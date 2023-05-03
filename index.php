@@ -3,9 +3,9 @@ session_start();
 require_once 'src/controller/frontController.php';
 require 'src/controller/back/UsersController.php';
 
-if (isset($_GET['action']) && $_GET['action'] == '' & !isset($_GET['admin'])) {
+if (isset($_GET['action']) && $_GET['action'] !== '' && !isset($_GET['admin'])) {
     $action = $_GET['action'];
-    require_once 'public.php';
+    require 'public.php';
 
     if (isset($_SESSION['user'])) {
         if ($_SESSION['user']['role'] <= 4) {
@@ -29,4 +29,6 @@ if (isset($_GET['action']) && $_GET['action'] == '' & !isset($_GET['admin'])) {
             }
         }
     }
+} else {
+    registrationForm();
 }

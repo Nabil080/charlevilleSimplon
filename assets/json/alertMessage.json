@@ -1,0 +1,17 @@
+{
+  "errorMessage": [
+    {
+      "name": "emptyField",
+      "message": "Le champ est vide."
+    },
+    {
+      "name": "emailIncorrect",
+      "message": "L'email est incorrect."
+    },
+    {
+      "name": "passwordNotIdentical",
+      "message": "Les mots de passes ne sont pas identique."
+    }
+  ],
+  "succesMessage": []
+}
