@@ -11,7 +11,16 @@
     {
       "name": "passwordNotIdentical",
       "message": "Les mots de passes ne sont pas identique."
+    },
+    {
+      "name": "existingEmail",
+      "message": "L'email a déjà été utiliser."
     }
   ],
-  "succesMessage": []
+  "successMessage": [
+    {
+      "name": "register",
+      "message": "Votre insciption à bien était enregistrer.<br> Un email vous a été envoyer pour activer votre compte et confirmer votre email."
+    }
+  ]
 }

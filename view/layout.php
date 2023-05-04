@@ -23,9 +23,9 @@
 </head>
 
 <body>
-    <?php require_once 'view/template/navbar.php'; ?>
+    <?php require_once 'view/template/_navbar.php'; ?>
     <?= $content ?>
-    <?php require_once 'view/template/footer.php'; ?>
+    <?php require_once 'view/template/_footer.php'; ?>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
     <?php if (isset($script))
         echo $script; ?>

@@ -1,0 +1,81 @@
+<?php
+require_once 'src/model/User.php';
+require_once 'src/model/AlertMessage.php';
+
+function registerTreatment()
+{
+    //var_dump($_POST);
+
+    if ((isset($_POST) && !empty($_POST) || 1)) {
+        $AlertMessage = new AlertMessage;
+        $UserRepo = new UsersRepository;
+        $errorTable = array();
+
+        $candidate = ['id_poleEmploi', 'birth_place', 'birth_date', 'nationality'];
+        $company = 'company';
+
+        foreach ($_POST as $name => $value) {
+
+            if (!empty($value)) {
+                if ($name == "email") {
+                    if (!filter_var($value, FILTER_VALIDATE_EMAIL)) {
+                        $errorTable[] = $AlertMessage->getError($name, 'emailIncorrect');
+
+                    } elseif ($UserRepo->checkEmail($value)) {
+                        $errorTable[] = $AlertMessage->getError($name, 'existingEmail');
+                    }
+                }
+            } else {
+                if (
+                    ($name == $company && !isset($_POST['company_register'])) ||
+                    (array_search($name, $candidate) && isset($_POST['company_register']))
+                ) {
+                } else {
+                    $errorTable[] = $AlertMessage->getError($name, 'emptyField');
+
+                }
+            }
+        }
+        if (!empty($_POST['password']) && !empty($_POST['confirm_password'])) {
+            if ($_POST['password'] !== $_POST['confirm_password']) {
+                $errorTable[] = $AlertMessage->getError('password', 'passwordNotIdentical');
+            }
+        }
+        if (!empty($errorTable)) {
+            $errorJson = json_encode($errorTable);
+            echo $errorJson;
+        } else {
+
+            $adress = htmlspecialchars(strip_tags($_POST['adress'])) . ',<br>' . htmlspecialchars(strip_tags($_POST['postal'])) . htmlspecialchars(strip_tags($_POST['ville']));
+            $user = [
+                'name' => htmlspecialchars(strip_tags($_POST['name'])),
+                'surname' => htmlspecialchars(strip_tags($_POST['surname'])),
+                'email' => htmlspecialchars(strip_tags($_POST['email'])),
+                'password' => htmlspecialchars(strip_tags($_POST['password'])),
+                'adress' => htmlspecialchars($adress),
+                'phone' => htmlspecialchars(strip_tags($_POST['phone'])),
+                'company' => '',
+                'id_poleEmploi' => '',
+                'birth_place' => '',
+                'birth_date' => '',
+                'nationality' => ''
+            ];
+
+            if (isset($_POST['company_register'])) {
+                $user['company'] = htmlspecialchars(strip_tags($_POST['company']));
+            } else {
+                $user['id_poleEmploi'] = htmlspecialchars(strip_tags($_POST['id_poleEmploi']));
+                $user['birth_place'] = htmlspecialchars(strip_tags($_POST['birth_place']));
+                $user['birth_date'] = htmlspecialchars(strip_tags($_POST['birth_date']));
+                $user['nationality'] = htmlspecialchars(strip_tags($_POST['nationality']));
+            }
+
+            $UserRepo = new UsersRepository;
+            $UserRepo->InsertUser($user);
+
+            $success = [$AlertMessage->getSuccess('register', 'register')];
+            $successJson = json_encode($success);
+            echo $successJson;
+        }
+    }
+}
