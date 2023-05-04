@@ -12,5 +12,9 @@ switch ($action) {
     // Afficher du projet choisi
 
     // Envoie du traitement du formulaire d'inscription
+    case 'registerTreatment':
+        registerTreatment();
+        break;
+    // Envoie du traitement d'activation de compte
     // Envoie du traitement du formulaire de connexion
 }
