@@ -1,6 +1,8 @@
 <?php
 switch ($action) {
-    // Afficher liste des formations
+    case 'allFormationsPage':
+        allFormationsPage();
+        break;
     // Aficher la formation choisie
     case 'formationPage':
         formationPage();
