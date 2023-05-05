@@ -7,7 +7,7 @@
         <h2 class="text-center text-2xl md:text-4xl font-bold font-title text-main-red uppercase pb-5">Développeur Web
             et Web Mobile
         </h2>
-        <div class="py-10 md:px-10 lg:px-15 lg:px-20 flex justify-center md:gap-10 lg:gap-20">
+        <div class="px-10 py-10 md:px-10 lg:px-15 lg:px-20 flex justify-center md:gap-10 lg:gap-20">
             <div
                 class="md:w-3/5 lg:w-2/3 xl:w-2/5 md:p-5 md:bg-main-lightgray md:border-2 md:border-gray md:rounded-lg md:shadow-[2px_0_3px_2px_rgba(0,0,0,0.5)]">
                 <div class="font-main text-md text-justify">
@@ -141,41 +141,156 @@
                         <p class="pb-3 text-xs underline">RNCP31114BC01</p>
                         <ul class="list-outside list-disc ml-10">
                             <li>Maquetter une application</li>
-                            <li>Maquetter une application</li>
-                            <li>Maquetter une application</li>
-
+                            <li>Réaliser une interface utilisateur web</li>
+                            <li>Développer une interface utilisateur web dynamique</li>
+                            <li>Réaliser une interface utilisateur avec une solution de gestion de contenu ou e-commerce
+                            </li>
                         </ul>
                     </div>
                 </div>
                 <div class="hidden px-4 bg-white text-md" id="admission" role="tabpanel"
                     aria-labelledby="admission-tab">
+                    <div class="py-4">
+                        <div class="pb-2 flex gap-4 items-center text-main-red">
+                            <h3 class="text-xl font-bold">Pas de prérequis mais…</h3>
+                        </div>
+                        <ul class="list-outside list-disc ml-10">
+                            <li>Très forte motivation, à prouver !</li>
+                            <li>Découvrir le code soi-même (plateformes d'apprentissage en ligne)</li>
+                            <li>Explorer les principaux métiers du numérique, ce qu’ils font, à quoi ils servent</li>
+                            <li>Vouloir travailler en équipe</li>
+                            <li>Ce que nous cherchons ? De la curiosité, de la créativité, une bonne expression à l’oral
+                                et à l’écrit, une représentation claire du métier… et bien sûr, l’envie de s’engager
+                                dans une formation intense !</li>
+                        </ul>
+                    </div>
 
-                    <p class="text-sm text-gray-500 dark:text-gray-400">This is some placeholder content the <strong
-                            class="font-medium text-gray-800 dark:text-white">Dashboard tab's associated
-                            content</strong>.
-                        Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript
-                        swaps
-                        classes to control the content visibility and styling.</p>
                 </div>
                 <div class="hidden px-4 bg-white text-md" id="program" role="tabpanel" aria-labelledby="program-tab">
 
-                    <p class="text-sm text-gray-500 dark:text-gray-400">This is some placeholder content the <strong
-                            class="font-medium text-gray-800 dark:text-white">Settings tab's associated
-                            content</strong>.
-                        Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript
-                        swaps
-                        classes to control the content visibility and styling.</p>
+                    <div class="py-4">
+                        <div class="pb-2 text-main-red">
+                            <h3 class="text-xl font-bold">Phase d’immersion
+                            </h3>
+                        </div>
+                        <ul class="list-outside list-disc ml-10">
+                            <li>Les mains dans la tech : mise en place de son environnement de travail, première mise en
+                                application de l’algorithmique et de la programmation
+                            </li>
+                            <li>Contractualisation du parcours entre le formateur et les apprenants
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="py-4">
+                        <div class="pb-2 text-main-red">
+                            <h3 class="text-xl font-bold">Gestion de projet et qualité
+                            </h3>
+                        </div>
+                        <ul class="list-outside list-disc ml-10">
+                            <li>Méthodes agiles et Scrum
+                            </li>
+                            <li>Qualité web, accessibilité
+                            </li>
+                            <li>Sécurité et RGPD
+                            </li>
+                    </div>
+                    <div class="py-4">
+                        <div class="pb-2 text-main-red">
+                            <h3 class="text-xl font-bold">Fondamentaux
+                            </h3>
+                        </div>
+                        <ul class="list-outside list-disc ml-10">
+                            <li>Conception et maquettage d’une application web
+                            </li>
+                            <li>Développement d’une interface web
+                            </li>
+                            <li>Développement de la partie back-end
+                            </li>
+                            <li>Développement de la partie back-end
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="py-4">
+                        <div class="pb-2 text-main-red">
+                            <h3 class="text-xl font-bold">Approfondissement
+                            </h3>
+                        </div>
+                        <ul class="list-outside list-disc ml-10">
+                            <li>Interfaces dynamiques et responsives
+                            </li>
+                            <li>Patrons de conception et architecture
+                            </li>
+                            <li>Frameworks avancés
+                            </li>
+                            <li>L’esprit DevOps
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="py-4">
+                        <div class="pb-2 text-main-red">
+                            <h3 class="text-xl font-bold">Une formation professionalisante
+                            </h3>
+                        </div>
+                        <ul class="list-outside list-disc ml-10">
+                            <li>Parrainage d'une entreprise pour chaque promotion
+                            </li>
+                            <li>Stage et alternance
+                            </li>
+                            <li>Simulation d’entretien, job dating
+                            </li>
+                            <li>Meet-up
+                            </li>
+                            <li>Participation aux jurys
+                            </li>
+                        </ul>
+                    </div>
                 </div>
                 <div class="hidden px-4 bg-white text-md" id="financing" role="tabpanel"
                     aria-labelledby="financing-tab">
-                    <p class="text-sm text-gray-500 dark:text-gray-400">This is some placeholder content the <strong
-                            class="font-medium text-gray-800 dark:text-white">Contacts tab's associated
-                            content</strong>.
-                        Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript
-                        swaps
-                        classes to control the content visibility and styling.</p>
+                    <div class="py-4">
+                        <div class="pb-2 flex gap-4 items-center text-main-red">
+                            <i class="fa-sharp fa-solid fa-tv fa-xl"></i>
+                            <h3 class="text-xl font-bold">Pas de prérequis mais…</h3>
+                        </div>
+                        <ul class="list-outside list-disc ml-10">
+                            <li>Très forte motivation, à prouver !</li>
+                            <li>Découvrir le code soi-même (plateformes d'apprentissage en ligne)</li>
+                            <li>Explorer les principaux métiers du numérique, ce qu’ils font, à quoi ils servent</li>
+                            <li>Vouloir travailler en équipe</li>
+                            <li>Ce que nous cherchons ? De la curiosité, de la créativité, une bonne expression à l’oral
+                                et à l’écrit, une représentation claire du métier… et bien sûr, l’envie de s’engager
+                                dans une formation intense !</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
+        </div>
+    </section>
+    <section class="px-10 md:px-20 pb-10 bg-main-lightgray">
+        <div class="flex gap-4 items-center text-main-red">
+            <i class="fa-sharp fa-solid fa-tv fa-xl"></i>
+            <h3 class="text-2xl font-bold">Certifications</h3>
+        </div>
+        <div class="pb-5">
+            <p class="text-lg font-bold">Formation certifiante délivrant une certification inscrite au Répertoire
+                Spécifique</p>
+            <p class="text-lg font-bold text-cyan-600 pb-4">RS5487 Gérer un projet en mobilisant les méthodes agiles
+            </p>
+            <ul class="list-outside list-disc ml-10">
+                <li>Domaine : La certification concerne tous les secteurs car les besoins en gestion de projet agile
+                    sont présents dans tous les domaines
+                </li>
+                <li>Possibilité de certification partielle : non</li>
+                <li>Durée de validité des composantes acquises : Permanente</li>
+                <li> Matérialisation officielle de la certification : Certificat de compétences</li>
+            </ul>
+        </div>
+        <div>
+            <p class="text-lg font-bold">Certification inscrite au Répertoire spécifique</p>
+            <p class="text-lg font-bold text-cyan-600 pb-4">RS5599 Réaliser des applications web à l’aide d’un système
+                de gestion de contenus</p>
+            <p>La certification concerne les professionnels du secteur de la communication, du marketing et de la vente.
+            </p>
         </div>
     </section>
 </main>

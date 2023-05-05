@@ -14,13 +14,13 @@
         theme: {
             extend: {
                 fontFamily: {
-                    'main' : ['"Roboto"', 'sans-serif'],
-                    'title' : ['"Montserrat"', 'sans-serif'],
+                    'main': ['"Roboto"', 'sans-serif'],
+                    'title': ['"Montserrat"', 'sans-serif'],
                 },
                 colors: {
-                    'main':{
-                        red:'#BD3124',
-                        white:'#EFF1F3',
+                    'main': {
+                        red: '#BD3124',
+                        white: '#EFF1F3',
                         gray: '#4F4F4F',
                         lightred: '#F6DADE',
                         lightgray: '#F2F2F3',
@@ -34,7 +34,7 @@
 </head>
 
 <body class="w-[100vw] overflow-x-hidden bg-main-white">
-    <?php require_once 'view/template/_navbar.php'; ?>
+    <?php //require_once 'view/template/_navbar.php'; ?>
     <?= $content ?>
     <?php require_once 'view/template/_footer.php'; ?>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
