@@ -13,7 +13,20 @@ function changeNavFunction () {
     changeNav.classList.toggle("h-[100vh]");
     changeNav.classList.toggle("grid-rows-[10vh_10vh_10vh_10vh]");
     // changement d'icone
-    change[0].classList.toggle("hidden");
+    if (change[0].classList.contains("hidden")) {
+        change[0].classList.toggle("hidden");
+        change[0].style.display = "block";
+    } else {
+        change[0].style.display = "none";
+        change[0].classList.toggle("hidden");
+    }
+    if (!change[1].classList.contains("hidden")) {
+        change[1].classList.remove("hidden");
+        change[1].style.display = "block";
+    } else {
+        change[1].style.display = "none";
+        change[1].classList.add("hidden");
+    }
     change[1].classList.toggle("hidden");
     // changement de couleur nav superieur
     div.classList.toggle("bg-main-white");

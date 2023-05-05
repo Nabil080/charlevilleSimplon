@@ -1,8 +1,8 @@
 <nav class="w-[100vw] fixed top-0 left-0 transition-all duration-[0.3s]">
       <div class="grid grid-cols-2 transition-all duration-[0.2s] items-center bg-main-white border-t-[4px] md:grid-cols-[20%_80%] border-main-red">
         <img src="assets/img/navbar/logo-simplon.png" alt="Logo Simplon" class="w-[171px]" />
-        <i onclick="changeNavFunction()" class="fa-solid fa-bars text-[39px] justify-self-end mr-4 mb-1 md:hidden"></i>
-        <i onclick="changeNavFunction()" class="fa-solid fa-xmark text-[46px] justify-self-end mr-4 mb-1 hidden md:hidden"></i>
+        <i id="hiddenIcon" onclick="changeNavFunction()" class="fa-solid fa-bars text-[39px] justify-self-end mr-4 mb-1 md:hidden"></i>
+        <i onclick="changeNavFunction()" class="fa-solid fa-xmark text-[46px] justify-self-end mr-4 mb-1 md:hidden" style="display: none"></i>
         <div class="changeNav hidden md:grid bg-main-lightred md:bg-main-white col-start-1 col-end-3 md:col-start-auto md:justify-self-end md:mr-2 lg:mr-4 xl:mr-6 translate-x-[80vw] md:translate-x-0 duration-[0.4s] ease-out transition-all ">
           <div class="grid grid-cols-[25%_60%] sm:mx-auto sm:w-[40%] items-center pt-8 gap-8 md:mr-4 md:pt-0 md:inline-flex md:w-full md:gap-2">
               <i class="md:ml-2 fa-solid fa-file-lines text-[44px] sm:text-[62px] md:text-[20px] justify-self-center"  style="color: #BD3124;"></i>
