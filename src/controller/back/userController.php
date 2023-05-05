@@ -6,7 +6,7 @@ function registerTreatment()
 {
     //var_dump($_POST);
 
-    if ((isset($_POST) && !empty($_POST) || 1)) {
+    if ((isset($_POST) && !empty($_POST))) {
         $AlertMessage = new AlertMessage;
         $UserRepo = new UsersRepository;
         $errorTable = array();
@@ -76,6 +76,39 @@ function registerTreatment()
             $success = [$AlertMessage->getSuccess('register', 'register')];
             $successJson = json_encode($success);
             echo $successJson;
+        }
+    }
+}
+
+function login()
+{
+    if ((isset($_POST) && !empty($_POST))) {
+        $AlertMessage = new AlertMessage;
+        $UserRepo = new UsersRepository;
+
+        $email = htmlspecialchars(strip_tags($_POST['email']));
+        $password = htmlspecialchars(strip_tags($_POST['password']));
+        $error = "";
+        $succes = "";
+
+        $user = $UserRepo->getUser($email);
+        if ($user) {
+            $bool = $UserRepo->checkPassword($user['user_id'], $password);
+            if ($bool) {
+                $_SESSION['user'] = $user;
+                $error = $AlertMessage->getSuccess('content', 'login');
+            } else
+                $error = $AlertMessage->getError('content', 'loginIncorrect');
+        } else
+            $error = $AlertMessage->getError('content', 'loginIncorrect');
+
+
+        if ($error != '') {
+            $errorJson = json_encode($error);
+            echo $errorJson;
+        } elseif ($succes != '') {
+            $succesJson = json_encode($succes);
+            echo $succesJson;
         }
     }
 }

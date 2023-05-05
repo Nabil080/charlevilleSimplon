@@ -1,11 +1,11 @@
-const loginForm = document.querySelector('#register-form');
+const loginForm = document.querySelector('#login-form');
 
 loginForm.addEventListener('submit', function (event) {
     event.preventDefault(); // prevent default form submission behavior
 
     // handle form submission with fetch
     const formData = new FormData(loginForm);
-    fetch('index.php?action=registerTreatment', {
+    fetch('index.php?action=loginTreatment', {
         method: 'POST',
         body: formData
     })
