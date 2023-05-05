@@ -8,6 +8,7 @@
         <?= $title ?>
     </title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://kit.fontawesome.com/eb7aa99f8d.js" crossorigin="anonymous"></script>
     <script>
     tailwind.config = {
         theme: {
