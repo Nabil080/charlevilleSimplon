@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html class="w-[100vw] overflow-x-hidden">
 
 <head>
     <meta charset="UTF-8">
@@ -19,7 +19,7 @@
                 },
                 colors: {
                     'main':{
-                        red:'#da373d',
+                        red:'#BD3124',
                         white:'#EFF1F3',
                         gray: '#4F4F4F',
                         lightred: '#F6DADE',
@@ -33,7 +33,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.css" rel="stylesheet" />
 </head>
 
-<body>
+<body class="w-[100vw] overflow-x-hidden bg-main-white">
     <?php require_once 'view/template/_navbar.php'; ?>
     <?= $content ?>
     <?php require_once 'view/template/_footer.php'; ?>

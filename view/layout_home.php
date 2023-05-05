@@ -17,7 +17,7 @@
             extend: {
                 colors: {
                     'main':{
-                        red:'#da373d',
+                        red:'#BD3124',
                         white:'#EFF1F3',
                         gray: '#4F4F4F',
                         lightred: '#F6DADE',

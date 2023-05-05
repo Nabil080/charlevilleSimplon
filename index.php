@@ -30,5 +30,5 @@ if (isset($_GET['action']) && $_GET['action'] !== '' && !isset($_GET['admin'])) 
         }
     }
 } else {
-    registrationForm();
+    seeLayout();
 }
