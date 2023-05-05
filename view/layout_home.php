@@ -14,11 +14,12 @@
             extend: {
                 colors: {
                     'main':{
-                        '#da373d',
+                        red:'#da373d',
+                        white:'#EFF1F3',
                         gray: '#4F4F4F',
                         lightred: '#F6DADE',
                         lightgray: '#F2F2F3',
-                        }
+                    }
                 }
             }
         }
@@ -28,7 +29,6 @@
 </head>
 
 <body>
-    <div class="text">   </div>
     <?php require_once 'view/template/_navbar.php'; ?>
     <?= $content ?>
     <?php require_once 'view/template/_footer.php'; ?>
