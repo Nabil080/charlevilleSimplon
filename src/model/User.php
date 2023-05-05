@@ -1,6 +1,6 @@
 <?php
 require_once 'src/model/ConnectBdd.php';
-class Users
+class User
 {
     public $id;
     public $name;
@@ -58,7 +58,7 @@ class Users
 class UsersRepository extends ConnectBdd
 {
 
-    public function checkEmail($email)
+    public function checkEmail($email): bool
     {
         $req = "SELECT user_email FROM user WHERE user_email = ?";
         $stmt = $this->bdd->prepare($req);
@@ -75,7 +75,7 @@ class UsersRepository extends ConnectBdd
     }
     public function InsertUser($account)
     {
-        $User = new Users;
+        $User = new User;
         $token = $User->tokenMail('activateUser', $account['email']);
         $pass = password_hash($account['password'], PASSWORD_BCRYPT);
 
@@ -84,6 +84,49 @@ class UsersRepository extends ConnectBdd
         $stmt->execute([$account['name'], $account['surname'], $account['email'], $pass, $token, $account['adress'], $account['phone'], $account['company'], $account['id_poleEmploi'], $account['birth_place'], $account['birth_date'], $account['nationality']]);
         $stmt->closeCursor();
 
+    }
+    public function getUser($email): object
+    {
+        $req = "SELECT * FROM `user` AS u LEFT JOIN `status` AS s ON u.status_id = s.status_id WHERE  user_email= ?";
+        $stmt = $this->bdd->prepare($req);
+        $stmt->execute([$email]);
+        $account = $stmt->fetch(PDO::FETCH_OBJ);
+        $stmt->closeCursor();
+
+        $User = new User;
+
+        $User->id = $account['user_id'];
+        $User->name = $account['user_name'];
+        $User->surname = $account['user_surname'];
+        $User->email = $account['user_email'];
+        $User->password = $account['user_password'];
+        $User->avatar = $account['user_avater'];
+        $User->description = $account['user_description'];
+        $User->linkedin = $account['user_linkedin'];
+        $User->github = $account['user_github'];
+        $User->token = $account['user_token'];
+        $User->id__poleEmploi = $account['user_'];
+        $User->phone = $account['user_phone'];
+        $User->adress = $account['user_place'];
+        $User->birth_date = $account['user_birth_date'];
+        $User->birth_place = $account['user_birth_place'];
+        $User->nationality = $account['user_nationality'];
+        $User->status = $account['status_name'];
+        $User->id_role = $account['role_id'];
+
+        return $User;
+    }
+    public function checkPassword($id, $mdp): bool
+    {
+        $req = "SELECT password_users FROM `user` WHERE  user_id= ?";
+        $stmt = $this->bdd->prepare($req);
+        $stmt->execute([$id]);
+        $mdpuser = $stmt->fetch(PDO::FETCH_OBJ);
+        $stmt->closeCursor();
+
+        $mdpuser = $mdpuser->password_users;
+        $mdpval = password_verify($mdp, $mdpuser);
+        return $mdpval;
     }
 
 /*
@@ -98,15 +141,6 @@ public function addToken($email, $token)
 $req = "UPDATE `users` SET `token_users` = ? WHERE email_users = ?";
 $stmt = $this->bdd->prepare($req);
 $stmt->execute([$token, $email]);
-}
-public function checkPassword($id, $mdp)
-{
-$reqmdp = $this->bdd->prepare("SELECT password_users FROM users WHERE  id_users= ?");
-$reqmdp->execute([$id]);
-$mdpuser = $reqmdp->fetch(PDO::FETCH_OBJ);
-$mdpuser = $mdpuser->password_users;
-$mdpval = password_verify($mdp, $mdpuser);
-return $mdpval;
 }
 public function checkToken($token)
 {
