@@ -2,6 +2,9 @@
 switch ($action) {
     // Afficher liste des formations
     // Aficher la formation choisie
+    case 'formationPage':
+        formationPage();
+        break;
     // Afficher le formulaire de pré-inscription.
 
     // Afficher toutes les promos

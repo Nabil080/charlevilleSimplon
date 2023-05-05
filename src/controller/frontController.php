@@ -1,6 +1,6 @@
 <?php
 
-function registrationForm()
+function formationPage()
 {
-    include 'view/template/registrationForm.php';
+    include 'view/template/formation.php';
 }
