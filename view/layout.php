@@ -12,6 +12,10 @@
     tailwind.config = {
         theme: {
             extend: {
+                fontFamily: {
+                    'main' : ['"Roboto"', 'sans-serif'],
+                    'title' : ['"Montserrat"', 'sans-serif'],
+                },
                 colors: {
                     'main':{
                         red:'#da373d',
