@@ -15,12 +15,20 @@
     {
       "name": "existingEmail",
       "message": "L'email a déjà été utiliser."
+    },
+    {
+      "name": "loginIncorrect",
+      "message": "Oups ! Connexion incorrect."
     }
   ],
   "successMessage": [
     {
       "name": "register",
       "message": "Votre insciption à bien était enregistrer.<br> Un email vous a été envoyer pour activer votre compte et confirmer votre email."
+    },
+    {
+      "name": "login",
+      "message": "Vous avez réussi à vous connecter."
     }
   ]
 }
