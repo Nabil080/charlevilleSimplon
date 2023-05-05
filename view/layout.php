@@ -38,6 +38,7 @@
     <?= $content ?>
     <?php require_once 'view/template/_footer.php'; ?>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
+    <script src="https://kit.fontawesome.com/eb7aa99f8d.js" crossorigin="anonymous"></script>
     <?php if (isset($script))
         echo $script; ?>
 </body>
