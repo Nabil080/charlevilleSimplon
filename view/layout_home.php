@@ -4,22 +4,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simplon.co -
-        <?= $title ?>
-    </title>
+    <title>Simplon.co - <?= $title ?></title>
+    <link href="https://fonts.googleapis.com/css2?family=Lato&family=Roboto&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
     tailwind.config = {
         theme: {
+            fontFamily: {
+              main : 'Roboto',
+              title : 'Montserrat',
+            },
             extend: {
                 fontFamily: {
                     'main': ['"Roboto"', 'sans-serif'],
                     'title': ['"Montserrat"', 'sans-serif'],
                 },
                 colors: {
-                    'main': {
-                        red: '#BD3124',
-                        white: '#EFF1F3',
+                    'main':{
+                        red:'#BD3124',
+                        white:'#EFF1F3',
                         gray: '#4F4F4F',
                         lightred: '#F6DADE',
                         lightgray: '#F2F2F3',

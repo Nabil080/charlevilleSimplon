@@ -1,0 +1,70 @@
+const nav = document.querySelector("nav");
+const changeNav = nav.querySelector(".changeNav");
+const change = nav.querySelectorAll("i");
+const div = nav.querySelectorAll("div")[0];
+const button = nav.querySelector("button");
+
+function changeNavFunction () {
+    // apparition nav inférieur
+    changeNav.classList.toggle("hidden");
+    changeNav.offsetHeight; // permet de spécifier au js la réapparition de l'élément et ainsi l'animer
+    // animation nav inferieur
+    changeNav.classList.toggle("translate-x-[80vw]");
+    changeNav.classList.toggle("h-[100vh]");
+    changeNav.classList.toggle("grid-rows-[10vh_10vh_10vh_10vh]");
+    // changement d'icone
+    change[0].classList.toggle("hidden");
+    change[1].classList.toggle("hidden");
+    // changement de couleur nav superieur
+    div.classList.toggle("bg-main-white");
+    div.classList.toggle("bg-main-lightred");
+    // Empeche le click sur le dropdown menu pendant le temps de l'animation
+    button.style.pointerEvents = "none";
+    function pointer () {
+    button.style.pointerEvents = "auto";
+    }
+    setTimeout(pointer, 500);
+    
+}
+
+window.addEventListener ("scroll", function () {
+    
+    const body = document.body;
+    //Defini prevScrollTop pour le premier scroll
+    if (typeof prevScrollTop == "undefined") {
+      prevScrollTop = 0;
+    } 
+    // une fois que 150px on été scroll, enlève la navbar
+    if (body.getBoundingClientRect().top > -150 && this.window.screen.width > 762) {
+    //   nav.classList.remove("hidden");
+    //   nav.offsetHeight;
+      nav.classList.remove("opacity-0");
+
+    } else {
+       
+        if (body.getBoundingClientRect().top < prevScrollTop) {  // Si on scroll vers le haut (cherche la distance du hat actuelle puis compare à la précédente), affiche la navbar 
+        // nav.classList.add("hidden");
+        // nav.offsetHeight;
+        nav.classList.add("opacity-0");
+          
+        prevScrollTop = body.getBoundingClientRect().top;
+  
+    }
+        
+    if (body.getBoundingClientRect().top > prevScrollTop) { // Si on scroll vers le bas, pareil
+            // nav.classList.remove("hidden");
+            // nav.offsetHeight;
+        nav.classList.remove("opacity-0");
+
+        prevScrollTop = body.getBoundingClientRect().top; // Définie la variable contenant la position précédente
+        const dropdown = nav.querySelector("#dropdown");
+
+        if (! dropdown.classList.contains("hidden")) { // Cache le dropdown si il est affiché lors du scroll
+          console.log("bouah");
+          dropdown.classList.add("hidden");
+        }
+    }
+    }
+  
+  }
+  );
