@@ -9,7 +9,7 @@ function companyHomepage(){
     setTimeout(() => {
         homepage.classList.add("hidden");
         companyHomepage.classList.add("opacity-100");
-    },500)
+    },300)
 }
 
 function visitorHomepage(){
@@ -23,14 +23,33 @@ function visitorHomepage(){
     setTimeout(() => {
         homepage.classList.add("hidden");
         visitorHomepage.classList.add("opacity-100");
-    },500)
+    },300)
+}
+
+function louis() {
+    var i = 0;
+    function louisBrain() {
+      setTimeout(function() {
+        $i++;
+        if (i < 100) {
+            louisBrain();
+        }else{
+            louisThink();
+        }
+      }, 100);
+    }
+
+
+}
+function louisThink(){
+    alert("fart");
 }
 
 function returnHomepage(id){
     const homepage = document.getElementById("homepage");
     // console.log(homepage);
     const previousPage = document.getElementById(id);
-    console.log(previousPage);
+    // console.log(previousPage);
     previousPage.classList.remove("opacity-100");
     setTimeout(() => {
         homepage.classList.remove("hidden");
@@ -38,7 +57,7 @@ function returnHomepage(id){
         setTimeout(() => {
             homepage.classList.remove("opacity-0");
         },1)
-    },500)
+    },300)
 }
 
 function loginModal(){
@@ -62,4 +81,7 @@ function visitorProject(){
 function visitorFormation(){
     window.location.replace("index.php");
 }
+
+
+
 
