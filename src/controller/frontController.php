@@ -14,3 +14,8 @@ function formationPage()
 {
     include 'view/template/formation.php';
 }
+
+function allProjectsPage()
+{
+    include 'view/template/_all_projects.php';
+}
