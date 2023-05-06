@@ -21,10 +21,6 @@
                 title: 'Montserrat',
             },
             extend: {
-                fontFamily: {
-                    'main' : ['"Roboto"', 'sans-serif'],
-                    'title' : ['"Montserrat"', 'sans-serif'],
-                },
                 colors: {
                     'main':{
                         red:'#BD3124',
