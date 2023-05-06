@@ -26,6 +26,19 @@ function visitorHomepage(){
     },300)
 }
 
+function switchDiv(id1, id2) {
+    console.log(id1 + " " + id2);
+    const div1 = document.getElementById(id1);
+    const div2 = document.getElementById(id2);
+    if (div1.style.display === "none") {
+        div1.style.display = "block";
+        div2.style.display = "none";
+    } else {
+        div1.style.display = "none";
+        div2.style.display = "block";
+    }
+}
+
 function louis() {
     var i = 0;
     function louisBrain() {
@@ -42,7 +55,7 @@ function louis() {
 
 }
 function louisThink(){
-    alert("fart");
+    console("fart");
 }
 
 function returnHomepage(id){
@@ -67,18 +80,23 @@ function loginModal(){
 }
 
 function companyPromo(){
+    // REDIRECTION VERS TOUTES LES PROMOS
     window.location.replace("index.php");
 }
 
 function companyProject(){
+    // REDIRECTION VERS GESTION DE PROJET
     window.location.replace("index.php");
+    // REDIRECTION VERS CONNEXION/INSCRIPTION SI PAS CO
 }
 
 function visitorProject(){
+    // REDIRECTION VERS TOUS LES PROJETS
     window.location.replace("index.php");
 }
 
 function visitorFormation(){
+    // REDIRECTION VERS TOUTES LES FORMATIONS
     window.location.replace("index.php");
 }
 
