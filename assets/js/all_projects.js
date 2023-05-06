@@ -1,13 +1,13 @@
-function searchProject()
+function searchByInputAndClassName(input,className)
 {
-    const search = document.getElementById("project-search").value;
+    const search = input.value;
     console.log(search);
-    var projects = document.getElementsByClassName("project-card");
+    var projects = document.getElementsByClassName(className);
     console.log(projects);
 
     for (var i = 0, len = projects.length; i < len; ++i) {
 
-        if(projects[i].innerHTML.indexOf(search) == -1) {
+        if(projects[i].innerHTML.toLowerCase().indexOf(search.toLowerCase()) === -1) {
             projects[i].style.display = "none";
         }else{
             projects[i].style.display = "block";
