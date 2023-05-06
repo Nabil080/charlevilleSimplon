@@ -32,7 +32,7 @@
                 <div class="flex gap-2 text-xs my-2 px-2"><input class="my-auto" id="2021" type="checkbox" value="2021"><label for="2021">2021</label></div>
                 <div class="flex gap-2 text-xs my-2 px-2"><input class="my-auto" id="2020" type="checkbox" value="2020"><label for="2020">2020</label></div>
             </div>
-            <button data-dropdown-toggle="dropdown-years" data-dropdown-offset-distance="0" class="relative"><i class="fa fa-filter text-xs"></i> Niveau</button>
+            <button data-dropdown-toggle="dropdown-level" data-dropdown-offset-distance="0" class="relative"><i class="fa fa-filter text-xs"></i> Niveau</button>
             <!-- dropdown niveau -->
             <div id="dropdown-level" class="hidden w-[92.3px] sm:w-[24.5%] text-start bg-main-white border-t-transparent border-main-red border">
                 <div class="flex gap-2 text-xs my-2 px-2"><input class="my-auto" id="bac+1" type="checkbox" value="bac+1"><label for="bac+1">Bac+1</label></div>
@@ -47,7 +47,7 @@
     <h3 class="my-4 text-main-red">10 projets affichés sur 72</h3>
 
     <!-- card projet 1 -->
-    <article id="projet-card-1" class="project-card border-2 border-black rounded-lg p-4">
+    <article id="projet-card-1" class="project-card border-2 border-black rounded-lg p-4 mb-8">
         <!-- partie info projet -->
         <div class="flex-col text-[12px] flex justify-end text-end">
             <!-- tags projet -->
@@ -73,7 +73,180 @@
         </div>
         <!-- séparateur -->
         <div class="w-4/5 mx-auto bg-main-gray bg-opacity-50 h-0.5 my-4"></div>
+        <!-- partie info entreprise -->
+        <div class="my-2">
+            <div class="flex flex-wrap"><p class="font-title font-bold mr-2">Projet fourni par : </p><p><a href="lien vers la société" class="text-main-red underline font-bold text-sm">Pole formation CCI Ardennes</a></p></div>
+            <div class="flex flex-wrap"><p class="font-title font-bold mr-2">Adresse :</p><p class="text-sm pt-0.5 text-left font-light">33 rue de la gare, 08000 Charleville-Mézières</p></div>
+        </div>
+    </article>
 
+
+    <!-- card projet 2 -->
+    <article id="projet-card-2" class="project-card border-2 border-black rounded-lg p-4 mb-8">
+        <!-- partie info projet -->
+        <div class="flex-col text-[12px] flex justify-end text-end">
+            <!-- tags projet -->
+            <div class="uppercase space-x-4 my-4 [&>tag]:bg-main-gray [&>tag]:bg-opacity-10 [&>tag]:py-2 [&>tag]:px-4 [&>tag]:rounded-full">
+                <tag> php</tag>
+                <tag> oop</tag>
+                <tag> symfony</tag>
+            </div>
+            <!-- titre projet -->
+            <h2 class="font-title text-main-red italic font-bold text-3xl my-2"><a href="lien du projet">Projet McDo</a></h2>
+            <div class="self-end flex w-3/4 justify-between italic border-b border-main-red"><span>Débuté le 25/03/2002</span><span>Fini le 25/03/2002</span></div>
+            <!-- contenu projet -->
+            <div class="text-base">
+                <p class="pl-[20%] line-clamp-5 mt-2 mb-4">The best kept secret of The Bahamas is the country’s sheer size and diversity. With 16 major islands, The Bahamas is an unmatched destination...</p>
+                <a href="page de la promo" class="bg-main-red py-2 px-4 rounded-full text-main-white my-2 hover:bg-main-white hover:text-main-red hover:border border-main-red">Référents digitals 2023</a>
+                <div class="space-x-4 mt-4 mb-2 text-sm text-main-white [&>a]:bg-main-gray [&>a]:py-1 [&>a]:px-3 [&>a]:rounded-full">
+                    <a href="profil de l'apprenant" class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white">Florian</a>
+                </div>
+                <a href="lien du projet" class="block float-left text-xs">Voir le projet <i class="fa fa-arrow-right"></i></a>
+            </div>
+        </div>
+        <!-- séparateur -->
+        <div class="w-4/5 mx-auto bg-main-gray bg-opacity-50 h-0.5 my-4"></div>
+        <!-- partie info entreprise -->
+        <div class="my-2">
+            <div class="flex flex-wrap"><p class="font-title font-bold mr-2">Projet fourni par : </p><p><a href="lien vers la société" class="text-main-red underline font-bold text-sm">McDonald's Charleville</a></p></div>
+            <div class="flex flex-wrap"><p class="font-title font-bold mr-2">Adresse :</p><p class="text-sm pt-0.5 text-left font-light">1 Allée de la Cardamine 08000 LA FRANCHEVILLE</p></div>
+        </div>
+    </article>
+
+
+    <!-- card projet 3 -->
+    <article id="projet-card-3" class="project-card border-2 border-black rounded-lg p-4 mb-8">
+        <!-- partie info projet -->
+        <div class="flex-col text-[12px] flex justify-end text-end">
+            <!-- tags projet -->
+            <div class="uppercase space-x-4 my-4 [&>tag]:bg-main-gray [&>tag]:bg-opacity-10 [&>tag]:py-2 [&>tag]:px-4 [&>tag]:rounded-full">
+                <tag> html</tag>
+                <tag> css</tag>
+                <tag> react</tag>
+            </div>
+            <!-- titre projet -->
+            <h2 class="font-title text-main-red italic font-bold text-3xl my-2"><a href="lien du projet">TEMA LE PROJET</a></h2>
+            <div class="self-end flex w-3/4 justify-between italic border-b border-main-red"><span>Débuté le 25/03/2002</span><span>Fini le 25/03/2002</span></div>
+            <!-- contenu projet -->
+            <div class="text-base">
+                <p class="pl-[20%] line-clamp-5 mt-2 mb-4">The best kept secret of The Bahamas is the country’s sheer size and diversity. With 16 major islands, The Bahamas is an unmatched destination...</p>
+                <a href="page de la promo" class="bg-main-red py-2 px-4 rounded-full text-main-white my-2 hover:bg-main-white hover:text-main-red hover:border border-main-red">Concepteurs développeurs d'applications 2023</a>
+                <div class="space-x-4 mt-4 mb-2 text-sm text-main-white [&>a]:bg-main-gray [&>a]:py-1 [&>a]:px-3 [&>a]:rounded-full">
+                    <a href="profil de l'apprenant" class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white">Alexandre</a>
+                    <a href="profil de l'apprenant" class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white">Florian</a>
+                </div>
+                <a href="lien du projet" class="block float-left text-xs">Voir le projet <i class="fa fa-arrow-right"></i></a>
+            </div>
+        </div>
+        <!-- séparateur -->
+        <div class="w-4/5 mx-auto bg-main-gray bg-opacity-50 h-0.5 my-4"></div>
+        <!-- partie info entreprise -->
+        <div class="my-2">
+            <div class="flex flex-wrap"><p class="font-title font-bold mr-2">Projet fourni par : </p><p><a href="lien vers la société" class="text-main-red underline font-bold text-sm">Pole formation CCI Ardennes</a></p></div>
+            <div class="flex flex-wrap"><p class="font-title font-bold mr-2">Adresse :</p><p class="text-sm pt-0.5 text-left font-light">33 rue de la gare, 08000 Charleville-Mézières</p></div>
+        </div>
+    </article>
+
+
+    <!-- card projet 4 -->
+    <article id="projet-card-4" class="project-card border-2 border-black rounded-lg p-4 mb-8">
+        <!-- partie info projet -->
+        <div class="flex-col text-[12px] flex justify-end text-end">
+            <!-- tags projet -->
+            <div class="uppercase space-x-4 my-4 [&>tag]:bg-main-gray [&>tag]:bg-opacity-10 [&>tag]:py-2 [&>tag]:px-4 [&>tag]:rounded-full">
+                <tag> php</tag>
+                <tag> oop</tag>
+                <tag> symfony</tag>
+            </div>
+            <!-- titre projet -->
+            <h2 class="font-title text-main-red italic font-bold text-3xl my-2"><a href="lien du projet">Projet McDo</a></h2>
+            <div class="self-end flex w-3/4 justify-between italic border-b border-main-red"><span>Débuté le 25/03/2002</span><span>Fini le 25/03/2002</span></div>
+            <!-- contenu projet -->
+            <div class="text-base">
+                <p class="pl-[20%] line-clamp-5 mt-2 mb-4">The best kept secret of The Bahamas is the country’s sheer size and diversity. With 16 major islands, The Bahamas is an unmatched destination...</p>
+                <a href="page de la promo" class="bg-main-red py-2 px-4 rounded-full text-main-white my-2 hover:bg-main-white hover:text-main-red hover:border border-main-red">Référents digitals 2023</a>
+                <div class="space-x-4 mt-4 mb-2 text-sm text-main-white [&>a]:bg-main-gray [&>a]:py-1 [&>a]:px-3 [&>a]:rounded-full">
+                    <a href="profil de l'apprenant" class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white">Florian</a>
+                </div>
+                <a href="lien du projet" class="block float-left text-xs">Voir le projet <i class="fa fa-arrow-right"></i></a>
+            </div>
+        </div>
+        <!-- séparateur -->
+        <div class="w-4/5 mx-auto bg-main-gray bg-opacity-50 h-0.5 my-4"></div>
+        <!-- partie info entreprise -->
+        <div class="my-2">
+            <div class="flex flex-wrap"><p class="font-title font-bold mr-2">Projet fourni par : </p><p><a href="lien vers la société" class="text-main-red underline font-bold text-sm">McDonald's Charleville</a></p></div>
+            <div class="flex flex-wrap"><p class="font-title font-bold mr-2">Adresse :</p><p class="text-sm pt-0.5 text-left font-light">1 Allée de la Cardamine 08000 LA FRANCHEVILLE</p></div>
+        </div>
+    </article>
+
+
+    <!-- card projet 5 -->
+    <article id="projet-card-5" class="project-card border-2 border-black rounded-lg p-4 mb-8">
+        <!-- partie info projet -->
+        <div class="flex-col text-[12px] flex justify-end text-end">
+            <!-- tags projet -->
+            <div class="uppercase space-x-4 my-4 [&>tag]:bg-main-gray [&>tag]:bg-opacity-10 [&>tag]:py-2 [&>tag]:px-4 [&>tag]:rounded-full">
+                <tag> html</tag>
+                <tag> css</tag>
+                <tag> react</tag>
+            </div>
+            <!-- titre projet -->
+            <h2 class="font-title text-main-red italic font-bold text-3xl my-2"><a href="lien du projet">Super projet de fou</a></h2>
+            <div class="self-end flex w-3/4 justify-between italic border-b border-main-red"><span>Débuté le 25/03/2002</span><span>Fini le 25/03/2002</span></div>
+            <!-- contenu projet -->
+            <div class="text-base">
+                <p class="pl-[20%] line-clamp-5 mt-2 mb-4">The best kept secret of The Bahamas is the country’s sheer size and diversity. With 16 major islands, The Bahamas is an unmatched destination...</p>
+                <a href="page de la promo" class="bg-main-red py-2 px-4 rounded-full text-main-white my-2 hover:bg-main-white hover:text-main-red hover:border border-main-red">Développeurs Web 2023</a>
+                <div class="space-x-4 mt-4 mb-2 text-sm text-main-white [&>a]:bg-main-gray [&>a]:py-1 [&>a]:px-3 [&>a]:rounded-full">
+                    <a href="profil de l'apprenant" class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white">Nabil</a>
+                    <a href="profil de l'apprenant" class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white">Alexandre</a>
+                    <a href="profil de l'apprenant" class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white">Bryan</a>
+                    <a href="profil de l'apprenant" class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white">Florian</a>
+                </div>
+                <a href="lien du projet" class="block float-left text-xs">Voir le projet <i class="fa fa-arrow-right"></i></a>
+            </div>
+        </div>
+        <!-- séparateur -->
+        <div class="w-4/5 mx-auto bg-main-gray bg-opacity-50 h-0.5 my-4"></div>
+        <!-- partie info entreprise -->
+        <div class="my-2">
+            <div class="flex flex-wrap"><p class="font-title font-bold mr-2">Projet fourni par : </p><p><a href="lien vers la société" class="text-main-red underline font-bold text-sm">Pole formation CCI Ardennes</a></p></div>
+            <div class="flex flex-wrap"><p class="font-title font-bold mr-2">Adresse :</p><p class="text-sm pt-0.5 text-left font-light">33 rue de la gare, 08000 Charleville-Mézières</p></div>
+        </div>
+    </article>
+
+
+    <!-- card projet 6 -->
+    <article id="projet-card-6" class="project-card border-2 border-black rounded-lg p-4 mb-8">
+        <!-- partie info projet -->
+        <div class="flex-col text-[12px] flex justify-end text-end">
+            <!-- tags projet -->
+            <div class="uppercase space-x-4 my-4 [&>tag]:bg-main-gray [&>tag]:bg-opacity-10 [&>tag]:py-2 [&>tag]:px-4 [&>tag]:rounded-full">
+                <tag> php</tag>
+                <tag> oop</tag>
+                <tag> symfony</tag>
+            </div>
+            <!-- titre projet -->
+            <h2 class="font-title text-main-red italic font-bold text-3xl my-2"><a href="lien du projet">Projet McDo</a></h2>
+            <div class="self-end flex w-3/4 justify-between italic border-b border-main-red"><span>Débuté le 25/03/2002</span><span>Fini le 25/03/2002</span></div>
+            <!-- contenu projet -->
+            <div class="text-base">
+                <p class="pl-[20%] line-clamp-5 mt-2 mb-4">The best kept secret of The Bahamas is the country’s sheer size and diversity. With 16 major islands, The Bahamas is an unmatched destination...</p>
+                <a href="page de la promo" class="bg-main-red py-2 px-4 rounded-full text-main-white my-2 hover:bg-main-white hover:text-main-red hover:border border-main-red">Référents digitals 2023</a>
+                <div class="space-x-4 mt-4 mb-2 text-sm text-main-white [&>a]:bg-main-gray [&>a]:py-1 [&>a]:px-3 [&>a]:rounded-full">
+                    <a href="profil de l'apprenant" class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white">Florian</a>
+                </div>
+                <a href="lien du projet" class="block float-left text-xs">Voir le projet <i class="fa fa-arrow-right"></i></a>
+            </div>
+        </div>
+        <!-- séparateur -->
+        <div class="w-4/5 mx-auto bg-main-gray bg-opacity-50 h-0.5 my-4"></div>
+        <!-- partie info entreprise -->
+        <div class="my-2">
+            <div class="flex flex-wrap"><p class="font-title font-bold mr-2">Projet fourni par : </p><p><a href="lien vers la société" class="text-main-red underline font-bold text-sm">McDonald's Charleville</a></p></div>
+            <div class="flex flex-wrap"><p class="font-title font-bold mr-2">Adresse :</p><p class="text-sm pt-0.5 text-left font-light">1 Allée de la Cardamine 08000 LA FRANCHEVILLE</p></div>
+        </div>
     </article>
 
 
