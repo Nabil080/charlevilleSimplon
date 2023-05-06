@@ -1,10 +1,11 @@
 <?php
 
-function formationPage()
+function homepage()
 {
-    include 'view/template/formation.php';
+    include 'view/template/_homepage.php';
 }
 
-function seeLayout() {
+function seeLayout() 
+{
     include 'view/layout.php';
 }
