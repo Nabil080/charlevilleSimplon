@@ -9,13 +9,13 @@
 <!-- section tous les projets -->
 <section id="all-projects" class="px-4">
     <!-- barre de recherche -->
-    <div class="relative w-full mt-4">
+    <div class="relative w-full 2xl:w-4/5 mx-auto mt-4">
         <input id="project-search" class="border-main-red rounded-lg w-full pl-10 py-4 placeholder:text-black focus:border-green-50" placeholder="Votre recherche" type="search" oninput="searchByInputAndClassName(this,'project-card')">
         <i class="fa fa-search absolute top-0 left-0 w-10 text-center text-xl py-4"></i>
     </div>
     <!-- boutons de filtre -->
-    <span class="text-main-red text-xs py-0.5">Filtrer par :</span>
-    <div class="flex justify-start text-sm gap-x-4 sm:[&>button]:w-1/4 [&>button]:px-4 [&>button]:py-2 [&>button]:border-main-red [&>button]:border [&>button]:rounded-lg">
+    <span class="text-main-red text-xs py-0.5 2xl:mx-[10%]">Filtrer par :</span>
+    <div class="2xl:mx-[10%] flex justify-start text-xs sm:text-sm gap-x-4 sm:[&>button]:w-1/4 [&>button]:px-2 sm:[&>button]:px-4 [&>button]:py-2 [&>button]:border-main-red [&>button]:border [&>button]:rounded-lg">
         <button data-dropdown-toggle="dropdown-formation" data-dropdown-offset-distance="0" class="relative"><i class="fa fa-filter text-xs"></i> Formation</button>
         <!-- dropdown formations -->
             <div id="dropdown-formation" class="hidden w-[113.33px] sm:w-[24.5%] text-start bg-main-white border-t-transparent border-main-red border">
@@ -42,13 +42,13 @@
                 <div class="flex gap-2 text-xs my-2 px-2"><input class="my-auto" id="bac+5" type="checkbox" value="bac+5"><label for="bac+5">Bac+5</label></div>
             </div>
     </div>
-    <span onclick="resetProjectFilters()" class="text-main-red text-xs py-0.5 cursor-pointer underline hover:text-red-700">Réinitialiser les filtres</span>
+    <span onclick="resetProjectFilters()" class="text-main-red text-xs py-0.5 cursor-pointer underline hover:text-red-700 2xl:mx-[10%]">Réinitialiser les filtres</span>
 
-    <h3 class="my-4 text-main-red">10 projets affichés sur 72</h3>
 
-    <section id="project-cards" class="grid gap-2 md:grid-cols-2">
+    <section id="project-cards" class="mt-2 grid gap-6 md:grid-cols-2 w-fit mx-auto">
+    <h3 class="max-w-[766px] text-main-red md:col-span-2">10 projets affichés sur 72</h3>
         <!-- card projet 1 -->
-        <article id="projet-card-1" class="project-card border-2 border-black rounded-lg p-4 mb-8 2xl:flex gap-6 2xl:p-6">
+        <article id="projet-card-1" class="project-card max-w-[766px] border-2 border-black rounded-lg p-4 mb-8 2xl:flex gap-6 2xl:p-6">
             <!-- partie entreprise desktop -->
             <div class="hidden 2xl:block w-1/3 border-r-2 border-main-gray pr-6">
             <div class="my-2 flex-col">
@@ -92,7 +92,7 @@
         </article>
 
         <!-- card projet 1 -->
-        <article id="projet-card-1" class="project-card border-2 border-black rounded-lg p-4 mb-8 2xl:flex gap-6 2xl:p-6">
+        <article id="projet-card-1" class="project-card max-w-[766px] border-2 border-black rounded-lg p-4 mb-8 2xl:flex gap-6 2xl:p-6">
             <!-- partie entreprise desktop -->
             <div class="hidden 2xl:block w-1/3 border-r-2 border-main-gray pr-6">
             <div class="my-2 flex-col">
@@ -114,7 +114,7 @@
                 <div class="self-end flex w-3/4 justify-between italic border-b border-main-red"><span>Débuté le 25/03/2002</span><span>Fini le 25/03/2002</span></div>
                 <!-- contenu projet -->
                 <div class="text-base flex-grow flex-col">
-                    <p class="pl-[20%] line-clamp-5 mt-2 mb-4">The best kept secret of The Bahamas is the country’s sheer size and diversity. With 16 major islands, The Bahamas is an unmatched destination... </p>
+                    <p class="pl-[20%] h-fit line-clamp-5 mt-2 mb-4">The best kept secret of The Bahamas is the country’s sheer size and diversity. With 16 major islands, The Bahamas is an unmatched destination... </p>
                     <div id="end" class="mt-auto">
                         <a href="page de la promo" class="bg-main-red py-2 px-4 rounded-full text-main-white my-2 hover:bg-main-white hover:text-main-red hover:border border-main-red">Développeurs Web 2023</a>
                         <div class="space-x-4 mt-4 mb-2 text-sm text-main-white [&>a]:bg-main-gray [&>a]:py-1 [&>a]:px-3 [&>a]:rounded-full">
@@ -136,7 +136,7 @@
         </article>
 
         <!-- card projet 2 -->
-        <article id="projet-card-2" class="project-card border-2 border-black rounded-lg p-4 mb-8">
+        <article id="projet-card-2" class="project-card max-w-[766px] border-2 border-black rounded-lg p-4 mb-8">
             <!-- partie info projet -->
             <div class="flex-col text-[12px] flex justify-end text-end">
                 <!-- tags projet -->
@@ -169,7 +169,7 @@
 
 
         <!-- card projet 3 -->
-        <article id="projet-card-3" class="project-card border-2 border-black rounded-lg p-4 mb-8">
+        <article id="projet-card-3" class="project-card max-w-[766px] border-2 border-black rounded-lg p-4 mb-8">
             <!-- partie info projet -->
             <div class="flex-col text-[12px] flex justify-end text-end">
                 <!-- tags projet -->
@@ -203,7 +203,7 @@
 
 
         <!-- card projet 4 -->
-        <article id="projet-card-4" class="project-card border-2 border-black rounded-lg p-4 mb-8">
+        <article id="projet-card-4" class="project-card max-w-[766px] border-2 border-black rounded-lg p-4 mb-8">
             <!-- partie info projet -->
             <div class="flex-col text-[12px] flex justify-end text-end">
                 <!-- tags projet -->
@@ -236,7 +236,7 @@
 
 
         <!-- card projet 5 -->
-        <article id="projet-card-5" class="project-card border-2 border-black rounded-lg p-4 mb-8">
+        <article id="projet-card-5" class="project-card max-w-[766px] border-2 border-black rounded-lg p-4 mb-8">
             <!-- partie info projet -->
             <div class="flex-col text-[12px] flex justify-end text-end">
                 <!-- tags projet -->
@@ -272,7 +272,7 @@
 
 
         <!-- card projet 6 -->
-        <article id="projet-card-6" class="project-card border-2 border-black rounded-lg p-4 mb-8">
+        <article id="projet-card-6" class="project-card max-w-[766px] border-2 border-black rounded-lg p-4 mb-8">
             <!-- partie info projet -->
             <div class="flex-col text-[12px] flex justify-end text-end">
                 <!-- tags projet -->
