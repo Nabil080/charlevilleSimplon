@@ -249,52 +249,19 @@
         </div>
     </article>
 
+<!-- pagination -->
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-     <!-- card projet 2 -->
-    <article id="projet-card-2" class="project-card">
-
-    <h2>Apprenants : Nabil, Alexandre</h2>
-    </article>
-
-     <!-- card projet 3 -->
-     <article id="projet-card-3" class="project-card">
-
-         <h2>Apprenants : Bryan, Alexandre</h2>
-    </article>
-
-
-    <!-- card projet 4 -->
-    <article id="projet-card-4" class="project-card">
-
-    <h2>Apprenants : Nabil</h2>
-    </article>
-    <article id="projet-card-5" class="project-card">
-
-    <h2>Apprenants : Florian, Alexandre</h2>
-    </article>
-
-    <article id="projet-card-6" class="project-card">
-
-    <h2>Apprenants : Alexandre, Florian, Bryan</h2>
-    </article>
+<div class="flex justify-center text-md">
+<a href="lien vers page" class="fa fa-chevron-left my-auto mx-3 px-3 opacity-30"></a>
+<div class="flex gap-x-0.5 [&>a]:px-4 [&>a]:py-0.5 [&>a]:rounded-md">
+    <a href="lien vers page" class="hover:bg-main-red hover:text-main-white PAGEACTIVE= bg-main-red text-main-white">1</a>
+    <a href="lien vers page" class="hover:bg-main-red hover:text-main-white">2</a>
+    <a href="lien vers page" class="hover:bg-main-red hover:text-main-white">3</a>
+    <a href="lien vers page" class="hover:bg-main-red hover:text-main-white">4</a>
+    <a href="lien vers page" class="hover:bg-main-red hover:text-main-white">5</a>
+</div>
+<a href="lien vers page" class="fa fa-chevron-right my-auto mx-3 px-3"></a>
+</div>
 
 </section>
 
