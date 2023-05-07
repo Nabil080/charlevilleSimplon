@@ -91,6 +91,50 @@
             </div>
         </article>
 
+        <!-- card projet 1 -->
+        <article id="projet-card-1" class="project-card border-2 border-black rounded-lg p-4 mb-8 2xl:flex gap-6 2xl:p-6">
+            <!-- partie entreprise desktop -->
+            <div class="hidden 2xl:block w-1/3 border-r-2 border-main-gray pr-6">
+            <div class="my-2 flex-col">
+                <div class="flex flex-wrap"><p class="font-title font-bold mr-2">Projet fourni par : </p><p><a href="lien vers la société" class="text-main-red underline font-bold text-sm">Pole formation CCI Ardennes</a></p></div>
+                <div class="my-4 grow"><img class="" src="assets/img/homepage_image" alt="logo de l'entreprise"></div>
+                <div class="flex flex-wrap"><p class="font-title font-bold mr-2">Adresse :</p><p class="text-sm pt-0.5 text-left font-light">33 rue de la gare, 08000 Charleville-Mézières</p></div>
+            </div>
+            </div>
+            <!-- partie info projet -->
+            <div class="flex-col text-[12px] flex text-end 2xl:w-2/3">
+                <!-- tags projet -->
+                <div class="uppercase space-x-4 my-4 [&>tag]:bg-main-gray [&>tag]:bg-opacity-10 [&>tag]:py-2 [&>tag]:px-4 [&>tag]:rounded-full">
+                    <tag> html</tag>
+                    <tag> css</tag>
+                    <tag> react</tag>
+                </div>
+                <!-- titre projet -->
+                <h2 class="font-title text-main-red italic font-bold text-3xl my-2"><a href="lien du projet">Super projet de fou</a></h2>
+                <div class="self-end flex w-3/4 justify-between italic border-b border-main-red"><span>Débuté le 25/03/2002</span><span>Fini le 25/03/2002</span></div>
+                <!-- contenu projet -->
+                <div class="text-base flex-grow flex-col">
+                    <p class="pl-[20%] line-clamp-5 mt-2 mb-4">The best kept secret of The Bahamas is the country’s sheer size and diversity. With 16 major islands, The Bahamas is an unmatched destination... </p>
+                    <div id="end" class="mt-auto">
+                        <a href="page de la promo" class="bg-main-red py-2 px-4 rounded-full text-main-white my-2 hover:bg-main-white hover:text-main-red hover:border border-main-red">Développeurs Web 2023</a>
+                        <div class="space-x-4 mt-4 mb-2 text-sm text-main-white [&>a]:bg-main-gray [&>a]:py-1 [&>a]:px-3 [&>a]:rounded-full">
+                            <a href="profil de l'apprenant" class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white">Nabil</a>
+                            <a href="profil de l'apprenant" class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white">Alexandre</a>
+                            <a href="profil de l'apprenant" class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white">Bryan</a>
+                        </div>
+                        <a href="lien du projet" class="block float-left text-xs">Voir le projet <i class="fa fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+            <!-- séparateur mobile-->
+            <div class="2xl:hidden w-4/5 mx-auto bg-main-gray bg-opacity-50 h-0.5 my-4"></div>
+            <!-- partie info entreprise mobile-->
+            <div class="2xl:hidden my-2">
+                <div class="flex flex-wrap"><p class="font-title font-bold mr-2">Projet fourni par : </p><p><a href="lien vers la société" class="text-main-red underline font-bold text-sm">Pole formation CCI Ardennes</a></p></div>
+                <div class="flex flex-wrap"><p class="font-title font-bold mr-2">Adresse :</p><p class="text-sm pt-0.5 text-left font-light">33 rue de la gare, 08000 Charleville-Mézières</p></div>
+            </div>
+        </article>
+
         <!-- card projet 2 -->
         <article id="projet-card-2" class="project-card border-2 border-black rounded-lg p-4 mb-8">
             <!-- partie info projet -->
