@@ -24,7 +24,7 @@
                       </svg>
                   </button>
                   <div id="dropdown" class="z-10 border-main-lightgray hidden bg-main-white rounded-lg shadow w-full mr-4 pl-0 border-main-lightgray">
-                      <ul class="z-100 relative py-2 px-2 text-sm leading-9 sm:leading-[60px] text-gray-700 divide-y border-2 border-main-red divide-main-red rounded-[4px]" aria-labelledby="dropdownDefaultButton">
+                      <ul class="z-100 relative py-2 md:py-0 px-2 md:px-0 text-sm leading-9 sm:leading-[60px] text-gray-700 divide-y border-2 border-main-red divide-main-red rounded-[4px]" aria-labelledby="dropdownDefaultButton">
                         <li class="md:hover:bg-main-lightred">
                           <a href="#" class="block px-4 py-2 text-[22px] sm:text-[32px] md:text-[20px] ">Découvrir nos formations</a>
                         </li>

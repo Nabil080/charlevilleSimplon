@@ -38,7 +38,7 @@
     <link href="assets/css/nav.css" rel="stylesheet" />
 </head>
 
-<body class="w-[100vw] overflow-x-hidden bg-main-white">
+<body class="w-[100vw] overflow-x-hidden bg-main-white pt-24">
     <?php require_once 'view/template/_navbar.php'; ?>
     <?= $content ?>
     <?php require_once 'view/template/_footer.php'; ?>
