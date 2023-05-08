@@ -12,7 +12,10 @@ switch ($action) {
     // Afficher profil de l'apprennant
 
     // Afficher tous les projets
-    // Afficher du projet choisi
+    // Afficher le projet choisi
+    case 'projectPage':
+        projectPage();
+        break;
 
     // Envoie du traitement du formulaire d'inscription
     case 'registerTreatment':
