@@ -36,9 +36,12 @@
     </script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.css" rel="stylesheet" />
     <link href="assets/css/nav.css" rel="stylesheet" />
+    <?php if (isset($link))
+        echo $link; ?>
 </head>
 
 <body class="w-[100vw] 2xl:px-[5%] overflow-x-hidden bg-main-white">
+
     <?php require_once 'view/template/_navbar.php'; ?>
     <?= $content ?>
     <?php require_once 'view/template/_footer.php'; ?>

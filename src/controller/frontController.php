@@ -18,4 +18,8 @@ function formationPage()
 function allProjectsPage()
 {
     include 'view/template/_all_projects.php';
+
+function promotionPage()
+{
+    include 'view/template/promotion.php';
 }
