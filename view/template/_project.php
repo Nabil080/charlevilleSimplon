@@ -74,20 +74,20 @@
 </section>
 
 <!-- tabulation entreprise/apprenants -->
-<section>
+<section class="max-w-[1200px] mx-auto">
     <div class="flex w-full">
-        <div onclick="changeTab(0)" class="tabChange px-0 transition-all duration-[0.4s] bg-main-red w-1/2 text-center text-main-white font-title text-lg font-bold py-2">
-            <p>Demandes de l'entreprise</p>
+        <div onclick="changeTab(0)" class="tabChange cursor-pointer px-0 transition-all duration-[0.4s] bg-main-red w-1/2 text-center text-main-white font-title text-lg md:text-xl lg:text-2xl font-bold py-2 md:py-4">
+            <p class="select-none">Demandes de l'entreprise</p>
         </div>
-        <div onclick="changeTab(1)" class="tabChange px-0 transition-all duration-[0.4s] bg-main-gray w-1/2 text-center text-main-white font-title text-lg font-bold py-2">
-            <p>Notes des apprenants</p>
+        <div onclick="changeTab(1)" class="tabChange cursor-pointer px-0 transition-all duration-[0.4s] bg-main-gray w-1/2 text-center text-main-white font-title text-lg md:text-xl lg:text-2xl font-bold py-2 md:py-4">
+            <p class="select-none">Notes des apprenants</p>
         </div>
     </div>
 </section>
 
 <!-- CONTENU TAB ENTREPRISE -->
 <section class="sectionChange">
-    <h2 class="text-center italic font-title text-xl font-semibold uppercase my-4">Demandes de l'entreprise</h2>
+    <h2 class="text-center italic font-title text-xl lg:text-2xl font-semibold uppercase my-4">Demandes de l'entreprise</h2>
     <div class="mx-4 h-1 bg-main-red"></div>
     <p class="m-4">La méthode d’apprentissage <I>Simplon.co</I>, <B>c’est une pédagogie active et par projets</B> où l’apprenant est confronté à des mises en situation concrètes via des projets individuels et en groupe. Les thèmes des projets sont directement issus de cas réels, pour permettre aux apprenants d’appréhender le terrain dès la formation. Le collectif est un élément central de l’apprentissage car <B>le travail en équipe est constant</B>, et les apprenants s’entraident et s’évaluent régulièrement.<br><br>
 ​​​​​​​
@@ -97,7 +97,7 @@ Quasiment toutes nos formations débouchent sur <B>la délivrance de certificati
 </section>
 <!-- CONTENU TAB APPRENANT -->
 <section class="sectionChange hidden">
-    <h2 class="text-center italic font-title text-xl font-semibold uppercase my-4">Notes des apprenants</h2>
+    <h2 class="text-center italic font-title text-xl lg:text-2xl font-semibold uppercase my-4">Notes des apprenants</h2>
     <div class="mx-4 h-1 bg-main-red"></div>
     <p class="m-4">La méthode d’apprentissage <I>Simplon.co</I>, <B>c’est une pédagogie active et par projets</B> où l’apprenant est confronté à des mises en situation concrètes via des projets individuels et en groupe. Les thèmes des projets sont directement issus de cas réels, pour permettre aux apprenants d’appréhender le terrain dès la formation. Le collectif est un élément central de l’apprentissage car <B>le travail en équipe est constant</B>, et les apprenants s’entraident et s’évaluent régulièrement.<br><br>
 ​​​​​​​
