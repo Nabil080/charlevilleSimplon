@@ -47,7 +47,25 @@
         </div>
     </div>
 </section>
-
+<!-- boutons liens externes -->
+<section class="[&_i]:text-[40px] [&_i]:w-10 [&_i]:text-center">
+    <!-- bouton 1 -->
+    <div class="flex mx-4 my-4 gap-4 h-max">
+        <i class="fa-brands fa-github"></i>
+        <a href="github externe" target="_blank" class="text-main-white bg-main-red grow h-[40px] flex items-center justify-center">Voir le github du projet</a>
+    </div>
+    <!-- bouton 2 -->
+    <div class="flex mx-4 my-4 gap-4 h-max">
+        <i class="fa-solid fa-file-pdf"></i>
+        <a href="cahier des charges pdf" download class="text-main-white bg-main-red grow h-[40px] flex items-center justify-center">Télécharger le cahier des charges</a>
+    </div>
+    <!-- bouton 3 -->
+    <div class="flex mx-4 my-4 gap-4 h-max">
+        <i class="fa-brands fa-chrome"></i>
+        <!-- disabled : div + opacity-50 -->
+        <div href="site externe" target="_blank" class="opacity-50 text-main-white bg-main-red grow h-[40px] flex items-center justify-center">Lien vers le site</div>
+    </div>
+</section>
 
 
 
