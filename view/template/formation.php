@@ -1,4 +1,4 @@
-<?php $title = "nameFormation"; ?>
+<?php $title = "Développeur Web et Web Mobile"; ?>
 
 <?php ob_start(); ?>
 

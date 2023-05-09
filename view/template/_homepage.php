@@ -12,7 +12,7 @@ ob_start();
     <div id="homepage-overlay" class="absolute w-screen 2xl:px-[15%] h-screen bg-main-white bg-opacity-60">
         <!-- header logo + titre -->
         <div class="flex justify-center my-6 lg:my-0 sm:justify-between">
-            <img class="h-60 sm:h-auto sm:w-40 sm:mx-8" src="assets/img/logo.png" alt="logo simplon charleville-mézières"><h1 class="hidden">Simplon Charleville-Mézières, formations numérique</h1>
+            <img class="h-60     sm:h-auto sm:w-40 sm:mx-8" src="assets/img/logo.png" alt="logo simplon charleville-mézières"><h1 class="hidden">Simplon Charleville-Mézières, formations numérique</h1>
             <div class="hidden sm:block w-fit mx-8 my-auto relative"><i class="fa fa-user text-[80px] text-main-red"></i><button data-modal-target="login-modal" data-modal-toggle="login-modal" class="font-main absolute -bottom-6 -right-2 underline text-main-white whitespace-nowrap">Se connecter</button></div>
         </div>
         <!-- div cards accueil -->
@@ -34,8 +34,8 @@ ob_start();
             <h2 class="w-fit font-title font-bold text-3xl text-main-white xl:text-[46px]">Je souhaite</h2>
             <div class="lg:flex gap-8 px-8 [&>button]:mx-auto [&>button]:xl:mx-0">
                 <button onclick="companyPromo()" type="button" class="hover:bg-main-white hover:text-main-red hover:border-main-red hover:-translate-y-4 ">Chercher un profil</button>
-                <button onclick="companyProject()" type="button" class="hover:bg-main-white hover:text-main-red hover:border-main-red hover:-translate-y-4 ">Soumettre un projet</button>
-                <button onclick="companyProject()" type="button" class="hover:bg-main-white hover:text-main-red hover:border-main-red hover:-translate-y-4 ">Gérer mes projets</button>
+                <button onclick="companyProject()" type="button" class="hover:bg-main-white hover:text-main-red hover:border-main-red hover:-translate-y-4 ">Soumettre ou suivre un projet</button>
+                <!-- <button onclick="companyProject()" type="button" class="hover:bg-main-white hover:text-main-red hover:border-main-red hover:-translate-y-4 ">Gérer mes projets</button> -->
             </div>
             <div class="absolute -bottom-12 w-full flex justify-center"><div onclick="returnHomepage('company-homepage')" class="cursor-pointer font-semibold font-main text-main-white text-xl shadow-2xl"><i class="fa-solid fa-angle-left"></i> Retour</div></div>
         </section>
@@ -64,7 +64,7 @@ ob_start();
             <!-- Partie CONNEXION -->
             <div id="co" class="px-6 py-6 lg:px-8">
                 <h3 class="mb-4 text-xl uppercase w-fit mx-auto font-bold font-title text-main-red">Connexion</h3>
-                <form class="space-y-6" action="/portfolio/allosimplon/traitements/connexion/login.php" method="post">
+                <form class="space-y-6" action="" method="post">
                     <div>
                         <label for="email" class="block mb-2 text-sm font-medium  text-main-red">E-mail</label>
                         <input type="email" name="email" id="email" class=" border text-sm rounded-md block w-full p-2.5 border-main-red text-main-red" placeholder="Exemple@mail.com" required>
