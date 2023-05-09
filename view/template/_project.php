@@ -22,6 +22,7 @@
         </div>
     </div>
 </section>
+
 <!-- aperçu projet -->
 <section class="text-center mx-4">
     <!-- maquette -->
@@ -47,8 +48,9 @@
         </div>
     </div>
 </section>
+
 <!-- boutons liens externes -->
-<section class="[&_i]:text-[40px] [&_i]:w-10 [&_i]:text-center">
+<section class="my-12    [&_i]:text-[40px] [&_i]:w-10 [&_i]:text-center">
     <!-- bouton 1 -->
     <div class="flex mx-4 my-4 gap-4 h-max">
         <i class="fa-brands fa-github"></i>
@@ -65,6 +67,27 @@
         <!-- disabled : div + opacity-50 -->
         <div href="site externe" target="_blank" class="opacity-50 text-main-white bg-main-red grow h-[40px] flex items-center justify-center">Lien vers le site</div>
     </div>
+</section>
+
+<!-- tabulation entreprise/apprenants -->
+<section>
+    <div class="flex w-full">
+        <div onclick="changeTab(0)" class="tabChange px-0 transition-all duration-[0.4s] bg-main-red w-1/2 text-center text-main-white font-title text-lg font-bold py-2">
+            <p>Demandes de l'entreprise</p>
+        </div>
+        <div onclick="changeTab(1)" class="tabChange px-0 transition-all duration-[0.4s] bg-main-gray w-1/2 text-center text-main-white font-title text-lg font-bold py-2">
+            <p>Note des apprenants</p>
+        </div>
+    </div>
+</section>
+
+
+
+<section class="sectionChange"> <!-------------PROMOTIONS----------->
+Promo
+</section>
+<section class="sectionChange hidden"> <!-------------PROJETS----------->
+    projets
 </section>
 
 
@@ -87,7 +110,7 @@
 
 
 <?php ob_start(); ?>
-<!-- <script src="assets/js/ajax_register.js"></script> -->
+<script src="assets/js/project.js"></script>
 <?php $script = ob_get_clean(); ?>
 
 <?php require 'view/layout.php'; ?>
