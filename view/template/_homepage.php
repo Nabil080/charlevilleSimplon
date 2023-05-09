@@ -34,8 +34,8 @@ ob_start();
             <h2 class="w-fit font-title font-bold text-3xl text-main-white xl:text-[46px]">Je souhaite</h2>
             <div class="lg:flex gap-8 px-8 [&>button]:mx-auto [&>button]:xl:mx-0">
                 <button onclick="companyPromo()" type="button" class="hover:bg-main-white hover:text-main-red hover:border-main-red hover:-translate-y-4 ">Chercher un profil</button>
-                <button onclick="companyProject()" type="button" class="hover:bg-main-white hover:text-main-red hover:border-main-red hover:-translate-y-4 ">Soumettre un projet</button>
-                <button onclick="companyProject()" type="button" class="hover:bg-main-white hover:text-main-red hover:border-main-red hover:-translate-y-4 ">Gérer mes projets</button>
+                <button onclick="companyProject()" type="button" class="hover:bg-main-white hover:text-main-red hover:border-main-red hover:-translate-y-4 ">Soumettre ou suivre un projet</button>
+                <!-- <button onclick="companyProject()" type="button" class="hover:bg-main-white hover:text-main-red hover:border-main-red hover:-translate-y-4 ">Gérer mes projets</button> -->
             </div>
             <div class="absolute -bottom-12 w-full flex justify-center"><div onclick="returnHomepage('company-homepage')" class="cursor-pointer font-semibold font-main text-main-white text-xl shadow-2xl"><i class="fa-solid fa-angle-left"></i> Retour</div></div>
         </section>

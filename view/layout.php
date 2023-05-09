@@ -40,7 +40,8 @@
         echo $link; ?>
 </head>
 
-<body class="w-[100vw] overflow-x-hidden bg-main-white pt-24">
+<body class="w-[100vw] 2xl:px-[5%] overflow-x-hidden bg-main-white">
+
     <?php require_once 'view/template/_navbar.php'; ?>
     <?= $content ?>
     <?php require_once 'view/template/_footer.php'; ?>
