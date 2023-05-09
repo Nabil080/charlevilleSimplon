@@ -25,9 +25,27 @@
 <!-- aperçu projet -->
 <section class="text-center mx-4">
     <!-- maquette -->
-    <div class=""><div class="font-title text-xl font-bold my-4 underline w-full"><a href="lien de la maquette">Maquette/Wireframe</a></div><div class="w-full max-h-[200px] overflow-scroll"><img class="w-full" src="assets/img/maquette" alt="maquette du projet"></div></div>
+    <div class=""><div class="font-title text-xl font-bold my-4 underline w-full"><a href="lien de la maquette">Maquette/Wireframe</a></div>
+        <div class="w-full max-h-[200px] overflow-scroll"><img class="w-full" src="assets/img/maquette" alt="maquette du projet"></div>
+    </div>
     <!-- avancement -->
-    <div class=""><div class="font-title text-xl font-bold my-4">Avancement du projet</div></div>
+    <div class=""><div class="font-title text-xl font-bold my-4">Avancement du projet</div>
+        <!-- avancement 1 -->
+        <div class="mb-1 text-start italic">Cahier des charges</div>
+        <div class="w-full bg-gray-200 rounded-full h-2.5 mb-4  ">
+            <div class="bg-green-600 h-2.5 rounded-full" style="width: 100%"></div>
+        </div>
+        <!-- avancement 2 -->
+        <div class="mb-1 text-start italic">Développement front</div>
+        <div class="w-full bg-gray-200 rounded-full h-2.5 mb-4  ">
+            <div class="bg-yellow-400 h-2.5 rounded-full" style="width: 60%"></div>
+        </div>
+        <!-- avancement 3 -->
+        <div class="mb-1 text-start italic">Non défini</div>
+        <div class="w-full bg-gray-200 rounded-full h-2.5 mb-4  ">
+            <div class="bg-red-main h-2.5 rounded-full" style="width: 45%"></div>
+        </div>
+    </div>
 </section>
 
 
