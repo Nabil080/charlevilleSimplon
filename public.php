@@ -20,7 +20,11 @@ switch ($action) {
     case 'allProjectsPage':
         allProjectsPage();
         break;
-    // Afficher du projet choisi
+    // Afficher le projet choisi
+    case 'projectPage':
+        projectPage();
+        break;
+
 
     // Envoie du traitement du formulaire d'inscription
     case 'registerTreatment':

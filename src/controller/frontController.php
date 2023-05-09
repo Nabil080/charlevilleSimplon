@@ -15,9 +15,16 @@ function formationPage()
     include 'view/template/formation.php';
 }
 
+
+function projectPage()
+{
+    include 'view/template/_project.php';
+}
+
 function allProjectsPage()
 {
     include 'view/template/_all_projects.php';
+}
 
 function promotionPage()
 {
