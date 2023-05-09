@@ -14,3 +14,7 @@ function formationPage()
 {
     include 'view/template/formation.php';
 }
+function promotionPage()
+{
+    include 'view/template/promotion.php';
+}

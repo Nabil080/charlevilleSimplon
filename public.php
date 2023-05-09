@@ -1,9 +1,14 @@
 <?php
 switch ($action) {
-    // Afficher liste des formations
+    case 'allFormationsPage':
+        allFormationsPage();
+        break;
     // Aficher la formation choisie
     case 'formationPage':
         formationPage();
+        break;
+    case 'promotionPage':
+        promotionPage();
         break;
     // Afficher le formulaire de pré-inscription.
 
