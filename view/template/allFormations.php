@@ -5,9 +5,9 @@ $title = "Toutes nos formations";
 <?php ob_start(); ?>
 
 <div class="background bg-main-white">
-
-    <div class="key_numbers hidden md:flex md:justify-center border-t-[4px] border-b-[4px] border-main-red py-5">
-        <div class="numbers_container px-5 flex ">
+    <!-- Chiffres clés, invisibles en mobile -->
+    <div class="key_numbers hidden md:flex md:justify-center border-t-[4px] border-b-[4px] border-main-red py-5 w-full">
+        <div class="numbers_container px-5 flex w-full">
             <div class="number1 flex w-1/3 items-center">
                 <span class="bg-main-red rounded-[5px] text-main-white text-[30px] h-[100px] w-[100px] flex items-center justify-center">142</span>
                 <p class="font-title text-[20px] italic pl-2">Simplonien.ne.s depuis la création</p>
@@ -28,13 +28,14 @@ $title = "Toutes nos formations";
 
     <div class="large_screen md:mx-2">
         <div class="section-cards md:flex md:flex-wrap md:justify-around">
+            <!-- Card formation -->
             <div class="card_formation rounded-[5px] border-[1px] m-3 border-main-border md:w-2/5">
                 <img class="max-h-[140px] md:max-h-[200px] w-full" src="assets/img/formations/devweb" alt="Formation">
                 <h3 class="text-main-red font-title text-[18px] pl-3 mt-3 md:text-center md:text-[36px]">Développeur Web / Web Mobile</h3>
                 <h4 class="text-main-gray font-main text-[14px] italic pl-3 md:text-center">Niveau Bac + 2 / Titre professionnel niveau 5</h4>
-                <div class="hidden md:flex flex-col text-justify px-6 py-4 text-[16px]">
+                <div class="hidden md:flex flex-col text-justify px-8 py-4 text-[16px]">
                     <h5 class="text-main-red font-main pb-2 font-semibold">Le métier de développeur Web s’articule autour de plusieurs activités principales :</h5>
-                    <ul>
+                    <ul class="list-disc pl-4">
                         <li>Développer la partie front-end d’une application web ou web mobile en intégrant les recommandations de sécurité</li>
                         <li>Développer la partie back-end d’une application web ou web mobile en intégrant les recommandations de sécurité</li>
                     </ul>
@@ -48,7 +49,7 @@ $title = "Toutes nos formations";
                     <a href="" class="bg-main-red rounded-[5px] text-main-white font-medium flex items-center justify-center text-[14px] font-main w-1/3 py-2 px-2">Postuler à la formation</a>
                 </div>
             </div>
-
+            <!-- Fin de la card formation -->
             <div class="card_formation rounded-[5px] border-[1px] m-3 border-main-border md:w-2/5">
                 <img class="max-h-[140px] md:max-h-[200px] w-full" src="assets/img/formations/devweb" alt="Formation">
                 <h3 class="text-main-red font-title text-[18px] pl-3 mt-3 md:text-center md:text-[36px]">Développeur Web / Web Mobile</h3>
@@ -94,7 +95,7 @@ $title = "Toutes nos formations";
         </div>
     </div>
     
-
+    <!-- Section Apprendre à Simplon -->
     <div class="section_learn bg-main-white pb-5">
         <h2 class="text-main-red font-title text-center text-[24px] font-semibold pt-4">Apprendre à Simplon</h2>
         <p class="mx-7 py-5 font-main text-[16px] text-justify tracking-wide">La méthode d’apprentissage <span class="italic">Simplon.co</span>, <strong>c’est une pédagogie active et par projets</strong> où l’apprenant est confronté à des mises en situation concrètes via des projets individuels et en groupe. Les thèmes des projets sont directement issus de cas réels, pour permettre aux apprenants d’appréhender le terrain dès la formation. Le collectif est un élément central de l’apprentissage car <strong>le travail en équipe est constant</strong>, et les apprenants s’entraident et s’évaluent régulièrement.</p>
@@ -107,7 +108,7 @@ $title = "Toutes nos formations";
 
     <div class="section_history">
         <h2 class="text-main-red font-title text-center text-[24px] font-semibold py-5">Notre histoire</h2>
-        <!-- TIMELINE -->
+        <!-- Timeline -->
         <ol class="border-l border-neutral-300 md:flex md:justify-center md:gap-6 md:border-l-0 md:border-t">
             <li>
                 <div class="flex-start flex items-center pt-2 md:block md:pt-0">
