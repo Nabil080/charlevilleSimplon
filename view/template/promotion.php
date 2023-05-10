@@ -67,7 +67,7 @@
             <!-----Card Apprenants------->
             <div class="grid grid-cols-[60%_40%] bg-white grid-rows-1 relative w-[100%] border-2">
                 <div class="w-full">
-                    <div class="h-[75%] w-11/12 lg:w-[98%] ml-auto">
+                    <div class="h-[75%] lg:h-[80%] w-11/12 lg:w-[98%] ml-auto">
                         <p class="text-[22px] font-main-title text-left font-bold pt-4 leading-1 inline">Steven <span class="uppercase">Blombou</span></p>
                         <div class="border-2 border-main-red text-left w-10/12 ml-0 mt-1"></div>
                         <p class="text-[16px]">
@@ -98,7 +98,7 @@
             <!-----Card Apprenants------->
             <div class="grid grid-cols-[60%_40%] bg-white grid-rows-1 relative w-[100%] border-2">
                 <div class="w-full">
-                    <div class="h-[75%] w-11/12 lg:w-[98%] ml-auto">
+                    <div class="h-[75%] lg:h-[80%] w-11/12 lg:w-[98%] ml-auto">
                         <p class="text-[22px] font-main-title text-left font-bold pt-4 leading-1 inline">Steven <span class="uppercase">Blombou</span></p>
                         <div class="border-2 border-main-red text-left w-10/12 ml-0 mt-1"></div>
                         <p class="text-[16px]">
