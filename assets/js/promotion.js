@@ -11,3 +11,4 @@ function changeTab(y) {
     sectionChange[y].classList.remove("hidden");
     tabChange[y].classList.add("bg-main-red");
 }
+

@@ -24,7 +24,7 @@
                 colors: {
                     'main':{
                         red:'#BD3124',
-                        white:'#EFF1F3',
+                        white:'#FFFF',
                         gray: '#4F4F4F',
                         lightred: '#F6DADE',
                         lightgray: '#F2F2F3',

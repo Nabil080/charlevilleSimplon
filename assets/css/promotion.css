@@ -18,3 +18,10 @@
     background-color: #BD3124;
     clip-path: polygon(35% 0%, 100% 0, 100% 100%, 8% 100%); 
 }
+
+@media screen and (max-width: 640px) {
+    
+.clipper2:after {
+    display: none;
+}
+}
