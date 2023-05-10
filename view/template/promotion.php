@@ -99,7 +99,7 @@
                             animate-pulse duration-[2s] mb-6 mt-4 mr-1"></i>
                             En recherche d'emploi depuis 1987
                         </p>
-                        <div class="flex gap-1 justify-center sm:justify-normal mx-auto sm:gap-1 xl:gap-3 sm:px-4">
+                        <div class="flex gap-1 justify-center sm:justify-normal mx-auto sm:gap-1 xl:gap-3 sm:px-4  lg:px-1 xl:px-4">
                             <a href="">
                                 <p class="bg-[#F2F2F3] px-4 py-1 border-main-gray border-2 text-[14px] md:text-[16px] rounded-[50px] mb-2">REACT</p>
                             </a>
@@ -149,7 +149,7 @@
                              animate-pulse duration-[2s] mb-6 mt-4 mr-1"></i>
                             En alternance depuis 2013
                         </p>
-                        <div class="flex gap-1 justify-center sm:justify-normal mx-auto sm:gap-1 xl:gap-3 sm:px-4">
+                        <div class="flex gap-1 justify-center sm:justify-normal mx-auto sm:gap-1 xl:gap-3 sm:px-4  lg:px-1 xl:px-4">
                             <a href="">
                                 <p class="bg-[#F2F2F3] px-4 py-1 border-main-gray border-2 text-[14px] md:text-[16px] rounded-[50px] mb-2">REACT</p>
                             </a>
