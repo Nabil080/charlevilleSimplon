@@ -5,10 +5,12 @@ function companyHomepage(){
     const companyHomepage = document.getElementById("company-homepage");
     // console.log(companyHomepage);
     homepage.classList.add("opacity-0");
-    companyHomepage.classList.remove("hidden");
     setTimeout(() => {
-        homepage.classList.add("hidden");
-        companyHomepage.classList.add("opacity-100");
+        companyHomepage.classList.remove("hidden");
+        setTimeout(() => {
+            homepage.classList.add("hidden");
+            companyHomepage.classList.add("opacity-100");
+        },1)
     },300)
 }
 
@@ -19,10 +21,12 @@ function visitorHomepage(){
     const visitorHomepage = document.getElementById("visitor-homepage");
     // console.log(visitorHomepage);
     homepage.classList.add("opacity-0");
-    visitorHomepage.classList.remove("hidden");
     setTimeout(() => {
+        visitorHomepage.classList.remove("hidden");
+        setTimeout(() => {
         homepage.classList.add("hidden");
         visitorHomepage.classList.add("opacity-100");
+        },1)
     },300)
 }
 
