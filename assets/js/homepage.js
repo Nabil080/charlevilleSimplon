@@ -6,9 +6,9 @@ function companyHomepage(){
     // console.log(companyHomepage);
     homepage.classList.add("opacity-0");
     setTimeout(() => {
-        companyHomepage.classList.remove("hidden");
+        homepage.classList.add("hidden","lg:hidden");
+        companyHomepage.classList.remove("hidden","lg:hidden");
         setTimeout(() => {
-            homepage.classList.add("hidden");
             companyHomepage.classList.add("opacity-100");
         },1)
     },300)
@@ -22,9 +22,9 @@ function visitorHomepage(){
     // console.log(visitorHomepage);
     homepage.classList.add("opacity-0");
     setTimeout(() => {
-        visitorHomepage.classList.remove("hidden");
+        homepage.classList.add("hidden","lg:hidden");
+        visitorHomepage.classList.remove("hidden","lg:hidden");
         setTimeout(() => {
-        homepage.classList.add("hidden");
         visitorHomepage.classList.add("opacity-100");
         },1)
     },300)
@@ -69,8 +69,8 @@ function returnHomepage(id){
     // console.log(previousPage);
     previousPage.classList.remove("opacity-100");
     setTimeout(() => {
-        homepage.classList.remove("hidden");
-        previousPage.classList.add("hidden");
+        homepage.classList.remove("hidden","lg:hidden");
+        previousPage.classList.add("hidden","lg:hidden");
         setTimeout(() => {
             homepage.classList.remove("opacity-0");
         },1)
