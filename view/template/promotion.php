@@ -89,7 +89,7 @@
                     <div class="flex h-[60%] mb-[5%] items-center sm:hidden justify-center relative z-10">
                         <img src="upload/promotion/devWeb2023/efz.png" class="bg-right grayscale relative rounded-full h-full object-cover aspect-[1/1] lg:object-cover z-10">
                     </div>
-                    <div class=" w-[98%] mx-auto h-[30%] md:p-2 text-center sm:text-left sm:h-[75%] lg:h-[80%] sm:w-11/12 lg:w-[98%] sm:ml-auto">
+                    <div class=" w-[98%] mx-auto h-[30%] md:pl-2 md:pt-2  text-center sm:text-left sm:h-[75%] lg:h-[80%] sm:w-11/12 lg:w-[98%] sm:ml-auto">
                         <p class="text-[22px] md:text-[24px] font-main-title text-left font-bold pt-4 leading-1 inline">Steven <span class="uppercase">Blombou</span></p>
                         <div class=" mx-auto border-2 border-main-red text-left w-10/12 sm:ml-0 sm:mt-1"></div>
                         <p class="text-[16px] md:text-[18px]  leading-[1px] sm:whitespace-nowrap">
@@ -139,7 +139,7 @@
                     <div class="flex h-[60%]  mb-[5%] items-center sm:hidden justify-center relative z-10">
                         <img src="upload/promotion/devWeb2023/profil.jpg" class="bg-right grayscale relative rounded-full h-full object-cover aspect-[1/1] lg:object-cover z-10">
                     </div>
-                    <div class=" w-[98%] mx-auto h-[30%] md:p-2 text-center sm:text-left sm:h-[75%] lg:h-[80%] sm:w-11/12 lg:w-[98%] sm:ml-auto">
+                    <div class=" w-[98%] mx-auto h-[30%] md:pl-2 md:pt-2  text-center sm:text-left sm:h-[75%] lg:h-[80%] sm:w-11/12 lg:w-[98%] sm:ml-auto">
                         <p class="text-[22px] md:text-[24px] font-main-title text-left font-bold pt-4 leading-1 inline">Guillaume <span class="uppercase">Poucet</span></p>
                         <div class=" mx-auto border-2 border-main-red text-left w-10/12 sm:ml-0 sm:mt-1"></div>
                         <p class="text-[16px] md:text-[18px]  leading-[1px] sm:whitespace-nowrap">
