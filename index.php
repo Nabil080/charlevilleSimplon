@@ -2,6 +2,8 @@
 session_start();
 require_once 'src/controller/frontController.php';
 require 'src/controller/back/UserController.php';
+$_SESSION['user'] = ['role'=> 0];
+// var_dump($_SESSION);
 
 if (isset($_GET['action']) && $_GET['action'] !== '' && !isset($_GET['admin'])) {
     $action = $_GET['action'];
@@ -30,5 +32,5 @@ if (isset($_GET['action']) && $_GET['action'] !== '' && !isset($_GET['admin'])) 
         }
     }
 } else {
-    formationPage();
+    homepage();
 }

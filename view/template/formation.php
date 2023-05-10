@@ -9,6 +9,7 @@
         et Web Mobile
     </h2>
     <div class="bg-white px-[10%] xl:px-[15%]">
+
         <div class="flex justify-center md:gap-10 lg:gap-20">
             <div
                 class="w-full p-5 lg:bg-main-lightgray lg:border-2 lg:border-gray lg:rounded-lg lg:shadow-[2px_0_3px_2px_rgba(0,0,0,0.5)]">
@@ -266,8 +267,6 @@
             communication, du marketing et de la vente.</p>
     </div>
 </section>
-
-
 
 <?php $content = ob_get_clean(); ?>
 
