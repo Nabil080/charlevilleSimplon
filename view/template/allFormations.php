@@ -132,7 +132,7 @@ $title = "Toutes nos formations";
         <!-- Timeline -->
         <ol id="translateList" class="flex w-[300%] sm:w-full lg:w-3/4 sm:animate-none
          sm:translate-x-0 sm:opacity-100 sm:relative sm:flex-row sm:mx-auto lg:relative
-          transition-all duration-[0.5s] overflow-x-hidden lg:flex md:justify-around md:gap-6">
+          transition-all duration-[0.5s] overflow-x-hidden sm:overflow-x-clip lg:flex md:justify-around md:gap-6">
             <div class="border-2 hidden sm:block border-main-red w-[300vw] absolute z-0 h-0 top-1/2 -left-full"></div>
             <li class="z-10 w-2/3 cursor-pointer">
                 <div onclick="changeTab(0)" class="tabChange rounded-[5px] text-main-white bg-main-red p-2 grid items-center justify-center">
@@ -140,7 +140,7 @@ $title = "Toutes nos formations";
                 </div>
             </li>
             <li class="z-10 w-2/3 cursor-pointer">
-            <div onclick="changeTab(1)" class="tabChange bg-main-gray rounded-[5px] animate-pulse text-main-white p-2 grid items-center justify-center">
+            <div onclick="changeTab(1)" class="tabChange bg-main-gray rounded-[5px] animate-pulse sm:animate-none text-main-white p-2 grid items-center justify-center">
                     <span class="lg:text-xl text-md font-semibold">2014-2015</span>
                 </div>
             </li>
@@ -159,8 +159,8 @@ $title = "Toutes nos formations";
                     <span class="lg:text-xl text-md font-semibold">2020-2021</span>
                 </div>
             </li>
-            <li class="z-10 w-2/3 cursor-pointer">
-            <div onclick="changeTab('back')" class="tabChange sm:hidden bg-main-gray rounded-[5px] text-main-white p-2 grid items-center justify-center">
+            <li class="z-10 w-2/3 cursor-pointer sm:hidden">
+            <div onclick="changeTab('back')" class="tabChange  bg-main-gray rounded-[5px] text-main-white p-2 grid items-center justify-center">
                     <span class="lg:text-xl text-md font-semibold">Début de Simplon</span>
                 </div>
             </li>
