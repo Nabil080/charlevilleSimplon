@@ -2,7 +2,7 @@
 
 function homepage()
 {
-    include 'view/template/_homepage.php';
+    include 'view/template/homepage.php';
 }
 
 function seeLayout() 
