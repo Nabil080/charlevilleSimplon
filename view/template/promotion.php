@@ -232,7 +232,7 @@
     <!-------------Fin de la section Apprenants----------->
 
     <!-------------PROJETS----------->
-    <section class="sectionChange hidden w-11/12 mt-8  md:mt-20 grid gap-6 lg:gap-16 2xl:grid-cols-2 mx-auto">
+    <section class="sectionChange hidden w-11/12 mt-8  md:mt-20 grid gap-6 lg:gap-16 xl:grid-cols-2 mx-auto">
         <!-- card projet 1 -->
         <article id="projet-card-1"
             class="project-card max-w-[766px] border-2 border-black rounded-lg p-4 mb-8 md:flex gap-6 md:p-6 md:mx-auto">
