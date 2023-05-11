@@ -38,3 +38,8 @@ function promotionPage()
 {
     include 'view/template/promotion.php';
 }
+
+function contactPage()
+{
+    include 'view/template/contact.php';
+}
