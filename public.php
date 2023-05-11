@@ -24,7 +24,10 @@ switch ($action) {
     case 'projectPage':
         projectPage();
         break;
-
+    // Afficher la page contact
+    case 'contactPage':
+        contactPage();
+        break;
 
     // Envoie du traitement du formulaire d'inscription
     case 'registerTreatment':

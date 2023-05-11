@@ -1,4 +1,4 @@
-<?php $title = "Connexion"; ?>
+<?php $title = "Promotion"; ?>
 
 <?php ob_start(); ?>
 
