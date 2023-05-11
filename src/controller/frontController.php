@@ -7,14 +7,11 @@ function homepage()
     include 'view/template/homepage.php';
 }
 
-function seeLayout()
-{
-    include 'view/layout.php';
-}
 function allFormationsPage()
 {
-    include 'view/template/allFormation.php';
+    include 'view/template/allFormations.php';
 }
+
 function formationPage()
 {
     include 'view/template/formation.php';
