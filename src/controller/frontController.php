@@ -43,3 +43,8 @@ function contactPage()
 {
     include 'view/template/contact.php';
 }
+
+function crudPage()
+{
+    include 'view/template/crud.php';
+}
