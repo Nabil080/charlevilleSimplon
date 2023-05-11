@@ -13,8 +13,8 @@
 </h3> -->
 
 <!-- bouton ajouter un projet -->
-<a href="?action=addProjectTreatment" class="fixed bottom-6 right-6 rounded-full w-12 h-12 lg:!w-24 lg:!h-24 border text-main-white bg-main-red border-main-white hover:text-main-red hover:bg-main-white hover:border-main-red grid place-content-center">
-    <i class="fa fa-plus"></i>
+<a href="?action=addProjectTreatment" class="fixed bottom-6 right-6 rounded-full w-12 h-12 lg:!w-24 lg:!h-24 border text-main-white bg-main-gray border-main-white hover:text-main-gray hover:bg-main-white hover:border-main-gray grid place-content-center">
+    <i class="fa fa-plus lg:text-3xl"></i>
 </a>
 
 <!-- cards projets -->
