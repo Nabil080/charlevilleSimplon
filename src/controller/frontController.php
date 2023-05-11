@@ -1,4 +1,6 @@
 <?php
+require_once('src/model/Formation.php');
+
 
 function homepage()
 {
@@ -11,7 +13,7 @@ function seeLayout()
 }
 function allFormationsPage()
 {
-    include 'view/template/formation.php';
+    include 'view/template/allFormation.php';
 }
 function formationPage()
 {
