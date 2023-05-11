@@ -13,7 +13,7 @@
 </h3> -->
 
 <!-- bouton ajouter un projet -->
-<a href="?action=addProjectTreatment" class="fixed bottom-6 right-6 rounded-full w-12 h-12 lg:w-24 lg:h-24 border text-main-white bg-main-red border-main-white hover:text-main-red hover:bg-main-white hover:border-main-red grid place-content-center">
+<a href="?action=addProjectTreatment" class="fixed bottom-6 right-6 rounded-full w-12 h-12 lg:!w-24 lg:!h-24 border text-main-white bg-main-red border-main-white hover:text-main-red hover:bg-main-white hover:border-main-red grid place-content-center">
     <i class="fa fa-plus"></i>
 </a>
 
@@ -25,7 +25,7 @@
         <!-- card projet -->
         <div id="projet-card-1" class="project-card max-w-[1000px] border-2 border-black rounded-lg p-4 md:flex gap-6  md:p-6">
             <!-- partie entreprise desktop -->
-            <div class="hidden md:block w-1/3 border-r-2 border-main-gray pr-4">
+            <div class="hidden md:block w-2/5 border-r-2 border-main-gray pr-4">
                 <div class="my-2 flex-col text-lg">
                     <div class="flex flex-wrap"><p class="font-title font-bold mr-">Projet fourni par : </p><p><a href="lien vers la société" class="text-main-red underline font-bold text-base">Pole formation CCI Ardennes</a></p></div>
                     <div class="my-4 grow"><img class="" src="assets/img/logo" alt="logo de l'entreprise"></div>
@@ -41,19 +41,19 @@
                     <tag> react</tag>
                 </div>
                 <!-- titre projet -->
-                <h2 class="font-title text-main-red italic font-bold text-3xl lg:text-[48px] my-2"><a href="lien du projet">Super projet de fou</a></h2>
+                <h2 class="font-title text-main-red italic font-bold text-3xl lg:!text-[46px] my-2 lg:!my-6"><a href="lien du projet">Super projet de fou</a></h2>
                 <div class="self-end flex w-3/4 justify-between italic border-b border-main-red"><span>Débuté le 25/03/2002</span><span>Fini le 25/03/2002</span></div>
                 <!-- contenu projet -->
                 <div class="text-base lg:text-xl flex-grow flex-col">
-                    <p class="pl-[20%] line-clamp-5 lg:line-clamp-6 mt-2 mb-4">The best kept secret of The Bahamas is the country’s sheer size and diversity. With 16 major islands, The Bahamas is an unmatched destination The best kept secret of The Bahamas is the country’s sheer size and diversity. With 16 major islands, The Bahamas is an unmatched destination The best kept secret of The Bahamas is the country’s sheer size and diversity. With 16 major islands, The Bahamas is an unmatched destination The best kept secret of The Bahamas is the country’s sheer size and diversity. With 16 major islands, The Bahamas is an unmatched destination The best kept secret of The Bahamas is the country’s sheer size and diversity. With 16 major islands, The Bahamas is an unmatched destination</p>
+                    <p class="pl-[10%] line-clamp-5 lg:line-clamp-6 mt-2 mb-4">The best kept secret of The Bahamas is the country’s sheer size and diversity. With 16 major islands, The Bahamas is an unmatched destination The best kept secret of The Bahamas is the country’s sheer size and diversity. With 16 major islands, The Bahamas is an unmatched destination The best kept secret of The Bahamas is the country’s sheer size and diversity. With 16 major islands, The Bahamas is an unmatched destination The best kept secret of The Bahamas is the country’s sheer size and diversity. With 16 major islands, The Bahamas is an unmatched destination The best kept secret of The Bahamas is the country’s sheer size and diversity. With 16 major islands, The Bahamas is an unmatched destination</p>
                     <div id="end" class="mt-auto lg:mt-8">
                         <a href="page de la promo" class="bg-main-red py-2 px-4 rounded-full text-main-white my-2 hover:bg-main-white hover:text-main-red hover:border border-main-red">Développeurs Web 2023</a>
-                        <div class="space-x-4 mt-4 mb-2 text-sm lg:text-base text-main-white [&>a]:bg-main-gray [&>a]:py-1 [&>a]:px-3 [&>a]:rounded-full">
+                        <div class="space-x-4 mt-4 mb-2 text-sm lg:!text-lg text-main-white [&>a]:bg-main-gray [&>a]:py-1 [&>a]:px-3 [&>a]:rounded-full">
                             <a href="profil de l'apprenant" class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white">Nabil</a>
                             <a href="profil de l'apprenant" class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white">Alexandre</a>
                             <a href="profil de l'apprenant" class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white">Bryan</a>
                         </div>
-                        <a href="lien du projet" class="block float-left text-xs lg:text-lg ">Voir le projet <i class="fa fa-arrow-right"></i></a>
+                        <a href="lien du projet" class="block float-left text-xs lg:!text-lg ">Voir le projet <i class="fa fa-arrow-right"></i></a>
                     </div>
                 </div>
             </div>
@@ -212,7 +212,7 @@
 </section>
 
 <?php ob_start(); ?>
-<script src="assets/js/ajax_register.js"></script>
+<!-- <script src="assets/js/ajax_register.js"></script> -->
 <?php $script = ob_get_clean(); ?>
 
 <?php require 'view/layout.php'; ?>
