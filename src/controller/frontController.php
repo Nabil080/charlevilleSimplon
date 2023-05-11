@@ -36,3 +36,8 @@ function promotionPage()
 {
     include 'view/template/promotion.php';
 }
+
+function projectGestionPage()
+{
+    include 'view/template/project_gestion.php';
+}
