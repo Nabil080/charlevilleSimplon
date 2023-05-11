@@ -19,6 +19,17 @@ function changeTab(y) {
     // translate_x = "translate-x-" + number +"/4";
     // translate.classList.add (translate_x);
 
+    if (window.innerWidth < 640) {
+        console.log("salut");
+        if (typeof translate_x !== 'undefined') {
+            translate.classList.remove(translate_x);
+        }
+
+        let number = y * 1;
+        translate_x = "translate-x-" + number +"/4";
+        translate.classList.add (translate_x);
+    }
+
     sectionChange[y].classList.remove("hidden");
     sectionChange[y].offsetHeight;
     sectionChange[y].classList.add("opacity-100");
