@@ -13,6 +13,9 @@ switch ($action) {
     // Afficher le formulaire de pré-inscription.
 
     // Afficher toutes les promos
+    case 'allPromotionPage':
+        allPromotionPage();
+        break;
     // Afficher la promo choisi
     // Afficher profil de l'apprennant
 
