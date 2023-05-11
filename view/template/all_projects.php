@@ -2,8 +2,6 @@
 
 <?php ob_start(); ?>
 
-<div class="h-20">Séparation nav bar</div>
-
 <h1 class="px-4 text-main-red font-title font-semibold text-center text-2xl">Les projets réalisés à <span class="italic">Simplon Charleville</span></h1>
 
 <!-- section tous les projets -->
@@ -46,7 +44,7 @@
 
 
     <section id="project-cards" class="mt-2 grid gap-6 md:grid-cols-2 w-fit mx-auto">
-    <h3 class="max-w-[766px] text-main-red md:col-span-2">10 projets affichés sur 72</h3>
+        <h3 class="max-w-[766px] text-main-red md:col-span-2">10 projets affichés sur 72</h3>
         <!-- card projet 1 -->
         <article id="projet-card-1" class="project-card max-w-[766px] border-2 border-black rounded-lg p-4 mb-8 2xl:flex gap-6 2xl:p-6">
             <!-- partie entreprise desktop -->
