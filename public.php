@@ -7,14 +7,27 @@ switch ($action) {
     case 'formationPage':
         formationPage();
         break;
+    case 'promotionPage':
+        promotionPage();
+        break;
     // Afficher le formulaire de pré-inscription.
 
     // Afficher toutes les promos
+    case 'allPromotionsPage':
+        allPromotionsPage();
+        break;
     // Afficher la promo choisi
     // Afficher profil de l'apprennant
 
     // Afficher tous les projets
-    // Afficher du projet choisi
+    case 'allProjectsPage':
+        allProjectsPage();
+        break;
+    // Afficher le projet choisi
+    case 'projectPage':
+        projectPage();
+        break;
+
 
     // Envoie du traitement du formulaire d'inscription
     case 'registerTreatment':
