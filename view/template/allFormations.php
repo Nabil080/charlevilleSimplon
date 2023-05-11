@@ -140,7 +140,7 @@ $title = "Toutes nos formations";
                 </div>
             </li>
             <li class="z-10 w-2/3 cursor-pointer">
-            <div onclick="changeTab(1)" class="tabChange bg-main-gray rounded-[5px] text-main-white p-2 grid items-center justify-center">
+            <div onclick="changeTab(1)" class="tabChange bg-main-gray rounded-[5px] animate-pulse text-main-white p-2 grid items-center justify-center">
                     <span class="lg:text-xl text-md font-semibold">2014-2015</span>
                 </div>
             </li>
@@ -159,9 +159,11 @@ $title = "Toutes nos formations";
                     <span class="lg:text-xl text-md font-semibold">2020-2021</span>
                 </div>
             </li>
-            <!-- <div onclick="openSide()" draggable="true" ondragend="openSide()" style="clip-path: polygon(49% 0, 100% 100%, 0 100%);" class="cursor-pointer translate-x-[55%] sm:hidden -translate-y-[235%] rotate-90 w-2/3 ml-4 py-4 bg-main-red">
-                <p class="text-main-white text-center ">Découvrir</p>
-            </div> -->
+            <li class="z-10 w-2/3 cursor-pointer">
+            <div onclick="changeTab('back')" class="tabChange sm:hidden bg-main-gray rounded-[5px] text-main-white p-2 grid items-center justify-center">
+                    <span class="lg:text-xl text-md font-semibold">Début de Simplon</span>
+                </div>
+            </li>
         </ol>
         
         <div class="mx-7 lg:mx-[15%] lg:mt-16 my-8">
