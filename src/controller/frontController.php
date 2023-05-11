@@ -28,9 +28,9 @@ function allProjectsPage()
     include 'view/template/all_projects.php';
 }
 
-function allPromotionPage()
+function allPromotionsPage()
 {
-    include 'view/template/promotion_all.php';
+    include 'view/template/all_promotions.php';
 }
 function promotionPage()
 {
