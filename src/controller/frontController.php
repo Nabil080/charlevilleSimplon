@@ -1,4 +1,6 @@
 <?php
+require_once('src/model/Formation.php');
+
 
 function homepage()
 {
@@ -11,7 +13,7 @@ function seeLayout()
 }
 function allFormationsPage()
 {
-    include 'view/template/formation.php';
+    include 'view/template/allFormation.php';
 }
 function formationPage()
 {
@@ -28,9 +30,9 @@ function allProjectsPage()
     include 'view/template/all_projects.php';
 }
 
-function allPromotionPage()
+function allPromotionsPage()
 {
-    include 'view/template/promotion_all.php';
+    include 'view/template/all_promotions.php';
 }
 function promotionPage()
 {
@@ -40,4 +42,9 @@ function promotionPage()
 function projectGestionPage()
 {
     include 'view/template/project_gestion.php';
+}
+
+function contactPage()
+{
+    include 'view/template/contact.php';
 }
