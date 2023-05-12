@@ -44,7 +44,8 @@ function contactPage()
     include 'view/template/contact.php';
 }
 
-function crudPage()
+function crudCandidatPage()
 {
-    include 'view/template/crud.php';
+    $candidatPage = 1;
+    include 'view/template/crudCandidat.php';
 }

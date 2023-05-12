@@ -2,8 +2,8 @@
 
 switch ($admin) {
     // Afficher le tableau de bord
-    case 'crudPage':
-        crudPage();
+    case 'crudCandidatPage':
+        crudCandidatPage();
         break;
     // Afficher le CRUD users choisie
     // Afficher le CRUD des formations

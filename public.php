@@ -37,8 +37,8 @@ switch ($action) {
         registerTreatment();
         break;
     // Affiche le crud (temporaire)
-    case 'crudPage':
-        crudPage();
+    case 'crudCandidatPage':
+        crudCandidatPage();
         break;
     // Envoie du traitement d'activation de compte
     // Envoie du traitement du formulaire de connexion
