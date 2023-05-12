@@ -1,3 +1,4 @@
+
     <?php
     $title = "Accueil";
     ob_start();
@@ -13,8 +14,12 @@
             <!-- HEADER -->
             <div class="h-1/3 lg:h-[48%] grid place-content-center">
                 <img class="h-full mx-auto lg:mx-0 lg:absolute lg:top-0 lg:left-8 lg:h-1/4 " src="assets/img/logo.png" alt="logo simplon charleville-mézières">
-                <div class="hidden lg:grid absolute top-0 right-8 h-1/4 place-items-center">
-                    <div class="w-fit mx-8 my-auto relative"><i class="fa fa-user text-[80px] text-main-red"></i><button data-modal-target="login-modal" data-modal-toggle="login-modal" class="font-main absolute -bottom-6 -right-2 underline text-main-white whitespace-nowrap">Se connecter</button></div>
+                <div class="hidden lg:grid absolute top-0 right-8 h-1/4">
+                    <div class="w-fit mx-8 relative h-fit my-auto cursor-pointer" data-modal-target="login-modal" data-modal-toggle="login-modal">
+                        <i class="fa fa-user text-[80px] text-main-red"></i>
+                        <p class="underline text-main-white whitespace-nowrap">Se connecter</p>
+                        <!-- <button data-modal-target="login-modal" data-modal-toggle="login-modal" class="font-main absolute -bottom-6 -right-2 underline text-main-white whitespace-nowrap">Se connecter</button> -->
+                    </div>
                 </div>
                 <h1 class="hidden lg:block uppercase font-title h-full text-main-white text-[60px] font-bold text-center">Simplon <br> charleville-mézières</h1>
             </div>
@@ -68,7 +73,7 @@
                     <p>Je souhaite découvrir</p>
                 </div>
                 <!-- BOUTONS -->
-                <div class="h-3/4 mx-4 flex flex-col justify-between text-[3.5vh] lg:text-[4vh] xl:text-[5vh] text-main-white font-title font-semibold
+                <div class="h-3/4 mx-4 flex flex-col justify-center gap-8 text-[3.5vh] lg:text-[4vh] xl:text-[5vh] text-main-white font-title font-semibold
                 [&>button]:h-1/4 [&>button]:bg-main-red [&>button]:uppercase [&>button]:px-6 [&>button]:border-main-white [&>button]:border-2 [&_button]:ease-linear [&_button]:duration-200
                 lg:flex-row lg:justify-center lg:gap-10 [&>button]:lg:w-[340px] [&>button]:lg:h-[180px] [&>button]:lg:py-[0vh]
                 [&>button]:xl:h-[210px] [&>button]:xl:w-[410px]">

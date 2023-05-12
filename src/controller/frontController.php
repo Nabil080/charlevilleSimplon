@@ -1,18 +1,17 @@
 <?php
+require_once('src/model/Formation.php');
+
 
 function homepage()
 {
     include 'view/template/homepage.php';
 }
 
-function seeLayout()
-{
-    include 'view/layout.php';
-}
 function allFormationsPage()
 {
-    include 'view/template/formation.php';
+    include 'view/template/allFormations.php';
 }
+
 function formationPage()
 {
     include 'view/template/formation.php';
@@ -28,11 +27,21 @@ function allProjectsPage()
     include 'view/template/all_projects.php';
 }
 
-function allPromotionPage()
+function allPromotionsPage()
 {
-    include 'view/template/promotion_all.php';
+    include 'view/template/all_promotions.php';
 }
 function promotionPage()
 {
     include 'view/template/promotion.php';
+}
+
+function projectGestionPage()
+{
+    include 'view/template/project_gestion.php';
+}
+
+function contactPage()
+{
+    include 'view/template/contact.php';
 }

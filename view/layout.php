@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html class="w-[100vw] overflow-x-hidden">
 
 <head>
@@ -42,7 +42,9 @@
         echo $link; ?>
 </head>
 
+
 <body class="w-[100vw] overflow-x-hidden bg-main-white pt-24">
+
 
     <?php require_once 'view/template/_navbar.php'; ?>
     <?= $content ?>
