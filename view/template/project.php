@@ -68,8 +68,8 @@
     <!-- bouton 3 -->
     <div class="flex mx-4 my-4 gap-4 h-max">
         <i class="fa-brands fa-chrome"></i>
-        <!-- disabled : div + opacity-50 -->
-        <div href="site externe" target="_blank" class="opacity-50 text-main-white bg-main-red grow h-[40px] flex items-center justify-center">Lien vers le site</div>
+        <!-- disabled : opacity-50 select-none pointer-events-none -->
+        <a href="site externe" target="_blank" class="disabled text-main-white bg-main-red grow h-[40px] flex items-center justify-center">Lien vers le site</a>
     </div>
 </section>
 

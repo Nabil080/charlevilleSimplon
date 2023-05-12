@@ -4,7 +4,7 @@
 
 <main>
     <section> <!--Téléphone + Adresse -->
-        <h2 class="text-center text-[24px] md:text-4xl  font-bold font-title text-main-red uppercase pb-2 lg:my-8">Nous Contacter
+        <h2 class="text-center text-[24px] md:text-4xl font-bold font-title text-main-red uppercase pb-2 lg:my-8">Nous Contacter
         </h2>
         <div class="grid md:grid-cols-2 sm:gap-8 justify-center md:items-baseline w-2/3 mx-auto mt-8 lg:mt-16">
             <div class="flex flex-wrap justify-center w-auto mb-8">
