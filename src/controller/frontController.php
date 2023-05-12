@@ -6,12 +6,17 @@ function homepage()
 {
     include 'view/template/homepage.php';
 }
+function contactPage()
+{
+    include 'view/template/contact.php';
+}
 
 // Formation 
 function allFormationsPage()
 {
     include 'view/template/allFormations.php';
 }
+
 function formationPage()
 {
     include 'view/template/formation.php';
@@ -29,6 +34,11 @@ function allProjectsPage()
     include 'view/template/all_projects.php';
 }
 
+function projectGestionPage()
+{
+    include 'view/template/project_gestion.php';
+}
+
 // Promotion
 function allPromotionsPage()
 {
@@ -44,3 +54,5 @@ function registerPage()
 {
     include 'view/template/register.php';
 }
+
+

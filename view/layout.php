@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html class="w-[100vw] overflow-x-hidden">
 
 <head>

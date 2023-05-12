@@ -232,12 +232,12 @@
     <!-------------Fin de la section Apprenants----------->
 
     <!-------------PROJETS----------->
-    <section class="sectionChange hidden w-11/12 mt-8  md:mt-20 grid gap-6 lg:gap-16 md:grid-cols-2 mx-auto">
+    <section class="sectionChange hidden w-11/12 mt-8  md:mt-20 grid gap-6 lg:gap-16 xl:grid-cols-2 mx-auto">
         <!-- card projet 1 -->
         <article id="projet-card-1"
-            class="project-card max-w-[766px] border-2 border-black rounded-lg p-4 mb-8 2xl:flex gap-6 2xl:p-6">
+            class="project-card max-w-[766px] border-2 border-black rounded-lg p-4 mb-8 md:flex gap-6 md:p-6 md:mx-auto">
             <!-- partie entreprise desktop -->
-            <div class="hidden 2xl:block w-1/3 border-r-2 border-main-gray pr-6">
+            <div class="hidden md:block w-1/3 border-r-2 border-main-gray pr-6">
                 <div class="my-2 flex-col">
                     <div class="flex flex-wrap">
                         <p class="font-title font-bold mr-2">Projet fourni par : </p>
@@ -252,7 +252,7 @@
                 </div>
             </div>
             <!-- partie info projet -->
-            <div class="flex-col text-[12px] flex text-end 2xl:w-2/3">
+            <div class="flex-col text-[12px] flex text-end md:w-2/3">
                 <!-- tags projet -->
                 <div
                     class="uppercase space-x-4 my-4 [&>tag]:bg-main-gray [&>tag]:bg-opacity-10 [&>tag]:py-2 [&>tag]:px-4 [&>tag]:rounded-full">
@@ -295,9 +295,9 @@
                 </div>
             </div>
             <!-- séparateur mobile-->
-            <div class="2xl:hidden w-4/5 mx-auto bg-main-gray bg-opacity-50 h-0.5 my-4"></div>
+            <div class="md:hidden w-4/5 mx-auto bg-main-gray bg-opacity-50 h-0.5 my-4"></div>
             <!-- partie info entreprise mobile-->
-            <div class="2xl:hidden my-2">
+            <div class="md:hidden my-2">
                 <div class="flex flex-wrap">
                     <p class="font-title font-bold mr-2">Projet fourni par : </p>
                     <p><a href="lien vers la société" class="text-main-red underline font-bold text-sm">Pole formation
@@ -311,9 +311,9 @@
         </article>
         <!-- card projet 1 -->
         <article id="projet-card-1"
-            class="project-card max-w-[766px] border-2 border-black rounded-lg p-4 mb-8 2xl:flex gap-6 2xl:p-6">
+            class="project-card max-w-[766px] border-2 border-black rounded-lg p-4 mb-8 md:flex gap-6 md:p-6 md:mx-auto">
             <!-- partie entreprise desktop -->
-            <div class="hidden 2xl:block w-1/3 border-r-2 border-main-gray pr-6">
+            <div class="hidden md:block w-1/3 border-r-2 border-main-gray pr-6">
                 <div class="my-2 flex-col">
                     <div class="flex flex-wrap">
                         <p class="font-title font-bold mr-2">Projet fourni par : </p>
@@ -328,7 +328,7 @@
                 </div>
             </div>
             <!-- partie info projet -->
-            <div class="flex-col text-[12px] flex text-end 2xl:w-2/3">
+            <div class="flex-col text-[12px] flex text-end md:w-2/3">
                 <!-- tags projet -->
                 <div
                     class="uppercase space-x-4 my-4 [&>tag]:bg-main-gray [&>tag]:bg-opacity-10 [&>tag]:py-2 [&>tag]:px-4 [&>tag]:rounded-full">
@@ -371,9 +371,9 @@
                 </div>
             </div>
             <!-- séparateur mobile-->
-            <div class="2xl:hidden w-4/5 mx-auto bg-main-gray bg-opacity-50 h-0.5 my-4"></div>
+            <div class="md:hidden w-4/5 mx-auto bg-main-gray bg-opacity-50 h-0.5 my-4"></div>
             <!-- partie info entreprise mobile-->
-            <div class="2xl:hidden my-2">
+            <div class="md:hidden my-2">
                 <div class="flex flex-wrap">
                     <p class="font-title font-bold mr-2">Projet fourni par : </p>
                     <p><a href="lien vers la société" class="text-main-red underline font-bold text-sm">Pole formation
@@ -385,7 +385,6 @@
                 </div>
             </div>
         </article>
-
     </section>
 </main>
 
