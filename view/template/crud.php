@@ -5,12 +5,21 @@
 <main >
     <?php include ("crudInclude/_navbarCrud.php"); ?>
   <!--TABLE-->
-    <?php if (isset($candidatPage)) {
-        include ("crudInclude/_modalCandidat.php");
-
+    <?php 
+    if (isset($candidatPage) && $candidatPage == 1) {
         include ("crudInclude/_crudCandidat.php");
+        include ("crudInclude/_modalCandidat.php");
+        include ("crudInclude/_modalCandidature.php");
 
     }
+
+    if (isset($apprenantPage)  && $apprenantPage == 1) {
+
+      include ("crudInclude/_crudApprenant.php");
+      include ("crudInclude/_modalCandidat.php");
+      include ("crudInclude/_modalCandidature.php");
+
+  }
     ?> 
 
 

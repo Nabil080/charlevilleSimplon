@@ -1,4 +1,4 @@
-<nav class="w-[100vw] fixed top-0 left-0 z-50 transition-all duration-[0.3s]">
+<nav class="w-[100vw] fixed top-0 left-0 z-40 transition-all duration-[0.3s]">
 
       <div class="grid grid-cols-2 transition-all duration-[0.2s] items-center bg-main-white border-t-[4px] md:grid-cols-[20%_80%] border-main-red">
         <img src="assets/img/navbar/logo-simplon.png" alt="Logo Simplon" class="w-[171px]" />
