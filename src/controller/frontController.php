@@ -7,18 +7,17 @@ function homepage()
     include 'view/template/homepage.php';
 }
 
-function seeLayout()
-{
-    include 'view/layout.php';
-}
+// Formation 
 function allFormationsPage()
 {
-    include 'view/template/allFormation.php';
+    include 'view/template/allFormations.php';
 }
 function formationPage()
 {
     include 'view/template/formation.php';
 }
+
+// Project 
 
 function projectPage()
 {
@@ -30,6 +29,7 @@ function allProjectsPage()
     include 'view/template/all_projects.php';
 }
 
+// Promotion
 function allPromotionsPage()
 {
     include 'view/template/all_promotions.php';
@@ -37,4 +37,10 @@ function allPromotionsPage()
 function promotionPage()
 {
     include 'view/template/promotion.php';
+}
+
+// Register
+function registerPage()
+{
+    include 'view/template/register.php';
 }

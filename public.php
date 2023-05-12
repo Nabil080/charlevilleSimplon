@@ -11,7 +11,9 @@ switch ($action) {
         promotionPage();
         break;
     // Afficher le formulaire de pré-inscription.
-
+    case 'registerPage':
+        registerPage();
+        break;
     // Afficher toutes les promos
     case 'allPromotionsPage':
         allPromotionsPage();
