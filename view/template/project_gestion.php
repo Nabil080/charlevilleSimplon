@@ -2,9 +2,6 @@
 
 <?php ob_start(); ?>
 
-
-<?php $content = ob_get_clean(); ?>
-
 <h2 class="pt-5 bg-white text-center text-[24px] md:text-[36px] lg:text-[48px] font-semibold font-title text-main-red uppercase">
     Gestion de projet
 </h2>
@@ -13,12 +10,16 @@
 </h3> -->
 
 <!-- bouton ajouter un projet -->
-<a href="?action=addProjectTreatment" class="fixed bottom-6 right-6 rounded-full w-12 h-12 lg:!w-24 lg:!h-24 border text-main-white bg-main-gray border-main-white hover:text-main-gray hover:bg-main-white hover:border-main-gray grid place-content-center">
-    <i class="fa fa-plus lg:text-3xl"></i>
-</a>
+<div class="fixed bottom-6 right-6 flex gap-2">
+    <p class="h-fit my-auto lg:text-xl">Soumettre un projet</p>
+    <a href="?action=addProjectTreatment" class="animate-pulse rounded-full w-12 h-12 lg:!w-24 lg:!h-24 border-4 text-main-white bg-main-gray border-main-white hover:text-main-gray hover:bg-main-white hover:border-main-gray grid place-content-center">
+        <i class="fa fa-plus lg:text-3xl"></i>
+    </a>
+</div>
 
 <!-- cards projets -->
-<section id="project-cards" class="mt-6 px-4 grid gap-6 w-fit mx-auto">
+<section id="project-cards" class="px-4 grid w-fit mx-auto">
+<div class="w-4/5 h-1 border-b-2 mb-12 mx-auto"></div>
 
     <!-- projet 1 -->
     <article id="project-1" class="">
@@ -82,6 +83,7 @@
                 <p class="hidden md:block"> Accepter</p><i class="fa-solid fa-check"></i>
             </button>
         </form>
+        <div class="w-4/5 h-1 border-b-2 my-12 mx-auto"></div>
     </article>
 
     <!-- projet 2 -->
@@ -138,7 +140,8 @@
             </div>
             <!-- select promo -->
             <div class="grow">
-                <select class="w-full" name="user[]" id="">
+                <div data-dropdown-toggle="user-dropdown" class="text-center w-full cursor-pointer">Sélectionner les apprenants <i class="fa fa-chevron-down"></i></div>
+                <select id="user-dropdown" multiple class="hidden z-20 w-fit" name="user[]" id="">
                     <option value="1">Nabil</option><option value="2">Alexandre</option><option value="2">Bryan</option><option value="2">Florian</option>
                 </select>
             </div>
@@ -147,12 +150,13 @@
                 <p class="hidden md:block"> Attribuer</p><i class="fa-solid fa-check"></i>
             </button>
         </form>
+        <div class="w-4/5 h-1 border-b-2 my-12 mx-auto"></div>
     </article>
 
     <!-- projet 3 -->
     <article id="project-3" class="relative mt-2">
         <!-- statut projet -->
-        <div class="absolute -top-8 italic font-bold">Statut du projet : En attente <i class="fa fa-circle text-orange-400"></i></div>
+        <div class="absolute -top-8 italic font-bold text-xl">Statut du projet : En attente <i class="fa fa-circle text-orange-400 animate-pulse"></i></div>
         <!-- card projet -->
                 <!-- card projet -->
                 <div id="projet-card-3" class="project-card max-w-[1000px] border-2 border-black rounded-lg p-4 md:flex gap-6  md:p-6">
@@ -216,12 +220,13 @@
                 <p>Modifier <i class="fa-solid fa-pen-to-square"></i></p>
             </div>
         </form>
+        <div class="w-4/5 h-1 border-b-2 my-12 mx-auto"></div>
     </article>
 
         <!-- projet 4 -->
         <article id="project-4" class="relative mt-2">
         <!-- statut projet -->
-        <div class="absolute -top-8 italic font-bold">Statut du projet : En cours <i class="fa fa-circle text-green-400"></i></div>
+        <div class="absolute -top-8 italic font-bold text-xl">Statut du projet : En cours <i class="fa fa-circle text-green-400 animate-pulse"></i></div>
         <!-- card projet -->
                 <!-- card projet -->
                 <div id="projet-card-4" class="project-card max-w-[1000px] border-2 border-black rounded-lg p-4 md:flex gap-6  md:p-6">
@@ -285,9 +290,14 @@
                 <p>Modifier <i class="fa-solid fa-pen-to-square"></i></p>
             </div>
         </form>
+        <div class="w-4/5 h-1 border-b-2 my-12 mx-auto"></div>
     </article>
 
 </section>
+
+<?php $content = ob_get_clean(); ?>
+
+
 
 <?php ob_start(); ?>
 <!-- <script src="assets/js/ajax_register.js"></script> -->
