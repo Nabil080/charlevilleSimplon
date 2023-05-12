@@ -15,8 +15,49 @@
             </div>
             <!-- Modal body -->
             <div class="p-6 space-y-6">
-            <img src="upload/promotion/devWeb2023/efz.png"
-                            class="bg-right relative object-cover aspect-[1/1] lg:object-cover z-10">
+            <div class="background bg-main-white overflow-x-hidden min-h-[100vh]">
+    
+    <!-- Image de profil -->
+    <div class="picture_desc grid grid-cols-1 md:grid-cols-2 items-center md:pt-[150px] pt-[100px] px-[8%] 2xl:px-[5%]">
+        <div class="picture max-h-screen md:mr-5">
+            <img class="w-full rounded-t-lg" src="assets/img/avatar/default_avatar.png" alt="Image de profil">
+            <button class="bg-main-red w-full text-main-white text-[16px] md:text-[28px] py-3 rounded-b-lg">Changer ma photo de profil</button>
+        </div>
+        <!-- Description profil Prospect -->
+        <div class="description md:ml-5 h-[100%] flex flex-col">
+            <h1 class="text-main-red font-title text-[28px] md:text-[48px] font-semibold pt-5 text-center md:text-left"><span class="uppercase">Gérard</span> Roger</h1>
+            <div class="text-desc rounded-[5px] border-[1px] border-main-border mt-5 grow md:flex md:flex-col md:justify-between">
+                <div class="formation_status flex justify-center items-center px-3 md:hidden">
+                    <span class="text-[28px] flex justify-center pt-1 pb-2 italic">Statut : En attente</span>
+                    <span class="w-6 h-6 border-[1px] bg-main-red rounded-full ml-2"></span>
+                </div>
+                <p class="text-[20px] text-justify py-5 px-3">Candidature pour la formation de développeur Web / Web mobile :</p>
+                <div class="h-0 border-[2px] border-main-red w-1/2"></div>
+                <ul class="text-justify px-3 pb-3 text-[16px] md:text-[18px] leading-loose ml-8">
+                    <li class="list-disc">Nom : </li>
+                    <li class="list-disc">Prénom : </li>
+                    <li class="list-disc">Adresse : </li>
+                    <li class="list-disc">Ville : </li>
+                    <li class="list-disc">Email : </li>
+                    <li class="list-disc">Téléphone : </li>
+                    <li class="list-disc">Date de naissance : </li>
+                    <li class="list-disc">Lieu de naissance : </li>
+                    <li class="list-disc">Nationalité : </li>
+                    <li class="list-disc">Numéro Pôle Emploi : </li>
+                </ul>
+                <div class="formation_status hidden md:flex px-3 justify-end items-center">
+                    <span class="text-[28px] flex justify-center pt-1 pb-2 italic">Statut : En attente</span>
+                    <span class="w-6 h-6 border-[1px] bg-main-red rounded-full ml-2"></span>
+                </div>
+                <button class="bg-main-red w-full md:w-3/5 text-main-white text-[18px] uppercase py-3 rounded-b-lg md:rounded-none md:mb-4 md:flex md:justify-center md:mx-auto">Editer ma candidature</button>
+            </div>
+        </div>
+        <!-- Description profil apprenant -->
+
+    </div>
+
+
+</div>
                 <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
                     With less than a month to go before the European Union enacts new consumer privacy laws for its citizens, companies around the world are updating their terms of service agreements to comply.
                 </p>
