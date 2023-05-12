@@ -17,7 +17,7 @@
 
       include ("crudInclude/_crudApprenant.php");
       include ("crudInclude/_modalCandidat.php");
-      include ("crudInclude/_modalCandidature.php");
+      include ("crudInclude/_modalProjet.php");
 
   }
     ?> 
