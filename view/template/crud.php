@@ -8,7 +8,7 @@
     <?php 
     if (isset($candidatPage) && $candidatPage == 1) {
         include ("crudInclude/_crudCandidat.php");
-        include ("crudInclude/_modalCandidat.php");
+        include ("crudInclude/_modalInfos.php");
         include ("crudInclude/_modalCandidature.php");
 
     }
@@ -16,10 +16,23 @@
     if (isset($apprenantPage)  && $apprenantPage == 1) {
 
       include ("crudInclude/_crudApprenant.php");
-      include ("crudInclude/_modalCandidat.php");
+      include ("crudInclude/_modalInfos.php");
       include ("crudInclude/_modalProjet.php");
+    }
 
-  }
+    if (isset($entreprisePage)  && $entreprisePage == 1) {
+
+      include ("crudInclude/_crudEntreprise.php");
+      include ("crudInclude/_modalInfos.php");
+      include ("crudInclude/_modalProjet.php");
+    }
+    
+    if (isset($promotionPage)  && $promotionPage == 1) {
+
+      include ("crudInclude/_crudPromotion.php");
+      include ("crudInclude/_modalApprenant.php");
+      include ("crudInclude/_modalProjet.php");
+    }
     ?> 
 
 

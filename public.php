@@ -49,11 +49,11 @@ switch ($action) {
         break;
     // Afficher le tableau de bord Promotions
     case 'crudPromotionPage':
-        crudPromoPage();
+        crudPromotionPage();
         break;
     // Afficher le tableau de bord Projets
     case 'crudProjetPage':
-        crudProjetsPage();
+        crudProjetPage();
         break;
     // Envoie du traitement d'activation de compte
     // Envoie du traitement du formulaire de connexion

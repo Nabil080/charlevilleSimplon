@@ -27,7 +27,7 @@
                                 
                             </td>
                             <td class="px-4 py-3 border">
-                                <button data-modal-target="modal-candidat<?php "" ?>" data-modal-toggle="modal-candidat<?php "" ?>" 
+                                <button data-modal-target="modal-info<?php "" ?>" data-modal-toggle="modal-info<?php "" ?>" 
                                     class="block w-full md:w-auto text-white bg-main-red hover:bg-red-800 focus:ring-4 focus:outline-none 
                                      font-medium rounded-lg text-sm px-5 mx-auto py-2.5 text-center" type="button">
                                         Voir les infos
@@ -39,6 +39,13 @@
                                     class="block w-full md:w-auto text-white bg-main-red hover:bg-red-800 focus:ring-4 focus:outline-none 
                                      font-medium rounded-lg text-sm px-5 py-2.5 mt-2 mx-auto text-center" type="button">
                                         Voir les Projets
+                                </button>
+                            </td>
+                            <td class="px-4 py-3 border">
+                                <button data-modal-target="modal-contact<?php "" ?>" data-modal-toggle="modal-contact<?php "" ?>" 
+                                    class="block w-full md:w-auto text-white bg-main-gray hover:bg-gray-900 focus:ring-4 focus:outline-none 
+                                     font-medium rounded-lg text-sm px-5 py-2.5 mt-2 mx-auto text-center" type="button">
+                                     <i class="fa-solid fa-envelope text-main-white"></i>
                                 </button>
                             </td>
                             <td class="px-4 py-3 mx-auto items-center text-center">

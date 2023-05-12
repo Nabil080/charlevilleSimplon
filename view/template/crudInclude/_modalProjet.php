@@ -28,6 +28,7 @@
                     <option value="promotion_2020">Promotion 2020</option>
                     <option value="promotion_2019">Promotion 2019</option>
                 </select>
+                <? if (isset($projetPerso)) {}?>
                 <select
                     class="w-1/2 md:w-[320px] text-main-red text-center border border-4 border-main-red rounded-[10px] font-bold">
                     <option selected value="promotion_2023">Projets perso</option>
@@ -35,7 +36,8 @@
                     <option value="promotion_2021">Promotion 2021</option>
                     <option value="promotion_2020">Promotion 2020</option>
                     <option value="promotion_2019">Promotion 2019</option>
-                </select>
+                </select> 
+                <? {} ?>
                 </div>
                 <!-- card projet -->
                 <article id="projet-card-1" class="project-card max-w-[800px] mx-auto border-2 border-black rounded-lg p-4 mb-8 2xl:flex gap-6 2xl:p-6">
