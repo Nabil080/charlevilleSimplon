@@ -93,7 +93,7 @@ $boolCompany = (isset($_GET['campany'])) ? true : false;
                     class="bg-main-white border border-main-red text-[18px] rounded-[5px] block w-full p-2.5">
             </div>
             <div class="w-full md:w-2/3 mb-6 md:mb-3">
-                <label for="postal" class="block mb-2 text-[14px] font-medium">code Postal</label>
+                <label for="postal" class="block mb-2 text-[14px] font-medium">Code Postal</label>
                 <input type="text" id="postal" name="postal" placeholder="75000"
                     class="bg-main-white border border-main-red text-[18px] rounded-[5px] block w-full p-2.5">
             </div>
