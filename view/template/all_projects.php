@@ -5,7 +5,7 @@
 <h1 class="px-4 text-main-red font-title font-semibold text-center text-2xl sm:text-3xl lg:text-[40px]">Les projets réalisés à <span class="italic">Simplon Charleville</span></h1>
 
 <!-- section tous les projets -->
-<section id="all-projects" class="px-4">
+<section id="all-projects" class="px-4 2xl:mx-6">
     <!-- barre de recherche -->
     <div class="relative w-full 2xl:w-4/5 mx-auto mt-4">
         <input id="project-search" class="border-main-red rounded-lg w-full pl-10 py-4 placeholder:text-black focus:border-green-50" placeholder="Votre recherche" type="search" oninput="searchByInputAndClassName(this,'project-card')">
@@ -44,7 +44,7 @@
 
 
     <section id="project-cards" class="mt-2 grid gap-6 xl:grid-cols-2 w-fit mx-auto">
-        <h3 class="max-w-[766px] text-main-red xl:col-span-2">10 projets affichés sur 72</h3>
+        <h3 class="max-w-[766px] text-main-red xl:col-span-2">10 projets correspondants sur 72</h3>
         <!-- card projet 1 -->
         <article id="projet-card-1"
             class="project-card max-w-[766px] border-2 border-black rounded-lg p-4 mb-8 md:flex gap-6 md:p-6 md:mx-auto">
@@ -73,7 +73,7 @@
                     <tag> react</tag>
                 </div>
                 <!-- titre projet -->
-                <h2 class="font-title text-main-red italic font-bold text-3xl my-2"><a href="lien du projet">Super projet de fou 1</a></h2>
+                <h2 class="font-title text-main-red italic font-bold text-3xl my-2"><a href="?action=projectPage">Super projet de fou 1</a></h2>
                 <div class="self-end flex w-3/4 justify-between italic border-b border-main-red"><span>Débuté le
                         25/03/2002</span><span>Fini le 25/03/2002</span></div>
                 <!-- contenu projet -->
@@ -100,7 +100,7 @@
                             <a href="profil de l'apprenant"
                                 class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white">Bryan</a>
                         </div>
-                        <a href="lien du projet" class="block float-left text-xs">Voir le projet <i
+                        <a href="?action=projectPage" class="block float-left text-xs">Voir le projet <i
                                 class="fa fa-arrow-right"></i></a>
                     </div>
                 </div>
@@ -149,7 +149,7 @@
                     <tag> react</tag>
                 </div>
                 <!-- titre projet -->
-                <h2 class="font-title text-main-red italic font-bold text-3xl my-2"><a href="lien du projet">Super projet de fou 2</a></h2>
+                <h2 class="font-title text-main-red italic font-bold text-3xl my-2"><a href="?action=projectPage">Super projet de fou 2</a></h2>
                 <div class="self-end flex w-3/4 justify-between italic border-b border-main-red"><span>Débuté le
                         25/03/2002</span><span>Fini le 25/03/2002</span></div>
                 <!-- contenu projet -->
@@ -176,7 +176,462 @@
                             <a href="profil de l'apprenant"
                                 class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white">Bryan</a>
                         </div>
-                        <a href="lien du projet" class="block float-left text-xs">Voir le projet <i
+                        <a href="?action=projectPage" class="block float-left text-xs">Voir le projet <i
+                                class="fa fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+            <!-- séparateur mobile-->
+            <div class="md:hidden w-4/5 mx-auto bg-main-gray bg-opacity-50 h-0.5 my-4"></div>
+            <!-- partie info entreprise mobile-->
+            <div class="md:hidden my-2">
+                <div class="flex flex-wrap">
+                    <p class="font-title font-bold mr-2">Projet fourni par : </p>
+                    <p><a href="lien vers la société" class="text-main-red underline font-bold text-sm">Pole formation
+                            CCI Ardennes</a></p>
+                </div>
+                <div class="flex flex-wrap">
+                    <p class="font-title font-bold mr-2">Adresse :</p>
+                    <p class="text-sm pt-0.5 text-left font-light">33 rue de la gare, 08000 Charleville-Mézières</p>
+                </div>
+            </div>
+        </article>
+
+                <!-- card projet 1 -->
+                <article id="projet-card-1"
+            class="project-card max-w-[766px] border-2 border-black rounded-lg p-4 mb-8 md:flex gap-6 md:p-6 md:mx-auto">
+            <!-- partie entreprise desktop -->
+            <div class="hidden md:block w-1/3 border-r-2 border-main-gray pr-6">
+                <div class="my-2 flex-col">
+                    <div class="flex flex-wrap">
+                        <p class="font-title font-bold mr-2">Projet fourni par : </p>
+                        <p><a href="lien vers la société" class="text-main-red underline font-bold text-sm">Pole
+                                formation CCI Ardennes</a></p>
+                    </div>
+                    <div class="my-4 grow"><img class="" src="assets/img/maquette" alt="logo de l'entreprise"></div>
+                    <div class="flex flex-wrap">
+                        <p class="font-title font-bold mr-2">Adresse :</p>
+                        <p class="text-sm pt-0.5 text-left font-light">33 rue de la gare, 08000 Charleville-Mézières</p>
+                    </div>
+                </div>
+            </div>
+            <!-- partie info projet -->
+            <div class="flex-col text-[12px] flex text-end md:w-2/3">
+                <!-- tags projet -->
+                <div
+                    class="uppercase space-x-4 my-4 [&>tag]:bg-main-gray [&>tag]:bg-opacity-10 [&>tag]:py-2 [&>tag]:px-4 [&>tag]:rounded-full">
+                    <tag> html</tag>
+                    <tag> css</tag>
+                    <tag> react</tag>
+                </div>
+                <!-- titre projet -->
+                <h2 class="font-title text-main-red italic font-bold text-3xl my-2"><a href="?action=projectPage">Super projet de fou 3</a></h2>
+                <div class="self-end flex w-3/4 justify-between italic border-b border-main-red"><span>Débuté le
+                        25/03/2002</span><span>Fini le 25/03/2002</span></div>
+                <!-- contenu projet -->
+                <div class="text-base flex-grow flex-col">
+                    <p class="pl-[20%] line-clamp-5 mt-2 mb-4">The best kept secret of The Bahamas is the country’s
+                        sheer size and diversity. With 16 major islands, The Bahamas is an unmatched destination The
+                        best kept secret of The Bahamas is the country’s sheer size and diversity. With 16 major
+                        islands, The Bahamas is an unmatched destination The best kept secret of The Bahamas is the
+                        country’s sheer size and diversity. With 16 major islands, The Bahamas is an unmatched
+                        destination The best kept secret of The Bahamas is the country’s sheer size and diversity. With
+                        16 major islands, The Bahamas is an unmatched destination The best kept secret of The Bahamas is
+                        the country’s sheer size and diversity. With 16 major islands, The Bahamas is an unmatched
+                        destination</p>
+                    <div id="end" class="mt-auto">
+                        <a href="page de la promo"
+                            class="bg-main-red py-2 px-4 rounded-full text-main-white my-2 hover:bg-main-white hover:text-main-red hover:border border-main-red">Développeurs
+                            Web 2023</a>
+                        <div
+                            class="space-x-4 mt-4 mb-2 text-sm text-main-white [&>a]:bg-main-gray [&>a]:py-1 [&>a]:px-3 [&>a]:rounded-full">
+                            <a href="profil de l'apprenant"
+                                class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white">Nabil</a>
+                            <a href="profil de l'apprenant"
+                                class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white">Alexandre</a>
+                            <a href="profil de l'apprenant"
+                                class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white">Bryan</a>
+                        </div>
+                        <a href="?action=projectPage" class="block float-left text-xs">Voir le projet <i
+                                class="fa fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+            <!-- séparateur mobile-->
+            <div class="md:hidden w-4/5 mx-auto bg-main-gray bg-opacity-50 h-0.5 my-4"></div>
+            <!-- partie info entreprise mobile-->
+            <div class="md:hidden my-2">
+                <div class="flex flex-wrap">
+                    <p class="font-title font-bold mr-2">Projet fourni par : </p>
+                    <p><a href="lien vers la société" class="text-main-red underline font-bold text-sm">Pole formation
+                            CCI Ardennes</a></p>
+                </div>
+                <div class="flex flex-wrap">
+                    <p class="font-title font-bold mr-2">Adresse :</p>
+                    <p class="text-sm pt-0.5 text-left font-light">33 rue de la gare, 08000 Charleville-Mézières</p>
+                </div>
+            </div>
+        </article>
+
+         <!-- card projet 2 -->
+         <article id="projet-card-2"
+            class="project-card max-w-[766px] border-2 border-black rounded-lg p-4 mb-8 md:flex gap-6 md:p-6 md:mx-auto">
+            <!-- partie entreprise desktop -->
+            <div class="hidden md:block w-1/3 border-r-2 border-main-gray pr-6">
+                <div class="my-2 flex-col">
+                    <div class="flex flex-wrap">
+                        <p class="font-title font-bold mr-2">Projet fourni par : </p>
+                        <p><a href="lien vers la société" class="text-main-red underline font-bold text-sm">Pole
+                                formation CCI Ardennes</a></p>
+                    </div>
+                    <div class="my-4 grow"><img class="" src="assets/img/formations/cda" alt="logo de l'entreprise"></div>
+                    <div class="flex flex-wrap">
+                        <p class="font-title font-bold mr-2">Adresse :</p>
+                        <p class="text-sm pt-0.5 text-left font-light">33 rue de la gare, 08000 Charleville-Mézières</p>
+                    </div>
+                </div>
+            </div>
+            <!-- partie info projet -->
+            <div class="flex-col text-[12px] flex text-end md:w-2/3">
+                <!-- tags projet -->
+                <div
+                    class="uppercase space-x-4 my-4 [&>tag]:bg-main-gray [&>tag]:bg-opacity-10 [&>tag]:py-2 [&>tag]:px-4 [&>tag]:rounded-full">
+                    <tag> html</tag>
+                    <tag> css</tag>
+                    <tag> react</tag>
+                </div>
+                <!-- titre projet -->
+                <h2 class="font-title text-main-red italic font-bold text-3xl my-2"><a href="?action=projectPage">Super projet de fou 4</a></h2>
+                <div class="self-end flex w-3/4 justify-between italic border-b border-main-red"><span>Débuté le
+                        25/03/2002</span><span>Fini le 25/03/2002</span></div>
+                <!-- contenu projet -->
+                <div class="text-base flex-grow flex-col">
+                    <p class="pl-[20%] line-clamp-5 mt-2 mb-4">The best kept secret of The Bahamas is the country’s
+                        sheer size and diversity. With 16 major islands, The Bahamas is an unmatched destination The
+                        best kept secret of The Bahamas is the country’s sheer size and diversity. With 16 major
+                        islands, The Bahamas is an unmatched destination The best kept secret of The Bahamas is the
+                        country’s sheer size and diversity. With 16 major islands, The Bahamas is an unmatched
+                        destination The best kept secret of The Bahamas is the country’s sheer size and diversity. With
+                        16 major islands, The Bahamas is an unmatched destination The best kept secret of The Bahamas is
+                        the country’s sheer size and diversity. With 16 major islands, The Bahamas is an unmatched
+                        destination</p>
+                    <div id="end" class="mt-auto">
+                        <a href="page de la promo"
+                            class="bg-main-red py-2 px-4 rounded-full text-main-white my-2 hover:bg-main-white hover:text-main-red hover:border border-main-red">Développeurs
+                            Web 2023</a>
+                        <div
+                            class="space-x-4 mt-4 mb-2 text-sm text-main-white [&>a]:bg-main-gray [&>a]:py-1 [&>a]:px-3 [&>a]:rounded-full">
+                            <a href="profil de l'apprenant"
+                                class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white">Nabil</a>
+                            <a href="profil de l'apprenant"
+                                class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white">Alexandre</a>
+                            <a href="profil de l'apprenant"
+                                class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white">Bryan</a>
+                        </div>
+                        <a href="?action=projectPage" class="block float-left text-xs">Voir le projet <i
+                                class="fa fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+            <!-- séparateur mobile-->
+            <div class="md:hidden w-4/5 mx-auto bg-main-gray bg-opacity-50 h-0.5 my-4"></div>
+            <!-- partie info entreprise mobile-->
+            <div class="md:hidden my-2">
+                <div class="flex flex-wrap">
+                    <p class="font-title font-bold mr-2">Projet fourni par : </p>
+                    <p><a href="lien vers la société" class="text-main-red underline font-bold text-sm">Pole formation
+                            CCI Ardennes</a></p>
+                </div>
+                <div class="flex flex-wrap">
+                    <p class="font-title font-bold mr-2">Adresse :</p>
+                    <p class="text-sm pt-0.5 text-left font-light">33 rue de la gare, 08000 Charleville-Mézières</p>
+                </div>
+            </div>
+        </article>
+
+                <!-- card projet 1 -->
+                <article id="projet-card-1"
+            class="project-card max-w-[766px] border-2 border-black rounded-lg p-4 mb-8 md:flex gap-6 md:p-6 md:mx-auto">
+            <!-- partie entreprise desktop -->
+            <div class="hidden md:block w-1/3 border-r-2 border-main-gray pr-6">
+                <div class="my-2 flex-col">
+                    <div class="flex flex-wrap">
+                        <p class="font-title font-bold mr-2">Projet fourni par : </p>
+                        <p><a href="lien vers la société" class="text-main-red underline font-bold text-sm">Pole
+                                formation CCI Ardennes</a></p>
+                    </div>
+                    <div class="my-4 grow"><img class="" src="assets/img/formations/designer" alt="logo de l'entreprise"></div>
+                    <div class="flex flex-wrap">
+                        <p class="font-title font-bold mr-2">Adresse :</p>
+                        <p class="text-sm pt-0.5 text-left font-light">33 rue de la gare, 08000 Charleville-Mézières</p>
+                    </div>
+                </div>
+            </div>
+            <!-- partie info projet -->
+            <div class="flex-col text-[12px] flex text-end md:w-2/3">
+                <!-- tags projet -->
+                <div
+                    class="uppercase space-x-4 my-4 [&>tag]:bg-main-gray [&>tag]:bg-opacity-10 [&>tag]:py-2 [&>tag]:px-4 [&>tag]:rounded-full">
+                    <tag> html</tag>
+                    <tag> css</tag>
+                    <tag> react</tag>
+                </div>
+                <!-- titre projet -->
+                <h2 class="font-title text-main-red italic font-bold text-3xl my-2"><a href="?action=projectPage">Super projet de fou 5</a></h2>
+                <div class="self-end flex w-3/4 justify-between italic border-b border-main-red"><span>Débuté le
+                        25/03/2002</span><span>Fini le 25/03/2002</span></div>
+                <!-- contenu projet -->
+                <div class="text-base flex-grow flex-col">
+                    <p class="pl-[20%] line-clamp-5 mt-2 mb-4">The best kept secret of The Bahamas is the country’s
+                        sheer size and diversity. With 16 major islands, The Bahamas is an unmatched destination The
+                        best kept secret of The Bahamas is the country’s sheer size and diversity. With 16 major
+                        islands, The Bahamas is an unmatched destination The best kept secret of The Bahamas is the
+                        country’s sheer size and diversity. With 16 major islands, The Bahamas is an unmatched
+                        destination The best kept secret of The Bahamas is the country’s sheer size and diversity. With
+                        16 major islands, The Bahamas is an unmatched destination The best kept secret of The Bahamas is
+                        the country’s sheer size and diversity. With 16 major islands, The Bahamas is an unmatched
+                        destination</p>
+                    <div id="end" class="mt-auto">
+                        <a href="page de la promo"
+                            class="bg-main-red py-2 px-4 rounded-full text-main-white my-2 hover:bg-main-white hover:text-main-red hover:border border-main-red">Développeurs
+                            Web 2023</a>
+                        <div
+                            class="space-x-4 mt-4 mb-2 text-sm text-main-white [&>a]:bg-main-gray [&>a]:py-1 [&>a]:px-3 [&>a]:rounded-full">
+                            <a href="profil de l'apprenant"
+                                class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white">Nabil</a>
+                            <a href="profil de l'apprenant"
+                                class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white">Alexandre</a>
+                            <a href="profil de l'apprenant"
+                                class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white">Bryan</a>
+                        </div>
+                        <a href="?action=projectPage" class="block float-left text-xs">Voir le projet <i
+                                class="fa fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+            <!-- séparateur mobile-->
+            <div class="md:hidden w-4/5 mx-auto bg-main-gray bg-opacity-50 h-0.5 my-4"></div>
+            <!-- partie info entreprise mobile-->
+            <div class="md:hidden my-2">
+                <div class="flex flex-wrap">
+                    <p class="font-title font-bold mr-2">Projet fourni par : </p>
+                    <p><a href="lien vers la société" class="text-main-red underline font-bold text-sm">Pole formation
+                            CCI Ardennes</a></p>
+                </div>
+                <div class="flex flex-wrap">
+                    <p class="font-title font-bold mr-2">Adresse :</p>
+                    <p class="text-sm pt-0.5 text-left font-light">33 rue de la gare, 08000 Charleville-Mézières</p>
+                </div>
+            </div>
+        </article>
+
+         <!-- card projet 2 -->
+         <article id="projet-card-2"
+            class="project-card max-w-[766px] border-2 border-black rounded-lg p-4 mb-8 md:flex gap-6 md:p-6 md:mx-auto">
+            <!-- partie entreprise desktop -->
+            <div class="hidden md:block w-1/3 border-r-2 border-main-gray pr-6">
+                <div class="my-2 flex-col">
+                    <div class="flex flex-wrap">
+                        <p class="font-title font-bold mr-2">Projet fourni par : </p>
+                        <p><a href="lien vers la société" class="text-main-red underline font-bold text-sm">Pole
+                                formation CCI Ardennes</a></p>
+                    </div>
+                    <div class="my-4 grow"><img class="" src="assets/img/formations/devweb" alt="logo de l'entreprise"></div>
+                    <div class="flex flex-wrap">
+                        <p class="font-title font-bold mr-2">Adresse :</p>
+                        <p class="text-sm pt-0.5 text-left font-light">33 rue de la gare, 08000 Charleville-Mézières</p>
+                    </div>
+                </div>
+            </div>
+            <!-- partie info projet -->
+            <div class="flex-col text-[12px] flex text-end md:w-2/3">
+                <!-- tags projet -->
+                <div
+                    class="uppercase space-x-4 my-4 [&>tag]:bg-main-gray [&>tag]:bg-opacity-10 [&>tag]:py-2 [&>tag]:px-4 [&>tag]:rounded-full">
+                    <tag> html</tag>
+                    <tag> css</tag>
+                    <tag> react</tag>
+                </div>
+                <!-- titre projet -->
+                <h2 class="font-title text-main-red italic font-bold text-3xl my-2"><a href="?action=projectPage">Super projet de fou 6</a></h2>
+                <div class="self-end flex w-3/4 justify-between italic border-b border-main-red"><span>Débuté le
+                        25/03/2002</span><span>Fini le 25/03/2002</span></div>
+                <!-- contenu projet -->
+                <div class="text-base flex-grow flex-col">
+                    <p class="pl-[20%] line-clamp-5 mt-2 mb-4">The best kept secret of The Bahamas is the country’s
+                        sheer size and diversity. With 16 major islands, The Bahamas is an unmatched destination The
+                        best kept secret of The Bahamas is the country’s sheer size and diversity. With 16 major
+                        islands, The Bahamas is an unmatched destination The best kept secret of The Bahamas is the
+                        country’s sheer size and diversity. With 16 major islands, The Bahamas is an unmatched
+                        destination The best kept secret of The Bahamas is the country’s sheer size and diversity. With
+                        16 major islands, The Bahamas is an unmatched destination The best kept secret of The Bahamas is
+                        the country’s sheer size and diversity. With 16 major islands, The Bahamas is an unmatched
+                        destination</p>
+                    <div id="end" class="mt-auto">
+                        <a href="page de la promo"
+                            class="bg-main-red py-2 px-4 rounded-full text-main-white my-2 hover:bg-main-white hover:text-main-red hover:border border-main-red">Développeurs
+                            Web 2023</a>
+                        <div
+                            class="space-x-4 mt-4 mb-2 text-sm text-main-white [&>a]:bg-main-gray [&>a]:py-1 [&>a]:px-3 [&>a]:rounded-full">
+                            <a href="profil de l'apprenant"
+                                class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white">Nabil</a>
+                            <a href="profil de l'apprenant"
+                                class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white">Alexandre</a>
+                            <a href="profil de l'apprenant"
+                                class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white">Bryan</a>
+                        </div>
+                        <a href="?action=projectPage" class="block float-left text-xs">Voir le projet <i
+                                class="fa fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+            <!-- séparateur mobile-->
+            <div class="md:hidden w-4/5 mx-auto bg-main-gray bg-opacity-50 h-0.5 my-4"></div>
+            <!-- partie info entreprise mobile-->
+            <div class="md:hidden my-2">
+                <div class="flex flex-wrap">
+                    <p class="font-title font-bold mr-2">Projet fourni par : </p>
+                    <p><a href="lien vers la société" class="text-main-red underline font-bold text-sm">Pole formation
+                            CCI Ardennes</a></p>
+                </div>
+                <div class="flex flex-wrap">
+                    <p class="font-title font-bold mr-2">Adresse :</p>
+                    <p class="text-sm pt-0.5 text-left font-light">33 rue de la gare, 08000 Charleville-Mézières</p>
+                </div>
+            </div>
+        </article>
+
+                <!-- card projet 1 -->
+                <article id="projet-card-1"
+            class="project-card max-w-[766px] border-2 border-black rounded-lg p-4 mb-8 md:flex gap-6 md:p-6 md:mx-auto">
+            <!-- partie entreprise desktop -->
+            <div class="hidden md:block w-1/3 border-r-2 border-main-gray pr-6">
+                <div class="my-2 flex-col">
+                    <div class="flex flex-wrap">
+                        <p class="font-title font-bold mr-2">Projet fourni par : </p>
+                        <p><a href="lien vers la société" class="text-main-red underline font-bold text-sm">Pole
+                                formation CCI Ardennes</a></p>
+                    </div>
+                    <div class="my-4 grow"><img class="" src="assets/img/formations/ref_dig" alt="logo de l'entreprise"></div>
+                    <div class="flex flex-wrap">
+                        <p class="font-title font-bold mr-2">Adresse :</p>
+                        <p class="text-sm pt-0.5 text-left font-light">33 rue de la gare, 08000 Charleville-Mézières</p>
+                    </div>
+                </div>
+            </div>
+            <!-- partie info projet -->
+            <div class="flex-col text-[12px] flex text-end md:w-2/3">
+                <!-- tags projet -->
+                <div
+                    class="uppercase space-x-4 my-4 [&>tag]:bg-main-gray [&>tag]:bg-opacity-10 [&>tag]:py-2 [&>tag]:px-4 [&>tag]:rounded-full">
+                    <tag> html</tag>
+                    <tag> css</tag>
+                    <tag> react</tag>
+                </div>
+                <!-- titre projet -->
+                <h2 class="font-title text-main-red italic font-bold text-3xl my-2"><a href="?action=projectPage">Super projet de fou 7</a></h2>
+                <div class="self-end flex w-3/4 justify-between italic border-b border-main-red"><span>Débuté le
+                        25/03/2002</span><span>Fini le 25/03/2002</span></div>
+                <!-- contenu projet -->
+                <div class="text-base flex-grow flex-col">
+                    <p class="pl-[20%] line-clamp-5 mt-2 mb-4">The best kept secret of The Bahamas is the country’s
+                        sheer size and diversity. With 16 major islands, The Bahamas is an unmatched destination The
+                        best kept secret of The Bahamas is the country’s sheer size and diversity. With 16 major
+                        islands, The Bahamas is an unmatched destination The best kept secret of The Bahamas is the
+                        country’s sheer size and diversity. With 16 major islands, The Bahamas is an unmatched
+                        destination The best kept secret of The Bahamas is the country’s sheer size and diversity. With
+                        16 major islands, The Bahamas is an unmatched destination The best kept secret of The Bahamas is
+                        the country’s sheer size and diversity. With 16 major islands, The Bahamas is an unmatched
+                        destination</p>
+                    <div id="end" class="mt-auto">
+                        <a href="page de la promo"
+                            class="bg-main-red py-2 px-4 rounded-full text-main-white my-2 hover:bg-main-white hover:text-main-red hover:border border-main-red">Développeurs
+                            Web 2023</a>
+                        <div
+                            class="space-x-4 mt-4 mb-2 text-sm text-main-white [&>a]:bg-main-gray [&>a]:py-1 [&>a]:px-3 [&>a]:rounded-full">
+                            <a href="profil de l'apprenant"
+                                class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white">Nabil</a>
+                            <a href="profil de l'apprenant"
+                                class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white">Alexandre</a>
+                            <a href="profil de l'apprenant"
+                                class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white">Bryan</a>
+                        </div>
+                        <a href="?action=projectPage" class="block float-left text-xs">Voir le projet <i
+                                class="fa fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+            <!-- séparateur mobile-->
+            <div class="md:hidden w-4/5 mx-auto bg-main-gray bg-opacity-50 h-0.5 my-4"></div>
+            <!-- partie info entreprise mobile-->
+            <div class="md:hidden my-2">
+                <div class="flex flex-wrap">
+                    <p class="font-title font-bold mr-2">Projet fourni par : </p>
+                    <p><a href="lien vers la société" class="text-main-red underline font-bold text-sm">Pole formation
+                            CCI Ardennes</a></p>
+                </div>
+                <div class="flex flex-wrap">
+                    <p class="font-title font-bold mr-2">Adresse :</p>
+                    <p class="text-sm pt-0.5 text-left font-light">33 rue de la gare, 08000 Charleville-Mézières</p>
+                </div>
+            </div>
+        </article>
+
+         <!-- card projet 2 -->
+         <article id="projet-card-2"
+            class="project-card max-w-[766px] border-2 border-black rounded-lg p-4 mb-8 md:flex gap-6 md:p-6 md:mx-auto">
+            <!-- partie entreprise desktop -->
+            <div class="hidden md:block w-1/3 border-r-2 border-main-gray pr-6">
+                <div class="my-2 flex-col">
+                    <div class="flex flex-wrap">
+                        <p class="font-title font-bold mr-2">Projet fourni par : </p>
+                        <p><a href="lien vers la société" class="text-main-red underline font-bold text-sm">Pole formation CCI Ardennes</a></p>
+                    </div>
+                    <div class="my-4 grow"><img class="" src="assets/img/formations/tssr" alt="logo de l'entreprise"></div>
+                    <div class="flex flex-wrap">
+                        <p class="font-title font-bold mr-2">Adresse :</p>
+                        <p class="text-sm pt-0.5 text-left font-light">33 rue de la gare, 08000 Charleville-Mézières</p>
+                    </div>
+                </div>
+            </div>
+            <!-- partie info projet -->
+            <div class="flex-col text-[12px] flex text-end md:w-2/3">
+                <!-- tags projet -->
+                <div
+                    class="uppercase space-x-4 my-4 [&>tag]:bg-main-gray [&>tag]:bg-opacity-10 [&>tag]:py-2 [&>tag]:px-4 [&>tag]:rounded-full">
+                    <tag> html</tag>
+                    <tag> css</tag>
+                    <tag> react</tag>
+                </div>
+                <!-- titre projet -->
+                <h2 class="font-title text-main-red italic font-bold text-3xl my-2"><a href="?action=projectPage">Super projet de fou 8</a></h2>
+                <div class="self-end flex w-3/4 justify-between italic border-b border-main-red"><span>Débuté le
+                        25/03/2002</span><span>Fini le 25/03/2002</span></div>
+                <!-- contenu projet -->
+                <div class="text-base flex-grow flex-col">
+                    <p class="pl-[20%] line-clamp-5 mt-2 mb-4">The best kept secret of The Bahamas is the country’s
+                        sheer size and diversity. With 16 major islands, The Bahamas is an unmatched destination The
+                        best kept secret of The Bahamas is the country’s sheer size and diversity. With 16 major
+                        islands, The Bahamas is an unmatched destination The best kept secret of The Bahamas is the
+                        country’s sheer size and diversity. With 16 major islands, The Bahamas is an unmatched
+                        destination The best kept secret of The Bahamas is the country’s sheer size and diversity. With
+                        16 major islands, The Bahamas is an unmatched destination The best kept secret of The Bahamas is
+                        the country’s sheer size and diversity. With 16 major islands, The Bahamas is an unmatched
+                        destination</p>
+                    <div id="end" class="mt-auto">
+                        <a href="page de la promo"
+                            class="bg-main-red py-2 px-4 rounded-full text-main-white my-2 hover:bg-main-white hover:text-main-red hover:border border-main-red">Développeurs
+                            Web 2023</a>
+                        <div
+                            class="space-x-4 mt-4 mb-2 text-sm text-main-white [&>a]:bg-main-gray [&>a]:py-1 [&>a]:px-3 [&>a]:rounded-full">
+                            <a href="profil de l'apprenant"
+                                class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white">Nabil</a>
+                            <a href="profil de l'apprenant"
+                                class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white">Alexandre</a>
+                            <a href="profil de l'apprenant"
+                                class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white">Bryan</a>
+                        </div>
+                        <a href="?action=projectPage" class="block float-left text-xs">Voir le projet <i
                                 class="fa fa-arrow-right"></i></a>
                     </div>
                 </div>
@@ -225,7 +680,7 @@
                     <tag> react</tag>
                 </div>
                 <!-- titre projet -->
-                <h2 class="font-title text-main-red italic font-bold text-3xl my-2"><a href="lien du projet">Super projet de fou 3</a></h2>
+                <h2 class="font-title text-main-red italic font-bold text-3xl my-2"><a href="?action=projectPage">Super projet de fou 9</a></h2>
                 <div class="self-end flex w-3/4 justify-between italic border-b border-main-red"><span>Débuté le
                         25/03/2002</span><span>Fini le 25/03/2002</span></div>
                 <!-- contenu projet -->
@@ -252,7 +707,7 @@
                             <a href="profil de l'apprenant"
                                 class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white">Bryan</a>
                         </div>
-                        <a href="lien du projet" class="block float-left text-xs">Voir le projet <i
+                        <a href="?action=projectPage" class="block float-left text-xs">Voir le projet <i
                                 class="fa fa-arrow-right"></i></a>
                     </div>
                 </div>
@@ -301,7 +756,7 @@
                     <tag> react</tag>
                 </div>
                 <!-- titre projet -->
-                <h2 class="font-title text-main-red italic font-bold text-3xl my-2"><a href="lien du projet">Super projet de fou 4</a></h2>
+                <h2 class="font-title text-main-red italic font-bold text-3xl my-2"><a href="?action=projectPage">Super projet de fou 10</a></h2>
                 <div class="self-end flex w-3/4 justify-between italic border-b border-main-red"><span>Débuté le
                         25/03/2002</span><span>Fini le 25/03/2002</span></div>
                 <!-- contenu projet -->
@@ -328,7 +783,7 @@
                             <a href="profil de l'apprenant"
                                 class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white">Bryan</a>
                         </div>
-                        <a href="lien du projet" class="block float-left text-xs">Voir le projet <i
+                        <a href="?action=projectPage" class="block float-left text-xs">Voir le projet <i
                                 class="fa fa-arrow-right"></i></a>
                     </div>
                 </div>
@@ -377,7 +832,7 @@
                     <tag> react</tag>
                 </div>
                 <!-- titre projet -->
-                <h2 class="font-title text-main-red italic font-bold text-3xl my-2"><a href="lien du projet">Super projet de fou 5</a></h2>
+                <h2 class="font-title text-main-red italic font-bold text-3xl my-2"><a href="?action=projectPage">Super projet de fou 11</a></h2>
                 <div class="self-end flex w-3/4 justify-between italic border-b border-main-red"><span>Débuté le
                         25/03/2002</span><span>Fini le 25/03/2002</span></div>
                 <!-- contenu projet -->
@@ -404,7 +859,7 @@
                             <a href="profil de l'apprenant"
                                 class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white">Bryan</a>
                         </div>
-                        <a href="lien du projet" class="block float-left text-xs">Voir le projet <i
+                        <a href="?action=projectPage" class="block float-left text-xs">Voir le projet <i
                                 class="fa fa-arrow-right"></i></a>
                     </div>
                 </div>
@@ -453,7 +908,7 @@
                     <tag> react</tag>
                 </div>
                 <!-- titre projet -->
-                <h2 class="font-title text-main-red italic font-bold text-3xl my-2"><a href="lien du projet">Super projet de fou 6</a></h2>
+                <h2 class="font-title text-main-red italic font-bold text-3xl my-2"><a href="?action=projectPage">Super projet de fou 12</a></h2>
                 <div class="self-end flex w-3/4 justify-between italic border-b border-main-red"><span>Débuté le
                         25/03/2002</span><span>Fini le 25/03/2002</span></div>
                 <!-- contenu projet -->
@@ -480,7 +935,7 @@
                             <a href="profil de l'apprenant"
                                 class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white">Bryan</a>
                         </div>
-                        <a href="lien du projet" class="block float-left text-xs">Voir le projet <i
+                        <a href="?action=projectPage" class="block float-left text-xs">Voir le projet <i
                                 class="fa fa-arrow-right"></i></a>
                     </div>
                 </div>
@@ -529,7 +984,7 @@
                     <tag> react</tag>
                 </div>
                 <!-- titre projet -->
-                <h2 class="font-title text-main-red italic font-bold text-3xl my-2"><a href="lien du projet">Super projet de fou 7</a></h2>
+                <h2 class="font-title text-main-red italic font-bold text-3xl my-2"><a href="?action=projectPage">Super projet de fou 13</a></h2>
                 <div class="self-end flex w-3/4 justify-between italic border-b border-main-red"><span>Débuté le
                         25/03/2002</span><span>Fini le 25/03/2002</span></div>
                 <!-- contenu projet -->
@@ -556,7 +1011,7 @@
                             <a href="profil de l'apprenant"
                                 class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white">Bryan</a>
                         </div>
-                        <a href="lien du projet" class="block float-left text-xs">Voir le projet <i
+                        <a href="?action=projectPage" class="block float-left text-xs">Voir le projet <i
                                 class="fa fa-arrow-right"></i></a>
                     </div>
                 </div>
@@ -605,7 +1060,7 @@
                     <tag> react</tag>
                 </div>
                 <!-- titre projet -->
-                <h2 class="font-title text-main-red italic font-bold text-3xl my-2"><a href="lien du projet">Super projet de fou 8</a></h2>
+                <h2 class="font-title text-main-red italic font-bold text-3xl my-2"><a href="?action=projectPage">Super projet de fou 14</a></h2>
                 <div class="self-end flex w-3/4 justify-between italic border-b border-main-red"><span>Débuté le
                         25/03/2002</span><span>Fini le 25/03/2002</span></div>
                 <!-- contenu projet -->
@@ -632,7 +1087,7 @@
                             <a href="profil de l'apprenant"
                                 class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white">Bryan</a>
                         </div>
-                        <a href="lien du projet" class="block float-left text-xs">Voir le projet <i
+                        <a href="?action=projectPage" class="block float-left text-xs">Voir le projet <i
                                 class="fa fa-arrow-right"></i></a>
                     </div>
                 </div>
@@ -681,7 +1136,7 @@
                     <tag> react</tag>
                 </div>
                 <!-- titre projet -->
-                <h2 class="font-title text-main-red italic font-bold text-3xl my-2"><a href="lien du projet">Super projet de fou 9</a></h2>
+                <h2 class="font-title text-main-red italic font-bold text-3xl my-2"><a href="?action=projectPage">Super projet de fou 15</a></h2>
                 <div class="self-end flex w-3/4 justify-between italic border-b border-main-red"><span>Débuté le
                         25/03/2002</span><span>Fini le 25/03/2002</span></div>
                 <!-- contenu projet -->
@@ -708,7 +1163,7 @@
                             <a href="profil de l'apprenant"
                                 class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white">Bryan</a>
                         </div>
-                        <a href="lien du projet" class="block float-left text-xs">Voir le projet <i
+                        <a href="?action=projectPage" class="block float-left text-xs">Voir le projet <i
                                 class="fa fa-arrow-right"></i></a>
                     </div>
                 </div>
@@ -757,7 +1212,7 @@
                     <tag> react</tag>
                 </div>
                 <!-- titre projet -->
-                <h2 class="font-title text-main-red italic font-bold text-3xl my-2"><a href="lien du projet">Super projet de fou 10</a></h2>
+                <h2 class="font-title text-main-red italic font-bold text-3xl my-2"><a href="?action=projectPage">Super projet de fou 16</a></h2>
                 <div class="self-end flex w-3/4 justify-between italic border-b border-main-red"><span>Débuté le
                         25/03/2002</span><span>Fini le 25/03/2002</span></div>
                 <!-- contenu projet -->
@@ -784,7 +1239,7 @@
                             <a href="profil de l'apprenant"
                                 class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white">Bryan</a>
                         </div>
-                        <a href="lien du projet" class="block float-left text-xs">Voir le projet <i
+                        <a href="?action=projectPage" class="block float-left text-xs">Voir le projet <i
                                 class="fa fa-arrow-right"></i></a>
                     </div>
                 </div>
@@ -833,7 +1288,7 @@
                     <tag> react</tag>
                 </div>
                 <!-- titre projet -->
-                <h2 class="font-title text-main-red italic font-bold text-3xl my-2"><a href="lien du projet">Super projet de fou 11</a></h2>
+                <h2 class="font-title text-main-red italic font-bold text-3xl my-2"><a href="?action=projectPage">Super projet de fou 17</a></h2>
                 <div class="self-end flex w-3/4 justify-between italic border-b border-main-red"><span>Débuté le
                         25/03/2002</span><span>Fini le 25/03/2002</span></div>
                 <!-- contenu projet -->
@@ -860,7 +1315,7 @@
                             <a href="profil de l'apprenant"
                                 class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white">Bryan</a>
                         </div>
-                        <a href="lien du projet" class="block float-left text-xs">Voir le projet <i
+                        <a href="?action=projectPage" class="block float-left text-xs">Voir le projet <i
                                 class="fa fa-arrow-right"></i></a>
                     </div>
                 </div>
@@ -909,7 +1364,7 @@
                     <tag> react</tag>
                 </div>
                 <!-- titre projet -->
-                <h2 class="font-title text-main-red italic font-bold text-3xl my-2"><a href="lien du projet">Super projet de fou 12</a></h2>
+                <h2 class="font-title text-main-red italic font-bold text-3xl my-2"><a href="?action=projectPage">Super projet de fou 18</a></h2>
                 <div class="self-end flex w-3/4 justify-between italic border-b border-main-red"><span>Débuté le
                         25/03/2002</span><span>Fini le 25/03/2002</span></div>
                 <!-- contenu projet -->
@@ -936,7 +1391,7 @@
                             <a href="profil de l'apprenant"
                                 class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white">Bryan</a>
                         </div>
-                        <a href="lien du projet" class="block float-left text-xs">Voir le projet <i
+                        <a href="?action=projectPage" class="block float-left text-xs">Voir le projet <i
                                 class="fa fa-arrow-right"></i></a>
                     </div>
                 </div>
@@ -985,7 +1440,7 @@
                     <tag> react</tag>
                 </div>
                 <!-- titre projet -->
-                <h2 class="font-title text-main-red italic font-bold text-3xl my-2"><a href="lien du projet">Super projet de fou 13</a></h2>
+                <h2 class="font-title text-main-red italic font-bold text-3xl my-2"><a href="?action=projectPage">Super projet de fou 19</a></h2>
                 <div class="self-end flex w-3/4 justify-between italic border-b border-main-red"><span>Débuté le
                         25/03/2002</span><span>Fini le 25/03/2002</span></div>
                 <!-- contenu projet -->
@@ -1012,7 +1467,7 @@
                             <a href="profil de l'apprenant"
                                 class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white">Bryan</a>
                         </div>
-                        <a href="lien du projet" class="block float-left text-xs">Voir le projet <i
+                        <a href="?action=projectPage" class="block float-left text-xs">Voir le projet <i
                                 class="fa fa-arrow-right"></i></a>
                     </div>
                 </div>
@@ -1061,7 +1516,7 @@
                     <tag> react</tag>
                 </div>
                 <!-- titre projet -->
-                <h2 class="font-title text-main-red italic font-bold text-3xl my-2"><a href="lien du projet">Super projet de fou 14</a></h2>
+                <h2 class="font-title text-main-red italic font-bold text-3xl my-2"><a href="?action=projectPage">Super projet de fou 20</a></h2>
                 <div class="self-end flex w-3/4 justify-between italic border-b border-main-red"><span>Débuté le
                         25/03/2002</span><span>Fini le 25/03/2002</span></div>
                 <!-- contenu projet -->
@@ -1088,7 +1543,7 @@
                             <a href="profil de l'apprenant"
                                 class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white">Bryan</a>
                         </div>
-                        <a href="lien du projet" class="block float-left text-xs">Voir le projet <i
+                        <a href="?action=projectPage" class="block float-left text-xs">Voir le projet <i
                                 class="fa fa-arrow-right"></i></a>
                     </div>
                 </div>
@@ -1137,7 +1592,7 @@
                     <tag> react</tag>
                 </div>
                 <!-- titre projet -->
-                <h2 class="font-title text-main-red italic font-bold text-3xl my-2"><a href="lien du projet">Super projet de fou 15</a></h2>
+                <h2 class="font-title text-main-red italic font-bold text-3xl my-2"><a href="?action=projectPage">Super projet de fou 21</a></h2>
                 <div class="self-end flex w-3/4 justify-between italic border-b border-main-red"><span>Débuté le
                         25/03/2002</span><span>Fini le 25/03/2002</span></div>
                 <!-- contenu projet -->
@@ -1164,7 +1619,7 @@
                             <a href="profil de l'apprenant"
                                 class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white">Bryan</a>
                         </div>
-                        <a href="lien du projet" class="block float-left text-xs">Voir le projet <i
+                        <a href="?action=projectPage" class="block float-left text-xs">Voir le projet <i
                                 class="fa fa-arrow-right"></i></a>
                     </div>
                 </div>
@@ -1213,7 +1668,7 @@
                     <tag> react</tag>
                 </div>
                 <!-- titre projet -->
-                <h2 class="font-title text-main-red italic font-bold text-3xl my-2"><a href="lien du projet">Super projet de fou 16</a></h2>
+                <h2 class="font-title text-main-red italic font-bold text-3xl my-2"><a href="?action=projectPage">Super projet de fou 22</a></h2>
                 <div class="self-end flex w-3/4 justify-between italic border-b border-main-red"><span>Débuté le
                         25/03/2002</span><span>Fini le 25/03/2002</span></div>
                 <!-- contenu projet -->
@@ -1240,7 +1695,7 @@
                             <a href="profil de l'apprenant"
                                 class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white">Bryan</a>
                         </div>
-                        <a href="lien du projet" class="block float-left text-xs">Voir le projet <i
+                        <a href="?action=projectPage" class="block float-left text-xs">Voir le projet <i
                                 class="fa fa-arrow-right"></i></a>
                     </div>
                 </div>
@@ -1289,7 +1744,7 @@
                     <tag> react</tag>
                 </div>
                 <!-- titre projet -->
-                <h2 class="font-title text-main-red italic font-bold text-3xl my-2"><a href="lien du projet">Super projet de fou 17</a></h2>
+                <h2 class="font-title text-main-red italic font-bold text-3xl my-2"><a href="?action=projectPage">Super projet de fou 23</a></h2>
                 <div class="self-end flex w-3/4 justify-between italic border-b border-main-red"><span>Débuté le
                         25/03/2002</span><span>Fini le 25/03/2002</span></div>
                 <!-- contenu projet -->
@@ -1316,7 +1771,7 @@
                             <a href="profil de l'apprenant"
                                 class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white">Bryan</a>
                         </div>
-                        <a href="lien du projet" class="block float-left text-xs">Voir le projet <i
+                        <a href="?action=projectPage" class="block float-left text-xs">Voir le projet <i
                                 class="fa fa-arrow-right"></i></a>
                     </div>
                 </div>
@@ -1365,7 +1820,7 @@
                     <tag> react</tag>
                 </div>
                 <!-- titre projet -->
-                <h2 class="font-title text-main-red italic font-bold text-3xl my-2"><a href="lien du projet">Super projet de fou 18</a></h2>
+                <h2 class="font-title text-main-red italic font-bold text-3xl my-2"><a href="?action=projectPage">Super projet de fou 24</a></h2>
                 <div class="self-end flex w-3/4 justify-between italic border-b border-main-red"><span>Débuté le
                         25/03/2002</span><span>Fini le 25/03/2002</span></div>
                 <!-- contenu projet -->
@@ -1392,7 +1847,7 @@
                             <a href="profil de l'apprenant"
                                 class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white">Bryan</a>
                         </div>
-                        <a href="lien du projet" class="block float-left text-xs">Voir le projet <i
+                        <a href="?action=projectPage" class="block float-left text-xs">Voir le projet <i
                                 class="fa fa-arrow-right"></i></a>
                     </div>
                 </div>
@@ -1441,7 +1896,7 @@
                     <tag> react</tag>
                 </div>
                 <!-- titre projet -->
-                <h2 class="font-title text-main-red italic font-bold text-3xl my-2"><a href="lien du projet">Super projet de fou 19</a></h2>
+                <h2 class="font-title text-main-red italic font-bold text-3xl my-2"><a href="?action=projectPage">Super projet de fou 25</a></h2>
                 <div class="self-end flex w-3/4 justify-between italic border-b border-main-red"><span>Débuté le
                         25/03/2002</span><span>Fini le 25/03/2002</span></div>
                 <!-- contenu projet -->
@@ -1468,7 +1923,7 @@
                             <a href="profil de l'apprenant"
                                 class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white">Bryan</a>
                         </div>
-                        <a href="lien du projet" class="block float-left text-xs">Voir le projet <i
+                        <a href="?action=projectPage" class="block float-left text-xs">Voir le projet <i
                                 class="fa fa-arrow-right"></i></a>
                     </div>
                 </div>
@@ -1517,7 +1972,7 @@
                     <tag> react</tag>
                 </div>
                 <!-- titre projet -->
-                <h2 class="font-title text-main-red italic font-bold text-3xl my-2"><a href="lien du projet">Super projet de fou 20</a></h2>
+                <h2 class="font-title text-main-red italic font-bold text-3xl my-2"><a href="?action=projectPage">Super projet de fou 26</a></h2>
                 <div class="self-end flex w-3/4 justify-between italic border-b border-main-red"><span>Débuté le
                         25/03/2002</span><span>Fini le 25/03/2002</span></div>
                 <!-- contenu projet -->
@@ -1544,7 +1999,7 @@
                             <a href="profil de l'apprenant"
                                 class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white">Bryan</a>
                         </div>
-                        <a href="lien du projet" class="block float-left text-xs">Voir le projet <i
+                        <a href="?action=projectPage" class="block float-left text-xs">Voir le projet <i
                                 class="fa fa-arrow-right"></i></a>
                     </div>
                 </div>
@@ -1593,7 +2048,7 @@
                     <tag> react</tag>
                 </div>
                 <!-- titre projet -->
-                <h2 class="font-title text-main-red italic font-bold text-3xl my-2"><a href="lien du projet">Super projet de fou 21</a></h2>
+                <h2 class="font-title text-main-red italic font-bold text-3xl my-2"><a href="?action=projectPage">Super projet de fou 27</a></h2>
                 <div class="self-end flex w-3/4 justify-between italic border-b border-main-red"><span>Débuté le
                         25/03/2002</span><span>Fini le 25/03/2002</span></div>
                 <!-- contenu projet -->
@@ -1620,7 +2075,7 @@
                             <a href="profil de l'apprenant"
                                 class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white">Bryan</a>
                         </div>
-                        <a href="lien du projet" class="block float-left text-xs">Voir le projet <i
+                        <a href="?action=projectPage" class="block float-left text-xs">Voir le projet <i
                                 class="fa fa-arrow-right"></i></a>
                     </div>
                 </div>
@@ -1669,7 +2124,7 @@
                     <tag> react</tag>
                 </div>
                 <!-- titre projet -->
-                <h2 class="font-title text-main-red italic font-bold text-3xl my-2"><a href="lien du projet">Super projet de fou 22</a></h2>
+                <h2 class="font-title text-main-red italic font-bold text-3xl my-2"><a href="?action=projectPage">Super projet de fou 28</a></h2>
                 <div class="self-end flex w-3/4 justify-between italic border-b border-main-red"><span>Débuté le
                         25/03/2002</span><span>Fini le 25/03/2002</span></div>
                 <!-- contenu projet -->
@@ -1696,7 +2151,7 @@
                             <a href="profil de l'apprenant"
                                 class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white">Bryan</a>
                         </div>
-                        <a href="lien du projet" class="block float-left text-xs">Voir le projet <i
+                        <a href="?action=projectPage" class="block float-left text-xs">Voir le projet <i
                                 class="fa fa-arrow-right"></i></a>
                     </div>
                 </div>
@@ -1745,7 +2200,7 @@
                     <tag> react</tag>
                 </div>
                 <!-- titre projet -->
-                <h2 class="font-title text-main-red italic font-bold text-3xl my-2"><a href="lien du projet">Super projet de fou 23</a></h2>
+                <h2 class="font-title text-main-red italic font-bold text-3xl my-2"><a href="?action=projectPage">Super projet de fou 29</a></h2>
                 <div class="self-end flex w-3/4 justify-between italic border-b border-main-red"><span>Débuté le
                         25/03/2002</span><span>Fini le 25/03/2002</span></div>
                 <!-- contenu projet -->
@@ -1772,7 +2227,7 @@
                             <a href="profil de l'apprenant"
                                 class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white">Bryan</a>
                         </div>
-                        <a href="lien du projet" class="block float-left text-xs">Voir le projet <i
+                        <a href="?action=projectPage" class="block float-left text-xs">Voir le projet <i
                                 class="fa fa-arrow-right"></i></a>
                     </div>
                 </div>
@@ -1821,7 +2276,7 @@
                     <tag> react</tag>
                 </div>
                 <!-- titre projet -->
-                <h2 class="font-title text-main-red italic font-bold text-3xl my-2"><a href="lien du projet">Super projet de fou 24</a></h2>
+                <h2 class="font-title text-main-red italic font-bold text-3xl my-2"><a href="?action=projectPage">Super projet de fou 30</a></h2>
                 <div class="self-end flex w-3/4 justify-between italic border-b border-main-red"><span>Débuté le
                         25/03/2002</span><span>Fini le 25/03/2002</span></div>
                 <!-- contenu projet -->
@@ -1848,463 +2303,7 @@
                             <a href="profil de l'apprenant"
                                 class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white">Bryan</a>
                         </div>
-                        <a href="lien du projet" class="block float-left text-xs">Voir le projet <i
-                                class="fa fa-arrow-right"></i></a>
-                    </div>
-                </div>
-            </div>
-            <!-- séparateur mobile-->
-            <div class="md:hidden w-4/5 mx-auto bg-main-gray bg-opacity-50 h-0.5 my-4"></div>
-            <!-- partie info entreprise mobile-->
-            <div class="md:hidden my-2">
-                <div class="flex flex-wrap">
-                    <p class="font-title font-bold mr-2">Projet fourni par : </p>
-                    <p><a href="lien vers la société" class="text-main-red underline font-bold text-sm">Pole formation
-                            CCI Ardennes</a></p>
-                </div>
-                <div class="flex flex-wrap">
-                    <p class="font-title font-bold mr-2">Adresse :</p>
-                    <p class="text-sm pt-0.5 text-left font-light">33 rue de la gare, 08000 Charleville-Mézières</p>
-                </div>
-            </div>
-        </article>
-
-                <!-- card projet 1 -->
-                <article id="projet-card-1"
-            class="project-card max-w-[766px] border-2 border-black rounded-lg p-4 mb-8 md:flex gap-6 md:p-6 md:mx-auto">
-            <!-- partie entreprise desktop -->
-            <div class="hidden md:block w-1/3 border-r-2 border-main-gray pr-6">
-                <div class="my-2 flex-col">
-                    <div class="flex flex-wrap">
-                        <p class="font-title font-bold mr-2">Projet fourni par : </p>
-                        <p><a href="lien vers la société" class="text-main-red underline font-bold text-sm">Pole
-                                formation CCI Ardennes</a></p>
-                    </div>
-                    <div class="my-4 grow"><img class="" src="assets/img/logo" alt="logo de l'entreprise"></div>
-                    <div class="flex flex-wrap">
-                        <p class="font-title font-bold mr-2">Adresse :</p>
-                        <p class="text-sm pt-0.5 text-left font-light">33 rue de la gare, 08000 Charleville-Mézières</p>
-                    </div>
-                </div>
-            </div>
-            <!-- partie info projet -->
-            <div class="flex-col text-[12px] flex text-end md:w-2/3">
-                <!-- tags projet -->
-                <div
-                    class="uppercase space-x-4 my-4 [&>tag]:bg-main-gray [&>tag]:bg-opacity-10 [&>tag]:py-2 [&>tag]:px-4 [&>tag]:rounded-full">
-                    <tag> html</tag>
-                    <tag> css</tag>
-                    <tag> react</tag>
-                </div>
-                <!-- titre projet -->
-                <h2 class="font-title text-main-red italic font-bold text-3xl my-2"><a href="lien du projet">Super projet de fou 25</a></h2>
-                <div class="self-end flex w-3/4 justify-between italic border-b border-main-red"><span>Débuté le
-                        25/03/2002</span><span>Fini le 25/03/2002</span></div>
-                <!-- contenu projet -->
-                <div class="text-base flex-grow flex-col">
-                    <p class="pl-[20%] line-clamp-5 mt-2 mb-4">The best kept secret of The Bahamas is the country’s
-                        sheer size and diversity. With 16 major islands, The Bahamas is an unmatched destination The
-                        best kept secret of The Bahamas is the country’s sheer size and diversity. With 16 major
-                        islands, The Bahamas is an unmatched destination The best kept secret of The Bahamas is the
-                        country’s sheer size and diversity. With 16 major islands, The Bahamas is an unmatched
-                        destination The best kept secret of The Bahamas is the country’s sheer size and diversity. With
-                        16 major islands, The Bahamas is an unmatched destination The best kept secret of The Bahamas is
-                        the country’s sheer size and diversity. With 16 major islands, The Bahamas is an unmatched
-                        destination</p>
-                    <div id="end" class="mt-auto">
-                        <a href="page de la promo"
-                            class="bg-main-red py-2 px-4 rounded-full text-main-white my-2 hover:bg-main-white hover:text-main-red hover:border border-main-red">Développeurs
-                            Web 2023</a>
-                        <div
-                            class="space-x-4 mt-4 mb-2 text-sm text-main-white [&>a]:bg-main-gray [&>a]:py-1 [&>a]:px-3 [&>a]:rounded-full">
-                            <a href="profil de l'apprenant"
-                                class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white">Nabil</a>
-                            <a href="profil de l'apprenant"
-                                class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white">Alexandre</a>
-                            <a href="profil de l'apprenant"
-                                class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white">Bryan</a>
-                        </div>
-                        <a href="lien du projet" class="block float-left text-xs">Voir le projet <i
-                                class="fa fa-arrow-right"></i></a>
-                    </div>
-                </div>
-            </div>
-            <!-- séparateur mobile-->
-            <div class="md:hidden w-4/5 mx-auto bg-main-gray bg-opacity-50 h-0.5 my-4"></div>
-            <!-- partie info entreprise mobile-->
-            <div class="md:hidden my-2">
-                <div class="flex flex-wrap">
-                    <p class="font-title font-bold mr-2">Projet fourni par : </p>
-                    <p><a href="lien vers la société" class="text-main-red underline font-bold text-sm">Pole formation
-                            CCI Ardennes</a></p>
-                </div>
-                <div class="flex flex-wrap">
-                    <p class="font-title font-bold mr-2">Adresse :</p>
-                    <p class="text-sm pt-0.5 text-left font-light">33 rue de la gare, 08000 Charleville-Mézières</p>
-                </div>
-            </div>
-        </article>
-
-         <!-- card projet 2 -->
-         <article id="projet-card-2"
-            class="project-card max-w-[766px] border-2 border-black rounded-lg p-4 mb-8 md:flex gap-6 md:p-6 md:mx-auto">
-            <!-- partie entreprise desktop -->
-            <div class="hidden md:block w-1/3 border-r-2 border-main-gray pr-6">
-                <div class="my-2 flex-col">
-                    <div class="flex flex-wrap">
-                        <p class="font-title font-bold mr-2">Projet fourni par : </p>
-                        <p><a href="lien vers la société" class="text-main-red underline font-bold text-sm">Pole
-                                formation CCI Ardennes</a></p>
-                    </div>
-                    <div class="my-4 grow"><img class="" src="assets/img/homepage_image" alt="logo de l'entreprise"></div>
-                    <div class="flex flex-wrap">
-                        <p class="font-title font-bold mr-2">Adresse :</p>
-                        <p class="text-sm pt-0.5 text-left font-light">33 rue de la gare, 08000 Charleville-Mézières</p>
-                    </div>
-                </div>
-            </div>
-            <!-- partie info projet -->
-            <div class="flex-col text-[12px] flex text-end md:w-2/3">
-                <!-- tags projet -->
-                <div
-                    class="uppercase space-x-4 my-4 [&>tag]:bg-main-gray [&>tag]:bg-opacity-10 [&>tag]:py-2 [&>tag]:px-4 [&>tag]:rounded-full">
-                    <tag> html</tag>
-                    <tag> css</tag>
-                    <tag> react</tag>
-                </div>
-                <!-- titre projet -->
-                <h2 class="font-title text-main-red italic font-bold text-3xl my-2"><a href="lien du projet">Super projet de fou 26</a></h2>
-                <div class="self-end flex w-3/4 justify-between italic border-b border-main-red"><span>Débuté le
-                        25/03/2002</span><span>Fini le 25/03/2002</span></div>
-                <!-- contenu projet -->
-                <div class="text-base flex-grow flex-col">
-                    <p class="pl-[20%] line-clamp-5 mt-2 mb-4">The best kept secret of The Bahamas is the country’s
-                        sheer size and diversity. With 16 major islands, The Bahamas is an unmatched destination The
-                        best kept secret of The Bahamas is the country’s sheer size and diversity. With 16 major
-                        islands, The Bahamas is an unmatched destination The best kept secret of The Bahamas is the
-                        country’s sheer size and diversity. With 16 major islands, The Bahamas is an unmatched
-                        destination The best kept secret of The Bahamas is the country’s sheer size and diversity. With
-                        16 major islands, The Bahamas is an unmatched destination The best kept secret of The Bahamas is
-                        the country’s sheer size and diversity. With 16 major islands, The Bahamas is an unmatched
-                        destination</p>
-                    <div id="end" class="mt-auto">
-                        <a href="page de la promo"
-                            class="bg-main-red py-2 px-4 rounded-full text-main-white my-2 hover:bg-main-white hover:text-main-red hover:border border-main-red">Développeurs
-                            Web 2023</a>
-                        <div
-                            class="space-x-4 mt-4 mb-2 text-sm text-main-white [&>a]:bg-main-gray [&>a]:py-1 [&>a]:px-3 [&>a]:rounded-full">
-                            <a href="profil de l'apprenant"
-                                class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white">Nabil</a>
-                            <a href="profil de l'apprenant"
-                                class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white">Alexandre</a>
-                            <a href="profil de l'apprenant"
-                                class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white">Bryan</a>
-                        </div>
-                        <a href="lien du projet" class="block float-left text-xs">Voir le projet <i
-                                class="fa fa-arrow-right"></i></a>
-                    </div>
-                </div>
-            </div>
-            <!-- séparateur mobile-->
-            <div class="md:hidden w-4/5 mx-auto bg-main-gray bg-opacity-50 h-0.5 my-4"></div>
-            <!-- partie info entreprise mobile-->
-            <div class="md:hidden my-2">
-                <div class="flex flex-wrap">
-                    <p class="font-title font-bold mr-2">Projet fourni par : </p>
-                    <p><a href="lien vers la société" class="text-main-red underline font-bold text-sm">Pole formation
-                            CCI Ardennes</a></p>
-                </div>
-                <div class="flex flex-wrap">
-                    <p class="font-title font-bold mr-2">Adresse :</p>
-                    <p class="text-sm pt-0.5 text-left font-light">33 rue de la gare, 08000 Charleville-Mézières</p>
-                </div>
-            </div>
-        </article>
-
-                <!-- card projet 1 -->
-                <article id="projet-card-1"
-            class="project-card max-w-[766px] border-2 border-black rounded-lg p-4 mb-8 md:flex gap-6 md:p-6 md:mx-auto">
-            <!-- partie entreprise desktop -->
-            <div class="hidden md:block w-1/3 border-r-2 border-main-gray pr-6">
-                <div class="my-2 flex-col">
-                    <div class="flex flex-wrap">
-                        <p class="font-title font-bold mr-2">Projet fourni par : </p>
-                        <p><a href="lien vers la société" class="text-main-red underline font-bold text-sm">Pole
-                                formation CCI Ardennes</a></p>
-                    </div>
-                    <div class="my-4 grow"><img class="" src="assets/img/logo" alt="logo de l'entreprise"></div>
-                    <div class="flex flex-wrap">
-                        <p class="font-title font-bold mr-2">Adresse :</p>
-                        <p class="text-sm pt-0.5 text-left font-light">33 rue de la gare, 08000 Charleville-Mézières</p>
-                    </div>
-                </div>
-            </div>
-            <!-- partie info projet -->
-            <div class="flex-col text-[12px] flex text-end md:w-2/3">
-                <!-- tags projet -->
-                <div
-                    class="uppercase space-x-4 my-4 [&>tag]:bg-main-gray [&>tag]:bg-opacity-10 [&>tag]:py-2 [&>tag]:px-4 [&>tag]:rounded-full">
-                    <tag> html</tag>
-                    <tag> css</tag>
-                    <tag> react</tag>
-                </div>
-                <!-- titre projet -->
-                <h2 class="font-title text-main-red italic font-bold text-3xl my-2"><a href="lien du projet">Super projet de fou 27</a></h2>
-                <div class="self-end flex w-3/4 justify-between italic border-b border-main-red"><span>Débuté le
-                        25/03/2002</span><span>Fini le 25/03/2002</span></div>
-                <!-- contenu projet -->
-                <div class="text-base flex-grow flex-col">
-                    <p class="pl-[20%] line-clamp-5 mt-2 mb-4">The best kept secret of The Bahamas is the country’s
-                        sheer size and diversity. With 16 major islands, The Bahamas is an unmatched destination The
-                        best kept secret of The Bahamas is the country’s sheer size and diversity. With 16 major
-                        islands, The Bahamas is an unmatched destination The best kept secret of The Bahamas is the
-                        country’s sheer size and diversity. With 16 major islands, The Bahamas is an unmatched
-                        destination The best kept secret of The Bahamas is the country’s sheer size and diversity. With
-                        16 major islands, The Bahamas is an unmatched destination The best kept secret of The Bahamas is
-                        the country’s sheer size and diversity. With 16 major islands, The Bahamas is an unmatched
-                        destination</p>
-                    <div id="end" class="mt-auto">
-                        <a href="page de la promo"
-                            class="bg-main-red py-2 px-4 rounded-full text-main-white my-2 hover:bg-main-white hover:text-main-red hover:border border-main-red">Développeurs
-                            Web 2023</a>
-                        <div
-                            class="space-x-4 mt-4 mb-2 text-sm text-main-white [&>a]:bg-main-gray [&>a]:py-1 [&>a]:px-3 [&>a]:rounded-full">
-                            <a href="profil de l'apprenant"
-                                class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white">Nabil</a>
-                            <a href="profil de l'apprenant"
-                                class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white">Alexandre</a>
-                            <a href="profil de l'apprenant"
-                                class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white">Bryan</a>
-                        </div>
-                        <a href="lien du projet" class="block float-left text-xs">Voir le projet <i
-                                class="fa fa-arrow-right"></i></a>
-                    </div>
-                </div>
-            </div>
-            <!-- séparateur mobile-->
-            <div class="md:hidden w-4/5 mx-auto bg-main-gray bg-opacity-50 h-0.5 my-4"></div>
-            <!-- partie info entreprise mobile-->
-            <div class="md:hidden my-2">
-                <div class="flex flex-wrap">
-                    <p class="font-title font-bold mr-2">Projet fourni par : </p>
-                    <p><a href="lien vers la société" class="text-main-red underline font-bold text-sm">Pole formation
-                            CCI Ardennes</a></p>
-                </div>
-                <div class="flex flex-wrap">
-                    <p class="font-title font-bold mr-2">Adresse :</p>
-                    <p class="text-sm pt-0.5 text-left font-light">33 rue de la gare, 08000 Charleville-Mézières</p>
-                </div>
-            </div>
-        </article>
-
-         <!-- card projet 2 -->
-         <article id="projet-card-2"
-            class="project-card max-w-[766px] border-2 border-black rounded-lg p-4 mb-8 md:flex gap-6 md:p-6 md:mx-auto">
-            <!-- partie entreprise desktop -->
-            <div class="hidden md:block w-1/3 border-r-2 border-main-gray pr-6">
-                <div class="my-2 flex-col">
-                    <div class="flex flex-wrap">
-                        <p class="font-title font-bold mr-2">Projet fourni par : </p>
-                        <p><a href="lien vers la société" class="text-main-red underline font-bold text-sm">Pole
-                                formation CCI Ardennes</a></p>
-                    </div>
-                    <div class="my-4 grow"><img class="" src="assets/img/homepage_image" alt="logo de l'entreprise"></div>
-                    <div class="flex flex-wrap">
-                        <p class="font-title font-bold mr-2">Adresse :</p>
-                        <p class="text-sm pt-0.5 text-left font-light">33 rue de la gare, 08000 Charleville-Mézières</p>
-                    </div>
-                </div>
-            </div>
-            <!-- partie info projet -->
-            <div class="flex-col text-[12px] flex text-end md:w-2/3">
-                <!-- tags projet -->
-                <div
-                    class="uppercase space-x-4 my-4 [&>tag]:bg-main-gray [&>tag]:bg-opacity-10 [&>tag]:py-2 [&>tag]:px-4 [&>tag]:rounded-full">
-                    <tag> html</tag>
-                    <tag> css</tag>
-                    <tag> react</tag>
-                </div>
-                <!-- titre projet -->
-                <h2 class="font-title text-main-red italic font-bold text-3xl my-2"><a href="lien du projet">Super projet de fou 28</a></h2>
-                <div class="self-end flex w-3/4 justify-between italic border-b border-main-red"><span>Débuté le
-                        25/03/2002</span><span>Fini le 25/03/2002</span></div>
-                <!-- contenu projet -->
-                <div class="text-base flex-grow flex-col">
-                    <p class="pl-[20%] line-clamp-5 mt-2 mb-4">The best kept secret of The Bahamas is the country’s
-                        sheer size and diversity. With 16 major islands, The Bahamas is an unmatched destination The
-                        best kept secret of The Bahamas is the country’s sheer size and diversity. With 16 major
-                        islands, The Bahamas is an unmatched destination The best kept secret of The Bahamas is the
-                        country’s sheer size and diversity. With 16 major islands, The Bahamas is an unmatched
-                        destination The best kept secret of The Bahamas is the country’s sheer size and diversity. With
-                        16 major islands, The Bahamas is an unmatched destination The best kept secret of The Bahamas is
-                        the country’s sheer size and diversity. With 16 major islands, The Bahamas is an unmatched
-                        destination</p>
-                    <div id="end" class="mt-auto">
-                        <a href="page de la promo"
-                            class="bg-main-red py-2 px-4 rounded-full text-main-white my-2 hover:bg-main-white hover:text-main-red hover:border border-main-red">Développeurs
-                            Web 2023</a>
-                        <div
-                            class="space-x-4 mt-4 mb-2 text-sm text-main-white [&>a]:bg-main-gray [&>a]:py-1 [&>a]:px-3 [&>a]:rounded-full">
-                            <a href="profil de l'apprenant"
-                                class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white">Nabil</a>
-                            <a href="profil de l'apprenant"
-                                class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white">Alexandre</a>
-                            <a href="profil de l'apprenant"
-                                class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white">Bryan</a>
-                        </div>
-                        <a href="lien du projet" class="block float-left text-xs">Voir le projet <i
-                                class="fa fa-arrow-right"></i></a>
-                    </div>
-                </div>
-            </div>
-            <!-- séparateur mobile-->
-            <div class="md:hidden w-4/5 mx-auto bg-main-gray bg-opacity-50 h-0.5 my-4"></div>
-            <!-- partie info entreprise mobile-->
-            <div class="md:hidden my-2">
-                <div class="flex flex-wrap">
-                    <p class="font-title font-bold mr-2">Projet fourni par : </p>
-                    <p><a href="lien vers la société" class="text-main-red underline font-bold text-sm">Pole formation
-                            CCI Ardennes</a></p>
-                </div>
-                <div class="flex flex-wrap">
-                    <p class="font-title font-bold mr-2">Adresse :</p>
-                    <p class="text-sm pt-0.5 text-left font-light">33 rue de la gare, 08000 Charleville-Mézières</p>
-                </div>
-            </div>
-        </article>
-
-                <!-- card projet 1 -->
-                <article id="projet-card-1"
-            class="project-card max-w-[766px] border-2 border-black rounded-lg p-4 mb-8 md:flex gap-6 md:p-6 md:mx-auto">
-            <!-- partie entreprise desktop -->
-            <div class="hidden md:block w-1/3 border-r-2 border-main-gray pr-6">
-                <div class="my-2 flex-col">
-                    <div class="flex flex-wrap">
-                        <p class="font-title font-bold mr-2">Projet fourni par : </p>
-                        <p><a href="lien vers la société" class="text-main-red underline font-bold text-sm">Pole
-                                formation CCI Ardennes</a></p>
-                    </div>
-                    <div class="my-4 grow"><img class="" src="assets/img/logo" alt="logo de l'entreprise"></div>
-                    <div class="flex flex-wrap">
-                        <p class="font-title font-bold mr-2">Adresse :</p>
-                        <p class="text-sm pt-0.5 text-left font-light">33 rue de la gare, 08000 Charleville-Mézières</p>
-                    </div>
-                </div>
-            </div>
-            <!-- partie info projet -->
-            <div class="flex-col text-[12px] flex text-end md:w-2/3">
-                <!-- tags projet -->
-                <div
-                    class="uppercase space-x-4 my-4 [&>tag]:bg-main-gray [&>tag]:bg-opacity-10 [&>tag]:py-2 [&>tag]:px-4 [&>tag]:rounded-full">
-                    <tag> html</tag>
-                    <tag> css</tag>
-                    <tag> react</tag>
-                </div>
-                <!-- titre projet -->
-                <h2 class="font-title text-main-red italic font-bold text-3xl my-2"><a href="lien du projet">Super projet de fou 29</a></h2>
-                <div class="self-end flex w-3/4 justify-between italic border-b border-main-red"><span>Débuté le
-                        25/03/2002</span><span>Fini le 25/03/2002</span></div>
-                <!-- contenu projet -->
-                <div class="text-base flex-grow flex-col">
-                    <p class="pl-[20%] line-clamp-5 mt-2 mb-4">The best kept secret of The Bahamas is the country’s
-                        sheer size and diversity. With 16 major islands, The Bahamas is an unmatched destination The
-                        best kept secret of The Bahamas is the country’s sheer size and diversity. With 16 major
-                        islands, The Bahamas is an unmatched destination The best kept secret of The Bahamas is the
-                        country’s sheer size and diversity. With 16 major islands, The Bahamas is an unmatched
-                        destination The best kept secret of The Bahamas is the country’s sheer size and diversity. With
-                        16 major islands, The Bahamas is an unmatched destination The best kept secret of The Bahamas is
-                        the country’s sheer size and diversity. With 16 major islands, The Bahamas is an unmatched
-                        destination</p>
-                    <div id="end" class="mt-auto">
-                        <a href="page de la promo"
-                            class="bg-main-red py-2 px-4 rounded-full text-main-white my-2 hover:bg-main-white hover:text-main-red hover:border border-main-red">Développeurs
-                            Web 2023</a>
-                        <div
-                            class="space-x-4 mt-4 mb-2 text-sm text-main-white [&>a]:bg-main-gray [&>a]:py-1 [&>a]:px-3 [&>a]:rounded-full">
-                            <a href="profil de l'apprenant"
-                                class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white">Nabil</a>
-                            <a href="profil de l'apprenant"
-                                class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white">Alexandre</a>
-                            <a href="profil de l'apprenant"
-                                class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white">Bryan</a>
-                        </div>
-                        <a href="lien du projet" class="block float-left text-xs">Voir le projet <i
-                                class="fa fa-arrow-right"></i></a>
-                    </div>
-                </div>
-            </div>
-            <!-- séparateur mobile-->
-            <div class="md:hidden w-4/5 mx-auto bg-main-gray bg-opacity-50 h-0.5 my-4"></div>
-            <!-- partie info entreprise mobile-->
-            <div class="md:hidden my-2">
-                <div class="flex flex-wrap">
-                    <p class="font-title font-bold mr-2">Projet fourni par : </p>
-                    <p><a href="lien vers la société" class="text-main-red underline font-bold text-sm">Pole formation
-                            CCI Ardennes</a></p>
-                </div>
-                <div class="flex flex-wrap">
-                    <p class="font-title font-bold mr-2">Adresse :</p>
-                    <p class="text-sm pt-0.5 text-left font-light">33 rue de la gare, 08000 Charleville-Mézières</p>
-                </div>
-            </div>
-        </article>
-
-         <!-- card projet 2 -->
-         <article id="projet-card-2"
-            class="project-card max-w-[766px] border-2 border-black rounded-lg p-4 mb-8 md:flex gap-6 md:p-6 md:mx-auto">
-            <!-- partie entreprise desktop -->
-            <div class="hidden md:block w-1/3 border-r-2 border-main-gray pr-6">
-                <div class="my-2 flex-col">
-                    <div class="flex flex-wrap">
-                        <p class="font-title font-bold mr-2">Projet fourni par : </p>
-                        <p><a href="lien vers la société" class="text-main-red underline font-bold text-sm">Pole
-                                formation CCI Ardennes</a></p>
-                    </div>
-                    <div class="my-4 grow"><img class="" src="assets/img/homepage_image" alt="logo de l'entreprise"></div>
-                    <div class="flex flex-wrap">
-                        <p class="font-title font-bold mr-2">Adresse :</p>
-                        <p class="text-sm pt-0.5 text-left font-light">33 rue de la gare, 08000 Charleville-Mézières</p>
-                    </div>
-                </div>
-            </div>
-            <!-- partie info projet -->
-            <div class="flex-col text-[12px] flex text-end md:w-2/3">
-                <!-- tags projet -->
-                <div
-                    class="uppercase space-x-4 my-4 [&>tag]:bg-main-gray [&>tag]:bg-opacity-10 [&>tag]:py-2 [&>tag]:px-4 [&>tag]:rounded-full">
-                    <tag> html</tag>
-                    <tag> css</tag>
-                    <tag> react</tag>
-                </div>
-                <!-- titre projet -->
-                <h2 class="font-title text-main-red italic font-bold text-3xl my-2"><a href="lien du projet">Super projet de fou 30</a></h2>
-                <div class="self-end flex w-3/4 justify-between italic border-b border-main-red"><span>Débuté le
-                        25/03/2002</span><span>Fini le 25/03/2002</span></div>
-                <!-- contenu projet -->
-                <div class="text-base flex-grow flex-col">
-                    <p class="pl-[20%] line-clamp-5 mt-2 mb-4">The best kept secret of The Bahamas is the country’s
-                        sheer size and diversity. With 16 major islands, The Bahamas is an unmatched destination The
-                        best kept secret of The Bahamas is the country’s sheer size and diversity. With 16 major
-                        islands, The Bahamas is an unmatched destination The best kept secret of The Bahamas is the
-                        country’s sheer size and diversity. With 16 major islands, The Bahamas is an unmatched
-                        destination The best kept secret of The Bahamas is the country’s sheer size and diversity. With
-                        16 major islands, The Bahamas is an unmatched destination The best kept secret of The Bahamas is
-                        the country’s sheer size and diversity. With 16 major islands, The Bahamas is an unmatched
-                        destination</p>
-                    <div id="end" class="mt-auto">
-                        <a href="page de la promo"
-                            class="bg-main-red py-2 px-4 rounded-full text-main-white my-2 hover:bg-main-white hover:text-main-red hover:border border-main-red">Développeurs
-                            Web 2023</a>
-                        <div
-                            class="space-x-4 mt-4 mb-2 text-sm text-main-white [&>a]:bg-main-gray [&>a]:py-1 [&>a]:px-3 [&>a]:rounded-full">
-                            <a href="profil de l'apprenant"
-                                class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white">Nabil</a>
-                            <a href="profil de l'apprenant"
-                                class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white">Alexandre</a>
-                            <a href="profil de l'apprenant"
-                                class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white">Bryan</a>
-                        </div>
-                        <a href="lien du projet" class="block float-left text-xs">Voir le projet <i
+                        <a href="?action=projectPage" class="block float-left text-xs">Voir le projet <i
                                 class="fa fa-arrow-right"></i></a>
                     </div>
                 </div>
