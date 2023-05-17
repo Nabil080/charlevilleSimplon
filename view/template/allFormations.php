@@ -10,18 +10,18 @@ $title = "Toutes nos formations";
         <div class="numbers_container px-5 flex w-full">
             <div class="number1 flex w-1/3 items-center">
                 <span
-                    class="bg-main-red rounded-[5px] text-main-white text-[30px] h-[100px] w-[100px] flex items-center justify-center">142</span>
-                <p class="font-title text-[20px] italic pl-2">Simplonien.ne.s depuis la création</p>
+                    class="bg-main-red rounded-[5px] text-main-white border border-main-white hover:bg-main-white hover:text-main-red hover:border-main-red text-xl xl:text-3xl p-4 aspect-square flex items-center justify-center">142</span>
+                <p class="font-title text-lg lg:text-xl italic pl-2">Simplonien.ne.s depuis la création</p>
             </div>
             <div class="number2 flex w-1/3 items-center">
                 <span
-                    class="bg-main-gray rounded-[5px] text-main-white text-[30px] h-[100px] w-[100px] flex items-center justify-center">99%</span>
-                <p class="font-title text-[20px] font-semibold pl-2">Taux de réussite au diplôme front-end</p>
+                    class="bg-main-gray rounded-[5px] text-main-white text-xl xl:text-3xl p-4 aspect-square flex items-center justify-center">99%</span>
+                <p class="font-title text-lg lg:text-xl font-semibold pl-2">Taux de réussite au diplôme front-end</p>
             </div>
             <div class="number3 flex w-1/3 items-center">
                 <span
-                    class="bg-main-red rounded-[5px] text-main-white text-[30px] h-[100px] w-[100px] flex items-center justify-center">80%</span>
-                <p class="font-title text-[20px] italic pl-2">Taux de réussite au diplôme back-end</p>
+                    class="bg-main-red rounded-[5px] text-main-white border border-main-white hover:bg-main-white hover:text-main-red hover:border-main-red text-xl xl:text-3xl p-4 aspect-square flex items-center justify-center">80%</span>
+                <p class="font-title text-lg lg:text-xl italic pl-2">Taux de réussite au diplôme back-end</p>
             </div>
         </div>
 
@@ -51,14 +51,14 @@ $title = "Toutes nos formations";
                 <div class="formation_status flex justify-center items-center">
                     <h5 class="text-main-gray font-main text-[14px] md:text-[16px] italic text-center my-3">Formation en
                         cours depuis le 28/01/2023</h5>
-                    <span class="w-4 h-4 border-[1px] bg-main-green rounded-full ml-2"></span>
+                    <span class="w-4 h-4 border-[1px] bg-main-green rounded-full ml-2 animate-pulse"></span>
                 </div>
                 <div class="card_buttons flex justify-around pb-6 pt-2">
                     <a href="index.php?action=formationPage"
-                        class="bg-main-red rounded-[5px] text-main-white text-center font-medium flex items-center justify-center text-[14px] font-main w-1/3 py-2 px-3">En
+                        class="bg-main-red rounded-[5px] text-main-white border border-main-white hover:bg-main-white hover:text-main-red hover:border-main-red  text-center font-medium flex items-center justify-center text-[14px] font-main w-1/3 py-2 px-3">En
                         savoir plus</a>
                     <a href="index.php?action=registerPage"
-                        class="bg-main-red rounded-[5px] text-main-white text-center font-medium flex items-center justify-center text-[14px] font-main w-1/3 py-2 px-2">Postuler
+                        class="bg-main-red rounded-[5px] text-main-white border border-main-white hover:bg-main-white hover:text-main-red hover:border-main-red  text-center font-medium flex items-center justify-center text-[14px] font-main w-1/3 py-2 px-2">Postuler
                         à la formation</a>
                 </div>
             </div>
@@ -82,14 +82,14 @@ $title = "Toutes nos formations";
                 <div class="formation_status flex justify-center items-center">
                     <h5 class="text-main-gray font-main text-[14px] md:text-[16px] italic text-center my-3">Formation en
                         cours depuis le 28/01/2023</h5>
-                    <span class="w-4 h-4 border-[1px] bg-main-green rounded-full ml-2"></span>
+                    <span class="w-4 h-4 border-[1px] bg-main-green rounded-full ml-2 animate-pulse"></span>
                 </div>
                 <div class="card_buttons flex justify-around pb-6 pt-2">
                     <a href="index.php?action=formationPage"
-                        class="bg-main-red rounded-[5px] text-main-white font-medium text-center flex items-center justify-center text-[14px] font-main w-1/3 py-2 px-3">En
+                        class="bg-main-red rounded-[5px] text-main-white border border-main-white hover:bg-main-white hover:text-main-red hover:border-main-red  font-medium text-center flex items-center justify-center text-[14px] font-main w-1/3 py-2 px-3">En
                         savoir plus</a>
                     <a href="index.php?action=registerPage"
-                        class="bg-main-red rounded-[5px] text-main-white font-medium text-center flex items-center justify-center text-[14px] font-main w-1/3 py-2 px-2">Postuler
+                        class="bg-main-red rounded-[5px] text-main-white border border-main-white hover:bg-main-white hover:text-main-red hover:border-main-red  font-medium text-center flex items-center justify-center text-[14px] font-main w-1/3 py-2 px-2">Postuler
                         à la formation</a>
                 </div>
             </div>
@@ -113,14 +113,14 @@ $title = "Toutes nos formations";
                 <div class="formation_status flex justify-center items-center">
                     <h5 class="text-main-gray font-main text-[14px] md:text-[16px] italic text-center my-3">Formation en
                         cours depuis le 28/01/2023</h5>
-                    <span class="w-4 h-4 border-[1px] bg-main-green rounded-full ml-2"></span>
+                    <span class="w-4 h-4 border-[1px] bg-main-green rounded-full ml-2 animate-pulse"></span>
                 </div>
                 <div class="card_buttons flex justify-around pb-6 pt-2">
                     <a href="index.php?action=formationPage"
-                        class="bg-main-red rounded-[5px] text-main-white font-medium text-center flex items-center justify-center text-[14px] font-main w-1/3 py-2 px-3">En
+                        class="bg-main-red rounded-[5px] text-main-white border border-main-white hover:bg-main-white hover:text-main-red hover:border-main-red  font-medium text-center flex items-center justify-center text-[14px] font-main w-1/3 py-2 px-3">En
                         savoir plus</a>
                     <a href="index.php?action=registerPage"
-                        class="bg-main-red rounded-[5px] text-main-white font-medium text-center flex items-center justify-center text-[14px] font-main w-1/3 py-2 px-2">Postuler
+                        class="bg-main-red rounded-[5px] text-main-white border border-main-white hover:bg-main-white hover:text-main-red hover:border-main-red  font-medium text-center flex items-center justify-center text-[14px] font-main w-1/3 py-2 px-2">Postuler
                         à la formation</a>
                 </div>
             </div>
@@ -165,7 +165,7 @@ $title = "Toutes nos formations";
         </div>
         <div class="flex justify-center mt-4 lg:mt-8">
             <a href=""
-                class="bg-main-red rounded-[5px] text-main-white font-semibold text-[16px] lg:text-[22px] font-main py-5 px-3 inline">Projets
+                class="bg-main-red rounded-[5px] text-main-white border border-main-white hover:bg-main-white hover:text-main-red hover:border-main-red  font-semibold text-[16px] lg:text-[22px] font-main py-5 px-3 inline">Projets
                 réalisés par nos formations</a>
         </div>
     </div>
