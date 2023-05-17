@@ -14,5 +14,5 @@
         <a href="?action=contactPage" class="hover:underline">Page Contact</a>
         <a href="?action=projectGestionPage" class="hover:underline">Page Gestion de Projet</a>
         <a href="?action=registerPage" class="hover:underline">Page d'inscription</a>
-        <a href="?action=registerPage" class="hover:underline">Crud</a>
+        <a class="hover:underline">Crud</a>
 </footer>

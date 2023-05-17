@@ -2,7 +2,7 @@
 
 <?php ob_start(); ?>
 
-<h1 class="px-4 text-main-red font-title font-semibold text-center text-2xl">Les projets réalisés à <span class="italic">Simplon Charleville</span></h1>
+<h1 class="px-4 text-main-red font-title font-semibold text-center text-2xl sm:text-3xl lg:text-[40px]">Les projets réalisés à <span class="italic">Simplon Charleville</span></h1>
 
 <!-- section tous les projets -->
 <section id="all-projects" class="px-4">
