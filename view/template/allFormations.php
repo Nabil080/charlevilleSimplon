@@ -27,21 +27,21 @@ $title = "Toutes nos formations";
 
     </div>
 
-    <h1 class="text-main-red font-title text-center text-[24px] md:text-[48px] font-semibold pt-4 md:py-8">Nos formations</h1>
+    <h1 class="text-main-red font-title text-center text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold pt-4 md:py-8">Nos formations</h1>
 
     <div class="large_screen md:mx-2">
-        <div class="section-cards md:flex md:flex-wrap md:justify-around">
+        <div class="section-cards grid place-content-center md:flex md:flex-wrap md:justify-around">
             <!-- Card formation -->
-            <div class="card_formation rounded-[5px] border-[1px] m-3 border-main-border md:w-2/5">
+            <div class="card_formation max-w-[445px] rounded-[5px] border-[1px] m-3 border-main-border md:w-2/5">
                 <img class="max-h-[140px] md:max-h-[200px] w-full" src="assets/img/formations/devweb" alt="Formation">
-                <h3 class="text-main-red font-title text-[18px] pl-3 mt-3 text-center md:text-[36px]">Développeur Web /
+                <h3 class="text-main-red font-title font-semibold text-lg pl-3 mt-3 text-center md:text-2xl xl:text-3xl">Développeur Web /
                     Web Mobile</h3>
-                <h4 class="text-main-gray font-main text-[14px] italic pl-3 text-center">Niveau Bac + 2 / Titre
+                <h4 class="text-main-gray font-main text-sm  italic pl-3 text-center">Niveau Bac + 2 / Titre
                     professionnel niveau 5</h4>
-                <div class="hidden md:flex flex-col text-justify px-8 py-4 text-[16px]">
+                <div class="hidden md:flex flex-col px-8 py-4 text-[16px]">
                     <h5 class="text-main-red font-main pb-2 font-semibold">Le métier de développeur Web s’articule
                         autour de plusieurs activités principales :</h5>
-                    <ul class="list-disc pl-4">
+                    <ul class="space-y-2 list-disc pl-4">
                         <li>Développer la partie front-end d’une application web ou web mobile en intégrant les
                             recommandations de sécurité</li>
                         <li>Développer la partie back-end d’une application web ou web mobile en intégrant les
@@ -49,30 +49,30 @@ $title = "Toutes nos formations";
                     </ul>
                 </div>
                 <div class="formation_status flex justify-center items-center">
-                    <h5 class="text-main-gray font-main text-[14px] md:text-[16px] italic text-center my-3">Formation en
+                    <h5 class="text-main-gray font-main text-sm md:text-[16px] italic text-center my-3">Formation en
                         cours depuis le 28/01/2023</h5>
                     <span class="w-4 h-4 border-[1px] bg-main-green rounded-full ml-2 animate-pulse"></span>
                 </div>
                 <div class="card_buttons flex justify-around pb-6 pt-2">
                     <a href="index.php?action=formationPage"
-                        class="bg-main-red rounded-[5px] text-main-white border border-main-white hover:bg-main-white hover:text-main-red hover:border-main-red  text-center font-medium flex items-center justify-center text-[14px] font-main w-1/3 py-2 px-3">En
+                        class="bg-main-red rounded-[5px] text-main-white border border-main-white hover:bg-main-white hover:text-main-red hover:border-main-red  text-center font-medium flex items-center justify-center text-sm font-main w-1/3 py-2 px-3">En
                         savoir plus</a>
                     <a href="index.php?action=registerPage"
-                        class="bg-main-red rounded-[5px] text-main-white border border-main-white hover:bg-main-white hover:text-main-red hover:border-main-red  text-center font-medium flex items-center justify-center text-[14px] font-main w-1/3 py-2 px-2">Postuler
+                        class="bg-main-red rounded-[5px] text-main-white border border-main-white hover:bg-main-white hover:text-main-red hover:border-main-red  text-center font-medium flex items-center justify-center text-sm font-main w-1/3 py-2 px-2">Postuler
                         à la formation</a>
                 </div>
             </div>
             <!-- Fin de la card formation -->
-            <div class="card_formation rounded-[5px] border-[1px] m-3 border-main-border md:w-2/5">
+            <div class="card_formation max-w-[445px] rounded-[5px] border-[1px] m-3 border-main-border md:w-2/5">
                 <img class="max-h-[140px] md:max-h-[200px] w-full" src="assets/img/formations/devweb" alt="Formation">
-                <h3 class="text-main-red font-title text-[18px] pl-3 mt-3 text-center md:text-[36px]">Développeur Web /
+                <h3 class="text-main-red font-title font-semibold text-lg pl-3 mt-3 text-center md:text-2xl xl:text-3xl">Développeur Web /
                     Web Mobile</h3>
-                <h4 class="text-main-gray font-main text-[14px] italic pl-3 text-center">Niveau Bac + 2 / Titre
+                <h4 class="text-main-gray font-main text-sm italic pl-3 text-center">Niveau Bac + 2 / Titre
                     professionnel niveau 5</h4>
-                <div class="hidden md:flex flex-col text-justify px-6 py-4 text-[16px]">
+                <div class="hidden md:flex flex-col px-6 py-4 text-[16px]">
                     <h5 class="text-main-red font-main pb-2 font-semibold">Le métier de développeur Web s’articule
                         autour de plusieurs activités principales :</h5>
-                    <ul>
+                    <ul class="space-y-2 list-disc pl-4">
                         <li>Développer la partie front-end d’une application web ou web mobile en intégrant les
                             recommandations de sécurité</li>
                         <li>Développer la partie back-end d’une application web ou web mobile en intégrant les
@@ -80,30 +80,30 @@ $title = "Toutes nos formations";
                     </ul>
                 </div>
                 <div class="formation_status flex justify-center items-center">
-                    <h5 class="text-main-gray font-main text-[14px] md:text-[16px] italic text-center my-3">Formation en
+                    <h5 class="text-main-gray font-main text-sm md:text-[16px] italic text-center my-3">Formation en
                         cours depuis le 28/01/2023</h5>
                     <span class="w-4 h-4 border-[1px] bg-main-green rounded-full ml-2 animate-pulse"></span>
                 </div>
                 <div class="card_buttons flex justify-around pb-6 pt-2">
                     <a href="index.php?action=formationPage"
-                        class="bg-main-red rounded-[5px] text-main-white border border-main-white hover:bg-main-white hover:text-main-red hover:border-main-red  font-medium text-center flex items-center justify-center text-[14px] font-main w-1/3 py-2 px-3">En
+                        class="bg-main-red rounded-[5px] text-main-white border border-main-white hover:bg-main-white hover:text-main-red hover:border-main-red  font-medium text-center flex items-center justify-center text-sm font-main w-1/3 py-2 px-3">En
                         savoir plus</a>
                     <a href="index.php?action=registerPage"
-                        class="bg-main-red rounded-[5px] text-main-white border border-main-white hover:bg-main-white hover:text-main-red hover:border-main-red  font-medium text-center flex items-center justify-center text-[14px] font-main w-1/3 py-2 px-2">Postuler
+                        class="bg-main-red rounded-[5px] text-main-white border border-main-white hover:bg-main-white hover:text-main-red hover:border-main-red  font-medium text-center flex items-center justify-center text-sm font-main w-1/3 py-2 px-2">Postuler
                         à la formation</a>
                 </div>
             </div>
 
-            <div class="card_formation rounded-[5px] border-[1px] m-3 border-main-border md:w-2/5">
+            <div class="card_formation max-w-[445px] rounded-[5px] border-[1px] m-3 border-main-border md:w-2/5">
                 <img class="max-h-[140px] md:max-h-[200px] w-full" src="assets/img/formations/devweb" alt="Formation">
-                <h3 class="text-main-red font-title text-[18px] pl-3 mt-3 text-center md:text-[36px]">Développeur Web /
+                <h3 class="text-main-red font-title font-semibold text-lg pl-3 mt-3 text-center md:text-2xl xl:text-3xl">Développeur Web /
                     Web Mobile</h3>
-                <h4 class="text-main-gray font-main text-[14px] italic pl-3 text-center">Niveau Bac + 2 / Titre
+                <h4 class="text-main-gray font-main text-sm italic pl-3 text-center">Niveau Bac + 2 / Titre
                     professionnel niveau 5</h4>
-                <div class="hidden md:flex flex-col text-justify px-6 py-4 text-[16px]">
+                <div class="hidden md:flex flex-col px-6 py-4 text-[16px]">
                     <h5 class="text-main-red font-main pb-2 font-semibold">Le métier de développeur Web s’articule
                         autour de plusieurs activités principales :</h5>
-                    <ul>
+                    <ul class="space-y-2 list-disc pl-4">
                         <li>Développer la partie front-end d’une application web ou web mobile en intégrant les
                             recommandations de sécurité</li>
                         <li>Développer la partie back-end d’une application web ou web mobile en intégrant les
@@ -111,16 +111,47 @@ $title = "Toutes nos formations";
                     </ul>
                 </div>
                 <div class="formation_status flex justify-center items-center">
-                    <h5 class="text-main-gray font-main text-[14px] md:text-[16px] italic text-center my-3">Formation en
+                    <h5 class="text-main-gray font-main text-sm md:text-[16px] italic text-center my-3">Formation en
                         cours depuis le 28/01/2023</h5>
                     <span class="w-4 h-4 border-[1px] bg-main-green rounded-full ml-2 animate-pulse"></span>
                 </div>
                 <div class="card_buttons flex justify-around pb-6 pt-2">
                     <a href="index.php?action=formationPage"
-                        class="bg-main-red rounded-[5px] text-main-white border border-main-white hover:bg-main-white hover:text-main-red hover:border-main-red  font-medium text-center flex items-center justify-center text-[14px] font-main w-1/3 py-2 px-3">En
+                        class="bg-main-red rounded-[5px] text-main-white border border-main-white hover:bg-main-white hover:text-main-red hover:border-main-red  font-medium text-center flex items-center justify-center text-sm font-main w-1/3 py-2 px-3">En
                         savoir plus</a>
                     <a href="index.php?action=registerPage"
-                        class="bg-main-red rounded-[5px] text-main-white border border-main-white hover:bg-main-white hover:text-main-red hover:border-main-red  font-medium text-center flex items-center justify-center text-[14px] font-main w-1/3 py-2 px-2">Postuler
+                        class="bg-main-red rounded-[5px] text-main-white border border-main-white hover:bg-main-white hover:text-main-red hover:border-main-red  font-medium text-center flex items-center justify-center text-sm font-main w-1/3 py-2 px-2">Postuler
+                        à la formation</a>
+                </div>
+            </div>
+
+            <div class="card_formation max-w-[445px] rounded-[5px] border-[1px] m-3 border-main-border md:w-2/5">
+                <img class="max-h-[140px] md:max-h-[200px] w-full" src="assets/img/formations/devweb" alt="Formation">
+                <h3 class="text-main-red font-title font-semibold text-lg pl-3 mt-3 text-center md:text-2xl xl:text-3xl">Développeur Web /
+                    Web Mobile</h3>
+                <h4 class="text-main-gray font-main text-sm italic pl-3 text-center">Niveau Bac + 2 / Titre
+                    professionnel niveau 5</h4>
+                <div class="hidden md:flex flex-col px-6 py-4 text-[16px]">
+                    <h5 class="text-main-red font-main pb-2 font-semibold">Le métier de développeur Web s’articule
+                        autour de plusieurs activités principales :</h5>
+                    <ul class="space-y-2 list-disc pl-4">
+                        <li>Développer la partie front-end d’une application web ou web mobile en intégrant les
+                            recommandations de sécurité</li>
+                        <li>Développer la partie back-end d’une application web ou web mobile en intégrant les
+                            recommandations de sécurité</li>
+                    </ul>
+                </div>
+                <div class="formation_status flex justify-center items-center">
+                    <h5 class="text-main-gray font-main text-sm md:text-[16px] italic text-center my-3">Formation en
+                        cours depuis le 28/01/2023</h5>
+                    <span class="w-4 h-4 border-[1px] bg-main-green rounded-full ml-2 animate-pulse"></span>
+                </div>
+                <div class="card_buttons flex justify-around pb-6 pt-2">
+                    <a href="index.php?action=formationPage"
+                        class="bg-main-red rounded-[5px] text-main-white border border-main-white hover:bg-main-white hover:text-main-red hover:border-main-red  font-medium text-center flex items-center justify-center text-sm font-main w-1/3 py-2 px-3">En
+                        savoir plus</a>
+                    <a href="index.php?action=registerPage"
+                        class="bg-main-red rounded-[5px] text-main-white border border-main-white hover:bg-main-white hover:text-main-red hover:border-main-red  font-medium text-center flex items-center justify-center text-sm font-main w-1/3 py-2 px-2">Postuler
                         à la formation</a>
                 </div>
             </div>
@@ -135,7 +166,7 @@ $title = "Toutes nos formations";
             Apprendre à Simplon</h2>
         <div class="block lg:grid lg:grid-cols-[10%_90%] items-center justify-center">
             <i class="fa-solid text-center w-full fa-user-group text-[32px] my-2 text-main-red lg:text-[55px]"></i>
-            <p class="mx-7 py-5 font-main text-[16px] text-justify tracking-wide">La méthode d’apprentissage
+            <p class="mx-7 py-5 font-main text-[16px] tracking-wide">La méthode d’apprentissage
                 <span class="italic">Simplon.co</span>, <strong>c’est une pédagogie active et par projets</strong> où
                 l’apprenant est confronté
                 à des mises en situation concrètes via des projets individuels et en groupe. Les thèmes des projets sont
@@ -147,7 +178,7 @@ $title = "Toutes nos formations";
                 régulièrement.
             </p>
             <i class="fa-solid fa-briefcase text-center w-full text-[32px] my-2 text-main-red lg:text-[55px]"></i>
-            <p class="mx-7 py-5  font-main text-[16px] text-justify tracking-wide">Pour garantir une
+            <p class="mx-7 py-5  font-main text-[16px] tracking-wide">Pour garantir une
                 <strong>insertion professionnelle réussie</strong>, l’apprenante est accompagnée par des formateurs
                 experts du métier visé et
                 des équipes en lien avec les entreprises du territoire. Il est immergé dans le monde de l’entreprise
@@ -155,7 +186,7 @@ $title = "Toutes nos formations";
                 formation : parrainage de la promotion par une entreprise, simulations d’entretiens, meet-ups...
             </p>
             <i class="fa-solid text-center w-full fa-graduation-cap text-[32px] my-2 text-main-red lg:text-[55px]"></i>
-            <p class="mx-7 py-5  font-main text-[16px] text-justify tracking-wide">Quasiment toutes nos formations
+            <p class="mx-7 py-5  font-main text-[16px] tracking-wide">Quasiment toutes nos formations
                 débouchent sur la
                 <strong>délivrance de certifications reconnues</strong>, soit un Titre RNCP reconnu par le ministère du
                 travail
