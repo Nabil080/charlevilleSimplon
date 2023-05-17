@@ -1,3 +1,4 @@
+const aside = document.getElementById("sidebar-multi-level-sidebar");
 const dropdown = document.getElementById("dropdown-contact");
 const inputs = dropdown.querySelectorAll("input");
 const contactButton = document.getElementById("contactValidation");
@@ -23,3 +24,13 @@ inputs[i].addEventListener('change', function()  // Event listener sur chaque ch
 })
 
 };
+
+window.addEventListener("scroll", function () {
+
+    if (nav.classList.contains("-translate-y-[20vh]")) {
+        console.log("remove");
+        aside.classList.add("-translate-y-20");
+    } else {
+        aside.classList.remove("-translate-y-20");
+    }
+});

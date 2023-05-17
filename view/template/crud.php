@@ -31,7 +31,14 @@
 
       include ("crudInclude/_crudPromotion.php");
       include ("crudInclude/_modalApprenant.php");
+      include ("crudInclude/_modalFormateur.php");
       include ("crudInclude/_modalProjet.php");
+    }
+
+    if (isset($projetPage)  && $projetPage == 1) {
+
+      include ("crudInclude/_crudProjet.php");
+
     }
     ?> 
 

@@ -1,5 +1,5 @@
 
-<section class="sm:ml-64">
+<section class="md:ml-64">
         <?php include ("_searchCrud.php"); ?>
         
             <div class="overflow-x-auto">
