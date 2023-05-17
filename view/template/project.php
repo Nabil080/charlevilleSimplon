@@ -143,7 +143,7 @@
 
 
 <?php ob_start(); ?>
-<script src="assets/js/project.js"></script>
+<script src="assets/js/tabs.js"></script>
 <?php $script = ob_get_clean(); ?>
 
 <?php require 'view/layout.php'; ?>

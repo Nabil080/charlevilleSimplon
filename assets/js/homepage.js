@@ -43,25 +43,6 @@ function switchDiv(id1, id2) {
     }
 }
 
-function louis() {
-    var i = 0;
-    function louisBrain() {
-      setTimeout(function() {
-        $i++;
-        if (i < 100) {
-            louisBrain();
-        }else{
-            louisThink();
-        }
-      }, 100);
-    }
-
-
-}
-function louisThink(){
-    console("fart");
-}
-
 function returnHomepage(id){
     const homepage = document.getElementById("homepage");
     // console.log(homepage);
