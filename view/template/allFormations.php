@@ -27,8 +27,7 @@ $title = "Toutes nos formations";
 
     </div>
 
-    <h1 class="text-main-red font-title text-center text-[24px] md:text-[48px] font-semibold pt-4 md:py-8">Les
-        formations de <span class="italic">Simplon Charleville</span></h1>
+    <h1 class="text-main-red font-title text-center text-[24px] md:text-[48px] font-semibold pt-4 md:py-8">Nos formations</h1>
 
     <div class="large_screen md:mx-2">
         <div class="section-cards md:flex md:flex-wrap md:justify-around">
@@ -256,7 +255,7 @@ $title = "Toutes nos formations";
                     fellow Ashoka et sélectionnée par EPIC en 2015.</p>
             </div>
             <div class="hidden sectionChange transition-all opacity-50 duration-[1.5s]">
-                <h3 class="text-[20px] md:text-[32px] font-bold font-title">2016-2017</h3>
+                <h3 class="text-[20px] md:text-[32px] font-bold font-title">2016 - 2017</h3>
                 <p class="text-[16px]"> Simplon devient le premier réseau de formation labellisées par l'Etat en France
                     "Grande Ecole du Numérique" et se développe à l’international :
                     la Belgique, le Liban, la Côte d’Ivoire. Simplon voit grand et organise une seconde levée de fonds.
@@ -272,7 +271,7 @@ $title = "Toutes nos formations";
                     moment là pour accompagner la transition numérique des acteurs à impact positif.</p>
             </div>
             <div class="hidden sectionChange transition-all opacity-50 duration-[1.5s]">
-                <h3 class="text-[20px] md:text-[32px] font-bold font-title">2018-2019</h3>
+                <h3 class="text-[20px] md:text-[32px] font-bold font-title">2018 - 2019</h3>
                 <p class="text-[16px]"> Au moment de fêter ses 6 ans, Simplon.co lève 12 millions d’euros auprès de son
                     pool d’investisseurs de l’Économie sociale
                     et solidaire (ESS) afin de poursuivre la croissance de son impact social en France et à
@@ -286,7 +285,7 @@ $title = "Toutes nos formations";
                     Simplon Prod dépasse les 150 projets ESS réalisés et Simplon Corp le millier de salarié formé.</p>
             </div>
             <div class="hidden sectionChange transition-all opacity-50 duration-[1.5s]">
-                <h3 class="text-[20px] md:text-[32px] font-bold font-title">2020-2021</h3>
+                <h3 class="text-[20px] md:text-[32px] font-bold font-title">2020 - 2021</h3>
                 <p class="text-[16px]"> En 2020, Simplon poursuit le développement de son impact social dans un contexte
                     de crise sanitaire inédit.
                     Durant le confinement, les formations passent à distance, ce qui oblige à en repenser les modalités

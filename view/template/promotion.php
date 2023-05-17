@@ -9,7 +9,7 @@
             Web
             et Web Mobile
         </h2>
-        <p class="text-center text-[24px] md:text-4xl font-title text-main-red pb-8">Janvier 2023-Septembre 2023
+        <p class="text-center text-[24px] md:text-4xl font-title text-main-red pb-8">Janvier 2023 - Septembre 2023
         </p>
     </section>
     <section>
