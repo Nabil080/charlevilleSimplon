@@ -64,21 +64,44 @@
     </article>
     <!-- avancement -->
     <article class="flex-col flex">
-        <div class="font-title text-xl sm:text-2xl xl:text-3xl font-bold my-4">Avancement</div>
+        <div class="font-title text-xl sm:text-2xl xl:text-3xl font-bold my-4">Avancement
+            <!-- boutons d'edit -->
+            <i onclick="swapDivsById('progress1','progress1-update');swapDivsById('progress2','progress2-update');swapDivsById('progress3','progress3-update')" class="fa-solid fa-pen text-main-red cursor-pointer h-fit my-auto"></i></div>
         <div class="grow flex flex-col justify-center">
             <!-- avancement 1 -->
-            <div class="mb-1 text-start italic">Cahier des charges</div>
-            <div class="w-full bg-gray-200 rounded-full h-2.5 mb-4  ">
+            <div id="progress1" class="mb-1 text-start italic">Cahier des charges</div>
+            <!-- formulaire d'edit 1 -->
+            <form id="progress1-update" class="hidden my-2 gap-4 w-full flex place-items-center">
+                <input type="text" class="min-w-[80px] grow" placeholder="Nom">
+                <input type="number" class="w-1/5 min-w-[80px]" placeholder="80%">
+                <button type="submit"><i class="fa-solid fa-check text-main-red"></i></button>
+                <i onclick="swapDivsById('progress1','progress1-update')" class="fa-solid fa-xmark text-main-red cursor-pointer"></i>
+            </form>
+            <div class="w-full bg-gray-200 rounded-full h-2.5 mb-4">
                 <div class="bg-green-600 h-2.5 rounded-full" style="width: 100%"></div>
             </div>
             <!-- avancement 2 -->
-            <div class="mb-1 text-start italic">Développement front</div>
+            <div id="progress2" class="mb-1 text-start italic">Développement front</div>
+            <!-- formulaire d'edit 2 -->
+            <form id="progress2-update" class="hidden my-2 gap-4 w-full flex place-items-center">
+                <input type="text" class="min-w-[80px] grow" placeholder="Nom" value="Cahier des charges">
+                <input type="number" class="w-1/5 min-w-[80px]" placeholder="80%" value="40" min='0' max='100'>
+                <button type="submit"><i class="fa-solid fa-check text-main-red"></i></button>
+                <i onclick="swapDivsById('progress2','progress2-update')" class="fa-solid fa-xmark text-main-red cursor-pointer"></i>
+            </form>
             <div class="w-full bg-gray-200 rounded-full h-2.5 mb-4  ">
                 <div class="bg-yellow-400 h-2.5 rounded-full" style="width: 60%"></div>
             </div>
             <!-- avancement 3 -->
-            <div class="mb-1 text-start italic">Non défini</div>
-            <div class="w-full bg-gray-200 rounded-full h-2.5 mb-4  ">
+            <div id="progress3" class="mb-1 text-start italic">Non défini</div>
+            <!-- formulaire d'edit 3 -->
+            <form id="progress3-update" class="hidden my-2 gap-4 w-full flex place-items-center">
+                <input type="text" class="min-w-[80px] grow" placeholder="Nom" value="Non défini">
+                <input type="number" class="w-1/5 min-w-[80px]" placeholder="80%" value="0" min='0' max='100'>
+                <button type="submit"><i class="fa-solid fa-check text-main-red"></i></button>
+                <i onclick="swapDivsById('progress3','progress3-update')" class="fa-solid fa-xmark text-main-red cursor-pointer"></i>
+            </form>
+            <div class="w-full bg-gray-200 rounded-full h-2.5 mb-4">
                 <div class="bg-red-main h-2.5 rounded-full" style="width: 45%"></div>
             </div>
         </div>
