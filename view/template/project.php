@@ -4,7 +4,17 @@
 
 <!-- header -->
 <section class="text-center [&_h5]:italic [&_h5]:my-2">
-    <h1 class="font-title text-2xl sm:text-3xl lg:text-[40px] font-semibold text-main-red uppercase">Super projet de zinzin</h1>
+    <!-- titre du projet  -->
+    <h1 id="title" class="font-title text-2xl sm:text-3xl lg:text-[40px] font-semibold text-main-red uppercase">Super projet de zinzin
+        <!-- bouton d'edit -->
+        <i onclick="swapDivsById('title','title-update')" class="fa-solid fa-pen text-main-red cursor-pointer"></i>
+    </h1>
+        <!-- formulaire d'edit -->
+    <form id="title-update" class="hidden space-x-4 font-title text-2xl sm:text-3xl lg:text-[40px] font-semibold text-main-red uppercase ">
+        <input class="border-main-red border-2 p-2" value="Super projet de zinzin" placeholder="Nom du projet">
+        <button type="submit"><i class="fa-solid fa-check"></i></button>
+        <i onclick="swapDivsById('title','title-update')" class="fa-solid fa-xmark cursor-pointer"></i>
+    </form>
     <div>
         <h5>Réalisé par :</h5>
         <div class="flex flex-wrap justify-center gap-2 text-sm md:text-base 2xl:text-lg text-main-white [&>a]:bg-main-gray [&>a]:py-0.5 [&>a]:px-3 [&>a]:rounded-full">
