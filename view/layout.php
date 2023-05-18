@@ -44,7 +44,7 @@
 </head>
 
 
-<body class="w-[100vw] overflow-x-hidden bg-main-white pt-24 pb">
+<body class="w-[100vw] overflow-x-hidden bg-main-white pt-20 pb">
 
 
     <?php require_once 'view/template/_navbar.php'; ?>
