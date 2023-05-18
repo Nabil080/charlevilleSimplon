@@ -110,23 +110,42 @@
 
 <!-- boutons liens externes -->
 <section class="my-12 lg:grid grid-cols-3 lg:max-w-[1150px] mx-auto [&_i]:text-[40px] [&_i]:w-10 [&_i]:text-center">
-    <!-- bouton 1 -->
+    <!-- bouton 1 github -->
     <div class="flex mx-4 my-4 gap-4 h-max">
         <i class="fa-brands fa-github"></i>
-        <a href="github externe" target="_blank" class="text-main-white bg-main-red grow h-[40px] flex items-center justify-center">Voir le github du projet</a>
+        <a id="github" href="github externe" target="_blank" class="text-main-white bg-main-red grow h-[40px] flex items-center justify-center">Voir le github du projet</a>
+        <!-- formulaire d'edit github -->
+        <form id="github-update" class="hidden w-full flex flex-wrap">
+            <input type="text" name="github" placeholder="lien github" value="https://github.com/SirLauvel/charlevilleSimplon" class="text-main-white bg-main-red w-1/2 grow h-[40px] flex items-center justify-center">
+            <button type="submit"><i class="fa-solid fa-check text-main-red"></i></button>
+            <i onclick="swapDivsById('github','github-update')" class="fa-solid fa-xmark text-main-red cursor-pointer"></i>
+        </form>
     </div>
     <!-- bouton 2 -->
     <div class="flex mx-4 my-4 gap-4 h-max">
         <i class="fa-solid fa-file-pdf"></i>
-        <a href="cahier des charges pdf" download class="text-main-white bg-main-red grow h-[40px] flex items-center justify-center">Télécharger le cahier des charges</a>
+        <a id="pdf" href="cahier des charges pdf" download class="text-main-white bg-main-red grow h-[40px] flex items-center justify-center">Télécharger le cahier des charges</a>
+        <!-- formulaire d'edit cahier des charges -->
+        <form id="pdf-update" class="hidden w-full flex flex-wrap">
+            <input type="file" name="pdf" placeholder="cahier des charges" class="text-main-white bg-main-red w-1/2 grow h-[40px] flex items-center justify-center">
+            <button type="submit"><i class="fa-solid fa-check text-main-red"></i></button>
+            <i onclick="swapDivsById('pdf','pdf-update')" class="fa-solid fa-xmark text-main-red cursor-pointer"></i>
+        </form>
     </div>
     <!-- bouton 3 -->
     <div class="flex mx-4 my-4 gap-4 h-max">
         <i class="fa-brands fa-chrome"></i>
-        <!-- disabled : opacity-50 select-none pointer-events-none -->
-        <a href="site externe" target="_blank" class="disabled text-main-white bg-main-red grow h-[40px] flex items-center justify-center">Lien vers le site</a>
+        <a id="link" href="site externe" target="_blank" class="disabled-button text-main-white bg-main-red grow h-[40px] flex items-center justify-center">Lien vers le site</a>
+        <!-- formulaire d'edit lien site -->
+        <form id="link-update" class="hidden w-full flex flex-wrap">
+            <input type="text" name="link" placeholder="lien du site" value="" class="text-main-white bg-main-red w-1/2 grow h-[40px] flex items-center justify-center">
+            <button type="submit"><i class="fa-solid fa-check text-main-red"></i></button>
+            <i onclick="swapDivsById('link','link-update')" class="fa-solid fa-xmark text-main-red cursor-pointer"></i>
+        </form>
     </div>
 </section>
+<!-- bouton d'edit liens externes -->
+<div onclick="swapDivsById('github','github-update');swapDivsById('link','link-update');swapDivsById('pdf','pdf-update')" class="w-fit mx-auto relative -top-10 text-main-red cursor-pointer"><i class="fa-solid fa-pen cursor-pointer"></i> Modifier les liens</div>
 
 <!-- tabulation entreprise/apprenants -->
 <section class="max-w-[1200px] mx-auto">
