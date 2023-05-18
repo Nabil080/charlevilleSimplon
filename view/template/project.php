@@ -15,21 +15,43 @@
         <button type="submit"><i class="fa-solid fa-check"></i></button>
         <i onclick="swapDivsById('title','title-update')" class="fa-solid fa-xmark cursor-pointer"></i>
     </form>
+    <!-- Apprenants du projet -->
     <div>
         <h5>Réalisé par :</h5>
-        <div class="flex flex-wrap justify-center gap-2 text-sm md:text-base 2xl:text-lg text-main-white [&>a]:bg-main-gray [&>a]:py-0.5 [&>a]:px-3 [&>a]:rounded-full">
+        <div id="students" class="flex flex-wrap justify-center gap-2 text-sm md:text-base 2xl:text-lg text-main-white [&>a]:bg-main-gray [&>a]:py-0.5 [&>a]:px-3 [&>a]:rounded-full">
             <a href="profil de l'apprenant" class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white">Nabil</a>
             <a href="profil de l'apprenant" class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white">Alexandre</a>
             <a href="profil de l'apprenant" class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white">Florian</a>
             <a href="profil de l'apprenant" class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white">Bryan</a>
+            <!-- bouton d'edit -->
+            <i onclick="swapDivsById('students','students-update')" class="fa-solid fa-pen text-main-red cursor-pointer h-fit my-auto"></i>
         </div>
+        <!-- formulaire d'edit -->
+        <form id="students-update" class="hidden space-x-4 text-main-red">
+            <select name="students" class="border-main-red border-2 p-2">
+                <option value="apprenant 1">apprenant 1</option><option value="apprenant 2">apprenant 2</option>
+            </select>
+            <button type="submit"><i class="fa-solid fa-check text-main-red"></i></button>
+            <i onclick="swapDivsById('students','students-update')" class="fa-solid fa-xmark text-main-red cursor-pointer"></i>
+        </form>
     </div>
+    <!-- Formateurs du projet -->
     <div>
         <h5>Supervisé par :</h5>
-        <div class="flex flex-wrap justify-center gap-2 text-sm md:text-base 2xl:text-lg text-main-white [&>a]:bg-main-gray [&>a]:py-0.5 [&>a]:px-3 [&>a]:rounded-full">
+        <div id="formator" class="flex flex-wrap justify-center gap-2 text-sm md:text-base 2xl:text-lg text-main-white [&>a]:bg-main-gray [&>a]:py-0.5 [&>a]:px-3 [&>a]:rounded-full">
             <a href="profil de l'apprenant" class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white">Axel</a>
             <a href="profil de l'apprenant" class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white">Steven</a>
+            <i onclick="swapDivsById('formator','formator-update')" class="fa-solid fa-pen text-main-red cursor-pointer h-fit my-auto"></i>
+            <!-- bouton d'edit -->
         </div>
+        <!-- formulaire d'edit -->
+        <form id="formator-update" class="hidden space-x-4 text-main-red">
+            <select name="formator" class="border-main-red border-2 p-2">
+                <option value="formateur 1">formateur 1</option><option value="formateur 2">formateur 2</option>
+            </select>
+            <button type="submit"><i class="fa-solid fa-check text-main-red"></i></button>
+            <i onclick="swapDivsById('formator','formator-update')" class="fa-solid fa-xmark text-main-red cursor-pointer"></i>
+        </form>
     </div>
 </section>
 
