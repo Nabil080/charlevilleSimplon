@@ -15,6 +15,11 @@ function searchByInputAndClassName(input,className)
     }
 }
 
+function toggleDropdown(id){
+    document.querySelector(`#${id}`).classList.toggle('rounded-b-lg')
+    document.querySelector(`#${id} .filter-dropdown`).classList.toggle('hidden')
+}
+
 function showPageProjects(currentPage){
     const projectsList = document.querySelectorAll('#project-cards article')
     // console.log(projectsList)
