@@ -164,16 +164,30 @@
 <section class="max-w-[1200px] mx-auto flex">
     <!-- CONTENU TAB ENTREPRISE -->
     <div class="sectionChange">
-        <h2 class="text-center italic font-title text-xl lg:text-2xl font-semibold uppercase my-4">Demandes de l'entreprise</h2>
+        <h2 class="text-center italic font-title text-xl lg:text-2xl font-semibold uppercase my-4">Demandes de l'entreprise
+            <!-- bouton d'edit -->
+            <i onclick="swapDivsById('company-notes','company-notes-update')" class="fa-solid fa-pen text-main-red cursor-pointer"></i>
+        </h2>
         <div class="mx-4 h-1 bg-main-red"></div>
         <div class="flex">
-            <p class="m-4 lg:w-4/5">
+            <p id="company-notes" class="m-4 lg:w-4/5">
                 La méthode d'apprentissage <I>Simplon.co</I>, <B>c'est une pédagogie active et par projets</B> où l'apprenant est confronté à des mises en situation concrètes via des projets individuels et en groupe. Les thèmes des projets sont directement issus de cas réels, pour permettre aux apprenants d'appréhender le terrain dès la formation. Le collectif est un élément central de l'apprentissage car <B>le travail en équipe est constant</B>, et les apprenants s'entraident et s'évaluent régulièrement.<br><br>
 
                 Pour garantir une <B>insertion professionnelle réussie</B>, l'apprenante est accompagnée par des formateurs experts du métier visé et des équipes en lien avec les entreprises du territoire. Il est immergé dans le monde de l'entreprise tout au long de sa formation : parrainage de la promotion par une entreprise, simulations d'entretiens, meet-ups...<br><br>
 
                 Quasiment toutes nos formations débouchent sur <B>la délivrance de certifications reconnues</B>, soit un Titre RNCP reconnu par le ministère du travail (équivalent diplôme), soit une ou plusieurs certifications Simplon reconnues par l'État ou par les professionnels.
             </p>
+            <!-- formulaire d'edit -->
+            <form id="company-notes-update" class="hidden w-full" method="post" action="">
+                <textarea name="company-notes" id="editor" class="w-full" rows="10">La méthode d'apprentissage <I>Simplon.co</I>, <B>c'est une pédagogie active et par projets</B> où l'apprenant est confronté à des mises en situation concrètes via des projets individuels et en groupe. Les thèmes des projets sont directement issus de cas réels, pour permettre aux apprenants d'appréhender le terrain dès la formation. Le collectif est un élément central de l'apprentissage car <B>le travail en équipe est constant</B>, et les apprenants s'entraident et s'évaluent régulièrement.<br><br>
+
+                Pour garantir une <B>insertion professionnelle réussie</B>, l'apprenante est accompagnée par des formateurs experts du métier visé et des équipes en lien avec les entreprises du territoire. Il est immergé dans le monde de l'entreprise tout au long de sa formation : parrainage de la promotion par une entreprise, simulations d'entretiens, meet-ups...<br><br>
+
+                Quasiment toutes nos formations débouchent sur <B>la délivrance de certifications reconnues</B>, soit un Titre RNCP reconnu par le ministère du travail (équivalent diplôme), soit une ou plusieurs certifications Simplon reconnues par l'État ou par les professionnels.
+                </textarea>
+                <button type="submit" class="py-2 px-4 bg-main-red border-main-white border text-main-white hover:border-main my-4 mr-4">Modifier</button>
+                Annuler<i onclick="swapDivsById('company-notes','company-notes-update')" class="fa-solid fa-xmark text-main-red cursor-pointer"></i>
+            </form>
             <!-- ANIMATION ASIDE -->
             <div class="hidden lg:grid w-1/5 place-items-center">
                 <img class="w-4/5"src="assets/img/logo" alt="anim">
@@ -182,7 +196,10 @@
     </div>
     <!-- CONTENU TAB APPRENANT -->
     <div class="sectionChange hidden">
-        <h2 class="text-center italic font-title text-xl lg:text-2xl font-semibold uppercase my-4">Notes des apprenants</h2>
+        <h2 class="text-center italic font-title text-xl lg:text-2xl font-semibold uppercase my-4">Notes des apprenants
+        <!-- bouton d'edit -->
+        <i onclick="swapDivsById('notes','notes-update')" class="fa-solid fa-pen text-main-red cursor-pointer"></i>
+        </h2>
         <div class="mx-4 h-1 bg-main-red"></div>
         <div class="flex">
             <p class="m-4 lg:w-4/5">
@@ -198,10 +215,35 @@
     </div>
 </section>
 
+<?php
+var_dump($_POST)
+?>
 
 
-
-
+<script>
+        ClassicEditor
+            .create( document.querySelector( '#editor' ),{
+                fontColor: {
+                    colors: [
+                        {
+                    color: '#BD3124',
+                    label: 'Rouge'
+                },
+                {
+                    color: '#F6DADE',
+                    label: 'Rouge clair'
+                },
+                {
+                    color: '#4F4F4F',
+                    label: 'Gris'
+                },
+                    ]
+                }
+            })
+            .catch( error => {
+                console.error( error );
+            } );
+    </script>
 
 
 
