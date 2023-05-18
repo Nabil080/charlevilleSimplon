@@ -14,10 +14,10 @@
     <!-- boutons de filtre -->
     <span class="text-main-red text-xs py-0.5 2xl:mx-[10%]">Filtrer par :</span>
     <div class="2xl:mx-[10%] flex justify-start text-xs sm:text-sm gap-x-4 sm:[&>button]:w-1/4 [&>button]:px-2 sm:[&>button]:px-4 [&>button]:py-2 [&>button]:border-main-red [&>button]:border [&>button]:rounded-lg">
-        <div id="formation-dropdown" class="w-1/4 border-main-red border rounded-t-lg rounded-b-lg relative">
+        <div id="formation-dropdown" class="dropdown-toggle w-1/4 border-main-red border z-10 rounded-t-lg rounded-b-lg sm:relative">
         <button onclick="toggleDropdown('formation-dropdown')" class="relative w-full py-2"><i class="fa fa-filter text-xs"></i> Formation</button>
         <!-- dropdown formations -->
-            <div class="filter-dropdown hidden absolute box-content -translate-x-[1px] -translate-y-[1px] border rounded-b-lg w-full text-start bg-main-white border-t-transparent border-main-red">
+            <div class="filter-dropdown dropdown hidden absolute box-content -translate-x-[1px] w-[calc(100%-2rem)] sm:w-full -translate-y-1 border rounded-b-lg rounded-tr-lg sm:rounded-tr-none text-start bg-main-white sm:border-t-transparent border-main-red">
                 <div class="flex gap-2 text-xs my-2 px-2"><input class="my-auto" id="dev" type="checkbox" value="dev"><label for="dev">Développeur Web et Web Mobile</label></div>
                 <div class="flex gap-2 text-xs my-2 px-2"><input class="my-auto" id="cda" type="checkbox" value="cda"><label for="cda">Concepteur développeur d'applications</label></div>
                 <div class="flex gap-2 text-xs my-2 px-2"><input class="my-auto" id="tssr" type="checkbox" value="tssr"><label for="tssr">Technicien supérieur système et réseaux</label></div>

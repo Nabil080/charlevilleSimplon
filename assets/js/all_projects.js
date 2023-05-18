@@ -16,8 +16,23 @@ function searchByInputAndClassName(input,className)
 }
 
 function toggleDropdown(id){
-    document.querySelector(`#${id}`).classList.toggle('rounded-b-lg')
-    document.querySelector(`#${id} .filter-dropdown`).classList.toggle('hidden')
+    const selectedDropdownButton = document.querySelector(`#${id}`)
+    const allDropdownButtons = document.querySelectorAll('.dropdown-toggle')
+    const selectedDropdown = document.querySelector(`#${id} .filter-dropdown`)
+    const allDropdowns = document.querySelectorAll('.dropdown')
+
+
+    // // Réinitialise les autres dropdown
+    // allDropdownButtons.forEach(dropdownButton => {
+    //     if(dropdownButton.id != id){
+    //     dropdownButton.classList.add('rounded-b-lg')
+    //     }
+    // })
+    // allDropdowns.forEach(dropdown => dropdown.classList.add('hidden'))
+
+    // Active le dropdown correspondant
+    selectedDropdownButton.classList.toggle('rounded-b-lg')
+    selectedDropdown.classList.toggle('hidden')
 }
 
 function showPageProjects(currentPage){
