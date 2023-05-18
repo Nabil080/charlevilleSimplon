@@ -14,33 +14,37 @@
     <!-- boutons de filtre -->
     <span class="text-main-red text-xs py-0.5 2xl:mx-[10%]">Filtrer par :</span>
     <div class="2xl:mx-[10%] flex justify-start text-xs sm:text-sm gap-x-4 sm:[&>button]:w-1/4 [&>button]:px-2 sm:[&>button]:px-4 [&>button]:py-2 [&>button]:border-main-red [&>button]:border [&>button]:rounded-lg">
-        <div id="formation-dropdown" class="dropdown-toggle w-1/4 border-main-red border z-10 rounded-t-lg rounded-b-lg sm:relative">
+        <div id="formation-dropdown" class="dropdown-toggle w-1/4 border-main-red border rounded-t-lg rounded-b-lg sm:relative">
         <button onclick="toggleDropdown('formation-dropdown')" class="relative w-full py-2"><i class="fa fa-filter text-xs"></i> Formation</button>
         <!-- dropdown formations -->
-            <div class="filter-dropdown dropdown hidden absolute box-content -translate-x-[1px] w-[calc(100%-2rem)] sm:w-full -translate-y-1 border rounded-b-lg rounded-tr-lg sm:rounded-tr-none text-start bg-main-white sm:border-t-transparent border-main-red">
+            <div class="filter-dropdown dropdown hidden absolute box-content -translate-x-[1px] z-10 w-[calc(100%-2rem)] sm:w-full -translate-y-1 border rounded-b-lg rounded-tr-lg sm:rounded-tr-none text-start bg-main-white sm:border-t-transparent border-main-red">
                 <div class="flex gap-2 text-xs my-2 px-2"><input class="my-auto" id="dev" type="checkbox" value="dev"><label for="dev">Développeur Web et Web Mobile</label></div>
                 <div class="flex gap-2 text-xs my-2 px-2"><input class="my-auto" id="cda" type="checkbox" value="cda"><label for="cda">Concepteur développeur d'applications</label></div>
                 <div class="flex gap-2 text-xs my-2 px-2"><input class="my-auto" id="tssr" type="checkbox" value="tssr"><label for="tssr">Technicien supérieur système et réseaux</label></div>
                 <div class="flex gap-2 text-xs my-2 px-2"><input class="my-auto" id="ref-dig" type="checkbox" value="ref-dig"><label for="ref-dig">Référent digital</label></div>
             </div>
         </div>
-        <button data-dropdown-toggle="dropdown-years" data-dropdown-offset-distance="0" class="relative"><i class="fa fa-filter text-xs"></i> Années</button>
-         <!-- dropdown années -->
-            <div id="dropdown-years" class="hidden w-[96.08px] sm:w-[24.5%] 2xl:w-[17.5%] text-start bg-main-white border-t-transparent border-main-red border">
+        <div id="years-dropdown" class="dropdown-toggle w-1/4 border-main-red border rounded-t-lg rounded-b-lg relative">
+        <button onclick="toggleDropdown('years-dropdown')" class="relative w-full py-2"><i class="fa fa-filter text-xs"></i> Années</button>
+        <!-- dropdown yearss -->
+            <div class="filter-dropdown dropdown hidden absolute box-content -translate-x-[1px] z-10 w-full sm:w-full -translate-y-1 border rounded-b-lg text-start bg-main-white border-t-transparent border-main-red">
                 <div class="flex gap-2 text-xs my-2 px-2"><input class="my-auto" id="2023" type="checkbox" value="2023"><label for="2023">2023</label></div>
                 <div class="flex gap-2 text-xs my-2 px-2"><input class="my-auto" id="2022" type="checkbox" value="2022"><label for="2022">2022</label></div>
                 <div class="flex gap-2 text-xs my-2 px-2"><input class="my-auto" id="2021" type="checkbox" value="2021"><label for="2021">2021</label></div>
                 <div class="flex gap-2 text-xs my-2 px-2"><input class="my-auto" id="2020" type="checkbox" value="2020"><label for="2020">2020</label></div>
             </div>
-            <button data-dropdown-toggle="dropdown-level" data-dropdown-offset-distance="0" class="relative"><i class="fa fa-filter text-xs"></i> Niveau</button>
-            <!-- dropdown niveau -->
-            <div id="dropdown-level" class="hidden w-[92.3px] sm:w-[24.5%] 2xl:w-[17.5%] text-start bg-main-white border-t-transparent border-main-red border">
+        </div>
+        <div id="level-dropdown" class="dropdown-toggle w-1/4 border-main-red border rounded-t-lg rounded-b-lg relative">
+        <button onclick="toggleDropdown('level-dropdown')" class="relative w-full py-2"><i class="fa fa-filter text-xs"></i> Niveau</button>
+        <!-- dropdown yearss -->
+            <div class="filter-dropdown dropdown hidden absolute box-content -translate-x-[1px] z-10 w-full sm:w-full -translate-y-1 border rounded-b-lg text-start bg-main-white border-t-transparent border-main-red">
                 <div class="flex gap-2 text-xs my-2 px-2"><input class="my-auto" id="bac+1" type="checkbox" value="bac+1"><label for="bac+1">Bac+1</label></div>
                 <div class="flex gap-2 text-xs my-2 px-2"><input class="my-auto" id="bac+2" type="checkbox" value="bac+2"><label for="bac+2">Bac+2</label></div>
                 <div class="flex gap-2 text-xs my-2 px-2"><input class="my-auto" id="bac+3" type="checkbox" value="bac+3"><label for="bac+3">Bac+3</label></div>
                 <div class="flex gap-2 text-xs my-2 px-2"><input class="my-auto" id="bac+4" type="checkbox" value="bac+4"><label for="bac+4">Bac+4</label></div>
                 <div class="flex gap-2 text-xs my-2 px-2"><input class="my-auto" id="bac+5" type="checkbox" value="bac+5"><label for="bac+5">Bac+5</label></div>
             </div>
+        </div>
     </div>
     <span onclick="resetProjectFilters()" class="text-main-red text-xs py-0.5 cursor-pointer underline hover:text-red-700 2xl:mx-[10%]">Réinitialiser les filtres</span>
 
