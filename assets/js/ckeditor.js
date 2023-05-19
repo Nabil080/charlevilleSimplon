@@ -9,8 +9,8 @@ import BlockQuote from '@ckeditor/ckeditor5-block-quote/src/blockquote.js';
 import Bold from '@ckeditor/ckeditor5-basic-styles/src/bold.js';
 import Essentials from '@ckeditor/ckeditor5-essentials/src/essentials.js';
 import FontColor from '@ckeditor/ckeditor5-font/src/fontcolor.js';
-import FontFamily from '@ckeditor/ckeditor5-font/src/fontfamily.js';
-import Heading from '@ckeditor/ckeditor5-heading/src/heading.js';
+// import FontFamily from '@ckeditor/ckeditor5-font/src/fontfamily.js';
+// import Heading from '@ckeditor/ckeditor5-heading/src/heading.js';
 import Indent from '@ckeditor/ckeditor5-indent/src/indent.js';
 import Italic from '@ckeditor/ckeditor5-basic-styles/src/italic.js';
 import Link from '@ckeditor/ckeditor5-link/src/link.js';
@@ -32,8 +32,8 @@ Editor.builtinPlugins = [
 	Bold,
 	Essentials,
 	FontColor,
-	FontFamily,
-	Heading,
+	// FontFamily,
+	// Heading,
 	Indent,
 	Italic,
 	Link,
@@ -50,8 +50,8 @@ Editor.builtinPlugins = [
 Editor.defaultConfig = {
 	toolbar: {
 		items: [
-			'heading',
-			'fontFamily',
+			// 'heading',
+			// 'fontFamily',
 			'|',
 			'fontColor',
 			'bold',

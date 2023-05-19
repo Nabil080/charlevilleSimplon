@@ -19,10 +19,10 @@
     <div>
         <h5>Réalisé par :</h5>
         <div id="students" class="flex flex-wrap justify-center gap-2 text-sm md:text-base 2xl:text-lg text-main-white [&>a]:bg-main-gray [&>a]:py-0.5 [&>a]:px-3 [&>a]:rounded-full">
-            <a href="profil de l'apprenant" class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white">Nabil</a>
-            <a href="profil de l'apprenant" class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white">Alexandre</a>
-            <a href="profil de l'apprenant" class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white">Florian</a>
-            <a href="profil de l'apprenant" class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white">Bryan</a>
+            <a href="profil de l'apprenant" class="border border-main-gray hover:text-main-gray hover:bg-main-white">Nabil</a>
+            <a href="profil de l'apprenant" class="border border-main-gray hover:text-main-gray hover:bg-main-white">Alexandre</a>
+            <a href="profil de l'apprenant" class="border border-main-gray hover:text-main-gray hover:bg-main-white">Florian</a>
+            <a href="profil de l'apprenant" class="border border-main-gray hover:text-main-gray hover:bg-main-white">Bryan</a>
             <!-- bouton d'edit -->
             <i onclick="swapDivsById('students','students-update')" class="fa-solid fa-pen text-main-red cursor-pointer h-fit my-auto"></i>
         </div>
@@ -39,8 +39,8 @@
     <div>
         <h5>Supervisé par :</h5>
         <div id="formator" class="flex flex-wrap justify-center gap-2 text-sm md:text-base 2xl:text-lg text-main-white [&>a]:bg-main-gray [&>a]:py-0.5 [&>a]:px-3 [&>a]:rounded-full">
-            <a href="profil de l'apprenant" class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white">Axel</a>
-            <a href="profil de l'apprenant" class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white">Steven</a>
+            <a href="profil de l'apprenant" class="border border-main-gray hover:text-main-gray hover:bg-main-white">Axel</a>
+            <a href="profil de l'apprenant" class="border border-main-gray hover:text-main-gray hover:bg-main-white">Steven</a>
             <i onclick="swapDivsById('formator','formator-update')" class="fa-solid fa-pen text-main-red cursor-pointer h-fit my-auto"></i>
             <!-- bouton d'edit -->
         </div>
@@ -59,8 +59,18 @@
 <section class="text-center sm:text-start mx-4 mt-4 sm:grid grid-cols-2 gap-8 sm:gap-10 md:gap-12 lg:gap-20 xl:gap-40 max-w-[1200px] lg:mx-12 xl:mx-auto">
     <!-- maquette -->
     <article class="order-2">
-        <div class="font-title text-xl sm:text-2xl xl:text-3xl font-bold my-4 underline w-full"><a href="lien de la maquette">Maquette/Wireframe</a></div>
-        <div class="w-full max-h-[200px] sm:max-h-[250px] overflow-scroll"><img class="w-full" src="assets/img/maquette" alt="maquette du projet"></div>
+        <div class="font-title text-xl sm:text-2xl xl:text-3xl font-bold my-4 w-full"><a href="lien de la maquette" class="underline">Maquette/Wireframe</a>
+        <i onclick="swapDivsById('maquette','maquette-update')" class="fa-solid fa-pen text-main-red cursor-pointer"></i></div>
+        <div class="w-full max-h-[200px] sm:max-h-[250px] overflow-scroll">
+            <img id="maquette" class="w-full" src="assets/img/maquette" alt="maquette du projet">
+            <form id="maquette-update" class="hidden">
+                <input type="file" name="image">
+                <div class="flex">
+                    <button type="submit" class="py-2 px-4 bg-main-red border-main-white border text-main-white my-4 mr-4">Modifier <i class="fa-solid fa-check"></i></button>
+                    <div class="w-fit h-fit py-2 px-4 bg-main-red border-main-white border text-main-white cursor-pointer my-4" onclick="swapDivsById('maquette','maquette-update')">Annuler <i class="fa-solid fa-xmark"></i></div>
+                </div>
+            </form>
+        </div>
     </article>
     <!-- avancement -->
     <article class="flex-col flex">
@@ -178,15 +188,15 @@
                 Quasiment toutes nos formations débouchent sur <B>la délivrance de certifications reconnues</B>, soit un Titre RNCP reconnu par le ministère du travail (équivalent diplôme), soit une ou plusieurs certifications Simplon reconnues par l'État ou par les professionnels.
             </p>
             <!-- formulaire d'edit -->
-            <form id="company-notes-update" class="hidden w-full" method="post" action="">
+            <form id="company-notes-update" class="hidden w-full m-4" method="post" action="">
                 <textarea name="company-notes" id="editor" class="w-full" rows="10">La méthode d'apprentissage <I>Simplon.co</I>, <B>c'est une pédagogie active et par projets</B> où l'apprenant est confronté à des mises en situation concrètes via des projets individuels et en groupe. Les thèmes des projets sont directement issus de cas réels, pour permettre aux apprenants d'appréhender le terrain dès la formation. Le collectif est un élément central de l'apprentissage car <B>le travail en équipe est constant</B>, et les apprenants s'entraident et s'évaluent régulièrement.<br><br>
 
                 Pour garantir une <B>insertion professionnelle réussie</B>, l'apprenante est accompagnée par des formateurs experts du métier visé et des équipes en lien avec les entreprises du territoire. Il est immergé dans le monde de l'entreprise tout au long de sa formation : parrainage de la promotion par une entreprise, simulations d'entretiens, meet-ups...<br><br>
 
                 Quasiment toutes nos formations débouchent sur <B>la délivrance de certifications reconnues</B>, soit un Titre RNCP reconnu par le ministère du travail (équivalent diplôme), soit une ou plusieurs certifications Simplon reconnues par l'État ou par les professionnels.
                 </textarea>
-                <button type="submit" class="py-2 px-4 bg-main-red border-main-white border text-main-white hover:border-main my-4 mr-4">Modifier</button>
-                Annuler<i onclick="swapDivsById('company-notes','company-notes-update')" class="fa-solid fa-xmark text-main-red cursor-pointer"></i>
+                <button type="submit" class="py-2 px-4 bg-main-red border-main-white border text-main-white my-4 mr-4">Modifier <i class="fa-solid fa-check"></i></button>
+                <span onclick="swapDivsById('company-notes','company-notes-update')" class="cursor-pointer">Annuler <i class="fa-solid fa-xmark"></i></span>
             </form>
             <!-- ANIMATION ASIDE -->
             <div class="hidden lg:grid w-1/5 place-items-center">
@@ -202,11 +212,22 @@
         </h2>
         <div class="mx-4 h-1 bg-main-red"></div>
         <div class="flex">
-            <p class="m-4 lg:w-4/5">
+            <p id="notes" class="m-4 lg:w-4/5">
                 La méthode d'apprentissage <I>Simplon.co</I>, <B>c'est une pédagogie active et par projets</B> où l'apprenant est confronté à des mises en situation concrètes via des projets individuels et en groupe. Les thèmes des projets sont directement issus de cas réels, pour permettre aux apprenants d'appréhender le terrain dès la formation. Le collectif est un élément central de l'apprentissage car <B>le travail en équipe est constant</B>, et les apprenants s'entraident et s'évaluent régulièrement.<br><br>
 
                 Pour garantir une <B>insertion professionnelle réussie</B>, l'apprenante est accompagnée par des formateurs experts du métier visé et des équipes en lien avec les entreprises du territoire. Il est immergé dans le monde de l'entreprise tout au long de sa formation : parrainage de la promotion par une entreprise, simulations d'entretiens, meet-ups...<br><br>
             </p>
+            <!-- formulaire d'edit -->
+            <form id="notes-update" class="hidden w-full m-4" method="post" action="">
+                <textarea name="notes" id="editor" class="w-full" rows="10">La méthode d'apprentissage <I>Simplon.co</I>, <B>c'est une pédagogie active et par projets</B> où l'apprenant est confronté à des mises en situation concrètes via des projets individuels et en groupe. Les thèmes des projets sont directement issus de cas réels, pour permettre aux apprenants d'appréhender le terrain dès la formation. Le collectif est un élément central de l'apprentissage car <B>le travail en équipe est constant</B>, et les apprenants s'entraident et s'évaluent régulièrement.<br><br>
+
+                Pour garantir une <B>insertion professionnelle réussie</B>, l'apprenante est accompagnée par des formateurs experts du métier visé et des équipes en lien avec les entreprises du territoire. Il est immergé dans le monde de l'entreprise tout au long de sa formation : parrainage de la promotion par une entreprise, simulations d'entretiens, meet-ups...<br><br>
+
+                Quasiment toutes nos formations débouchent sur <B>la délivrance de certifications reconnues</B>, soit un Titre RNCP reconnu par le ministère du travail (équivalent diplôme), soit une ou plusieurs certifications Simplon reconnues par l'État ou par les professionnels.
+                </textarea>
+                <button type="submit" class="py-2 px-4 bg-main-red border-main-white border text-main-white my-4 mr-4">Modifier <i class="fa-solid fa-check"></i></button>
+                <span onclick="swapDivsById('notes','notes-update')" class="cursor-pointer">Annuler <i class="fa-solid fa-xmark"></i></span>
+            </form>
             <!-- ANIMATION ASIDE -->
             <div class="hidden lg:grid w-1/5 place-items-center">
                 <img class="w-4/5"src="assets/img/logo" alt="anim">
@@ -216,50 +237,15 @@
 </section>
 
 <?php
-var_dump($_POST)
+// var_dump($_POST)
 ?>
 
-
-<script>
-        ClassicEditor
-            .create( document.querySelector( '#editor' ),{
-                fontColor: {
-                    colors: [
-                        {
-                    color: '#BD3124',
-                    label: 'Rouge'
-                },
-                {
-                    color: '#F6DADE',
-                    label: 'Rouge clair'
-                },
-                {
-                    color: '#4F4F4F',
-                    label: 'Gris'
-                },
-                    ]
-                }
-            })
-            .catch( error => {
-                console.error( error );
-            } );
-    </script>
-
-
-
-
-
-
-
-
-
-
 <?php $content = ob_get_clean(); ?>
-
-
-
 <?php ob_start(); ?>
+
 <script src="assets/js/tabs.js"></script>
+<script src="assets/js/editor_setup.js"></script>
+
 <?php $script = ob_get_clean(); ?>
 
 <?php require 'view/layout.php'; ?>
