@@ -4,7 +4,7 @@ ob_start();
 ?>
 
 <!-- background -->
-<section class="w-screen h-screen bg-cover bg-center relative"
+<section class="w-screen h-[100dvh] bg-cover bg-center relative"
     style="background-image: url(assets/img/homepage_image_blur.jpg);">
     <video autoplay muted loop class="h-screen hidden lg:block blur-sm absolute w-screen object-cover">
         <source src="assets/img/homepage_video.mp4" type="video/mp4">
