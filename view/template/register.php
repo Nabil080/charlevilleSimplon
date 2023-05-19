@@ -1,6 +1,6 @@
 <?php
 $title = "Inscription";
-$boolCompany = (isset($_GET['campany'])) ? true : false;
+$boolCompany = (isset($_GET['company'])) ? true : false;
 ?>
 
 <?php ob_start(); ?>

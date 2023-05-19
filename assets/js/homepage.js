@@ -6,8 +6,8 @@ function companyHomepage(){
     // console.log(companyHomepage);
     homepage.classList.add("opacity-0");
     setTimeout(() => {
-        homepage.classList.add("hidden","lg:hidden");
-        companyHomepage.classList.remove("hidden","lg:hidden");
+            homepage.classList.add("hidden","lg:hidden");
+            companyHomepage.classList.remove("hidden","lg:hidden");
         setTimeout(() => {
             companyHomepage.classList.add("opacity-100");
         },1)
@@ -22,10 +22,10 @@ function visitorHomepage(){
     // console.log(visitorHomepage);
     homepage.classList.add("opacity-0");
     setTimeout(() => {
-        homepage.classList.add("hidden","lg:hidden");
-        visitorHomepage.classList.remove("hidden","lg:hidden");
+            homepage.classList.add("hidden","lg:hidden");
+            visitorHomepage.classList.remove("hidden","lg:hidden");
         setTimeout(() => {
-        visitorHomepage.classList.add("opacity-100");
+            visitorHomepage.classList.add("opacity-100");
         },1)
     },300)
 }
