@@ -76,20 +76,20 @@
             <!-------------Fin de la Card Formateur----------->
 
         </div>
-        <div class="grid w-11/12 lg:w-[98%] grid-cols-1 lg:grid-cols-2 xl:w-11/12 gap-8 xl:gap-24 justify-center mx-auto"> <!------Apprenants------->
-            <h3 class="text-center lg:col-start-1 lg:col-end-3 font-main-title text-[22px] font-bold mt-4">Apprenants</h3>
+        <div class="grid w-11/12 justify-center mx-auto xl:w-[100%] grid-cols-1 xl:grid-cols-2 gap-8 xl:gap-12"> <!------Apprenants------->
+            <h3 class="text-center xl:col-start-1 xl:col-end-3 font-main-title text-[22px] font-bold mt-4">Apprenants</h3>
             
             <!-----Card Apprenants------->
-            <div id="home" class="grid place-items-center mb-32 w-[99%] sm:w-auto ">
-              <div class="wrapper relative grid grid-rows-[40%_40%] grid-cols-1 sm:gap-0 sm:h-[350px] lg:h-auto sm:grid-cols-[6fr_4fr] sm:grid-rows-1 sm:aspect-[16/9]">
-                <div class="sm:hidden mx-auto overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1580707578919-892eb22db615?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTV8fG1hbiUyMHBvcnRyYWl0fGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=60" alt="">
+            <div id="home" class="grid place-items-center overflow-hidden max-w-[400px] justify-self-center mx-auto sm:w-auto sm:max-w-full">
+              <div class="wrapper relative grid grid-rows-[60%_40%] max-h-[520px] min-[400px]:grid-rows-[55%_45%]  min-[400px]:max-h-[700px] grid-cols-1 sm:gap-0 sm:h-[350px] sm:grid-cols-[6fr_4fr] sm:grid-rows-1 sm:aspect-[16/9]">
+                <div class="sm:hidden mx-auto overflow-hidden object-fill">
+                    <img class="max-w-full h-auto" src="https://images.unsplash.com/photo-1580707578919-892eb22db615?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTV8fG1hbiUyMHBvcnRyYWl0fGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=60" alt="">
                 </div>
-                <div class="content-splitter pt-4 border-2 border-t-0 sm:border-r-0  sm:pt-2 flex flex-col gap-4">
-                  <div class="left flex flex-col flex-grow gap-4 px-4 w-[minmax(80px,80%)]">
-                        <p class="text-[22px] md:text-[24px] font-main-title text-left font-bold leading-1 inline">Guillaume <span class="uppercase">Poucet</span></p>
-                        <div class=" mx-auto border-2 border-main-red text-left w-10/12"></div>
-                        <p class="text-[16px] md:text-[18px]  leading-[1px] sm:whitespace-nowrap">
+                <div class="content-splitter pt-4 border-2 border-y-0 sm:border-r-0 sm:border-b-2  sm:pt-4 flex flex-col gap-4">
+                    <div class="left flex flex-col flex-grow gap-4 px-4 w-[minmax(80px,80%)]">
+                        <p class="text-[22px] md:text-[24px] text-center sm:text-left  font-main-title font-bold leading-1 inline">Guillaume <span class="uppercase">Poucet</span></p>
+                        <div class=" mx-auto border-2 -mt-2 border-main-red text-left w-10/12 "></div>
+                        <p class="text-[16px] md:text-[18px] text-center sm:text-left  leading-[1px] sm:whitespace-nowrap">
                             <i class="fa-solid fa-circle 
                             <?php if (isset($statut) && $statut == 1) { echo("text-red-500"); } ?>
                             text-green-500
@@ -107,9 +107,9 @@
                                 <p class="bg-[#F2F2F3] px-4 py-1 border-main-gray border-2 text-[14px] md:text-[16px] rounded-[50px]">TypeScript</p>
                             </a>
                         </div>
-                        <div class="block">
-                            <p  class="font-bold my-3">Projets de l'apprenant :</p>
-                            <div class="flex gap-3 px-4">
+                        <div class="hidden min-[400px]:block">
+                            <p  class="font-bold my-3 text-center sm:text-left ">Projets de l'apprenant :</p>
+                            <div class="flex justify-center sm:justify-auto gap-3 px-4">
                                 <a href="">
                                     <p class="bg-main-gray text-main-white px-4 py-1 text-[14px] rounded-[50px]">Un projet génial</p>
                                 </a>
@@ -119,11 +119,11 @@
                             </div>
                         </div>
                     </div>
-                    <button class="clipper2 h-[25%] sm:h-[25%] lg:h-[20%] bg-main-red block text-white z-10 relative text-[20px] text-[22px] font-bold font-main-title w-full">Voir le profil</button>
+                    <button class="clipper2 h-[25%] sm:h-[25%] xl:h-[20%] bg-main-red block text-white z-10 relative text-[20px] text-[22px] font-bold font-main-title w-full">Voir le profil</button>
                   
                 </div>
-                <div class="hidden clipper sm:flex flex-grow w-full  z-10">
-                    <img src="https://images.unsplash.com/photo-1580707578919-892eb22db615?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTV8fG1hbiUyMHBvcnRyYWl0fGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=60" alt="">
+                <div class="hidden clipper sm:flex w-full z-10">
+                    <img class="flex-grow" src="https://images.unsplash.com/photo-1580707578919-892eb22db615?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTV8fG1hbiUyMHBvcnRyYWl0fGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=60" alt="">
                 </div>
               </div>
             </div>
@@ -132,13 +132,16 @@
             <!-------------Fin de la Card Apprenants----------->
 
             <!-----Card Apprenants------->
-            <div class="grid place-items-center">
-              <div class="wrapper grid grid-cols-[6fr_4fr] aspect-[16/9]">
-                <div class="content-splitter flex flex-col gap-4">
-                  <div class="left flex flex-col flex-grow gap-4 px-4 w-[minmax(80px,80%)]">
-                        <p class="text-[22px] md:text-[24px] font-main-title text-left font-bold leading-1 inline">Guillaume <span class="uppercase">Poucet</span></p>
-                        <div class=" mx-auto border-2 border-main-red text-left w-10/12"></div>
-                        <p class="text-[16px] md:text-[18px]  leading-[1px] sm:whitespace-nowrap">
+            <div id="home" class="grid place-items-center overflow-hidden max-w-[400px] mx-auto sm:w-auto sm:max-w-full ">
+              <div class="wrapper relative grid grid-rows-[60%_40%] min-[400px]:grid-rows-[55%_45%] max-h-[550px] min-[400px]:max-h-[700px] grid-cols-1 sm:gap-0 sm:h-[350px] sm:grid-cols-[6fr_4fr] sm:grid-rows-1 sm:aspect-[16/9]">
+                <div class="sm:hidden mx-auto overflow-hidden object-fill">
+                    <img class=" max-w-full h-auto object-center" src="upload\promotion\devWeb2023\profil.jpg" alt="">
+                </div>
+                <div class="content-splitter pt-4 border-2 border-y-0 sm:border-r-0 sm:border-b-2  sm:pt-4 flex flex-col gap-4">
+                    <div class="left flex flex-col flex-grow gap-4 px-4 w-[minmax(80px,80%)]">
+                        <p class="text-[22px] md:text-[24px] text-center sm:text-left  font-main-title font-bold leading-1 inline">Guillaume <span class="uppercase">Poucet</span></p>
+                        <div class=" mx-auto border-2 -mt-2 border-main-red text-left w-10/12 "></div>
+                        <p class="text-[16px] md:text-[18px] text-center sm:text-left  leading-[1px] sm:whitespace-nowrap">
                             <i class="fa-solid fa-circle 
                             <?php if (isset($statut) && $statut == 1) { echo("text-red-500"); } ?>
                             text-green-500
@@ -152,13 +155,13 @@
                             <a href="">
                                 <p class="bg-[#F2F2F3] px-4 py-1 border-main-gray border-2 text-[14px] md:text-[16px] rounded-[50px]">Symfony</p>
                             </a>
-                            <a href="">
+                            <a class="hidden sm:block" href="">
                                 <p class="bg-[#F2F2F3] px-4 py-1 border-main-gray border-2 text-[14px] md:text-[16px] rounded-[50px]">TypeScript</p>
                             </a>
                         </div>
-                        <div class="hidden xl:block">
-                            <p  class="font-bold my-3">Projets de l'apprenant :</p>
-                            <div class="flex gap-3 px-4">
+                        <div class="hidden min-[400px]:block">
+                            <p  class="font-bold my-3 text-center sm:text-left ">Projets de l'apprenant :</p>
+                            <div class="flex justify-center sm:justify-auto gap-3 px-4">
                                 <a href="">
                                     <p class="bg-main-gray text-main-white px-4 py-1 text-[14px] rounded-[50px]">Un projet génial</p>
                                 </a>
@@ -168,66 +171,68 @@
                             </div>
                         </div>
                     </div>
-                    <button class="clipper2 h-[10%] sm:h-[25%] lg:h-[20%] bg-main-red block text-white z-10 relative text-[20px] text-[22px] font-bold font-main-title w-full">Voir le profil</button>
+                    <button class="clipper2 h-[25%] sm:h-[25%] xl:h-[20%] bg-main-red block text-white z-10 relative text-[20px] text-[22px] font-bold font-main-title w-full">Voir le profil</button>
                   
                 </div>
-                <div class="clipper z-10">
-                    <img src="https://images.unsplash.com/photo-1580707578919-892eb22db615?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTV8fG1hbiUyMHBvcnRyYWl0fGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=60" alt="">
+                <div class="hidden clipper sm:flex flex-grow w-full  z-10">
+                    <img src="upload\promotion\devWeb2023\profil.jpg" alt="">
                 </div>
               </div>
             </div>
-            </div>
+
 
             <!-------------Fin de la Card Apprenants----------->
 
             <!-----Card Apprenants------->
-            <div class="grid grid-cols-1 grid-rows-[1fr] rounded-[5px] w-full min-[500px]:w-3/4 sm:w-[100%] justify-self-center sm:grid-cols-[60%_40%] 
-            bg-white sm:grid-rows-[250px] xl:grid-rows-[300px] md:justify-self-center md:w-3/4 
-            lg:w-full lg:grid-rows-[200px] xl:grid-rows-[300px] relative border-2">
-
-                <div class="h-auto sm:h-[100%] ">
-                    <div class="flex h-[60%]  mb-[5%] items-center sm:hidden justify-center relative z-10">
-                        <img src="upload/promotion/devWeb2023/profil.jpg" class="bg-right grayscale relative rounded-full h-full object-cover aspect-[1/1] lg:object-cover z-10">
-                    </div>
-                    <div class=" w-[98%] mx-auto h-[30%] md:p-2 text-center sm:text-left sm:h-[75%] lg:h-[80%] sm:w-11/12 lg:w-[98%] sm:ml-auto">
-                        <p class="text-[22px] md:text-[24px] font-main-title text-left font-bold pt-4 leading-1 inline">Guillaume <span class="uppercase">Poucet</span></p>
-                        <div class=" mx-auto border-2 border-main-red text-left w-10/12 sm:ml-0 sm:mt-1"></div>
-                        <p class="text-[16px] md:text-[18px]  leading-[1px] sm:whitespace-nowrap">
+            <div id="home" class="grid place-items-center overflow-hidden max-w-[400px] mx-auto sm:w-auto sm:max-w-full ">
+              <div class="wrapper relative grid grid-rows-[60%_40%] min-[400px]:grid-rows-[55%_45%] max-h-[550px] min-[400px]:max-h-[700px] grid-cols-1 sm:gap-0 sm:h-[350px] sm:grid-cols-[6fr_4fr] sm:grid-rows-1 sm:aspect-[16/9]">
+                <div class="sm:hidden mx-auto overflow-hidden object-fill">
+                    <img class=" max-w-full h-auto object-center" src="upload\promotion\devWeb2023\efz.png" alt="">
+                </div>
+                <div class="content-splitter pt-4 border-2 border-y-0 sm:border-r-0 sm:border-b-2  sm:pt-4 flex flex-col gap-4">
+                    <div class="left flex flex-col flex-grow gap-4 px-4 w-[minmax(80px,80%)]">
+                        <p class="text-[22px] md:text-[24px] text-center sm:text-left  font-main-title font-bold leading-1 inline">Guillaume <span class="uppercase">Poucet</span></p>
+                        <div class=" mx-auto border-2 -mt-2 border-main-red text-left w-10/12 "></div>
+                        <p class="text-[16px] md:text-[18px] text-center sm:text-left  leading-[1px] sm:whitespace-nowrap">
                             <i class="fa-solid fa-circle 
                             <?php if (isset($statut) && $statut == 1) { echo("text-red-500"); } ?>
                             text-green-500
-                             animate-pulse duration-[2s] mb-6 mt-4 mr-1"></i>
+                             animate-pulse duration-[2s] mr-1"></i>
                             En alternance depuis 2013
                         </p>
-                        <div class="flex gap-1 justify-center sm:justify-normal mx-auto sm:gap-1 xl:gap-3 sm:px-4">
+                        <div class="flex gap-1 justify-center sm:justify-normal mx-auto sm:gap-1">
                             <a href="">
-                                <p class="bg-[#F2F2F3] px-4 py-1 border-main-gray border-2 text-[14px] md:text-[16px] rounded-[50px] mb-2">REACT</p>
+                                <p class="bg-[#F2F2F3] px-4 py-1 border-main-gray border-2 text-[14px] md:text-[16px] rounded-[50px]">REACT</p>
                             </a>
                             <a href="">
-                                <p class="bg-[#F2F2F3] px-4 py-1 border-main-gray border-2 text-[14px] md:text-[16px] rounded-[50px] mb-2">Symfony</p>
+                                <p class="bg-[#F2F2F3] px-4 py-1 border-main-gray border-2 text-[14px] md:text-[16px] rounded-[50px]">Symfony</p>
                             </a>
-                            <a href="">
-                                <p class="bg-[#F2F2F3] px-4 py-1 border-main-gray border-2 text-[14px] md:text-[16px] rounded-[50px] mb-2">TypeScript</p>
+                            <a class="hidden sm:block" href="">
+                                <p class="bg-[#F2F2F3] px-4 py-1 border-main-gray border-2 text-[14px] md:text-[16px] rounded-[50px]">TypeScript</p>
                             </a>
                         </div>
-                        <div class="hidden xl:grid mb-3">
-                            <p  class="font-bold my-3">Projets de l'apprenant :</p>
-                            <div class="flex gap-3 px-4">
+                        <div class="hidden min-[400px]:block">
+                            <p  class="font-bold my-3 text-center sm:text-left ">Projets de l'apprenant :</p>
+                            <div class="flex justify-center sm:justify-auto gap-3 px-4">
                                 <a href="">
-                                    <p class="bg-main-gray text-main-white px-4 py-1 text-[14px] rounded-[50px] mb-2">Un projet génial</p>
+                                    <p class="bg-main-gray text-main-white px-4 py-1 text-[14px] rounded-[50px]">Un projet génial</p>
                                 </a>
                                 <a href="">
-                                    <p class="bg-main-gray text-main-white px-4 py-1 text-[14px] rounded-[50px] mb-2">Projet absolum..</p>
+                                    <p class="bg-main-gray text-main-white px-4 py-1 text-[14px] rounded-[50px]">Projet absolum..</p>
                                 </a>
                             </div>
                         </div>
                     </div>
-                    <button class="clipper2 h-[10%] sm:h-[25%] lg:h-[20%] bg-main-red block text-white z-10 relative text-[20px] text-[22px] font-bold font-main-title w-full">Voir le profil</button>
+                    <button class="clipper2 h-[25%] sm:h-[25%] xl:h-[20%] bg-main-red block text-white z-10 relative text-[20px] text-[22px] font-bold font-main-title w-full">Voir le profil</button>
+                  
                 </div>
-                <div class="clipper h-full hidden sm:flex relative z-10">
-                    <img src="upload/promotion/devWeb2023/profil.jpg" class=" rounded-[5px] bg-right grayscale relative  h-full object-cover aspect-[1/1] lg:object-cover z-10">
+                <div class="hidden clipper sm:flex flex-grow w-full  z-10">
+                    <img src="upload\promotion\devWeb2023\efz.png" alt="">
                 </div>
+              </div>
             </div>
+
+
             <!-------------Fin de la Card Apprenants----------->
 
         </div>
