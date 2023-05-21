@@ -1,9 +1,11 @@
 .clipper {
     overflow: hidden;
     clip-path: polygon(35% 0%, 100% 0, 100% 100%, 8% 100%); 
-    position: absolute;
     object-fit: cover;
+    position: relative;
 }
+
+
 
 .clipper2:after {
     content: "";
@@ -25,3 +27,17 @@
     display: none;
 }
 }
+
+@media screen and (min-width: 640px) {
+    .wrapper:after {
+        content: "";
+        position: absolute;
+        top: 0;
+        border: solid 0.5px #e5e7eb;
+        width: 97.5%;
+        height: 0%;
+        left: 0;
+        z-index: 999;
+    
+    }
+    }
