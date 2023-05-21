@@ -25,8 +25,8 @@
             <h3 class="text-center lg:col-start-1 lg:col-end-3 font-main-title text-[22px] font-bold mt-4">Formateurs</h3>
             <!-----Card Formateur------->
             <div class="grid grid-cols-auto rounded-[5px] place-items-center  justify-center items-center border-2 border-main-gray mx-auto">
-                <div class="rounded-full flex place-items-center w-[130px] h-[130px] bg-main-lightred grayscale z-10">
-                    <img src="upload\promotion\devWeb2023\efz.png" class="w-[78px] z-20 grayscale mx-auto my-auto">
+                <div class="flex place-items-center pt-4">
+                    <img src="upload\promotion\devWeb2023\efz.png" class="w-[150px] h-[150px] z-20 rounded-full grayscale mx-auto my-auto">
                 </div>
                 <p class="text-[18px] font-main-title font-bold pt-4">Steven <span class="uppercase">Blombou</span></p>
                 <div class="border-2 border-main-red w-full mt-1"></div>
@@ -50,15 +50,15 @@
             <!-------------Fin de la Card Formateur----------->
 
             <!-----Card Formateur------->
-            <div class="grid grid-cols-auto rounded-[5px] place-items-center justify-center items-center border-2 border-main-gray mx-auto">
-                <div class="rounded-full flex place-items-center w-[130px] h-[130px] bg-main-lightred grayscale z-10">
-                    <img src="upload\promotion\devWeb2023\efz.png" class="w-[78px] z-20 grayscale mx-auto my-auto">
+            <div class="grid grid-cols-auto rounded-[5px] place-items-center  justify-center items-center border-2 border-main-gray mx-auto">
+                <div class="flex place-items-center pt-4">
+                    <img src="upload\promotion\devWeb2023\profil.jpg" class="w-[150px] h-[150px] z-20 rounded-full grayscale mx-auto my-auto">
                 </div>
                 <p class="text-[18px] font-main-title font-bold pt-4">Steven <span class="uppercase">Blombou</span></p>
                 <div class="border-2 border-main-red w-full mt-1"></div>
                 <p class="text-main-white bg-main-gray px-4 py-1 text-[10px] rounded-[50px] mt-4 mb-4">Développeur Web et Web mobile</p>
                 <div class="flex gap-3 px-4">
-                <a href="">
+                    <a href="">
                         <p class="text-main-white bg-main-gray px-4 py-1 text-[10px] rounded-[50px] mb-4">PHP</p>
                     </a>
                     <a href="">
@@ -69,12 +69,11 @@
                     </a>
                     <a href="">
                         <p class="text-main-white bg-main-gray px-4 py-1 text-[10px] rounded-[50px] mb-4">CSS</p> 
-                    </a>                  
+                    </a>               
                 </div>
                 <button class="bg-main-red text-white text-[20px] font-bold font-main-title w-full py-4">Voir le profil</button>
             </div>
             <!-------------Fin de la Card Formateur----------->
-
         </div>
         <div class="grid w-11/12 justify-center mx-auto xl:w-[100%] grid-cols-1 xl:grid-cols-2 gap-8 xl:gap-12"> <!------Apprenants------->
             <h3 class="text-center xl:col-start-1 xl:col-end-3 font-main-title text-[22px] font-bold mt-4">Apprenants</h3>
@@ -83,7 +82,7 @@
             <div id="home" class="grid place-items-center overflow-hidden max-w-[400px] justify-self-center mx-auto sm:w-auto sm:max-w-full">
               <div class="wrapper relative grid grid-rows-[60%_40%] max-h-[520px] min-[400px]:grid-rows-[55%_45%]  min-[400px]:max-h-[700px] grid-cols-1 sm:gap-0 sm:h-[350px] sm:grid-cols-[6fr_4fr] sm:grid-rows-1 sm:aspect-[16/9]">
                 <div class="sm:hidden mx-auto overflow-hidden object-fill">
-                    <img class="max-w-full h-auto" src="https://images.unsplash.com/photo-1580707578919-892eb22db615?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTV8fG1hbiUyMHBvcnRyYWl0fGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=60" alt="">
+                    <img class="max-w-full h-auto grayscale" src="https://images.unsplash.com/photo-1580707578919-892eb22db615?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTV8fG1hbiUyMHBvcnRyYWl0fGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=60" alt="">
                 </div>
                 <div class="content-splitter pt-4 border-2 border-y-0 sm:border-r-0 sm:border-b-2  sm:pt-4 flex flex-col gap-4">
                     <div class="left flex flex-col flex-grow gap-4 px-4 w-[minmax(80px,80%)]">
@@ -123,7 +122,7 @@
                   
                 </div>
                 <div class="hidden clipper sm:flex w-full z-10">
-                    <img class="flex-grow" src="https://images.unsplash.com/photo-1580707578919-892eb22db615?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTV8fG1hbiUyMHBvcnRyYWl0fGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=60" alt="">
+                    <img class="flex-grow grayscale" src="https://images.unsplash.com/photo-1580707578919-892eb22db615?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTV8fG1hbiUyMHBvcnRyYWl0fGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=60" alt="">
                 </div>
               </div>
             </div>
@@ -175,7 +174,7 @@
                   
                 </div>
                 <div class="hidden clipper sm:flex flex-grow w-full  z-10">
-                    <img src="upload\promotion\devWeb2023\profil.jpg" alt="">
+                    <img class="flex-grow grayscale" src="upload\promotion\devWeb2023\profil.jpg" alt="">
                 </div>
               </div>
             </div>
@@ -187,7 +186,7 @@
             <div id="home" class="grid place-items-center overflow-hidden max-w-[400px] mx-auto sm:w-auto sm:max-w-full ">
               <div class="wrapper relative grid grid-rows-[60%_40%] min-[400px]:grid-rows-[55%_45%] max-h-[550px] min-[400px]:max-h-[700px] grid-cols-1 sm:gap-0 sm:h-[350px] sm:grid-cols-[6fr_4fr] sm:grid-rows-1 sm:aspect-[16/9]">
                 <div class="sm:hidden mx-auto overflow-hidden object-fill">
-                    <img class=" max-w-full h-auto object-center" src="upload\promotion\devWeb2023\efz.png" alt="">
+                    <img class=" max-w-full h-auto object-center grayscale" src="upload\promotion\devWeb2023\efz.png" alt="">
                 </div>
                 <div class="content-splitter pt-4 border-2 border-y-0 sm:border-r-0 sm:border-b-2  sm:pt-4 flex flex-col gap-4">
                     <div class="left flex flex-col flex-grow gap-4 px-4 w-[minmax(80px,80%)]">
@@ -227,7 +226,7 @@
                   
                 </div>
                 <div class="hidden clipper sm:flex flex-grow w-full  z-10">
-                    <img src="upload\promotion\devWeb2023\efz.png" alt="">
+                    <img class="flex-grow grayscale" src="upload\promotion\devWeb2023\efz.png" alt="">
                 </div>
               </div>
             </div>
