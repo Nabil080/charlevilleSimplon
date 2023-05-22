@@ -4,44 +4,81 @@ require_once('src/model/Formation.php');
 
 function homepage()
 {
-    include 'view/template/homepage.php';
+    include 'view/public/homepage.php';
+}
+function contactPage()
+{
+    include 'view/public/contact.php';
 }
 
+// Formation 
 function allFormationsPage()
 {
-    include 'view/template/allFormations.php';
+    include 'view/public/allFormations.php';
 }
 
 function formationPage()
 {
-    include 'view/template/formation.php';
+    include 'view/public/formation.php';
 }
+
+// Project 
 
 function projectPage()
 {
-    include 'view/template/project.php';
+    include 'view/public/project.php';
 }
 
 function allProjectsPage()
 {
-    include 'view/template/all_projects.php';
-}
-
-function allPromotionsPage()
-{
-    include 'view/template/all_promotions.php';
-}
-function promotionPage()
-{
-    include 'view/template/promotion.php';
+    include 'view/public/all_projects.php';
 }
 
 function projectGestionPage()
 {
-    include 'view/template/project_gestion.php';
+    include 'view/public/project_gestion.php';
 }
 
-function contactPage()
+// Promotion
+function allPromotionsPage()
 {
-    include 'view/template/contact.php';
+    include 'view/public/all_promotions.php';
+}
+function promotionPage()
+{
+    include 'view/public/promotion.php';
+}
+
+// Register
+function registerPage()
+{
+    include 'view/public/register.php';
+}
+
+
+// ==================  Admin  ======================
+
+function crudCandidatePage()
+{
+    include 'view/admin/_candidate.php';
+}
+
+function crudLearnerPage()
+{
+    include 'view/admin/_learner.php';
+}
+
+function crudCompanyPage()
+{
+    include 'view/admin/_company.php';
+}
+
+function crudPromotionPage()
+{
+    include 'view/admin/_promotions.php';
+}
+
+function crudProjetPage()
+{
+    include 'view/admin/_projects.php';
 }

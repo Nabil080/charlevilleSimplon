@@ -2,7 +2,7 @@
 session_start();
 require_once 'src/controller/frontController.php';
 require 'src/controller/back/UserController.php';
-$_SESSION['user'] = ['role' => 0];
+$_SESSION['user'] = ['role' => 1];
 // var_dump($_SESSION);
 
 if (isset($_GET['action']) && $_GET['action'] !== '' && !isset($_GET['admin'])) {
@@ -29,7 +29,7 @@ if (isset($_GET['action']) && $_GET['action'] !== '' && !isset($_GET['admin'])) 
                     // Envoi de la demande de suppression de projet
                 }
                 if ($_SESSION['user']['role'] == 1) {
-                    $admin = $_GET['admin'];
+                    require 'admin.php';
                 }
             }
         }
