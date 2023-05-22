@@ -51,11 +51,13 @@ ob_start();
                 </button>
             </div>
             <div class="lg:hidden w-full flex justify-center">
-                <div data-modal-target="login-modal" data-modal-toggle="login-modal" class="underline font-main cursor-pointer font-semibold text-main-white">se connecter</div>
+                <div data-modal-target="login-modal" data-modal-toggle="login-modal"
+                    class="underline font-main cursor-pointer font-semibold text-main-white">se connecter</div>
             </div>
         </div>
         <!-- ENTREPRISE TITRE + BOUTONS -->
-        <div id="company-homepage" class="hidden h-2/3 lg:h-2/5 opacity-0 ease-in duration-300 w-full lg:hidden lg:flex lg:flex-col lg:grow lg:gap-6 ">
+        <div id="company-homepage"
+            class="hidden h-2/3 lg:h-2/5 opacity-0 ease-in duration-300 w-full lg:hidden lg:flex lg:flex-col lg:grow lg:gap-6 ">
             <div class="h-1/5 font-title font-bold text-[5vh] lg:text-[7vh] text-main-white grid items-center">
                 <p>Je souhaite</p>
             </div>
@@ -78,16 +80,21 @@ ob_start();
                 </button>
             </div>
             <div class="hidden lg:block absolute bottom-4 left-1/2 -translate-x-1/2">
-                <div onclick="returnHomepage('company-homepage')" class="cursor-pointer font-semibold font-main text-main-white text-xl shadow-2xl">
-                    <i class="fa-solid fa-angle-left"></i> Retour</div>
+                <div onclick="returnHomepage('company-homepage')"
+                    class="cursor-pointer font-semibold font-main text-main-white text-xl shadow-2xl">
+                    <i class="fa-solid fa-angle-left"></i> Retour
+                </div>
             </div>
             <div class="lg:hidden w-full flex justify-center">
-                <div onclick="returnHomepage('company-homepage')" class="cursor-pointer font-main text-main-white text-lg font-semibold shadow-2xl">
-                <i class="fa-solid fa-angle-left"></i> Retour</div>
+                <div onclick="returnHomepage('company-homepage')"
+                    class="cursor-pointer font-main text-main-white text-lg font-semibold shadow-2xl">
+                    <i class="fa-solid fa-angle-left"></i> Retour
+                </div>
             </div>
         </div>
         <!-- VISITEUR TITRE + BOUTONS -->
-        <div id="visitor-homepage" class="hidden h-2/3 lg:h-2/5 opacity-0 ease-in duration-300 w-full lg:hidden lg:flex lg:flex-col lg:grow lg:gap-6 ">
+        <div id="visitor-homepage"
+            class="hidden h-2/3 lg:h-2/5 opacity-0 ease-in duration-300 w-full lg:hidden lg:flex lg:flex-col lg:grow lg:gap-6 ">
             <div class="h-1/5 font-title font-bold text-[5vh] lg:text-[7vh] text-main-white grid items-center">
                 <p>Je souhaite découvrir</p>
             </div>
@@ -106,19 +113,23 @@ ob_start();
                 </button>
             </div>
             <div class="hidden lg:block absolute bottom-4 left-1/2 -translate-x-1/2">
-                <div onclick="returnHomepage('visitor-homepage')" class="cursor-pointer font-semibold font-main text-main-white text-xl shadow-2xl">
-                    <i class="fa-solid fa-angle-left"></i> Retour</div>
+                <div onclick="returnHomepage('visitor-homepage')"
+                    class="cursor-pointer font-semibold font-main text-main-white text-xl shadow-2xl">
+                    <i class="fa-solid fa-angle-left"></i> Retour
+                </div>
             </div>
             <div class="lg:hidden w-full flex justify-center">
-                <div onclick="returnHomepage('visitor-homepage')" class="cursor-pointer font-main text-main-white text-lg font-semibold shadow-2xl">
-                <i class="fa-solid fa-angle-left"></i> Retour</div>
+                <div onclick="returnHomepage('visitor-homepage')"
+                    class="cursor-pointer font-main text-main-white text-lg font-semibold shadow-2xl">
+                    <i class="fa-solid fa-angle-left"></i> Retour
+                </div>
             </div>
         </div>
     </div>
 </section>
 
-<?php include('view/include/login_modal.php') ?>
-<?php include('view/include/company_login_modal.php') ?>
+<?php include('view/template/_login.php') ?>
+<?php include('view/template/_loginCompany.php') ?>
 
 
 <?php
