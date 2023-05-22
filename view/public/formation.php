@@ -228,7 +228,7 @@
         <h3 class="text-[30px] lg:text-[40px] font-bold">Métier ciblé</h3>
     </div>
     <div class="pb-5">
-        <ul class="ml-10 list-disc text-[16px] lg:text-[20px]">
+        <ul class="ml-10 list-disc">
             <li>Développeur Web et Mobile</li>
             <li>Développeur d'application</li>
             <li>Développeur front</li>
@@ -242,13 +242,13 @@
         <h3 class="text-[30px] lg:text-[40px] font-bold">Certifications</h3>
     </div>
     <div class="pb-5">
-        <p class="text-[16px] lg:text-[20px] font-bold">Formation certifiante délivrant une certification inscrite
+        <p class="font-bold">Formation certifiante délivrant une certification inscrite
             au Répertoire Spécifique</p>
-        <div class="pb-5 flex gap-10 text-[16px] lg:text-[20px] text-main-blue font-bold">
+        <div class="pb-5 flex gap-10 text-main-blue font-bold">
             <p>RS5487</p>
             <p>Gérer un projet en mobilisant les méthodes agiles</p>
         </div>
-        <ul class="ml-10 list-disc text-[16px] lg:text-[20px]">
+        <ul class="ml-10 list-disc">
             <li>Domaine : La certification concerne tous les secteurs car les besoins en gestion de projet agile
                 sont présents dans tous les domaines</li>
             <li>Possibilité de certification partielle : non</li>
@@ -257,13 +257,13 @@
         </ul>
     </div>
     <div>
-        <p class="text-[16px] lg:text-[20px] text-[16px] lg:text-[20px] font-bold">Certification inscrite au
+        <p class="font-bold">Certification inscrite au
             Répertoire spécifique</p>
         <div class="pb-5 flex gap-10 text-main-blue font-bold">
             <p>RS5599</p>
             <p>Réaliser des applications web à l’aide d’un système de gestion de contenus</p>
         </div>
-        <p class="ml-10 text-[16px] lg:text-[20px]">La certification concerne les professionnels du secteur de la
+        <p class="ml-10">La certification concerne les professionnels du secteur de la
             communication, du marketing et de la vente.</p>
     </div>
 </section>
