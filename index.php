@@ -13,6 +13,9 @@ if (isset($_GET['action']) && $_GET['action'] !== '' && !isset($_GET['admin'])) 
         if ($_SESSION['user']['role'] <= 4) {
             switch ($action) {
                 // Afficher le CRUD de projet (Gestion de projet)
+                case 'projectGestionPage':
+                    projectGestionPage();
+                    break;
 
                 // Afficher le formulaire d'ajout de projet
                 // Afficher le formulaire de modification du projet

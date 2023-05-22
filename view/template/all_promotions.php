@@ -2,9 +2,7 @@
 
 <?php ob_start(); ?>
 <main class="px-[5%]">
-    <h2 class="pb-10 text-main-red text-[24px] md:text-[48px] font-bold text-center">Les promotions de Simplon
-        Charleville
-    </h2>
+    <h2 class="pb-10 text-main-red text-[24px] md:text-[48px] font-bold text-center">Nos promotions</h2>
     <div class="pb-10 flex justify-evenly gap-5">
         <button class="w-1/2 md:w-[320px] px-5 py-3 bg-main-red text-white font-bold rounded-[10px]">Promotion
             Actuelle</button>
