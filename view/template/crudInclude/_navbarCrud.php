@@ -3,7 +3,7 @@
     data-drawer-toggle="sidebar-multi-level-sidebar" 
     aria-controls="sidebar-multi-level-sidebar" 
     type="button" 
-    class="fixed inset-x-0 bottom-0 mx-auto h-24 w-52 text-center bg-main-red text-main-white text-2xl uppercase items-center z-50 p-2 rounded-lg md:hidden focus:outline-none">
+    class="fixed inset-x-0 bottom-0 mx-auto h-20 w-36 text-center bg-main-red text-main-white text-md uppercase items-center z-50 p-2 rounded-lg md:hidden focus:outline-none">
        <span class="sr-only">Open sidebar</span>
       Navigation admin
     </button>
@@ -33,7 +33,7 @@
            <li>
               <a href="#" class="flex items-center p-2  rounded-lg ">
               <i class="fa-solid fa-user-group text-3xl md:text-xl text-main-red"></i>
-                 <span class="flex-1 ml-3 text-3xl md:text-xl whitespace-nowrap">Utilisateurs</span>
+                 <span class="flex-1 ml-3 text-3xl md:text-xl whitespace-nowrap">Promotions</span>
               </a>
            </li>
            <li>

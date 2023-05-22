@@ -39,7 +39,7 @@
       include ("crudInclude/_modalFormateur.php");
       include ("crudInclude/_modalProjet.php");
       include ("crudInclude/_modalContact.php");
-
+      include ("crudInclude/_modalValidationPromo.php");
     }
 
     if (isset($projetPage)  && $projetPage == 1) {

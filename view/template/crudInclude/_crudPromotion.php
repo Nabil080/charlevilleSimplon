@@ -4,7 +4,7 @@
         
             <div class="overflow-x-auto">
                 <table class="w-full text-sm text-left ">
-                    <thead class="text-xs text-gray-700 uppercase bg-main-red text-main-white ">
+                    <thead class="text-xs uppercase bg-main-red text-main-white">
                         <tr>
                             <th scope="col" class="px-4 py-3 text-center"><?= "" ?> Nom </th>
                             <th scope="col" class="px-4 py-3 text-center"><?= "" ?> Liste des apprenants</th>
@@ -21,11 +21,19 @@
                         <tr class="border-2 border-gray-800">
                             <th scope="row" class="px-4 py-3 font-medium text-gray-900 border whitespace-nowrap ">Apple iMac 27&#34;</th>
                             <td class="px-4 py-3 border">
-                                <button data-modal-target="modal-apprenant<?php "" ?>" data-modal-toggle="modal-apprenant<?php "" ?>" 
-                                    class="block w-full md:w-auto text-white bg-main-red hover:bg-red-800 focus:ring-4 focus:outline-none 
-                                     font-medium rounded-lg text-sm px-5 mx-auto py-2.5 text-center" type="button">
+                                <?php if (isset($apprenants)) { ?>
+                                    <button data-modal-target="modal-apprenant<?php "" ?>" data-modal-toggle="modal-apprenant<?php "" ?>" 
+                                        class="block w-full md:w-auto text-white bg-main-red hover:bg-red-800 focus:ring-4 focus:outline-none 
+                                         font-medium rounded-lg text-sm px-5 mx-auto py-2.5 text-center" type="button">
                                         Voir les apprenants
-                                </button>
+                                    </button>
+                                <?php } else { ?>
+                                <button data-modal-target="modal-promotion<?php "" ?>" data-modal-toggle="modal-promotion<?php "" ?>" 
+                                        class="block w-full md:w-auto text-white bg-main-gray hover:bg-gray-700 focus:ring-4 focus:outline-none 
+                                         font-medium rounded-lg text-sm px-5 mx-auto py-2.5 text-center" type="button">
+                                        Valider les candidatures
+                                    </button>
+                                <?php }; ?>
                             </td>
                             <td class="px-4 py-3 border">
                                 <button data-modal-target="modal-formateur<?php "" ?>" data-modal-toggle="modal-formateur<?php "" ?>" 
