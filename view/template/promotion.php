@@ -133,17 +133,17 @@
             <!-------------Fin de la Card Apprenants----------->
 
             <!-----Card Apprenants------->
-
-            <div id="home" class="grid place-items-center overflow-hidden max-w-[400px] mx-auto sm:w-auto sm:max-w-full ">
-              <div class="wrapper relative grid grid-rows-[60%_40%] min-[400px]:grid-rows-[55%_45%] max-h-[550px] min-[400px]:max-h-[700px] grid-cols-1 sm:gap-0 sm:h-[350px] sm:grid-cols-[6fr_4fr] sm:grid-rows-1 sm:aspect-[16/9]">
+            <div id="home" class="grid place-items-center overflow-hidden border-4 max-w-[400px] justify-self-center mx-auto sm:w-auto sm:max-w-full">
+              <div class="wrapper relative grid grid-rows-[60%_40%] max-h-[520px] min-[400px]:grid-rows-[55%_45%]  min-[400px]:max-h-[700px] grid-cols-1 sm:gap-0 sm:h-[350px] sm:grid-cols-[6fr_4fr] sm:grid-rows-1 sm:aspect-[16/9]">
                 <div class="sm:hidden mx-auto overflow-hidden object-fill">
-                    <img class=" max-w-full h-auto object-center" src="upload\promotion\devWeb2023\profil.jpg" alt="">
+                    <img class="max-w-full h-auto grayscale" src="https://images.unsplash.com/photo-1580707578919-892eb22db615?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTV8fG1hbiUyMHBvcnRyYWl0fGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=60" alt="">
                 </div>
-                <div class="content-splitter pt-4 border-2 border-y-0 sm:border-r-0 sm:border-b-2  sm:pt-4 flex flex-col gap-4">
+                <div class="content-splitter pt-4 sm:pt-4 flex flex-col gap-4">
                     <div class="left flex flex-col flex-grow gap-4 px-4 w-[minmax(80px,80%)]">
                         <p class="text-[22px] md:text-[24px] text-center sm:text-left  font-main-title font-bold leading-1 inline">Guillaume <span class="uppercase">Poucet</span></p>
                         <div class=" mx-auto border-2 -mt-2 border-main-red text-left w-10/12 "></div>
                         <p class="text-[16px] md:text-[18px] text-center sm:text-left  leading-[1px] sm:whitespace-nowrap">
+
                             <i class="fa-solid fa-circle 
                             <?php if (isset($statut) && $statut == 1) { echo("text-red-500"); } ?>
                             text-green-500
@@ -173,30 +173,33 @@
                             </div>
                         </div>
                     </div>
+
                     <button class="clipper2 h-[25%] sm:h-[25%] xl:h-[20%] bg-main-red block text-white z-10 relative text-[20px] text-[22px] font-bold font-main-title w-full">Voir le profil</button>
                   
                 </div>
-                <div class="hidden clipper sm:flex flex-grow w-full z-10 bg-cover bg-center" style="background-image:url(upload/promotion/devWeb2023/profil.jpg);">
-                    <!-- <img class="flex-grow grayscale" src="upload\promotion\devWeb2023\profil.jpg" alt=""> -->
+                <div class="hidden clipper sm:flex w-full z-10 bg-center bg-cover grayscale" style="background-image: url(upload/promotion/devWeb2023/profil.jpg);">
+                    <!-- <img class="flex-grow grayscale" src="upload/promotion/dev" alt=""> -->
                 </div>
               </div>
             </div>
 
 
             <!-------------Fin de la Card Apprenants----------->
+            
 
             <!-----Card Apprenants------->
-            <div id="home" class="grid place-items-center overflow-hidden max-w-[400px] mx-auto sm:w-auto sm:max-w-full ">
-              <div class="wrapper relative grid grid-rows-[60%_40%] min-[400px]:grid-rows-[55%_45%] max-h-[550px] min-[400px]:max-h-[700px] grid-cols-1 sm:gap-0 sm:h-[350px] sm:grid-cols-[6fr_4fr] sm:grid-rows-1 sm:aspect-[16/9]">
-                <div class="sm:hidden mx-auto overflow-hidden object-fill bg-cover bg-center grayslace" style="background-image:url(upload/promotion/devWeb2023/efz.png);">
-                    <!-- <img class=" max-w-full h-auto object-center grayscale" src="upload\promotion\devWeb2023\efz.png" alt=""> -->
+            <div id="home" class="grid place-items-center overflow-hidden border-4 max-w-[400px] justify-self-center mx-auto sm:w-auto sm:max-w-full">
+              <div class="wrapper relative grid grid-rows-[60%_40%] max-h-[520px] min-[400px]:grid-rows-[55%_45%]  min-[400px]:max-h-[700px] grid-cols-1 sm:gap-0 sm:h-[350px] sm:grid-cols-[6fr_4fr] sm:grid-rows-1 sm:aspect-[16/9]">
+                <div class="sm:hidden mx-auto overflow-hidden object-fill">
+                    <img class="max-w-full h-auto grayscale" src="upload/promotion/dev" alt="">
                 </div>
-                <div class="content-splitter pt-4 border-2 border-y-0 sm:border-r-0 sm:border-b-2  sm:pt-4 flex flex-col gap-4">
+                <div class="content-splitter pt-4 sm:pt-4 flex flex-col gap-4">
                     <div class="left flex flex-col flex-grow gap-4 px-4 w-[minmax(80px,80%)]">
                         <p class="text-[22px] md:text-[24px] text-center sm:text-left  font-main-title font-bold leading-1 inline">Guillaume <span class="uppercase">Poucet</span></p>
                         <div class=" mx-auto border-2 -mt-2 border-main-red text-left w-10/12 "></div>
                         <p class="text-[16px] md:text-[18px] text-center sm:text-left  leading-[1px] sm:whitespace-nowrap">
-                            <i class="fa-solid fa-circle
+
+                            <i class="fa-solid fa-circle 
                             <?php if (isset($statut) && $statut == 1) { echo("text-red-500"); } ?>
                             text-green-500
                              animate-pulse duration-[2s] mr-1"></i>
@@ -225,19 +228,19 @@
                             </div>
                         </div>
                     </div>
+
                     <button class="clipper2 h-[25%] sm:h-[25%] xl:h-[20%] bg-main-red block text-white z-10 relative text-[20px] text-[22px] font-bold font-main-title w-full">Voir le profil</button>
                   
                 </div>
-                <div class="hidden clipper sm:flex flex-grow w-full z-10 bg-cover bg-center grayscale" style="background-image: url(upload/promotion/devWeb2023/efz.png);">
-                    <!-- <img class="flex-grow grayscale" src="upload\promotion\devWeb2023\efz.png" alt=""> -->
-
+                <div class="hidden clipper sm:flex w-full z-10 bg-center bg-cover grayscale" style="background-image: url(upload/promotion/devWeb2023/efz.png);">
+                    <!-- <img class="flex-grow grayscale" src="https://images.unsplash.com/photo-1580707578919-892eb22db615?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTV8fG1hbiUyMHBvcnRyYWl0fGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=60" alt=""> -->
                 </div>
               </div>
             </div>
 
 
             <!-------------Fin de la Card Apprenants----------->
-
+            
         </div>
     </section>
     <!-------------Fin de la section Apprenants----------->
