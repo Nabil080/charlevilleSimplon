@@ -33,7 +33,7 @@
         content: "";
         position: absolute;
         top: 0;
-        border: solid 0.5px #e5e7eb;
+        /* border: solid 0.5px #e5e7eb; */
         width: 97.5%;
         height: 0%;
         left: 0;
