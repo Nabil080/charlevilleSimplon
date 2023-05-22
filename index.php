@@ -18,6 +18,9 @@ if (isset($_GET['action']) && $_GET['action'] !== '' && !isset($_GET['admin'])) 
                     break;
 
                 // Afficher le formulaire d'ajout de projet
+                case 'addProject':
+                    projectFormPage();
+                    break;
                 // Afficher le formulaire de modification du projet
 
                 // Envoi du formulaire d'ajoute de projet

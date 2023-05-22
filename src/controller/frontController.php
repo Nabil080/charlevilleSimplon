@@ -82,3 +82,7 @@ function crudProjetPage()
 {
     include 'view/admin/_projects.php';
 }
+
+function projectFormPage() {
+    include 'view/admin/projectAddForm.php';
+}
