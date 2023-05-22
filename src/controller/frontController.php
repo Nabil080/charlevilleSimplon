@@ -56,3 +56,34 @@ function registerPage()
 }
 
 
+function crudCandidatPage()
+{
+    $candidatPage = 1;
+    include 'view/template/crud.php';
+
+}
+
+function crudApprenantPage() 
+{
+    $apprenantPage = 1;
+    include 'view/template/crud.php';
+}
+
+function crudEntreprisePage() 
+{
+    $entreprisePage = 1;
+    include 'view/template/crud.php';
+}
+
+function crudPromotionPage() 
+{
+    $promotionPage = 1;
+    include 'view/template/crud.php';
+}
+
+function crudProjetPage() 
+{
+    $projetPage = 1;
+    include 'view/template/crud.php';
+}
+
