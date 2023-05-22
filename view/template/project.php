@@ -119,7 +119,7 @@
 </section>
 
 <!-- boutons liens externes -->
-<section class="my-12 lg:grid grid-cols-3 lg:max-w-[1150px] mx-auto [&_i]:text-[40px] [&_i]:w-10 [&_i]:text-center">
+<section class="my-16 lg:grid grid-cols-3 lg:max-w-[1150px] mx-auto [&_i]:text-[40px] [&_i]:w-10 [&_i]:text-center">
     <!-- bouton 1 github -->
     <div class="flex mx-4 my-4 gap-4 h-max">
         <i class="fa-brands fa-github"></i>
@@ -237,7 +237,7 @@
 </section>
 
 <?php
-// var_dump($_POST)
+var_dump($_POST)
 ?>
 
 <?php $content = ob_get_clean(); ?>
