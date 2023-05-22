@@ -15,7 +15,7 @@
             <div class="flex flex-wrap justify-center  mb-8">
                 <i class="fa-solid fa-location-dot text-[24px] xl:text-[36px] w-full text-center mt-2 text-main-red"></i>
                 <p class="font-bold mb-4 text-[24px] xl:text-[36px] w-full text-center">Nous rendre visite :</p>
-                <p class="col-start-1 col-end-3 xl:text-[20px] text-center">Campus Sup Ardennes, 8 rue Claude Chrétien, <br> 0800 Charleville-Mézières</p>
+                <p class="col-start-1 col-end-3 xl:text-[20px] text-center">Campus Sup Ardennes, 8 rue Claude Chrétien, <br> 08000 Charleville-Mézières</p>
             </div>
         </div>
     </section>

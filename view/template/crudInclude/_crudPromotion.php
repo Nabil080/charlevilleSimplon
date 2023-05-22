@@ -58,14 +58,11 @@
                                 <div id="apple-imac-27-dropdown" class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow  ">
                                     <ul class="py-1 text-sm text-gray-700 " aria-labelledby="apple-imac-27-dropdown-button">
                                         <li>
-                                            <a href="#" class="block py-2 px-4">Show</a>
-                                        </li>
-                                        <li>
-                                            <a href="#" class="block py-2 px-4">Edit</a>
+                                            <a href="#" class="block py-2 px-4">Modifier</a>
                                         </li>
                                     </ul>
                                     <div class="py-1">
-                                        <a href="#" class="block py-2 px-4 text-sm text-gray-700">Delete</a>
+                                        <a href="#" class="block py-2 px-4 text-sm text-gray-700">Supprimer</a>
                                     </div>
                                 </div>
                             </td>

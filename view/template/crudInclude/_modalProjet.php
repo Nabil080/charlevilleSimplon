@@ -40,9 +40,9 @@
                 <? {} ?>
                 </div>
                 <!-- card projet -->
-                <article id="projet-card-1" class="project-card max-w-[800px] mx-auto border-2 border-black rounded-lg p-4 mb-8 2xl:flex gap-6 2xl:p-6">
+                <article id="projet-card-1" class="project-card max-w-[800px] mx-auto border-2 border-black rounded-lg p-4 mb-8 xl:flex gap-6 xl:p-6">
                     <!-- partie entreprise desktop -->
-                    <div class="hidden 2xl:block w-1/3 border-r-2 border-main-gray pr-6">
+                    <div class="hidden xl:block w-1/3 border-r-2 border-main-gray pr-6">
                     <div class="my-2 flex-col">
                         <div class="flex flex-wrap"><p class="font-title font-bold mr-2">Projet fourni par : </p><p><a href="lien vers la société" class="text-main-red underline font-bold text-sm">Pole formation CCI Ardennes</a></p></div>
                         <div class="my-4 grow"><img class="" src="assets/img/logo" alt="logo de l'entreprise"></div>
@@ -50,7 +50,7 @@
                     </div>
                     </div>
                     <!-- partie info projet -->
-                    <div class="flex-col text-[12px] flex text-end 2xl:w-2/3">
+                    <div class="flex-col text-[12px] flex text-end xl:w-2/3">
                         <!-- tags projet -->
                         <div class="uppercase space-x-4 my-4 [&>tag]:bg-main-gray [&>tag]:bg-opacity-10 [&>tag]:py-2 [&>tag]:px-4 [&>tag]:rounded-full">
                             <tag> html</tag>
@@ -75,17 +75,17 @@
                         </div>
                     </div>
                     <!-- séparateur mobile-->
-                    <div class="2xl:hidden w-4/5 mx-auto bg-main-gray bg-opacity-50 h-0.5 my-4"></div>
+                    <div class="xl:hidden w-4/5 mx-auto bg-main-gray bg-opacity-50 h-0.5 my-4"></div>
                     <!-- partie info entreprise mobile-->
-                    <div class="2xl:hidden my-2">
+                    <div class="xl:hidden my-2">
                         <div class="flex flex-wrap"><p class="font-title font-bold mr-2">Projet fourni par : </p><p><a href="lien vers la société" class="text-main-red underline font-bold text-sm">Pole formation CCI Ardennes</a></p></div>
                         <div class="flex flex-wrap"><p class="font-title font-bold mr-2">Adresse :</p><p class="text-sm pt-0.5 text-left font-light">33 rue de la gare, 08000 Charleville-Mézières</p></div>
                     </div>
                 </article>
 <!-- card projet -->
-<article id="projet-card-1" class="project-card max-w-[800px] mx-auto border-2 border-black rounded-lg p-4 mb-8 2xl:flex gap-6 2xl:p-6">
+<article id="projet-card-1" class="project-card max-w-[800px] mx-auto border-2 border-black rounded-lg p-4 mb-8 xl:flex gap-6 xl:p-6">
                     <!-- partie entreprise desktop -->
-                    <div class="hidden 2xl:block w-1/3 border-r-2 border-main-gray pr-6">
+                    <div class="hidden xl:block w-1/3 border-r-2 border-main-gray pr-6">
                     <div class="my-2 flex-col">
                         <div class="flex flex-wrap"><p class="font-title font-bold mr-2">Projet fourni par : </p><p><a href="lien vers la société" class="text-main-red underline font-bold text-sm">Pole formation CCI Ardennes</a></p></div>
                         <div class="my-4 grow"><img class="" src="assets/img/logo" alt="logo de l'entreprise"></div>
@@ -93,7 +93,7 @@
                     </div>
                     </div>
                     <!-- partie info projet -->
-                    <div class="flex-col text-[12px] flex text-end 2xl:w-2/3">
+                    <div class="flex-col text-[12px] flex text-end xl:w-2/3">
                         <!-- tags projet -->
                         <div class="uppercase space-x-4 my-4 [&>tag]:bg-main-gray [&>tag]:bg-opacity-10 [&>tag]:py-2 [&>tag]:px-4 [&>tag]:rounded-full">
                             <tag> html</tag>
@@ -118,9 +118,9 @@
                         </div>
                     </div>
                     <!-- séparateur mobile-->
-                    <div class="2xl:hidden w-4/5 mx-auto bg-main-gray bg-opacity-50 h-0.5 my-4"></div>
+                    <div class="xl:hidden w-4/5 mx-auto bg-main-gray bg-opacity-50 h-0.5 my-4"></div>
                     <!-- partie info entreprise mobile-->
-                    <div class="2xl:hidden my-2">
+                    <div class="xl:hidden my-2">
                         <div class="flex flex-wrap"><p class="font-title font-bold mr-2">Projet fourni par : </p><p><a href="lien vers la société" class="text-main-red underline font-bold text-sm">Pole formation CCI Ardennes</a></p></div>
                         <div class="flex flex-wrap"><p class="font-title font-bold mr-2">Adresse :</p><p class="text-sm pt-0.5 text-left font-light">33 rue de la gare, 08000 Charleville-Mézières</p></div>
                     </div>

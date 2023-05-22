@@ -1,8 +1,8 @@
 <nav class="flex flex-col md:flex-row justify-between items-start md:items-center space-y-3 md:space-y-0 p-4" aria-label="Table navigation">
                 <span class="text-sm font-normal ">
-                    Showing
+                    Résultats
                     <span class="font-semibold text-gray-900 ">1-10</span>
-                    of
+                    sur
                     <span class="font-semibold text-gray-900 ">1000</span>
                 </span>
                 <ul class="inline-flex items-stretch -space-x-px">

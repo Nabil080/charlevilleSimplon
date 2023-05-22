@@ -20,63 +20,57 @@
             <div class="p-6 space-y-6">
             <div class="background bg-main-white overflow-x-hidden min-h-[100vh]">
     
-    <!-- Image de profil -->
             <div class="picture_desc grid grid-cols-1 lg:grid-cols-[40%_60%] items-center  px-[8%] 2xl:px-[5%]">
+                <!-- Image de profil -->
                 <div class="picture max-h-screen md:mr-5">
                     <img class=" md:h-[300px] xl:h-[500px] mx-auto rounded-t-lg" src="upload/promotion/devWeb2023/efz.png" alt="Image de profil">
                     <button class="bg-main-red w-full text-main-white text-[16px] md:text-[28px] py-3 rounded-b-lg">Changer la photo de profil</button>
                 </div>
-           <!-- Description profil Prospect -->
-           <div class="description md:ml-5 h-[100%] flex flex-col">
-               <h1 class="text-main-red font-title text-[28px] md:text-[48px] font-semibold pt-5 text-center md:text-left"><span class="uppercase">$nom</span> $prenom</h1>
-               <div class="text-desc rounded-[5px] border-[1px] border-main-border mt-5 grow md:flex md:flex-col md:justify-between">
-                   <p class="text-[20px] text-justify py-5 px-3">Mes informations</p>
-                   <div class="h-0 border-[2px] border-main-red w-1/2"></div>
-                   <ul class="text-justify px-3 pb-3 text-[16px] md:text-[18px] leading-loose ml-8">
-                        <?php if (isset($nom)) { ?>
-                            <li class="list-disc">Nom : <?php "" ?></li>
-                        <?php } ?>
-                        <?php if (isset($prenom)) { ?>
-                            <li class="list-disc">Prénom : <?php "" ?></li>
-                        <?php } ?>
-                        <?php if (isset($adresse)) { ?>
-                            <li class="list-disc">Adresse : <?php "" ?></li>
-                        <?php } ?>
-                        <?php if (isset($ville)) { ?>
-                            <li class="list-disc">Ville : <?php "" ?></li>
-                        <?php } ?>
-                        <?php if (isset($mail)) { ?>
-                            <li class="list-disc">Email : <?php "" ?></li>
-                        <?php } ?>
-                        <?php if (isset($tel)) { ?>
-                            <li class="list-disc">Téléphone : <?php "" ?></li>
-                        <?php } ?>
-                        <?php if (isset($birthDate)) { ?>
-                            <li class="list-disc">Date de naissance : <?php "" ?></li>
-
-                        <?php } ?> 
-                        <?php if (isset($birthLocation)) { ?>
-                            <li class="list-disc">Lieu de naissance : <?php "" ?></li>
-                        <?php } ?>  
-                        <?php if (isset($nationality)) { ?>
-                            <<li class="list-disc">Nationalité : <?php "" ?></li>
-                        <?php } ?>  
-                        <?php if (isset($num)) { ?>
-                            <li class="list-disc">Numéro Pôle Emploi : <?php "" ?></li>
-                        <?php } ?>   
-                        <?php if (isset($gerant)) { ?>
-                            <li class="list-disc">Gérant de l'entreprise : <?php "" ?></li>
-                        <?php } ?>   
-
-                       
-                       
-                   </ul>
-                   <button class="bg-main-red w-full md:w-3/5 text-main-white text-[18px] uppercase py-3 rounded-b-lg md:rounded-none md:mb-4 md:flex md:justify-center md:mx-auto">Editer les infos</button>
-               </div>
-           </div>
-        <!-- Description profil apprenant -->
-
-        </div>
+                <!-- Description profil Prospect -->
+                <div class="description md:ml-5 h-[100%] flex flex-col">
+                    <h1 class="text-main-red font-title text-[28px] md:text-[48px] font-semibold pt-5 text-center md:text-left"><span class="uppercase">$nom</span> $prenom</h1>
+                    <div class="text-desc rounded-[5px] border-[1px] border-main-border mt-5 grow md:flex md:flex-col md:justify-between">
+                        <p class="text-[20px] text-justify py-5 px-3">Mes informations</p>
+                        <div class="h-0 border-[2px] border-main-red w-1/2"></div>
+                        <ul class="text-justify px-3 pb-3 text-[16px] md:text-[18px] leading-loose ml-8">
+                                <?php if (isset($nom)) { ?>
+                                    <li class="list-disc">Nom : <?php "" ?></li>
+                                <?php } ?>
+                                <?php if (isset($prenom)) { ?>
+                                    <li class="list-disc">Prénom : <?php "" ?></li>
+                                <?php } ?>
+                                <?php if (isset($adresse)) { ?>
+                                    <li class="list-disc">Adresse : <?php "" ?></li>
+                                <?php } ?>
+                                <?php if (isset($ville)) { ?>
+                                    <li class="list-disc">Ville : <?php "" ?></li>
+                                <?php } ?>
+                                <?php if (isset($mail)) { ?>
+                                    <li class="list-disc">Email : <?php "" ?></li>
+                                <?php } ?>
+                                <?php if (isset($tel)) { ?>
+                                    <li class="list-disc">Téléphone : <?php "" ?></li>
+                                <?php } ?>
+                                <?php if (isset($birthDate)) { ?>
+                                    <li class="list-disc">Date de naissance : <?php "" ?></li>
+                                <?php } ?> 
+                                <?php if (isset($birthLocation)) { ?>
+                                    <li class="list-disc">Lieu de naissance : <?php "" ?></li>
+                                <?php } ?>  
+                                <?php if (isset($nationality)) { ?>
+                                    <<li class="list-disc">Nationalité : <?php "" ?></li>
+                                <?php } ?>  
+                                <?php if (isset($num)) { ?>
+                                    <li class="list-disc">Numéro Pôle Emploi : <?php "" ?></li>
+                                <?php } ?>   
+                                <?php if (isset($gerant)) { ?>
+                                    <li class="list-disc">Gérant de l'entreprise : <?php "" ?></li>
+                                <?php } ?>   
+                        </ul>
+                        <button class="bg-main-red w-full md:w-3/5 text-main-white text-[18px] uppercase py-3 rounded-b-lg md:rounded-none md:mb-4 md:flex md:justify-center md:mx-auto">Editer les infos</button>
+                    </div>
+                </div>
+            </div>
 
 
             <!-- Modal footer -->
