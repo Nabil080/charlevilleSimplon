@@ -33,7 +33,7 @@
            <li>
               <a href="#" class="flex items-center p-2  rounded-lg ">
               <i class="fa-solid fa-user-group text-3xl md:text-xl text-main-red"></i>
-                 <span class="flex-1 ml-3 text-3xl md:text-xl whitespace-nowrap">Utilisateurs</span>
+                 <span class="flex-1 ml-3 text-3xl md:text-xl whitespace-nowrap">Promotions</span>
               </a>
            </li>
            <li>
