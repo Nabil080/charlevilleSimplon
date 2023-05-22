@@ -25,12 +25,11 @@ inputs[i].addEventListener('change', function()  // Event listener sur chaque ch
 
 };
 
-window.addEventListener("scroll", function () {
+window.addEventListener("scroll", function () { // Ecoute le scroll sur la page
 
-    if (nav.classList.contains("-translate-y-[20vh]")) {
-        console.log("remove");
+    if (nav.classList.contains("-translate-y-[20vh]")) { // si la navbar est caché fait remonté l'aside jusqu'en haut
         aside.classList.add("-translate-y-20");
-    } else {
+    } else {    // Si la navbar apparait fait redescendre l'aside
         aside.classList.remove("-translate-y-20");
     }
 });

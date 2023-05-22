@@ -48,40 +48,45 @@
                       <span class="flex-1 ml-3 text-3xl md:text-xl text-left whitespace-nowrap" sidebar-toggle-item>Contact</span>
                       <svg sidebar-toggle-item class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
                 </button>
-                <ul id="dropdown-contact" class="hidden py-2 space-y-2">
-                    <li>
-                       <a href="#" class="flex items-center w-full p-2 text-2xl md:text-xl transition duration-75 rounded-lg pl-11 group " aria-controls="dropdown-dev" data-collapse-toggle="dropdown-dev" >Promotions
-                       <svg sidebar-toggle-item class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-                       </a>
-                    </li>
-                    <ul id="dropdown-dev" class="hidden py-2 text-2xl md:text-xl space-y-2">
-                        <!-- <?php foreach ($promotions as $promotion) { ?> -->
-                        <li class="flex items-center">
-                            <input type="checkbox" name="$promotion['nom'];">
-                            <a href="#" class="flex items-center w-full p-2 transition duration-75 rounded-lg pl-11 group ">$promotion['nom']</a>
-                        </li>
-                        <!-- <?php } ?> -->
-                        
-                        <li class="flex items-center">
-                            <input type="checkbox" name="<?php ?>;">
-                           <a href="#" class="flex items-center w-full p-2  transition duration-75 rounded-lg pl-11 group ">Référent Digital</a>
-                        </li>
-                        <li class="flex items-center">
-                            <input type="checkbox" name="<?php ?>;">
-                           <a href="#" class="flex items-center w-full p-2  transition duration-75 rounded-lg pl-11 group ">TSSR</a>
-                        </li>
-                        <li class="flex items-center">
-                            <input type="checkbox" name="<?php ?>;">
-                           <a href="#" class="flex items-center w-full p-2  transition duration-75 rounded-lg pl-11 group ">CDA</a>
-                        </li>
-                    </ul>
-                    <li class="flex items-center">
-                        <input type="checkbox" name="allEntreprise">
-                       <a href="#" class="flex items-center w-full p-2 text-2xl md:text-xl transition duration-75 rounded-lg pl-11 group ">Entreprise</a>
-                    </li>
-
-                </ul>
-                <button onclick="openModal()" id="contactValidation" class="hidden bg-main-red w-1/2 text-center block text-white mx-auto md:w-auto rounded-[5px] mt-4 p-2 px-4">Envoyer<button>
+                <!-- <form> -->
+                   <ul id="dropdown-contact" class="hidden py-2 space-y-2">
+                       <li>
+                          <a href="#" class="flex items-center w-full p-2 text-2xl md:text-xl transition duration-75 rounded-lg pl-11 group " aria-controls="dropdown-dev" data-collapse-toggle="dropdown-dev" >Promotions
+                          <svg sidebar-toggle-item class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                          </a>
+                       </li>
+                       <ul id="dropdown-dev" class="hidden py-2 text-2xl md:text-xl space-y-2">
+                           <!-- <?php foreach ($promotions as $promotion) { ?> -->
+                           <li class="flex items-center">
+                               <input type="checkbox" name="$promotion['nom'];">
+                               <a href="#" class="flex items-center w-full p-2 transition duration-75 rounded-lg pl-11 group ">$promotion['nom']</a>
+                           </li>
+                           <!-- <?php } ?> -->
+                   
+                           <li class="flex items-center">
+                               <input type="checkbox" name="<?php ?>;">
+                              <a href="#" class="flex items-center w-full p-2  transition duration-75 rounded-lg pl-11 group ">Référent Digital</a>
+                           </li>
+                           <li class="flex items-center">
+                               <input type="checkbox" name="<?php ?>;">
+                              <a href="#" class="flex items-center w-full p-2  transition duration-75 rounded-lg pl-11 group ">TSSR</a>
+                           </li>
+                           <li class="flex items-center">
+                               <input type="checkbox" name="<?php ?>;">
+                              <a href="#" class="flex items-center w-full p-2  transition duration-75 rounded-lg pl-11 group ">CDA</a>
+                           </li>
+                       </ul>
+                       <li class="flex items-center">
+                           <input type="checkbox" name="allEntreprise">
+                          <a href="#" class="flex items-center w-full p-2 text-2xl md:text-xl transition duration-75 rounded-lg pl-11 group ">Entreprise</a>
+                       </li>
+                     </ul>
+                     <button data-modal-target="modal-contact" data-modal-toggle="modal-contact"
+                        id="contactValidation"
+                        class="hidden bg-main-red w-1/2 text-center block text-white mx-auto md:w-auto rounded-[5px] mt-4 p-2 px-4">
+                        Envoyer
+                     <button>
+                <!-- </form> -->
 
            </li>
         </ul>

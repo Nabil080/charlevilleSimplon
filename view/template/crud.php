@@ -10,6 +10,7 @@
         include ("crudInclude/_crudCandidat.php");
         include ("crudInclude/_modalInfos.php");
         include ("crudInclude/_modalCandidature.php");
+        include ("crudInclude/_modalContact.php");
 
     }
 
@@ -18,6 +19,8 @@
       include ("crudInclude/_crudApprenant.php");
       include ("crudInclude/_modalInfos.php");
       include ("crudInclude/_modalProjet.php");
+      include ("crudInclude/_modalContact.php");
+
     }
 
     if (isset($entreprisePage)  && $entreprisePage == 1) {
@@ -25,6 +28,8 @@
       include ("crudInclude/_crudEntreprise.php");
       include ("crudInclude/_modalInfos.php");
       include ("crudInclude/_modalProjet.php");
+      include ("crudInclude/_modalContact.php");
+
     }
     
     if (isset($promotionPage)  && $promotionPage == 1) {
@@ -33,11 +38,14 @@
       include ("crudInclude/_modalApprenant.php");
       include ("crudInclude/_modalFormateur.php");
       include ("crudInclude/_modalProjet.php");
+      include ("crudInclude/_modalContact.php");
+
     }
 
     if (isset($projetPage)  && $projetPage == 1) {
 
       include ("crudInclude/_crudProjet.php");
+      include ("crudInclude/_modalContact.php");
 
     }
     ?> 
