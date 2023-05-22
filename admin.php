@@ -1,25 +1,24 @@
 <?php
 
-switch ($admin) {
+switch ($action) {
     // Afficher le tableau de bord prospects
-    case 'crudCandidatPage':
-        crudCandidatPage();
+    case 'crudCandidatePage':
+        crudCandidatePage();
         break;
-    // Afficher le tableau de bord Apprenants
-    case 'crudApprenantPage':
-        crudApprenantPage();
+    case 'crudLearnerPage':
+        crudLearnerPage();
         break;
     // Afficher le tableau de bord Entreprises
-    case 'crudEntreprisePage':
-        crudEntreprisePage();
+    case 'crudCompanyPage':
+        crudCompanyPage();
         break;
     // Afficher le tableau de bord Promotions
     case 'crudPromotionPage':
-        crudPromoPage();
+        crudPromotionPage();
         break;
     // Afficher le tableau de bord Projets
     case 'crudProjetPage':
-        crudProjetsPage();
+        crudProjetPage();
         break;
     // Afficher le CRUD users choisie
     // Afficher le CRUD des formations

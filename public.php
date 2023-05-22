@@ -38,25 +38,6 @@ switch ($action) {
     case 'registerTreatment':
         registerTreatment();
         break;
-    // Affiche le crud (temporaire)
-    case 'crudCandidatPage':
-        crudCandidatPage();
-        break;
-    case 'crudApprenantPage':
-        crudApprenantPage();
-        break;
-    // Afficher le tableau de bord Entreprises
-    case 'crudEntreprisePage':
-        crudEntreprisePage();
-        break;
-    // Afficher le tableau de bord Promotions
-    case 'crudPromotionPage':
-        crudPromotionPage();
-        break;
-    // Afficher le tableau de bord Projets
-    case 'crudProjetPage':
-        crudProjetPage();
-        break;
     // Envoie du traitement d'activation de compte
     // Envoie du traitement du formulaire de connexion
 }
