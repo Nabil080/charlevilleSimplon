@@ -58,7 +58,7 @@ class User
 class UsersRepository extends ConnectBdd
 {
 
-    public function getUserById($id)
+    public function getUserById($id):object
     {
         $req = "SELECT * FROM `user` WHERE `user_id` = ?";
         $stmt = $this->bdd->prepare($req);

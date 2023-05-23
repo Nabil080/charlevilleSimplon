@@ -58,7 +58,7 @@ class ProjectRepository extends ConnectBdd{
 
         $Status = new Status();
         $statusRepo = new StatusRepository();
-        $Status = $StatusRepo->getStatusById($data['status_id']);
+        $Status = $statusRepo->getStatusById($data['status_id']);
         $project->status = $Status;
 
         $Promo = new Promo();
