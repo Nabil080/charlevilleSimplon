@@ -2,7 +2,10 @@
 $title = "Espace personnel";
 ?>
 
-<?php ob_start(); ?>
+<?php ob_start();
+var_dump($allTags);
+var_dump($userDatas);
+?>
 <!-- Section photo et description -->
 <div class="background bg-main-white overflow-x-hidden min-h-[100vh]">
 
@@ -51,13 +54,13 @@ $title = "Espace personnel";
             <div class="picture_description grid grid-cols-1 lg:grid-cols-2 items-center px-[8%] lg:px-[3%]">
                 <!-- Image de profil -->
                 <div class="picture max-h-screen mx-auto">
-                    <img class="max-w-full max-h-[600px] overflow-scroll rounded-t-lg" src="assets/img/avatar/default_avatar.png" alt="Image de profil">
+                    <img class="max-w-full max-h-[600px] overflow-scroll rounded-t-lg" src="assets/img/avatar/<?= $userDatas->avatar ?>" alt="Image de profil">
                     <button class="bg-main-red w-full text-main-white text-[16px] lg:text-[28px] py-3 rounded-b-lg">Changer ma photo de profil</button>
                 </div>
                 <!-- Description -->
                 <div class="description lg:ml-5 h-[100%] flex flex-col">
                     <div class="edit_profil flex justify-center lg:justify-normal items-center pt-5">
-                        <h1 id="title" class="text-main-red font-title text-[28px] lg:text-[48px] font-semibold text-center pr-5"><span class="uppercase">Gérard</span> Roger</h1>
+                        <h1 id="title" class="text-main-red font-title text-[28px] lg:text-[48px] font-semibold text-center pr-5"><span class="uppercase"><?= $userDatas->name ?></span> <?= $userDatas->surname ?></h1>
                         <!-- bouton d'edit du nom -->
                     </div>
                     <!-- Statut -->
@@ -79,7 +82,7 @@ $title = "Espace personnel";
 
                         <div id="user-status" class="flex items-center pt-1 pb-2">
                             <span class="w-6 h-6 border-[1px] bg-main-green rounded-full mr-2 animate-pulse"></span>
-                            <span class="text-[16px] flex justify-center italic">En alternance depuis janvier 2023</span>
+                            <span class="text-[16px] flex justify-center italic"><?= $userDatas->status->name ?> depuis <?=  substr($userDatas->status_date, 0,-6) ?></span>
                             <div onclick="swapDivsById('user-status','user-status-update')" class="cursor-pointer">
                                 <i class="fa-solid fa-pen text-main-red w-[20px] ml-3"></i>
                                 <span class="hidden sm:inline-block text-[10px] lg:text-base text-main-red"> Modifier</span>
@@ -89,17 +92,11 @@ $title = "Espace personnel";
                     <!-- Texte de description -->
                     <div class="text_description rounded-[5px] border-[1px] border-main-border bg-main-lightgray mt-5 grow lg:flex lg:flex-col lg:justify-between">
                         <div id="description" class="lg:p-4 flex flex-col ">
-                            <p class="text-[18px] text-justify pt-4 px-3 pb-2 lg:pb-0">Je m'appelle Guillaume et je suis un super développeur front-end. Je suis le boss du Javascript.</p>
-                            <p class="text-[18px] text-justify pt-4 px-3 pb-2 lg:pb-0">J'ai fait un stage de méga beau gosse chez Apple, Tilm Cook a promis de m'embaucher. Je m'appelle Guillaume et je suis un super développeur front-end. Je suis le boss du Javascript.</p>
-                            <p class="text-[18px] text-justify pt-4 px-3 pb-2 lg:pb-0">J'ai fait un stage de méga beau gosse chez Apple, Tilm Cook a promis de m'embaucher.Je m'appelle Guillaume et je suis un super développeur front-end. Je suis le boss du Javascript.</p>
+                            <p class="text-[18px] text-justify pt-4 px-3 pb-2 lg:pb-0"><?= $userDatas->description ?></p>
                         </div>
                         <form id="description-update" class="hidden h-full">
                             <textarea name="description" id="editor" class="h-full overflow-scroll">
-                                Je m'appelle Guillaume et je suis un super développeur front-end. Je suis le boss du Javascript.
-
-                                J'ai fait un stage de méga beau gosse chez Apple, Tilm Cook a promis de m'embaucher. Je m'appelle Guillaume et je suis un super développeur front-end. Je suis le boss du Javascript.
-
-                                J'ai fait un stage de méga beau gosse chez Apple, Tilm Cook a promis de m'embaucher.Je m'appelle Guillaume et je suis un super développeur front-end. Je suis le boss du Javascript.
+                            <?= $userDatas->description ?>
                             </textarea>
                             <button type="submit" class="py-2 px-4 bg-main-red border-main-white border text-main-white my-4 mr-4">Modifier <i class="fa-solid fa-check"></i></button>
                             <span onclick="swapDivsById('description','description-update')" class="cursor-pointer">Annuler <i class="fa-solid fa-xmark"></i></span>
@@ -110,7 +107,7 @@ $title = "Espace personnel";
 
                     <div class="flex flex-col lg:flex-row justify-center my-3 lg:my-0 lg:mt-4">
                         <div id="cv" class="flex items-center justify-center lg:flex-row flex-col my-4 lg:my-0 lg:mx-auto">
-                            <button class="bg-main-red text-main-white text-[16px] rounded-[5px] mx-auto py-3 lg:py-1 px-2 lg:px-4">Télécharger le C.V.</button>
+                            <a href="upload/cv/<?= $userDatas->cv ?>" class="bg-main-red text-main-white text-[16px] rounded-[5px] mx-auto py-3 lg:py-1 px-2 lg:px-4" target="_blank">Voir le C.V.</a>
                             <div onclick="swapDivsById('cv','cv-update')" class="modify-cv cursor-pointer flex items-center pt-2 pl-3">
                                 <i class="fa-solid fa-download text-main-red w-[20px]"></i>
                                 <span class="text-[10px] text-main-red">Modifier mon C.V.</span>
@@ -121,7 +118,7 @@ $title = "Espace personnel";
                             <button type="submit"><i class="fa-solid fa-check text-main-red"></i></button>
                             <i onclick="swapDivsById('cv','cv-update')" class="fa-solid fa-xmark text-main-red cursor-pointer"></i>
                         </form>
-                        <button class="bg-main-red text-main-white text-[16px] rounded-[5px] mx-auto py-3 lg:py-1 px-2 lg:px-4">Contacter</button>
+                        <a href="mailto:<?= $userDatas->email ?>" class="bg-main-red text-main-white text-[16px] rounded-[5px] mx-auto py-3 lg:py-1 px-2 lg:px-4">Contacter</a>
                     </div>
                 </div>
             </div>
@@ -137,21 +134,21 @@ $title = "Espace personnel";
                         <div id="links">
                             <div class="sites flex items-center px-3 mt-2 mb-4 lg:mb-5">
                                 <span class="w-6 h-6 border-[1px] bg-main-red rounded-full mr-2"></span>
-                                <a href="">https://monlinkedindebeaugosse</a>
+                                <a href="<?= $userDatas->linkedin ?>"><?= $userDatas->linkedin ?></a>
                             </div>
                             <div class="sites flex items-center px-3 mt-2 mb-4 lg:mb-8">
                                 <span class="w-6 h-6 border-[1px] bg-main-red rounded-full mr-2"></span>
-                                <a href="">https://mongithubdebeaugosse</a>
+                                <a href="<?= $userDatas->github ?>"><?= $userDatas->github ?></a>
                             </div>
                         </div>
                         <form id="links-update" class="hidden space-y-2">
                             <div class="space-x-4">
-                                <input type="text" value="https://monlinkedindebeaugosse" placeholder="lien linkedin">
+                                <input type="text" value="<?= $userDatas->linkedin ?>" placeholder="lien linkedin">
                                 <button type="submit"><i class="fa-solid fa-check text-main-red"></i></button>
                                 <i onclick="swapDivsById('cv','cv-update')" class="fa-solid fa-xmark text-main-red cursor-pointer"></i>
                             </div>
                             <div class="space-x-4">
-                                <input type="text" value="https://mongithubdebeaugosse" placeholder="lien github">
+                                <input type="text" value="<?= $userDatas->github ?>" placeholder="lien github">
                                 <button type="submit"><i class="fa-solid fa-check text-main-red"></i></button>
                                 <i onclick="swapDivsById('cv','cv-update')" class="fa-solid fa-xmark text-main-red cursor-pointer"></i>
                             </div>
@@ -163,34 +160,19 @@ $title = "Espace personnel";
                         <form id="skills-update" class="hidden">
                             <select multiple name="skills">
                                 <option disabled selected>Sélectionner des compétences</option>
-                                <option value="">HTML</option>
-                                <option value="">CSS</option>
-                                <option value="">Javascript</option>
-                                <option value="">PHP</option>
-                                <option value="">POO</option>
-                                <option value="">React</option>
-                                <option value="">Symfony</option>
-                                <option value="">Laravel</option>
+                                <?php foreach ($allTags as $each_tag){ ?>
+                                    <option value="<?= $each_tag['tag_id']?>"><?= $each_tag['tag_name'] ?></option>
+                                <?php } ?>
                             </select>
                             <button type="submit" class="py-2 px-4 bg-main-red border-main-white border text-main-white my-4 mr-4">Modifier <i class="fa-solid fa-check"></i></button>
                             <span onclick="swapDivsById('description','description-update')" class="cursor-pointer">Annuler <i class="fa-solid fa-xmark"></i></span>
                         </form>
                         <div id="skills" class="flex gap-4 justify-center sm:justify-normal mx-auto sm:px-4 mt-2 lg:mt-7 mb-4 flex-wrap">
-                            <a href="">
-                                <p class="bg-[#F2F2F3] px-4 py-1 border-main-gray border-2 text-[14px] lg:text-[16px] rounded-[50px] mb-2">REACT</p>
-                            </a>
-                            <a href="">
-                                <p class="bg-[#F2F2F3] px-4 py-1 border-main-gray border-2 text-[14px] lg:text-[16px] rounded-[50px] mb-2">Symfony</p>
-                            </a>
-                            <a href="">
-                                <p class="bg-[#F2F2F3] px-4 py-1 border-main-gray border-2 text-[14px] lg:text-[16px] rounded-[50px] mb-2">TypeScript</p>
-                            </a>
-                            <a href="">
-                                <p class="bg-[#F2F2F3] px-4 py-1 border-main-gray border-2 text-[14px] lg:text-[16px] rounded-[50px] mb-2">TypeScript</p>
-                            </a>
-                            <a href="">
-                                <p class="bg-[#F2F2F3] px-4 py-1 border-main-gray border-2 text-[14px] lg:text-[16px] rounded-[50px] mb-2">TypeScript</p>
-                            </a>
+                            <?php foreach ($userDatas->tags as $tag) { ?>
+                                <a href="">
+                                    <p class="bg-[#F2F2F3] px-4 py-1 border-main-gray border-2 text-[14px] lg:text-[16px] rounded-[50px] mb-2"><?= $tag->name ?></p>
+                                </a>
+                            <?php } ?>
                         </div>
                         <!-- Modifier ses infos persos -->
                         <div class="modify-infos flex items-center pt-2 lg:mt-10 lg:mb-10">
@@ -257,7 +239,7 @@ $title = "Espace personnel";
 
                     <!-- Section : projet phare -->
                     <section class="sectionChange">
-                        <iframe class="w-full min-h-[300px] lg:min-h-[500px]" src="https://nabil.serveur-mw.fr/portfolio/Voyage_autour_du_monde/" title="iframe du projet phare"></iframe>
+                        <iframe class="w-full min-h-[300px] lg:min-h-[500px]" src="<?= $userDatas->highlight ?>" title="iframe du projet phare"></iframe>
                         <!-- Boutons modifier/supprimer le projet -->
                         <div class="boutons lg:flex lg:flex-row lg:justify-between">
                             <div id="main-project" class="flex justify-between mt-5 mx-5 mb-2">
