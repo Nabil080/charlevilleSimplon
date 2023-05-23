@@ -21,6 +21,7 @@ class User
     public $status;
     public $id_role;
     public $highlight;
+    public $company;
 
     public function getNameAndPseudo($account)
     {
@@ -88,6 +89,7 @@ class UsersRepository extends ConnectBdd
         $User->status = $data['status_name'];
         $User->id_role = $data['role_id'];
         $User->highlight = $data['user_highlight'];
+        $User->company = $data['user_company'];
 
         return $User;
     }
@@ -148,6 +150,7 @@ class UsersRepository extends ConnectBdd
         $User->status = $account['status_name'];
         $User->id_role = $account['role_id'];
         $User->highlight = $account['user_highlight'];
+        $User->company = $account['user_company'];
 
         return $User;
     }

@@ -41,6 +41,16 @@ function profilePage()
 {
     include 'view/public/profile.php';
 }
+function myProfile()
+{
+    $user = new UsersRepository();
+    $userDatas = $user->getUserById($_SESSION['user']->id);
+    include 'view/public/profile.php';
+    // $ProjectRepo = new ProjectRepository;
+    // récupérer projects bu user id
+    // $userProjects = $ProjectRepo->getProjectsByUserId($_SESSION['user']->id);
+    // var_dump($userProjects);
+}
 
 // Promotion
 function allPromotionsPage()
