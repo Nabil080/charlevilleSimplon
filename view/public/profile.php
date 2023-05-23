@@ -3,7 +3,6 @@ $title = "Espace personnel";
 ?>
 
 <?php ob_start(); ?>
-
 <!-- Section photo et description -->
 <div class="background bg-main-white overflow-x-hidden min-h-[100vh]">
 
@@ -74,7 +73,7 @@ $title = "Espace personnel";
                                 <option value="">En alternance</option>
                                 <option value="">En formation</option>
                             </select>
-                             <button type="submit"><i class="fa-solid fa-check text-main-red"></i></button>
+                            <button type="submit"><i class="fa-solid fa-check text-main-red"></i></button>
                             <i onclick="swapDivsById('user-status','user-status-update')" class="fa-solid fa-xmark text-main-red cursor-pointer"></i>
                         </form>
 

@@ -43,8 +43,8 @@ function profilePage()
 }
 function myProfile()
 {
-    $user = new UsersRepository();
-    $userDatas = $user->getUserById($_SESSION['user']->id);
+    // $user = new UsersRepository();
+    // $userDatas = $user->getUserById($_SESSION['user']->id);
     include 'view/public/profile.php';
     // $ProjectRepo = new ProjectRepository;
     // récupérer projects bu user id
