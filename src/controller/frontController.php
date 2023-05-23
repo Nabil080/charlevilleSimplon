@@ -1,4 +1,5 @@
 <?php
+require_once("src/model/Promo.php");
 function homepage()
 {
     include 'view/public/homepage.php';
@@ -49,6 +50,9 @@ function allPromotionsPage()
 }
 function promotionPage()
 {
+    $id = 1;
+    $promoRepository = new PromoRepository;
+    $promos = $promoRepository->getPromoById($id);
     include 'view/public/promotion.php';
 }
 

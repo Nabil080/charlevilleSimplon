@@ -2,7 +2,7 @@
 session_start();
 require_once 'src/controller/frontController.php';
 require 'src/controller/back/UserController.php';
-require 'src/model/ConnectBdd.php';
+// require 'src/model/ConnectBdd.php';
 
 $_SESSION['user'] = ['role' => 1];
 // var_dump($_SESSION);

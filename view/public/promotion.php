@@ -3,6 +3,7 @@
 <?php ob_start(); ?>
 
 <main class="w-[100vw] overflow-x-hidden bg-main-white">
+    <?php var_dump($promos); ?>
     <section>
         <!-------------Titre----------->
         <h2 class="text-center text-[24px] md:text-4xl font-bold font-title text-main-red uppercase pb-2">Développeur

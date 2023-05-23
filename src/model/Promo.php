@@ -37,6 +37,8 @@ class PromoRepository extends ConnectBdd{
 
         return $Promo;
     }
+
+    public function 
 }
 
 
