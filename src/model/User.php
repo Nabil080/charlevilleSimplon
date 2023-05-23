@@ -12,6 +12,7 @@ class User
     public $linkedin;
     public $github;
     public $token;
+    public $company;
     public $numero_pe;
     public $phone;
     public $adress;
@@ -83,6 +84,7 @@ class UsersRepository extends ConnectBdd
         $User->linkedin = isset($data['user_linkedin']) ? $data['user_linkedin'] : null;
         $User->github = isset($data['user_github']) ? $data['user_github'] : null;
         $User->numero_pe = isset($data['user_numero_pe']) ? $data['user_numero_pe'] : null;
+        $User->company = isset($data['user_company']) ? $data['user_company'] : null;
         $User->birth_date = isset($data['user_birth_date']) ? $data['user_birth_date'] : null;
         $User->birth_place = isset($data['user_birth_place']) ? $data['user_birth_place'] : null;
         $User->nationality = isset($data['user_nationality']) ? $data['user_nationality'] : null;
@@ -152,6 +154,7 @@ class UsersRepository extends ConnectBdd
         $User->linkedin = isset($data['user_linkedin']) ? $data['user_linkedin'] : null;
         $User->github = isset($data['user_github']) ? $data['user_github'] : null;
         $User->numero_pe = isset($data['user_numero_pe']) ? $data['user_numero_pe'] : null;
+        $User->company = isset($data['user_company']) ? $data['user_company'] : null;
         $User->birth_date = isset($data['user_birth_date']) ? $data['user_birth_date'] : null;
         $User->birth_place = isset($data['user_birth_place']) ? $data['user_birth_place'] : null;
         $User->nationality = isset($data['user_nationality']) ? $data['user_nationality'] : null;

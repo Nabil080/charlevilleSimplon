@@ -3,6 +3,7 @@ require_once('src/model/ConnectBdd.php');
 
 class Promo {
     public $id;
+    public $name;
     public $start;
     public $end;
     public $status;
@@ -22,6 +23,7 @@ class PromoRepository extends ConnectBdd{
         $data = $req->fetch(PDO::FETCH_ASSOC);
 
         $Promo->id = $data['promo_id'];
+        $Promo->name = $data['promo_name'];
         $Promo->start = $data['promo_start'];
         $Promo->end = $data['promo_end'];
 
