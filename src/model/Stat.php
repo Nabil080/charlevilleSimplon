@@ -1,34 +1,35 @@
 <?php
 require_once('src/model/ConnectBdd.php');
 
-class Job {
+class Stat {
     public $id;
     public $name;
+    public $number;
     public $formation;
 }
 
-class JobRepository extends ConnectBdd{
+class StatRepository extends ConnectBdd{
     public function __construct(){
         parent::__construct();
     }
 
-    public function getJobById($id):object
+    public function getStatById($id):object
     {
-        $Job = new Job;
-        $req = $this->bdd->prepare("SELECT * FROM `job` WHERE `job_id` = ?");
+        $Stat = new Stat;
+        $req = $this->bdd->prepare("SELECT * FROM `stat` WHERE `stat_id` = ?");
         $req->execute([$id]);
         $data = $req->fetch(PDO::FETCH_ASSOC);
 
-        $Job->id = $data['job_id'];
-        $Job->name = $data['job_name'];
+        $Stat->id = $data['stat_id'];
+        $Stat->name = $data['stat_name'];
+        $Stat->number = $data['stat_number'];
 
         $Formation = new Formation;
         $formationRepo = new FormationRepository;
         $Formation = $formationRepo->getFormationById($data['formation_id']);
-        $Job->formation = $Formation;
+        $Stat->formation = $Formation;
 
-
-        return $Job;
+        return $Stat;
     }
 }
 

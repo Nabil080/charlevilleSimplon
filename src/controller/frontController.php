@@ -1,7 +1,4 @@
 <?php
-require_once('src/model/Formation.php');
-
-
 function homepage()
 {
     include 'view/public/homepage.php';
