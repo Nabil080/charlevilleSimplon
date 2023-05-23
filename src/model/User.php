@@ -86,7 +86,7 @@ class UsersRepository extends ConnectBdd
         $User->birth_date = $data['user_birth_date'];
         $User->birth_place = $data['user_birth_place'];
         $User->nationality = $data['user_nationality'];
-        $User->status = $data['status_name'];
+        $User->status = $data['status_id'];
         $User->id_role = $data['role_id'];
         $User->highlight = $data['user_highlight'];
         $User->company = $data['user_company'];
