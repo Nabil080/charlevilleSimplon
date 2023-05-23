@@ -9,7 +9,7 @@ class Promo {
     public $formation;
 }
 
-class StatusRepository extends ConnectBdd{
+class PromoRepository extends ConnectBdd{
     public function __construct(){
         parent::__construct();
     }
@@ -19,7 +19,7 @@ class StatusRepository extends ConnectBdd{
         $Promo = new Promo;
         $req = $this->bdd->prepare("SELECT * FROM `promo` WHERE `promo_id` = ?");
         $req->execute([$id]);
-        $data = $req->fetch(PDO::FETCH_OBJ);
+        $data = $req->fetch(PDO::FETCH_ASSOC);
 
         $Promo->id = $data['promo_id'];
         $Promo->start = $data['promo_start'];

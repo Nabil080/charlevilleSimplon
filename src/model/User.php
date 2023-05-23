@@ -63,7 +63,7 @@ class UsersRepository extends ConnectBdd
         $req = "SELECT * FROM `user` WHERE `user_id` = ?";
         $stmt = $this->bdd->prepare($req);
         $stmt->execute([$id]);
-        $data = $stmt->fetch(PDO::FETCH_OBJ);
+        $data = $stmt->fetch(PDO::FETCH_ASSOC);
         $stmt->closeCursor();
 
         $User = new User;

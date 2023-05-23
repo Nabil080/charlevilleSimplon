@@ -3,11 +3,11 @@ require_once('src/model/ConnectBdd.php');
 
 class Formation
 {
-    public $formation_id;
-    public $formation_name;
-    public $formation_description;
-    public $formation_duration;
-    public $formation_level;
+    public $id;
+    public $name;
+    public $description;
+    public $duration;
+    public $level;
     public $status;
 }
 class FormationRepository extends ConnectBdd
@@ -22,13 +22,20 @@ class FormationRepository extends ConnectBdd
         $Formation = new Formation;
         $req = $this->bdd->prepare("SELECT * FROM `formation` WHERE `formation_id` = ?");
         $req->execute([$id]);
-        $data = $req->fetch(PDO::FETCH_OBJ);
+        $data = $req->fetch(PDO::FETCH_ASSOC);
 
         $Formation->id = $data['formation_id'];
         $Formation->name = $data['formation_name'];
         $Formation->description = $data['formation_description'];
-        $Formation->name = $data['formation_name'];
-        $Formation->name = $data['formation_name'];
+        $Formation->duration = $data['formation_duration'];
+        $Formation->level = $data['formation_level'];
+
+        $Status = new Status;
+        $statusRepo = new StatusRepository;
+        $Status = $statusRepo->getStatusById($data['status_id']);
+        $Formation->status = $Status;
+
+        return $Formation;
     }
 
     public function getFormations()

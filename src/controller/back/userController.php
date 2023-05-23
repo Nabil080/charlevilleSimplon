@@ -1,6 +1,4 @@
 <?php
-require_once 'src/model/User.php';
-require_once 'src/model/AlertMessage.php';
 
 function registerTreatment()
 {

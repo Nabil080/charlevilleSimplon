@@ -16,7 +16,7 @@ class StatusRepository extends ConnectBdd{
         $Status = new Status;
         $req = $this->bdd->prepare("SELECT * FROM `status` WHERE `status_id` = ?");
         $req->execute([$id]);
-        $data = $req->fetch(PDO::FETCH_OBJ);
+        $data = $req->fetch(PDO::FETCH_ASSOC);
 
         $Status->id = $data['status_id'];
         $Status->name = $data['status_name'];

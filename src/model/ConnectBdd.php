@@ -1,6 +1,4 @@
 <?php
-require_once('src/model/Status.php');
-
 
 class ConnectBdd
 {
@@ -16,3 +14,22 @@ class ConnectBdd
         $this->bdd = new PDO("mysql:host=$host;dbname=$db;charset=utf8", $user, $pass, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
     }
 }
+require_once('src/model/Activity.php');
+require_once('src/model/AlertMessage.php');
+require_once('src/model/Certification.php');
+require_once('src/model/Fee.php');
+require_once('src/model/Formation.php');
+require_once('src/model/Job.php');
+require_once('src/model/Program.php');
+require_once('src/model/ProgramLayout.php');
+require_once('src/model/Progress.php');
+require_once('src/model/Project.php');
+require_once('src/model/Promo.php');
+require_once('src/model/Requirement.php');
+require_once('src/model/Role.php');
+require_once('src/model/Skill.php');
+require_once('src/model/Statistic.php');
+require_once('src/model/Status.php');
+require_once('src/model/Tag.php');
+require_once('src/model/Type.php');
+require_once('src/model/User.php');

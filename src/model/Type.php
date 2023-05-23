@@ -16,7 +16,7 @@ class TypeRepository extends ConnectBdd{
         $Type = new Type;
         $req = $this->bdd->prepare("SELECT * FROM `type` WHERE `type_id` = ?");
         $req->execute([$id]);
-        $data = $req->fetch(PDO::FETCH_OBJ);
+        $data = $req->fetch(PDO::FETCH_ASSOC);
 
         $Type->id = $data['type_id'];
         $Type->name = $data['type_name'];

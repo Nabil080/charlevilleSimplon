@@ -33,9 +33,9 @@ class ProjectRepository extends ConnectBdd{
     public function getProjectById($projectId){
         $project = new Project;
 
-        $req = $this->bdd->prepare("SELECT * FROM projects WHERE id_project = ?");
+        $req = $this->bdd->prepare("SELECT * FROM project WHERE project_id = ?");
         $req->execute([$projectId]);
-        $data = $req->fetch();
+        $data = $req->fetch(PDO::FETCH_ASSOC);
 
         $project->id = $data['project_id'];
         $project->name = $data['project_name'];
