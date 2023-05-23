@@ -19,12 +19,13 @@ class SkillRepository extends ConnectBdd{
         $req->execute([$id]);
         $data = $req->fetch(PDO::FETCH_ASSOC);
 
-        $Skill->id = $data['Skill_id'];
-        $Skill->name = $data['Skill_name'];
+        $Skill->id = $data['skill_id'];
+        $Skill->name = $data['skill_name'];
 
         $Activity = new Activity;
         $activityRepo = new ActivityRepository;
-        $Activity = $activityRepo->getActivityById($data['']);
+        $Activity = $activityRepo->getActivityById($data['activity_id']);
+        $Skill->activity = $Activity;
 
         return $Skill;
     }
