@@ -15,7 +15,7 @@
         if(sizeof($projects) == 0){
             echo '<script>window.location.href = "?action=allProjectsPage"</script>';
         }
-        var_dump($projects);
+        // var_dump($projects);
 
 ?>
 
@@ -72,9 +72,9 @@
         <h3 class="max-w-[766px] text-main-red xl:col-span-2">10 projets correspondants sur 72</h3>
 
         <?php
-        foreach($projects as $project){
-            include('view/template/_project_card.php');
-        }
+        // foreach($projects as $project){
+        //     include('view/template/_project_card.php');
+        // }
         ?>
 
 
@@ -83,10 +83,10 @@
     <!-- pagination -->
     <section id="pagination" class="flex justify-center text-md ">
     <a href="?action=allProjectsPage&page=<?=$pageNumber-1?>" class="fa fa-chevron-left my-auto mx-3 px-3 <?php if($pageNumber == 1){ echo 'opacity-30 select-none pointer-events-none';}?>"></a>
-    <div class="flex gap-x-0.5 [&>a]:px-4 [&>a]:py-0.5 [&>a]:rounded-md">
+    <div id="pagination" class="flex gap-x-0.5 [&>a]:px-4 [&>a]:py-0.5 [&>a]:rounded-md">
         <?php for($i=1;$i<=$pageCount;$i++){
                 if($i > $pageNumber - 3 && $i < $pageNumber + 3){?>
-                    <a href="?action=allProjectsPage&page=<?=$i?>" class="hover:bg-main-red hover:text-main-white cursor-pointer <?php echo $i == $pageNumber ? " bg-main-red text-main-white " : " "; ?>"><?=$i?></a>
+                    <a id="pagination-<?=$i?>" onclick="changePage(<?=$i?>)" class="hover:bg-main-red hover:text-main-white cursor-pointer <?php echo $i == $pageNumber ? " bg-main-red text-main-white " : " "; ?>"><?=$i?></a>
                 <?php }} ?>
     </div>
     <a href="?action=allProjectsPage&page=<?=$pageNumber+1?>" class="fa fa-chevron-right my-auto mx-3 px-3 <?php if($pageNumber == $pageCount){ echo 'opacity-30 select-none pointer-events-none';}?>"></a>
@@ -94,6 +94,112 @@
 
 </section>
 
+<script>
+
+window.onload = () => changePage(1);
+
+const changePage = number => {
+    const projectGrid = document.querySelector('#project-cards')
+    const paginationButtons = document.querySelectorAll('#pagination a');
+
+
+    let pageNumber = number;
+
+    const projectsCount = 9
+    const projectsPerPage = 6
+    const totalPages = Math.ceil(projectsCount/projectsPerPage)
+
+    let initialPage = (pageNumber-1)*projectsPerPage
+    let limitRequest = `${initialPage}, ${projectsPerPage}`;
+    // console.log(limitRequest);
+
+    fetch('?action=projectsPagination',{
+        method: 'POST',
+        body:JSON.stringify({request: limitRequest})
+    })
+    .then((response) => {
+        // console.log(response.text())
+
+        return response.text()
+    })
+    .then((data) => {
+        projectGrid.innerHTML = ""
+        data = JSON.parse(data);
+
+        data.projets.forEach(projet => {
+
+            console.log(projet)
+            projectGrid.insertAdjacentHTML('beforeend',
+            `
+            <!-- card projet 1 -->
+        <article id="projet-card-1"
+            class="project-card max-w-[766px] border-2 border-black rounded-lg p-4 mb-8 md:flex gap-6 md:p-6 md:mx-auto">
+            <!-- partie entreprise desktop -->
+            <div class="hidden md:block w-1/3 border-r-2 border-main-gray pr-6">
+                <div class="my-2 flex-col">
+                    <div class="flex flex-wrap">
+                        <p class="font-title font-bold mr-2">Projet fourni par : </p>
+                        <p><a href="${projet.company_link}" target="_blank" class="text-main-red underline font-bold text-sm">${projet.company_name}</a></p>
+                    </div>
+                    <div class="my-4 grow"><img class="" src="${projet.company_image}" alt="logo de l\'entreprise"></div>
+                    <div class="flex flex-wrap">
+                        <p class="font-title font-bold mr-2">Adresse :</p>
+                        <p class="text-sm pt-0.5 text-left font-light">${projet.company_adress}</p>
+                    </div>
+                </div>
+            </div>
+            <!-- partie info projet -->
+            <div class="flex-col text-[12px] flex text-end md:w-2/3">
+                <!-- tags projet -->
+                <div
+                    class="uppercase space-x-4 my-4 [&>tag]:bg-main-gray [&>tag]:bg-opacity-10 [&>tag]:py-2 [&>tag]:px-4 [&>tag]:rounded-full">
+                    <tag>React</tag>
+                </div>
+                <!-- titre projet -->
+                <h2 class="font-title text-main-red italic font-bold text-3xl my-2"><a href="?action=projetPage&id=${projet.id}">${projet.name}</a></h2>
+                <div class="self-end flex w-3/4 justify-between italic border-b border-main-red">
+                    <span>Débuté le ${projet.start}</span>
+                    <span>Fini le ${projet.end}</span></div>
+                <!-- contenu projet -->
+                <div class="text-base flex-grow flex-col">
+                    <p class="pl-[20%] line-clamp-5 mt-2 mb-4">${projet.description}</p>
+                    <div id="end" class="mt-auto">
+                        <a href="page de la promo"
+                            class="bg-main-red py-2 px-4 rounded-full text-main-white my-2 hover:bg-main-white hover:text-main-red hover:border border-main-red">
+                            ${projet.name}
+                        </a>
+                        <div
+                            class="space-x-4 mt-4 mb-2 text-sm text-main-white [&>a]:bg-main-gray [&>a]:py-1 [&>a]:px-3 [&>a]:rounded-full">
+   
+                        </div>
+                        <a href="?action=projetPage&id=${projet.id}" class="block float-left text-xs">
+                        Voir le projet <i class="fa fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+            <!-- séparateur mobile-->
+            <div class="md:hidden w-4/5 mx-auto bg-main-gray bg-opacity-50 h-0.5 my-4"></div>
+            <!-- partie info entreprise mobile-->
+            <div class="md:hidden my-2">
+                <div class="flex flex-wrap">
+                    <p class="font-title font-bold mr-2">Projet fourni par : </p>
+                    <p><a href="${projet.company_link}" class="text-main-red underline font-bold text-sm">${projet.company_name}</a></p>
+                </div>
+                <div class="flex flex-wrap">
+                    <p class="font-title font-bold mr-2">Adresse :</p>
+                    <p class="text-sm pt-0.5 text-left font-light">${projet.company_adress}</p>
+                </div>
+            </div>
+        </article>
+
+            `
+            )
+        })
+    })
+}
+
+
+</script>
 
 
 

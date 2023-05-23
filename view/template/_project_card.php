@@ -8,7 +8,7 @@
                         <p class="font-title font-bold mr-2">Projet fourni par : </p>
                         <p><a href="<?=$project->company_link?>" target="_blank" class="text-main-red underline font-bold text-sm"><?=$project->company_name?></a></p>
                     </div>
-                    <div class="my-4 grow"><img class="" src="<?=$project->company_image?>" alt="logo de l'entreprise"></div>
+                    <div class="my-4 grow"><img class="" src="<?=$project->company_image?>" alt="logo de l\'entreprise"></div>
                     <div class="flex flex-wrap">
                         <p class="font-title font-bold mr-2">Adresse :</p>
                         <p class="text-sm pt-0.5 text-left font-light"><?=$project->company_adress?></p>
