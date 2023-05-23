@@ -20,7 +20,9 @@ switch ($action) {
         break;
     // Afficher la promo choisi
     // Afficher profil de l'apprennant
-
+    case 'profilePage':
+        profilePage();
+        break;
     // Afficher tous les projets
     case 'allProjectsPage':
         allProjectsPage();

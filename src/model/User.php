@@ -20,6 +20,7 @@ class User
     public $nationality;
     public $status;
     public $id_role;
+    public $highlight;
 
     public function getNameAndPseudo($account)
     {
@@ -132,12 +133,12 @@ class UsersRepository extends ConnectBdd
         $User->surname = $account['user_surname'];
         $User->email = $account['user_email'];
         $User->password = $account['user_password'];
-        $User->avatar = $account['user_avater'];
+        $User->avatar = $account['user_avatar'];
         $User->description = $account['user_description'];
         $User->linkedin = $account['user_linkedin'];
         $User->github = $account['user_github'];
         $User->token = $account['user_token'];
-        $User->id__poleEmploi = $account['user_'];
+        $User->id__poleEmploi = $account['user_numero_pe'];
         $User->phone = $account['user_phone'];
         $User->adress = $account['user_place'];
         $User->birth_date = $account['user_birth_date'];
@@ -145,6 +146,7 @@ class UsersRepository extends ConnectBdd
         $User->nationality = $account['user_nationality'];
         $User->status = $account['status_name'];
         $User->id_role = $account['role_id'];
+        $User->highlight = $account['user_highlight'];
 
         return $User;
     }
