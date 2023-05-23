@@ -8,15 +8,27 @@ class Formation
     public $formation_description;
     public $formation_duration;
     public $formation_level;
-    public $status_id;
-    public $id_author;
-    public $author_avatar;
+    public $status;
 }
-class FormationsRepository extends ConnectBdd
+class FormationRepository extends ConnectBdd
 {
     public function __construct()
     {
         parent::__construct();
+    }
+
+    public function getFormationById($id):object
+    {
+        $Formation = new Formation;
+        $req = $this->bdd->prepare("SELECT * FROM `formation` WHERE `formation_id` = ?");
+        $req->execute([$id]);
+        $data = $req->fetch(PDO::FETCH_OBJ);
+
+        $Formation->id = $data['formation_id'];
+        $Formation->name = $data['formation_name'];
+        $Formation->description = $data['formation_description'];
+        $Formation->name = $data['formation_name'];
+        $Formation->name = $data['formation_name'];
     }
 
     public function getFormations()

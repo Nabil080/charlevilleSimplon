@@ -1,4 +1,7 @@
 <?php
+require_once('src/model/Status.php');
+
+
 class ConnectBdd
 {
     public $bdd;
