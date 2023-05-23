@@ -30,8 +30,9 @@ class User
         $this->name = $account['name_users'];
         $this->email = $account['email_users'];
         $this->status = $account['email_users'];
-        return $this;
 
+
+        return $this;
     }
 
     public function generateToken($length = 32)

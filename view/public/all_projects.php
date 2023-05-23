@@ -5,15 +5,17 @@
         $projects = $projectRepo->getAllProjects();
         // pagination
         $pageNumber = isset($_GET['page']) ? intval($_GET['page']) : 1 ;
-        var_dump($pageNumber);
-        $limit = 1;
+        $limit = 6;
         $initialPage = ($pageNumber-1)*$limit;
         // syntaxe requete avec limit
         $limitRequest = $initialPage.",".$limit;
         $pageCount = ceil(count($projects)/$limit);
 
         $projects = $projectRepo->getAllProjects($limitRequest);
-        // var_dump($projects);
+        if(sizeof($projects) == 0){
+            echo '<script>window.location.href = "?action=allProjectsPage"</script>';
+        }
+        var_dump($projects);
 
 ?>
 

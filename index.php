@@ -1,7 +1,5 @@
 <?php
 session_start();
-require_once 'src/controller/frontController.php';
-require 'src/controller/back/UserController.php';
 require 'src/model/ConnectBdd.php';
 
 $_SESSION['user'] = ['role' => 1];

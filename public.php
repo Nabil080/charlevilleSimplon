@@ -42,4 +42,9 @@ switch ($action) {
         break;
     // Envoie du traitement d'activation de compte
     // Envoie du traitement du formulaire de connexion
+
+    // Envoie du traitement pagination tous les projets
+    case 'projectsPagination':
+        projectsPagination();
+        break;
 }
