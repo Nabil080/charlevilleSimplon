@@ -39,6 +39,12 @@ function projectGestionPage()
     include 'view/public/project_gestion.php';
 }
 
+// Profile
+function profilePage()
+{
+    include 'view/public/profile.php';
+}
+
 // Promotion
 function allPromotionsPage()
 {
