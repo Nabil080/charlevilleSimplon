@@ -5,6 +5,7 @@ class Program {
     public $id;
     public $name;
     public $formation;
+    public $layout;
 }
 
 class ProgramRepository extends ConnectBdd{
@@ -30,7 +31,7 @@ class ProgramRepository extends ConnectBdd{
         $ProgramLayout = new ProgramLayout;
         $ProgramLayoutRepo = new ProgramLayoutRepository;
         $ProgramLayout = $ProgramLayoutRepo->getProgramLayoutById($data['programme_layout_id']);
-        $Program->ProgramLayout = $ProgramLayout;
+        $Program->layout = $ProgramLayout;
 
 
         return $Program;
