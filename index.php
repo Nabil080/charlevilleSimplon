@@ -10,7 +10,7 @@ if (isset($_GET['action']) && $_GET['action'] !== '' && !isset($_GET['admin'])) 
     require 'public.php';
 
     if (isset($_SESSION['user'])) {
-        if ($_SESSION['user']['role'] <= 4) {
+        if ($_SESSION['user']['role'] <= 3) {
             switch ($action) {
                 // Afficher le CRUD de projet (Gestion de projet)
                 case 'projectGestionPage':
