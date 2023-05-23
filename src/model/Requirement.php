@@ -4,7 +4,7 @@ require_once('src/model/ConnectBdd.php');
 class Requirement {
     public $id;
     public $name;
-    public $name;
+    public $formation;
 }
 
 class RequirementRepository extends ConnectBdd{
@@ -21,7 +21,12 @@ class RequirementRepository extends ConnectBdd{
 
         $Requirement->id = $data['requirement_id'];
         $Requirement->name = $data['requirement_name'];
-        
+
+        $Formation = new Formation;
+        $formationRepo = new FormationRepository;
+        $Formation = $formationRepo->getFormationById($data['formation_id']);
+        $Requirement->formation = $Formation;
+
 
         return $Requirement;
     }
