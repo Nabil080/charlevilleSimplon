@@ -74,12 +74,12 @@ class UsersRepository extends ConnectBdd
         $User->surname = $data['user_surname'];
         $User->email = $data['user_email'];
         $User->password = $data['user_password'];
-        $User->avatar = $data['user_avater'];
+        $User->avatar = $data['user_avatar'];
         $User->description = $data['user_description'];
         $User->linkedin = $data['user_linkedin'];
         $User->github = $data['user_github'];
         $User->token = $data['user_token'];
-        $User->id__poleEmploi = $data['user_'];
+        $User->id__poleEmploi = $data['user_numero_pe'];
         $User->phone = $data['user_phone'];
         $User->adress = $data['user_place'];
         $User->birth_date = $data['user_birth_date'];
@@ -87,6 +87,7 @@ class UsersRepository extends ConnectBdd
         $User->nationality = $data['user_nationality'];
         $User->status = $data['status_name'];
         $User->id_role = $data['role_id'];
+        $User->highlight = $data['user_highlight'];
 
         return $User;
     }
