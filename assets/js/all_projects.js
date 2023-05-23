@@ -55,17 +55,17 @@ function showPageProjects(currentPage){
 
 showPageProjects(1)
 
-const paginationList = document.querySelectorAll("#pagination div a")
+// const paginationList = document.querySelectorAll("#pagination div a")
 
-paginationList.forEach((pagination, index) => {
-    pagination.addEventListener('click',event => {
-        event.preventDefault()
-        paginationList.forEach((pagination, index) => {
-            pagination.classList.remove('bg-main-red','text-main-white')
-        })
-        pagination.classList.add('bg-main-red','text-main-white')
-        console.log(pagination)
+// paginationList.forEach((pagination, index) => {
+//     pagination.addEventListener('click',event => {
+//         event.preventDefault()
+//         paginationList.forEach((pagination, index) => {
+//             pagination.classList.remove('bg-main-red','text-main-white')
+//         })
+//         pagination.classList.add('bg-main-red','text-main-white')
+//         console.log(pagination)
 
-        showPageProjects(index+1)
-    })
-})
+//         showPageProjects(index+1)
+//     })
+// })

@@ -3,9 +3,19 @@
 <?php
         $projectRepo = new ProjectRepository;
         $projects = $projectRepo->getAllProjects();
-        var_dump($projects);
+        // pagination
+        $pageNumber = isset($_GET['page']) ? intval($_GET['page']) : 1 ;
+        var_dump($pageNumber);
+        $limit = 1;
+        $initialPage = ($pageNumber-1)*$limit;
+        // syntaxe requete avec limit
+        $limitRequest = $initialPage.",".$limit;
+        $pageCount = ceil(count($projects)/$limit);
 
-        ?>
+        $projects = $projectRepo->getAllProjects($limitRequest);
+        // var_dump($projects);
+
+?>
 
 <?php ob_start(); ?>
 
@@ -70,15 +80,14 @@
 
     <!-- pagination -->
     <section id="pagination" class="flex justify-center text-md ">
-    <a class="fa fa-chevron-left my-auto mx-3 px-3 opacity-30"></a>
+    <a href="?action=allProjectsPage&page=<?=$pageNumber-1?>" class="fa fa-chevron-left my-auto mx-3 px-3 <?php if($pageNumber == 1){ echo 'opacity-30 select-none pointer-events-none';}?>"></a>
     <div class="flex gap-x-0.5 [&>a]:px-4 [&>a]:py-0.5 [&>a]:rounded-md">
-        <a class="hover:bg-main-red hover:text-main-white cursor-pointer bg-main-red text-main-white">1</a>
-        <a class="hover:bg-main-red hover:text-main-white cursor-pointer">2</a>
-        <a class="hover:bg-main-red hover:text-main-white cursor-pointer">3</a>
-        <a class="hover:bg-main-red hover:text-main-white cursor-pointer">4</a>
-        <a class="hover:bg-main-red hover:text-main-white cursor-pointer">5</a>
+        <?php for($i=1;$i<=$pageCount;$i++){
+                if($i > $pageNumber - 3 && $i < $pageNumber + 3){?>
+                    <a href="?action=allProjectsPage&page=<?=$i?>" class="hover:bg-main-red hover:text-main-white cursor-pointer <?php echo $i == $pageNumber ? " bg-main-red text-main-white " : " "; ?>"><?=$i?></a>
+                <?php }} ?>
     </div>
-    <a class="fa fa-chevron-right my-auto mx-3 px-3"></a>
+    <a href="?action=allProjectsPage&page=<?=$pageNumber+1?>" class="fa fa-chevron-right my-auto mx-3 px-3 <?php if($pageNumber == $pageCount){ echo 'opacity-30 select-none pointer-events-none';}?>"></a>
     </section>
 
 </section>
