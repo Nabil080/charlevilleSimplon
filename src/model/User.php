@@ -12,20 +12,20 @@ class User
     public $linkedin;
     public $github;
     public $token;
-    public $id__poleEmploi;
+    public $numero_pe;
     public $phone;
     public $adress;
     public $birth_date;
     public $birth_place;
     public $nationality;
     public $status;
-    public $id_role;
+    public $role;
     public $highlight;
 
     public function getNameAndPseudo($account)
     {
         $this->id = $account['id_users'];
-        $this->id_role = $account['id_role'];
+        $this->role = $account['role_id'];
         $this->name = $account['name_users'];
         $this->email = $account['email_users'];
         $this->status = $account['email_users'];
@@ -72,22 +72,31 @@ class UsersRepository extends ConnectBdd
         $User->id = $data['user_id'];
         $User->name = $data['user_name'];
         $User->surname = $data['user_surname'];
-        $User->email = $data['user_email'];
+        $User->email = $data['user_surname'];
         $User->password = $data['user_password'];
         $User->avatar = $data['user_avatar'];
         $User->description = $data['user_description'];
-        $User->linkedin = $data['user_linkedin'];
-        $User->github = $data['user_github'];
         $User->token = $data['user_token'];
-        $User->id__poleEmploi = $data['user_numero_pe'];
         $User->phone = $data['user_phone'];
-        $User->adress = $data['user_place'];
-        $User->birth_date = $data['user_birth_date'];
-        $User->birth_place = $data['user_birth_place'];
-        $User->nationality = $data['user_nationality'];
-        $User->status = $data['status_name'];
-        $User->id_role = $data['role_id'];
-        $User->highlight = $data['user_highlight'];
+        $User->adress =  $data['user_place'];
+
+        $User->linkedin = isset($data['user_linkedin']) ? $data['user_linkedin'] : null;
+        $User->github = isset($data['user_github']) ? $data['user_github'] : null;
+        $User->numero_pe = isset($data['user_numero_pe']) ? $data['user_numero_pe'] : null;
+        $User->birth_date = isset($data['user_birth_date']) ? $data['user_birth_date'] : null;
+        $User->birth_place = isset($data['user_birth_place']) ? $data['user_birth_place'] : null;
+        $User->nationality = isset($data['user_nationality']) ? $data['user_nationality'] : null;
+        $User->highlight = isset($data['highlight']) ? $data['highlight'] : null;
+
+        $Status = new Status;
+        $statusRepo = new StatusRepository;
+        $Status = $statusRepo->getStatusById($data['status_id']);
+        $User->status = $Status;
+
+        $Role = new Role;
+        $roleRepo = new RoleRepository;
+        $Role = $roleRepo->getRoleById($data['role_id']);
+        $User->role = $Role;
 
         return $User;
     }
@@ -124,30 +133,39 @@ class UsersRepository extends ConnectBdd
         $req = "SELECT * FROM `user` AS u LEFT JOIN `status` AS s ON u.status_id = s.status_id WHERE  user_email= ?";
         $stmt = $this->bdd->prepare($req);
         $stmt->execute([$email]);
-        $account = $stmt->fetch(PDO::FETCH_OBJ);
+        $data = $stmt->fetch(PDO::FETCH_OBJ);
         $stmt->closeCursor();
 
         $User = new User;
 
-        $User->id = $account['user_id'];
-        $User->name = $account['user_name'];
-        $User->surname = $account['user_surname'];
-        $User->email = $account['user_email'];
-        $User->password = $account['user_password'];
-        $User->avatar = $account['user_avatar'];
-        $User->description = $account['user_description'];
-        $User->linkedin = $account['user_linkedin'];
-        $User->github = $account['user_github'];
-        $User->token = $account['user_token'];
-        $User->id__poleEmploi = $account['user_numero_pe'];
-        $User->phone = $account['user_phone'];
-        $User->adress = $account['user_place'];
-        $User->birth_date = $account['user_birth_date'];
-        $User->birth_place = $account['user_birth_place'];
-        $User->nationality = $account['user_nationality'];
-        $User->status = $account['status_name'];
-        $User->id_role = $account['role_id'];
-        $User->highlight = $account['user_highlight'];
+        $User->id = $data['user_id'];
+        $User->name = $data['user_name'];
+        $User->surname = $data['user_surname'];
+        $User->email = $data['user_surname'];
+        $User->password = $data['user_password'];
+        $User->avatar = $data['user_avatar'];
+        $User->description = $data['user_description'];
+        $User->token = $data['user_token'];
+        $User->phone = $data['user_phone'];
+        $User->adress =  $data['user_place'];
+
+        $User->linkedin = isset($data['user_linkedin']) ? $data['user_linkedin'] : null;
+        $User->github = isset($data['user_github']) ? $data['user_github'] : null;
+        $User->numero_pe = isset($data['user_numero_pe']) ? $data['user_numero_pe'] : null;
+        $User->birth_date = isset($data['user_birth_date']) ? $data['user_birth_date'] : null;
+        $User->birth_place = isset($data['user_birth_place']) ? $data['user_birth_place'] : null;
+        $User->nationality = isset($data['user_nationality']) ? $data['user_nationality'] : null;
+        $User->highlight = isset($data['highlight']) ? $data['highlight'] : null;
+
+        $Status = new Status;
+        $statusRepo = new StatusRepository;
+        $Status = $statusRepo->getStatusById($data['status_id']);
+        $User->status = $Status;
+
+        $Role = new Role;
+        $roleRepo = new RoleRepository;
+        $Role = $roleRepo->getRoleById($data['role_id']);
+        $User->role = $Role;
 
         return $User;
     }
