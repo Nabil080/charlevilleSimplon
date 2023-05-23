@@ -9,7 +9,8 @@
         $initialPage = ($pageNumber-1)*$limit;
         // syntaxe requete avec limit
         $limitRequest = $initialPage.",".$limit;
-        $pageCount = ceil(count($projects)/$limit);
+        $projectCount = count($projects);
+        $pageCount = ceil($projectCount/$limit);
 
         $projects = $projectRepo->getAllProjects($limitRequest);
         if(sizeof($projects) == 0){
@@ -68,9 +69,8 @@
     <span onclick="resetProjectFilters()" class="text-main-red text-xs py-0.5 cursor-pointer underline hover:text-red-700 2xl:mx-[10%]">Réinitialiser les filtres</span>
 
 
+    <h3 id="project-count" class="max-w-[766px] text-main-red mt-6">6 projets affichés sur <?=$projectCount?></h3>
     <section id="project-cards" class="mt-2 grid gap-6 xl:grid-cols-2 w-fit mx-auto">
-        <h3 class="max-w-[766px] text-main-red xl:col-span-2">10 projets correspondants sur 72</h3>
-
         <?php
         // foreach($projects as $project){
         //     include('view/template/_project_card.php');
