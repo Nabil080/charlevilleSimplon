@@ -28,7 +28,7 @@ require_once('src/model/Promo.php');
 require_once('src/model/Requirement.php');
 require_once('src/model/Role.php');
 require_once('src/model/Skill.php');
-require_once('src/model/Statistic.php');
+require_once('src/model/Stat.php');
 require_once('src/model/Status.php');
 require_once('src/model/Tag.php');
 require_once('src/model/Type.php');
