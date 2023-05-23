@@ -1,41 +1,35 @@
 <?php
 require_once('src/model/ConnectBdd.php');
 
-class Promo {
+class Progress {
     public $id;
     public $name;
     public $number;
-    public $status;
-    public $formation;
+    public $project;
 }
 
-class PromoRepository extnumbers ConnectBdd{
+class ProgressRepository extends ConnectBdd{
     public function __construct(){
         parent::__construct();
     }
 
-    public function getPromoById($id):object
+    public function getProgressById($id):object
     {
-        $Promo = new Promo;
-        $req = $this->bdd->prepare("SELECT * FROM `promo` WHERE `promo_id` = ?");
+        $Progress = new Progress;
+        $req = $this->bdd->prepare("SELECT * FROM `progress` WHERE `progress_id` = ?");
         $req->execute([$id]);
         $data = $req->fetch(PDO::FETCH_ASSOC);
 
-        $Promo->id = $data['promo_id'];
-        $Promo->name = $data['promo_name'];
-        $Promo->number = $data['promo_number'];
+        $Progress->id = $data['progress_id'];
+        $Progress->name = $data['progress_name'];
+        $Progress->number = $data['progress_number'];
 
-        $Status = new Status;
-        $statusRepo = new StatusRepository;
-        $Status = $statusRepo->getStatusById($data['status_id']);
-        $Promo->status = $Status;
+        $Project = new Project;
+        $projectRepo = new ProjectRepository;
+        $Project = $projectRepo->getProjectById($data['Project_id']);
+        $Progress->project = $Project;
 
-        $Formation = new Formation;
-        $formationRepo = new FormationRepository;
-        $Formation = $formationRepo->getFormationById($data['formation_id']);
-        $Promo->formation = $Formation;
-
-        return $Promo;
+        return $Progress;
     }
 }
 
