@@ -51,8 +51,8 @@ function allPromotionsPage()
 function promotionPage()
 {
     $id = 1;
-    $promoRepository = new PromoRepository;
-    $promos = $promoRepository->getPromoById($id);
+    $PromoRepository = new PromoRepository;
+    $apprenants = $PromoRepository->getAllApprenants($id);
     include 'view/public/promotion.php';
 }
 

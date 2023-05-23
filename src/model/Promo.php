@@ -1,5 +1,7 @@
 <?php
 require_once('src/model/ConnectBdd.php');
+require_once('src/model/User.php');
+
 
 class Promo {
     public $id;
@@ -38,7 +40,36 @@ class PromoRepository extends ConnectBdd{
         return $Promo;
     }
 
-    public function 
+    public function getAllApprenants($id):array 
+    {
+        $req = $this->bdd->prepare("SELECT user_id FROM promo_user WHERE promo_id = ?");
+        $req->execute([$id]);
+        $datas = $req->fetchAll(PDO::FETCH_COLUMN);
+        $UsersRepository = new UsersRepository;
+        $users = [];
+        
+        foreach ($datas as $data) {
+            $user = $UsersRepository->getUserById($data);
+            array_push($users, $user);
+        }
+        return $users;
+    }
+
+    public function getAllFormateurs($id):array 
+    {
+        $req = $this->bdd->prepare("SELECT user_id FROM promo_user WHERE promo_id = ?");
+        $req->execute([$id]);
+        $datas = $req->fetchAll(PDO::FETCH_COLUMN);
+        $UsersRepository = new UsersRepository;
+        $users = [];
+        
+        foreach ($datas as $data) {
+            $user = $UsersRepository->getUserById($data);
+            array_push($users, $user);
+        }
+        return $users;
+    }
+    
 }
 
 
