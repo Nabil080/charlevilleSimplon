@@ -60,32 +60,32 @@ class UsersRepository extends ConnectBdd
 
     public function getUserById($id)
     {
-        $req = "SELECT * FROM `user` WHERE user_email= ?";
+        $req = "SELECT * FROM `user` WHERE `user_id` = ?";
         $stmt = $this->bdd->prepare($req);
-        $stmt->execute([$email]);
-        $account = $stmt->fetch(PDO::FETCH_OBJ);
+        $stmt->execute([$id]);
+        $data = $stmt->fetch(PDO::FETCH_OBJ);
         $stmt->closeCursor();
 
         $User = new User;
 
-        $User->id = $account['user_id'];
-        $User->name = $account['user_name'];
-        $User->surname = $account['user_surname'];
-        $User->email = $account['user_email'];
-        $User->password = $account['user_password'];
-        $User->avatar = $account['user_avater'];
-        $User->description = $account['user_description'];
-        $User->linkedin = $account['user_linkedin'];
-        $User->github = $account['user_github'];
-        $User->token = $account['user_token'];
-        $User->id__poleEmploi = $account['user_'];
-        $User->phone = $account['user_phone'];
-        $User->adress = $account['user_place'];
-        $User->birth_date = $account['user_birth_date'];
-        $User->birth_place = $account['user_birth_place'];
-        $User->nationality = $account['user_nationality'];
-        $User->status = $account['status_name'];
-        $User->id_role = $account['role_id'];
+        $User->id = $data['user_id'];
+        $User->name = $data['user_name'];
+        $User->surname = $data['user_surname'];
+        $User->email = $data['user_email'];
+        $User->password = $data['user_password'];
+        $User->avatar = $data['user_avater'];
+        $User->description = $data['user_description'];
+        $User->linkedin = $data['user_linkedin'];
+        $User->github = $data['user_github'];
+        $User->token = $data['user_token'];
+        $User->id__poleEmploi = $data['user_'];
+        $User->phone = $data['user_phone'];
+        $User->adress = $data['user_place'];
+        $User->birth_date = $data['user_birth_date'];
+        $User->birth_place = $data['user_birth_place'];
+        $User->nationality = $data['user_nationality'];
+        $User->status = $data['status_name'];
+        $User->id_role = $data['role_id'];
 
         return $User;
     }

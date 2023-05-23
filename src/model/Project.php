@@ -34,7 +34,7 @@ class ProjectRepository extends ConnectBdd{
         $project = new Project;
 
         $req = $this->bdd->prepare("SELECT * FROM projects WHERE id_project = ?");
-        $req->execute($projectId);
+        $req->execute([$projectId]);
         $data = $req->fetch();
 
         $project->id = $data['project_id'];
@@ -47,29 +47,29 @@ class ProjectRepository extends ConnectBdd{
         $project->model_image = $data['project_model_image'];
         $project->model_link = $data['project_model_link'];
 
-        $user = new User();
+        $User = new User();
         $userRepo = new UsersRepository();
-        $user = $userRepo->getUserById($data['user_id']);
-        $project->user = $user;
+        $User = $userRepo->getUserById($data['user_id']);
+        $project->user = $User;
 
-        $formator = new User();
-        $formator = $userRepo->getUserById($data['user_id_project_formator']);
-        $project->formator = $formator;
+        $Formator = new User();
+        $Formator = $userRepo->getUserById($data['user_id_project_formator']);
+        $project->formator = $Formator;
 
-        $status = new Status();
+        $Status = new Status();
         $statusRepo = new StatusRepository();
-        $status = $statusRepo->getStatusById($data['status_id']);
-        $project->status = $status;
+        $Status = $StatusRepo->getStatusById($data['status_id']);
+        $project->status = $Status;
 
-        $promo = new Promo();
+        $Promo = new Promo();
         $promoRepo = new PromoRepository();
-        $promo = $promoRepo->getpromoById($data['promo_id']);
-        $project->promo = $promo;
+        $Promo = $promoRepo->getpromoById($data['promo_id']);
+        $project->promo = $Promo;
 
-        $type = new Type();
+        $Type = new Type();
         $typeRepo = new TypeRepository();
-        $type = $typeRepo->gettypeById($data['type_id']);
-        $project->type = $type;
+        $Type = $typeRepo->gettypeById($data['type_id']);
+        $project->type = $Type;
 
 
         return $project;
