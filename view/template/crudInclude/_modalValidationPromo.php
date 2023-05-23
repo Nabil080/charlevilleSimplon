@@ -5,8 +5,8 @@
         <div class="relative bg-white rounded-lg shadow ">
             <!-- Modal header -->
             <div class="flex items-center justify-between p-5 border-b rounded-t dark:border-gray-600">
-                <h3 class="text-xl font-medium text-gray-900">
-                    Validation
+                <h3 class="text-xl md:text-3xl font-medium italic">
+                    Validation des candidatures pour la promotion $promotion
                 </h3>
                 <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 
                 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 
@@ -18,26 +18,43 @@
             </div>
             <!-- Modal body -->
             <div class="p-2 space-y-6">
-                <div class="grid grid-cols-2 grid-rows-[70%_30%] overflow-x-hidden min-h-[70vh]">
-                    <form class="border-2 row-start-1 row-end-3">
-                        <h3 class="text-main-red text-xl p-4 italic">Liste des apprenants</h3>
-                        <div id="validationForm" class="pl-4 ">
-                            <?php for ($i = 0; $i < 1; $i++) { ?>
+                <form class="grid grid-rows-[50%_35%_15%] md:grid-cols-2 md:grid-rows-[70%_30%] p-2 overflow-x-hidden min-h-[80vh] md:min-h-[70vh]">
+                    <div class="border-2 relative md:row-start-1 md:row-end-3 overflow-y-scroll">
+                        <h3 class="text-main-red font-bold text-xl md:text-3xl p-4 italic">Liste des candidats</h3>
+                        <div id="validationForm" class="pl-4 p-2 text-md">
+                            <?php $y = 0;
+                            for ($i = 0; $i < 2; $i++) { ?>
                                 <input type="checkbox" data-name="$Alex">
-                                <p class="inline ml-4">Alex</p>
+                                <a href="$lienprofil"> <!-- A voir si on laisse les a, cela impose de garder 
+                                                            en session les elements deja cochés, on peut supposer qu'il aura fait au préalable sa séléction et 
+                                                            se servira juste de ceci pour valider-->
+                                    <p class="inline ml-4">Alex</p>
+                                </a>
                                 <br>
                                 <input type="checkbox" data-name="$Florian">
-                                <p class="inline ml-4">Florian</p>
+                                <a href="$lienprofil">
+                                    <p class="inline ml-4">Florian</p>
+                                </a>
                                 <br>
                                 <input type="checkbox" data-name="$nabil">
-                                <p class="inline ml-4">Nabil</p>
+                                <a href="$lienprofil">
+                                    <p class="inline ml-4">Nabil</p>
+                                </a>
                                 <br>
-                            <?php } ?>
+                            <?php $y ++;
+                            } ?>
+                            <p class="absolute right-8 font-bold bottom-2 italic"><?= $y ?> candidats</p>
                         </div>
-                    </form>
-                    <div id="showValidation" class="border-2 max-h-[50vh] overflow-y-scroll">
-
                     </div>
+                    <div id="showValidation" class="border-2 relative transition-all duration-[3s] max-h-[50vh] overflow-y-scroll">
+                            <h3 class="text-green-700 font-bold text-xl md:text-3xl p-4 italic">Candidats Acceptés</h3>
+                            <p class="absolute right-8 font-bold bottom-2 italic"><span id="numberChecked"></span> candidats</p>
+                    </div>
+                    <button type="submit" class="block w-full md:w-auto h-1/3 text-white bg-main-red hover:bg-red-800 focus:ring-4 focus:outline-none 
+                                     font-medium rounded-lg text-sm px-5 my-auto mx-auto py-2.5 text-center transition-all duration-[1s] hover:scale-105 hover:bg-green-600">
+                            Valider les candidatures
+                        </button>
+                </form>
 
             </div>
 

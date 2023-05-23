@@ -38,46 +38,44 @@ window.addEventListener("scroll", function () { // Ecoute le scroll sur la page
 
 const validationForm = document.getElementById("validationForm");
 const showValidation = document.getElementById("showValidation");
-const inputsValidation = validationForm.getElementsByTagName("input");
-let allText = [];
+const inputsValidation = validationForm.querySelectorAll("input");
+const numberCheckedContainer = document.getElementById("numberChecked");
 let containerValidation = 0;
+let reset = 0;
 
-for (i = 0; i < inputsValidation.length; i++) {
-    inputsValidation[i].addEventListener("change", (e) => {
-        let validation = document.getElementById(e.target.dataset.name);
-
-        if (validation == null) {
-            if (typeof containerValidation !== 'undefined' && containerValidation !== 0) {
+for (i = 0; i < inputsValidation.length; i++) { // Pour chaque input
+    inputsValidation[i].addEventListener("change", (e) => { // Surveille si un input change 
+            if (typeof containerValidation !== 'undefined' && containerValidation !== 0) { // Si le container des input est déja défini, le supprime 
                 containerValidation.remove();
             }
 
-            showValidation.insertAdjacentHTML("afterbegin", "<div id='containerValidation'></div>");
-            containerValidation = document.getElementById("containerValidation");
+            let allText = [];  // Remet le tableau qui contient les input en vide
+            let boolInput = true; // Défini un booléan 
+            let numberChecked = 0; // Réinitialise le nombre des inputs checked
+            numberCheckedContainer.textContent = ""; // Réinitialise le container de comptage des inputs checked
 
-            inputs.forEach(input => {
-                console.log("salut");
+            showValidation.insertAdjacentHTML("beforeend", "<div class='pl-4 transition-all' id='containerValidation'></div>"); // Crée la div qui contient les input
+            containerValidation = document.getElementById("containerValidation"); // Relie la variable au container crée 
+            
+            inputsValidation.forEach(input => { // pour chaque input verifie si elle est checked
                 if (input.checked) {
-                    console.log("salut");
-                    allText.push(input.dataset.name);
+                    let text = "<p id='" + input.dataset.name + "'>" + input.dataset.name + "</p>" // Si il est checked crée un element p avec les infos transmis par l'input
+                    allText.push(text); // Insère dans le tableau chaque element checked
+                    boolInput = false; // Si un des inputs est checked change le boolean
+                    numberChecked ++; // Ajoute +1 pour chaque input checked
                 }
             });
-
-            // let text = "<p id='" + e.target.dataset.name + "'>" + e.target.dataset.name + "</p>";
-            // allText.push(text);
-            allText = allText.sort();
-            finalText = allText.join("");
-
-            containerValidation.insertAdjacentHTML("afterbegin", finalText);
-        
-        } else {
-            console.log(validation.outerHTML);
-            console.log(allText[1]);
-
-            
-            validation.remove();
-            allText.splice(index);
-            console.log("cet élement existe déja");
-        }
+            console.log(boolInput);
+            allText = allText.sort(); // Trie tout les elements par ordre alphabétique
+            finalText = allText.join(""); // Transforme l'array en string
+            containerValidation.insertAdjacentHTML("afterbegin", finalText); // Ajoute tout les éléments selectionnés dans le container
+            if (boolInput == false) { // Si le bool est faux un des inputs est checked donc ajoute un ring vert
+                showValidation.classList.add("ring-green-500", "ring")
+            } else if (boolInput !== false) { // Enlève les class si le bool est true
+                showValidation.classList.remove("ring-green-500", "ring");
+            }
+            numberCheckedContainer.textContent += numberChecked; // Rajoute en texte le nombre d'elements checked
     });
 };
+
 
