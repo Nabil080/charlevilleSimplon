@@ -11,11 +11,11 @@ class Project {
     public $company_image;
     public $model_image;
     public $model_link;
-    public $user_id;
-    public $formator_id;
-    public $status_id;
-    public $promo_id;
-    public $type_id;
+    public $user;
+    public $formator;
+    public $status;
+    public $promo;
+    public $type;
 
     // public function createToInsert(array $projectForm):bool{
 
@@ -37,8 +37,42 @@ class ProjectRepository extends ConnectBdd{
         $req->execute($projectId);
         $data = $req->fetch();
 
-        $article->name
+        $project->id = $data['project_id'];
+        $project->name = $data['project_name'];
+        $project->description = $data['project_description'];
+        $project->file = $data['project_file'];
+        $project->notes = $data['project_notes'];
+        $project->github = $data['project_github'];
+        $project->company_image = $data['project_company_image'];
+        $project->model_image = $data['project_model_image'];
+        $project->model_link = $data['project_model_link'];
 
+        $user = new User();
+        $userRepo = new UsersRepository();
+        $user = $userRepo->getUserById($data['user_id']);
+        $project->user = $user;
+
+        $formator = new User();
+        $formator = $userRepo->getUserById($data['user_id_project_formator']);
+        $project->formator = $formator;
+
+        $status = new Status();
+        $statusRepo = new StatusRepository();
+        $status = $statusRepo->getStatusById($data['status_id']);
+        $project->status = $status;
+
+        $promo = new Promo();
+        $promoRepo = new PromoRepository();
+        $promo = $promoRepo->getpromoById($data['promo_id']);
+        $project->promo = $promo;
+
+        $type = new Type();
+        $typeRepo = new TypeRepository();
+        $type = $typeRepo->gettypeById($data['type_id']);
+        $project->type = $type;
+
+
+        return $project;
     }
 
     public function getAllProjects(){

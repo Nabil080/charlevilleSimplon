@@ -58,6 +58,38 @@ class User
 class UsersRepository extends ConnectBdd
 {
 
+    public function getUserById($id)
+    {
+        $req = "SELECT * FROM `user` WHERE user_email= ?";
+        $stmt = $this->bdd->prepare($req);
+        $stmt->execute([$email]);
+        $account = $stmt->fetch(PDO::FETCH_OBJ);
+        $stmt->closeCursor();
+
+        $User = new User;
+
+        $User->id = $account['user_id'];
+        $User->name = $account['user_name'];
+        $User->surname = $account['user_surname'];
+        $User->email = $account['user_email'];
+        $User->password = $account['user_password'];
+        $User->avatar = $account['user_avater'];
+        $User->description = $account['user_description'];
+        $User->linkedin = $account['user_linkedin'];
+        $User->github = $account['user_github'];
+        $User->token = $account['user_token'];
+        $User->id__poleEmploi = $account['user_'];
+        $User->phone = $account['user_phone'];
+        $User->adress = $account['user_place'];
+        $User->birth_date = $account['user_birth_date'];
+        $User->birth_place = $account['user_birth_place'];
+        $User->nationality = $account['user_nationality'];
+        $User->status = $account['status_name'];
+        $User->id_role = $account['role_id'];
+
+        return $User;
+    }
+
     public function checkEmail($email): bool
     {
         $req = "SELECT user_email FROM user WHERE user_email = ?";

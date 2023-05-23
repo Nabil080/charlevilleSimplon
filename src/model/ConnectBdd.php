@@ -5,11 +5,11 @@ class ConnectBdd
 
     public function __construct()
     {
-        $user = "dbu5557170";
-        $pass = "p6V4yrM2";
-        $host = "db5011786821.hosting-data.io";
+        $user = "root";
+        $pass = "";
+        $host = "localhost";
         $port = '3306';
-        $db = "dbs9928735";
+        $db = "simplon_charleville";
         $this->bdd = new PDO("mysql:host=$host;dbname=$db;charset=utf8", $user, $pass, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
     }
 }
