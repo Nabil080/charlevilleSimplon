@@ -12,32 +12,32 @@
     <div class="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-main-white shadow-md shadow-gray-800">
         <ul class="space-y-2 font-medium">
            <li>
-              <a href="#" class="flex items-center p-2 rounded-lg ">
+              <a href="index.php?action=crudCandidatPage" class="flex items-center p-2 rounded-lg ">
                 <i class="fa-solid fa-user text-3xl md:text-xl text-main-red"></i>
                  <span class="ml-3 text-3xl md:text-xl">Candidat</span>
               </a>
            </li>
 
            <li>
-              <a href="#" class="flex items-center p-2 rounded-lg ">
+              <a href="index.php?action=crudApprenantPage" class="flex items-center p-2 rounded-lg ">
                 <i class="fa-solid fa-graduation-cap text-3xl md:text-xl text-main-red"></i>
                 <span class="flex-1 ml-3 text-3xl md:text-xl whitespace-nowrap">Apprenant</span>
               </a>
            </li>
            <li>
-              <a href="#" class="flex items-center p-2  rounded-lg ">
+              <a href="index.php?action=crudEntreprisePage" class="flex items-center p-2  rounded-lg ">
                 <i class="fa-solid fa-industry text-3xl md:text-xl text-main-red"></i>
                 <span class="flex-1 ml-3 text-3xl md:text-xl whitespace-nowrap">Entreprise</span>
               </a>
            </li>
            <li>
-              <a href="#" class="flex items-center p-2  rounded-lg ">
+              <a href="index.php?action=crudPromotionPage" class="flex items-center p-2  rounded-lg ">
               <i class="fa-solid fa-user-group text-3xl md:text-xl text-main-red"></i>
                  <span class="flex-1 ml-3 text-3xl md:text-xl whitespace-nowrap">Promotions</span>
               </a>
            </li>
            <li>
-              <a href="#" class="flex items-center p-2  rounded-lg ">
+              <a href="index.php?action=crudProjetPage" class="flex items-center p-2  rounded-lg ">
                 <i class="fa-solid fa-file-pen text-3xl md:text-xl text-main-red    "></i>
                  <span class="flex-1 ml-3 text-3xl md:text-xl whitespace-nowrap">Projets</span>
               </a>

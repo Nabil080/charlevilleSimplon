@@ -10,7 +10,7 @@ function changeTab(y) {
     }
     for (i = 0; i < sectionChange.length; i++) { // Cache toutes les section et enleve le style de toutes les tab
         sectionChange[i].classList.add("hidden");
-        tabChange[i].classList.remove("bg-main-red");
+        tabChange[i].classList.remove("!bg-main-red");
         tabChange[i].classList.add("bg-main-gray");
         sectionChange[y].classList.remove("opacity-50");
         tabChange[y].classList.remove("animate-pulse");
@@ -31,7 +31,7 @@ function changeTab(y) {
     sectionChange[y].offsetHeight;
     sectionChange[y].classList.add("opacity-100");
 
-    tabChange[y].classList.add("bg-main-red");
+    tabChange[y].classList.add("!bg-main-red");
 }
 
 // Open Side menu

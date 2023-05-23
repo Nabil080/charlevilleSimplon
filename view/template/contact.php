@@ -4,7 +4,7 @@
 
 <main>
     <section> <!--Téléphone + Adresse -->
-        <h2 class="text-center text-[24px] md:text-4xl  font-bold font-title text-main-red uppercase pb-2 lg:my-8">Nous Contacter
+        <h2 class="text-center text-[24px] md:text-4xl font-bold font-title text-main-red uppercase pb-2 lg:my-8">Nous Contacter
         </h2>
         <div class="grid md:grid-cols-2 sm:gap-8 justify-center md:items-baseline w-2/3 mx-auto mt-8 lg:mt-16">
             <div class="flex flex-wrap justify-center w-auto mb-8">
@@ -15,7 +15,7 @@
             <div class="flex flex-wrap justify-center  mb-8">
                 <i class="fa-solid fa-location-dot text-[24px] xl:text-[36px] w-full text-center mt-2 text-main-red"></i>
                 <p class="font-bold mb-4 text-[24px] xl:text-[36px] w-full text-center">Nous rendre visite :</p>
-                <p class="col-start-1 col-end-3 xl:text-[20px] text-center">Campus Sup Ardennes, 8 rue Claude Chrétien, <br> 0800 Charleville-Mézières</p>
+                <p class="col-start-1 col-end-3 xl:text-[20px] text-center">Campus Sup Ardennes, 8 rue Claude Chrétien, <br> 08000 Charleville-Mézières</p>
             </div>
         </div>
     </section>

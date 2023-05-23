@@ -2,7 +2,7 @@
 
 <?php ob_start(); ?>
 
-<main>
+<main class="pb-10">
     <h2
         class="py-5 bg-white text-center text-[24px] md:text-[36px] lg:text-[48px] font-bold font-title text-main-red uppercase">
         Développeur Web
@@ -71,15 +71,15 @@
                 </div>
             </aside>
         </div>
-        <div class="mt-20 pb-20 hidden md:block text-center">
+        <div class="mt-20 pb-10 hidden md:block text-center">
             <a href="index.php?action=registerPage"
-                class="px-10 py-3 text-main-white font-bold text-lg uppercase bg-main-red rounded-lg">
+                class="px-10 py-3 border border-2  border-main-red text-main-white font-bold text-lg uppercase bg-main-red rounded-lg hover:bg-main-white hover:text-main-red">
                 Postuler à la formation</a>
         </div>
     </div>
 </main>
 
-<section class="pb-10">
+<section>
     <img src="assets/img/autres/campus.png" alt="mur du campus" class="w-full img-fluid" />
 </section>
 <section class="py-10 lg:px-[10%] xl:px-[15%] bg-main-lightgray">
@@ -216,9 +216,9 @@
         </div>
     </div>
 </section>
-<div class="md:hidden pb-10 text-center">
+<div class="bg-main-lightgray md:hidden pb-10 text-center">
     <a href="index.php?action=registerPage"
-        class="px-10 py-3 text-main-white font-bold text-lg uppercase bg-main-red rounded-lg">
+        class="px-10 py-3 border border-2 border-main-red text-main-white font-bold text-lg uppercase bg-main-red rounded-lg hover:bg-main-white hover:text-main-red">
         Postuler à la formation
     </a>
 </div>

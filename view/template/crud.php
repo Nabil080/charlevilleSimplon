@@ -8,7 +8,6 @@
     <?php 
     if (isset($candidatPage) && $candidatPage == 1) {
         include ("crudInclude/_crudCandidat.php");
-        include ("crudInclude/_modalInfos.php");
         include ("crudInclude/_modalCandidature.php");
         include ("crudInclude/_modalContact.php");
 
