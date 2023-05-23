@@ -72,9 +72,9 @@
         <h3 class="max-w-[766px] text-main-red xl:col-span-2">10 projets correspondants sur 72</h3>
 
         <?php
-        // foreach($projects as $project){
-        //     include('view/template/_project_card.php');
-        // }
+        foreach($projects as $project){
+            include('view/template/_project_card.php');
+        }
         ?>
 
 
@@ -122,13 +122,26 @@ const changePage = number => {
 
         return response.text()
     })
-    .then((data) => {
+    .then((data) => {2
         projectGrid.innerHTML = ""
         data = JSON.parse(data);
 
         data.projets.forEach(projet => {
 
-            console.log(projet)
+            let projectTags = ""
+            projet.tags.forEach(tag => {
+                projectTags += `<tag>${tag.name}</tag>`
+            })
+
+            let projectTeam = ""
+            projet.team.forEach(user => {
+                projectTeam += `
+                <a href="?action=profilePage&id=${user.id}" class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white">
+                    ${user.surname}
+                </a>`
+            })
+
+            // console.log(projet)
             projectGrid.insertAdjacentHTML('beforeend',
             `
             <!-- card projet 1 -->
@@ -153,6 +166,7 @@ const changePage = number => {
                 <!-- tags projet -->
                 <div
                     class="uppercase space-x-4 my-4 [&>tag]:bg-main-gray [&>tag]:bg-opacity-10 [&>tag]:py-2 [&>tag]:px-4 [&>tag]:rounded-full">
+                    ${projectTags}
                     <tag>React</tag>
                 </div>
                 <!-- titre projet -->
@@ -170,7 +184,7 @@ const changePage = number => {
                         </a>
                         <div
                             class="space-x-4 mt-4 mb-2 text-sm text-main-white [&>a]:bg-main-gray [&>a]:py-1 [&>a]:px-3 [&>a]:rounded-full">
-   
+                            ${projectTeam}
                         </div>
                         <a href="?action=projetPage&id=${projet.id}" class="block float-left text-xs">
                         Voir le projet <i class="fa fa-arrow-right"></i></a>
