@@ -86,6 +86,28 @@ class ProjectRepository extends ConnectBdd{
             $project = $projectRepo->getProjectById($key['project_id']);
         }
     }
+
+    public function getUserProjects($id):array
+    {
+        $projects = [];
+        $req = $this->bdd->prepare("SELECT project_id FROM project_team WHERE user_id = ?");
+        $req->execute([$id]);
+        $datas = $req->fetchAll(PDO::FETCH_COLUMN);
+
+        foreach($datas as $data){
+            $project = new Project;
+
+            $req = $this->bdd->prepare("SELECT project_id, project_name FROM project WHERE project_id = ?");
+            $req->execute([$data]);
+            $data = $req->fetch(PDO::FETCH_ASSOC);
+
+            $project->id = $data['project_id'];
+            $project->name = $data['project_name'];
+            array_push($projects, $project);
+        }
+
+        return $projects;
+    }
 }
 
 ?>

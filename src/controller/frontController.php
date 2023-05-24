@@ -47,11 +47,13 @@ function myProfile()
     $userDatas = $user->getUserById($_SESSION['user']->id);
     $tags = new TagRepository();
     $allTags = $tags->getAllTags();
+    $status = new StatusRepository();
+    $allStatus = $status->getAllStatus();
+    $ProjectRepo = new ProjectRepository;
+    $userProjects = $ProjectRepo->getUserProjects($_SESSION['user']->id);
+    $Promo = new PromoRepository();
+    $userPromo = $Promo->getPromoByUserID($_SESSION['user']->id);
     include 'view/public/profile.php';
-    // $ProjectRepo = new ProjectRepository;
-    // récupérer projects bu user id
-    // $userProjects = $ProjectRepo->getProjectsByUserId($_SESSION['user']->id);
-    // var_dump($userProjects);
 }
 
 // Promotion

@@ -3,51 +3,97 @@ $title = "Espace personnel";
 ?>
 
 <?php ob_start();
-var_dump($allTags);
-var_dump($userDatas);
+// var_dump($userDatas);
 ?>
 <!-- Section photo et description -->
 <div class="background bg-main-white overflow-x-hidden min-h-[100vh]">
 
+    <?php if ($userDatas->role->id == 5) {?>
         <!-- PROFIL PROSPECT : RETIRER LE HIDDEN POUR L'AFFICHER -->
-        <section class="prospect_profil hidden">
+        <section class="prospect_profil">
             <!-- Image de profil -->
-            <div class="picture_desc grid grid-cols-1 lg:grid-cols-2 items-center lg:pt-[150px] pt-[100px] px-[8%] 2xl:px-[5%]">
+            <div class="picture_desc grid grid-cols-1 lg:grid-cols-2 items-center py-[50px] px-[8%] 2xl:px-[5%]">
                 <div class="picture max-h-screen lg:mr-5">
-                    <img class="w-full rounded-t-lg" src="assets/img/avatar/default_avatar.png" alt="Image de profil">
+                    <img class="w-full rounded-t-lg" src="assets/img/avatar/<?= $userDatas->avatar ?>" alt="Image de profil">
                     <button class="bg-main-red w-full text-main-white text-[16px] lg:text-[28px] py-3 rounded-b-lg">Changer ma photo de profil</button>
                 </div>
                 <div class="description lg:ml-5 h-[100%] flex flex-col">
-                    <h1 class="text-main-red font-title text-[28px] lg:text-[48px] font-semibold pt-5 text-center lg:text-left"><span class="uppercase">Gérard</span> Roger</h1>
-                    <div class="text-desc rounded-[5px] border-[1px] border-main-border mt-5 grow lg:flex lg:flex-col lg:justify-between">
-                        <div class="formation_status flex justify-center items-center px-3 lg:hidden">
-                            <span class="text-[28px] flex justify-center pt-1 pb-2 italic">Statut : En attente</span>
-                            <span class="w-6 h-6 border-[1px] bg-main-red rounded-full ml-2"></span>
+                    <h1 class="text-main-red font-title text-[28px] lg:text-[48px] font-semibold pt-5 text-center lg:text-left"><span class="uppercase"><?= $userDatas->name ?></span> <?= $userDatas->surname ?></h1>
+                    <div class="text-desc rounded-[5px] border-[1px] border-main-border mt-2 grow lg:flex lg:flex-col lg:justify-between">
+                        <p class="text-[20px] text-justify pt-4 px-3 pb-2 lg:pb-0">Candidature pour la formation <?= $userPromo->name ?></p>
+                        <div class="formation_status flex justify-center items-center px-3">
+                            <span class="text-[28px] flex justify-center pt-1 pb-2 italic">Statut : <?= $userDatas->status->name ?></span>
+                            <span class="w-6 h-6 border-[1px rounded-full ml-2 
+                                <?php if ($userDatas->status->id == 7){?> bg-main-red<?php }?>
+                                <?php if ($userDatas->status->id == 6){?> bg-main-green<?php }?>
+                                <?php if ($userDatas->status->id == 2){?> bg-main-orange<?php }?>"></span>
                         </div>
-                        <p class="text-[20px] text-justify pt-4 px-3 pb-2 lg:pb-0">Candidature pour la formation de développeur Web / Web mobile :</p>
                         <div class="h-0 border-[2px] border-main-red w-1/2 mb-5"></div>
                         <ul class="text-justify px-3 pb-3 text-[16px] lg:text-[18px] leading-loose ml-8">
-                            <li class="list-disc">Nom : </li>
-                            <li class="list-disc">Prénom : </li>
-                            <li class="list-disc">Adresse : </li>
-                            <li class="list-disc">Ville : </li>
-                            <li class="list-disc">Email : </li>
-                            <li class="list-disc">Téléphone : </li>
-                            <li class="list-disc">Date de naissance : </li>
-                            <li class="list-disc">Lieu de naissance : </li>
-                            <li class="list-disc">Nationalité : </li>
-                            <li class="list-disc">Numéro Pôle Emploi : </li>
+                            <li class="list-disc">Nom : <?= $userDatas->name ?></li>
+                            <li class="list-disc">Prénom : <?= $userDatas->surname ?> </li>
+                            <li class="list-disc">Adresse : <?= $userDatas->adress ?></li>
+                            <li class="list-disc">Email : <?= $userDatas->email ?></li>
+                            <li class="list-disc">Téléphone : <?= $userDatas->phone ?></li>
+                            <li class="list-disc">Date de naissance : <?= $userDatas->birth_date ?></li>
+                            <li class="list-disc">Lieu de naissance : <?= $userDatas->birth_place ?></li>
+                            <li class="list-disc">Nationalité : <?= $userDatas->nationality ?></li>
+                            <li class="list-disc">Numéro Pôle Emploi : <?= $userDatas->numero_pe ?></li>
                         </ul>
-                        <div class="formation_status hidden lg:flex px-3 justify-end items-center">
-                            <span class="text-[28px] flex justify-center pt-1 pb-2 italic">Statut : En attente</span>
-                            <span class="w-6 h-6 border-[1px] bg-main-red rounded-full ml-2"></span>
-                        </div>
-                        <button class="bg-main-red w-full lg:w-3/5 text-main-white text-[18px] uppercase py-3 rounded-b-lg lg:rounded-none lg:mb-4 lg:flex lg:justify-center lg:mx-auto">Editer ma candidature</button>
+                        <button data-modal-target="modify-prospect_data-modal" data-modal-toggle="modify-prospect_data-modal" class="bg-main-red w-full lg:w-3/5 text-main-white text-[18px] uppercase py-3 rounded-b-lg lg:rounded-none lg:mb-4 lg:flex lg:justify-center lg:mx-auto">Editer ma candidature</button>
+                        <!-- Modal de modification des informations persos -->
+                        <section id="modify-prospect_data-modal" data-modal-placement="center" tabindex="-1" aria-hidden="true" class="backdrop:brightness-50 fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto lg:inset-0 h-[calc(100%-1rem)] lg:h-full">
+                            <div class="relative w-full h-fit max-w-lg lg:h-auto">
+                                <div class="relative bg-main-white border-main-red border-2 rounded-lg text-main-red">
+                                    <button type="button" class="absolute top-3 right-2.5 text-main-red bg-transparent rounded-lg text-sm p-1.5 ml-auto inline-flex items-center hover: hover:border border-main-red" data-modal-hide="modify-prospect_data-modal">
+                                        <svg data-modal-hide="modify-prospect_data-modal" aria-hidden="true" class="w-5 h-5 text-main-light" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                                        <span class="sr-only">Close modal</span>
+                                    </button>
+                                    <!-- Partie MODIFICATION -->
+                                    <div id="co" class="px-6 py-6 lg:px-8">
+                                        <h3 class="mb-4 text-medium uppercase w-fit mx-auto font-bold font-title text-main-red">Modifier mes informations personnelles</h3>
+                                        <form class="space-y-6" action="" method="post">
+                                            <div>
+                                                <label for="email" class="block mb-1 text-sm font-medium  text-main-red">E-mail</label>
+                                                <input type="email" name="email" id="email" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" placeholder="<?= $userDatas->email ?>">
+                                            </div>
+                                            <div>
+                                                <label for="phone" class="block mb-1 text-sm font-medium  text-main-red">Téléphone</label>
+                                                <input type="phone" name="phone" id="phone" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" placeholder="<?= $userDatas->phone ?>">
+                                            </div>
+                                            <div>
+                                                <label for="adress" class="block mb-1 text-sm font-medium  text-main-red">Adresse</label>
+                                                <input type="adress" name="adress" id="adress" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" placeholder="<?= $userDatas->adress ?>">
+                                            </div>
+                                            <div>
+                                                <label for="numero_pe" class="block mb-1 text-sm font-medium  text-main-red">Numéro Pôle Emploi</label>
+                                                <input type="numero_pe" name="numero_pe" id="numero_pe" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" placeholder="<?= $userDatas->numero_pe ?>">
+                                            </div>
+                                            <div>
+                                                <label for="nationality" class="block mb-1 text-sm font-medium  text-main-red">Nationalité</label>
+                                                <input type="nationality" name="nationality" id="nationality" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" placeholder="<?= $userDatas->nationality ?>">
+                                            </div>
+                                            <div>
+                                                <label for="new_password" class="block mb-1 text-sm font-medium text-main-red">Choisir un nouveau mot de passe</label>
+                                                <input type="new_password" name="new_password" id="new_password" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" placeholder="">
+                                            </div>
+                                            <div>
+                                                <label for="password" class="block mb-1 text-sm font-medium  text-main-red">Veuillez confirmer vos modifications en entrant votre (ancien) mot de passe.</label>
+                                                <input type="password" name="password" id="password" placeholder="*********" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" required>
+                                            </div>
+                                            <button type="submit" class="w-full uppercase font-title text-main-white bg-main-red hover:bg-red-800 font-medium rounded-lg text-sm px-5 py-1.5 text-center ">Se connecter</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
                     </div>
                 </div>
             </div>
         </section>
+    <?php } ?>
 
+    <?php if ($userDatas->role->id == 4) { ?>
         <!-- PROFIL APPRENANT A METTRE EN HIDDEN POUR PROSPECT -->
         <section class="apprenant_profil">
             <!-- Image de profil et description -->
@@ -68,20 +114,20 @@ var_dump($userDatas);
                         <form id="user-status-update" class="hidden space-x-4">
                             <select name="user_status" class="border-main-red px-4 py-2">
                                 <option selected disabled>Votre statut</option>
-                                <option value="">En recherche de stage</option>
-                                <option value="">En recherche d'emploi</option>
-                                <option value="">En recherche d'alternance</option>
-                                <option value="">En stage</option>
-                                <option value="">Employé</option>
-                                <option value="">En alternance</option>
-                                <option value="">En formation</option>
+                                <?php foreach ($allStatus as $eachStatus){ ?>
+                                    <option value="<?= $eachStatus['status_id']?>"><?= $eachStatus['status_name'] ?></option>
+                                <?php } ?>
                             </select>
                             <button type="submit"><i class="fa-solid fa-check text-main-red"></i></button>
                             <i onclick="swapDivsById('user-status','user-status-update')" class="fa-solid fa-xmark text-main-red cursor-pointer"></i>
                         </form>
 
                         <div id="user-status" class="flex items-center pt-1 pb-2">
-                            <span class="w-6 h-6 border-[1px] bg-main-green rounded-full mr-2 animate-pulse"></span>
+                            <span class="w-6 h-6 border-[1px] rounded-full mr-2 animate-pulse
+                                <?php if ($userDatas->status->id == 7){?> bg-main-red<?php }?>
+                                <?php if ($userDatas->status->id == 6){?> bg-main-green<?php }?>
+                                <?php if ($userDatas->status->id == 2){?> bg-main-orange<?php }?>">
+                            </span>
                             <span class="text-[16px] flex justify-center italic"><?= $userDatas->status->name ?> depuis <?=  substr($userDatas->status_date, 0,-6) ?></span>
                             <div onclick="swapDivsById('user-status','user-status-update')" class="cursor-pointer">
                                 <i class="fa-solid fa-pen text-main-red w-[20px] ml-3"></i>
@@ -160,8 +206,8 @@ var_dump($userDatas);
                         <form id="skills-update" class="hidden">
                             <select multiple name="skills">
                                 <option disabled selected>Sélectionner des compétences</option>
-                                <?php foreach ($allTags as $each_tag){ ?>
-                                    <option value="<?= $each_tag['tag_id']?>"><?= $each_tag['tag_name'] ?></option>
+                                <?php foreach ($allTags as $eachTag){ ?>
+                                    <option value="<?= $eachTag['tag_id']?>"><?= $eachTag['tag_name'] ?></option>
                                 <?php } ?>
                             </select>
                             <button type="submit" class="py-2 px-4 bg-main-red border-main-white border text-main-white my-4 mr-4">Modifier <i class="fa-solid fa-check"></i></button>
@@ -194,19 +240,23 @@ var_dump($userDatas);
                                     <form class="space-y-6" action="" method="post">
                                         <div>
                                             <label for="email" class="block mb-1 text-sm font-medium  text-main-red">E-mail</label>
-                                            <input type="email" name="email" id="email" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" placeholder="$user_email">
+                                            <input type="email" name="email" id="email" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" placeholder="<?= $userDatas->email ?>">
                                         </div>
                                         <div>
                                             <label for="phone" class="block mb-1 text-sm font-medium  text-main-red">Téléphone</label>
-                                            <input type="phone" name="phone" id="phone" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" placeholder="$user_phone">
+                                            <input type="phone" name="phone" id="phone" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" placeholder="<?= $userDatas->phone ?>">
+                                        </div>
+                                        <div>
+                                            <label for="adress" class="block mb-1 text-sm font-medium  text-main-red">Adresse</label>
+                                            <input type="adress" name="adress" id="adress" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" placeholder="<?= $userDatas->adress ?>">
                                         </div>
                                         <div>
                                             <label for="numero_pe" class="block mb-1 text-sm font-medium  text-main-red">Numéro Pôle Emploi</label>
-                                            <input type="numero_pe" name="numero_pe" id="numero_pe" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" placeholder="$user_numero_pe">
+                                            <input type="numero_pe" name="numero_pe" id="numero_pe" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" placeholder="<?= $userDatas->numero_pe ?>">
                                         </div>
                                         <div>
                                             <label for="nationality" class="block mb-1 text-sm font-medium  text-main-red">Nationalité</label>
-                                            <input type="nationality" name="nationality" id="nationality" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" placeholder="$user_nationality">
+                                            <input type="nationality" name="nationality" id="nationality" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" placeholder="<?= $userDatas->nationality ?>">
                                         </div>
                                         <div>
                                             <label for="new_password" class="block mb-1 text-sm font-medium text-main-red">Choisir un nouveau mot de passe</label>
@@ -575,7 +625,7 @@ var_dump($userDatas);
 
         </section>
         <!-- Fin de la section profil apprenant -->
-
+    <?php } ?>
     </div>
 </div>
 
