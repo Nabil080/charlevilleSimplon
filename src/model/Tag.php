@@ -23,6 +23,22 @@ class TagRepository extends ConnectBdd{
         return $Tag;
     }
 
+    public function getProjectTags($id):array
+    {
+        $tags = [];
+        $req = $this->bdd->prepare("SELECT `tag_id` FROM `project_tag` WHERE `project_id` = ?");
+        $req->execute([$id]);
+        $data = $req->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach($data as $key){
+            $tag = $this->getTagById($key['tag_id']);
+
+            $tags[] = $tag;
+        }
+
+        return $tags;
+    }
+
     public function getUserTags($id):array
     {
         $tags = [];

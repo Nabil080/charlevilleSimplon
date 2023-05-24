@@ -8,7 +8,10 @@ class Project {
     public $file;
     public $notes;
     public $github;
+    public $company_name;
+    public $company_link;
     public $company_image;
+    public $company_adress;
     public $model_image;
     public $model_link;
     public $user;
@@ -16,6 +19,10 @@ class Project {
     public $status;
     public $promo;
     public $type;
+    public $tags;
+    public $start;
+    public $end;
+    public $team;
 
     // public function createToInsert(array $projectForm):bool{
 
@@ -44,35 +51,78 @@ class ProjectRepository extends ConnectBdd{
         $project->notes = $data['project_notes'];
         $project->github = $data['project_github'];
         $project->company_image = $data['project_company_image'];
+        $project->company_name = $data['project_company_name'];
+        $project->company_link = $data['project_company_link'];
+        $project->company_adress = $data['project_company_adress'];
         $project->model_image = $data['project_model_image'];
         $project->model_link = $data['project_model_link'];
 
-        $User = new User();
-        $userRepo = new UsersRepository();
+        $User = new User;
+        $userRepo = new UsersRepository;
         $User = $userRepo->getUserById($data['user_id']);
         $project->user = $User;
 
-        $Formator = new User();
+        $Formator = new User;
+        $userRepo = new UsersRepository;
         $Formator = $userRepo->getUserById($data['user_id_project_formator']);
         $project->formator = $Formator;
 
-        $Status = new Status();
-        $statusRepo = new StatusRepository();
+        $Status = new Status;
+        $statusRepo = new StatusRepository;
         $Status = $statusRepo->getStatusById($data['status_id']);
         $project->status = $Status;
 
-        $Promo = new Promo();
-        $promoRepo = new PromoRepository();
-        $Promo = $promoRepo->getpromoById($data['promo_id']);
+        $Promo = new Promo;
+        $promoRepo = new PromoRepository;
+        $Promo = $promoRepo->getPromoById($data['promo_id']);
         $project->promo = $Promo;
 
-        $Type = new Type();
-        $typeRepo = new TypeRepository();
-        $Type = $typeRepo->gettypeById($data['type_id']);
+        $Type = new Type;
+        $typeRepo = new TypeRepository;
+        $Type = $typeRepo->getTypeById($data['type_id']);
         $project->type = $Type;
+
+        $tagRepo = new TagRepository;
+        $tags = $tagRepo->getProjectTags($data['project_id']);
+        $project->tags = $tags;
+
+        $project->team = $this->getProjectUsers($data['project_id']);
+
+        $project->start = null;
+        $project->end = null;
+        if($data['status_id'] == 12){
+            $project->start = $data['project_start'];
+            $project->end = 'En cours';
+        }
+        if($data['status_id'] == 12){
+            $project->start = $data['project_start'];
+            $project->end = 'En cours';
+        }
+        if($data['status_id'] == 13){
+            $project->start = $data['project_start'];
+            $project->end = $data['project_end'];
+        }
 
 
         return $project;
+    }
+
+    public function getProjectUsers($id):array
+    {
+        $team = [];
+        $req = $this->bdd->prepare("SELECT `user_id` FROM `project_team` WHERE `project_id` = ? ");
+        $req->execute([$id]);
+        $data = $req->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach($data as $key){
+            $User = new User;
+            $userRepo = new UsersRepository;
+            $User = $userRepo->getUserById($key['user_id']);
+
+            $team[] = $User;
+        }
+
+        return $team;
     }
 
     public function getAllProjects(){
@@ -97,14 +147,22 @@ class ProjectRepository extends ConnectBdd{
         foreach($datas as $data){
             $project = new Project;
 
-            $req = $this->bdd->prepare("SELECT project_id, project_name FROM project WHERE project_id = ?");
+            $req = $this->bdd->prepare("SELECT * FROM project WHERE project_id = ?");
             $req->execute([$data]);
             $data = $req->fetch(PDO::FETCH_ASSOC);
 
             $project->id = $data['project_id'];
             $project->name = $data['project_name'];
+            $project->description = $data['project_description'];
+            $project->file = $data['project_file'];
+            $project->notes = $data['project_notes'];
+            $project->github = $data['project_github'];
+            $project->company_image = $data['project_company_image'];
+            $project->model_image = $data['project_model_image'];
+            $project->model_link = $data['project_model_link'];
             array_push($projects, $project);
         }
+
 
         return $projects;
     }
