@@ -91,9 +91,36 @@ getProjets()
 
             // * UTILISE L'ARRAY PROJETS
             const limitedProjects = projets
-            // * FILTRE DE RECHERCHE
+            // // * FILTRES DE FORMATION
+            // .filter((projet) => {
+            //     return (
+            //         projet.toLowerCase().includes('con'.toLowerCase()) ||
+            //         projet.toLowerCase().includes('web'.toLowerCase()) ||
+            //         projet.toLowerCase().includes('Technicien'.toLowerCase()) ||
+            //         projet.toLowerCase().includes('Référent'.toLowerCase())
+            //     )
+            // })
+            // // * FILTRES D'ANNÉÉS
+            .filter((projet) => {
+                return (
+                    projet.toLowerCase().includes('2023'.toLowerCase()) ||
+                    projet.toLowerCase().includes('2022'.toLowerCase()) ||
+                    projet.toLowerCase().includes('2021'.toLowerCase())
+                )
+            })
+            // // * FILTRES DE NIVEAU
+            // .filter((projet) => {
+            //     return (
+            //         projet.toLowerCase().includes('Bac+5'.toLowerCase()) ||
+            //         projet.toLowerCase().includes('Bac+4'.toLowerCase()) ||
+            //         projet.toLowerCase().includes('Bac+3'.toLowerCase()) ||
+            //         projet.toLowerCase().includes('Bac+2'.toLowerCase()) ||
+            //         projet.toLowerCase().includes('Bac+1'.toLowerCase())
+            //     )
+            // })
+            // FILTRE DE RECHERCHE
             .filter((projet) => projet.toLowerCase().includes(searchInput.value.toLowerCase()))
-            // * FILTRE DE LIMITE
+            // * PAGINATION LIMITE
             .slice(0, 6)
             // * CREER LE NOUVEL ARRAY
             .map((projet) => projet)
@@ -102,8 +129,8 @@ getProjets()
 
         // * REMPLACE LA GRILLE PROJETS
         projectGrid.innerHTML = limitedProjects
-    })
 
+    })
   })
   .catch((error) => {
     console.error(error);
