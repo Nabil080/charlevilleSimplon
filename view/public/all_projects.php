@@ -31,7 +31,7 @@
 <section id="all-projects" class="px-4 2xl:mx-6">
     <!-- barre de recherche -->
     <div class="relative w-full 2xl:w-4/5 mx-auto mt-4">
-        <input id="project-search" class="border-main-red rounded-lg w-full pl-10 py-4 placeholder:text-black focus:border-green-50" placeholder="Votre recherche" type="search" oninput="searchByInputAndClassName(this,'project-card')">
+        <input id="project-search" class="border-main-red rounded-lg w-full pl-10 py-4 placeholder:text-black focus:border-green-50" placeholder="Votre recherche" type="search">
         <i class="fa fa-search absolute top-0 left-0 w-10 text-center text-xl py-4"></i>
     </div>
     <!-- boutons de filtre -->
@@ -74,9 +74,9 @@
     <h3 id="project-count" class="max-w-[766px] text-main-red mt-6">6 projets affichés sur <?=$projectCount?></h3>
     <section id="project-cards" class="mt-2 grid gap-6 xl:grid-cols-2 w-fit mx-auto">
         <?php
-        // foreach($projects as $project){
-        //     include('view/template/_project_card.php');
-        // }
+        foreach($projects as $project){
+            include('view/template/_project_card.php');
+        }
         ?>
 
 

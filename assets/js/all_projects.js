@@ -36,34 +36,75 @@ function toggleDropdown(id){
 }
 
 
-window.onload = () => changePage(1);
+// window.onload = () => changePage(1);
 
-const changePage = number => {
-    const projectGrid = document.querySelector('#project-cards')
-    const paginationButtons = document.querySelectorAll('#pagination a');
+// const changePage = number => {
+//     const projectGrid = document.querySelector('#project-cards')
+//     const paginationButtons = document.querySelectorAll('#pagination a');
 
 
-    let pageNumber = number;
+//     let pageNumber = number;
 
-    const projectsCount = 9
-    const projectsPerPage = 6
-    const totalPages = Math.ceil(projectsCount/projectsPerPage)
+//     const projectsCount = 9
+//     const projectsPerPage = 6
+//     const totalPages = Math.ceil(projectsCount/projectsPerPage)
 
-    let initialPage = (pageNumber-1)*projectsPerPage
-    let limitRequest = `${initialPage}, ${projectsPerPage}`;
-    // console.log(limitRequest);
+//     let initialPage = (pageNumber-1)*projectsPerPage
+//     let limitRequest = `${initialPage}, ${projectsPerPage}`;
+//     // console.log(limitRequest);
 
-    fetch('?action=projectsPagination',{
-        method: 'POST',
-        body:JSON.stringify({request: limitRequest})
-    })
-    .then((response) => {
-        // console.log(response.text())
+//     fetch('?action=projectsPagination',{
+//         method: 'POST',
+//         body:JSON.stringify({request: limitRequest})
+//     })
+//     .then((response) => {
+//         // console.log(response.text())
 
-        return response.text()
-    })
-    .then((data) => {2
+//         return response.text()
+//     })
+//     .then((data) => {2
+//         data = JSON.parse(data);
+//         projectGrid.innerHTML = data.projets
+//     })
+// }
+
+const projectGrid = document.querySelector('#project-cards');
+const searchInput = document.querySelector('#project-search');
+
+const getProjets = () => {
+
+    return fetch('?action=projectsPagination')
+    .then((response) => response.text())
+    .then((data) => {
         data = JSON.parse(data);
-        projectGrid.innerHTML = data.projets
+
+        return data.projets
     })
+
 }
+
+getProjets()
+  .then((projets) => {
+
+
+    searchInput.addEventListener('input', e => {
+
+            // * UTILISE L'ARRAY PROJETS
+            const limitedProjects = projets
+            // * FILTRE DE RECHERCHE
+            .filter((projet) => projet.toLowerCase().includes(searchInput.value.toLowerCase()))
+            // * FILTRE DE LIMITE
+            .slice(0, 6)
+            // * CREER LE NOUVEL ARRAY
+            .map((projet) => projet)
+            // * CONVERTIS L'ARRAY EN UN STRING
+            .join('');
+
+        // * REMPLACE LA GRILLE PROJETS
+        projectGrid.innerHTML = limitedProjects
+    })
+
+  })
+  .catch((error) => {
+    console.error(error);
+  });
