@@ -45,4 +45,3 @@ if (isset($_GET['action']) && $_GET['action'] !== '' && !isset($_GET['admin'])) 
 
 $ProjectRepo = new ProjectRepository;
 $Project = $ProjectRepo->getProjectById(3);
-var_dump($Project);
