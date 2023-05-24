@@ -147,20 +147,13 @@ class ProjectRepository extends ConnectBdd{
         foreach($datas as $data){
             $project = new Project;
 
-            $req = $this->bdd->prepare("SELECT * FROM project WHERE project_id = ?");
+            $req = $this->bdd->prepare("SELECT project_id, project_name FROM project WHERE project_id = ?");
             $req->execute([$data]);
             $data = $req->fetch(PDO::FETCH_ASSOC);
 
             $project->id = $data['project_id'];
             $project->name = $data['project_name'];
-            $project->description = $data['project_description'];
-            $project->file = $data['project_file'];
-            $project->notes = $data['project_notes'];
-            $project->github = $data['project_github'];
-            $project->company_image = $data['project_company_image'];
-            $project->model_image = $data['project_model_image'];
-            $project->model_link = $data['project_model_link'];
-            array_push($projects, $project);
+
         }
 
 

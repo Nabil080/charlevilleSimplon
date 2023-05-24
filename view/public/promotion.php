@@ -4,11 +4,15 @@
 <main class="w-[100vw] overflow-x-hidden bg-main-white">
     <section>
         <!-------------Titre----------->
-        <h2 class="text-center text-[24px] md:text-4xl font-bold font-title text-main-red uppercase pb-2">Développeur
-            Web
-            et Web Mobile
+        <h2 class="text-center text-[24px] md:text-4xl font-bold font-title text-main-red uppercase pb-2">
+            <?= $promo->name; ?>
         </h2>
-        <p class="text-center text-[24px] md:text-4xl font-title text-main-red pb-8">Janvier 2023 - Septembre 2023
+        <?php 
+            
+
+        ?>
+        <p class="text-center text-[24px] md:text-4xl font-title text-main-red pb-8"><?= $promo->start; ?> - 
+        <?= $promo->end; ?>
         </p>
     </section>
     <section>
