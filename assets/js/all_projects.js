@@ -84,54 +84,53 @@ const getProjets = () => {
 }
 
 getProjets()
-  .then((projets) => {
-
+.then((projets) => {
+    loadProjects(projets)
 
     searchInput.addEventListener('input', e => {
-
-            // * UTILISE L'ARRAY PROJETS
-            const limitedProjects = projets
-            // // * FILTRES DE FORMATION
-            // .filter((projet) => {
-            //     return (
-            //         projet.toLowerCase().includes('con'.toLowerCase()) ||
-            //         projet.toLowerCase().includes('web'.toLowerCase()) ||
-            //         projet.toLowerCase().includes('Technicien'.toLowerCase()) ||
-            //         projet.toLowerCase().includes('Référent'.toLowerCase())
-            //     )
-            // })
-            // // * FILTRES D'ANNÉÉS
-            .filter((projet) => {
-                return (
-                    projet.toLowerCase().includes('2023'.toLowerCase()) ||
-                    projet.toLowerCase().includes('2022'.toLowerCase()) ||
-                    projet.toLowerCase().includes('2021'.toLowerCase())
-                )
-            })
-            // // * FILTRES DE NIVEAU
-            // .filter((projet) => {
-            //     return (
-            //         projet.toLowerCase().includes('Bac+5'.toLowerCase()) ||
-            //         projet.toLowerCase().includes('Bac+4'.toLowerCase()) ||
-            //         projet.toLowerCase().includes('Bac+3'.toLowerCase()) ||
-            //         projet.toLowerCase().includes('Bac+2'.toLowerCase()) ||
-            //         projet.toLowerCase().includes('Bac+1'.toLowerCase())
-            //     )
-            // })
-            // FILTRE DE RECHERCHE
-            .filter((projet) => projet.toLowerCase().includes(searchInput.value.toLowerCase()))
-            // * PAGINATION LIMITE
-            .slice(0, 6)
-            // * CREER LE NOUVEL ARRAY
-            .map((projet) => projet)
-            // * CONVERTIS L'ARRAY EN UN STRING
-            .join('');
-
-        // * REMPLACE LA GRILLE PROJETS
-        projectGrid.innerHTML = limitedProjects
-
+        loadProjects(projets)
     })
-  })
-  .catch((error) => {
+})
+.catch((error) => {
     console.error(error);
-  });
+});
+
+
+function loadProjects(projets){
+
+        // * UTILISE L'ARRAY PROJETS
+        const limitedProjects = projets
+        // * FILTRES FORMATIONS
+        .filter((projet) => {
+            const formationFilters = ['con', 'web', 'Technicien', 'Référent'];
+            return formationFilters.some(filter =>
+            projet.toLowerCase().includes(filter.toLowerCase())
+            );
+        })
+        // * FILTRES ANNÉES
+        .filter((projet) => {
+            const annéesFilters = ['2023', '2022', '2021'];
+            return annéesFilters.some(filter =>
+            projet.toLowerCase().includes(filter.toLowerCase())
+            );
+        })
+        // * FILTRES NIVEAUX
+        .filter((projet) => {
+            const levelFilters = ['Bac+5', 'Bac+4', 'Bac+3', 'Bac+2', 'Bac+1'];
+            return levelFilters.some(filter =>
+            projet.toLowerCase().includes(filter.toLowerCase())
+            );
+        })
+        // * FILTRES RECHERCHE
+        .filter((projet) =>
+            projet.toLowerCase().includes(searchInput.value.toLowerCase())
+        )
+        .slice(0, 6)
+        .map((projet) => projet)
+        .join('');
+
+
+    // * REMPLACE LA GRILLE PROJETS
+    projectGrid.innerHTML = limitedProjects
+}
+
