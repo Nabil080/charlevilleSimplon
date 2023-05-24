@@ -1,5 +1,7 @@
 <?php
 require_once 'src/model/ConnectBdd.php';
+require_once 'src/model/Tag.php';
+
 class User
 {
     public $id;
@@ -18,9 +20,14 @@ class User
     public $birth_date;
     public $birth_place;
     public $nationality;
+    public $tags;
+    public $projects;
     public $status;
+    public $status_date;
     public $role;
     public $highlight;
+    public $company;
+
 
     public function getNameAndPseudo($account)
     {
@@ -87,6 +94,18 @@ class UsersRepository extends ConnectBdd
         $User->birth_place = isset($data['user_birth_place']) ? $data['user_birth_place'] : null;
         $User->nationality = isset($data['user_nationality']) ? $data['user_nationality'] : null;
         $User->highlight = isset($data['highlight']) ? $data['highlight'] : null;
+        $User->status_date = isset($data['user_status_date']) ? $data['user_status_date'] : null;
+
+
+        $Tags = new Tag;
+        $tagRepo = new TagRepository;
+        $Tags = $tagRepo->getUserTags($data['user_id']);
+        $User->tags = $Tags;
+
+        $Projects = new Project;
+        $projectRepository = new ProjectRepository;
+        $Projects = $projectRepository->getUserProjects($data['user_id']);
+        $User->projects = $Projects;
 
         $Status = new Status;
         $statusRepo = new StatusRepository;
@@ -141,7 +160,7 @@ class UsersRepository extends ConnectBdd
         $User->id = $data['user_id'];
         $User->name = $data['user_name'];
         $User->surname = $data['user_surname'];
-        $User->email = $data['user_surname'];
+        $User->email = $data['user_email'];
         $User->password = $data['user_password'];
         $User->avatar = $data['user_avatar'];
         $User->description = $data['user_description'];
