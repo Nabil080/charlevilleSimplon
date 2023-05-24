@@ -31,6 +31,7 @@
                         lightgray: '#F2F2F3',
                         blue: '#4A9AE6',
                         green: '#A2EF4D',
+                        orange: '#ff7f00',
                     }
                 }
             }
