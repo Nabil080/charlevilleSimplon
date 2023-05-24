@@ -70,6 +70,8 @@ function toggleDropdown(id){
 
 const projectGrid = document.querySelector('#project-cards');
 const searchInput = document.querySelector('#project-search');
+const formationCheckboxes = document.querySelectorAll("#formation-dropdown input");
+
 
 const getProjets = () => {
 
@@ -87,7 +89,13 @@ getProjets()
 .then((projets) => {
     loadProjects(projets)
 
-    searchInput.addEventListener('input', e => {
+    formationCheckboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', (e) => {
+            loadProjects(projets)
+        })
+    })
+
+    searchInput.addEventListener('input', (e) => {
         loadProjects(projets)
     })
 })
@@ -98,29 +106,42 @@ getProjets()
 
 function loadProjects(projets){
 
+    // DEFINIT LES FILTRES FORMATION
+    const formationFilters = []
+    formationCheckboxes.forEach(checkbox => {
+        // * AJOUTE LES CHECKBOX CHECK
+        if(checkbox.checked){
+            formationFilters.push(checkbox.value)
+        }
+    })
+    // SI ARRAY VIDE GERE L'ERREUR :
+    if(formationFilters.length === 0){
+        formationFilters.push('')
+    }
+
         // * UTILISE L'ARRAY PROJETS
         const limitedProjects = projets
         // * FILTRES FORMATIONS
         .filter((projet) => {
-            const formationFilters = ['con', 'web', 'Technicien', 'Référent'];
+            // const formationFilters = ['concepteurs développeurs', 'web', 'Référent'];
             return formationFilters.some(filter =>
             projet.toLowerCase().includes(filter.toLowerCase())
             );
         })
         // * FILTRES ANNÉES
         .filter((projet) => {
-            const annéesFilters = ['2023', '2022', '2021'];
+            const annéesFilters = ['2023', '2022', '2021', '2018'];
             return annéesFilters.some(filter =>
             projet.toLowerCase().includes(filter.toLowerCase())
             );
         })
-        // * FILTRES NIVEAUX
-        .filter((projet) => {
-            const levelFilters = ['Bac+5', 'Bac+4', 'Bac+3', 'Bac+2', 'Bac+1'];
-            return levelFilters.some(filter =>
-            projet.toLowerCase().includes(filter.toLowerCase())
-            );
-        })
+        // // * FILTRES NIVEAUX
+        // .filter((projet) => {
+        //     const levelFilters = ['Bac+5', 'Bac+4', 'Bac+3', 'Bac+2', 'Bac+1'];
+        //     return levelFilters.some(filter =>
+        //     projet.toLowerCase().includes(filter.toLowerCase())
+        //     );
+        // })
         // * FILTRES RECHERCHE
         .filter((projet) =>
             projet.toLowerCase().includes(searchInput.value.toLowerCase())
@@ -133,4 +154,3 @@ function loadProjects(projets){
     // * REMPLACE LA GRILLE PROJETS
     projectGrid.innerHTML = limitedProjects
 }
-

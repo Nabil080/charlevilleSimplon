@@ -64,4 +64,8 @@
                     <p class="text-sm pt-0.5 text-left font-light"><?=$project->company_adress?></p>
                 </div>
             </div>
+            <!-- data filtres-->
+            <div id="formation-<?=$project->promo->formation->id?>"></div>
+            <div id="bac+2"></div>
+            <div id="2022"></div>
         </article>
