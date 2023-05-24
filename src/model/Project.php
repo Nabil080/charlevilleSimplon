@@ -128,6 +128,18 @@ class ProjectRepository extends ConnectBdd{
         return $projects;
     }
 
+    public function getFilteredProjects(array $POST):array
+    {
+        $projects = [];
+        ("SELECT * FROM projects WHERE `formation_id` = 1 ");
+        if(str_contains($project_start, '2023')){
+            
+        }
+
+
+        return $projects;
+    }
+
     public function getProjectUsers($id):array
     {
         $team = [];

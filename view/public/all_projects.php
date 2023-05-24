@@ -18,6 +18,9 @@
         }
         // var_dump($projects);
 
+        $formationRepo = new FormationRepository;
+        $formations = $formationRepo->getAllFormations()
+
 ?>
 
 <?php ob_start(); ?>
@@ -38,10 +41,9 @@
         <button onclick="toggleDropdown('formation-dropdown')" class="relative w-full py-2"><i class="fa fa-filter text-xs"></i> Formation</button>
         <!-- dropdown formations -->
             <div class="filter-dropdown dropdown hidden absolute box-content -translate-x-[1px] z-10 w-[calc(100%-2rem)] sm:w-full -translate-y-1 border rounded-b-lg rounded-tr-lg sm:rounded-tr-none text-start bg-main-white sm:border-t-transparent border-main-red">
-                <div class="flex gap-2 text-xs my-2 px-2"><input class="my-auto" id="dev" type="checkbox" value="dev"><label for="dev">Développeur Web et Web Mobile</label></div>
-                <div class="flex gap-2 text-xs my-2 px-2"><input class="my-auto" id="cda" type="checkbox" value="cda"><label for="cda">Concepteur développeur d'applications</label></div>
-                <div class="flex gap-2 text-xs my-2 px-2"><input class="my-auto" id="tssr" type="checkbox" value="tssr"><label for="tssr">Technicien supérieur système et réseaux</label></div>
-                <div class="flex gap-2 text-xs my-2 px-2"><input class="my-auto" id="ref-dig" type="checkbox" value="ref-dig"><label for="ref-dig">Référent digital</label></div>
+                <?php foreach($formations as $formation){ ?>
+                    <div class="flex gap-2 text-xs my-2 px-2"><input class="my-auto" id="formation-<?=$formation->id?>" type="checkbox" value="<?=$formation->id?>"><label for="formation-<?=$formation->id?>"><?=$formation->name?></label></div>
+                <?php } ?>
             </div>
         </div>
         <div id="years-dropdown" class="dropdown-toggle w-1/4 border-main-red border rounded-t-lg rounded-b-lg relative">

@@ -40,3 +40,7 @@ if (isset($_GET['action']) && $_GET['action'] !== '' && !isset($_GET['admin'])) 
 } else {
     homepage();
 }
+
+// $repo = new FormationRepository;
+// $data = $repo->getAllFormations();
+// var_dump($data);

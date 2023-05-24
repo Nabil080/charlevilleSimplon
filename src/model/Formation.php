@@ -38,29 +38,20 @@ class FormationRepository extends ConnectBdd
         return $Formation;
     }
 
-    public function getFormations()
+    public function getAllFormations():array
     {
+        $formations = [];
+
         $req = $this->bdd->prepare('SELECT * FROM formation');
         $req->execute();
-        $datas = $req->fetchAll();
-        $formations = [];
-        
-        foreach($datas as $formationBdd)
-        {
-            $article = new Article();
-            $avatar = new AuthorRepository();
-            $avatar = $avatar->getDataByAuthorId($articleBdd['id_user']);
-            $article->id = $articleBdd['id_article'];
-            $article->title = $articleBdd['title_article'];
-            $article->image = $articleBdd['image_article'];
-            $article->description = $articleBdd['description_article'];
-            $article->author = $articleBdd['author_article'];
-            $article->date = $articleBdd['date_article'];
-            $article->id_author = $articleBdd['id_user'];
-            $article->author_avatar = $avatar;
-            $articles[] = $article;
-        } 
-        return $articles;
+        $data = $req->fetchAll();
+
+        foreach($data as $key){
+            $Formation = $this->getFormationById($key['formation_id']);
+            $formations[] = $Formation;
+        }
+
+        return $formations;
     }
 }
 
