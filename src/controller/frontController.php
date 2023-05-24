@@ -52,6 +52,7 @@ function promotionPage()
 {
     $id = 1;
     $PromoRepository = new PromoRepository;
+    $promo = $PromoRepository->getPromoById($id);
     $apprenants = $PromoRepository->getAllApprenants($id);
     $formateurs = $PromoRepository->getAllFormateurs($id);
     $allProjects = $PromoRepository->getPromoProjects($id);

@@ -28,8 +28,8 @@
                 <!-- titre projet -->
                 <h2 class="font-title text-main-red italic font-bold text-3xl my-2"><a href="?action=projectPage&id=<?=$project->id?>"><?=$project->name?></a></h2>
                 <div class="self-end flex w-3/4 justify-between italic border-b border-main-red">
-                    <?php if(isset($project->start)){ ?><span>Débuté le <?=$project->start?></span><?php }
-                    if(isset($project->end)){ ?><span>Fini le <?=$project->end?></span><?php } ?></div>
+                    <?php if(isset($project->start)){ ?><span>Débuté le <?=date('d-m-Y', strtotime($project->start))?></span><?php }
+                    if(isset($project->end)){ ?><span>Fini le <?=date('d-m-Y', strtotime($project->end))?></span><?php } ?></div>
                 <!-- contenu projet -->
                 <div class="text-base flex-grow flex-col">
                     <p class="pl-[20%] line-clamp-5 mt-2 mb-4"><?=$project->description?></p>

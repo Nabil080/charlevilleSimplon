@@ -20,14 +20,16 @@ class PromoRepository extends ConnectBdd{
     public function getPromoById($id):object
     {
         $Promo = new Promo;
+        $promoRepository = new PromoRepository;
         $req = $this->bdd->prepare("SELECT * FROM `promo` WHERE `promo_id` = ?");
         $req->execute([$id]);
         $data = $req->fetch(PDO::FETCH_ASSOC);
 
         $Promo->id = $data['promo_id'];
         $Promo->name = $data['promo_name'];
-        $Promo->start = $data['promo_start'];
-        $Promo->end = $data['promo_end'];
+        $Promo->start = $promoRepository->formateDate($data['promo_start']);
+        $Promo->end = $promoRepository->formateDate($data['promo_end']);
+        
 
         $Status = new Status;
         $statusRepo = new StatusRepository;
@@ -40,6 +42,17 @@ class PromoRepository extends ConnectBdd{
         $Promo->formation = $Formation;
 
         return $Promo;
+    }
+
+    public function formateDate($date):string
+    {
+        $mois = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'];
+        $explode  = substr($date, '5', '2');
+        $date = date('d-m-Y', strtotime($date));
+        $findMois = $mois[($explode * 1) - 1];
+        $date = str_replace($explode, $findMois, $date);
+        $date = str_replace("-", " ", $date);
+        return $date;
     }
 
     public function getAllApprenants($id):array 
