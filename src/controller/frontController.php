@@ -1,5 +1,7 @@
 <?php
 require_once("src/model/Promo.php");
+require_once("src/model/Formation.php");
+
 function homepage()
 {
     include 'view/public/homepage.php';
@@ -12,6 +14,8 @@ function contactPage()
 // Formation 
 function allFormationsPage()
 {
+    $formationRepository = new FormationRepository;
+    $formations = $formationRepository->getFormations();
     include 'view/public/allFormations.php';
 }
 
@@ -50,7 +54,11 @@ function allPromotionsPage()
 }
 function promotionPage()
 {
-    $id = 1;
+    if (isset($_GET['id_promo'])) {
+        $id = $_GET['id_promo'];
+    } else {
+        $id = 1;
+    }
     $PromoRepository = new PromoRepository;
     $promo = $PromoRepository->getPromoById($id);
     $apprenants = $PromoRepository->getAllApprenants($id);

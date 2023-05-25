@@ -8,7 +8,12 @@ class Formation
     public $description;
     public $duration;
     public $level;
+    public $diploma;
+    public $preview;
+    public $job_name;
+    public $promo_start;
     public $status;
+
 }
 class FormationRepository extends ConnectBdd
 {
@@ -29,38 +34,39 @@ class FormationRepository extends ConnectBdd
         $Formation->description = $data['formation_description'];
         $Formation->duration = $data['formation_duration'];
         $Formation->level = $data['formation_level'];
+        $Formation->diploma = $data['formation_diploma'];
+        $Formation->preview = $data['formation_preview'];
 
         $Status = new Status;
         $statusRepo = new StatusRepository;
         $Status = $statusRepo->getStatusById($data['status_id']);
         $Formation->status = $Status;
 
+        $jobRepo = new JobRepository;
+        $job = $jobRepo->getjobName($data['formation_id']);
+        $Formation->job_name = $job;
+
+        $promoRepo = new PromoRepository;
+        $promo_start = $promoRepo->formateDate($promoRepo->getPromoStart($data['formation_id'])) ;
+        $Formation->promo_start = $promo_start;
+
         return $Formation;
     }
 
     public function getFormations()
     {
-        $req = $this->bdd->prepare('SELECT * FROM formation');
+        $formationRepository = new FormationRepository;
+        $req = $this->bdd->prepare('SELECT formation_id FROM formation');
         $req->execute();
-        $datas = $req->fetchAll();
+        $datas = $req->fetchAll(PDO::FETCH_COLUMN);
         $formations = [];
-        
-        foreach($datas as $formationBdd)
-        {
-            $article = new Article();
-            $avatar = new AuthorRepository();
-            $avatar = $avatar->getDataByAuthorId($articleBdd['id_user']);
-            $article->id = $articleBdd['id_article'];
-            $article->title = $articleBdd['title_article'];
-            $article->image = $articleBdd['image_article'];
-            $article->description = $articleBdd['description_article'];
-            $article->author = $articleBdd['author_article'];
-            $article->date = $articleBdd['date_article'];
-            $article->id_author = $articleBdd['id_user'];
-            $article->author_avatar = $avatar;
-            $articles[] = $article;
-        } 
-        return $articles;
+
+        foreach ($datas as $data) {
+            $formation = $formationRepository->getFormationById($data);
+            array_push($formations, $formation);
+        }
+
+        return $formations;
     }
 }
 
