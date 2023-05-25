@@ -153,9 +153,10 @@ function loadProjects(projets,number){
 
     // TODO: CREATION DE LA PAGINATION
     // * VARIABLES POUR LA PAGINATION
-    let projectsPerPage = 6;
+    let projectsPerPage = 4;
     let pageCount = Math.ceil(projectsCount / projectsPerPage);
-    var currentPage = number;
+    let paginationRange = 3
+    let currentPage = number;
     const prevRange = ( currentPage - 1 ) * projectsPerPage
     const nextRange = (currentPage * projectsPerPage ) 
     console.log(prevRange,nextRange)
@@ -171,6 +172,8 @@ function loadProjects(projets,number){
     // * AFFICHE LA PAGINATION
     paginationDiv.innerHTML = '';
     for(page = 1; page <= pageCount; page++){
+
+    if(page > currentPage - paginationRange && page < currentPage + paginationRange)
         if(page == currentPage){
             paginationDiv.innerHTML += `<button id="${page}" class="bg-main-red text-main-white">${page}</button>`;
         }else{
