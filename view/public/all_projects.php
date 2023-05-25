@@ -74,9 +74,9 @@
     <h3 id="project-count" class="max-w-[766px] text-main-red mt-6">6 projets affichés sur <?=$projectCount?></h3>
     <section id="project-cards" class="mt-2 grid gap-6 xl:grid-cols-2 w-fit mx-auto">
         <?php
-        // foreach($projects as $project){
-        //     include('view/template/_project_card.php');
-        // }
+        foreach($projects as $project){
+            include('view/template/_project_card.php');
+        }
         ?>
 
 

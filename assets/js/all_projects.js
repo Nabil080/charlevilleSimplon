@@ -6,7 +6,7 @@ function toggleDropdown(id){
     selectedDropdown.classList.toggle('hidden')
 }
 
-
+const projectCountDiv = document.querySelector('#project-count');
 const projectGrid = document.querySelector('#project-cards');
 const searchInput = document.querySelector('#project-search');
 const formationCheckboxes = document.querySelectorAll("#formation-dropdown input");
@@ -71,6 +71,7 @@ function loadProjects(projets){
     if(formationFilters.length === 0){
         formationFilters.push('')
     }
+    // console.log(formationFilters)
 
     // TODO: DEFINIT LES FILTRES ANNÉES
     const yearFilters = []
@@ -84,6 +85,7 @@ function loadProjects(projets){
     if(yearFilters.length === 0){
         yearFilters.push('')
     }
+    console.log(yearFilters)
 
     // TODO: DEFINIT LES FILTRES NIVEAUX
     const levelFilters = []
@@ -97,27 +99,28 @@ function loadProjects(projets){
     if(levelFilters.length === 0){
         levelFilters.push('')
     }
-    console.log(levelFilters)
+    // console.log(levelFilters)
 
-        // * UTILISE L'ARRAY PROJETS
-        const limitedProjects = projets
+    // ! CREATION DE L'ARRAY PROJETS FILTRES A PARTIR DE L'ARRAY TOUS LES PROJETS
+        // * CREATION DU NOUVEL ARRAY VIA .MAP
+        const filteredProjects = projets
         // * FILTRES FORMATIONS
         .filter((projet) => {
-            // const formationFilters = ['concepteurs développeurs', 'web', 'Référent'];
+            // ? exemple : const formationFilters = ['concepteurs développeurs', 'web', 'Référent'];
             return formationFilters.some(filter =>
             projet.toLowerCase().includes(filter.toLowerCase())
             );
         })
         // * FILTRES ANNÉES
         .filter((projet) => {
-            // const yearFilters = ['2023', '2022', '2021', '2018'];
+            // ? exemple : const yearFilters = ['2023', '2022', '2021', '2018'];
             return yearFilters.some(filter =>
             projet.toLowerCase().includes(filter.toLowerCase())
             );
         })
         // * FILTRES NIVEAUX
         .filter((projet) => {
-            // const levelFilters = ['Bac+5', 'Bac+4', 'Bac+3', 'Bac+2', 'Bac+1'];
+            // ? exemple : const levelFilters = ['Bac+5', 'Bac+4', 'Bac+3', 'Bac+2', 'Bac+1'];
             return levelFilters.some(filter =>
             projet.toLowerCase().includes(filter.toLowerCase())
             );
@@ -126,11 +129,19 @@ function loadProjects(projets){
         .filter((projet) =>
             projet.toLowerCase().includes(searchInput.value.toLowerCase())
         )
-        .slice(0, 6)
         .map((projet) => projet)
-        .join('');
 
 
-    // * REMPLACE LA GRILLE PROJETS
-    projectGrid.innerHTML = limitedProjects
+    // * DEFINIT LE NOMBRE DE PROJETS FILTRES
+    const projectsCount = filteredProjects.length
+    console.log(projectsCount)
+    // * DEFINT LE NOMBRE TOTAL DE PROJETS
+    const allProjectsCount = projets.length
+    // * AFFICHE LE NOMBRE DE PROJETS CORRESPONDANTS
+    projectCountDiv.innerText = `${projectsCount} projets correspondants sur ${allProjectsCount}`;
+
+    // * LIMITE LES LES PROJETS AFFICHEES
+    const limitedProjects = filteredProjects.slice(0,6)
+    // * TRANSFORME L'ARRAY EN STRING ET L'INSERE
+    projectGrid.innerHTML = limitedProjects.join('');
 }
