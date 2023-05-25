@@ -19,6 +19,8 @@ const yearCheckboxes = document.querySelectorAll("#year-dropdown input");
 const levelCheckboxes = document.querySelectorAll("#level-dropdown input");
 const filterReset = document.querySelector('#filter-reset');
 
+let currentPage = 1
+
 const getProjets = () => {
 
     return fetch('?action=projectsPagination')
@@ -57,10 +59,6 @@ getProjets()
         loadProjects(projets,1)
     })
 
-    firstPage.addEventListener('click', (e) => {
-        loadProjects(projets,1)
-    })
-
     filterReset.addEventListener('click', (e) => {
         document.querySelectorAll('input[type=checkbox]').forEach(checkbox => {
             checkbox.checked = false
@@ -68,11 +66,25 @@ getProjets()
         loadProjects(projets,1)
     })
 
+    firstPage.addEventListener('click', (e) => {
+        loadProjects(projets,1)
+    })
+    prevPage.addEventListener('click', (e) => {
+        loadProjects(projets,currentPage - 1)
+    })
+
     paginationDiv.querySelectorAll('button').forEach(button => 
     {
         button.addEventListener('click', (e) => {
             loadProjects(projets,e.target.id)
         })
+    })
+
+    nextPage.addEventListener('click', (e) => {
+        loadProjects(projets,currentPage + 1)
+    })
+    lastPage.addEventListener('click', (e) => {
+        loadProjects(projets,'last')
     })
 
 })
@@ -170,7 +182,9 @@ function loadProjects(projets,number){
     let projectsPerPage = 4;
     let pageCount = Math.ceil(projectsCount / projectsPerPage);
     let paginationRange = 3
-    let currentPage = number;
+    currentPage = number
+    if(number == 'last'){currentPage = pageCount}
+
     const prevRange = ( currentPage - 1 ) * projectsPerPage
     const nextRange = (currentPage * projectsPerPage ) 
     console.log(prevRange,nextRange)
@@ -196,21 +210,12 @@ function loadProjects(projets,number){
             }
         }
     }
-    // * REMET LES EVENT LISTENERS
+    // * AJOUTE LES EVENT LISTENERS
     paginationDiv.querySelectorAll('button').forEach(button => 
     {
         button.addEventListener('click', (e) => {
             loadProjects(projets,e.target.id)
         })
-    })
-    prevPage.addEventListener('click', (e) => {
-        loadProjects(projets,currentPage - 1)
-    })
-    nextPage.addEventListener('click', (e) => {
-        loadProjects(projets,currentPage + 1)
-    })
-    lastPage.addEventListener('click', (e) => {
-        loadProjects(projets,pageCount)
     })
 
     // * ACTIVE/DESACTIVE BOUTON SUIVANT
@@ -226,5 +231,7 @@ function loadProjects(projets,number){
     const limitedProjects = filteredProjects.slice(prevRange,nextRange)
     // * TRANSFORME L'ARRAY EN STRING ET L'INSERE
     projectGrid.innerHTML += limitedProjects.join('');
+
+
 
 }
