@@ -8,6 +8,8 @@ class Formation
     public $description;
     public $duration;
     public $level;
+    public $diploma;
+    public $image;
     public $status;
 }
 class FormationRepository extends ConnectBdd
@@ -29,6 +31,8 @@ class FormationRepository extends ConnectBdd
         $Formation->description = $data['formation_description'];
         $Formation->duration = $data['formation_duration'];
         $Formation->level = $data['formation_level'];
+        $Formation->diploma = $data['formation_diploma'];
+        $Formation->image = $data['formation_image'];
 
         $Status = new Status;
         $statusRepo = new StatusRepository;
