@@ -1,27 +1,11 @@
 <?php $title = "Les projets"; ?>
 
 <?php
-        $projectRepo = new ProjectRepository;
-        $projects = $projectRepo->getAllProjects();
-        // pagination
-        $pageNumber = isset($_GET['page']) ? intval($_GET['page']) : 1 ;
-        $limit = 6;
-        $initialPage = ($pageNumber-1)*$limit;
-        // syntaxe requete avec limit
-        $limitRequest = $initialPage.",".$limit;
-        $projectCount = count($projects);
-        $pageCount = ceil($projectCount/$limit);
-
-        $projects = $projectRepo->getAllProjects($limitRequest);
-        if(sizeof($projects) == 0){
-            echo '<script>window.location.href = "?action=allProjectsPage"</script>';
-        }
-        // var_dump($projects);
-
         $formationRepo = new FormationRepository;
         $formations = $formationRepo->getAllFormations();
         $formationsLevel = $formationRepo->getFormationLevels();
 
+        $projectRepo = new ProjectRepository;
         $projectsDate = $projectRepo->getProjectsDate();
 
 ?>
@@ -72,14 +56,7 @@
 
 
     <section id="project-cards" class="mt-2 grid gap-6 xl:grid-cols-2 w-fit mx-auto">
-        <h3 id="project-count" class="max-w-[766px] text-main-red mt-6 xl:col-span-2"><?=$projectCount?> projets correspondants sur <?=$projectCount?></h3>
-        <?php
-        foreach($projects as $project){
-            include('view/template/_project_card.php');
-        }
-        ?>
-
-
+                <!-- INCLUDE DES CARDS DEPUIS LE JS -->
     </section>
 
     <!-- pagination -->
