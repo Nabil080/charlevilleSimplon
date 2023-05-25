@@ -154,3 +154,6 @@ function loadProjects(projets){
     // * REMPLACE LA GRILLE PROJETS
     projectGrid.innerHTML = limitedProjects
 }
+
+
+slt
