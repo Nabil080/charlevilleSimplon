@@ -6,7 +6,6 @@ function toggleDropdown(id){
     selectedDropdown.classList.toggle('hidden')
 }
 
-const projectCountDiv = document.querySelector('#project-count');
 const projectGrid = document.querySelector('#project-cards');
 const searchInput = document.querySelector('#project-search');
 const formationCheckboxes = document.querySelectorAll("#formation-dropdown input");
@@ -138,10 +137,10 @@ function loadProjects(projets){
     // * DEFINT LE NOMBRE TOTAL DE PROJETS
     const allProjectsCount = projets.length
     // * AFFICHE LE NOMBRE DE PROJETS CORRESPONDANTS
-    projectCountDiv.innerText = `${projectsCount} projets correspondants sur ${allProjectsCount}`;
+    projectGrid.innerHTML = `<h3 id="project-count" class="max-w-[766px] text-main-red mt-6 col-span-2">${projectsCount} projets correspondants sur ${allProjectsCount}</h3>`;
 
     // * LIMITE LES LES PROJETS AFFICHEES
     const limitedProjects = filteredProjects.slice(0,6)
     // * TRANSFORME L'ARRAY EN STRING ET L'INSERE
-    projectGrid.innerHTML = limitedProjects.join('');
+    projectGrid.innerHTML += limitedProjects.join('');
 }

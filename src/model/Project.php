@@ -88,20 +88,17 @@ class ProjectRepository extends ConnectBdd{
 
         $project->team = $this->getProjectUsers($data['project_id']);
 
-        $project->start = null;
-        $project->end = null;
+        $project->start = $project->start = $data['project_start'];;
+        $project->end = $project->end = $data['project_end'];;
+
         if($data['status_id'] == 12){
             $project->start = $data['project_start'];
             $project->end = 'En cours';
         }
-        if($data['status_id'] == 12){
-            $project->start = $data['project_start'];
-            $project->end = 'En cours';
-        }
-        if($data['status_id'] == 13){
-            $project->start = $data['project_start'];
-            $project->end = $data['project_end'];
-        }
+        // if($data['status_id'] == 13){
+        //     $project->start = $data['project_start'];
+        //     $project->end = $data['project_end'];
+        // }
 
 
         return $project;
@@ -128,16 +125,22 @@ class ProjectRepository extends ConnectBdd{
         return $projects;
     }
 
-    public function getFilteredProjects(array $POST):array
+    public function getProjectsDate()
     {
-        $projects = [];
-        ("SELECT * FROM projects WHERE `formation_id` = 1 ");
-        if(str_contains($project_start, '2023')){
-            
+        $dates =  [];
+        $req = $this->bdd->prepare("SELECT project_start FROM project WHERE project_start IS NOT NULL");
+        $req->execute();
+        $data = $req->fetchAll(PDO::FETCH_COLUMN);
+
+        foreach($data as $key){
+            $start = date_create($key);
+            $year = date_format($start,"Y");
+
+            $dates[] = $year ;
         }
-
-
-        return $projects;
+            
+        $uniqueDates = array_unique($dates);
+        return $uniqueDates;
     }
 
     public function getProjectUsers($id):array

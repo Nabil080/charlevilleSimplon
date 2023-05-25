@@ -57,5 +57,22 @@ class FormationRepository extends ConnectBdd
 
         return $formations;
     }
+
+    public function getFormationLevels()
+    {
+        $levels =  [];
+        $req = $this->bdd->prepare("SELECT formation_level FROM formation WHERE formation_level IS NOT NULL");
+        $req->execute();
+        $data = $req->fetchAll(PDO::FETCH_COLUMN);
+
+        foreach($data as $level){
+            $levels[] = $level ;
+        }
+            
+        $uniqueLevels = array_unique($levels);
+
+        
+        return $uniqueLevels;
+    }
 }
 

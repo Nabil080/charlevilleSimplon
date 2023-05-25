@@ -19,7 +19,10 @@
         // var_dump($projects);
 
         $formationRepo = new FormationRepository;
-        $formations = $formationRepo->getAllFormations()
+        $formations = $formationRepo->getAllFormations();
+        $formationsLevel = $formationRepo->getFormationLevels();
+
+        $projectsDate = $projectRepo->getProjectsDate();
 
 ?>
 
@@ -50,29 +53,26 @@
         <button onclick="toggleDropdown('year-dropdown')" class="relative w-full py-2"><i class="fa fa-filter text-xs"></i> Années</button>
         <!-- dropdown yearss -->
             <div class="filter-dropdown dropdown hidden absolute box-content -translate-x-[1px] z-10 w-full sm:w-full -translate-y-1 border rounded-b-lg text-start bg-main-white border-t-transparent border-main-red">
-                <div class="flex gap-2 text-xs my-2 px-2"><input class="my-auto" id="2023" type="checkbox" value="2023"><label for="2023">2023</label></div>
-                <div class="flex gap-2 text-xs my-2 px-2"><input class="my-auto" id="2022" type="checkbox" value="2022"><label for="2022">2022</label></div>
-                <div class="flex gap-2 text-xs my-2 px-2"><input class="my-auto" id="2021" type="checkbox" value="2021"><label for="2021">2021</label></div>
-                <div class="flex gap-2 text-xs my-2 px-2"><input class="my-auto" id="2020" type="checkbox" value="2020"><label for="2020">2020</label></div>
+                <?php foreach($projectsDate as $year){?>
+                    <div class="flex gap-2 text-xs my-2 px-2"><input class="my-auto" id="<?=$year?>" type="checkbox" value="<?=$year?>"><label for="<?=$year?>"><?=$year?></label></div>
+                <?php } ?>
             </div>
         </div>
         <div id="level-dropdown" class="dropdown-toggle w-1/4 border-main-red border rounded-t-lg rounded-b-lg relative">
         <button onclick="toggleDropdown('level-dropdown')" class="relative w-full py-2"><i class="fa fa-filter text-xs"></i> Niveau</button>
-        <!-- dropdown yearss -->
+        <!-- dropdown levels -->
             <div class="filter-dropdown dropdown hidden absolute box-content -translate-x-[1px] z-10 w-full sm:w-full -translate-y-1 border rounded-b-lg text-start bg-main-white border-t-transparent border-main-red">
-                <div class="flex gap-2 text-xs my-2 px-2"><input class="my-auto" id="bac+1" type="checkbox" value="bac+1"><label for="bac+1">Bac+1</label></div>
-                <div class="flex gap-2 text-xs my-2 px-2"><input class="my-auto" id="bac+2" type="checkbox" value="bac+2"><label for="bac+2">Bac+2</label></div>
-                <div class="flex gap-2 text-xs my-2 px-2"><input class="my-auto" id="bac+3" type="checkbox" value="bac+3"><label for="bac+3">Bac+3</label></div>
-                <div class="flex gap-2 text-xs my-2 px-2"><input class="my-auto" id="bac+4" type="checkbox" value="bac+4"><label for="bac+4">Bac+4</label></div>
-                <div class="flex gap-2 text-xs my-2 px-2"><input class="my-auto" id="bac+5" type="checkbox" value="bac+5"><label for="bac+5">Bac+5</label></div>
+                <?php foreach($formationsLevel as $level){?>
+                    <div class="flex gap-2 text-xs my-2 px-2"><input class="my-auto" id="<?=$level?>" type="checkbox" value="<?=$level?>"><label for="<?=$level?>"><?=$level?></label></div>
+                <?php } ?>
             </div>
         </div>
     </div>
     <span onclick="resetProjectFilters()" class="text-main-red text-xs py-0.5 cursor-pointer underline hover:text-red-700 2xl:mx-[10%]">Réinitialiser les filtres</span>
 
 
-    <h3 id="project-count" class="max-w-[766px] text-main-red mt-6">6 projets affichés sur <?=$projectCount?></h3>
     <section id="project-cards" class="mt-2 grid gap-6 xl:grid-cols-2 w-fit mx-auto">
+        <h3 id="project-count" class="max-w-[766px] text-main-red mt-6 col-span-2"><?=$projectCount?> projets correspondants sur <?=$projectCount?></h3>
         <?php
         foreach($projects as $project){
             include('view/template/_project_card.php');
