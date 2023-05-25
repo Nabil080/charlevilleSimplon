@@ -17,7 +17,7 @@ const searchInput = document.querySelector('#project-search');
 const formationCheckboxes = document.querySelectorAll("#formation-dropdown input");
 const yearCheckboxes = document.querySelectorAll("#year-dropdown input");
 const levelCheckboxes = document.querySelectorAll("#level-dropdown input");
-
+const filterReset = document.querySelector('#filter-reset');
 
 const getProjets = () => {
 
@@ -61,12 +61,21 @@ getProjets()
         loadProjects(projets,1)
     })
 
+    filterReset.addEventListener('click', (e) => {
+        document.querySelectorAll('input[type=checkbox]').forEach(checkbox => {
+            console.log(checkbox)
+            checkbox.checked = false
+        })
+        loadProjects(projets,1)
+    })
+
     paginationDiv.querySelectorAll('button').forEach(button => 
     {
         button.addEventListener('click', (e) => {
             loadProjects(projets,e.target.id)
         })
     })
+
 })
 .catch((error) => {
     console.error(error);
