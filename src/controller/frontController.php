@@ -50,6 +50,8 @@ function profilePage()
 // Promotion
 function allPromotionsPage()
 {
+    $PromoRepository = new PromoRepository;
+    $promos = $PromoRepository->getPromos();
     include 'view/public/all_promotions.php';
 }
 function promotionPage()

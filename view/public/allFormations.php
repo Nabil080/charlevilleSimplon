@@ -10,7 +10,7 @@ $title = "Toutes nos formations";
         <div class="numbers_container px-5 flex w-full">
             <div class="number1 flex w-1/3 items-center">
                 <span
-                    class="bg-main-red rounded-[5px] text-main-white border border-main-white hover:bg-main-white hover:text-main-red hover:border-main-red text-xl xl:text-3xl p-4 aspect-square flex items-center justify-center">142</span>
+                    class="bg-main-red rounded-[5px] text-main-white border border-main-white   text-xl xl:text-3xl p-4 aspect-square flex items-center justify-center">142</span>
                 <p class="font-title text-lg lg:text-xl italic pl-2">Simplonien.ne.s depuis la création</p>
             </div>
             <div class="number2 flex w-1/3 items-center">
@@ -20,7 +20,7 @@ $title = "Toutes nos formations";
             </div>
             <div class="number3 flex w-1/3 items-center">
                 <span
-                    class="bg-main-red rounded-[5px] text-main-white border border-main-white hover:bg-main-white hover:text-main-red hover:border-main-red text-xl xl:text-3xl p-4 aspect-square flex items-center justify-center">80%</span>
+                    class="bg-main-red rounded-[5px] text-main-white border border-main-white text-xl xl:text-3xl p-4 aspect-square flex items-center justify-center">80%</span>
                 <p class="font-title text-lg lg:text-xl italic pl-2">Taux de réussite au diplôme back-end</p>
             </div>
         </div>
