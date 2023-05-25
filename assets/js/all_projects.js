@@ -63,7 +63,6 @@ getProjets()
 
     filterReset.addEventListener('click', (e) => {
         document.querySelectorAll('input[type=checkbox]').forEach(checkbox => {
-            console.log(checkbox)
             checkbox.checked = false
         })
         loadProjects(projets,1)
@@ -227,7 +226,5 @@ function loadProjects(projets,number){
     const limitedProjects = filteredProjects.slice(prevRange,nextRange)
     // * TRANSFORME L'ARRAY EN STRING ET L'INSERE
     projectGrid.innerHTML += limitedProjects.join('');
-
-
 
 }
