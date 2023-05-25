@@ -49,8 +49,15 @@ function myProfile()
     $allTags = $tags->getAllTags();
     $status = new StatusRepository();
     $allStatus = $status->getAllStatus();
-    $ProjectRepo = new ProjectRepository;
+    $ProjectRepo = new ProjectRepository();
     $userProjects = $ProjectRepo->getUserProjects($_SESSION['user']->id);
+    var_dump($userProjects);
+    foreach ($userProjects as $userProject){
+        $eachProject = new ProjectRepository();
+        $userProject = $eachProject->getProjectById($userProject->id);
+        var_dump($userProject);
+    }
+    die;
     $Promo = new PromoRepository();
     $userPromo = $Promo->getPromoByUserID($_SESSION['user']->id);
     include 'view/public/profile.php';

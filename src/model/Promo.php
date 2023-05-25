@@ -80,6 +80,7 @@ class PromoRepository extends ConnectBdd{
         return $Promo_datas;
         }
     }
+    
     public function formateDate($date):string
     {
         $mois = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'];
@@ -90,4 +91,21 @@ class PromoRepository extends ConnectBdd{
         $date = str_replace("-", " ", $date);
         return $date;
     }
+
+    public function getPromoProjects($id):array
+    {
+        $req = $this->bdd->prepare("SELECT project_id FROM project 
+        WHERE promo_id = ?");
+        $req->execute([$id]);
+        $datas = $req->fetchAll(PDO::FETCH_COLUMN);
+        $ProjectRepository = new ProjectRepository;
+        $projects = [];
+
+        foreach ($datas as $data) {
+            $project = $ProjectRepository->getProjectById($data);
+            array_push($projects, $project);
+            }
+        return $projects;
+    }
+
 }
