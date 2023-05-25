@@ -1,18 +1,31 @@
 <?php
 require_once('src/model/ConnectBdd.php');
+require_once('src/model/Promo.php');
 
-class Formation
+
+class Formation extends Promo
 {
-    public $id;
-    public $name;
     public $description;
     public $duration;
     public $level;
     public $diploma;
     public $preview;
     public $job_name;
-    public $promo_start;
-    public $status;
+
+    public function __construct($id, $start, $end, $name, $status_id, $formation_id,$description, $duration, $level, $diploma, $preview) 
+    {
+        parent::__construct($id, $name, $start, $end, $status_id, $formation_id); 
+
+        $this->description = $description;
+        $this->duration = $duration;
+        $this->level = $level;
+        $this->diploma = $diploma;
+        $this->preview = $preview;
+
+        $jobRepo = new JobRepository;
+        $job = $jobRepo->getjobName($formation_id);
+        $this->job_name = $job;
+    }
 
 }
 class FormationRepository extends ConnectBdd
@@ -24,31 +37,26 @@ class FormationRepository extends ConnectBdd
 
     public function getFormationById($id):object
     {
-        $Formation = new Formation;
-        $req = $this->bdd->prepare("SELECT * FROM `formation` WHERE `formation_id` = ?");
+        
+        $req = $this->bdd->prepare("SELECT * FROM formation
+        INNER JOIN promo ON promo.formation_id = formation.formation_id
+        WHERE formation.formation_id = ?");
         $req->execute([$id]);
         $data = $req->fetch(PDO::FETCH_ASSOC);
 
-        $Formation->id = $data['formation_id'];
-        $Formation->name = $data['formation_name'];
-        $Formation->description = $data['formation_description'];
-        $Formation->duration = $data['formation_duration'];
-        $Formation->level = $data['formation_level'];
-        $Formation->diploma = $data['formation_diploma'];
-        $Formation->preview = $data['formation_preview'];
-
-        $Status = new Status;
-        $statusRepo = new StatusRepository;
-        $Status = $statusRepo->getStatusById($data['status_id']);
-        $Formation->status = $Status;
-
-        $jobRepo = new JobRepository;
-        $job = $jobRepo->getjobName($data['formation_id']);
-        $Formation->job_name = $job;
-
-        $promoRepo = new PromoRepository;
-        $promo_start = $promoRepo->formateDate($promoRepo->getPromoStart($data['formation_id'])) ;
-        $Formation->promo_start = $promo_start;
+        $Formation = new Formation (
+            $data['promo_id'],
+            $data['promo_start'],
+            $data['promo_end'],
+            $data['promo_name'],
+            $data['status_id'],
+            $data['formation_id'],
+            $data['formation_description'],
+            $data['formation_duration'],
+            $data['formation_level'],
+            $data['formation_diploma'],
+            $data['formation_preview']
+        );
 
         return $Formation;
     }

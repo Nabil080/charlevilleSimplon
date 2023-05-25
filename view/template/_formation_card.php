@@ -16,7 +16,7 @@
     </div>
     <div class="formation_status flex justify-center items-center">
         <h5 class="text-main-gray font-main text-sm md:text-[16px] italic text-center my-3">
-            <?= $formation->status->name; ?> <?= $formation->promo_start; ?></h5>
+            <?= $formation->status->name; ?> <?= $formation->start; ?></h5>
         <span class="w-4 h-4 border-[1px] bg-main-green rounded-full ml-2 animate-pulse"></span>
     </div>
     <div class="card_buttons flex  justify-around pb-6 pt-2">
