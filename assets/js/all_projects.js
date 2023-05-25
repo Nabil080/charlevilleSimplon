@@ -10,6 +10,8 @@ const projectGrid = document.querySelector('#project-cards');
 const paginationDiv = document.querySelector('#pagination');
 const prevPage = document.querySelector('#prev-page');
 const nextPage = document.querySelector('#next-page');
+const firstPage = document.querySelector('#first-page');
+const lastPage = document.querySelector('#last-page');
 
 const searchInput = document.querySelector('#project-search');
 const formationCheckboxes = document.querySelectorAll("#formation-dropdown input");
@@ -52,6 +54,10 @@ getProjets()
     })
 
     searchInput.addEventListener('input', (e) => {
+        loadProjects(projets,1)
+    })
+
+    firstPage.addEventListener('click', (e) => {
         loadProjects(projets,1)
     })
 
@@ -164,20 +170,22 @@ function loadProjects(projets,number){
     
     // * ACTIVE/DESACTIVE BOUTON PRECEDENT
     if(currentPage == 1){
+        firstPage.classList.add('opacity-30', 'select-none', 'pointer-events-none')
         prevPage.classList.add('opacity-30', 'select-none', 'pointer-events-none')
     }else{
+        firstPage.classList.remove('opacity-30', 'select-none', 'pointer-events-none')
         prevPage.classList.remove('opacity-30', 'select-none', 'pointer-events-none')
     }
 
     // * AFFICHE LA PAGINATION
     paginationDiv.innerHTML = '';
     for(page = 1; page <= pageCount; page++){
-
-    if(page > currentPage - paginationRange && page < currentPage + paginationRange)
-        if(page == currentPage){
-            paginationDiv.innerHTML += `<button id="${page}" class="bg-main-red text-main-white">${page}</button>`;
-        }else{
-            paginationDiv.innerHTML += `<button id="${page}" class="hover:bg-main-red hover:text-main-white">${page}</button>`;
+        if(page > currentPage - paginationRange && page < currentPage + paginationRange){
+            if(page == currentPage){
+                paginationDiv.innerHTML += `<button id="${page}" class="bg-main-red text-main-white">${page}</button>`;
+            }else{
+                paginationDiv.innerHTML += `<button id="${page}" class="hover:bg-main-red hover:text-main-white">${page}</button>`;
+            }
         }
     }
     // * REMET LES EVENT LISTENERS
@@ -193,11 +201,16 @@ function loadProjects(projets,number){
     nextPage.addEventListener('click', (e) => {
         loadProjects(projets,currentPage + 1)
     })
+    lastPage.addEventListener('click', (e) => {
+        loadProjects(projets,pageCount)
+    })
 
     // * ACTIVE/DESACTIVE BOUTON SUIVANT
     if(currentPage == pageCount){
+        lastPage.classList.add('opacity-30','select-none', 'pointer-events-none')
         nextPage.classList.add('opacity-30', 'select-none', 'pointer-events-none')
     }else{
+        lastPage.classList.remove('opacity-30','select-none', 'pointer-events-none')
         nextPage.classList.remove('opacity-30', 'select-none', 'pointer-events-none')
     }
 

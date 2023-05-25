@@ -84,10 +84,12 @@
 
     <!-- pagination -->
     <section id="pagination-section" class="flex justify-center text-md ">
+    <button id="first-page" class="fa fa-angles-left my-auto mx-3 px-3"></button>
     <button id="prev-page" class="fa fa-chevron-left my-auto mx-3 px-3"></button>
     <div id="pagination" class="flex gap-x-0.5 [&>button]:px-4 [&>button]:py-0.5 [&>button]:rounded-md">
     </div>
     <button id="next-page" class="fa fa-chevron-right my-auto mx-3 px-3"></button>
+    <button id="last-page" class="fa fa-angles-right my-auto mx-3 px-3"></button>
     </section>
 
 </section>
