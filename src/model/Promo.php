@@ -99,9 +99,16 @@ class PromoRepository extends ConnectBdd{
         
         foreach ($datas as $data) {
             $project = $ProjectRepository->getProjectById($data);
-                array_push($projects, $project);
+            array_push($projects, $project);
             }
         return $projects;
+    }
+
+    public function getPromoStart($id) {
+        $req = $this->bdd->prepare("SELECT `promo_start` FROM `promo` WHERE `formation_id` = ?");
+        $req->execute([$id]);
+        $data = $req->fetch(PDO::FETCH_COLUMN);
+        return $data;
     }
     
 }
