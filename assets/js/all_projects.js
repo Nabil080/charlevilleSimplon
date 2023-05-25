@@ -73,13 +73,6 @@ getProjets()
         loadProjects(projets,currentPage - 1)
     })
 
-    paginationDiv.querySelectorAll('button').forEach(button => 
-    {
-        button.addEventListener('click', (e) => {
-            loadProjects(projets,e.target.id)
-        })
-    })
-
     nextPage.addEventListener('click', (e) => {
         loadProjects(projets,currentPage + 1)
     })
@@ -187,7 +180,8 @@ function loadProjects(projets,number){
 
     const prevRange = ( currentPage - 1 ) * projectsPerPage
     const nextRange = (currentPage * projectsPerPage ) 
-    console.log(prevRange,nextRange)
+    // console.log(prevRange,nextRange)
+    console.log(currentPage)
 
     
     // * ACTIVE/DESACTIVE BOUTON PRECEDENT
@@ -214,7 +208,8 @@ function loadProjects(projets,number){
     paginationDiv.querySelectorAll('button').forEach(button => 
     {
         button.addEventListener('click', (e) => {
-            loadProjects(projets,e.target.id)
+            console.log(Number(e.target.id))
+            loadProjects(projets,Number(e.target.id))
         })
     })
 
