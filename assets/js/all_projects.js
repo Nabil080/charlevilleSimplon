@@ -7,6 +7,10 @@ function toggleDropdown(id){
 }
 
 const projectGrid = document.querySelector('#project-cards');
+const paginationDiv = document.querySelector('#pagination');
+const prevPage = document.querySelector('#prev-page');
+const nextPage = document.querySelector('#next-page');
+
 const searchInput = document.querySelector('#project-search');
 const formationCheckboxes = document.querySelectorAll("#formation-dropdown input");
 const yearCheckboxes = document.querySelectorAll("#year-dropdown input");
@@ -27,28 +31,35 @@ const getProjets = () => {
 
 getProjets()
 .then((projets) => {
-    loadProjects(projets)
+    loadProjects(projets,1)
 
     formationCheckboxes.forEach(checkbox => {
         checkbox.addEventListener('change', (e) => {
-            loadProjects(projets)
+            loadProjects(projets,1)
         })
     })
 
     yearCheckboxes.forEach(checkbox => {
         checkbox.addEventListener('change', (e) => {
-            loadProjects(projets)
+            loadProjects(projets,1)
         })
     })
 
     levelCheckboxes.forEach(checkbox => {
         checkbox.addEventListener('change', (e) => {
-            loadProjects(projets)
+            loadProjects(projets,1)
         })
     })
 
     searchInput.addEventListener('input', (e) => {
-        loadProjects(projets)
+        loadProjects(projets,1)
+    })
+
+    paginationDiv.querySelectorAll('button').forEach(button => 
+    {
+        button.addEventListener('click', (e) => {
+            loadProjects(projets,e.target.id)
+        })
     })
 })
 .catch((error) => {
@@ -56,7 +67,7 @@ getProjets()
 });
 
 
-function loadProjects(projets){
+function loadProjects(projets,number){
 
     // * DEFINIT LES FILTRES FORMATION
     const formationFilters = [];
@@ -72,7 +83,7 @@ function loadProjects(projets){
     }
     // console.log(formationFilters)
 
-    // TODO: DEFINIT LES FILTRES ANNÉES
+    // * DEFINIT LES FILTRES ANNÉES
     const yearFilters = []
     yearCheckboxes.forEach(checkbox => {
         // * AJOUTE LES CHECKBOX CHECK
@@ -84,9 +95,9 @@ function loadProjects(projets){
     if(yearFilters.length === 0){
         yearFilters.push('')
     }
-    console.log(yearFilters)
+    // console.log(yearFilters)
 
-    // TODO: DEFINIT LES FILTRES NIVEAUX
+    // * DEFINIT LES FILTRES NIVEAUX
     const levelFilters = []
     levelCheckboxes.forEach(checkbox => {
         // * AJOUTE LES CHECKBOX CHECK
@@ -133,14 +144,65 @@ function loadProjects(projets){
 
     // * DEFINIT LE NOMBRE DE PROJETS FILTRES
     const projectsCount = filteredProjects.length
-    console.log(projectsCount)
+    // console.log(projectsCount)
     // * DEFINT LE NOMBRE TOTAL DE PROJETS
     const allProjectsCount = projets.length
     // * AFFICHE LE NOMBRE DE PROJETS CORRESPONDANTS
-    projectGrid.innerHTML = `<h3 id="project-count" class="max-w-[766px] text-main-red mt-6 col-span-2">${projectsCount} projets correspondants sur ${allProjectsCount}</h3>`;
+    projectGrid.innerHTML = `<h3 id="project-count" class="max-w-[766px] text-main-red mt-6 xl:col-span-2">${projectsCount} projets correspondants sur ${allProjectsCount}</h3>`;
+
+
+    // TODO: CREATION DE LA PAGINATION
+    // * VARIABLES POUR LA PAGINATION
+    let projectsPerPage = 6;
+    let pageCount = Math.ceil(projectsCount / projectsPerPage);
+    var currentPage = number;
+    const prevRange = ( currentPage - 1 ) * projectsPerPage
+    const nextRange = (currentPage * projectsPerPage ) 
+    console.log(prevRange,nextRange)
+
+    
+    // * ACTIVE/DESACTIVE BOUTON PRECEDENT
+    if(currentPage == 1){
+        prevPage.classList.add('opacity-30', 'select-none', 'pointer-events-none')
+    }else{
+        prevPage.classList.remove('opacity-30', 'select-none', 'pointer-events-none')
+    }
+
+    // * AFFICHE LA PAGINATION
+    paginationDiv.innerHTML = '';
+    for(page = 1; page <= pageCount; page++){
+        if(page == currentPage){
+            paginationDiv.innerHTML += `<button id="${page}" class="bg-main-red text-main-white">${page}</button>`;
+        }else{
+            paginationDiv.innerHTML += `<button id="${page}" class="hover:bg-main-red hover:text-main-white">${page}</button>`;
+        }
+    }
+    // * REMET LES EVENT LISTENERS
+    paginationDiv.querySelectorAll('button').forEach(button => 
+    {
+        button.addEventListener('click', (e) => {
+            loadProjects(projets,e.target.id)
+        })
+    })
+    prevPage.addEventListener('click', (e) => {
+        loadProjects(projets,currentPage - 1)
+    })
+    nextPage.addEventListener('click', (e) => {
+        loadProjects(projets,currentPage + 1)
+    })
+
+    // * ACTIVE/DESACTIVE BOUTON SUIVANT
+    if(currentPage == pageCount){
+        nextPage.classList.add('opacity-30', 'select-none', 'pointer-events-none')
+    }else{
+        nextPage.classList.remove('opacity-30', 'select-none', 'pointer-events-none')
+    }
 
     // * LIMITE LES LES PROJETS AFFICHEES
-    const limitedProjects = filteredProjects.slice(0,6)
+    const limitedProjects = filteredProjects.slice(prevRange,nextRange)
     // * TRANSFORME L'ARRAY EN STRING ET L'INSERE
     projectGrid.innerHTML += limitedProjects.join('');
+
+
+
 }

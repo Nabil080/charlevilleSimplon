@@ -72,7 +72,7 @@
 
 
     <section id="project-cards" class="mt-2 grid gap-6 xl:grid-cols-2 w-fit mx-auto">
-        <h3 id="project-count" class="max-w-[766px] text-main-red mt-6 col-span-2"><?=$projectCount?> projets correspondants sur <?=$projectCount?></h3>
+        <h3 id="project-count" class="max-w-[766px] text-main-red mt-6 xl:col-span-2"><?=$projectCount?> projets correspondants sur <?=$projectCount?></h3>
         <?php
         foreach($projects as $project){
             include('view/template/_project_card.php');
@@ -83,15 +83,11 @@
     </section>
 
     <!-- pagination -->
-    <section id="pagination" class="flex justify-center text-md ">
-    <a href="?action=allProjectsPage&page=<?=$pageNumber-1?>" class="fa fa-chevron-left my-auto mx-3 px-3 <?php if($pageNumber == 1){ echo 'opacity-30 select-none pointer-events-none';}?>"></a>
-    <div id="pagination" class="flex gap-x-0.5 [&>a]:px-4 [&>a]:py-0.5 [&>a]:rounded-md">
-        <?php for($i=1;$i<=$pageCount;$i++){
-                if($i > $pageNumber - 3 && $i < $pageNumber + 3){?>
-                    <a id="pagination-<?=$i?>" onclick="changePage(<?=$i?>)" class="hover:bg-main-red hover:text-main-white cursor-pointer <?php echo $i == $pageNumber ? " bg-main-red text-main-white " : " "; ?>"><?=$i?></a>
-                <?php }} ?>
+    <section id="pagination-section" class="flex justify-center text-md ">
+    <button id="prev-page" class="fa fa-chevron-left my-auto mx-3 px-3"></button>
+    <div id="pagination" class="flex gap-x-0.5 [&>button]:px-4 [&>button]:py-0.5 [&>button]:rounded-md">
     </div>
-    <a href="?action=allProjectsPage&page=<?=$pageNumber+1?>" class="fa fa-chevron-right my-auto mx-3 px-3 <?php if($pageNumber == $pageCount){ echo 'opacity-30 select-none pointer-events-none';}?>"></a>
+    <button id="next-page" class="fa fa-chevron-right my-auto mx-3 px-3"></button>
     </section>
 
 </section>

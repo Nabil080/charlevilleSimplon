@@ -65,7 +65,7 @@
                 </div>
             </div>
             <!-- data filtres-->
-            <div class="hidden" formation-filter="<?=$project->promo->formation->id?>"></div>
+            <div class="hidden" formation-filter="formation-<?=$project->promo->formation->id?>"></div>
             <div class="hidden" year-filter="<?=$project->start?>"></div>
             <div class="hidden" level-filter="<?=$project->promo->formation->level?>"></div>
         </article>
