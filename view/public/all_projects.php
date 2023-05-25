@@ -46,8 +46,8 @@
                 <?php } ?>
             </div>
         </div>
-        <div id="years-dropdown" class="dropdown-toggle w-1/4 border-main-red border rounded-t-lg rounded-b-lg relative">
-        <button onclick="toggleDropdown('years-dropdown')" class="relative w-full py-2"><i class="fa fa-filter text-xs"></i> Années</button>
+        <div id="year-dropdown" class="dropdown-toggle w-1/4 border-main-red border rounded-t-lg rounded-b-lg relative">
+        <button onclick="toggleDropdown('year-dropdown')" class="relative w-full py-2"><i class="fa fa-filter text-xs"></i> Années</button>
         <!-- dropdown yearss -->
             <div class="filter-dropdown dropdown hidden absolute box-content -translate-x-[1px] z-10 w-full sm:w-full -translate-y-1 border rounded-b-lg text-start bg-main-white border-t-transparent border-main-red">
                 <div class="flex gap-2 text-xs my-2 px-2"><input class="my-auto" id="2023" type="checkbox" value="2023"><label for="2023">2023</label></div>
