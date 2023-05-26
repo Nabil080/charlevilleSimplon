@@ -13,7 +13,7 @@ if (isset($_GET['action']) && $_GET['action'] !== '' && !isset($_GET['admin'])) 
     require 'public.php';
 
     if (isset($_SESSION['user'])) {
-        if ($_SESSION['user']->role->id >=4) {
+        if ($_SESSION['user'] >=4) {
             switch ($action) {
                 // Afficher son profil perso
                 case 'myProfile':
