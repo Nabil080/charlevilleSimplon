@@ -14,9 +14,9 @@ class Formation extends Promo
     public $preview;
     public $job_name;
 
-    public function __construct($id, $start, $end, $name, $status_id, $formation_id,$description, $duration, $level, $diploma, $preview) 
+    public function __construct($id, $start, $end, $name, $status, $formation_id,$description, $duration, $level, $diploma, $preview) 
     {
-        parent::__construct($id, $name, $start, $end, $status_id, $formation_id); 
+        parent::__construct($id, $name, $start, $end, $status, $formation_id); 
 
         $this->description = $description;
         $this->duration = $duration;

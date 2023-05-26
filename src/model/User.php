@@ -27,7 +27,6 @@ class User
     public $status_date;
     public $role;
     public $highlight;
-    public $company;
 
 
     public function getNameAndPseudo($account)

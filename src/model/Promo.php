@@ -10,14 +10,13 @@ class Promo {
     public string $name;
     public $start;
     public $end;
-    public object $status;
 
     public $status_id;
     public $formation_id;
 
 
 
-    public function __construct ($id, $name, $start, $end, $status_id, $formation_id) 
+    public function __construct ($id, $name, $start, $end, $status_id, $formation_id)
     {
         $this->id = $id;
         $this->start = $start;

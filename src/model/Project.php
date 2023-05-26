@@ -72,7 +72,7 @@ class ProjectRepository extends ConnectBdd{
         $Status = $statusRepo->getStatusById($data['status_id']);
         $project->status = $Status;
 
-        $Promo = new Promo;
+        // $Promo = new Promo;
         $promoRepo = new PromoRepository;
         $Promo = $promoRepo->getPromoById($data['promo_id']);
         $project->promo = $Promo;
@@ -103,24 +103,6 @@ class ProjectRepository extends ConnectBdd{
 
 
         return $project;
-    }
-
-    public function getProjectUsers($id):array
-    {
-        $team = [];
-        $req = $this->bdd->prepare("SELECT `user_id` FROM `project_team` WHERE `project_id` = ? ");
-        $req->execute([$id]);
-        $data = $req->fetchAll(PDO::FETCH_ASSOC);
-
-        foreach($data as $key){
-            $User = new User;
-            $userRepo = new UsersRepository;
-            $User = $userRepo->getUserById($key['user_id']);
-
-            $team[] = $User;
-        }
-
-        return $team;
     }
 
       public function getAllProjects($limitRequest = null):array
