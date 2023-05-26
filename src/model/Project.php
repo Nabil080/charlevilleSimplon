@@ -18,6 +18,7 @@ class Project {
     public $formator;
     public $status;
     public $promo;
+    // public $formation;
     public $type;
     public $tags;
     public $start;
@@ -29,6 +30,14 @@ class Project {
 
     //     return true
     // }
+
+    public function getProjectLevel(){
+        $formationRepo = new FormationRepository();
+        
+        $level = $formationRepo->getFormationLevel($this->promo->formation_id);
+
+        return $level;
+    }
 
 }
 
@@ -76,6 +85,10 @@ class ProjectRepository extends ConnectBdd{
         $promoRepo = new PromoRepository;
         $Promo = $promoRepo->getPromoById($data['promo_id']);
         $project->promo = $Promo;
+
+        // $formationRepo = new FormationRepository;
+        // $Formation = $formationRepo->getFormationById($data['formation_id']);
+        // $project->formation = $Formation;
 
         $Type = new Type;
         $typeRepo = new TypeRepository;

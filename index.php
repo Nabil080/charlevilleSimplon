@@ -53,5 +53,3 @@ if (isset($_GET['action']) && $_GET['action'] !== '' && !isset($_GET['admin'])) 
 // $repo = new ProjectRepository;
 // $data = $repo->getProjectsDate();
 // var_dump($data);
-
-

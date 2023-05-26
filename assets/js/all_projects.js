@@ -180,8 +180,8 @@ function loadProjects(projets,number){
 
     const prevRange = ( currentPage - 1 ) * projectsPerPage
     const nextRange = (currentPage * projectsPerPage ) 
-    // console.log(prevRange,nextRange)
-    console.log(currentPage)
+    console.log(prevRange,nextRange)
+    // console.log(currentPage)
 
     
     // * ACTIVE/DESACTIVE BOUTON PRECEDENT

@@ -11,12 +11,12 @@ class Promo {
     public $start;
     public $end;
 
-    public $status_id;
+    public $status;
     public $formation_id;
 
 
 
-    public function __construct ($id, $name, $start, $end, $status_id, $formation_id)
+    public function __construct ($id, $name, $start, $end, $status, $formation_id)
     {
         $this->id = $id;
         $this->start = $start;
@@ -25,7 +25,7 @@ class Promo {
         $this->formation_id = $formation_id;
 
         $statusRepo = new StatusRepository;
-        $Status = $statusRepo->getStatusById($status_id);
+        $Status = $statusRepo->getStatusById($status);
         $this->status = $Status;
     }
 }

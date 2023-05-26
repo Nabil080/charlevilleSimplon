@@ -15,7 +15,7 @@ function contactPage()
 function allFormationsPage()
 {
     $formationRepository = new FormationRepository;
-    $formations = $formationRepository->getFormations();
+    $formations = $formationRepository->getAllFormations();
     include 'view/public/allFormations.php';
 }
 

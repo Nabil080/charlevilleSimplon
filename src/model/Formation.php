@@ -63,6 +63,15 @@ class FormationRepository extends ConnectBdd
         return $Formation;
     }
 
+    public function getFormationLevel($id):string
+    {
+        $req = $this->bdd->prepare("SELECT formation_level FROM formation WHERE formation_id = ?");
+        $req->execute([$id]);
+        $data = $req->fetch(PDO::FETCH_ASSOC);
+
+        return $data['formation_level'];
+    }
+
     public function getAllFormations():array
     {
         $formationRepository = new FormationRepository;
