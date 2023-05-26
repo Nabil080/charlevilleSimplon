@@ -1,14 +1,32 @@
 <?php
 require_once('src/model/ConnectBdd.php');
+require_once('src/model/Promo.php');
 
-class Formation
+
+class Formation extends Promo
 {
-    public $id;
-    public $name;
     public $description;
     public $duration;
     public $level;
-    public $status;
+    public $diploma;
+    public $preview;
+    public $job_name;
+
+    public function __construct($id, $start, $end, $name, $status_id, $formation_id,$description, $duration, $level, $diploma, $preview) 
+    {
+        parent::__construct($id, $name, $start, $end, $status_id, $formation_id); 
+
+        $this->description = $description;
+        $this->duration = $duration;
+        $this->level = $level;
+        $this->diploma = $diploma;
+        $this->preview = $preview;
+
+        $jobRepo = new JobRepository;
+        $job = $jobRepo->getjobName($formation_id);
+        $this->job_name = $job;
+    }
+
 }
 class FormationRepository extends ConnectBdd
 {
@@ -19,48 +37,44 @@ class FormationRepository extends ConnectBdd
 
     public function getFormationById($id):object
     {
-        $Formation = new Formation;
-        $req = $this->bdd->prepare("SELECT * FROM `formation` WHERE `formation_id` = ?");
+        
+        $req = $this->bdd->prepare("SELECT * FROM formation
+        INNER JOIN promo ON promo.formation_id = formation.formation_id
+        WHERE formation.formation_id = ?");
         $req->execute([$id]);
         $data = $req->fetch(PDO::FETCH_ASSOC);
 
-        $Formation->id = $data['formation_id'];
-        $Formation->name = $data['formation_name'];
-        $Formation->description = $data['formation_description'];
-        $Formation->duration = $data['formation_duration'];
-        $Formation->level = $data['formation_level'];
-
-        $Status = new Status;
-        $statusRepo = new StatusRepository;
-        $Status = $statusRepo->getStatusById($data['status_id']);
-        $Formation->status = $Status;
+        $Formation = new Formation (
+            $data['promo_id'],
+            $data['promo_start'],
+            $data['promo_end'],
+            $data['promo_name'],
+            $data['status_id'],
+            $data['formation_id'],
+            $data['formation_description'],
+            $data['formation_duration'],
+            $data['formation_level'],
+            $data['formation_diploma'],
+            $data['formation_preview']
+        );
 
         return $Formation;
     }
 
     public function getFormations()
     {
-        $req = $this->bdd->prepare('SELECT * FROM formation');
+        $formationRepository = new FormationRepository;
+        $req = $this->bdd->prepare('SELECT formation_id FROM formation');
         $req->execute();
-        $datas = $req->fetchAll();
+        $datas = $req->fetchAll(PDO::FETCH_COLUMN);
         $formations = [];
-        
-        foreach($datas as $formationBdd)
-        {
-            $article = new Article();
-            $avatar = new AuthorRepository();
-            $avatar = $avatar->getDataByAuthorId($articleBdd['id_user']);
-            $article->id = $articleBdd['id_article'];
-            $article->title = $articleBdd['title_article'];
-            $article->image = $articleBdd['image_article'];
-            $article->description = $articleBdd['description_article'];
-            $article->author = $articleBdd['author_article'];
-            $article->date = $articleBdd['date_article'];
-            $article->id_author = $articleBdd['id_user'];
-            $article->author_avatar = $avatar;
-            $articles[] = $article;
-        } 
-        return $articles;
+
+        foreach ($datas as $data) {
+            $formation = $formationRepository->getFormationById($data);
+            array_push($formations, $formation);
+        }
+
+        return $formations;
     }
 }
 

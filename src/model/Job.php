@@ -30,6 +30,13 @@ class JobRepository extends ConnectBdd{
 
         return $Job;
     }
+
+    public function getJobName($id) {
+        $req = $this->bdd->prepare("SELECT `job_name` FROM `job` WHERE `formation_id` = ?");
+        $req->execute([$id]);
+        $data = $req->fetch(PDO::FETCH_COLUMN);
+        return $data;
+    }
 }
 
 
