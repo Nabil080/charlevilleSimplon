@@ -148,7 +148,7 @@ $title = "Toutes nos formations";
                     femmes de 18 à 52 ans, de Bac-15 à Bac+15 et des personnes provenant de 17 nationalités différentes.
                 </p>
             </div>
-            <div class="hidden sectionChange transition-all opacity-50 duration-[1.5s]">
+            <div class="hidden sectionChange transition-all duration-[1.5s]">
                 <h3 class="text-[20px] md:text-[32px] font-bold font-title">2014 - 2015</h3>
                 <p class="text-[16px]"> Simplon se développe rapidement en dehors de Montreuil via un mécanisme de
                     "franchise sociale" et des fabriques commencent à
@@ -164,7 +164,7 @@ $title = "Toutes nos formations";
                     s'Engage en 2014,
                     fellow Ashoka et sélectionnée par EPIC en 2015.</p>
             </div>
-            <div class="hidden sectionChange transition-all opacity-50 duration-[1.5s]">
+            <div class="hidden sectionChange transition-all duration-[1.5s]">
                 <h3 class="text-[20px] md:text-[32px] font-bold font-title">2016 - 2017</h3>
                 <p class="text-[16px]"> Simplon devient le premier réseau de formation labellisées par l'Etat en France
                     "Grande Ecole du Numérique" et se développe à l’international :
@@ -180,7 +180,7 @@ $title = "Toutes nos formations";
                     grands comptes. DigitESS nait à ce
                     moment là pour accompagner la transition numérique des acteurs à impact positif.</p>
             </div>
-            <div class="hidden sectionChange transition-all opacity-50 duration-[1.5s]">
+            <div class="hidden sectionChange transition-all duration-[1.5s]">
                 <h3 class="text-[20px] md:text-[32px] font-bold font-title">2018 - 2019</h3>
                 <p class="text-[16px]"> Au moment de fêter ses 6 ans, Simplon.co lève 12 millions d’euros auprès de son
                     pool d’investisseurs de l’Économie sociale
@@ -194,7 +194,7 @@ $title = "Toutes nos formations";
                     compte 78 Fabriques dont 24 à l’étranger.
                     Simplon Prod dépasse les 150 projets ESS réalisés et Simplon Corp le millier de salarié formé.</p>
             </div>
-            <div class="hidden sectionChange transition-all opacity-50 duration-[1.5s]">
+            <div class="hidden sectionChange transition-all duration-[1.5s]">
                 <h3 class="text-[20px] md:text-[32px] font-bold font-title">2020 - 2021</h3>
                 <p class="text-[16px]"> En 2020, Simplon poursuit le développement de son impact social dans un contexte
                     de crise sanitaire inédit.

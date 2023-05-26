@@ -1,5 +1,7 @@
 <?php
-
+require_once 'src/controller/frontController.php';
+require 'src/controller/back/userController.php';
+require 'src/controller/back/projectController.php';
 class ConnectBdd
 {
     public $bdd;
