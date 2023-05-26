@@ -52,12 +52,12 @@ function myProfile()
     $ProjectRepo = new ProjectRepository();
     $userProjects = $ProjectRepo->getUserProjects($_SESSION['user']->id);
     var_dump($userProjects);
-    foreach ($userProjects as $userProject){
-        $eachProject = new ProjectRepository();
-        $userProject = $eachProject->getProjectById($userProject->id);
-        var_dump($userProject);
-    }
-    die;
+    // foreach ($userProjects as $userProject){
+    //     $eachProject = new ProjectRepository();
+    //     $userProject = $eachProject->getProjectById($userProject->id);
+    //     var_dump($userProject);
+    // }
+    // die;
     $Promo = new PromoRepository();
     $userPromo = $Promo->getPromoByUserID($_SESSION['user']->id);
     include 'view/public/profile.php';
