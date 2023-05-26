@@ -6,6 +6,11 @@ function toggleDropdown(id){
     selectedDropdown.classList.toggle('hidden')
 }
 
+function closeAllDropdowns(){
+    document.querySelectorAll('.filter-dropdown').forEach(dropdown => dropdown.classList.add('hidden'))
+    document.querySelectorAll('.dropdown-toggle').forEach(toggle => toggle.classList.add('rounded-b-lg'))
+}
+
 const projectGrid = document.querySelector('#project-cards');
 const paginationDiv = document.querySelector('#pagination');
 const prevPage = document.querySelector('#prev-page');
@@ -63,6 +68,7 @@ getProjets()
         document.querySelectorAll('input[type=checkbox]').forEach(checkbox => {
             checkbox.checked = false
         })
+        closeAllDropdowns();
         loadProjects(projets,1)
     })
 
