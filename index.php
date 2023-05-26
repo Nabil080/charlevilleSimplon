@@ -1,9 +1,7 @@
 <?php
 session_start();
-require_once 'src/controller/frontController.php';
-require 'src/controller/back/UserController.php';
+require 'src/model/ConnectBdd.php';
 
-// require 'src/model/ConnectBdd.php';
 
 $_SESSION['user'] = ['role' => 1];
 // var_dump($_SESSION);
@@ -13,7 +11,7 @@ if (isset($_GET['action']) && $_GET['action'] !== '' && !isset($_GET['admin'])) 
     require 'public.php';
 
     if (isset($_SESSION['user'])) {
-        if ($_SESSION['user']->role->id >=4) {
+        if ($_SESSION['user'] >=4) {
             switch ($action) {
                 // Afficher son profil perso
                 case 'myProfile':
@@ -52,6 +50,8 @@ if (isset($_GET['action']) && $_GET['action'] !== '' && !isset($_GET['admin'])) 
     homepage();
 }
 
-$ProjectRepo = new ProjectRepository;
-$Project = $ProjectRepo->getProjectById(3);
+// $repo = new ProjectRepository;
+// $data = $repo->getProjectsDate();
+// var_dump($data);
+
 

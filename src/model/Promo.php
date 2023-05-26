@@ -43,6 +43,7 @@ class PromoRepository extends ConnectBdd{
         $req->execute([$id]);
         $data = $req->fetch(PDO::FETCH_ASSOC);
 
+
         $Promo = new Promo(
         $data['promo_id'], 
         $data['promo_name'], 

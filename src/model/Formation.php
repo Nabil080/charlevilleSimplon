@@ -9,6 +9,8 @@ class Formation extends Promo
     public $duration;
     public $level;
     public $diploma;
+    public $image;
+    public $status;
     public $preview;
     public $job_name;
 
@@ -61,7 +63,7 @@ class FormationRepository extends ConnectBdd
         return $Formation;
     }
 
-    public function getFormations()
+    public function getAllFormations():array
     {
         $formationRepository = new FormationRepository;
         $req = $this->bdd->prepare('SELECT formation_id FROM formation');
@@ -75,6 +77,24 @@ class FormationRepository extends ConnectBdd
         }
 
         return $formations;
+    }
+
+    public function getFormationLevels()
+    {
+        $levels =  [];
+        $req = $this->bdd->prepare("SELECT formation_level FROM formation WHERE formation_level IS NOT NULL");
+        $req->execute();
+        $data = $req->fetchAll(PDO::FETCH_COLUMN);
+
+        foreach($data as $level){
+            $levels[] = $level ;
+        }
+            
+        $uniqueLevels = array_unique($levels);
+
+        
+        return $uniqueLevels;
+
     }
 }
 

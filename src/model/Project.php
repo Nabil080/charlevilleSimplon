@@ -88,20 +88,18 @@ class ProjectRepository extends ConnectBdd{
 
         $project->team = $this->getProjectUsers($data['project_id']);
 
-        $project->start = null;
-        $project->end = null;
+        $project->start = $project->start = $data['project_start'];;
+        $project->end = $project->end = $data['project_end'];;
+
         if($data['status_id'] == 12){
             $project->start = $data['project_start'];
             $project->end = 'En cours';
         }
-        if($data['status_id'] == 12){
-            $project->start = $data['project_start'];
-            $project->end = 'En cours';
-        }
-        if($data['status_id'] == 13){
-            $project->start = $data['project_start'];
-            $project->end = $data['project_end'];
-        }
+        // if($data['status_id'] == 13){
+        //     $project->start = $data['project_start'];
+        //     $project->end = $data['project_end'];
+        // }
+
 
 
         return $project;
@@ -125,16 +123,61 @@ class ProjectRepository extends ConnectBdd{
         return $team;
     }
 
-    public function getAllProjects(){
-        $req = $this->bdd->prepare("SELECT * FROM projects");
+      public function getAllProjects($limitRequest = null):array
+    {
+        $projects = [];
+        $limit = $limitRequest == null ? "" : "LIMIT ".$limitRequest;
+
+        $req = $this->bdd->prepare("SELECT project_id FROM project $limit");
         $req->execute();
         $data = $req->fetchAll(PDO::FETCH_ASSOC);
 
+
         foreach($data as $key){
-            $project = new Project;
+            $Project = new Project;
             $projectRepo = new ProjectRepository;
-            $project = $projectRepo->getProjectById($key['project_id']);
+            $Project = $projectRepo->getProjectById($key['project_id']);
+
+            $projects[] = $Project;
         }
+
+        return $projects;
+    }
+
+    public function getProjectsDate()
+    {
+        $dates =  [];
+        $req = $this->bdd->prepare("SELECT project_start FROM project WHERE project_start IS NOT NULL");
+        $req->execute();
+        $data = $req->fetchAll(PDO::FETCH_COLUMN);
+
+        foreach($data as $key){
+            $start = date_create($key);
+            $year = date_format($start,"Y");
+
+            $dates[] = $year ;
+        }
+            
+        $uniqueDates = array_unique($dates);
+        return $uniqueDates;
+    }
+
+    public function getProjectUsers($id):array
+    {
+        $team = [];
+        $req = $this->bdd->prepare("SELECT `user_id` FROM `project_team` WHERE `project_id` = ? ");
+        $req->execute([$id]);
+        $data = $req->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach($data as $key){
+            $User = new User;
+            $userRepo = new UsersRepository;
+            $User = $userRepo->getUserById($key['user_id']);
+
+            $team[] = $User;
+        }
+
+        return $team;
     }
 
     public function getUserProjects($id):array
