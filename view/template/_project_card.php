@@ -8,7 +8,7 @@
                         <p class="font-title font-bold mr-2">Projet fourni par : </p>
                         <p><a href="<?=$project->company_link?>" target="_blank" class="text-main-red underline font-bold text-sm"><?=$project->company_name?></a></p>
                     </div>
-                    <div class="my-4 grow"><img class="" src="<?=$project->company_image?>" alt="logo de l\'entreprise"></div>
+                    <div class="my-4 grow"><img class="" src="<?=$project->company_image?>" alt="logo de l'entreprise"></div>
                     <div class="flex flex-wrap">
                         <p class="font-title font-bold mr-2">Adresse :</p>
                         <p class="text-sm pt-0.5 text-left font-light"><?=$project->company_adress?></p>
@@ -28,8 +28,8 @@
                 <!-- titre projet -->
                 <h2 class="font-title text-main-red italic font-bold text-3xl my-2"><a href="?action=projectPage&id=<?=$project->id?>"><?=$project->name?></a></h2>
                 <div class="self-end flex w-3/4 justify-between italic border-b border-main-red">
-                    <?php if(isset($project->start)){ ?><span>Débuté le <?=$project->start?></span><?php }
-                    if(isset($project->end)){ ?><span>Fini le <?=$project->end?></span><?php } ?></div>
+                    <?php if(isset($project->start)){ ?><span>Débuté le <?=date('d-m-Y', strtotime($project->start))?></span><?php }
+                    if(isset($project->end)){ ?><span>Fini le <?=date('d-m-Y', strtotime($project->end))?></span><?php } ?></div>
                 <!-- contenu projet -->
                 <div class="text-base flex-grow flex-col">
                     <p class="pl-[20%] line-clamp-5 mt-2 mb-4"><?=$project->description?></p>
@@ -68,4 +68,5 @@
             <div class="hidden" formation-filter="formation-<?=$project->promo->formation->id?>"></div>
             <div class="hidden" year-filter="<?=$project->start?>"></div>
             <div class="hidden" level-filter="<?=$project->promo->formation->level?>"></div>
+
         </article>
