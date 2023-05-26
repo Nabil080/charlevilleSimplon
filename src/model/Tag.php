@@ -17,6 +17,7 @@ class TagRepository extends ConnectBdd{
         $req = $this->bdd->prepare("SELECT * FROM `tag` WHERE `tag_id` = ?");
         $req->execute([$id]);
         $data = $req->fetch(PDO::FETCH_ASSOC);
+
         $Tag->id = $data['tag_id'];
         $Tag->name = $data['tag_name'];
 
@@ -38,6 +39,7 @@ class TagRepository extends ConnectBdd{
 
         return $tags;
     }
+
 
     public function getUserTags($id):array
     {
