@@ -1,49 +1,58 @@
 <?php
 $title = "Inscription";
-$boolCompany = (isset($_GET['company'])) ? true : false;
+$boolCompany = (isset($_GET['company'])) ? 1 : 0;
 ?>
+
+<!-- Candidature  -->
 
 <?php ob_start(); ?>
 <div class="w-full md:w-2/3 mb-6 md:mb-3">
     <label for="nationality" class="block mb-2 text-[14px] font-medium">Nationalité</label>
     <input type="text" id="nationality" name="nationality" placeholder="Votre nationalité"
         class="bg-main-white border border-main-red text-[18px] rounded-[5px] block w-full p-2.5">
+    <p id="nationality_error" class="errorAlert mt-2 text-sm text-red-600 dark:text-red-500"></p>
 </div>
 <div class="w-full md:w-2/3 mb-6 md:mb-3">
-    <label for="date_birth" class="block mb-2 text-[14px] font-medium">Date de naissance</label>
-    <input type="date" id="date_birth" name="date_birth" placeholder="Votre date de naissance"
+    <label for="birth_date" class="block mb-2 text-[14px] font-medium">Date de naissance</label>
+    <input type="date" id="birth_date" name="birth_date" placeholder="Votre date de naissance"
         class="bg-main-white border border-main-red text-[18px] rounded-[5px] block w-full p-2.5">
+    <p id="birth_date_error" class="errorAlert mt-2 text-sm text-red-600 dark:text-red-500"></p>
+
 </div>
 <div class="w-full md:w-2/3 mb-6 md:mb-3">
-    <label for="place_birth" class="block mb-2 text-[14px] font-medium">Ville de naissance</label>
-    <input type="text" id="place_birth" name="place_birth" placeholder="Paris"
+    <label for="birth_place" class="block mb-2 text-[14px] font-medium">Ville de naissance</label>
+    <input type="text" id="birth_place" name="birth_place" placeholder="Paris"
         class="bg-main-white border border-main-red text-[18px] rounded-[5px] block w-full p-2.5">
+    <p id="birth_place_error" class="errorAlert mt-2 text-sm text-red-600 dark:text-red-500"></p>
+
 </div>
 <div class="w-full md:w-2/3 mb-6 md:mb-3">
     <label for="id_poleEmploi" class="block mb-2 text-[14px] font-medium">Identifiant Pole Emploi</label>
     <input type="text" id="id_poleEmploi" name="id_poleEmploi" placeholder="ID pole emploi"
         class="bg-main-white border border-main-red text-[18px] rounded-[5px] block w-full p-2.5">
     <div class="flex items-center mt-2">
-        <input id="default-checkbox" type="checkbox" value=""
+        <input id="default-checkbox" type="checkbox" name="id_poleEmploi_checkbox"
             class="w-4 h-4 text-main-red bg-main-white border-main-border rounded focus:ring-0">
         <label for="default-checkbox" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">J'ai pas encore
             le numéro Pôle Emploi</label>
     </div>
+    <p id="id_poleEmploi_error" class="errorAlert mt-2 text-sm text-red-600 dark:text-red-500"></p>
 </div>
-
 <?php $prospect = ob_get_clean(); ?>
+
+<!-- Entreprise  -->
 
 <?php ob_start(); ?>
 <div class="w-full md:w-2/3 mb-6 md:mb-3">
     <label for="name_company" class="block mb-2 text-[14px] font-medium">Nom de l'entreprise</label>
     <input type="text" id="name_company" name="name_company" placeholder="Simplon"
         class="bg-main-white border border-main-red text-[18px] rounded-[5px] block w-full p-2.5">
+    <p id="name_company_error" class="errorAlert mt-2 text-sm text-red-600 dark:text-red-500"></p>
 </div>
-
 <?php $company = ob_get_clean(); ?>
 
 
-
+<!-- Formulaire de base  -->
 
 <?php ob_start(); ?>
 <main class="px-[10%]">
@@ -60,10 +69,10 @@ $boolCompany = (isset($_GET['company'])) ? true : false;
     </div>
     <form id="register-form" class="bg-main-lightgray p-5 border border-main-red rounded-[5px]">
         <?php if (!$boolCompany) { ?>
-            <p class="pb-10 text-[14px] md:text-[20px] font-medium text-center">
-                Pour postuler à la formation $nom_de_la_promo qui commence le $date_de_la_promo, veuillez remplir le
-                formulaire ci-dessous :
-            </p>
+        <p class="pb-10 text-[14px] md:text-[20px] font-medium text-center">
+            Pour postuler à la formation $nom_de_la_promo qui commence le $date_de_la_promo, veuillez remplir le
+            formulaire ci-dessous :
+        </p>
         <?php } ?>
 
         <div class="grid [&>div]:mx-auto place-content-center gap-3 md:grid-cols-2 ">
@@ -71,40 +80,47 @@ $boolCompany = (isset($_GET['company'])) ? true : false;
                 <label for="name" class="block mb-2 text-[14px] font-medium">Nom</label>
                 <input type="text" id="name" name="name" placeholder="Votre nom"
                     class="bg-main-white border border-main-red text-[18px] rounded-[5px] block w-full p-2.5">
+                <p id="name_error" class="errorAlert mt-2 text-sm text-red-600 dark:text-red-500"></p>
             </div>
             <div class="w-full md:w-2/3 mb-6 md:mb-3">
                 <label for="surname" class="block mb-2 text-[14px] font-medium">Prénom</label>
                 <input type="text" id="surname" name="surname" placeholder="Votre prénom"
                     class="bg-main-white border border-main-red text-[18px] rounded-[5px] block w-full p-2.5">
+                <p id="surname_error" class="errorAlert mt-2 text-sm text-red-600 dark:text-red-500"></p>
             </div>
             <div class="w-full md:w-2/3 mb-6 md:mb-3">
                 <label for="email" class="block mb-2 text-[14px] font-medium">Email</label>
                 <input type="email" id="email" name="email" placeholder="Votre email"
                     class="bg-main-white border border-main-red text-[18px] rounded-[5px] block w-full p-2.5">
+                <p id="email_error" class="errorAlert mt-2 text-sm text-red-600 dark:text-red-500"></p>
             </div>
             <div class="w-full md:w-2/3 mb-6 md:mb-3">
                 <label for="phone" class="block mb-2 text-[14px] font-medium">Téléphone</label>
                 <input type="tel" id="phone" name="phone" pattern="[0][1-9]{9}" placeholder="07256533**"
                     class="bg-main-white border border-main-red text-[18px] rounded-[5px] block w-full p-2.5">
+                <p id="phone_error" class="errorAlert mt-2 text-sm text-red-600 dark:text-red-500"></p>
             </div>
             <div class="w-full md:w-2/3 mb-6 md:mb-3">
-                <label for="adress" class="block mb-2 text-[14px] font-medium">Adress</label>
+                <label for="adress" class="block mb-2 text-[14px] font-medium">Adresse</label>
                 <input type="text" id="adress" name="adress" placeholder="2 rue Du Général de Gaulle"
                     class="bg-main-white border border-main-red text-[18px] rounded-[5px] block w-full p-2.5">
+                <p id="adress_error" class="errorAlert mt-2 text-sm text-red-600 dark:text-red-500"></p>
             </div>
             <div class="w-full md:w-2/3 mb-6 md:mb-3">
                 <label for="postal" class="block mb-2 text-[14px] font-medium">Code Postal</label>
                 <input type="text" id="postal" name="postal" placeholder="75000"
                     class="bg-main-white border border-main-red text-[18px] rounded-[5px] block w-full p-2.5">
+                <p id="postal_error" class="errorAlert mt-2 text-sm text-red-600 dark:text-red-500"></p>
             </div>
             <div class="w-full md:w-2/3 mb-6 md:mb-3">
                 <label for="city" class="block mb-2 text-[14px] font-medium">Ville</label>
                 <input type="text" id="city" name="city" placeholder="Paris"
                     class="bg-main-white border border-main-red text-[18px] rounded-[5px] block w-full p-2.5">
+                <p id="city_error" class="errorAlert mt-2 text-sm text-red-600 dark:text-red-500"></p>
             </div>
             <?php echo ($boolCompany) ? $company : $prospect; ?>
         </div>
-        <p class="py-5 md:text-center text-[14px] text-main-red font-bold font-bold">
+        <p class="py-5 md:text-center text-[14px] text-main-red font-bold">
             Conservez votre mot de passe : il
             vous
             servira
@@ -117,6 +133,7 @@ $boolCompany = (isset($_GET['company'])) ? true : false;
                 <label for="password" class="block mb-2 text-[14px] font-medium">Mot de passe</label>
                 <input type="password" id="password" name="password" placeholder="Votre mot de passe"
                     class="bg-main-white border border-main-red text-[18px] rounded-[5px] block w-full p-2.5">
+                <p id="password_error" class="errorAlert mt-2 text-sm text-red-600 dark:text-red-500"></p>
             </div>
             <div class="w-full md:w-2/3 mb-6">
                 <label for="confirm_password" class="block mb-2 text-[14px] font-medium">Confirmez mot de
@@ -124,19 +141,22 @@ $boolCompany = (isset($_GET['company'])) ? true : false;
                 <input type="password" id="confirm_password" name="confirm_password"
                     placeholder="Confirmer votre mot de passe"
                     class="bg-main-white border border-main-red text-[18px] rounded-[5px] block w-full p-2.5">
+                <p id="confirm_password_error" class="errorAlert mt-2 text-sm text-red-600 dark:text-red-500"></p>
             </div>
         </div>
+        <input type="hidden" name="boolCompany" value="<?= $boolCompany ?>" />
+        <div id="registerContent_error"
+            class="hidden contentAlert border border-main-red bg-red-200 rounded-lg mb-5 p-3 text-center text-sm text-main-red">
+        </div>
         <div class="text-center">
-            <button type=" submit"
+            <button type=" submit" id="postuler"
                 class="px-10 py-3 text-main-white font-bold text-lg uppercase bg-main-red rounded-lg">
                 <?php echo ($boolCompany) ? "Inscription" : 'Postuler'; ?>
             </button>
         </div>
     </form>
+    <?= var_dump($_SESSION['user']) ?>
 </main>
-
-
-
 <?php $content = ob_get_clean(); ?>
 
 <?php include 'view/layout.php'; ?>

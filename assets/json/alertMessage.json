@@ -1,6 +1,14 @@
 {
   "errorMessage": [
     {
+      "name": "notForm",
+      "message": "Nous n'avons pas reçu de formulaire. Si le problème persiste, envoyer un message au support."
+    },
+    {
+      "name": "errorForm",
+      "message": "Un à plusieurs champ(s) sont incorrects. Merci de bien vouloir les corriger."
+    },
+    {
       "name": "emptyField",
       "message": "Le champ est vide."
     },
@@ -10,7 +18,7 @@
     },
     {
       "name": "passwordNotIdentical",
-      "message": "Les mots de passes ne sont pas identique."
+      "message": "Les mots de passe ne sont pas identiques."
     },
     {
       "name": "existingEmail",

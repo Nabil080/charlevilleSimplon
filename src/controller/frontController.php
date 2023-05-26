@@ -55,7 +55,11 @@ function registerPage()
     include 'view/public/register.php';
 }
 
-
+function accountActivationPage()
+{
+    $etat = activationAccountTreatment();
+    include 'view/public/accountActivation.php';
+}
 // ==================  Admin  ======================
 
 function crudCandidatePage()

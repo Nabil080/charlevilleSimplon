@@ -17,18 +17,23 @@
             <!-- Partie CONNEXION -->
             <div id="co" class="px-6 py-6 lg:px-8">
                 <h3 class="mb-4 text-xl uppercase w-fit mx-auto font-bold font-title text-main-red">Connexion</h3>
-                <form class="space-y-6" action="/portfolio/allosimplon/traitements/connexion/login.php" method="post">
+                <form class="space-y-6" id="login-form" method="post">
                     <div>
-                        <label for="email" class="block mb-2 text-sm font-medium  text-main-red">E-mail</label>
-                        <input type="email" name="email" id="email"
+                        <label for="email_login" class="block mb-2 text-sm font-medium  text-main-red">E-mail</label>
+                        <input type="email" name="email_login" id="email_login"
                             class=" border text-sm rounded-md block w-full p-2.5 border-main-red text-main-red"
-                            placeholder="Exemple@mail.com" required>
+                            placeholder="Exemple@mail.com">
+                        <p id="email_login_error" class="errorAlert mt-2 text-sm text-red-600 dark:text-red-500"></p>
                     </div>
                     <div>
-                        <label for="password" class="block mb-2 text-sm font-medium  text-main-red">Mot de passe</label>
-                        <input type="password" name="password" id="password" placeholder="*********"
-                            class=" border text-sm rounded-md block w-full p-2.5 border-main-red text-main-red"
-                            required>
+                        <label for="password_login" class="block mb-2 text-sm font-medium  text-main-red">Mot de
+                            passe</label>
+                        <input type="password" name="password_login" id="password_login" placeholder="*********"
+                            class=" border text-sm rounded-md block w-full p-2.5 border-main-red text-main-red">
+                        <p id="password_login_error" class="errorAlert mt-2 text-sm text-red-600 dark:text-red-500"></p>
+                    </div>
+                    <div id="loginContent_error"
+                        class="contentAlert hidden mb-5 border border-main-red bg-red-200 rounded-lg p-3 text-center text-sm text-main-red">
                     </div>
                     <button type="submit"
                         class="w-full uppercase font-title text-main-white bg-main-red hover:bg-red-800 font-medium rounded-md text-sm px-5 py-2.5 text-center ">Se
@@ -38,6 +43,12 @@
                             Mot de passe oublié ? <a onclick="switchDiv('co','paco')"
                                 class="hover:underline text-main-red cursor-pointer">Le réinitialiser</a>
                         </div>
+                        <div class="text-sm font-bold text-main-gray">
+                            Pas de compte ? S'inscrire: <a href="?action=registerPage&company="
+                                class="hover:underline text-main-red cursor-pointer">Entreprise</a> / <a
+                                href="?action=registerPage"
+                                class="hover:underline text-main-red cursor-pointer">Candidat</a>
+                        </div>
                     </div>
                 </form>
             </div>
@@ -45,11 +56,11 @@
             <div id="paco" class="hidden px-6 py-6 lg:px-8">
                 <h3 class="mb-4 text-xl uppercase w-fit mx-auto font-bold font-title text-main-red">Mot de passe oublié
                 </h3>
-                <form class="space-y-6" action="/portfolio/allosimplon/traitements/connexion/sign.php" method="post">
+                <form class="space-y-6" id="forget-form" method="post">
                     <div>
                         <label for="email" class="block mb-2 text-sm font-medium  text-main-red">Votre adresse
                             mail</label>
-                        <input type="email" name="email" id="email"
+                        <input type="email" name="email" id="email_forget"
                             class=" border text-sm rounded-md block w-full p-2.5 border-main-red text-main-red"
                             placeholder="Exemple@mail.com" required>
                     </div>
