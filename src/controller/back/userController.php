@@ -141,3 +141,10 @@ function contactUsers()
     
     }
 }
+
+function deleteCandidate(){
+    var_dump($_POST);
+    $userRepo = new UsersRepository;
+    $req = $userRepo->bdd->prepare("DELETE FROM `promo_candidate` WHERE `user_id` = ? AND `promo_id` = ?");
+    $req->execute([$_POST['user_id'], $_POST['promo_id']]);
+}

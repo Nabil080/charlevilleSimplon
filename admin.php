@@ -29,4 +29,9 @@ switch ($action) {
     case 'contactUsers':
         contactUsers();
         break;
+
+    // Traitement suppression CANDIDAT
+    case 'deleteCandidate':
+        deleteCandidate();
+        break;
 }
