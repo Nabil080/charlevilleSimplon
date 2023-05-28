@@ -1,15 +1,5 @@
 <?php $title = "Les projets"; ?>
 
-<?php
-        $formationRepo = new FormationRepository;
-        $formations = $formationRepo->getAllFormations();
-        $formationsLevel = $formationRepo->getFormationLevels();
-
-        $projectRepo = new ProjectRepository;
-        $projectsDate = $projectRepo->getProjectsDate();
-
-?>
-
 <?php ob_start(); ?>
 
 <h1 class="px-4 text-main-red font-title font-semibold text-center text-2xl sm:text-3xl lg:text-[40px]">Les projets réalisés à <span class="italic">Simplon Charleville</span></h1>
