@@ -293,16 +293,18 @@ $stmt->execute([$pass, $email]);
     public function getAllLearners(): array
     {
         $learners = [];
+        $formators = [];
         $query = "SELECT `user_id` FROM `promo_user`";
         $req = $this->bdd->prepare($query);
         $req->execute();
         $data = $req->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ($data as $learner) {
-            $learners[] = $this->getUserById($learner['user_id']);
+            $User = $this->getUserById($learner['user_id']);
+            $User->role->id == 2 ? $formators[] = $User : $learners[] = $User;
         }
 
-        return $learners;
+        return array_merge($formators,$learners);
     }
 
     public function getUserSimplonProjects($id):array

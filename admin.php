@@ -44,4 +44,9 @@ switch ($action) {
     case 'deleteProject':
         deleteProject();
         break;
+
+    // Traitement assigner un FORMATEUR
+    case 'assignFormator':
+        assignFormator();
+        break;
 }

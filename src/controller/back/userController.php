@@ -160,3 +160,12 @@ function deleteLearner()
     $req->execute([$_POST['user_id'], $_POST['promo_id']]);
 
 }
+
+function assignFormator()
+{
+    // Check si admin
+    var_dump($_POST);
+    $userRepo = new UsersRepository;
+    $req = $userRepo->bdd->prepare("UPDATE user SET `role_id` = ? WHERE `user_id` = ?");
+    $req->execute([2, $_POST['user_id']]);
+}

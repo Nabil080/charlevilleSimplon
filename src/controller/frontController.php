@@ -96,6 +96,8 @@ function crudLearnerPage()
 {
     $UserRepo = new UsersRepository;
     $learners = $UserRepo->getAllLearners();
+    $PromoRepo = new PromoRepository;
+    $promos = $PromoRepo->getActivePromos();
 
     include 'view/admin/_learner.php';
 }

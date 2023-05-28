@@ -23,7 +23,7 @@
     </thead>
     <tbody class="border-2">
         <?php foreach ($learners as $learner) { ?>
-            <tr class="border-2 border-gray-800">
+            <tr class="border-2 border-gray-800 <?php if($learner->role->id == 2){ echo 'bg-red-300' ;} ?>">
                 <th scope="row" class="px-4 py-3 font-medium text-gray-900 border whitespace-nowrap "><?=$learner->name?>
                 </th>
                 <td class="px-4 py-3 border"><?=$learner->surname?></td>
