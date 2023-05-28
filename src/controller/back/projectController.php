@@ -17,7 +17,7 @@ function projectsPagination()
 
     $response = array(
         "status" => "success",
-        "message" => "Un string des cards a été retourné",
+        "message" => "La requête a été modifée comme tel",
         "projets" => $projectsHTML,
     );
 
