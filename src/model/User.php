@@ -22,7 +22,7 @@ class User
     public $birth_place;
     public $nationality;
     public $tags;
-    public $projects;
+    // public $projects;
     public $status;
     public $status_date;
     public $role;
@@ -104,10 +104,10 @@ class UsersRepository extends ConnectBdd
         $Tags = $tagRepo->getUserTags($data['user_id']);
         $User->tags = $Tags;
 
-        $Projects = new Project;
-        $projectRepository = new ProjectRepository;
-        $Projects = $projectRepository->getUserProjects($data['user_id']);
-        $User->projects = $Projects;
+        // $Projects = new Project;
+        // $projectRepository = new ProjectRepository;
+        // $Projects = $projectRepository->getUserProjects($data['user_id']);
+        // $User->projects = $Projects;
 
         $Status = new Status;
         $statusRepo = new StatusRepository;
@@ -237,4 +237,53 @@ $stmt = $this->bdd->prepare($req);
 $stmt->execute([$pass, $email]);
 }
 */
+
+
+    public function getAllCandidates():array
+    {
+        $candidates = [];
+        $query = "SELECT `user_id` FROM `promo_candidate`";
+        $req = $this->bdd->prepare($query);
+        $req->execute();
+        $data = $req->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach($data as $candidate){
+            $candidates[] = $this->getUserById($candidate['user_id']); 
+        }
+
+        return $candidates;
+    }
+
+    public function getUserPromo($userId):object
+    {
+        $PromoRepo = new PromoRepository;
+
+        $req = $this->bdd->prepare("SELECT `promo_id` FROM promo_candidate WHERE user_id = ?");
+        $req->execute([$userId]);
+        $data = $req->fetch(PDO::FETCH_ASSOC);
+
+        if($data != false){
+
+            return $PromoRepo->getPromoById($data['promo_id']);
+        }
+
+        
+        $req = $this->bdd->prepare("SELECT `promo_id` FROM promo_user WHERE user_id = ?");
+        $req->execute([$userId]);
+        $data = $req->fetch(PDO::FETCH_ASSOC);
+        
+        if($data != false){
+
+            return $PromoRepo->getPromoById($data['promo_id']);
+        }
+        $req = $this->bdd->prepare("SELECT `promo_id` FROM promo_refused WHERE user_id = ?");
+        $req->execute([$userId]);
+        $data = $req->fetch(PDO::FETCH_ASSOC);
+
+        if($data != false){
+
+            return $PromoRepo->getPromoById($data['promo_id']);
+        }
+
+    }
 }

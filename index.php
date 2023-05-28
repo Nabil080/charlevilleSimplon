@@ -50,6 +50,6 @@ if (isset($_GET['action']) && $_GET['action'] !== '' && !isset($_GET['admin'])) 
     homepage();
 }
 
-// $repo = new ProjectRepository;
-// $data = $repo->getProjectsDate();
+// $repo = new UsersRepository;
+// $data = $repo->getUserPromo(2);
 // var_dump($data);

@@ -86,6 +86,9 @@ function registerPage()
 
 function crudCandidatePage()
 {
+    $UserRepo = new UsersRepository;
+    $candidates = $UserRepo->getAllCandidates();
+
     include 'view/admin/_candidate.php';
 }
 

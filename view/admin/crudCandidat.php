@@ -11,18 +11,20 @@
         </tr>
     </thead>
     <tbody class="border-2">
-        <?php for ($i = 0; $i < 10; $i++) { ?>
+        <?php foreach($candidates as $candidate) { ?>
         <tr class="border-2 border-gray-800">
-            <th scope="row" class="px-4 py-3 font-medium text-gray-900 border whitespace-nowrap ">Apple iMac 27&#34;
+            <th scope="row" class="px-4 py-3 font-medium text-gray-900 border whitespace-nowrap "><?=$candidate->name?>;
             </th>
-            <td class="px-4 py-3 border">PC</td>
+            <td class="px-4 py-3 border"><?=$candidate->surname?></td>
             <td class="px-4 py-3 border">
                 <?php if (isset($candidatures)) {
                                 foreach ($candidatures as $candidature) { ?>
                 <p class="text-center italic font-bold underline">$candidature</p>
                 <?php 
                                 }}?>
-                <p class="text-center italic font-bold underline">Développeur Web/Web Mobile 2023</p>
+                <p class="text-center italic font-bold underline"><?php
+                $userPromo = $UserRepo->getUserPromo($candidate->id);
+                echo $userPromo->name?></p>
 
                 <button data-modal-target="modal-candidature<?php "" ?>"
                     data-modal-toggle="modal-candidature<?php "" ?>" class="block w-full md:w-auto text-white bg-main-red hover:bg-red-800 focus:ring-4 focus:outline-none 
@@ -47,8 +49,8 @@
             </td>
         </tr>
         <?php 
-                        }
-                        ?>
+        }
+        ?>
 
     </tbody>
 </table>
