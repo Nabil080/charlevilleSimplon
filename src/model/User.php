@@ -252,36 +252,42 @@ $stmt->execute([$pass, $email]);
         return $candidates;
     }
 
-    public function getUserPromo($userId): object
+    public function getUserPromo($option,$userId):array
     {
-        $PromoRepo = new PromoRepository;
+        $promos = [];
+        $promoRepo = new PromoRepository;
 
-        $req = $this->bdd->prepare("SELECT `promo_id` FROM promo_candidate WHERE user_id = ?");
-        $req->execute([$userId]);
-        $data = $req->fetch(PDO::FETCH_ASSOC);
+        if($option == 'candidature'){
+            $req = $this->bdd->prepare("SELECT `promo_id` FROM promo_candidate WHERE user_id = ?");
+            $req->execute([$userId]);
+            $datas = $req->fetchAll(PDO::FETCH_ASSOC);
 
-        if ($data != false) {
-            // CHECK SI LA PROMO EST EN COURS OU NON
-            return $PromoRepo->getPromoById($data['promo_id']);
+            foreach($datas as $data){
+                $promos[] = $promoRepo->getPromoById($data['promo_id']);
+            }
         }
 
+        if($option == 'apprenant'){
+            $req = $this->bdd->prepare("SELECT `promo_id` FROM promo_user WHERE user_id = ?");
+            $req->execute([$userId]);
+            $datas = $req->fetchAll(PDO::FETCH_ASSOC);
 
-        $req = $this->bdd->prepare("SELECT `promo_id` FROM promo_user WHERE user_id = ?");
-        $req->execute([$userId]);
-        $data = $req->fetch(PDO::FETCH_ASSOC);
-
-        if ($data != false) {
-            // CHECK SI LA PROMO EST EN COURS OU NON
-            return $PromoRepo->getPromoById($data['promo_id']);
+            foreach($datas as $data){
+                $promos[] = $promoRepo->getPromoById($data['promo_id']);
+            }
         }
-        $req = $this->bdd->prepare("SELECT `promo_id` FROM promo_refused WHERE user_id = ?");
-        $req->execute([$userId]);
-        $data = $req->fetch(PDO::FETCH_ASSOC);
 
-        if ($data != false) {
-            // CHECK SI LA PROMO EST EN COURS OU NON
-            return $PromoRepo->getPromoById($data['promo_id']);
+        if($option == 'refusé'){
+            $req = $this->bdd->prepare("SELECT `promo_id` FROM promo_refused WHERE user_id = ?");
+            $req->execute([$userId]);
+            $datas = $req->fetchAll(PDO::FETCH_ASSOC);
+
+            foreach($datas as $data){
+                $promos[] = $promoRepo->getPromoById($data['promo_id']);
+            }
         }
+
+        return $promos;
     }
 
     public function getAllLearners(): array

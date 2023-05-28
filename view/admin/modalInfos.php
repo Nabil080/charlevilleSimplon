@@ -70,7 +70,8 @@
                         </div>
                     </div>
 
-
+                                    
+                                        <div>Passer cet utilisateur comme formateur</div>
                     <!-- Modal footer -->
                     <div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
                         <button data-modal-hide="modal-info-<?=$learner->id?>" type="button" class="text-gray-500 bg-white hover:bg-gray-100 
