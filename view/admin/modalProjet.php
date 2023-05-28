@@ -26,15 +26,15 @@
                 <div class="background bg-main-white overflow-x-hidden min-h-[100vh]">
                     <div class="mx-auto w-11/12 lg:max-w-[800px] flex justify-between mb-8 lg:mb-16">
                         <div class="flex w-full">
-                            <div onclick="changeTab(0)" class="tabChange cursor-pointer px-0 transition-all duration-[0.4s] bg-main-red w-1/2 text-center text-main-white font-title text-lg md:text-xl lg:text-2xl font-bold py-2 md:py-4">
+                            <div onclick="swapDivsById('simplon_projects_<?=$learner->id?>','perso_projects_<?=$learner->id?>')" class="tabChange cursor-pointer px-0 transition-all duration-[0.4s] bg-main-red w-1/2 text-center text-main-white font-title text-lg md:text-xl lg:text-2xl font-bold py-2 md:py-4">
                                 <p class="select-none">Projets simplon</p>
                             </div>
-                            <div onclick="changeTab(1)" class="tabChange cursor-pointer px-0 transition-all duration-[0.4s] bg-main-gray w-1/2 text-center text-main-white font-title text-lg md:text-xl lg:text-2xl font-bold py-2 md:py-4">
+                            <div onclick="swapDivsById('simplon_projects_<?=$learner->id?>','perso_projects_<?=$learner->id?>')" class="tabChange cursor-pointer px-0 transition-all duration-[0.4s] bg-main-gray w-1/2 text-center text-main-white font-title text-lg md:text-xl lg:text-2xl font-bold py-2 md:py-4">
                                 <p class="select-none">Projets perso</p>
                             </div>
                         </div>
                     </div>
-                    <section class="sectionChange">
+                    <section id="simplon_projects_<?=$learner->id?>" class="sectionChange">
                         <?php 
                             $projects = $UserRepo->getUserSimplonProjects($learner->id);
                             foreach($projects as $project){
@@ -42,7 +42,7 @@
                             }
                         ?>
                     </section>
-                    <section class="sectionChange hidden projet-cards w-11/12 mt-2 gap-6 mx-auto flex flex-col justify-center lg:flex-row lg:flex-wrap">
+                    <section id="perso_projects_<?=$learner->id?>" class="sectionChange hidden projet-cards w-11/12 mt-2 gap-6 mx-auto flex flex-col justify-center lg:flex-row lg:flex-wrap">
                     <?php 
                             $projects = $UserRepo->getUserPersonnalProjects($learner->id);
                             foreach($projects as $project){
