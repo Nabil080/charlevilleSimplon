@@ -24,22 +24,18 @@
               <div class="py-4 lg:py-8 px-4 mx-auto max-w-screen-md">
                   <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-center text-gray-900 ">Votre message</h2>
                   <p class="mb-8 lg:mb-16 font-light text-center text-gray-500 sm:text-xl"></p>
-                  <form action="#" class="space-y-4">
-                      <div>
-                          <label for="email" class="block mb-2 text-sm font-medium text-gray-900">Votre email d'envoi</label>
-                          <input type="email" id="email" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 " placeholder="Votre mail ici" required>
-                      </div>
+                  <form action="?action=contactUsers" method="post" class="space-y-4">
                       <div>
                           <label for="email" class="block mb-2 text-sm font-medium text-gray-900">Vos destinataire(s)</label>
-                          <input type="email" id="emailContact" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 " placeholder="Voici les destinataires" required>
+                          <input type="email" id="emailContact" name="send" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 " placeholder="Voici les destinataires" required>
                       </div>
                       <div>
                           <label for="subject" class="block mb-2 text-sm font-medium text-gray-900">Le sujet de votre mail</label>
-                          <input type="text" id="subject" class="block p-3 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 shadow-sm focus:ring-primary-500 focus:border-primary-500 " placeholder="Sujet du mail" required>
+                          <input type="text" id="subject" name="object" class="block p-3 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 shadow-sm focus:ring-primary-500 focus:border-primary-500 " placeholder="Sujet du mail" required>
                       </div>
                       <div class="sm:col-span-2">
                           <label for="message" class="block mb-2 text-sm font-medium text-gray-900">Votre message</label>
-                          <textarea id="message" rows="6" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg shadow-sm border border-gray-300" placeholder="Votre message ici"></textarea>
+                          <textarea id="message" rows="6" name="message" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg shadow-sm border border-gray-300" placeholder="Votre message ici"></textarea>
                       </div>
                       <button type="submit" class="py-3 mt-5 px-5 text-sm font-medium text-center text-white rounded-lg bg-primary-700 bg-main-red">Send message</button>
                   </form>
@@ -63,3 +59,7 @@
 
     </div>
 </div>
+
+<?php 
+// var_dump($_POST)
+?>

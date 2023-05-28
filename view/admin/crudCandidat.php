@@ -27,27 +27,27 @@
                     <p class="text-center italic font-bold underline"><?= $UserRepo->getUserPromo($candidate->id)->name ?>
                     </p>
 
-                    <button data-modal-target="modal-candidature-<?= $candidate->id ?>" data-modal-toggle="modal-candidature-<?= $candidate->id ?>" class="block w-full md:w-auto text-white bg-main-red hover:bg-red-800 focus:ring-4 focus:outline-none 
+                    <button data-modal-target="modal-candidature-<?= $candidate->id ?>" data-modal-toggle="modal-candidature-<?= $candidate->id ?>" class="block w-full md:w-auto text-white bg-main-red ho:bg-red-800 focus:ring-4 focus:outline-none 
                                     font-medium rounded-lg text-sm px-5 py-2.5 mt-2 mx-auto text-center" type="button">
                         Vérifier les candidatures
                     </button>
                 </td>
                 <td class="px-4 py-3 border">
-                    <button data-modal-target="modal-contact<?= $candidate->id ?>" data-modal-toggle="modal-contact<?= $candidate->id ?>" class="block w-full md:w-auto text-white bg-main-gray hover:bg-gray-900 focus:ring-4 focus:outline-none 
+                    <button data-user-mail="<?=$candidate->email?>" data-user-id="<?=$candidate->id?>" data-user-name="<?=$candidate->name,' ',$candidate->surname?> " data-modal-target="modal-contact" data-modal-toggle="modal-contact" class="block w-full md:w-auto text-white bg-main-gray hover:bg-gray-900 focus:ring-4 focus:outline-none 
                                     font-medium rounded-lg text-sm px-5 py-2.5 mt-2 mx-auto text-center" type="button">
-                        <i class="fa-solid fa-envelope text-main-white"></i>
+                        <i class="select-none pointer-events-none fa-solid fa-envelope text-main-white"></i>
                     </button>
                 </td>
                 <td class="px-4 py-3 mx-auto items-center text-center">
-                    <button data-modal-target="modal-contact<?= $candidate->id ?>" data-modal-toggle="modal-contact<?= $candidate->id ?>" class="block w-full md:w-auto text-white bg-main-gray hover:bg-gray-900 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 mt-2 mx-auto text-center" type="button">
+                    <button class="block w-full md:w-auto text-white bg-main-gray hover:bg-gray-900 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 mt-2 mx-auto text-center" type="button">
                         <i class="fa-solid fa-trash-can text-main-white"></i>
                     </button>
                 </td>
             </tr>
         <?php
             include("view/admin/modalCandidature.php");
-            include("view/admin/modalContact.php");
         }
+        include("view/admin/modalContact.php");
         ?>
 
     </tbody>

@@ -79,7 +79,7 @@ class UsersRepository extends ConnectBdd
         $User->id = $data['user_id'];
         $User->name = $data['user_name'];
         $User->surname = $data['user_surname'];
-        $User->email = $data['user_surname'];
+        $User->email = $data['user_email'];
         $User->password = $data['user_password'];
         $User->avatar = $data['user_avatar'];
         $User->description = $data['user_description'];

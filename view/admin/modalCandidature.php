@@ -24,8 +24,6 @@
                         <!-- Image de profil -->
                         <div class="picture max-h-screen md:mr-5">
                             <img class=" md:h-[300px] xl:h-[500px] mx-auto rounded-t-lg" src="<?=$candidate->avatar?>" alt="Image de profil">
-                            <button class="bg-main-red w-full text-main-white text-[16px] md:text-[28px] py-3 rounded-b-lg">Changer
-                                la photo de profil</button>
                         </div>
                         <!-- Description profil Prospect -->
                         <div class="description md:ml-5 h-[100%] flex flex-col">
