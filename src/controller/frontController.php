@@ -33,6 +33,12 @@ function projectPage()
 
 function allProjectsPage()
 {
+    $formationRepo = new FormationRepository;
+    $formations = $formationRepo->getAllFormations();
+    $formationsLevel = $formationRepo->getFormationLevels();
+
+    $projectRepo = new ProjectRepository;
+    $projectsDate = $projectRepo->getProjectsDate();
     include 'view/public/all_projects.php';
 }
 
@@ -80,6 +86,9 @@ function registerPage()
 
 function crudCandidatePage()
 {
+    $UserRepo = new UsersRepository;
+    $candidates = $UserRepo->getAllCandidates();
+
     include 'view/admin/_candidate.php';
 }
 
