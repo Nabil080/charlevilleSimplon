@@ -61,13 +61,12 @@ class User
         //mail($to, $subject, $message, $headers);
         return $token;
     }
-
 }
 
 class UsersRepository extends ConnectBdd
 {
 
-    public function getUserById($id):object
+    public function getUserById($id): object
     {
         $req = "SELECT * FROM `user` WHERE `user_id` = ?";
         $stmt = $this->bdd->prepare($req);
@@ -147,7 +146,6 @@ class UsersRepository extends ConnectBdd
         $stmt = $this->bdd->prepare($req);
         $stmt->execute([$account['name'], $account['surname'], $account['email'], $pass, $token, $account['adress'], $account['phone'], $account['company'], $account['id_poleEmploi'], $account['birth_place'], $account['birth_date'], $account['nationality']]);
         $stmt->closeCursor();
-
     }
     public function getUser($email): object
     {
@@ -204,7 +202,7 @@ class UsersRepository extends ConnectBdd
         return $mdpval;
     }
 
-/*
+    /*
 public function activateUsers($email, $token)
 {
 $req = "UPDATE `users` SET `activate_users`= 1, `token_users` = '' WHERE token_users = ? AND email_users = ?";
@@ -239,7 +237,7 @@ $stmt->execute([$pass, $email]);
 */
 
 
-    public function getAllCandidates():array
+    public function getAllCandidates(): array
     {
         $candidates = [];
         $query = "SELECT `user_id` FROM `promo_candidate`";
@@ -247,14 +245,14 @@ $stmt->execute([$pass, $email]);
         $req->execute();
         $data = $req->fetchAll(PDO::FETCH_ASSOC);
 
-        foreach($data as $candidate){
-            $candidates[] = $this->getUserById($candidate['user_id']); 
+        foreach ($data as $candidate) {
+            $candidates[] = $this->getUserById($candidate['user_id']);
         }
 
         return $candidates;
     }
 
-    public function getUserPromo($userId):object
+    public function getUserPromo($userId): object
     {
         $PromoRepo = new PromoRepository;
 
@@ -262,17 +260,17 @@ $stmt->execute([$pass, $email]);
         $req->execute([$userId]);
         $data = $req->fetch(PDO::FETCH_ASSOC);
 
-        if($data != false){
+        if ($data != false) {
 
             return $PromoRepo->getPromoById($data['promo_id']);
         }
 
-        
+
         $req = $this->bdd->prepare("SELECT `promo_id` FROM promo_user WHERE user_id = ?");
         $req->execute([$userId]);
         $data = $req->fetch(PDO::FETCH_ASSOC);
-        
-        if($data != false){
+
+        if ($data != false) {
 
             return $PromoRepo->getPromoById($data['promo_id']);
         }
@@ -280,10 +278,9 @@ $stmt->execute([$pass, $email]);
         $req->execute([$userId]);
         $data = $req->fetch(PDO::FETCH_ASSOC);
 
-        if($data != false){
+        if ($data != false) {
 
             return $PromoRepo->getPromoById($data['promo_id']);
         }
-
     }
 }
