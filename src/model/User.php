@@ -261,7 +261,7 @@ $stmt->execute([$pass, $email]);
         $data = $req->fetch(PDO::FETCH_ASSOC);
 
         if ($data != false) {
-
+            // CHECK SI LA PROMO EST EN COURS OU NON
             return $PromoRepo->getPromoById($data['promo_id']);
         }
 
@@ -271,7 +271,7 @@ $stmt->execute([$pass, $email]);
         $data = $req->fetch(PDO::FETCH_ASSOC);
 
         if ($data != false) {
-
+            // CHECK SI LA PROMO EST EN COURS OU NON
             return $PromoRepo->getPromoById($data['promo_id']);
         }
         $req = $this->bdd->prepare("SELECT `promo_id` FROM promo_refused WHERE user_id = ?");
@@ -279,8 +279,65 @@ $stmt->execute([$pass, $email]);
         $data = $req->fetch(PDO::FETCH_ASSOC);
 
         if ($data != false) {
-
+            // CHECK SI LA PROMO EST EN COURS OU NON
             return $PromoRepo->getPromoById($data['promo_id']);
         }
+    }
+
+    public function getAllLearners(): array
+    {
+        $learners = [];
+        $query = "SELECT `user_id` FROM `promo_user`";
+        $req = $this->bdd->prepare($query);
+        $req->execute();
+        $data = $req->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach ($data as $learner) {
+            $learners[] = $this->getUserById($learner['user_id']);
+        }
+
+        return $learners;
+    }
+
+    public function getUserSimplonProjects($id):array
+    {
+        $projects = [];
+        $req = $this->bdd->prepare("SELECT project_id FROM project_team WHERE user_id = ?");
+        $req->execute([$id]);
+        $datas = $req->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach($datas as $data){
+            $Project = new Project;
+            $projectRepo = new ProjectRepository;
+            $Project = $projectRepo->getProjectById($data['project_id']);
+
+            if($Project->type->id != 2){
+                $projects[] = $Project;
+            }
+        }
+
+
+        return $projects;
+    }
+
+    public function getUserPersonnalProjects($id):array
+    {
+        $projects = [];
+        $req = $this->bdd->prepare("SELECT project_id FROM project_team WHERE user_id = ?");
+        $req->execute([$id]);
+        $datas = $req->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach($datas as $data){
+            $Project = new Project;
+            $projectRepo = new ProjectRepository;
+            $Project = $projectRepo->getProjectById($data['project_id']);
+
+            if($Project->type->id == 2){
+                $projects[] = $Project;
+            }
+        }
+
+
+        return $projects;
     }
 }

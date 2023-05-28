@@ -94,6 +94,9 @@ function crudCandidatePage()
 
 function crudLearnerPage()
 {
+    $UserRepo = new UsersRepository;
+    $learners = $UserRepo->getAllLearners();
+
     include 'view/admin/_learner.php';
 }
 

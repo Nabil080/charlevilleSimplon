@@ -142,9 +142,21 @@ function contactUsers()
     }
 }
 
-function deleteCandidate(){
+function deleteCandidate()
+{
+    // Check si admin
     var_dump($_POST);
     $userRepo = new UsersRepository;
     $req = $userRepo->bdd->prepare("DELETE FROM `promo_candidate` WHERE `user_id` = ? AND `promo_id` = ?");
     $req->execute([$_POST['user_id'], $_POST['promo_id']]);
+}
+
+function deleteLearner()
+{
+    // Check si admin
+    var_dump($_POST);
+    $userRepo = new UsersRepository;
+    $req = $userRepo->bdd->prepare("DELETE FROM `promo_user` WHERE `user_id` = ? AND `promo_id` = ?");
+    $req->execute([$_POST['user_id'], $_POST['promo_id']]);
+
 }

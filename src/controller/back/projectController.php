@@ -25,4 +25,10 @@ function projectsPagination()
 
 }
 
+function deleteProject()
+{
+    $projectRepo = new ProjectRepository ;
+    $projectRepo->deleteProject($_GET['id']);
+}
+
 ?>

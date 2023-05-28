@@ -51,7 +51,6 @@
         <?php
             include("view/admin/modalCandidature.php");
         }
-        include("view/admin/modalContact.php");
         ?>
 
     </tbody>
