@@ -96,6 +96,7 @@ function crudLearnerPage()
 {
     $UserRepo = new UsersRepository;
     $learners = $UserRepo->getAllLearners();
+    $formators = $UserRepo->getAllFormators();
     $PromoRepo = new PromoRepository;
     $promos = $PromoRepo->getActivePromos();
 
@@ -104,6 +105,8 @@ function crudLearnerPage()
 
 function crudCompanyPage()
 {
+    $UserRepo = new UsersRepository;
+    // $companies = $UserRepo->getAllCompanies();
     include 'view/admin/_company.php';
 }
 

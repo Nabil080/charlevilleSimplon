@@ -1,5 +1,5 @@
 <!-- Extra Large Modal -->
-<div id="modal-projet-<?=$learner->id?>" tabindex="-1"
+<div id="modal-projet-<?=$user->id?>" tabindex="-1"
     class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
     <div class="relative w-full max-w-7xl max-h-full">
         <!-- Modal content -->
@@ -11,7 +11,7 @@
                 </h3>
                 <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 
                 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 
-                dark:hover:text-white" data-modal-hide="modal-projet-<?=$learner->id?>">
+                dark:hover:text-white" data-modal-hide="modal-projet-<?=$user->id?>">
                     <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
                         xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd"
@@ -26,25 +26,25 @@
                 <div class="background bg-main-white overflow-x-hidden min-h-[100vh]">
                     <div class="mx-auto w-11/12 lg:max-w-[800px] flex justify-between mb-8 lg:mb-16">
                         <div class="flex w-full">
-                            <div onclick="swapDivsById('simplon_projects_<?=$learner->id?>','perso_projects_<?=$learner->id?>')" class="tabChange cursor-pointer px-0 transition-all duration-[0.4s] bg-main-red w-1/2 text-center text-main-white font-title text-lg md:text-xl lg:text-2xl font-bold py-2 md:py-4">
+                            <div onclick="swapDivsById('simplon_projects_<?=$user->id?>','perso_projects_<?=$user->id?>')" class="tabChange cursor-pointer px-0 transition-all duration-[0.4s] bg-main-red w-1/2 text-center text-main-white font-title text-lg md:text-xl lg:text-2xl font-bold py-2 md:py-4">
                                 <p class="select-none">Projets simplon</p>
                             </div>
-                            <div onclick="swapDivsById('simplon_projects_<?=$learner->id?>','perso_projects_<?=$learner->id?>')" class="tabChange cursor-pointer px-0 transition-all duration-[0.4s] bg-main-gray w-1/2 text-center text-main-white font-title text-lg md:text-xl lg:text-2xl font-bold py-2 md:py-4">
+                            <div onclick="swapDivsById('simplon_projects_<?=$user->id?>','perso_projects_<?=$user->id?>')" class="tabChange cursor-pointer px-0 transition-all duration-[0.4s] bg-main-gray w-1/2 text-center text-main-white font-title text-lg md:text-xl lg:text-2xl font-bold py-2 md:py-4">
                                 <p class="select-none">Projets perso</p>
                             </div>
                         </div>
                     </div>
-                    <section id="simplon_projects_<?=$learner->id?>" class="sectionChange">
+                    <section id="simplon_projects_<?=$user->id?>" class="sectionChange">
                         <?php 
-                            $projects = $UserRepo->getUserSimplonProjects($learner->id);
+                            $projects = $UserRepo->getUserSimplonProjects($user->id);
                             foreach($projects as $project){
                                 include('view/template/_project_card.php');
                             }
                         ?>
                     </section>
-                    <section id="perso_projects_<?=$learner->id?>" class="sectionChange hidden projet-cards w-11/12 mt-2 gap-6 mx-auto flex flex-col justify-center lg:flex-row lg:flex-wrap">
+                    <section id="perso_projects_<?=$user->id?>" class="sectionChange hidden projet-cards w-11/12 mt-2 gap-6 mx-auto flex flex-col justify-center lg:flex-row lg:flex-wrap">
                     <?php 
-                            $projects = $UserRepo->getUserPersonnalProjects($learner->id);
+                            $projects = $UserRepo->getUserPersonnalProjects($user->id);
                             foreach($projects as $project){
                                 include('view/template/_project_perso_card.php');
                             }

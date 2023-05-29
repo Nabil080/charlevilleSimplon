@@ -240,9 +240,9 @@ $stmt->execute([$pass, $email]);
     public function getAllCandidates(): array
     {
         $candidates = [];
-        $query = "SELECT `user_id` FROM `promo_candidate`";
+        $query = "SELECT `user_id` FROM `user` WHERE `role_id` = ?";
         $req = $this->bdd->prepare($query);
-        $req->execute();
+        $req->execute([5]);
         $data = $req->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ($data as $candidate) {
@@ -294,17 +294,31 @@ $stmt->execute([$pass, $email]);
     {
         $learners = [];
         $formators = [];
-        $query = "SELECT `user_id` FROM `promo_user`";
+        $query = "SELECT `user_id` FROM `user` WHERE `role_id` = ? ";
         $req = $this->bdd->prepare($query);
-        $req->execute();
+        $req->execute([4]);
         $data = $req->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ($data as $learner) {
-            $User = $this->getUserById($learner['user_id']);
-            $User->role->id == 2 ? $formators[] = $User : $learners[] = $User;
+            $learners[] = $this->getUserById($learner['user_id']);
         }
 
-        return array_merge($formators,$learners);
+        return $learners;
+    }
+
+    public function getAllFormators(): array
+    {
+        $formators = [];
+        $query = "SELECT `user_id` FROM `user` WHERE `role_id` = ? ";
+        $req = $this->bdd->prepare($query);
+        $req->execute([2]);
+        $data = $req->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach ($data as $formator) {
+            $formators[] = $this->getUserById($formator['user_id']);
+        }
+
+        return $formators;
     }
 
     public function getUserSimplonProjects($id):array
