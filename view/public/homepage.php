@@ -52,7 +52,7 @@ ob_start();
             </div>
             <div class="lg:hidden w-full flex justify-center">
                 <div data-modal-target="login-modal" data-modal-toggle="login-modal"
-                    class="underline font-main cursor-pointer font-semibold text-main-white">se connecter</div>
+                    class="underline font-main cursor-pointer font-semibold text-main-white">Se connecter</div>
             </div>
         </div>
         <!-- ENTREPRISE TITRE + BOUTONS -->
@@ -75,7 +75,7 @@ ob_start();
                     Soumettre un <br>projet
                 </button>
                 <button class="hover:bg-main-white hover:text-main-red hover:border-main-red hover:-translate-y-4"
-                    onclick="window.location.href = '?action=allPromosPage'">
+                    onclick="window.location.href = '?action=allPromotionsPage'">
                     Chercher un <br>profil
                 </button>
             </div>
@@ -104,11 +104,11 @@ ob_start();
                 lg:flex-row lg:justify-center lg:gap-10 [&>button]:lg:w-1/3 [&>button]:lg:h-full [&>button]:lg:py-[0vh]
                 [&>button]:xl:h-50 xl:mx-[8vw]">
                 <button class="hover:bg-main-white hover:text-main-red hover:border-main-red hover:-translate-y-4"
-                    data-modal-target="visitor-login-modal" data-modal-toggle="company-login-modal">
+                onclick="window.location.href = '?action=allFormationsPage'">
                     Nos formations
                 </button>
                 <button class="hover:bg-main-white hover:text-main-red hover:border-main-red hover:-translate-y-4"
-                    data-modal-target="company-login-modal" data-modal-toggle="company-login-modal">
+                onclick="window.location.href = '?action=allProjectsPage'">
                     Nos projets
                 </button>
             </div>

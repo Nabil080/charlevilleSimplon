@@ -47,7 +47,8 @@
         echo $link; ?>
 </head>
 
-<body class="min-h-screen w-[100vw] bg-main-white pt-20 pb">
+
+<body class="w-[100vw] bg-main-white pt-20 min-h-screen flex flex-col">
     <?php require_once 'view/template/_navbar.php'; ?>
     <?= $content ?>
     <?php include 'view/template/_login.php'; ?>

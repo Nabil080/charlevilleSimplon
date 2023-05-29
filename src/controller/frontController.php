@@ -1,5 +1,6 @@
 <?php
-require_once('src/model/Formation.php');
+require_once("src/model/Promo.php");
+require_once("src/model/Formation.php");
 
 function homepage()
 {
@@ -13,6 +14,8 @@ function contactPage()
 // Formation 
 function allFormationsPage()
 {
+    $formationRepository = new FormationRepository;
+    $formations = $formationRepository->getAllFormations();
     include 'view/public/allFormations.php';
 }
 
@@ -38,13 +41,31 @@ function projectGestionPage()
     include 'view/public/project_gestion.php';
 }
 
+// Profile
+function profilePage()
+{
+    include 'view/public/profile.php';
+}
+
 // Promotion
 function allPromotionsPage()
 {
+    $PromoRepository = new PromoRepository;
+    $promos = $PromoRepository->getPromos();
     include 'view/public/all_promotions.php';
 }
 function promotionPage()
 {
+    if (isset($_GET['id_promo'])) {
+        $id = $_GET['id_promo'];
+    } else {
+        $id = 1;
+    }
+    $PromoRepository = new PromoRepository;
+    $promo = $PromoRepository->getPromoById($id);
+    $apprenants = $PromoRepository->getAllApprenants($id);
+    $formateurs = $PromoRepository->getAllFormateurs($id);
+    $allProjects = $PromoRepository->getPromoProjects($id);
     include 'view/public/promotion.php';
 }
 
@@ -92,4 +113,8 @@ function crudPromotionPage()
 function crudProjetPage()
 {
     include 'view/admin/_projects.php';
+}
+
+function projectFormPage() {
+    include 'view/admin/projectAddForm.php';
 }

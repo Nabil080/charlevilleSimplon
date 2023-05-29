@@ -24,7 +24,9 @@ switch ($action) {
         break;
     // Afficher la promo choisi
     // Afficher profil de l'apprennant
-
+    case 'profilePage':
+        profilePage();
+        break;
     // Afficher tous les projets
     case 'allProjectsPage':
         allProjectsPage();
@@ -49,5 +51,8 @@ switch ($action) {
     // Envoie du traitement du formulaire de connexion
     case 'loginTreatment':
         loginTreatment();
+    // Envoie du traitement pagination tous les projets
+    case 'projectsPagination':
+        projectsPagination();
         break;
 }

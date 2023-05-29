@@ -1,34 +1,35 @@
 <?php
 require_once('src/model/ConnectBdd.php');
 
-class Requirement {
+class Stat {
     public $id;
     public $name;
+    public $number;
     public $formation;
 }
 
-class RequirementRepository extends ConnectBdd{
+class StatRepository extends ConnectBdd{
     public function __construct(){
         parent::__construct();
     }
 
-    public function getRequirementById($id):object
+    public function getStatById($id):object
     {
-        $Requirement = new Requirement;
-        $req = $this->bdd->prepare("SELECT * FROM `requirement` WHERE `requirement_id` = ?");
+        $Stat = new Stat;
+        $req = $this->bdd->prepare("SELECT * FROM `stat` WHERE `stat_id` = ?");
         $req->execute([$id]);
         $data = $req->fetch(PDO::FETCH_ASSOC);
 
-        $Requirement->id = $data['requirement_id'];
-        $Requirement->name = $data['requirement_name'];
+        $Stat->id = $data['stat_id'];
+        $Stat->name = $data['stat_name'];
+        $Stat->number = $data['stat_number'];
 
         $Formation = new Formation;
         $formationRepo = new FormationRepository;
         $Formation = $formationRepo->getFormationById($data['formation_id']);
-        $Requirement->formation = $Formation;
+        $Stat->formation = $Formation;
 
-
-        return $Requirement;
+        return $Stat;
     }
 }
 

@@ -62,6 +62,7 @@
                                     développeur d'applications</a>
                             </li>
                         </ul>
+
                     </div>
                 </div>
                 <i class="md:ml-2 fa-solid fa-users text-[44px] sm:text-[62px] justify-self-center  md:text-[20px]"

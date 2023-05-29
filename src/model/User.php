@@ -1,6 +1,7 @@
 <?php
 require_once 'src/model/ConnectBdd.php';
 require_once 'src/model/Mail.php';
+require_once 'src/model/Tag.php';
 
 class User
 {
@@ -23,13 +24,14 @@ class User
     private $user_nationality;
     private $user_status;
     private $role_id;
+    public $highlight;
 
     public function __construct($id)
     {
         $UserRepo = new UserRepository;
         $user = $UserRepo->getUserById($id);
         $this->setUser($user);
-    }
+      
     public function getUser()
     {
         return $this;
@@ -71,8 +73,7 @@ class User
 
 class UserRepository extends ConnectBdd
 {
-    public function InsertUser($account): void
-    {
+    public function InsertUser($account): void {
         $Mail = new Mail;
         $token = $Mail->tokenMail('activateUser', $account['email']);
         $pass = password_hash($account['password'], PASSWORD_BCRYPT);
@@ -91,10 +92,23 @@ class UserRepository extends ConnectBdd
             $stmt = $this->bdd->prepare($req);
             $stmt->execute([$user_id[0], $account['formation_id']]);
         }
+        $stmt->closeCursor();
+}
 
+    public function getUserById($id):object
+    {
+        $req = "SELECT * FROM `user` AS u LEFT JOIN `status` AS s ON u.status_id = s.status_id LEFT JOIN `role` AS r ON u.role_id = r.role_id WHERE `user_id` = ?";
+        $stmt = $this->bdd->prepare($req);
+        $stmt->execute([$id]);
+        $data = $stmt->fetch(PDO::FETCH_ASSOC);
         $stmt->closeCursor();
 
+        $User = new User;
+        $User->setUser($data);
+
+        return $User;
     }
+
     /* Set */
 
     public function setPassword($email, $password): void
@@ -148,6 +162,7 @@ class UserRepository extends ConnectBdd
         $stmt->closeCursor();
 
         return ($account) ? true : false;
+
     }
     public function checkPassword($id, $mdp): bool
     {
