@@ -217,13 +217,6 @@ class ProjectRepository extends ConnectBdd{
         $req = $this->bdd->prepare("DELETE FROM project WHERE project_id =?");
         $req->execute([$id]);
         $req->closeCursor();
-
-        $response = array(
-            "status" => "success",
-            "message" => "Le projet a bien été supprimé.",
-        );
-    
-        echo json_encode($response);
     }
 }
 

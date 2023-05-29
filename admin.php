@@ -45,6 +45,11 @@ switch ($action) {
         deleteProject();
         break;
 
+    // Traitement suppression PROMOTION
+    case 'deletePromotion':
+        deletePromotion();
+        break;
+
     // Traitement assigner un FORMATEUR
     case 'assignFormator':
         assignFormator();

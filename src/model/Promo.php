@@ -197,6 +197,48 @@ class PromoRepository extends ConnectBdd{
 
         return $mailList;
     }
+
+    public function getPromoCandidates($id):array
+    {
+        $req = $this->bdd->prepare("SELECT user_id FROM promo_candidate WHERE promo_id = ?");
+        $req->execute([$id]);
+        $datas = $req->fetchAll(PDO::FETCH_ASSOC);
+        $UsersRepository = new UsersRepository;
+        $users = [];
+        
+        foreach ($datas as $data) {
+            $User = $UsersRepository->getUserById($data['user_id']);
+            $users[] = $User;
+        }
+
+        return $users;
+    }
+
+    public function deletePromo($id):void
+    {
+        $req = $this->bdd->prepare("DELETE FROM promo_candidate WHERE promo_id =?");
+        $req->execute([$id]);
+        $req->closeCursor();
+
+        $req = $this->bdd->prepare("DELETE FROM promo_user WHERE promo_id =?");
+        $req->execute([$id]);
+        $req->closeCursor();
+
+        $req = $this->bdd->prepare("DELETE FROM promo_refused WHERE promo_id =?");
+        $req->execute([$id]);
+        $req->closeCursor();
+
+        $projects = $this->getPromoProjects($id);
+        $projectRepo = new ProjectRepository;
+        foreach ($projects as $project) {
+            $projectRepo->deleteProject($project->id);
+        }
+
+        $req = $this->bdd->prepare("DELETE FROM promo WHERE promo_id =?");
+        $req->execute([$id]);
+        $req->closeCursor();
+
+    }
 }
 
 

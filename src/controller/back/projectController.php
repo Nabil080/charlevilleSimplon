@@ -29,6 +29,13 @@ function deleteProject()
 {
     $projectRepo = new ProjectRepository ;
     $projectRepo->deleteProject($_GET['id']);
+
+    $response = array(
+        "status" => "success",
+        "message" => "Le projet a bien été supprimé.",
+    );
+
+    echo json_encode($response);
 }
 
 ?>

@@ -82,7 +82,7 @@
                             </li>
                         </ul>
                         <div class="py-1">
-                            <a href="#" class="block py-2 px-4 text-sm text-gray-700">Supprimer</a>
+                            <a data-modal-target="modal-delete-<?=$promo->id?>" data-modal-toggle="modal-delete-<?=$promo->id?>" class="block py-2 px-4 text-sm text-gray-700">Supprimer</a>
                         </div>
                     </div>
                 </td>
@@ -92,11 +92,13 @@
             $apprenants = $PromoRepo->getAllApprenants($promo->id);
             include("view/admin/modalApprenant.php");
             }else{
+            $candidates = $PromoRepo->getPromoCandidates($promo->id);
             include("view/admin/modalValidationPromo.php");
             }
             $formators = $PromoRepo->getAllFormateurs($promo->id);
             include("view/admin/modalFormateur.php");
             include("view/admin/modalProjet.php");
+            include("view/admin/modalDelete.php");
         }
         ?>
 
