@@ -22,19 +22,19 @@
         </tr>
     </thead>
     <tbody class="border-2">
-        <?php for ($i = 0; $i < 10; $i++) { ?>
+        <?php foreach ($promos as $promo) { ?>
             <tr class="border-2 border-gray-800">
-                <th scope="row" class="px-4 py-3 font-medium text-gray-900 border whitespace-nowrap ">Apple iMac 27&#34;
+                <th scope="row" class="px-4 py-3 font-medium text-gray-900 border whitespace-nowrap "><?=$promo->name?>
                 </th>
                 <td class="px-4 py-3 border">
-                    <?php if (isset($apprenants)) { ?>
-                                    <button data-modal-target="modal-apprenant<?php "" ?>" data-modal-toggle="modal-apprenant<?php "" ?>" 
+                    <?php if ($promo->status->id == 9) { ?>
+                                    <button data-modal-target="modal-apprenant-<?=$promo->id?>" data-modal-toggle="modal-apprenant-<?=$promo->id?>" 
                                         class="block w-full md:w-auto text-white bg-main-red hover:bg-red-800 focus:ring-4 focus:outline-none 
                                          font-medium rounded-lg text-sm px-5 mx-auto py-2.5 text-center" type="button">
                                         Voir les apprenants
                                     </button>
                                 <?php } else { ?>
-                                <button data-modal-target="modal-promotion<?php "" ?>" data-modal-toggle="modal-promotion<?php "" ?>" 
+                                <button data-modal-target="modal-promotion-<?=$promo->id?>" data-modal-toggle="modal-promotion-<?=$promo->id?>" 
                                         class="block w-full md:w-auto text-white bg-main-gray hover:bg-gray-700 focus:ring-4 focus:outline-none 
                                          font-medium rounded-lg text-sm px-5 mx-auto py-2.5 text-center" type="button">
                                         Valider les candidatures
@@ -42,7 +42,7 @@
                                 <?php }; ?>
                 </td>
                 <td class="px-4 py-3 border">
-                    <button data-modal-target="modal-formateur<?php "" ?>" data-modal-toggle="modal-formateur<?php "" ?>"
+                    <button data-modal-target="modal-formateur-<?=$promo->id?>" data-modal-toggle="modal-formateur-<?=$promo->id?>"
                         class="block w-full md:w-auto text-white bg-main-red hover:bg-red-800 focus:ring-4 focus:outline-none 
                                      font-medium rounded-lg text-sm px-5 mx-auto py-2.5 text-center" type="button">
                         Voir les formateurs
@@ -50,14 +50,14 @@
                 </td>
                 <td class="px-4 py-3 border">
 
-                    <button data-modal-target="modal-projet<?php "" ?>" data-modal-toggle="modal-projet<?php "" ?>" class="block w-full md:w-auto text-white bg-main-red hover:bg-red-800 focus:ring-4 focus:outline-none 
+                    <button data-modal-target="modal-projet-<?=$promo->id?>" data-modal-toggle="modal-projet-<?=$promo->id?>" class="block w-full md:w-auto text-white bg-main-red hover:bg-red-800 focus:ring-4 focus:outline-none 
                                      font-medium rounded-lg text-sm px-5 py-2.5 mt-2 mx-auto text-center"
                         type="button">
                         Voir les Projets
                     </button>
                 </td>
                 <td class="px-4 py-3 border">
-                    <button data-modal-target="modal-contact<?php "" ?>" data-modal-toggle="modal-contact<?php "" ?>" class="block w-full md:w-auto text-white bg-main-gray hover:bg-gray-900 focus:ring-4 focus:outline-none 
+                    <button data-modal-target="modal-contact-<?=$promo->id?>" data-modal-toggle="modal-contact-<?=$promo->id?>" class="block w-full md:w-auto text-white bg-main-gray hover:bg-gray-900 focus:ring-4 focus:outline-none 
                                      font-medium rounded-lg text-sm px-5 py-2.5 mt-2 mx-auto text-center"
                         type="button">
                         <i class="fa-solid fa-envelope text-main-white"></i>
@@ -87,6 +87,12 @@
                 </td>
             </tr>
             <?php
+            $apprenants = $PromoRepo->getAllApprenants($promo->id);
+            include("view/admin/modalApprenant.php");
+            $formators = $PromoRepo->getAllFormateurs($promo->id);
+            include("view/admin/modalFormateur.php");
+            include("view/admin/modalValidationPromo.php");
+            include("view/admin/modalProjet.php");
         }
         ?>
 

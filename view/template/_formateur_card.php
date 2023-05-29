@@ -33,7 +33,7 @@
                         }
         }} ?>
     </div>
-    <button onclick="window.location.href = '?action=profilePage'"
+    <button onclick="window.location.href = '?action=profilePage&id=<?=$formateur->id?>'"
     class="bg-main-red text-white text-[20px] font-bold font-main-title w-full py-4 self-end">Voir le
         profil</button>
 </div>

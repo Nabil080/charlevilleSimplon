@@ -112,6 +112,10 @@ function crudCompanyPage()
 
 function crudPromotionPage()
 {
+    $PromoRepo = new PromoRepository;
+    $promos = $PromoRepo->getPromos();
+    
+    $UserRepo = new UsersRepository;
     include 'view/admin/_promotions.php';
 }
 
