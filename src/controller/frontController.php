@@ -38,7 +38,14 @@ function allProjectsPage()
 
 function projectGestionPage()
 {
-    include 'view/public/project_gestion.php';
+    if ($_SESSION['user']->role-> id == 3) {
+        $projectRepository = new ProjectRepository;
+        $projects = $projectRepository->getEntrepriseProjects($_SESSION['user']->id);
+        include 'view/public/project_gestion.php';
+    } else {
+        header('Location:?homepage');
+    }
+
 }
 
 // Profile

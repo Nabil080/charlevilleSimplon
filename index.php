@@ -2,8 +2,8 @@
 session_start();
 require 'src/model/ConnectBdd.php';
 
-
-$_SESSION['user'] = ['role' => 1];
+$userRepository = new UsersRepository;
+$_SESSION['user'] = $userRepository->getUserByid(6);
 // var_dump($_SESSION);
 
 if (isset($_GET['action']) && $_GET['action'] !== '' && !isset($_GET['admin'])) {

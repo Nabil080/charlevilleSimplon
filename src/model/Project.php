@@ -102,7 +102,7 @@ class ProjectRepository extends ConnectBdd{
         $project->team = $this->getProjectUsers($data['project_id']);
 
         $project->start = $project->start = $data['project_start'];;
-        $project->end = $project->end = $data['project_end'];;
+        $project->end = $project->end = $data['project_end'];
 
         if($data['status_id'] == 12){
             $project->start = $data['project_start'];
@@ -195,6 +195,22 @@ class ProjectRepository extends ConnectBdd{
         }
 
 
+        return $projects;
+    }
+
+    public function getEntrepriseProjects($id):array 
+    {
+        $req = $this->bdd->prepare("SELECT project_id FROM project WHERE user_id = ?");
+        $req->execute([$id]);
+        $datas = $req->fetchAll(PDO::FETCH_COLUMN);
+        $projectRepository = new ProjectRepository;
+        $projects = [];
+
+        foreach($datas as $data){
+
+            $project = $projectRepository->getProjectById($data);
+            array_push($projects, $project);
+        }   
         return $projects;
     }
 }
