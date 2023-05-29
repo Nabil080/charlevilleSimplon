@@ -1,14 +1,14 @@
-<nav class="w-[100vw] fixed top-0 left-0 z-40 transition-all duration-[0.3s]">
+<nav class="w-[100vw] backdrop-opacity-10 backdrop-blur-xl shadow-[3px_5px_10px_1px] shadow-[#1111114d] fixed top-0 left-0 z-40 transition-all duration-[0.3s]">
 
       <div class="grid grid-cols-2 transition-all duration-[0.2s] items-center bg-main-white border-t-[4px] md:grid-cols-[20%_80%] border-main-red">
-        <a href="index.php"><img src="assets/img/navbar/logo-simplon.png" alt="Logo Simplon" class="w-[171px]" /></a>
-        <i onclick="changeNavFunction()" class="fa-solid fa-bars text-[39px] justify-self-end mr-6 sm:mr-8 mb-1 md:hidden hiddenIcon"></i>
-        <i onclick="changeNavFunction()" class="fa-solid fa-xmark text-[46px] justify-self-end mr-6 mb-1 sm:mr-8 md:hidden hiddenIcon" style="display: none"></i>
+        <a href="index.php"><img src="assets/img/navbar/logo-simplon.png" alt="Logo Simplon" class="w-[120px] md:w-[171px]" /></a>
+        <i onclick="changeNavFunction()" class="fa-solid fa-bars text-[25px] md:text-[39px] justify-self-end mr-6 sm:mr-8 mb-1 md:hidden hiddenIcon"></i>
+        <i onclick="changeNavFunction()" class="fa-solid fa-xmark text-[30px] md:text-[46px] justify-self-end mr-6 mb-1 sm:mr-8 md:hidden hiddenIcon" style="display: none"></i>
         <div class="changeNav hidden md:grid bg-main-lightred md:bg-main-white col-start-1 col-end-3 md:col-start-auto md:justify-self-end md:mr-2 lg:mr-4 xl:mr-6 translate-x-[80vw] md:translate-x-0 duration-[0.4s] ease-out transition-all ">
 
           <div class="grid grid-cols-[25%_60%] sm:mx-auto sm:w-[40%] items-center pt-8 gap-8 md:mr-4 md:pt-0 md:inline-flex md:w-full md:gap-2">
           <?php 
-            if (isset($_SESSION['define'])) { 
+            if (isset($_SESSION['user']->role->id) && $_SESSION['user']->role->id == 1) { 
           ?>
               <i class="md:ml-2 hiddenIcon fa-solid fa-screwdriver-wrench text-[44px] sm:text-[62px] justify-self-center  md:text-[20px]" style="color: #BD3124;"></i>
               <a href="#" class="md:hidden text-[24px] sm:text-[36px]">Admin</a>
@@ -29,16 +29,16 @@
                           <a href="?action=allFormationsPage" class="block px-4 py-2 text-[22px] sm:text-[32px] md:text-[20px] ">Découvrir nos formations</a>
                         </li>
                         <li class="md:hover:bg-main-lightred">
-                          <a href="?action=formationPage" class="block px-4 py-2 text-[22px] sm:text-[32px] md:text-[20px]">Devellopeur Web / Web mobile</a>
+                          <a href="?action=formationPage&id=1" class="block px-4 py-2 text-[22px] sm:text-[32px] md:text-[20px]">Devellopeur Web / Web mobile</a>
                         </li>
                         <li class="md:hover:bg-main-lightred">
-                          <a href="#" class="block px-4 py-2 text-[22px] sm:text-[32px] md:text-[20px]">Référent Digital</a>
+                          <a href="?action=formationPage&id=2" class="block px-4 py-2 text-[22px] sm:text-[32px] md:text-[20px]">Référent Digital</a>
                         </li>
                         <li class="md:hover:bg-main-lightred">
-                          <a href="#" class="block px-4 py-2 text-[22px] sm:text-[32px] md:text-[20px]">Technicien supérieur système et réseaux</a>
+                          <a href="?action=formationPage&id=3" class="block px-4 py-2 text-[22px] sm:text-[32px] md:text-[20px]">Technicien supérieur système et réseaux</a>
                         </li>
                         <li class="md:hover:bg-main-lightred">
-                          <a href="#" class="block px-4 py-2 text-[22px] sm:text-[32px] md:text-[20px]">Concepteur développeur d'applications</a>
+                          <a href="?action=formationPage&id=4" class="block px-4 py-2 text-[22px] sm:text-[32px] md:text-[20px]">Concepteur développeur d'applications</a>
                         </li>
                       </ul>
                   </div>
@@ -48,9 +48,13 @@
               <i class="md:ml-2 fa-solid fa-book text-[44px] sm:text-[62px] justify-self-center  md:text-[20px]"  style="color: #BD3124;"></i>
               <p class="text-[24px] sm:text-[36px] md:text-[20px] xl:text-[24px]"><a href="?action=allProjectsPage">Projets</a></p>
               <i class="md:ml-2 fa-solid fa-user text-[44px] sm:text-[62px] justify-self-center  md:text-[20px]"  style="color: #BD3124;"></i>
-              <?php if (isset($_SESSION['define'])){ ?>
+              <?php if (isset($_SESSION['user']->role->id)){
+                      if ($_SESSION['user']->role->id == 3) {?>
+                <p class="text-[24px] sm:text-[36px] md:text-[20px] xl:text-[24px]"><a>Mes Projets</a></p>
+                  <?php } else { ?>
                 <p class="text-[24px] sm:text-[36px] md:text-[20px] xl:text-[24px]"><a>Compte</a></p>
               <?php 
+              }
               } else {
               ?>
                 <p class="text-[24px] sm:text-[36px] md:text-[20px] xl:text-[24px] cursor-pointer" data-modal-target="login-modal" data-modal-toggle="login-modal">Connexion</p>
