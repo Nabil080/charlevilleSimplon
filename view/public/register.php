@@ -1,6 +1,5 @@
 <?php
 $title = "Inscription";
-$boolCompany = (isset($_GET['company'])) ? 1 : 0;
 ?>
 
 <!-- Candidature  -->
@@ -144,7 +143,10 @@ $boolCompany = (isset($_GET['company'])) ? 1 : 0;
                 <p id="confirm_password_error" class="errorAlert mt-2 text-sm text-red-600 dark:text-red-500"></p>
             </div>
         </div>
+        <!-- Variable Hidden -->
         <input type="hidden" name="boolCompany" value="<?= $boolCompany ?>" />
+        <input type="hidden" name="formation_id" value="<?= $formation_id ?>" />
+
         <div id="registerContent_error"
             class="hidden contentAlert border border-main-red bg-red-200 rounded-lg mb-5 p-3 text-center text-sm text-main-red">
         </div>
@@ -155,7 +157,6 @@ $boolCompany = (isset($_GET['company'])) ? 1 : 0;
             </button>
         </div>
     </form>
-    <?= var_dump($_SESSION['user']) ?>
 </main>
 <?php $content = ob_get_clean(); ?>
 

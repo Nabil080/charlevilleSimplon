@@ -14,7 +14,7 @@
             <div
                 class="grid grid-cols-[25%_60%] sm:mx-auto sm:w-[40%] items-center pt-8 gap-8 md:mr-4 md:pt-0 md:inline-flex md:w-full md:gap-2">
                 <?php
-                if (isset($_SESSION['user']) && $_SESSION['user']['role_id'] == 1) {
+                if (isset($_SESSION['user']) && $_SESSION['user']->role_id == 1) {
                     ?>
                     <i class="md:ml-2 hiddenIcon fa-solid fa-screwdriver-wrench text-[44px] sm:text-[62px] justify-self-center  md:text-[20px]"
                         style="color: #BD3124;"></i>
@@ -89,7 +89,7 @@
         </div>
     </div>
     <?php
-    if (isset($_SESSION['user']) && $_SESSION['user']['role_id'] == 1) {
+    if (isset($_SESSION['user']) && $_SESSION['user']->role_id == 1) {
         ?>
         <div class="w-full  justify-center hidden md:flex">
             <a href="#" class="text-center bg-main-red px-5 py-1 rounded-[5px] text-[20px] text-main-white">Admin</a>

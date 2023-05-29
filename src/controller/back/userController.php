@@ -6,15 +6,21 @@ function registerTreatment()
 {
     $AlertMessage = new AlertMessage;
     $errorTable = array();
-    $boolCompany = $_POST['boolCompany'];
-
 
     if (isset($_POST) && !empty($_POST)) {
         $UserRepo = new UserRepository;
-        $candidate = ['id_poleEmploi', 'birth_place', 'birth_date', 'nationality'];
-        $company = 'name_company';
+        $candidate = ['formation_id', 'id_poleEmploi', 'birth_place', 'birth_date', 'nationality'];
+        $company = ['boolCompany', 'name_company'];
+        $boolTable = ['boolCompany', 'formation_id'];
         $id_poleEmploi = '';
+        $boolCompany = $_POST['boolCompany'];
+        $formation_id = $_POST['formation_id'];
         //var_dump($_POST);
+
+        if ($boolCompany == 1 && $formation_id > 0)
+            $errorTable[] = $AlertMessage->getError('registerContent', 'ErrorCompanyRegister');
+        if ($boolCompany == 0 && $formation_id == 0)
+            $errorTable[] = $AlertMessage->getError('registerContent', 'NoTrainingChosen');
 
         foreach ($_POST as $name => $value) {
             if (!empty($value)) {
@@ -27,10 +33,10 @@ function registerTreatment()
                     }
                 }
             } else {
+                var_dump($boolCompany);
                 if (
-                    ($name == $company && !$boolCompany) ||
-                    (array_search($name, $candidate) && $boolCompany ||
-                        $name == 'boolCompany')
+                    (array_search($name, $company) >= 0 && !$boolCompany) ||
+                    (array_search($name, $candidate) >= 0 && $boolCompany)
                 ) {
                 } elseif ($name == "id_poleEmploi" && isset($_POST['id_poleEmploi_checkbox'])) {
                     $id_poleEmploi = 'En attente.';
@@ -39,12 +45,13 @@ function registerTreatment()
                 }
             }
         }
-
         if (!empty($_POST['password']) && !empty($_POST['confirm_password'])) {
             if ($_POST['password'] !== $_POST['confirm_password']) {
                 $errorTable[] = $AlertMessage->getError('password', 'passwordNotIdentical');
             }
         }
+
+
         if (empty($errorTable)) {
             $role_id = ($boolCompany) ? 3 : 5;
             $adress = htmlspecialchars(strip_tags($_POST['adress'])) . ',<br>' . htmlspecialchars(strip_tags($_POST['postal'])) . ' ' . htmlspecialchars(strip_tags($_POST['city']));
@@ -62,6 +69,7 @@ function registerTreatment()
                 'birth_date' => '',
                 'nationality' => '',
                 'role_id' => $role_id,
+                'formation_id' => (int) $_POST['formation_id']
             ];
 
             if ($boolCompany) {
@@ -132,12 +140,16 @@ function loginTreatment()
 
         if (empty($errorTable)) {
 
-            $user = $UserRepo->getUserByEmail($email);
-            if (is_array($user)) {
-                $bool = $UserRepo->checkPassword($user['user_id'], $password);
-                var_dump($bool);
+            $user_id = $UserRepo->getIdByEmail($email);
+            if (is_array($user_id)) {
+                $bool = $UserRepo->checkPassword($user_id, $password);
                 if ($bool) {
-                    $_SESSION['user'] = $user;
+                    $userSession = $UserRepo->getUserSession($user_id);
+                    $_SESSION['user'] = (object) array(
+                        'user_id' => $userSession['user_id'],
+                        'id_status' => $userSession['id_status'],
+                        'id_role' => $userSession['id_role'],
+                    );
                     $alertSucces = $AlertMessage->getSuccess('login');
                     $succesJson = json_encode($alertSucces);
                     echo $succesJson;

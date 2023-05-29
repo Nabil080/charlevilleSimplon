@@ -27,6 +27,14 @@
     {
       "name": "loginIncorrect",
       "message": "Oups ! Connexion incorrect."
+    },
+    {
+      "name": "ErrorCompanyRegister",
+      "message": "Erreur ! Une formation à était lu lors d'une inscription d'entreprise."
+    },
+    {
+      "name": "NoTrainingChosen",
+      "message": "Erreur ! Il n'y pas de formation lu."
     }
   ],
   "successMessage": [
