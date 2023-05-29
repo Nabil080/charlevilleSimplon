@@ -127,6 +127,25 @@ class PromoRepository extends ConnectBdd{
         return $users;
     }
 
+    public function getPromoUsersId($id):array
+    {
+        $usersId = [];
+
+        if($this->getPromoById($id)->status->id == 9){
+            $req = $this->bdd->prepare("SELECT user_id FROM promo_candidate WHERE promo_id = ?");
+        }else{
+            $req = $this->bdd->prepare("SELECT user_id FROM promo_user WHERE promo_id = ?");
+        }
+        $req->execute([$id]);
+        $datas = $req->fetchAll(PDO::FETCH_ASSOC);
+        
+        foreach ($datas as $data) {
+            $usersId[] = $data['user_id'];
+        }
+
+        return $usersId;
+    }
+
     public function getPromoProjects($id):array
     {
         $req = $this->bdd->prepare("SELECT project_id FROM project 
@@ -163,6 +182,21 @@ class PromoRepository extends ConnectBdd{
         return $promos;
     }
     
+    public function getPromoMailList($id):array
+    {
+        $mailList = [];
+        $usersId = $this->getPromoUsersId($id);
+
+        foreach($usersId as $userId){
+            $req = $this->bdd->prepare("SELECT user_email FROM `user` WHERE user_id = ?");
+            $req->execute([$userId]);
+            $data = $req->fetch();
+
+            $mailList[] = $data['user_email'];
+        }
+
+        return $mailList;
+    }
 }
 
 

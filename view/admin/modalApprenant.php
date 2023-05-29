@@ -1,5 +1,5 @@
 <!-- Extra Large Modal -->
-<div id="modal-apprenant-<?= $promo->id ?>" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+<div id="modal-apprenant-<?=$promo->id?>" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
     <div class="relative w-full max-w-7xl max-h-full">
         <!-- Modal content -->
         <div class="relative bg-white rounded-lg shadow ">
@@ -21,9 +21,9 @@
             <div class="background bg-main-white overflow-x-hidden p-6 space-y-6 min-h-[100vh]">
                 <section>
                     <!-------------Titre----------->
-                    <h2 class="text-center text-[24px] md:text-4xl font-bold font-title text-main-red uppercase pb-2">$nom de la promo
+                    <h2 class="text-center text-[24px] md:text-4xl font-bold font-title text-main-red uppercase pb-2"><?=$promo->name?>
                     </h2>
-                    <p class="text-center text-[24px] md:text-4xl font-title text-main-red pb-8">Janvier 2023-Septembre 2023 $date
+                    <p class="text-center text-[24px] md:text-4xl font-title text-main-red pb-8"><?="$promo->start - $promo->end"?>
                     </p>
                 </section>
 

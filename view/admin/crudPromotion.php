@@ -22,12 +22,13 @@
         </tr>
     </thead>
     <tbody class="border-2">
-        <?php foreach ($promos as $promo) { ?>
+        <?php foreach ($promos as $promo) {
+            $mailList = $PromoRepo->getPromoMailList($promo->id) ?>
             <tr class="border-2 border-gray-800">
                 <th scope="row" class="px-4 py-3 font-medium text-gray-900 border whitespace-nowrap "><?=$promo->name?>
                 </th>
                 <td class="px-4 py-3 border">
-                    <?php if ($promo->status->id == 9) { ?>
+                    <?php if ($promo->status->id != 9) { ?>
                                     <button data-modal-target="modal-apprenant-<?=$promo->id?>" data-modal-toggle="modal-apprenant-<?=$promo->id?>" 
                                         class="block w-full md:w-auto text-white bg-main-red hover:bg-red-800 focus:ring-4 focus:outline-none 
                                          font-medium rounded-lg text-sm px-5 mx-auto py-2.5 text-center" type="button">
@@ -57,7 +58,7 @@
                     </button>
                 </td>
                 <td class="px-4 py-3 border">
-                    <button data-modal-target="modal-contact-<?=$promo->id?>" data-modal-toggle="modal-contact-<?=$promo->id?>" class="block w-full md:w-auto text-white bg-main-gray hover:bg-gray-900 focus:ring-4 focus:outline-none 
+                    <button data-user-mail="<?=join(",",$mailList)?>" data-modal-target="modal-contact" data-modal-toggle="modal-contact" class="block w-full md:w-auto text-white bg-main-gray hover:bg-gray-900 focus:ring-4 focus:outline-none 
                                     font-medium rounded-lg text-sm px-5 py-2.5 mt-2 mx-auto text-center"
                         type="button">
                         <i class="fa-solid fa-envelope text-main-white"></i>
@@ -87,11 +88,14 @@
                 </td>
             </tr>
             <?php
+            if ($promo->status->id != 9) {
             $apprenants = $PromoRepo->getAllApprenants($promo->id);
             include("view/admin/modalApprenant.php");
+            }else{
+            include("view/admin/modalValidationPromo.php");
+            }
             $formators = $PromoRepo->getAllFormateurs($promo->id);
             include("view/admin/modalFormateur.php");
-            include("view/admin/modalValidationPromo.php");
             include("view/admin/modalProjet.php");
         }
         ?>

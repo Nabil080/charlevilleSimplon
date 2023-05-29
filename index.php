@@ -50,6 +50,6 @@ if (isset($_GET['action']) && $_GET['action'] !== '' && !isset($_GET['admin'])) 
     homepage();
 }
 
-// $repo = new UsersRepository;
-// $data = $repo->getUserPromo(2);
+// $repo = new PromoRepository;
+// $data = $repo->getPromoMailList(1);
 // var_dump($data);
