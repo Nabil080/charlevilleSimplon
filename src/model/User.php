@@ -31,6 +31,7 @@ class User
         $UserRepo = new UserRepository;
         $user = $UserRepo->getUserById($id);
         $this->setUser($user);
+    
     }
     public function getUser()
     {
@@ -93,20 +94,6 @@ class UserRepository extends ConnectBdd
             $stmt->execute([$user_id[0], $account['formation_id']]);
         }
         $stmt->closeCursor();
-}
-
-    public function getUserById($id):object
-    {
-        $req = "SELECT * FROM `user` AS u LEFT JOIN `status` AS s ON u.status_id = s.status_id LEFT JOIN `role` AS r ON u.role_id = r.role_id WHERE `user_id` = ?";
-        $stmt = $this->bdd->prepare($req);
-        $stmt->execute([$id]);
-        $data = $stmt->fetch(PDO::FETCH_ASSOC);
-        $stmt->closeCursor();
-
-        $User = new User;
-        $User->setUser($data);
-
-        return $User;
     }
 
     /* Set */
@@ -121,14 +108,15 @@ class UserRepository extends ConnectBdd
     }
 
     /* Get */
-    public function getUserById($id)
+    public function getUserById($id):object
     {
-        $req = "SELECT * FROM `user` AS u LEFT JOIN `status` AS s ON u.status_id = s.status_id WHERE user_id= ?";
+        $req = "SELECT * FROM `user` AS u LEFT JOIN `status` AS s ON u.status_id = s.status_id LEFT JOIN `role` AS r ON u.role_id = r.role_id WHERE `user_id` = ?";
         $stmt = $this->bdd->prepare($req);
         $stmt->execute([$id]);
-        $account = $stmt->fetch();
+        $data = $stmt->fetch(PDO::FETCH_ASSOC);
         $stmt->closeCursor();
-        return $account;
+
+        return $data;
     }
     public function getIdByEmail($email)
     {
