@@ -17,16 +17,16 @@
             <!-- Partie CONNEXION -->
             <div id="co" class="px-6 py-6 lg:px-8">
                 <h3 class="mb-4 text-xl uppercase w-fit mx-auto font-bold font-title text-main-red">Connexion</h3>
-                <form class="space-y-6" action="/portfolio/allosimplon/traitements/connexion/login.php" method="post">
+                <form class="space-y-6" id="login-form" method="post">
                     <div>
                         <label for="email" class="block mb-2 text-sm font-medium  text-main-red">E-mail</label>
-                        <input type="email" name="email" id="email"
+                        <input type="email" name="email" id="email_login_"
                             class=" border text-sm rounded-md block w-full p-2.5 border-main-red text-main-red"
                             placeholder="Exemple@mail.com" required>
                     </div>
                     <div>
                         <label for="password" class="block mb-2 text-sm font-medium  text-main-red">Mot de passe</label>
-                        <input type="password" name="password" id="password" placeholder="*********"
+                        <input type="password" name="password" id="email_login_" placeholder="*********"
                             class=" border text-sm rounded-md block w-full p-2.5 border-main-red text-main-red"
                             required>
                     </div>
@@ -49,7 +49,7 @@
             <div id="paco" class="hidden px-6 py-6 lg:px-8">
                 <h3 class="mb-4 text-xl uppercase w-fit mx-auto font-bold font-title text-main-red">Mot de passe oublié
                 </h3>
-                <form class="space-y-6" action="/portfolio/allosimplon/traitements/connexion/sign.php" method="post">
+                <form class="space-y-6" id="forget-form" method="post">
                     <div>
                         <label for="email" class="block mb-2 text-sm font-medium  text-main-red">Votre adresse
                             mail</label>

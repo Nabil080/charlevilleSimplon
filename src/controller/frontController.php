@@ -72,8 +72,20 @@ function promotionPage()
 // Register
 function registerPage()
 {
+    $boolCompany = (isset($_GET['company'])) ? 1 : 0;
+    $formation_id = (isset($_GET['formation_id'])) ? $_GET['formation_id'] : 0;
+
     include 'view/public/register.php';
 }
+
+function accountActivationPage()
+{
+    $etat = activationAccountTreatment();
+    include 'view/public/accountActivation.php';
+}
+
+
+
 
 
 // ==================  Admin  ======================

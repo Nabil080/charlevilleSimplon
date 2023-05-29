@@ -14,6 +14,10 @@ switch ($action) {
     case 'registerPage':
         registerPage();
         break;
+    //afficher la page d'activation de compte
+    case 'accountActivationPage':
+        accountActivationPage();
+        break;
     // Afficher toutes les promos
     case 'allPromotionsPage':
         allPromotionsPage();
@@ -41,8 +45,12 @@ switch ($action) {
         registerTreatment();
         break;
     // Envoie du traitement d'activation de compte
+    case 'accountActivation':
+        activationAccountTreatment();
+        break;
     // Envoie du traitement du formulaire de connexion
-
+    case 'loginTreatment':
+        loginTreatment();
     // Envoie du traitement pagination tous les projets
     case 'projectsPagination':
         projectsPagination();

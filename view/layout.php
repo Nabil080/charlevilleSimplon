@@ -9,7 +9,9 @@
     </title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
     <script src="https://kit.fontawesome.com/eb7aa99f8d.js" crossorigin="anonymous"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="build/ckeditor.js"></script>
@@ -23,9 +25,9 @@
             },
             extend: {
                 colors: {
-                    'main':{
-                        red:'#BD3124',
-                        white:'#FFFF',
+                    'main': {
+                        red: '#BD3124',
+                        white: '#FFFF',
                         gray: '#4F4F4F',
                         lightred: '#F6DADE',
                         lightgray: '#F2F2F3',
@@ -47,13 +49,14 @@
 
 
 <body class="w-[100vw] bg-main-white pt-20 min-h-screen flex flex-col">
-
-
     <?php require_once 'view/template/_navbar.php'; ?>
     <?= $content ?>
+    <?php include 'view/template/_login.php'; ?>
     <?php require_once 'view/template/_footer.php'; ?>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
     <script src="https://kit.fontawesome.com/eb7aa99f8d.js" crossorigin="anonymous"></script>
+    <script src="assets/js/nav.js"></script>
+    <script src="assets/js/ajax_form.js"></script>
     <script src="assets/js/function.js"></script>
     <?php if (isset($script))
         echo $script; ?>

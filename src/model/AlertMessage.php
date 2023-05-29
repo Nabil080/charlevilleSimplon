@@ -1,63 +1,72 @@
 <?php class AlertMessage
 {
-    public $type;
-    public $name;
-    public $location;
+    private $type;
+    private $name;
+    private $location;
     public $message;
+
+    private $alertMessage = 'assets/json/alertMessage.json';
+
+    //<p id="$nameid_error" class="error mt-2 text-sm text-red-600"></p>
+    //<p id="content_success" class="success mt-2 text-sm text-green-600"></p>
 
     public function getError($location, $error)
     {
         $this->type = 'errorMessage';
-        $this->location = $location;
+        $this->location = $location . '_error';
         $this->name = $error;
 
-        $message = $this->createAlert();
+        $message = $this->getMessage();
         $this->message = $message;
 
         $test = [
             'successMessage' => 0,
-            'location' => $location,
-            'message' => $this->message,
-        ];
-        return $test;
-    }
-    public function getSuccess($location, $success)
-    {
-        $this->type = 'successMessage';
-        $this->location = $location;
-        $this->name = $success;
-
-        $message = $this->createAlert();
-        $this->message = $message;
-
-        $test = [
-            'successMessage' => 1,
             'location' => $this->location,
             'message' => $this->message,
         ];
         return $test;
     }
-
-
-
-    private function createAlert()
+    public function getSuccess($success)
     {
+        $this->type = 'successMessage';
+        $this->location = 'content_succes';
+        $this->name = $success;
+
         $message = $this->getMessage();
-        $location = $this->location;
-        $alert = "";
 
-        if ($this->type == "errorMessage") {
-            $alert = '<p id="' . $location . '_error" class="error mt-2 text-sm text-red-600 dark:text-red-500">' . $message . '</p>';
-        } elseif ($this->type == "successMessage") {
-            $alert = '<p id="' . $location . '_success" class="success mt-2 text-sm text-green-600 dark:text-green-500">' . $message . '</p>';
+        $file_path = 'view/template/_succesMessage.php';
+        $succesMessage = '';
+
+        // Vérifie si le fichier existe
+        if (file_exists($file_path)) {
+            // Lit le contenu du fichier
+            $succesMessage = file_get_contents($file_path);
+
+            // Insère le message prédéfini dans l'élément avec l'ID "content_success"
+            $succesMessage = str_replace(
+                '<div id="content_success" class="ml-3 text-sm font-medium">',
+                '<div id="content_success" class="ml-3 text-sm font-medium">' . $message,
+                $succesMessage
+            );
+
+        } else {
+            echo 'Le fichier n\'existe pas.';
         }
-        return $alert;
 
+
+
+        $test = [
+            'successMessage' => 1,
+            'location' => $this->location,
+            'message' => $succesMessage,
+        ];
+        return $test;
     }
+
     private function getMessage()
     {
-        $messageData = file_get_contents('assets/json/alertMessage.json');
-        $data = json_decode($messageData, true);
+
+        $data = json_decode(file_get_contents($this->alertMessage), true);
 
         foreach ($data[$this->type] as $row) {
             if ($row['name'] == $this->name) {
