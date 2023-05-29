@@ -9,7 +9,7 @@ function registerTreatment()
         $UserRepo = new UserRepository;
         $candidate = ['formation_id', 'id_poleEmploi', 'birth_place', 'birth_date', 'nationality'];
         $company = ['boolCompany', 'name_company'];
-        $boolTable = ['boolCompany', 'formation_id'];
+
         $id_poleEmploi = '';
         $boolCompany = $_POST['boolCompany'];
         $formation_id = $_POST['formation_id'];
@@ -139,24 +139,26 @@ function loginTreatment()
         if (empty($errorTable)) {
 
             $user_id = $UserRepo->getIdByEmail($email);
-            if (is_array($user_id)) {
+            if (is_string($user_id)) {
                 $bool = $UserRepo->checkPassword($user_id, $password);
                 if ($bool) {
                     $userSession = $UserRepo->getUserSession($user_id);
                     $_SESSION['user'] = (object) array(
                         'user_id' => $userSession['user_id'],
-                        'id_status' => $userSession['id_status'],
-                        'id_role' => $userSession['id_role'],
+                        'status_id' => $userSession['status_id'],
+                        'role_id' => $userSession['role_id'],
                     );
-                    $alertSucces = $AlertMessage->getSuccess('login');
-                    $succesJson = json_encode($alertSucces);
+                    $succes = $AlertMessage->getSuccess('login');
+                    $_SESSION['succes'] = $succes;
+                    
+                    $succesTable[] = ['role_id' => $userSession['role_id']];
+                    $succesJson = json_encode($succesTable);
                     echo $succesJson;
 
                 } else
                     $errorTable[] = $AlertMessage->getError('loginContent', 'loginIncorrect');
             } else
                 $errorTable[] = $AlertMessage->getError('loginContent', 'loginIncorrect');
-
         } else
             $errorTable[] = $AlertMessage->getError('loginContent', 'errorForm');
 
@@ -167,4 +169,9 @@ function loginTreatment()
         $errorJson = json_encode($errorTable);
         echo $errorJson;
     }
+}
+
+function logOut() {
+    unset($_SESSION['user']);
+    header('Location: index.php');
 }

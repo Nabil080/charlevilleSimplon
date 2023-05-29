@@ -12,7 +12,7 @@ switch ($action) {
         break;
     // Afficher le formulaire de pré-inscription.
     case 'registerPage':
-        registerPage();
+        (isset($_SESSION['user'])) ? registerPage() :registerPage();
         break;
     //afficher la page d'activation de compte
     case 'accountActivationPage':
@@ -51,8 +51,13 @@ switch ($action) {
     // Envoie du traitement du formulaire de connexion
     case 'loginTreatment':
         loginTreatment();
-    // Envoie du traitement pagination tous les projets
-    case 'projectsPagination':
-        projectsPagination();
         break;
+        // Envoie du traitement pagination tous les projets
+        case 'projectsPagination':
+            projectsPagination();
+            break;
+        // Déconnexion
+        case 'logOut':
+            logOut();
+            break;
 }

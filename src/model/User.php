@@ -108,7 +108,7 @@ class UserRepository extends ConnectBdd
     }
 
     /* Get */
-    public function getUserById($id):object
+    public function getUserById($id):array
     {
         $req = "SELECT * FROM `user` AS u LEFT JOIN `status` AS s ON u.status_id = s.status_id LEFT JOIN `role` AS r ON u.role_id = r.role_id WHERE `user_id` = ?";
         $stmt = $this->bdd->prepare($req);
@@ -131,7 +131,7 @@ class UserRepository extends ConnectBdd
 
     public function getUserSession($id)
     {
-        $req = "SELECT user_id,id_status,id_role FROM `user` WHERE user_id= ?";
+        $req = "SELECT user_id,status_id,role_id FROM `user` WHERE user_id= ?";
         $stmt = $this->bdd->prepare($req);
         $stmt->execute([$id]);
         $userSession = $stmt->fetch();
@@ -159,9 +159,7 @@ class UserRepository extends ConnectBdd
         $stmt->execute([$id]);
         $mdpuser = $stmt->fetch(PDO::FETCH_OBJ);
         $stmt->closeCursor();
-        var_dump($mdpuser, $id);
         $mdpuser = $mdpuser->user_password;
-        //var_dump($mdpuser);
 
         $mdpval = password_verify($mdp, $mdpuser);
         return $mdpval;
@@ -191,6 +189,4 @@ class UserRepository extends ConnectBdd
         $stmt->execute([2, '', $token, $email]);
         $stmt->closeCursor();
     }
-
-
 }
