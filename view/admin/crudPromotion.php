@@ -82,7 +82,7 @@
                             </li>
                         </ul>
                         <div class="py-1">
-                            <a data-modal-target="modal-delete-<?=$promo->id?>" data-modal-toggle="modal-delete-<?=$promo->id?>" class="block py-2 px-4 text-sm text-gray-700">Supprimer</a>
+                            <a data-modal-target="modal-delete-<?=$promo->id?>" data-modal-toggle="modal-delete-<?=$promo->id?>" class="cursor-pointer block py-2 px-4 text-sm text-gray-700">Supprimer</a>
                         </div>
                     </div>
                 </td>

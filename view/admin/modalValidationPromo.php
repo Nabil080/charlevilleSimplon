@@ -17,13 +17,13 @@
                 </button>
             </div>
             <!-- Modal body -->
-                <form class="validationForm grid grid-rows-[50%_35%_15%] md:grid-cols-2 md:grid-rows-[70%_30%] p-2 overflow-x-hidden min-h-[80vh] md:min-h-[70vh]">
+                <form data-promo="<?=$promo->id?>" class="validationForm grid grid-rows-[50%_35%_15%] md:grid-cols-2 md:grid-rows-[70%_30%] p-2 overflow-x-hidden min-h-[80vh] md:min-h-[70vh]">
                     <div class="border-2 relative md:row-start-1 md:row-end-3 overflow-y-scroll">
                         <h3 class="text-main-red font-bold text-xl md:text-3xl p-4 italic">Liste des candidats</h3>
                         <div id="validationForm" class="pl-4 p-2 text-md">
                             <?php $y = 0;
                             foreach ($candidates as $candidate) { ?>
-                                <input type="checkbox" data-name="<?=$candidate->name?>">
+                                <input type="checkbox" data-name="<?=$candidate->name?>" value="<?=$candidate->id?>">
                                 <a href="?action=profilePage&id=<?=$candidate->id?>" target="_blank">
                                     <p class="inline ml-4"><?=$candidate->name?></p>
                                 </a>
@@ -35,7 +35,7 @@
                     </div>
                     <div id="showValidation" class="border-2 relative transition-all duration-[3s] max-h-[50vh] overflow-y-scroll">
                             <h3 class="text-green-700 font-bold text-xl md:text-3xl p-4 italic">Candidats Acceptés</h3>
-                            <p class="absolute right-8 font-bold bottom-2 italic"><span id="numberChecked"></span> 0 candidats</p>
+                            <p class="absolute right-8 font-bold bottom-2 italic"><span id="numberChecked"></span> candidats</p>
                     </div>
                     <button type="submit" class="block w-full md:w-auto h-1/3 text-white bg-main-red hover:bg-red-800 focus:ring-4 focus:outline-none 
                                     font-medium rounded-lg text-sm px-5 my-auto mx-auto py-2.5 text-center transition-all duration-[1s] hover:scale-105 hover:bg-green-600">
