@@ -14,7 +14,6 @@ class User
     public $linkedin;
     public $github;
     public $token;
-    public $company;
     public $numero_pe;
     public $phone;
     public $adress;

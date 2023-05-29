@@ -2,6 +2,8 @@
 require_once 'src/controller/frontController.php';
 require 'src/controller/back/userController.php';
 require 'src/controller/back/projectController.php';
+require 'src/controller/back/promoController.php';
+
 class ConnectBdd
 {
     public $bdd;

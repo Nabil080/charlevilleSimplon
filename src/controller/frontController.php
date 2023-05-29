@@ -15,7 +15,7 @@ function contactPage()
 function allFormationsPage()
 {
     $formationRepository = new FormationRepository;
-    $formations = $formationRepository->getFormations();
+    $formations = $formationRepository->getAllFormations();
     include 'view/public/allFormations.php';
 }
 
@@ -50,14 +50,12 @@ function profilePage()
 // Promotion
 function allPromotionsPage()
 {
-    $PromoRepository = new PromoRepository;
-    $promos = $PromoRepository->getPromos();
     include 'view/public/all_promotions.php';
 }
 function promotionPage()
 {
-    if (isset($_GET['id_promo'])) {
-        $id = $_GET['id_promo'];
+    if (isset($_GET['id'])) {
+        $id = $_GET['id'];
     } else {
         $id = 1;
     }
