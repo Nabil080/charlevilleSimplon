@@ -55,7 +55,27 @@ loginForm.addEventListener('submit', function (event) {
     })
         .then(response => response.json())
         .then(data => {
-            //console.log(data);
+            console.log(data[0].role_id);
+            if (data[0].role_id) {
+                const role_id = data[0].role_id;
+                switch (role_id) {
+                    case '1':
+                        document.location.href = 'index.php';
+                        break;
+                    case '2':
+                        document.location.href = 'index.php';
+                        break;
+                    case '3':
+                        document.location.href = 'index.php';
+                    break;
+                    case '4':
+                        document.location.href = 'index.php';
+                        break;
+                    case '5':
+                        document.location.href = 'index.php';
+                        break;
+                }          
+            }
             deleteAlert();
             showAlert(data);
         })
