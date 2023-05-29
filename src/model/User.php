@@ -31,7 +31,7 @@ class User
         $UserRepo = new UserRepository;
         $user = $UserRepo->getUserById($id);
         $this->setUser($user);
-      
+    }
     public function getUser()
     {
         return $this;
