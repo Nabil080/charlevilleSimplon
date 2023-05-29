@@ -252,44 +252,6 @@ $stmt->execute([$pass, $email]);
         return $candidates;
     }
 
-    public function getUserPromo($option,$userId):array
-    {
-        $promos = [];
-        $promoRepo = new PromoRepository;
-
-        if($option == 'candidature'){
-            $req = $this->bdd->prepare("SELECT `promo_id` FROM promo_candidate WHERE user_id = ?");
-            $req->execute([$userId]);
-            $datas = $req->fetchAll(PDO::FETCH_ASSOC);
-
-            foreach($datas as $data){
-                $promos[] = $promoRepo->getPromoById($data['promo_id']);
-            }
-        }
-
-        if($option == 'apprenant'){
-            $req = $this->bdd->prepare("SELECT `promo_id` FROM promo_user WHERE user_id = ?");
-            $req->execute([$userId]);
-            $datas = $req->fetchAll(PDO::FETCH_ASSOC);
-
-            foreach($datas as $data){
-                $promos[] = $promoRepo->getPromoById($data['promo_id']);
-            }
-        }
-
-        if($option == 'refusé'){
-            $req = $this->bdd->prepare("SELECT `promo_id` FROM promo_refused WHERE user_id = ?");
-            $req->execute([$userId]);
-            $datas = $req->fetchAll(PDO::FETCH_ASSOC);
-
-            foreach($datas as $data){
-                $promos[] = $promoRepo->getPromoById($data['promo_id']);
-            }
-        }
-
-        return $promos;
-    }
-
     public function getAllLearners(): array
     {
         $learners = [];
@@ -304,6 +266,21 @@ $stmt->execute([$pass, $email]);
         }
 
         return $learners;
+    }
+
+    public function getAllCompanies(): array
+    {
+        $companies = [];
+        $query = "SELECT `user_id` FROM `user` WHERE `role_id` = ? ";
+        $req = $this->bdd->prepare($query);
+        $req->execute([3]);
+        $data = $req->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach ($data as $company) {
+            $companies[] = $this->getUserById($company['user_id']);
+        }
+
+        return $companies;
     }
 
     public function getAllFormators(): array
@@ -321,17 +298,55 @@ $stmt->execute([$pass, $email]);
         return $formators;
     }
 
+
+    public function getUserPromo($option,$userId):array
+    {
+        $promos = [];
+        $promoRepo = new PromoRepository;
+
+        if($option == 'candidature'){
+            $req = $this->bdd->prepare("SELECT `promo_id` FROM promo_candidate WHERE user_id = ?");
+            $req->execute([$userId]);
+            $data = $req->fetchAll(PDO::FETCH_ASSOC);
+
+            foreach($data as $key){
+                $promos[] = $promoRepo->getPromoById($key['promo_id']);
+            }
+        }
+
+        if($option == 'apprenant'){
+            $req = $this->bdd->prepare("SELECT `promo_id` FROM promo_user WHERE user_id = ?");
+            $req->execute([$userId]);
+            $data = $req->fetchAll(PDO::FETCH_ASSOC);
+
+            foreach($data as $key){
+                $promos[] = $promoRepo->getPromoById($key['promo_id']);
+            }
+        }
+
+        if($option == 'refusé'){
+            $req = $this->bdd->prepare("SELECT `promo_id` FROM promo_refused WHERE user_id = ?");
+            $req->execute([$userId]);
+            $data = $req->fetchAll(PDO::FETCH_ASSOC);
+
+            foreach($data as $key){
+                $promos[] = $promoRepo->getPromoById($key['promo_id']);
+            }
+        }
+
+        return $promos;
+    }
+
     public function getUserSimplonProjects($id):array
     {
         $projects = [];
         $req = $this->bdd->prepare("SELECT project_id FROM project_team WHERE user_id = ?");
         $req->execute([$id]);
-        $datas = $req->fetchAll(PDO::FETCH_ASSOC);
+        $data = $req->fetchAll(PDO::FETCH_ASSOC);
 
-        foreach($datas as $data){
-            $Project = new Project;
+        foreach($data as $key){
             $projectRepo = new ProjectRepository;
-            $Project = $projectRepo->getProjectById($data['project_id']);
+            $Project = $projectRepo->getProjectById($key['project_id']);
 
             if($Project->type->id != 2){
                 $projects[] = $Project;
@@ -347,18 +362,33 @@ $stmt->execute([$pass, $email]);
         $projects = [];
         $req = $this->bdd->prepare("SELECT project_id FROM project_team WHERE user_id = ?");
         $req->execute([$id]);
-        $datas = $req->fetchAll(PDO::FETCH_ASSOC);
+        $data = $req->fetchAll(PDO::FETCH_ASSOC);
 
-        foreach($datas as $data){
-            $Project = new Project;
+        foreach($data as $key){
             $projectRepo = new ProjectRepository;
-            $Project = $projectRepo->getProjectById($data['project_id']);
+            $Project = $projectRepo->getProjectById($key['project_id']);
 
             if($Project->type->id == 2){
                 $projects[] = $Project;
             }
         }
 
+
+        return $projects;
+    }
+
+    public function getUserSubmittedProjects($id):array
+    {
+        $projects = [];
+        $req = $this->bdd->prepare("SELECT project_id FROM project WHERE user_id = ?");
+        $req->execute([$id]);
+        $data = $req->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach($data as $key){
+            $projectRepo = new ProjectRepository;
+            $Project = $projectRepo->getProjectById($key['project_id']);
+            $projects[] = $Project;
+        }
 
         return $projects;
     }

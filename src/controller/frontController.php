@@ -106,7 +106,7 @@ function crudLearnerPage()
 function crudCompanyPage()
 {
     $UserRepo = new UsersRepository;
-    // $companies = $UserRepo->getAllCompanies();
+    $companies = $UserRepo->getAllCompanies();
     include 'view/admin/_company.php';
 }
 

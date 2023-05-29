@@ -6,7 +6,6 @@ tableRows.forEach((row) => {
     "table tbody tr button[data-modal-target=modal-contact]"
   );
   contactButton.addEventListener("click", (e) => {
-    console.log(e.target.dataset);
     contactInput.value = e.target.dataset.userMail;
   });
 });

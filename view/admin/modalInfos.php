@@ -69,20 +69,6 @@
                             </div>
                         </div>
                     </div>
-
-                                    
-                                        <form action="?action=assignFormator" method="post">
-                                            <input type="hidden" name="user_id" value="<?=$user->id?>">
-                                            <select name="promo_id">
-                                            <?php 
-                                                foreach($promos as $promo){?>
-                                                    <option value="<?=$promo->id?>"><?=$promo->name?></option>
-                                                <?php }
-                                            ?>
-                                            </select>
-                                            <button type="submit" class="bg-main-red text-main-white px-2 py-4">Passer cet utilisateur comme formateur</button>
-                                        </form>
-
                     <!-- Modal footer -->
                     <div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
                         <button data-modal-hide="modal-info-<?=$user->id?>" type="button" class="text-gray-500 bg-white hover:bg-gray-100 

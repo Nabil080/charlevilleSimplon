@@ -24,6 +24,7 @@
             <!-- Modal body -->
             <div class="p-6 space-y-6">
                 <div class="background bg-main-white overflow-x-hidden min-h-[100vh]">
+                    <?php if($user->role->id != 3){?>
                     <div class="mx-auto w-11/12 lg:max-w-[800px] flex justify-between mb-8 lg:mb-16">
                         <div class="flex w-full">
                             <div onclick="swapDivsById('simplon_projects_<?=$user->id?>','perso_projects_<?=$user->id?>')" class="tabChange cursor-pointer px-0 transition-all duration-[0.4s] bg-main-red w-1/2 text-center text-main-white font-title text-lg md:text-xl lg:text-2xl font-bold py-2 md:py-4">
@@ -50,12 +51,18 @@
                             }
                         ?>
                     </section>
+                    <?php }else{
+                        $projects = $UserRepo->getUserSubmittedProjects($user->id);
+                        foreach($projects as $project){
+                            include('view/template/_project_card.php');
+                        }
+                    } ?>
                 </div>
 
 
                 <!-- Modal footer -->
                 <div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
-                    <button data-modal-hide="modal-projet<?php "" ?>" type="button" class="text-gray-500 bg-white hover:bg-gray-100 
+                    <button data-modal-hide="modal-projet-<?=$user->id?>" type="button" class="text-gray-500 bg-white hover:bg-gray-100 
                 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium 
                 px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 
                 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Fermer</button>
