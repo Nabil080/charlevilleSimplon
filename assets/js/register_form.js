@@ -1,5 +1,4 @@
-const loginForm = document.querySelector('#login-form');
-
+const registerForm = document.querySelector('#register-form');
 function deleteAlert() {
     let errorMessages = document.getElementsByClassName('errorAlert');
     for (let i = 0; i < errorMessages.length; i++) {
@@ -24,40 +23,18 @@ function showAlert(data) {
         if (element['location'].endsWith('Content_error')) input.classList.remove('hidden');
     })
 }
-
-
-loginForm.addEventListener('submit', function (event) {
+registerForm.addEventListener('submit', function (event) {
     event.preventDefault(); // prevent default form submission behavior
 
     // handle form submission with fetch
-    const formData = new FormData(loginForm);
-    fetch('index.php?action=loginTreatment', {
+    const formData = new FormData(registerForm);
+    fetch('index.php?action=registerTreatment', {
         method: 'POST',
         body: formData
     })
         .then(response => response.json())
         .then(data => {
-            console.log(data[0].role_id);
-            if (data[0].role_id) {
-                const role_id = data[0].role_id;
-                switch (role_id) {
-                    case '1':
-                        document.location.href = 'index.php';
-                        break;
-                    case '2':
-                        document.location.href = 'index.php';
-                        break;
-                    case '3':
-                        document.location.href = 'index.php';
-                        break;
-                    case '4':
-                        document.location.href = 'index.php';
-                        break;
-                    case '5':
-                        document.location.href = 'index.php';
-                        break;
-                }
-            }
+            //console.log(data);
             deleteAlert();
             showAlert(data);
         })

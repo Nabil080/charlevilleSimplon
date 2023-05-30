@@ -77,33 +77,35 @@
                     style="color: #BD3124;"></i>
                 <?php if (isset($_SESSION['user'])) { ?>
                     <div>
-                    <button data-dropdown-toggle="dropdownAccount"
-                        class="focus:outline-none rounded-[4px] text-[24px] sm:text-[36px] md:text-[20px] xl:text-[24px] text-center inline-flex items-center"
-                        type="button">Compte
-                        <svg class="w-8 h-8 ml-2" aria-hidden="true" fill="none" stroke="currentColor"
-                            viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
-                            </path>
-                        </svg>
-                    </button>
-                    <div id="dropdownAccount"
-                        class="z-50 border-main-lightgray hidden bg-main-white rounded-lg shadow w-full mr-4 pl-0 border-main-lightgray">
-                        <ul class="z-50 relative py-2 md:py-0 px-2 md:px-0 text-sm leading-9 sm:leading-[60px] text-gray-700 divide-y border-2 border-main-red divide-main-red rounded-[4px]"
-                            aria-labelledby="dropdownAccountDefaultButton">
-                            <li class="md:hover:bg-main-lightred">
-                                <a href=""
-                                    class="block px-4 py-2 text-[22px] sm:text-[32px] md:text-[20px] ">Profile</a>
-                            </li>
-                            <li class="md:hover:bg-main-lightred">
-                                <a href="#" class="block px-4 py-2 text-[22px] sm:text-[32px] md:text-[20px]">Admin</a>
-                            </li>
-                            <li class="md:hover:bg-main-lightred">
-                                <a href="index.php?action=logOut" class="block px-4 py-2 text-[22px] sm:text-[32px] md:text-[20px]">Déconnexion</a>
-                            </li>
-                        </ul>
+                        <button data-dropdown-toggle="dropdownAccount"
+                            class="focus:outline-none rounded-[4px] text-[24px] sm:text-[36px] md:text-[20px] xl:text-[24px] text-center inline-flex items-center"
+                            type="button">Compte
+                            <svg class="w-8 h-8 ml-2" aria-hidden="true" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
+                                </path>
+                            </svg>
+                        </button>
+                        <div id="dropdownAccount"
+                            class="z-50 border-main-lightgray hidden bg-main-white rounded-lg shadow w-full mr-4 pl-0 border-main-lightgray">
+                            <ul class="z-50 relative py-2 md:py-0 px-2 md:px-0 text-sm leading-9 sm:leading-[60px] text-gray-700 divide-y border-2 border-main-red divide-main-red rounded-[4px]"
+                                aria-labelledby="dropdownAccountDefaultButton">
+                                <li class="md:hover:bg-main-lightred">
+                                    <a href=""
+                                        class="block px-4 py-2 text-[22px] sm:text-[32px] md:text-[20px] ">Profile</a>
+                                </li>
+                                <li class="md:hover:bg-main-lightred">
+                                    <a href="#" class="block px-4 py-2 text-[22px] sm:text-[32px] md:text-[20px]">Admin</a>
+                                </li>
+                                <li class="md:hover:bg-main-lightred">
+                                    <a href="index.php?action=logOut"
+                                        class="block px-4 py-2 text-[22px] sm:text-[32px] md:text-[20px]">Déconnexion</a>
+                                </li>
+                            </ul>
 
+                        </div>
                     </div>
-                </div>                    <?php
+                    <?php
                 } else {
                     ?>
                     <button type="button" id="connexion"
@@ -116,6 +118,8 @@
         </div>
     </div>
     <div id="content_succes">
-        <?php echo (isset($_SESSION['succes'])) ? $_SESSION['succes']->message : ''; ?> 
+        <?php if (isset($_SESSION['succes'])) {
+            $_SESSION['succes'];
+        } ?>
     </div>
 </nav>
