@@ -13,6 +13,7 @@
                 <?php if(isset($User->company)){?>
                     <h3 class="font-title text-main-red font-bold text-[20px] md:text-[24px]"><?=$User->company?></h3>
                     <input type="hidden" name="company" value="<?=$User->company?>" /> <!-- Variable à mettre -->
+                    <input type="hidden" name="adress" value="<?=$User->adress?>" /> <!-- Variable à mettre -->
                 <?php } ?>
                 <div class="w-full md:w-2/3">
                     <label for="project" class="block mb-2 text-[16px] font-medium">Nom du projet</label>

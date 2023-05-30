@@ -243,9 +243,37 @@ class ProjectRepository extends ConnectBdd{
 
     public function addProject($post,$files):void
     {
-        $req = $this->bdd->prepare("INSERT INTO project (project_name,project_description,project_company_link) VALUES (?,?,?)");
-        $req->execute([$post['project'],$post['description'],$post['link']]);
+        $error = false;
+        // traitement company name
+        $company = isset($post['company']) ? $post['company'] : 'Simplon';
+        $adress = isset($post['adress']) ? $post['adress'] : '17 rue de la grande mare lool';
 
+        // traitment fichier pdf
+        $pdf = securizePdf($_FILES['pdf']);
+        if($pdf === false){
+            // message d'erreurs dans securizePdf
+            $error = true;
+        }
+
+        // traitment image
+        $image = securizeImage($files['image']);
+        if($image === false){
+            // message d'erreurs dans securizePdf
+            $error = true;
+        }
+
+        if($error === false){
+            $req = $this->bdd->prepare("INSERT INTO project (project_name,project_description,project_company_name,project_company_link,user_id, project_file, project_company_image, project_company_adress) VALUES (?,?,?,?,?,?,?,?)");
+            // $req->execute([$post['project'],$post['description'],$post['link']],$_SESSION['user']->id);
+            $req->execute([$post['project'],$post['description'],$company,$post['link'],3, $pdf, $image, $adress]);
+
+            $response = array(
+                "status" => "success",
+                "message" => "Le projet a bien été ajouté.",
+            );
+        
+            echo json_encode($response);
+        }
     }
 }
 

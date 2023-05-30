@@ -57,5 +57,6 @@ function addProjectTraitement()
 {
     $projectRepo = new ProjectRepository;
     $projectRepo->addProject($_POST,$_FILES);
+
 }
 ?>
