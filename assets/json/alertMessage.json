@@ -45,6 +45,14 @@
     {
       "name": "login",
       "message": "Vous avez réussi à vous connecter."
+    },
+    {
+      "name": "mailForgetPassword",
+      "message": "<span class='font-bold'>Envoie réussi !</span><br> Si un compte appartient à cet email, vous recevrez un lien de demande reset de mot de passse."
+    },
+    {
+      "name": "resetPassword",
+      "message": "<span class='font-bold'>Changement réussi !</span><br>Le mot de passe à bien était changé. Vous pouvez maintenant vous connecter."
     }
   ]
 }

@@ -31,12 +31,12 @@ class User
         $UserRepo = new UserRepository;
         $user = $UserRepo->getUserById($id);
         $this->setUser($user);
-    
     }
     public function getUser()
     {
         return $this;
     }
+
     public function setUser($account): void
     {
         /* base */
@@ -69,14 +69,16 @@ class User
         $this->role_id = $account['role_id'];
     }
 
-
 }
 
 class UserRepository extends ConnectBdd
 {
-    public function InsertUser($account): void {
+    public function InsertUser($account): void
+    {
         $Mail = new Mail;
-        $token = $Mail->tokenMail('activateUser', $account['email']);
+        $Mail->sendMailActivationAccount($account['email']);
+        $token = $Mail->getToken();
+
         $pass = password_hash($account['password'], PASSWORD_BCRYPT);
 
         $req = "INSERT INTO `user`(`user_name`,`user_surname`, `user_email`, `user_password`, `user_token`,`user_place`,`user_phone`,`user_company`,`user_numero_pe`,`user_birth_place`,`user_birth_date`,`user_nationality`,`role_id`) VALUE(?,?,?,?,?,?,?,?,?,?,?,?,?)";
@@ -108,7 +110,7 @@ class UserRepository extends ConnectBdd
     }
 
     /* Get */
-    public function getUserById($id):array
+    public function getUserById($id): array
     {
         $req = "SELECT * FROM `user` AS u LEFT JOIN `status` AS s ON u.status_id = s.status_id LEFT JOIN `role` AS r ON u.role_id = r.role_id WHERE `user_id` = ?";
         $stmt = $this->bdd->prepare($req);
@@ -127,6 +129,16 @@ class UserRepository extends ConnectBdd
         $stmt->closeCursor();
 
         return ($user_id != false) ? $user_id['user_id'] : false;
+    }
+    public function getMailByToken($token)
+    {
+        $req = "SELECT user_email FROM user WHERE user_token = ?";
+        $stmt = $this->bdd->prepare($req);
+        $stmt->execute([$token]);
+        $results = $stmt->fetch();
+        $stmt->closeCursor();
+
+        return (isset($results['user_email']) && is_string($results['user_email'])) ? $results['user_email'] : false;
     }
 
     public function getUserSession($id)
@@ -161,25 +173,17 @@ class UserRepository extends ConnectBdd
         $stmt->closeCursor();
         $mdpuser = $mdpuser->user_password;
 
-        $mdpval = password_verify($mdp, $mdpuser);
-        return $mdpval;
-    }
-    public function checkToken($token)
-    {
-        $req = "SELECT user_email FROM user WHERE user_token = ?";
-        $stmt = $this->bdd->prepare($req);
-        $stmt->execute([$token]);
-        $results = $stmt->fetch();
-        $stmt->closeCursor();
 
-        return (isset($results['user_email']) && is_string($results['user_email'])) ? $results['user_email'] : false;
+        $bool = (password_verify($mdp, $mdpuser) || $mdp === $mdpuser) ? true : false;
+        return $bool;
     }
+
     /* Utility */
-    public function addToken($email, $token): void
+    public function addToken($user_id, $token): void
     {
-        $req = "UPDATE `user` SET `user_token` = ? WHERE user_email = ?";
+        $req = "UPDATE `user` SET `user_token` = ? WHERE user_id = ?";
         $stmt = $this->bdd->prepare($req);
-        $stmt->execute([$token, $email]);
+        $stmt->execute([$token, $user_id]);
         $stmt->closeCursor();
     }
     public function activateUsers($email, $token): void

@@ -1,4 +1,4 @@
-const registerForm = document.querySelector('#register-form');
+
 function deleteAlert() {
     let errorMessages = document.getElementsByClassName('errorAlert');
     for (let i = 0; i < errorMessages.length; i++) {
@@ -23,20 +23,3 @@ function showAlert(data) {
         if (element['location'].endsWith('Content_error')) input.classList.remove('hidden');
     })
 }
-registerForm.addEventListener('submit', function (event) {
-    event.preventDefault(); // prevent default form submission behavior
-
-    // handle form submission with fetch
-    const formData = new FormData(registerForm);
-    fetch('index.php?action=registerTreatment', {
-        method: 'POST',
-        body: formData
-    })
-        .then(response => response.json())
-        .then(data => {
-            //console.log(data);
-            deleteAlert();
-            showAlert(data);
-        })
-        .catch(error => console.error(error));
-});
