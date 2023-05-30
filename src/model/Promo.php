@@ -259,11 +259,19 @@ class PromoRepository extends ConnectBdd{
         $req = $this->bdd->prepare("INSERT INTO promo_user (promo_id, user_id) VALUES (?,?)");
         $req->execute([$promoId,$userId]);
         $req->closeCursor();
+
+        $req = $this->bdd->prepare("DELETE FROM promo_candidate WHERE promo_id = ? AND user_id = ?");
+        $req->execute([$promoId,$userId]);
+        $req->closeCursor();
     }
 
     public function rejectPromoUser($promoId, $userId):void
     {
         $req = $this->bdd->prepare("INSERT INTO promo_refused (promo_id, user_id) VALUES (?,?)");
+        $req->execute([$promoId,$userId]);
+        $req->closeCursor();
+
+        $req = $this->bdd->prepare("DELETE FROM promo_candidate WHERE promo_id = ? AND user_id = ?");
         $req->execute([$promoId,$userId]);
         $req->closeCursor();
     }
