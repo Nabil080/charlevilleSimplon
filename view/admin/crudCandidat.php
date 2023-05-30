@@ -24,9 +24,9 @@
                     <?php
                         }
                     } ?>
-                    <?php 
+                    <?php
                         foreach($UserRepo->getUserPromo('candidature',$candidate->id) as $promo){
-                            echo "<p class='text-center italic font-bold underline'>$promo->name</p>";
+                            echo "<p class='text-center italic font-bold underline'>$promo->name $promo->start</p>";
                         }
                     ?>
                     <button data-modal-target="modal-candidature-<?= $candidate->id ?>" data-modal-toggle="modal-candidature-<?= $candidate->id ?>" class="block w-full md:w-auto text-white bg-main-red ho:bg-red-800 focus:ring-4 focus:outline-none 
