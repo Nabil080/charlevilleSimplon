@@ -23,10 +23,17 @@
     <?php $i = 0;
         $x = 0;
         $y = 0;
+        if ($_SESSION['user']->role->id == 2) {
+            foreach ($projects as $projets) { 
+                foreach ($projets as $project) {
+                include('view/template/_gestion_project_card.php');
+                $x ++;
+            }
+        }} else {
         foreach ($projects as $project) { 
             include('view/template/_gestion_project_card.php');
             $x ++;
-        } ?>
+        }} ?>
     <!-- projet 2 -->
     <article id="project-2" class="">
         <!-- card projet -->

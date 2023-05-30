@@ -3,7 +3,7 @@ session_start();
 require 'src/model/ConnectBdd.php';
 
 $userRepository = new UsersRepository;
-$_SESSION['user'] = $userRepository->getUserByid(4);
+$_SESSION['user'] = $userRepository->getUserByid(3);
 // var_dump($_SESSION);
 
 if (isset($_GET['action']) && $_GET['action'] !== '' && !isset($_GET['admin'])) {

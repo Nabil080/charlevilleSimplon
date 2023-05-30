@@ -253,26 +253,30 @@ class ProjectRepository extends ConnectBdd{
 
     public function getWaitingProjects(): array
     {
-        $req = $this->bdd->prepare("SELECT * FROM project WHERE status_id = 9");
+        $projectRepository = new ProjectRepository;
+        $req = $this->bdd->prepare("SELECT project_id FROM project WHERE status_id = 9");
         $req->execute();
-        $projects = $req->fetchAll(PDO::FETCH_ASSOC);
+        $projectsId = $req->fetchAll(PDO::FETCH_COLUMN);
+        $projects = [];
+
+        foreach ($projectsId as $projectId) {
+            $project = $projectRepository->getProjectById($projectId);
+            array_push($projects, $project);
+        }
         return $projects;
     }
 
     public function getFormateurProjects($id): array
     {
+        $promoRepository = new PromoRepository;
         $req = $this->bdd->prepare("SELECT promo_id from promo_user WHERE user_id = ?");
         $req->execute([$id]);
         $promoIds = $req->fetchAll(PDO::FETCH_COLUMN);
         $projects = [];
         foreach ($promoIds as $promoId) {
-            $req = $this->bdd->prepare("SELECT * FROM project WHERE promo_id = ?");
-            $req->execute([$promoId]);
-            $project = $req->fetchAll(PDO::FETCH_ASSOC);
+            $project = $promoRepository->getPromoProjects($promoId);
             array_push($projects, $project);
-
         }
-        var_dump($projects);
         return $projects;
     }
 }
