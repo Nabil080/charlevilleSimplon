@@ -101,11 +101,6 @@ class UsersRepository extends ConnectBdd
         $Tags = $tagRepo->getUserTags($data['user_id']);
         $User->tags = $Tags;
 
-        $Projects = new Project;
-        $projectRepository = new ProjectRepository;
-        $Projects = $projectRepository->getUserProjects($data['user_id']);
-        $User->projects = $Projects;
-
         $Status = new Status;
         $statusRepo = new StatusRepository;
         $Status = $statusRepo->getStatusById($data['status_id']);

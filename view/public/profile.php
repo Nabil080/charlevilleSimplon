@@ -3,18 +3,18 @@ $title = "Espace personnel";
 ?>
 
 <?php ob_start();
-var_dump($userDatas);
-var_dump($userProjects);
+// var_dump($userDatas);
+// var_dump($userProjects);
 ?>
 <!-- Section photo et description -->
 <div class="background bg-main-white overflow-x-hidden min-h-[100vh]">
 
     
     <?php
-    if($isMyProfile == false)
+    if(!isset($isMyProfile) || $isMyProfile == false)
     {
         $notMyProfile = 'style="display:none"';
-    } else {
+    } else{
         $notMyProfile = '';
     }
     if ($userDatas->role->id == 5) {?>
@@ -320,6 +320,8 @@ var_dump($userProjects);
                     <!-- Fin de la section : projet phare -->
 
                     <!-- Section : mes projets persos -->
+                    <?php 
+                    // var_dump($project) ?>
                     <section class="sectionChange hidden border">
                         <div class="projet-cards w-11/12 mt-2 gap-6 mx-auto flex flex-col justify-center lg:flex-row lg:flex-wrap">
                             <!-- card projet 1 -->
@@ -500,40 +502,39 @@ var_dump($userProjects);
                 <h2 class="font-bold font-title text-main-red italic text-[30px] mb-4">Mes projets Simplon</h2>
                 <div class="projets-simplon flex justify-center flex-wrap gap-6">
 
-                    <?php foreach ($userProjects as $project){
-                        var_dump($project)?>
+                    <?php foreach ($userProjects as $project){ ?>
                     <!-- card projet -->
                     <article id="projet-card-1" class="project-card max-w-[500px] border-2 bg-main-white border-black rounded-lg p-4 mb-8 2xl:flex gap-6 2xl:p-6">
                         <!-- partie entreprise desktop -->
                         <div class="hidden 2xl:block w-1/3 border-r-2 border-main-gray pr-6">
                             <div class="my-2 flex-col">
-                                <div class="flex flex-wrap"><p class="font-title font-bold mr-2">Projet fourni par : </p><p><a href="<?= $project->company_link ?>" class="text-main-red underline font-bold text-sm"><?= $project->company_name ?></a></p></div>
+                                <div class="flex flex-wrap"><p class="font-title font-bold mr-2">Projet fourni par : </p><p><a href="<?= $project->company_link ?>" class="text-main-red underline font-bold text-sm" target="_blank"><?= $project->company_name ?></a></p></div>
                                 <div class="my-4 grow"><img class="" src="assets/img/logo" alt="logo de l'entreprise"></div>
-                                <div class="flex flex-wrap"><p class="font-title font-bold mr-2">Adresse :</p><p class="text-sm pt-0.5 text-left font-light">33 rue de la gare, 08000 Charleville-Mézières</p></div>
+                                <div class="flex flex-wrap"><p class="font-title font-bold mr-2">Adresse :</p><p class="text-sm pt-0.5 text-left font-light"><?= $project->company_adress ?></p></div>
                             </div>
                         </div>
                         <!-- partie info projet -->
                         <div class="flex-col text-[12px] flex text-end 2xl:w-2/3">
                             <!-- tags projet -->
                             <div class="uppercase space-x-4 my-4 [&>tag]:bg-main-gray [&>tag]:bg-opacity-10 [&>tag]:py-2 [&>tag]:px-4 [&>tag]:rounded-full">
-                                <tag> html</tag>
-                                <tag> css</tag>
-                                <tag> react</tag>
+                                <?php for ($i = 0; $i < count($project->tags); $i++) { ?>
+                                    <tag><?= $project->tags[$i]->name ?></tag>
+                                <?php } ?>
                             </div>
                             <!-- titre projet -->
-                            <h2 class="font-title text-main-red italic font-bold text-3xl my-2"><a href="lien du projet"><?= $project->name ?></a></h2>
+                            <h2 class="font-title text-main-red italic font-bold text-3xl my-2"><a href="index.php?action=projectPage&id=<?= $project->id ?>"><?= $project->name ?></a></h2>
                             <div class="self-end flex w-3/4 justify-between italic border-b border-main-red"><span>Débuté le <?= $project->start ?></span><span>Fini le <?= $project->end ?></span></div>
                             <!-- contenu projet -->
                             <div class="text-base flex-grow flex-col">
                                 <p class="pl-[20%] line-clamp-5 mt-2 mb-4"><?= $project->description ?></p>
                                 <div id="end" class="mt-auto">
-                                    <a href="page de la promo" class="bg-main-red py-2 px-4 rounded-full text-main-white my-2 hover:bg-main-white hover:text-main-red hover:border border-main-red"><?= $project->promo ?></a>
+                                    <a href="index.php?action=promotionPage&id=<?= $project->promo->id ?>" class="bg-main-red py-2 px-4 rounded-full text-main-white my-2 hover:bg-main-white hover:text-main-red hover:border border-main-red"><?= $project->promo->name ?></a>
                                     <div class="space-x-4 mt-4 mb-2 text-sm text-main-white [&>a]:bg-main-gray [&>a]:py-1 [&>a]:px-3 [&>a]:rounded-full">
-                                        <a href="profil de l'apprenant" class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white">Nabil</a>
-                                        <a href="profil de l'apprenant" class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white">Alexandre</a>
-                                        <a href="profil de l'apprenant" class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white">Bryan</a>
+                                        <?php for ($i = 0; $i < count($project->team); $i++) { ?>
+                                        <a href="index.php?action=profilePage&id=<?= $project->team[$i]->id ?>" class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white"><?= $project->team[$i]->surname ?> <?= $project->team[$i]->name ?></a>
+                                        <?php } ?>
                                     </div>
-                                    <a href="lien du projet" class="block float-left text-xs">Voir le projet <i class="fa fa-arrow-right"></i></a>
+                                    <a href="index.php?action=projectPage&id=<?= $project->id ?>" class="block float-left text-xs">Voir le projet <i class="fa fa-arrow-right"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -541,8 +542,8 @@ var_dump($userProjects);
                         <div class="2xl:hidden w-4/5 mx-auto bg-main-gray bg-opacity-50 h-0.5 my-4"></div>
                         <!-- partie info entreprise mobile-->
                         <div class="2xl:hidden my-2">
-                            <div class="flex flex-wrap"><p class="font-title font-bold mr-2">Projet fourni par : </p><p><a href="lien vers la société" class="text-main-red underline font-bold text-sm">Pole formation CCI Ardennes</a></p></div>
-                            <div class="flex flex-wrap"><p class="font-title font-bold mr-2">Adresse :</p><p class="text-sm pt-0.5 text-left font-light">33 rue de la gare, 08000 Charleville-Mézières</p></div>
+                            <div class="flex flex-wrap"><p class="font-title font-bold mr-2">Projet fourni par : </p><p><a href="<?= $project->company_link ?>" class="text-main-red underline font-bold text-sm" target="_blank"><?= $project->company_name ?></a></p></div>
+                            <div class="flex flex-wrap"><p class="font-title font-bold mr-2">Adresse :</p><p class="text-sm pt-0.5 text-left font-light"><?= $project->company_adress ?></p></div>
                         </div>
                     </article>
                     <?php } ?>

@@ -39,14 +39,37 @@ function projectGestionPage()
 // Profile
 function profilePage()
 {
-    include 'view/public/profile.php';
+    if (!isset($_GET['id'])) {
+        if (!isset($_SESSION['user']->id)) {
+            homepage();
+        } else {
+            myProfile();
+        }
+    }
+    else if (isset($_GET['id']) && $_GET['id'] == $_SESSION['user']->id) {
+        myProfile();
+    }
+    else {
+        $id = $_GET['id'];
+        $user = new UsersRepository();
+        $userDatas = $user->getUserById($id);
+        $tags = new TagRepository();
+        $allTags = $tags->getAllTags();
+        $status = new StatusRepository();
+        $allStatus = $status->getAllStatus();
+        $ProjectRepo = new ProjectRepository();
+        $userProjects = $ProjectRepo->getUserProjects($id);
+        $Promo = new PromoRepository();
+        $userPromo = $Promo->getPromoByUserID($id);
+        include 'view/public/profile.php';
+    }
 }
+
 function myProfile()
 {
-    $id = $_GET['id'];
     $isMyProfile = false;
     if (!isset($_GET['id'])) {
-        if (!isset($_SESSION['id'])) {
+        if (!isset($_SESSION['user']->id)) {
             homepage();
         } else {
             $id = $_SESSION['user']->id;
@@ -59,6 +82,7 @@ function myProfile()
     }
     else {
         $id = $_GET['id'];
+        profilePage();
     }
     $user = new UsersRepository();
     $userDatas = $user->getUserById($id);

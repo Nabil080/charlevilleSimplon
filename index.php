@@ -6,7 +6,7 @@ require 'src/model/ConnectBdd.php';
 
 // TEMP POUR TEST SANS CONNEXION
 $user = new UsersRepository();
-$_SESSION['user'] = $user->getUserById(2);
+$_SESSION['user'] = $user->getUserById(1);
 
 if (isset($_GET['action']) && $_GET['action'] !== '' && !isset($_GET['admin'])) {
     $action = $_GET['action'];
