@@ -133,5 +133,9 @@ function crudProjetPage()
 }
 
 function projectFormPage() {
+    $UserRepo = new UsersRepository;
+    // $User = $UserRepo->getUserById($_SESSION['user']->role_id);
+    $User = $UserRepo->getUserById(3);
+
     include 'view/admin/projectAddForm.php';
 }
