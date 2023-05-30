@@ -124,7 +124,7 @@ class ProjectRepository extends ConnectBdd{
         $projects = [];
         $limit = $limitRequest == null ? "" : "LIMIT ".$limitRequest;
 
-        $req = $this->bdd->prepare("SELECT project_id FROM project $limit ORDER BY project_id DESC");
+        $req = $this->bdd->prepare("SELECT project_id FROM project $limit ORDER BY status_id ASC");
         $req->execute();
         $data = $req->fetchAll(PDO::FETCH_ASSOC);
 
@@ -239,6 +239,13 @@ class ProjectRepository extends ConnectBdd{
         $req = $this->bdd->prepare("UPDATE project SET promo_id = ? WHERE project_id = ?");
         $bool = $req->execute([$promoId, $projectId]);
         return $bool;
+    }
+
+    public function addProject($post,$files):void
+    {
+        $req = $this->bdd->prepare("INSERT INTO project (project_name,project_description,project_company_link) VALUES (?,?,?)");
+        $req->execute([$post['project'],$post['description'],$post['link']]);
+
     }
 }
 

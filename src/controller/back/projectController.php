@@ -52,4 +52,10 @@ function assignProject()
     echo json_encode($response);
 
 }
+
+function addProjectTraitement()
+{
+    $projectRepo = new ProjectRepository;
+    $projectRepo->addProject($_POST,$_FILES);
+}
 ?>

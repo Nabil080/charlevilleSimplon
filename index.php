@@ -32,7 +32,10 @@ if (isset($_GET['action']) && $_GET['action'] !== '' && !isset($_GET['admin'])) 
                     break;
                 // Afficher le formulaire de modification du projet
 
-                // Envoi du formulaire d'ajoute de projet
+                // Envoi du formulaire d'ajout de projet
+                case 'addProjectTraitement':
+                    addProjectTraitement();
+                    break;
                 // Envoi du formulaire de moficiation de projet
             }
             if ($_SESSION['user']['role'] <= 2) {

@@ -9,7 +9,7 @@
             <img src="assets/img/autres/projet.jpg" alt="image de décoration" class="img-fluid" />
         </div>
         <div class="md:w-1/2">
-            <form id="projectForm" class="flex flex-col items-center gap-6">
+            <form id="projectForm" enctype="multipart/form-data" class="flex flex-col items-center gap-6">
                 <?php if(isset($User->company)){?>
                     <h3 class="font-title text-main-red font-bold text-[20px] md:text-[24px]"><?=$User->company?></h3>
                     <input type="hidden" name="company" value="<?=$User->company?>" /> <!-- Variable à mettre -->
@@ -57,8 +57,19 @@
 
 <script>
     const form = document.querySelector('#projectForm');
-    form.addEventListener('click', (event) => {
+    form.addEventListener('submit', (event) => {
         event.preventDefault();
+
+        const formData = new FormData(form);
+
+        fetch('?action=addProjectTraitement',{
+            method: 'POST',
+            body: formData
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            console.log(data);
+        })
     })
 </script>
 <?php
