@@ -240,10 +240,31 @@ class PromoRepository extends ConnectBdd{
 
     }
 
-    public function validatePromo($id, array $accepted, array $rejected):void
+    public function validatePromo($promoId, array $accepted, array $rejected):void
     {
         $req = $this->bdd->prepare("UPDATE promo SET status_id = ? WHERE promo_id = ?");
-        $req->execute([12,$id]);
+        $req->execute([12,$promoId]);
+        $req->closeCursor();
+
+        foreach($accepted as $userId){
+            $this->validatePromoUser($promoId,$userId);
+        }
+        foreach($rejected as $userId){
+            $this->rejectPromoUser($promoId,$userId);
+        }
+    }
+
+    public function validatePromoUser($promoId, $userId):void
+    {
+        $req = $this->bdd->prepare("INSERT INTO promo_user (promo_id, user_id) VALUES (?,?)");
+        $req->execute([$promoId,$userId]);
+        $req->closeCursor();
+    }
+
+    public function rejectPromoUser($promoId, $userId):void
+    {
+        $req = $this->bdd->prepare("INSERT INTO promo_refused (promo_id, user_id) VALUES (?,?)");
+        $req->execute([$promoId,$userId]);
         $req->closeCursor();
     }
 }
