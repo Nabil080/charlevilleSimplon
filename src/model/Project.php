@@ -261,11 +261,29 @@ class ProjectRepository extends ConnectBdd{
             // message d'erreurs dans securizePdf
             $error = true;
         }
+        
+        $project = securizeString($post['project']);
+        if($project === false){
+            // message d'erreurs dans securizeString
+            $error = true;
+        }
+        
+        $description = securizeString($post['description']);
+        if($description === false){
+            // message d'erreurs dans securizeString
+            $error = true;
+        }
+
+        $link = securizeString($post['link']);
+        if($link === false){
+            // message d'erreurs dans securizeString
+            $error = true;
+        }
 
         if($error === false){
             $req = $this->bdd->prepare("INSERT INTO project (project_name,project_description,project_company_name,project_company_link,user_id, project_file, project_company_image, project_company_adress) VALUES (?,?,?,?,?,?,?,?)");
-            // $req->execute([$post['project'],$post['description'],$post['link']],$_SESSION['user']->id);
-            $req->execute([$post['project'],$post['description'],$company,$post['link'],3, $pdf, $image, $adress]);
+            $req->execute([$project,$description,$company,$link,3, $pdf, $image, $adress]);
+            // REMPLACE 3 PAR SESSION USER ID
 
             $response = array(
                 "status" => "success",

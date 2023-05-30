@@ -1,5 +1,33 @@
 <?php 
 
+function securizeString(string $string)
+{
+
+    if(!isset($string) OR empty($string) OR strlen($string) < 3){
+        if(strlen($string) < 3){
+            $response = array(
+                "status" => "failure",
+                "message" => "Le nom est trop court"
+            );
+            echo json_encode($response);
+        }else{
+
+            $response = array(
+                "status" => "failure",
+                "message" => "Le nom est invalide"
+            );
+
+            echo json_encode($response);
+        }
+        return false;
+    }else{
+        $safe_string = filter_var(trim($string), FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+        return $safe_string;
+    }
+}
+
+
 function securizeImage(array $filesImage){
     if(!empty($filesImage))
         {
