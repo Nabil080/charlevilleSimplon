@@ -242,24 +242,46 @@ class PromoRepository extends ConnectBdd{
 
     public function validatePromo($promoId, array $accepted, array $rejected):void
     {
-        $req = $this->bdd->prepare("UPDATE promo SET status_id = ? WHERE promo_id = ?");
-        $req->execute([12,$promoId]);
-        $req->closeCursor();
-
         $UserRepo = new UsersRepository;
         $acceptedMails = [];
         $refusedMails = [];
+        $headers = "From: simplon@mail.com\r\n";
+        $headers .= "Reply-To: simplon@mail.com\r\n";
+        $headers .= "Content-Type: text/plain; charset=utf-8\r\n";
+        
+        $req = $this->bdd->prepare("UPDATE promo SET status_id = ? WHERE promo_id = ?");
+        $req->execute([12,$promoId]);
+        $req->closeCursor();
 
         foreach($accepted as $userId){
             $this->validatePromoUser($promoId,$userId);
             $acceptedMails[] = $UserRepo->getUserMail($userId);
         }
+
+        $Promo = $this->getPromoById($promoId);
+
+        $to = join(",",$acceptedMails);
+        $subject = "Vous avez été accepté pour votre formation $Promo->name";
+        $message = "Bonjour,\r\n\r\n
+            Vous avez été accepté pour la formation de : $Promo->name  \r\n\r\n
+            Bienvenue à Simplon ! La formation débute le $Promo->start et se termine le $Promo->end. \r\n\r\n
+            Cordialement,\r\n
+            Jordan Kunys";
+        mail($to, $subject, $message, $headers);
+
         foreach($rejected as $userId){
             $this->rejectPromoUser($promoId,$userId);
             $refusedMails[] = $UserRepo->getUserMail($userId);
         }
 
-        
+        $to = join(",",$refusedMails);
+        $subject = "Vous avez malheureusement été refusé pour votre formation $Promo->name";
+        $message = "Bonjour,\r\n\r\n
+            Vous avez été refusé pour la formation de : $Promo->name  \r\n\r\n
+            Mais n'abandonnez pas ! Formez vous via notre plateforme en ligne ! \r\n\r\n
+            Cordialement,\r\n
+            Jordan Kunys";
+        mail($to, $subject, $message, $headers);
     }
 
     public function validatePromoUser($promoId, $userId):void

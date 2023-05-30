@@ -23,7 +23,12 @@ function validatePromotion(){
     $promoRepo = new PromoRepository ;
     $promoRepo->validatePromo($promo,$accepted,$rejected);
 
-    var_dump($promo);
-    var_dump($accepted);
-    var_dump($rejected);
+    $response = array(
+        "status" => "success",
+        "message" => "Les candidats ont été informés",
+        "accepted" => $accepted,
+        "rejected" => $rejected,
+    );
+
+    echo json_encode($response);
 }
