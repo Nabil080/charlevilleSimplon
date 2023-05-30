@@ -37,14 +37,15 @@ window.addEventListener("scroll", function () { // Ecoute le scroll sur la page
 // Gestion de validation de promotion
 
 const validationForm = document.querySelectorAll("form.validationForm");
+// console.log(validationForm)
 validationForm.forEach(form => {
-    console.log(form);
+    // console.log(form);
     const validationDiv = form.querySelector(".validationDiv")
-    console.log(validationDiv);
-    const showValidation = form.querySelector("#showValidation");
-    console.log(showValidation);
+    // console.log(validationDiv);
+    const showValidation = form.querySelector(".showValidation");
+    // console.log(showValidation);
     const inputsValidation = validationDiv.querySelectorAll("input");
-    const numberCheckedContainer = form.querySelector("numberChecked");
+    const numberCheckedContainer = form.querySelector(".numberChecked");
     let containerValidation = 0;
     let reset = 0;
 
