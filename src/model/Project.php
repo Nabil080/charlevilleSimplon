@@ -71,10 +71,12 @@ class ProjectRepository extends ConnectBdd{
         $User = $userRepo->getUserById($data['user_id']);
         $project->user = $User;
 
-        $Formator = new User;
-        $userRepo = new UsersRepository;
-        $Formator = $userRepo->getUserById($data['user_id_project_formator']);
-        $project->formator = $Formator;
+        if(isset($data['user_id_project_formator'])){
+            $Formator = new User;
+            $userRepo = new UsersRepository;
+            $Formator = $userRepo->getUserById($data['user_id_project_formator']);
+            $project->formator = $Formator;
+        }
 
         $Status = new Status;
         $statusRepo = new StatusRepository;
@@ -239,6 +241,69 @@ class ProjectRepository extends ConnectBdd{
         $req = $this->bdd->prepare("UPDATE project SET promo_id = ? WHERE project_id = ?");
         $bool = $req->execute([$promoId, $projectId]);
         return $bool;
+    }
+
+    public function updateProject($post,$files):void
+    {
+        $error = false;
+
+        $project = securizeString($post['project']);
+        if($project === false){
+            // message d'erreurs dans securizeString
+            $error = true;
+        }
+        
+        $description = securizeString($post['description']);
+        if($description === false){
+            // message d'erreurs dans securizeString
+            $error = true;
+        }
+
+        $link = securizeString($post['link']);
+        if($link === false){
+            // message d'erreurs dans securizeString
+            $error = true;
+        }
+
+
+        $query = "UPDATE project SET project_name = ?, project_description = ?, project_company_link = ?, user_id = ?";
+        $execute = [$project,$description,$link,3];
+
+        // traitment fichier pdf
+        if($files['pdf']['error'] == 0){
+            $pdf = securizePdf($files['pdf']);
+            if($pdf === false){
+                // message d'erreurs dans securizePdf
+                $error = true;
+            }
+            $query .= ", project_file = ?";
+            $execute[] = $pdf;
+        }
+
+        // traitment image
+        if($files['image']['error'] == 0){
+            $image = securizeImage($files['image']);
+            if($image === false){
+                // message d'erreurs dans securizePdf
+                $error = true;
+            }
+            $query .= ", project_company_image = ?";
+            $execute[] = $image;
+        }
+        
+        $execute[] = $_POST['project_id'];
+        if($error === false){
+            $req = $this->bdd->prepare($query."WHERE project_id = ?");
+            $req->execute($execute);
+            // REMPLACE 3 PAR SESSION USER ID
+
+            $response = array(
+                "status" => "success",
+                "message" => "Le projet a bien été modifié.",
+            );
+        
+            echo json_encode($response);
+        }
     }
 
     public function addProject($post,$files):void

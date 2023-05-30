@@ -37,6 +37,9 @@ if (isset($_GET['action']) && $_GET['action'] !== '' && !isset($_GET['admin'])) 
                     addProjectTraitement();
                     break;
                 // Envoi du formulaire de moficiation de projet
+                case 'updateProjectTraitement':
+                    updateProjectTraitement();
+                    break;
             }
             if ($_SESSION['user']['role'] <= 2) {
                 switch ($action) {

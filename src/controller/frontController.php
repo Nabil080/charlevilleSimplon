@@ -136,6 +136,10 @@ function projectFormPage() {
     $UserRepo = new UsersRepository;
     // $User = $UserRepo->getUserById($_SESSION['user']->role_id);
     $User = $UserRepo->getUserById(3);
+    if(isset($_GET['id'])){
+        $projectRepo = new ProjectRepository;
+        $project=$projectRepo->getProjectById($_GET['id']);
+    }
 
     include 'view/admin/projectAddForm.php';
 }

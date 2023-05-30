@@ -7,14 +7,14 @@ function securizeString(string $string)
         if(strlen($string) < 3){
             $response = array(
                 "status" => "failure",
-                "message" => "Le nom est trop court"
+                "message" => "Un champ est trop court"
             );
             echo json_encode($response);
         }else{
 
             $response = array(
                 "status" => "failure",
-                "message" => "Le nom est invalide"
+                "message" => "Un champ est invalide"
             );
 
             echo json_encode($response);
