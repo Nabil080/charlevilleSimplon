@@ -43,14 +43,31 @@ function profilePage()
 }
 function myProfile()
 {
+    $id = $_GET['id'];
+    $isMyProfile = false;
+    if (!isset($_GET['id'])) {
+        if (!isset($_SESSION['id'])) {
+            homepage();
+        } else {
+            $id = $_SESSION['user']->id;
+            $isMyProfile = true;
+        }
+    }
+    else if (isset($_GET['id']) && $_GET['id'] == $_SESSION['user']->id) {
+        $id = $_SESSION['user']->id;
+        $isMyProfile = true;
+    }
+    else {
+        $id = $_GET['id'];
+    }
     $user = new UsersRepository();
-    $userDatas = $user->getUserById($_SESSION['user']->id);
+    $userDatas = $user->getUserById($id);
     $tags = new TagRepository();
     $allTags = $tags->getAllTags();
     $status = new StatusRepository();
     $allStatus = $status->getAllStatus();
     $ProjectRepo = new ProjectRepository();
-    $userProjects = $ProjectRepo->getUserProjects($_SESSION['user']->id);
+    $userProjects = $ProjectRepo->getUserProjects($id);
     var_dump($userProjects);
     // foreach ($userProjects as $userProject){
     //     $eachProject = new ProjectRepository();

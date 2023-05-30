@@ -3,19 +3,27 @@ $title = "Espace personnel";
 ?>
 
 <?php ob_start();
-// var_dump($userProjects);
+var_dump($userDatas);
 ?>
 <!-- Section photo et description -->
 <div class="background bg-main-white overflow-x-hidden min-h-[100vh]">
 
-    <?php if ($userDatas->role->id == 5) {?>
+    
+    <?php
+    if($isMyProfile == false)
+    {
+        $notMyProfile = 'style="display:none"';
+    } else {
+        $notMyProfile = '';
+    }
+    if ($userDatas->role->id == 5) {?>
         <!-- PROFIL PROSPECT : RETIRER LE HIDDEN POUR L'AFFICHER -->
         <section class="prospect_profil">
             <!-- Image de profil -->
             <div class="picture_desc grid grid-cols-1 lg:grid-cols-2 items-center py-[50px] px-[8%] 2xl:px-[5%]">
                 <div class="picture max-h-screen lg:mr-5">
                     <img class="w-full rounded-t-lg" src="assets/img/avatar/<?= $userDatas->avatar ?>" alt="Image de profil">
-                    <button class="bg-main-red w-full text-main-white text-[16px] lg:text-[28px] py-3 rounded-b-lg">Changer ma photo de profil</button>
+                    <button class="bg-main-red w-full text-main-white text-[16px] lg:text-[28px] py-3 rounded-b-lg" <?= $notMyProfile; ?>>Changer ma photo de profil</button>
                 </div>
                 <div class="description lg:ml-5 h-[100%] flex flex-col">
                     <h1 class="text-main-red font-title text-[28px] lg:text-[48px] font-semibold pt-5 text-center lg:text-left"><span class="uppercase"><?= $userDatas->name ?></span> <?= $userDatas->surname ?></h1>
@@ -40,7 +48,7 @@ $title = "Espace personnel";
                             <li class="list-disc">Nationalité : <?= $userDatas->nationality ?></li>
                             <li class="list-disc">Numéro Pôle Emploi : <?= $userDatas->numero_pe ?></li>
                         </ul>
-                        <button data-modal-target="modify-prospect_data-modal" data-modal-toggle="modify-prospect_data-modal" class="bg-main-red w-full lg:w-3/5 text-main-white text-[18px] uppercase py-3 rounded-b-lg lg:rounded-none lg:mb-4 lg:flex lg:justify-center lg:mx-auto">Editer ma candidature</button>
+                        <button data-modal-target="modify-prospect_data-modal" data-modal-toggle="modify-prospect_data-modal" class="bg-main-red w-full lg:w-3/5 text-main-white text-[18px] uppercase py-3 rounded-b-lg lg:rounded-none lg:mb-4 lg:flex lg:justify-center lg:mx-auto" <?= $notMyProfile; ?>>Editer ma candidature</button>
                         <!-- Modal de modification des informations persos -->
                         <section id="modify-prospect_data-modal" data-modal-placement="center" tabindex="-1" aria-hidden="true" class="backdrop:brightness-50 fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto lg:inset-0 h-[calc(100%-1rem)] lg:h-full">
                             <div class="relative w-full h-fit max-w-lg lg:h-auto">
@@ -101,13 +109,12 @@ $title = "Espace personnel";
                 <!-- Image de profil -->
                 <div class="picture max-h-screen mx-auto">
                     <img class="max-w-full max-h-[600px] overflow-scroll rounded-t-lg" src="assets/img/avatar/<?= $userDatas->avatar ?>" alt="Image de profil">
-                    <button class="bg-main-red w-full text-main-white text-[16px] lg:text-[28px] py-3 rounded-b-lg">Changer ma photo de profil</button>
+                    <button class="bg-main-red w-full text-main-white text-[16px] lg:text-[28px] py-3 rounded-b-lg" <?= $notMyProfile; ?>>Changer ma photo de profil</button>
                 </div>
                 <!-- Description -->
                 <div class="description lg:ml-5 h-[100%] flex flex-col">
                     <div class="edit_profil flex justify-center lg:justify-normal items-center pt-5">
                         <h1 id="title" class="text-main-red font-title text-[28px] lg:text-[48px] font-semibold text-center pr-5"><span class="uppercase"><?= $userDatas->name ?></span> <?= $userDatas->surname ?></h1>
-                        <!-- bouton d'edit du nom -->
                     </div>
                     <!-- Statut -->
                     <div class="formation_status flex justify-center lg:justify-normal items-center px-3 mt-2">
@@ -129,9 +136,9 @@ $title = "Espace personnel";
                                 <?php if ($userDatas->status->id == 2){?> bg-main-orange<?php }?>">
                             </span>
                             <span class="text-[16px] flex justify-center italic"><?= $userDatas->status->name ?> depuis <?=  substr($userDatas->status_date, 0,-6) ?></span>
-                            <div onclick="swapDivsById('user-status','user-status-update')" class="cursor-pointer">
+                            <div onclick="swapDivsById('user-status','user-status-update')" class="cursor-pointer" <?= $notMyProfile; ?>>
                                 <i class="fa-solid fa-pen text-main-red w-[20px] ml-3"></i>
-                                <span class="hidden sm:inline-block text-[10px] lg:text-base text-main-red"> Modifier</span>
+                                <span class="sm:inline-block text-[10px] lg:text-base text-main-red"> Modifier</span>
                             </div>
                         </div>
                     </div>
@@ -147,14 +154,14 @@ $title = "Espace personnel";
                             <button type="submit" class="py-2 px-4 bg-main-red border-main-white border text-main-white my-4 mr-4">Modifier <i class="fa-solid fa-check"></i></button>
                             <span onclick="swapDivsById('description','description-update')" class="cursor-pointer">Annuler <i class="fa-solid fa-xmark"></i></span>
                         </form>
-                        <button onclick="swapDivsById('description','description-update')" class="bg-main-red w-full text-main-white text-[14px] lg:text-[20px] lg:mt-2 py-2 rounded-b-lg">Editer ma description</button>
+                        <button onclick="swapDivsById('description','description-update')" class="bg-main-red w-full text-main-white text-[14px] lg:text-[20px] lg:mt-2 py-2 rounded-b-lg" <?= $notMyProfile; ?>>Editer ma description</button>
                     </div>
 
 
                     <div class="flex flex-col lg:flex-row justify-center my-3 lg:my-0 lg:mt-4">
                         <div id="cv" class="flex items-center justify-center lg:flex-row flex-col my-4 lg:my-0 lg:mx-auto">
                             <a href="upload/cv/<?= $userDatas->cv ?>" class="bg-main-red text-main-white text-[16px] rounded-[5px] mx-auto py-3 lg:py-1 px-2 lg:px-4" target="_blank">Voir le C.V.</a>
-                            <div onclick="swapDivsById('cv','cv-update')" class="modify-cv cursor-pointer flex items-center pt-2 pl-3">
+                            <div onclick="swapDivsById('cv','cv-update')" class="modify-cv cursor-pointer flex items-center pt-2 pl-3" <?= $notMyProfile; ?>>
                                 <i class="fa-solid fa-download text-main-red w-[20px]"></i>
                                 <span class="text-[10px] text-main-red">Modifier mon C.V.</span>
                             </div>
@@ -164,7 +171,7 @@ $title = "Espace personnel";
                             <button type="submit"><i class="fa-solid fa-check text-main-red"></i></button>
                             <i onclick="swapDivsById('cv','cv-update')" class="fa-solid fa-xmark text-main-red cursor-pointer"></i>
                         </form>
-                        <a href="mailto:<?= $userDatas->email ?>" class="bg-main-red text-main-white text-[16px] rounded-[5px] mx-auto py-3 lg:py-1 px-2 lg:px-4">Contacter</a>
+                        <a href="mailto:<?= $userDatas->email ?>" class="flex items-center my-4 bg-main-red text-main-white text-[16px] rounded-[5px] mx-auto py-3 lg:py-1 px-2 lg:px-4">Contacter</a>
                     </div>
                 </div>
             </div>
@@ -175,7 +182,7 @@ $title = "Espace personnel";
                     <section class="sites_skills my-5 px-[8%] lg:px-[3%] lg:ml-10">
                         <div class="modify-cv flex items-center pt-2 lg:mb-5">
                             <h3 class="font-title text-[24px] font-bold uppercase lg:mb-3">Sites web
-                            <i onclick="swapDivsById('links','links-update')" class="fa-solid fa-pen cursor-pointer text-main-red w-[20px] pl-3"></i></h3>
+                            <i onclick="swapDivsById('links','links-update')" class="fa-solid fa-pen cursor-pointer text-main-red w-[20px] pl-3" <?= $notMyProfile; ?>></i></h3>
                         </div>
                         <div id="links">
                             <div class="sites flex items-center px-3 mt-2 mb-4 lg:mb-5">
@@ -201,7 +208,7 @@ $title = "Espace personnel";
                         </form>
                         <div class="modify-cv flex items-center pt-2  lg:mt-5">
                             <h3 class="font-title text-[24px] font-bold uppercase lg:mb-3">Compétences
-                            <i onclick="swapDivsById('skills','skills-update')" class="fa-solid fa-pen cursor-pointer text-main-red w-[20px] pl-3"></i></h3>
+                            <i onclick="swapDivsById('skills','skills-update')" class="fa-solid fa-pen cursor-pointer text-main-red w-[20px] pl-3" <?= $notMyProfile; ?>></i></h3>
                         </div>
                         <form id="skills-update" class="hidden">
                             <select multiple name="skills">
@@ -221,7 +228,7 @@ $title = "Espace personnel";
                             <?php } ?>
                         </div>
                         <!-- Modifier ses infos persos -->
-                        <div class="modify-infos flex items-center pt-2 lg:mt-10 lg:mb-10">
+                        <div class="modify-infos flex items-center pt-2 lg:mt-10 lg:mb-10" <?= $notMyProfile; ?>>
                             <button data-modal-target="modify-data-modal" data-modal-toggle="modify-data-modal" class="bg-main-red text-main-white text-[16px] rounded-[5px] mx-auto py-3 px-2">Modifier mes informations personnelles</button>
                         </div>
                     </section>
@@ -291,7 +298,7 @@ $title = "Espace personnel";
                     <section class="sectionChange">
                         <iframe class="w-full min-h-[300px] lg:min-h-[500px]" src="<?= $userDatas->highlight ?>" title="iframe du projet phare"></iframe>
                         <!-- Boutons modifier/supprimer le projet -->
-                        <div class="boutons lg:flex lg:flex-row lg:justify-between">
+                        <div class="boutons lg:flex lg:flex-row lg:justify-between" <?= $notMyProfile; ?>>
                             <div id="main-project" class="flex justify-between mt-5 mx-5 mb-2">
                                 <div data-modal-target="main-project-update" data-modal-toggle="main-project-update" class="flex items-center pt-2 lg:mr-10 cursor-pointer">
                                     <i class="fa-solid fa-pen fa-xl text-main-red "></i>
@@ -303,7 +310,7 @@ $title = "Espace personnel";
                                 </div>
                             </div>
                             <!-- Bouton ajouter un projet perso -->
-                            <div data-modal-target="main-project-update" data-modal-toggle="main-project-update" class="flex items-center justify-end mt-5 mb-2 cursor-pointer">
+                            <div data-modal-target="main-project-update" data-modal-toggle="main-project-update" class="flex items-center justify-end mt-5 mb-2 cursor-pointer" <?= $notMyProfile; ?>>
                                 <span class="w-[40px] h-[40px] border bg-main-red rounded-full mr-2 flex items-center justify-center"><i class="fa-solid fa-plus text-main-white text-[25px] font-bold"></i></span>
                                 <p class="text-main-red italic text-[18px] font-semibold mr-4">Ajouter mon projet phare</p>
                             </div>
@@ -336,7 +343,7 @@ $title = "Espace personnel";
                                     </div>
                                     <a href="https://wikipedia.com" class="bg-main-red py-2 px-4 rounded-full text-main-white text-center text-[16px] mx-auto my-2 hover:bg-main-white hover:text-main-red hover:border border-main-red">Voir le projet </a>
                                     <!-- Boutons modifier/supprimer le projet -->
-                                    <div class="flex justify-between">
+                                    <div class="flex justify-between" <?= $notMyProfile; ?>>
                                         <div class="flex items-center pt-2">
                                             <i class="fa-solid fa-pen fa-xl text-main-red "></i>
                                             <span class="hidden lg:block text-[10px] text-main-red">Modifier</span>
@@ -370,7 +377,7 @@ $title = "Espace personnel";
                                     </div>
                                     <a href="https://wikipedia.com" class="bg-main-red py-2 px-4 rounded-full text-main-white text-center text-[16px] mx-auto my-2 hover:bg-main-white hover:text-main-red hover:border border-main-red">Voir le projet </a>
                                     <!-- Boutons modifier/supprimer le projet -->
-                                    <div class="flex justify-between">
+                                    <div class="flex justify-between" <?= $notMyProfile; ?>>
                                         <div class="flex items-center pt-2">
                                             <i class="fa-solid fa-pen fa-xl text-main-red "></i>
                                             <span class="hidden lg:block text-[10px] text-main-red">Modifier</span>
@@ -404,7 +411,7 @@ $title = "Espace personnel";
                                     </div>
                                     <a href="https://wikipedia.com" class="bg-main-red py-2 px-4 rounded-full text-main-white text-center text-[16px] mx-auto my-2 hover:bg-main-white hover:text-main-red hover:border border-main-red">Voir le projet </a>
                                     <!-- Boutons modifier/supprimer le projet -->
-                                    <div class="flex justify-between">
+                                    <div class="flex justify-between" <?= $notMyProfile; ?>>
                                         <div class="flex items-center pt-2">
                                             <i class="fa-solid fa-pen fa-xl text-main-red "></i>
                                             <span class="hidden lg:block text-[10px] text-main-red">Modifier</span>
@@ -550,6 +557,7 @@ $title = "Espace personnel";
 
 <?php ob_start(); ?>
 <script src="assets/js/editor_setup.js"></script>
+<script src="assets/js/tabs.js"></script>
 <?php $script = ob_get_clean(); ?>
 
 <?php require 'view/layout.php'; ?>
