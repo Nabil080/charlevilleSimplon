@@ -331,10 +331,11 @@ class PromoRepository extends ConnectBdd{
 
         var_dump($POST);
 
+        $lastId = $this->bdd->lastInsertId();
         if(isset($POST['formators'])){
             foreach($POST['formators'] as $formator){
                 $req = $this->bdd->prepare("INSERT INTO promo_user (user_id,promo_id) VALUES (?,?)");
-                $req->execute([$formator,$POST['promo']]);
+                $req->execute([$formator,$lastId]);
             }
         }
     }
