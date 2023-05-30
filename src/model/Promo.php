@@ -329,13 +329,14 @@ class PromoRepository extends ConnectBdd{
         $req = $this->bdd->prepare("INSERT INTO promo (promo_name,promo_start,promo_end,formation_id) VALUES (?,?,?,?)");
         $req->execute([$formation,$POST['start'],$POST['end'],$POST['formation']]);
 
-        // var_dump($POST);
+        var_dump($POST);
 
-        foreach($POST['formators'] as $formator){
-            $req = $this->bdd->prepare("INSERT INTO promo_user (user_id,promo_id) VALUES (?,?)");
-            $req->execute([$formator,$POST['promo']]);
+        if(isset($POST['formators'])){
+            foreach($POST['formators'] as $formator){
+                $req = $this->bdd->prepare("INSERT INTO promo_user (user_id,promo_id) VALUES (?,?)");
+                $req->execute([$formator,$POST['promo']]);
+            }
         }
-
     }
 
     public function updatePromo(array $POST):void
