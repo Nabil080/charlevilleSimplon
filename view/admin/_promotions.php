@@ -2,15 +2,9 @@
 
 <?php ob_start();
 
-$UserRepo = new UsersRepository;
-$formators = $UserRepo->getAllFormators();
-// var_dump($formators);
-$FormationRepo = new FormationRepository;
-$formations = $FormationRepo->getAllFormations();
-
-include("view/admin/crudPromotion.php");
+include("view/admin/promo/crudPromotion.php");
 include("view/admin/modalContact.php");
-include("view/admin/add/modalAddPromotion.php");
+include("view/admin/promo/modalAddPromotion.php");
 
 $content = ob_get_clean(); ?>
 

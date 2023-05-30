@@ -1,5 +1,5 @@
 const validationForms = document.querySelectorAll('form.validationForm');
-console.log(validationForms);
+// console.log(validationForms);
 
 validationForms.forEach((form) => {
     form.addEventListener('submit', (e) => {

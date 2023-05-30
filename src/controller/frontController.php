@@ -114,8 +114,12 @@ function crudPromotionPage()
 {
     $PromoRepo = new PromoRepository;
     $promos = $PromoRepo->getPromos();
-    
+
     $UserRepo = new UsersRepository;
+    $FormationRepo = new FormationRepository;
+    $formators = $UserRepo->getAllFormators();
+    $formations = $FormationRepo->getAllFormations();
+
     include 'view/admin/_promotions.php';
 }
 

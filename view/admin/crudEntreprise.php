@@ -42,18 +42,18 @@
                     </button>
                 </td>
                 <td class="px-4 py-3 border">
-                    <button data-user-mail="<?=$user->email?>" data-user-id="<?=$user->id?>" data-user-name="<?=$user->name,' ',$user->surname?> " data-modal-target="modal-contact" data-modal-toggle="modal-contact" class="block w-full md:w-auto text-white bg-main-gray hover:bg-gray-900 focus:ring-4 focus:outline-none 
+                    <button data-user-mail="<?= $user->email ?>" data-user-id="<?= $user->id ?>" data-user-name="<?= $user->name, ' ', $user->surname ?> " data-modal-target="modal-contact" data-modal-toggle="modal-contact" class="block w-full md:w-auto text-white bg-main-gray hover:bg-gray-900 focus:ring-4 focus:outline-none 
                                     font-medium rounded-lg text-sm px-5 py-2.5 mt-2 mx-auto text-center" type="button">
                         <i class="fa-solid fa-envelope text-main-white"></i>
                     </button>
                 </td>
                 <td class="px-4 py-3 mx-auto items-center text-center">
-                <form action="?action=deleteLearner" method="post">
-                        <input type="hidden" name="user_id" value=<?=$user->id?>>
-                        <input type="hidden" name="promo_id" value=<?=$UserRepo->getUserPromo('apprenant',$user->id)[0]->id?>>
+                    <form action="?action=deleteLearner" method="post">
+                        <input type="hidden" name="user_id" value=<?= $user->id ?>>
+                        <input type="hidden" name="promo_id" value=<?= $UserRepo->getUserPromo('apprenant', $user->id)[0]->id ?>>
                         <button class="block w-full md:w-auto text-white bg-main-gray hover:bg-gray-900 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 mt-2 mx-auto text-center" type="submit">
-                        <i class="fa-solid fa-trash-can text-main-white"></i>
-                    </button>
+                            <i class="fa-solid fa-trash-can text-main-white"></i>
+                        </button>
                     </form>
                 </td>
             </tr>

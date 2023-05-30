@@ -16,10 +16,32 @@ function addPromotion(){
     if(isset($_POST)){
         $promoRepo = new PromoRepository;
         $promoRepo->addPromo($_POST);
+
+        $response = array(
+            "status" => "success",
+            "message" => "La promotion a bien été ajouté.",
+        );
+    
+        echo json_encode($response);
+    }else{
+        $response = array(
+            "status" => "failure",
+            "message" => "La promotion n'a pas été ajouté.",
+        );
+    
+        echo json_encode($response);
+    }
+}
+
+function updatePromotion(){
+    if(isset($_POST)){
+        $promoRepo = new PromoRepository;
+        $promoRepo->updatePromo($_POST);
     }else{
         echo 'erreur';
     }
 }
+
 
 function validatePromotion(){
     $jsonData = file_get_contents('php://input',true);

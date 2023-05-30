@@ -64,11 +64,11 @@ class PromoRepository extends ConnectBdd{
         $datas = $req->fetchAll(PDO::FETCH_ASSOC);
         $promos = [];
 
-        foreach ($datas as $data) 
+        foreach ($datas as $data)
         {
             $Promo = new Promo(
-                $data['promo_id'], 
-                $data['promo_name'], 
+                $data['promo_id'],
+                $data['promo_name'],
                 $promoRepository->formateDate($data['promo_start']),
                 $promoRepository->formateDate($data['promo_end']),
                 $data['status_id'],
@@ -85,13 +85,28 @@ class PromoRepository extends ConnectBdd{
 
     public function formateDate($date):string
     {
-        $mois = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'];
-        $explode  = substr($date, '5', '2');
-        $date = date('d-m-Y', strtotime($date));
-        $findMois = $mois[($explode * 1) - 1];
-        $date = str_replace($explode, $findMois, $date);
-        $date = str_replace("-", " ", $date);
+        // $mois = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'];
+        // $explode  = substr($date, '5', '2');
+        // $date = date('d-m-Y', strtotime($date));
+        // $findMois = $mois[((int)$explode) - 1];
+        // $date = str_replace($explode, $findMois, $date);
+        // $date = str_replace("-", " ", $date);
         return $date;
+    }
+
+    public function getPromoDate($id):array
+    {
+        $dates = [];
+
+        $req = $this->bdd->prepare("SELECT promo_start, promo_end FROM promo WHERE promo_id = ?");
+        $req->execute([$id]);
+        $data = $req->fetch();
+
+        $dates['start'] = $data['promo_start'] ;
+        $dates['end'] = $data['promo_end'] ;
+
+
+
     }
 
     public function getAllApprenants($id):array 
@@ -310,13 +325,28 @@ class PromoRepository extends ConnectBdd{
     {
         $FormationRepo = new FormationRepository;
         $formation = $FormationRepo->getFormationById($POST['formation'])->name;
-        // $year = $start;
-        // var_dump($formation);
-        // var_dump($_POST);
 
         $req = $this->bdd->prepare("INSERT INTO promo (promo_name,promo_start,promo_end,formation_id) VALUES (?,?,?,?)");
         $req->execute([$formation,$POST['start'],$POST['end'],$POST['formation']]);
 
+        // var_dump($POST);
+
+        foreach($POST['formators'] as $formator){
+            $req = $this->bdd->prepare("INSERT INTO promo_user (user_id,promo_id) VALUES (?,?)");
+            $req->execute([$formator,$POST['promo']]);
+        }
+
+    }
+
+    public function updatePromo(array $POST):void
+    {
+        var_dump($POST);
+        $FormationRepo = new FormationRepository;
+        $formation = $FormationRepo->getFormationById($POST['formation'])->name;
+        var_dump($formation);
+
+        $req = $this->bdd->prepare("UPDATE promo SET promo_name = ?, promo_start = ?, promo_end = ?, formation_id = ? WHERE promo_id = ?");
+        $req->execute([$formation,$POST['start'],$POST['end'],$POST['formation']],$POST['promo']);
     }
 }
 

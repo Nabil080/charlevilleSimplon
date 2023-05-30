@@ -31,7 +31,7 @@
                     <!------Formateurs------->
                     <h3 class="text-center lg:col-start-1 lg:col-end-3 font-main-title text-[22px] font-bold mt-4">Formateurs
                     </h3>
-                    <?php foreach ($formators as $formateur) { 
+                    <?php foreach ($promoFormators as $formateur) {
                         include('view/template/_formateur_card.php');
                     } ?>
                 </div>

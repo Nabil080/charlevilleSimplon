@@ -76,7 +76,7 @@
                     <div id="apple-imac-27-dropdown" class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow  ">
                         <ul class="py-1 text-sm text-gray-700 " aria-labelledby="apple-imac-27-dropdown-button">
                             <li>
-                                <a href="#" class="block py-2 px-4">Modifier</a>
+                                <a data-modal-target="modal-update-<?=$promo->id?>" data-modal-toggle="modal-update-<?=$promo->id?>" class="cursor-pointer block py-2 px-4">Modifier</a>
                             </li>
                         </ul>
                         <div class="py-1">
@@ -91,11 +91,13 @@
                 include("view/admin/modalApprenant.php");
             } else {
                 $candidates = $PromoRepo->getPromoCandidates($promo->id);
-                include("view/admin/modalValidationPromo.php");
+                include("view/admin/promo/modalValidationPromo.php");
             }
-            $formators = $PromoRepo->getAllFormateurs($promo->id);
+
+            $promoFormators = $PromoRepo->getAllFormateurs($promo->id);
             include("view/admin/modalFormateur.php");
             include("view/admin/modalProjet.php");
+            include("view/admin/promo/modalUpdatePromotion.php");
             include("view/admin/modalDelete.php");
         }
         ?>

@@ -44,13 +44,13 @@ let containerValidation = 0;
 let reset = 0;
 
 for (i = 0; i < inputsValidation.length; i++) { // Pour chaque input
-    inputsValidation[i].addEventListener("change", (e) => { // Surveille si un input change 
+    inputsValidation[i].addEventListener("change", (e) => { // Surveille si un input change
             if (typeof containerValidation !== 'undefined' && containerValidation !== 0) { // Si le container des input est déja défini, le supprime 
                 containerValidation.remove();
             }
 
             let allText = [];  // Remet le tableau qui contient les input en vide
-            let boolInput = true; // Défini un booléan 
+            let boolInput = true; // Défini un booléan
             let numberChecked = 0; // Réinitialise le nombre des inputs checked
             numberCheckedContainer.textContent = ""; // Réinitialise le container de comptage des inputs checked
 

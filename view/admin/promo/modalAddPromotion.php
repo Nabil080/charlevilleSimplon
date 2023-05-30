@@ -10,9 +10,10 @@
             <div id="co" class="px-6 py-6 lg:px-8">
                 <h3 class="mb-4 text-xl uppercase w-fit mx-auto font-bold font-title text-main-red">Ajout de promo</h3>
                 <form class="space-y-6" action="?action=addPromotion" method="post">
+                <input type="hidden" value="<?=$promo->id?>" name="promo">
                     <div>
                         <label for="formation" class="block mb-2 text-sm font-medium  text-main-red">Formation</label>
-                        <select name="formation" multiple id="formation" class=" border text-sm rounded-md block w-full p-2.5 border-main-red text-main-red" required>
+                        <select name="formation" id="formation" class=" border text-sm rounded-md block w-full p-2.5 border-main-red text-main-red" required>
                         <?php foreach($formations as $formation){?>
                             <option value="<?=$formation->id?>"><?=$formation->name?></option>
                         <?php } ?>
@@ -20,9 +21,9 @@
                     </div>
                     <div>
                         <label for="formators" class="block mb-2 text-sm font-medium  text-main-red">Formateurs</label>
-                        <select name="formators" id="formators" class=" border text-sm rounded-md block w-full p-2.5 border-main-red text-main-red">
-                            <?php foreach($formators as $formator){
-                                var_dump($formators)?>
+                        <select name="formators[]" multiple id="formators" class=" border text-sm rounded-md block w-full p-2.5 border-main-red text-main-red">
+                            <option disabled selected value> Formateurs(non obligatoire) </option>
+                            <?php foreach($formators as $formator){?>
                                 <option value="<?=$formator->id?>"><?=$formator->name?></option>
                             <?php } ?>
                         </select>

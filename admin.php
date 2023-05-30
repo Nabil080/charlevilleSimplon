@@ -64,4 +64,9 @@ switch ($action) {
     case 'addPromotion':
         addPromotion();
         break;
+
+    // Traitement update de PROMOTION
+    case 'updatePromotion';
+        updatePromotion();
+        break;
 }
