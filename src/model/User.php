@@ -392,4 +392,13 @@ $stmt->execute([$pass, $email]);
 
         return $projects;
     }
+
+    public function getUserMail($userId):string
+    {
+        $req = $this->bdd->prepare("SELECT `user_email` FROM `user` WHERE `user_id` = ?");
+        $req->execute([$userId]);
+        $data = $req->fetch();
+
+        return $data['user_email'];
+    }
 }

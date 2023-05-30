@@ -246,12 +246,20 @@ class PromoRepository extends ConnectBdd{
         $req->execute([12,$promoId]);
         $req->closeCursor();
 
+        $UserRepo = new UsersRepository;
+        $acceptedMails = [];
+        $refusedMails = [];
+
         foreach($accepted as $userId){
             $this->validatePromoUser($promoId,$userId);
+            $acceptedMails[] = $UserRepo->getUserMail($userId);
         }
         foreach($rejected as $userId){
             $this->rejectPromoUser($promoId,$userId);
+            $refusedMails[] = $UserRepo->getUserMail($userId);
         }
+
+        
     }
 
     public function validatePromoUser($promoId, $userId):void
