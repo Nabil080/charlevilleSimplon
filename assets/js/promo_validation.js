@@ -22,12 +22,22 @@ validationForms.forEach((form) => {
         });
     
         let data = {
-            Promo: promo,
-            Accepted: accepted,
-            Rejected: rejected
+            promo: promo,
+            accepted: accepted,
+            rejected: rejected
         };
 
         console.log(data);
+
+        fetch('?action=validatePromotion',{
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        .then((response) => response.json())
+        .then((data) => console.log(data))
 
         // FETCH METHOD POST
 

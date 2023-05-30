@@ -54,4 +54,9 @@ switch ($action) {
     case 'assignFormator':
         assignFormator();
         break;
+
+    // Traitement valider une PROMOTION
+    case 'validatePromotion':
+        validatePromotion();
+        break;
 }

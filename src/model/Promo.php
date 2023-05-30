@@ -239,6 +239,13 @@ class PromoRepository extends ConnectBdd{
         $req->closeCursor();
 
     }
+
+    public function validatePromo($id, array $accepted, array $rejected):void
+    {
+        $req = $this->bdd->prepare("UPDATE promo SET status_id = ? WHERE promo_id = ?");
+        $req->execute([12,$id]);
+        $req->closeCursor();
+    }
 }
 
 
