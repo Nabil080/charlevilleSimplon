@@ -81,10 +81,11 @@ class ProjectRepository extends ConnectBdd{
         $Status = $statusRepo->getStatusById($data['status_id']);
         $project->status = $Status;
 
-        // $Promo = new Promo;
-        $promoRepo = new PromoRepository;
-        $Promo = $promoRepo->getPromoById($data['promo_id']);
-        $project->promo = $Promo;
+        if(isset($data['promo_id'])){
+            $promoRepo = new PromoRepository;
+            $Promo = $promoRepo->getPromoById($data['promo_id']);
+            $project->promo = $Promo;
+        }
 
         // $formationRepo = new FormationRepository;
         // $Formation = $formationRepo->getFormationById($data['formation_id']);
@@ -217,6 +218,27 @@ class ProjectRepository extends ConnectBdd{
         $req = $this->bdd->prepare("DELETE FROM project WHERE project_id =?");
         $req->execute([$id]);
         $req->closeCursor();
+    }
+
+    public function updateProjectStatus(string $validation, int $id):bool
+    {
+        if ($validation == "accept") {
+            $status_id = 10;
+        } else if ($validation == "refused") {
+            $status_id = 11;
+        }
+        $req = $this->bdd->prepare("UPDATE project SET status_id = ? WHERE project_id = ?");
+        $bool = $req->execute([$status_id, $id]);
+
+
+        return $bool;
+    }
+
+    public function assignProjectToPromo(int $projectId ,int $promoId):bool
+    {
+        $req = $this->bdd->prepare("UPDATE project SET promo_id = ? WHERE project_id = ?");
+        $bool = $req->execute([$promoId, $projectId]);
+        return $bool;
     }
 }
 

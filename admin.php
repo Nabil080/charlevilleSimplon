@@ -74,4 +74,9 @@ switch ($action) {
     case 'updatePromotion';
         updatePromotion();
         break;
+
+    // Traitment assignation de PROJET
+    case 'assignProject':
+        assignProject();
+        break;
 }

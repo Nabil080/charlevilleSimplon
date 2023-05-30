@@ -125,6 +125,10 @@ function crudPromotionPage()
 
 function crudProjetPage()
 {
+    $ProjectRepo = new ProjectRepository;
+    $projects = $ProjectRepo->getAllProjects();
+    $PromoRepo = new PromoRepository;
+    $promos = $PromoRepo->getActivePromos();
     include 'view/admin/_projects.php';
 }
 

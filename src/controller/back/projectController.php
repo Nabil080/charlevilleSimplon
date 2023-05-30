@@ -38,4 +38,11 @@ function deleteProject()
     echo json_encode($response);
 }
 
+function assignProject()
+{
+    $projectRepo = new ProjectRepository ;
+    var_dump($_POST);
+    $projectRepo->updateProjectStatus('accept',$_POST['project']);
+    $projectRepo->assignProjectToPromo($_POST['project'],$_POST['promo']);
+}
 ?>
