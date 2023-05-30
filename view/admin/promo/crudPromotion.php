@@ -42,7 +42,7 @@
                             Voir les apprenants
                         </button>
                     <?php } else { ?>
-                        <button data-modal-target="modal-promotion-<?= $promo->id ?>" data-modal-toggle="modal-promotion-<?= $promo->id ?>" class="block w-full md:w-auto text-white bg-main-gray hover:bg-gray-700 focus:ring-4 focus:outline-none 
+                        <button data-modal-target="modal-promotion-<?=$promo->id?>" data-modal-toggle="modal-promotion-<?=$promo->id?>" class="block w-full md:w-auto text-white bg-main-gray hover:bg-gray-700 focus:ring-4 focus:outline-none 
                                          font-medium rounded-lg text-sm px-5 mx-auto py-2.5 text-center" type="button">
                             Valider les candidatures
                         </button>
@@ -86,21 +86,26 @@
                 </td>
             </tr>
         <?php
-            if ($promo->status->id != 9) {
-                $apprenants = $PromoRepo->getAllApprenants($promo->id);
-                include("view/admin/modalApprenant.php");
-            } else {
-                $candidates = $PromoRepo->getPromoCandidates($promo->id);
-                include("view/admin/promo/modalValidationPromo.php");
-            }
-
-            $promoFormators = $PromoRepo->getAllFormateurs($promo->id);
-            include("view/admin/modalFormateur.php");
-            include("view/admin/modalProjet.php");
-            include("view/admin/promo/modalUpdatePromotion.php");
-            include("view/admin/modalDelete.php");
         }
         ?>
 
     </tbody>
 </table>
+
+<?php
+foreach ($promos as $promo) {
+    if ($promo->status->id != 9) {
+        $apprenants = $PromoRepo->getAllApprenants($promo->id);
+        include("view/admin/modalApprenant.php");
+    } else {
+        $candidates = $PromoRepo->getPromoCandidates($promo->id);
+        include("view/admin/promo/modalValidationPromo.php");
+    }
+
+    $promoFormators = $PromoRepo->getAllFormateurs($promo->id);
+    include("view/admin/modalFormateur.php");
+    include("view/admin/modalProjet.php");
+    include("view/admin/promo/modalUpdatePromotion.php");
+    include("view/admin/modalDelete.php");
+}
+?>
