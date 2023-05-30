@@ -34,10 +34,15 @@ switch ($action) {
     case 'deleteCandidate':
         deleteCandidate();
         break;
-        
+
     // Traitement suppression APPRENANT
     case 'deleteLearner':
         deleteLearner();
+        break;
+
+    // Traitement suppression totale USER
+    case 'deleteUser':
+        deleteUser();
         break;
 
     // Traitement suppression PROJET

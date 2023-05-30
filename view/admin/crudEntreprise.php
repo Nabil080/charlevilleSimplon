@@ -48,9 +48,8 @@
                     </button>
                 </td>
                 <td class="px-4 py-3 mx-auto items-center text-center">
-                    <form action="?action=deleteLearner" method="post">
+                    <form action="?action=deleteUser" method="post">
                         <input type="hidden" name="user_id" value=<?= $user->id ?>>
-                        <input type="hidden" name="promo_id" value=<?= $UserRepo->getUserPromo('apprenant', $user->id)[0]->id ?>>
                         <button class="block w-full md:w-auto text-white bg-main-gray hover:bg-gray-900 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 mt-2 mx-auto text-center" type="submit">
                             <i class="fa-solid fa-trash-can text-main-white"></i>
                         </button>

@@ -161,6 +161,13 @@ function deleteLearner()
 
 }
 
+function deleteUser()
+{
+    var_dump($_POST);
+    $userRepo = new UsersRepository;
+    $userRepo->deleteUser($_POST['user_id']);
+}
+
 function assignFormator()
 {
     // Check si admin

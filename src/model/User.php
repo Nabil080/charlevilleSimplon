@@ -401,4 +401,28 @@ $stmt->execute([$pass, $email]);
 
         return $data['user_email'];
     }
+
+    public function deleteUser($userId):void
+    {
+        $req = $this->bdd->prepare("DELETE FROM `user_tag` WHERE `user_id` = ?");
+        $req->execute([$_POST['user_id']]);
+
+        $req = $this->bdd->prepare("DELETE FROM `promo_user` WHERE `user_id` = ?");
+        $req->execute([$_POST['user_id']]);
+
+        $req = $this->bdd->prepare("DELETE FROM `promo_refused` WHERE `user_id` = ?");
+        $req->execute([$_POST['user_id']]);
+
+        $req = $this->bdd->prepare("DELETE FROM `promo_candidate` WHERE `user_id` = ?");
+        $req->execute([$_POST['user_id']]);
+
+        $req = $this->bdd->prepare("DELETE FROM `project_team` WHERE `user_id` = ?");
+        $req->execute([$_POST['user_id']]);
+
+        $req = $this->bdd->prepare("DELETE FROM `project` WHERE `user_id` = ?");
+        $req->execute([$_POST['user_id']]);
+
+        $req = $this->bdd->prepare("DELETE FROM `user` WHERE `user_id` = ?");
+        $req->execute([$_POST['user_id']]);
+    }
 }
