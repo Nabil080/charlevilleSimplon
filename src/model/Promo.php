@@ -83,13 +83,10 @@ class PromoRepository extends ConnectBdd{
     
     public function formateDate($date):string
     {
-        $mois = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'];
-        $explode  = substr($date, '5', '2');
-        $date = date('d-m-Y', strtotime($date));
-        $findMois = $mois[((int) $explode) - 1];
-        $date = str_replace($explode, $findMois, $date);
-        $date = str_replace("-", " ", $date);
-        return $date;
+        setlocale(LC_TIME,'fr_FR','french','French_France.1252','fr_FR.ISO8859-1','fra');
+        $datefmt = new IntlDateFormatter('fr_FR', 0, 0, NULL, NULL, 'dd MMMM yyyy');
+        $formatedDate = $datefmt->format(date_create($date));
+        return $formatedDate;
     }
 
     public function getPromoProjects($id):array

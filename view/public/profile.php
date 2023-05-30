@@ -320,115 +320,50 @@ $title = "Espace personnel";
                     <!-- Fin de la section : projet phare -->
 
                     <!-- Section : mes projets persos -->
-                    <?php 
-                    // var_dump($project) ?>
                     <section class="sectionChange hidden border">
                         <div class="projet-cards w-11/12 mt-2 gap-6 mx-auto flex flex-col justify-center lg:flex-row lg:flex-wrap">
-                            <!-- card projet 1 -->
-                            <article id="projet-card-1" class="project-card max-w-[400px] border-2 border-black rounded-lg p-4 2xl:flex gap-6 2xl:p-6">
-                                <!-- partie info projet -->
-                                <div class="flex-col text-[12px] flex">
-                                    <!-- titre projet -->
-                                    <h2 class="font-title text-main-red italic font-bold text-[30px] my-2 text-center"><a href="lien du projet">Mon super projet</a></h2>
-                                    <div class=" flex w-full justify-between italic border-b border-main-red"><span>Débuté le 25/03/2002</span></div>
-                                    <!-- contenu projet -->
-                                    <div class="text-base flex-grow flex-col">
-                                        <p class="pl-[20%] line-clamp-5 mt-4 mb-4 text-[14px] font-medium text-end">The best kept secret of The Bahamas is the country’s sheer size and diversity. With 16 major islands, The Bahamas is an unmatched destination The best kept secret of The Bahamas is the country’s sheer size and diversity. With 16 major islands, The Bahamas is an unmatched destination The best kept secret of The Bahamas is the country’s sheer size and diversity. With 16 major islands, The Bahamas is an unmatched destination The best kept secret of The Bahamas is the country’s sheer size and diversity. With 16 major islands, The Bahamas is an unmatched destination The best kept secret of The Bahamas is the country’s sheer size and diversity. With 16 major islands, The Bahamas is an unmatched destination</p>
-                                        <div class="my-2 grow"><img class="w-2/3 flex mx-auto" src="assets/img/maquette.png" alt="image du projet"></div>
-                                        <div id="end" class="mt-auto">
-                                            <!-- tags projet -->
-                                            <div class="uppercase space-x-4 my-4 [&>tag]:bg-main-gray [&>tag]:bg-opacity-10 [&>tag]:py-2 [&>tag]:px-4 [&>tag]:rounded-full flex justify-around">
-                                                <tag> html</tag>
-                                                <tag> css</tag>
-                                                <tag> react</tag>
+                            <!-- card projet -->
+                            <?php foreach ($userProjects as $project){
+                                if($project->type->id == 2) { ?>
+                                <article id="projet-card-1" class="project-card max-w-[400px] border-2 border-black rounded-lg p-4 2xl:flex gap-6 2xl:p-6">
+                                    <!-- partie info projet -->
+                                    <?php 
+                                var_dump($project) ?>
+                                    <div class="flex-col text-[12px] flex">
+                                        <!-- titre projet -->
+                                        <h2 class="font-title text-main-red italic font-bold text-[30px] my-2 text-center"><a href="lien du projet"><?= $project->name ?></a></h2>
+                                        <div class=" flex w-full justify-between italic border-b border-main-red"><span>Publié le <?= $project->start ?></span></div>
+                                        <!-- contenu projet -->
+                                        <div class="text-base flex-grow flex-col">
+                                            <p class="pl-[20%] line-clamp-5 mt-4 mb-4 text-[14px] font-medium text-end"><?= $project->description ?></p>
+                                            <div class="my-2 grow"><img class="w-2/3 flex mx-auto" src="" alt="image du projet"></div>
+                                            <div id="end" class="mt-auto">
+                                                <!-- tags projet -->
+                                                <div class="uppercase space-x-4 my-4 [&>tag]:bg-main-gray [&>tag]:bg-opacity-10 [&>tag]:py-2 [&>tag]:px-4 [&>tag]:rounded-full flex justify-around">
+                                                    <tag> html</tag>
+                                                    <tag> css</tag>
+                                                    <tag> react</tag>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <a href="https://wikipedia.com" class="bg-main-red py-2 px-4 rounded-full text-main-white text-center text-[16px] mx-auto my-2 hover:bg-main-white hover:text-main-red hover:border border-main-red">Voir le projet </a>
+                                        <!-- Boutons modifier/supprimer le projet -->
+                                        <div class="flex justify-between" <?= $notMyProfile; ?>>
+                                            <div class="flex items-center pt-2">
+                                                <i class="fa-solid fa-pen fa-xl text-main-red "></i>
+                                                <span class="hidden lg:block text-[10px] text-main-red">Modifier</span>
+                                            </div>
+                                            <div data-modal-target="confirm_delete_project" data-modal-toggle="confirm_delete_project" class="flex items-center pt-2 cursor-pointer">
+                                                <i class="fa-solid fa-trash-can fa-xl text-main-red "></i>
+                                                <span class="hidden lg:block text-[10px] text-main-red">Supprimer</span>
                                             </div>
                                         </div>
                                     </div>
-                                    <a href="https://wikipedia.com" class="bg-main-red py-2 px-4 rounded-full text-main-white text-center text-[16px] mx-auto my-2 hover:bg-main-white hover:text-main-red hover:border border-main-red">Voir le projet </a>
-                                    <!-- Boutons modifier/supprimer le projet -->
-                                    <div class="flex justify-between" <?= $notMyProfile; ?>>
-                                        <div class="flex items-center pt-2">
-                                            <i class="fa-solid fa-pen fa-xl text-main-red "></i>
-                                            <span class="hidden lg:block text-[10px] text-main-red">Modifier</span>
-                                        </div>
-                                        <div data-modal-target="confirm_delete_project" data-modal-toggle="confirm_delete_project" class="flex items-center pt-2 cursor-pointer">
-                                            <i class="fa-solid fa-trash-can fa-xl text-main-red "></i>
-                                            <span class="hidden lg:block text-[10px] text-main-red">Supprimer</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </article>
-                            <!-- card projet 2 -->
-                            <article id="projet-card-2" class="project-card max-w-[400px] border-2 border-black rounded-lg p-4 2xl:flex gap-6 2xl:p-6">
-                                <!-- partie info projet -->
-                                <div class="flex-col text-[12px] flex">
-                                    <!-- titre projet -->
-                                    <h2 class="font-title text-main-red italic font-bold text-[30px] my-2 text-center"><a href="lien du projet">Mon super projet</a></h2>
-                                    <div class=" flex w-full justify-between italic border-b border-main-red"><span>Débuté le 25/03/2002</span></div>
-                                    <!-- contenu projet -->
-                                    <div class="text-base flex-grow flex-col">
-                                        <p class="pl-[20%] line-clamp-5 mt-4 mb-4 text-[14px] font-medium text-end">The best kept secret of The Bahamas is the country’s sheer size and diversity. With 16 major islands, The Bahamas is an unmatched destination The best kept secret of The Bahamas is the country’s sheer size and diversity. With 16 major islands, The Bahamas is an unmatched destination The best kept secret of The Bahamas is the country’s sheer size and diversity. With 16 major islands, The Bahamas is an unmatched destination The best kept secret of The Bahamas is the country’s sheer size and diversity. With 16 major islands, The Bahamas is an unmatched destination The best kept secret of The Bahamas is the country’s sheer size and diversity. With 16 major islands, The Bahamas is an unmatched destination</p>
-                                        <div class="my-2 grow"><img class="w-2/3 flex mx-auto" src="assets/img/maquette.png" alt="image du projet"></div>
-                                        <div id="end" class="mt-auto">
-                                            <!-- tags projet -->
-                                            <div class="uppercase space-x-4 my-4 [&>tag]:bg-main-gray [&>tag]:bg-opacity-10 [&>tag]:py-2 [&>tag]:px-4 [&>tag]:rounded-full flex justify-around">
-                                                <tag> html</tag>
-                                                <tag> css</tag>
-                                                <tag> react</tag>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <a href="https://wikipedia.com" class="bg-main-red py-2 px-4 rounded-full text-main-white text-center text-[16px] mx-auto my-2 hover:bg-main-white hover:text-main-red hover:border border-main-red">Voir le projet </a>
-                                    <!-- Boutons modifier/supprimer le projet -->
-                                    <div class="flex justify-between" <?= $notMyProfile; ?>>
-                                        <div class="flex items-center pt-2">
-                                            <i class="fa-solid fa-pen fa-xl text-main-red "></i>
-                                            <span class="hidden lg:block text-[10px] text-main-red">Modifier</span>
-                                        </div>
-                                        <div class="flex items-center pt-2">
-                                            <i class="fa-solid fa-trash-can fa-xl text-main-red "></i>
-                                            <span class="hidden lg:block text-[10px] text-main-red">Supprimer</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </article>
-                            <!-- card projet 3 -->
-                            <article id="projet-card-3" class="project-card max-w-[400px] border-2 border-black rounded-lg p-4 2xl:flex gap-6 2xl:p-6">
-                                <!-- partie info projet -->
-                                <div class="flex-col text-[12px] flex">
-                                    <!-- titre projet -->
-                                    <h2 class="font-title text-main-red italic font-bold text-[30px] my-2 text-center"><a href="lien du projet">Mon super projet</a></h2>
-                                    <div class=" flex w-full justify-between italic border-b border-main-red"><span>Débuté le 25/03/2002</span></div>
-                                    <!-- contenu projet -->
-                                    <div class="text-base flex-grow flex-col">
-                                        <p class="pl-[20%] line-clamp-5 mt-4 mb-4 text-[14px] font-medium text-end">The best kept secret of The Bahamas is the country’s sheer size and diversity. With 16 major islands, The Bahamas is an unmatched destination The best kept secret of The Bahamas is the country’s sheer size and diversity. With 16 major islands, The Bahamas is an unmatched destination The best kept secret of The Bahamas is the country’s sheer size and diversity. With 16 major islands, The Bahamas is an unmatched destination The best kept secret of The Bahamas is the country’s sheer size and diversity. With 16 major islands, The Bahamas is an unmatched destination The best kept secret of The Bahamas is the country’s sheer size and diversity. With 16 major islands, The Bahamas is an unmatched destination</p>
-                                        <div class="my-2 grow"><img class="w-2/3 flex mx-auto" src="assets/img/maquette.png" alt="image du projet"></div>
-                                        <div id="end" class="mt-auto">
-                                            <!-- tags projet -->
-                                            <div class="uppercase space-x-4 my-4 [&>tag]:bg-main-gray [&>tag]:bg-opacity-10 [&>tag]:py-2 [&>tag]:px-4 [&>tag]:rounded-full flex justify-around">
-                                                <tag> html</tag>
-                                                <tag> css</tag>
-                                                <tag> react</tag>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <a href="https://wikipedia.com" class="bg-main-red py-2 px-4 rounded-full text-main-white text-center text-[16px] mx-auto my-2 hover:bg-main-white hover:text-main-red hover:border border-main-red">Voir le projet </a>
-                                    <!-- Boutons modifier/supprimer le projet -->
-                                    <div class="flex justify-between" <?= $notMyProfile; ?>>
-                                        <div class="flex items-center pt-2">
-                                            <i class="fa-solid fa-pen fa-xl text-main-red "></i>
-                                            <span class="hidden lg:block text-[10px] text-main-red">Modifier</span>
-                                        </div>
-                                        <div class="flex items-center pt-2">
-                                            <i class="fa-solid fa-trash-can fa-xl text-main-red "></i>
-                                            <span class="hidden lg:block text-[10px] text-main-red">Supprimer</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </article>
+                                </article>
+                            <?php }} ?>
                         </div>
                         <!-- Bouton ajouter un projet perso -->
-                        <div class="flex items-center justify-end mb-5 mt-2 mr-3">
+                        <div class="flex items-center justify-end mb-5 mt-2 mr-3" <?= $notMyProfile; ?>>
                             <span class="w-[40px] h-[40px] border bg-main-red rounded-full mr-2 flex items-center justify-center"><i class="fa-solid fa-plus text-main-white text-[25px] font-bold"></i></span>
                             <p class="text-main-red italic text-[18px] font-semibold">Ajouter un projet perso</p>
                         </div>
@@ -502,7 +437,8 @@ $title = "Espace personnel";
                 <h2 class="font-bold font-title text-main-red italic text-[30px] mb-4">Mes projets Simplon</h2>
                 <div class="projets-simplon flex justify-center flex-wrap gap-6">
 
-                    <?php foreach ($userProjects as $project){ ?>
+                    <?php foreach ($userProjects as $project){
+                        if($project->type->id == 1) { ?>
                     <!-- card projet -->
                     <article id="projet-card-1" class="project-card max-w-[500px] border-2 bg-main-white border-black rounded-lg p-4 mb-8 2xl:flex gap-6 2xl:p-6">
                         <!-- partie entreprise desktop -->
@@ -546,7 +482,7 @@ $title = "Espace personnel";
                             <div class="flex flex-wrap"><p class="font-title font-bold mr-2">Adresse :</p><p class="text-sm pt-0.5 text-left font-light"><?= $project->company_adress ?></p></div>
                         </div>
                     </article>
-                    <?php } ?>
+                    <?php }} ?>
                 </div>
             </section>
 
