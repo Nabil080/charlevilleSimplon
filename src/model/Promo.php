@@ -106,7 +106,7 @@ class PromoRepository extends ConnectBdd{
         $dates['end'] = $data['promo_end'] ;
 
 
-
+        return $dates;
     }
 
     public function getAllApprenants($id):array 
