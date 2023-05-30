@@ -42,8 +42,20 @@ function projectGestionPage()
         $projectRepository = new ProjectRepository;
         $projects = $projectRepository->getEntrepriseProjects($_SESSION['user']->id);
         include 'view/public/project_gestion.php';
+    } else if ($_SESSION['user']->role-> id == 1){
+        $promoRepository = new PromoRepository;
+        $promos =   $promoRepository->getActivePromos();
+        $projectRepository = new ProjectRepository;
+        $projects = $projectRepository->getWaitingProjects();
+        include 'view/public/project_gestion.php';
+
+    } else if ($_SESSION['user']->role-> id == 2) {
+        $projectRepository = new ProjectRepository;
+        $projects = $projectRepository->getFormateurProjects($_SESSION['user']->id);
+        include 'view/public/project_gestion.php';
+
     } else {
-        header('Location:?homepage');
+        header('Location:?action=homepage');
     }
 
 }

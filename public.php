@@ -40,6 +40,13 @@ switch ($action) {
     case 'registerTreatment':
         registerTreatment();
         break;
+    // Gestions projet
+    case 'validationProjectTreatment':
+        validationProjectTreatment();
+        break;
+    case 'assignTeamToProject':
+        assignTeamToProject();
+        break;
     // Envoie du traitement d'activation de compte
     // Envoie du traitement du formulaire de connexion
 

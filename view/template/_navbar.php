@@ -50,9 +50,9 @@
               <i class="md:ml-2 fa-solid fa-user text-[44px] sm:text-[62px] justify-self-center  md:text-[20px]"  style="color: #BD3124;"></i>
               <?php if (isset($_SESSION['user']->role->id)){
                       if ($_SESSION['user']->role->id == 3) {?>
-                <p class="text-[24px] sm:text-[36px] md:text-[20px] xl:text-[24px]"><a>Mes Projets</a></p>
+                <p class="text-[24px] sm:text-[36px] md:text-[20px] xl:text-[24px]"><a href="?action=projectGestionPage">Mes Projets</a></p>
                   <?php } else { ?>
-                <p class="text-[24px] sm:text-[36px] md:text-[20px] xl:text-[24px]"><a>Compte</a></p>
+                <p class="text-[24px] sm:text-[36px] md:text-[20px] xl:text-[24px]"><a href="">Compte</a></p>
               <?php 
               }
               } else {

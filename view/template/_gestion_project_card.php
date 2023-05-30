@@ -1,4 +1,21 @@
-<article id="project-1" class="">
+<article class="relative mt-2">
+
+    <!-- statut projet -->
+    <div id="status<?= $x ?>" class="absolute -top-8 italic flex items-center font-bold text-xl"><p>Statut du projet : <?= $project->status->name ?> 
+    <?php  
+
+        if (isset($project->start) && $project->status->id == 12) {
+        echo $project->start;
+    } ?></p>
+        <i class="fa fa-circle ml-2 mt-1 
+        <?php if (isset($project->status) && $project->status->id == 10 || $project->status->id = 12) { ?>
+            text-green-500
+        <?php } else if (isset($project->status) && $project->status->id == 11) { ?>
+            text-red-500
+        <?php } else if (isset($project->status) && $project->status->id == 9) { ?>
+            text-orange-500
+        <?php } ?> animate-pulse"></i>
+    </div>
         <!-- card projet -->
         <div id="projet-card-1" class="project-card max-w-[1000px] border-2 border-black rounded-lg p-4 md:flex gap-6  md:p-6">
             <!-- partie entreprise desktop -->
@@ -65,21 +82,57 @@
             </div>
         </div>
         <!-- boutons projet -->
-        <form class="mt-6 flex lg:text-lg [&>div]:grid [&>div]:place-content-center">
-            <!-- refuser -->
-            <div class="w-fit px-6 md:!flex gap-2 md:items-center hover:text-main-red cursor-pointer" onclick="deleteProject('project-1')">
-                <i class="fa-solid fa-xmark"></i><p class="hidden md:block"> Refuser </p>
-            </div>
-            <!-- select promo -->
-            <div class="grow">
-                <select class="w-full" name="promo" id="">
-                    <option value="1">Développeurs Web et Web Mobile 2023</option><option value="2">Concepteurs développeurs d'application 2023</option>
-                </select>
-            </div>
-            <!-- accepter -->
-            <button type="submit" class="w-fit px-6 md:flex md:items-center gap-2 hover:text-main-red cursor-pointer" onclick="acceptProject('project-1')">
-                <p class="hidden md:block"> Accepter</p><i class="fa-solid fa-check"></i>
-            </button>
-        </form>
+        <?php if (isset($_SESSION['user']) && $_SESSION['user']->role->id == 3 && $project->status->id == 9 ) { ?> <!--1-->
+            <form id="<?= $x ?>" class="validationProjectForm mt-6 flex lg:text-lg [&>div]:grid [&>div]:place-content-center">
+                <!-- refuser -->
+                <button type="submit" onclick="refuseProject(<?= $i ?>, <?= $x ?>)" class="w-fit px-6 md:!flex gap-2 md:items-center hover:text-main-red cursor-pointer">
+                    <i  class="fa-solid fa-xmark"></i>
+                    <p class=" hidden md:block"> Refuser </p>
+                </button>
+                <!-- select promo -->
+                <div class="grow">
+                    
+                        <select class="w-full" name="promo" id="">
+                            <?php foreach ($promos as $promo) { ?>
+                                <option value="<?= $promo->id ?>"><?= $promo->name ?></option>
+                            <?php } 
+                             ?>
+                        </select>
+                            
+                    <input type="hidden" name="projectId" value="<?= $project->id ?>"/>           
+                </div>
+                <!-- accepter -->
+                <button type="submit" onclick="acceptProject(<?=$i?>, <?= $x ?>)" class="w-fit px-6 md:flex md:items-center gap-2 hover:text-main-red cursor-pointer">
+                    <p  class="hidden md:block"> Accepter</p><i class="fa-solid fa-check"></i>
+                </button>
+            </form>
+        <?php $i ++;
+         } else if (isset($_SESSION['user']) && $_SESSION['user']->role->id == 3 && $project->status->id == 10) { ?> <!--2-->
+            <form id="team<?= $x ?>" class="validationTeamForm mt-6 flex lg:text-lg [&>div]:grid [&>div]:place-content-center">
+                <!-- refuser -->
+                <p class="w-fit px-6 md:!flex gap-2  md:items-center hover:text-main-red cursor-pointer">
+                    <p class=" hidden md:block font-extrabold"> <?= $project->promo->name ?> </p>
+                </p>
+                <!-- select promo -->
+                <div class="grow">
+                    <?php $apprenants = $promoRepository->getAllApprenants($project->promo->id);?>
+                    <div data-dropdown-toggle="user-dropdown" class="text-center w-full cursor-pointer">Sélectionner les apprenants <i class="fa fa-chevron-down"></i></div>
+                    
+                    <select id="user-dropdown" multiple class="hidden z-20 w-fit" name="team[]" id="">
+                       <?php foreach ($apprenants as $apprenant) { ?>
+                            <option value="<?= $apprenant->id ?>"><?= $apprenant->name ?> <?= $apprenant->surname ?></option>
+                        <?php } 
+                        $y ++; // Compte le nombre de formulaire
+                        ?>
+                    </select>
+
+                    <input type="hidden" name="projectId" value="<?= $project->id ?>"/>           
+                </div>
+                <!-- accepter -->
+                <button type="submit" onclick="assignTeamToProject(<?= $i ?>, <?= $x ?>)" class="w-fit px-6 md:flex md:items-center gap-2 hover:text-main-red cursor-pointer">
+                    <p  class="hidden md:block"> Accepter</p><i class="fa-solid fa-check"></i>
+                </button>
+            </form>
+        <?php } ?>
         <div class="w-4/5 h-1 border-b-2 my-12 mx-auto"></div>
     </article>

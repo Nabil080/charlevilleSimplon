@@ -3,7 +3,7 @@ session_start();
 require 'src/model/ConnectBdd.php';
 
 $userRepository = new UsersRepository;
-$_SESSION['user'] = $userRepository->getUserByid(6);
+$_SESSION['user'] = $userRepository->getUserByid(4);
 // var_dump($_SESSION);
 
 if (isset($_GET['action']) && $_GET['action'] !== '' && !isset($_GET['admin'])) {
@@ -11,7 +11,7 @@ if (isset($_GET['action']) && $_GET['action'] !== '' && !isset($_GET['admin'])) 
     require 'public.php';
 
     if (isset($_SESSION['user'])) {
-        if ($_SESSION['user'] >=4) {
+        if ($_SESSION['user']->role->id >=4) {
             switch ($action) {
                 // Afficher son profil perso
                 case 'myProfile':

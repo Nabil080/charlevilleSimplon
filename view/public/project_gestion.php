@@ -20,8 +20,12 @@
 <!-- cards projets -->
 <section id="project-cards" class="px-4 grid w-fit mx-auto">
 <div class="w-4/5 h-1 border-b-2 mb-12 mx-auto"></div>
-    <?php foreach ($projects as $project) { 
+    <?php $i = 0;
+        $x = 0;
+        $y = 0;
+        foreach ($projects as $project) { 
             include('view/template/_gestion_project_card.php');
+            $x ++;
         } ?>
     <!-- projet 2 -->
     <article id="project-2" class="">
@@ -237,7 +241,7 @@
 
 
 <?php ob_start(); ?>
-<!-- <script src="assets/js/ajax_register.js"></script> -->
+<script src="assets/js/ajax_gestion_project.js"></script>
 <?php $script = ob_get_clean(); ?>
 
 <?php require 'view/layout.php'; ?>

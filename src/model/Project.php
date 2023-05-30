@@ -104,14 +104,14 @@ class ProjectRepository extends ConnectBdd{
         $project->start = $project->start = $data['project_start'];;
         $project->end = $project->end = $data['project_end'];
 
-        if($data['status_id'] == 12){
-            $project->start = $data['project_start'];
-            $project->end = 'En cours';
-        }
-        // if($data['status_id'] == 13){
+        // if($data['status_id'] == 12){
         //     $project->start = $data['project_start'];
-        //     $project->end = $data['project_end'];
+        //     $project->end = 'En cours';
         // }
+        //  if($data['status_id'] == 13){
+        //      $project->start = $data['project_start'];
+        //      $project->end = $data['project_end'];
+        //  }
 
 
 
@@ -194,11 +194,10 @@ class ProjectRepository extends ConnectBdd{
 
         }
 
-
         return $projects;
     }
 
-    public function getEntrepriseProjects($id):array 
+    public function getEntrepriseProjects(int $id):array 
     {
         $req = $this->bdd->prepare("SELECT project_id FROM project WHERE user_id = ?");
         $req->execute([$id]);
@@ -211,6 +210,69 @@ class ProjectRepository extends ConnectBdd{
             $project = $projectRepository->getProjectById($data);
             array_push($projects, $project);
         }   
+        return $projects;
+    }
+
+    public function updateProjectStatus(string $validation, int $id):bool
+    {
+        if ($validation == "accept") {
+            $status_id = 10;
+        } else if ($validation == "refused") {
+            $status_id = 11;
+        }
+        $req = $this->bdd->prepare("UPDATE project SET status_id = ? WHERE project_id = ?");
+        $bool = $req->execute([$status_id, $id]);
+        return $bool;
+    }
+
+    public function assignProjectToPromo(int $projectId ,int $promoId):bool
+    {
+        $req = $this->bdd->prepare("UPDATE project SET promo_id = ? WHERE project_id = ?");
+        $bool = $req->execute([$promoId, $projectId]);
+        return $bool;
+    }
+
+    public function assignTeamToProject(int $projectId, array $apprenants):array
+    {
+        $bools = [];
+        if (is_array($apprenants)) {
+            foreach ($apprenants as $apprenant) {
+                $req = $this->bdd->prepare("INSERT INTO project_team (project_id, user_id) VALUES (?, ?)");
+                $bool = $req->execute([$projectId, $apprenant]);
+                array_push($bools, $bool);
+            }
+            if ($bool == true) {
+                $req = $this->bdd->prepare("UPDATE project SET status_id = 12 WHERE project_id = ?");
+                $req->execute([$projectId]);
+                $req = $this->bdd->prepare("UPDATE project SET project_start = CURRENT_TIMESTAMP() WHERE project_id = ?");
+                $req->execute([$projectId]);
+            }
+            return $bools;
+        }
+    }
+
+    public function getWaitingProjects(): array
+    {
+        $req = $this->bdd->prepare("SELECT * FROM project WHERE status_id = 9");
+        $req->execute();
+        $projects = $req->fetchAll(PDO::FETCH_ASSOC);
+        return $projects;
+    }
+
+    public function getFormateurProjects($id): array
+    {
+        $req = $this->bdd->prepare("SELECT promo_id from promo_user WHERE user_id = ?");
+        $req->execute([$id]);
+        $promoIds = $req->fetchAll(PDO::FETCH_COLUMN);
+        $projects = [];
+        foreach ($promoIds as $promoId) {
+            $req = $this->bdd->prepare("SELECT * FROM project WHERE promo_id = ?");
+            $req->execute([$promoId]);
+            $project = $req->fetchAll(PDO::FETCH_ASSOC);
+            array_push($projects, $project);
+
+        }
+        var_dump($projects);
         return $projects;
     }
 }
