@@ -8,6 +8,9 @@
                 <?= "" ?> Nom de l'entreprise
             </th>
             <th scope="col" class="px-4 py-3 text-center">
+                <?= "" ?> Type de projet
+            </th>
+            <th scope="col" class="px-4 py-3 text-center">
                 <?= "" ?> Promotion
             </th>
             <th scope="col" class="px-4 py-3 text-center">
@@ -28,6 +31,9 @@
                 </th>
                 <td class="px-4 py-3 border">
                     <a href="<?=$project->company_link?>" target="_blank"><?=$project->company_name?></a>
+                </td>
+                <td class="px-4 py-3 border">
+                    <?=$project->type->name?>
                 </td>
                 <td class="px-4 py-3 border">
                     <?php if (isset($project->promo)){
@@ -86,12 +92,13 @@
                             </li>
                         </ul>
                         <div class="py-1">
-                            <a href="#" class="block py-2 px-4 text-sm text-gray-700">Supprimer</a>
+                            <a data-modal-target="modal-delete-<?= $project->id ?>" data-modal-toggle="modal-delete-<?= $project->id ?>" class="cursor-pointer block py-2 px-4 text-sm text-gray-700">Supprimer</a>
                         </div>
                     </div>
                 </td>
             </tr>
         <?php
+    include("view/admin/modalDelete.php");
         }
         ?>
 

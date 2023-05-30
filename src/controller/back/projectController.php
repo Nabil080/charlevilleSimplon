@@ -41,8 +41,15 @@ function deleteProject()
 function assignProject()
 {
     $projectRepo = new ProjectRepository ;
-    var_dump($_POST);
     $projectRepo->updateProjectStatus('accept',$_POST['project']);
     $projectRepo->assignProjectToPromo($_POST['project'],$_POST['promo']);
+
+    $response = array(
+        "status" => "success",
+        "message" => "Le projet a bien été assigné.",
+    );
+
+    echo json_encode($response);
+
 }
 ?>
