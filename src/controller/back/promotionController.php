@@ -12,6 +12,15 @@ function deletePromotion(){
     echo json_encode($response);
 }
 
+function addPromotion(){
+    if(isset($_POST)){
+        $promoRepo = new PromoRepository;
+        $promoRepo->addPromo($_POST);
+    }else{
+        echo 'erreur';
+    }
+}
+
 function validatePromotion(){
     $jsonData = file_get_contents('php://input',true);
     $data = json_decode($jsonData);

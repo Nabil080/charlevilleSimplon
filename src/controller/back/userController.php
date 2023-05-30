@@ -119,7 +119,7 @@ function contactUsers()
         $send=trim(htmlspecialchars(strip_tags($_POST['send']),ENT_QUOTES));
         $objet=trim(htmlspecialchars(strip_tags($_POST['object']),ENT_QUOTES));
         $message=trim(htmlspecialchars(strip_tags($_POST['message']),ENT_QUOTES));
-        
+
         $name = "Simplon Charleville";
         $email = "simplon.charleville@gmail.com";
     

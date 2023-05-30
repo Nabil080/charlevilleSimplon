@@ -181,7 +181,7 @@ class PromoRepository extends ConnectBdd{
 
         return $promos;
     }
-    
+
     public function getPromoMailList($id):array
     {
         $mailList = [];
@@ -304,6 +304,19 @@ class PromoRepository extends ConnectBdd{
         $req = $this->bdd->prepare("DELETE FROM promo_candidate WHERE promo_id = ? AND user_id = ?");
         $req->execute([$promoId,$userId]);
         $req->closeCursor();
+    }
+
+    public function addPromo(array $POST):void
+    {
+        $FormationRepo = new FormationRepository;
+        $formation = $FormationRepo->getFormationById($POST['formation'])->name;
+        // $year = $start;
+        // var_dump($formation);
+        // var_dump($_POST);
+
+        $req = $this->bdd->prepare("INSERT INTO promo (promo_name,promo_start,promo_end,formation_id) VALUES (?,?,?,?)");
+        $req->execute([$formation,$POST['start'],$POST['end'],$POST['formation']]);
+
     }
 }
 
