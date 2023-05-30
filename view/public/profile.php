@@ -4,6 +4,7 @@ $title = "Espace personnel";
 
 <?php ob_start();
 var_dump($userDatas);
+var_dump($userProjects);
 ?>
 <!-- Section photo et description -->
 <div class="background bg-main-white overflow-x-hidden min-h-[100vh]">
@@ -17,7 +18,7 @@ var_dump($userDatas);
         $notMyProfile = '';
     }
     if ($userDatas->role->id == 5) {?>
-        <!-- PROFIL PROSPECT : RETIRER LE HIDDEN POUR L'AFFICHER -->
+        <!-- PROFIL PROSPECT -->
         <section class="prospect_profil">
             <!-- Image de profil -->
             <div class="picture_desc grid grid-cols-1 lg:grid-cols-2 items-center py-[50px] px-[8%] 2xl:px-[5%]">
@@ -101,8 +102,8 @@ var_dump($userDatas);
         </section>
     <?php } ?>
 
-    <?php if ($userDatas->role->id == 4) { ?>
-        <!-- PROFIL APPRENANT A METTRE EN HIDDEN POUR PROSPECT -->
+    <?php if ($userDatas->role->id == 4 || $userDatas->role->id == 2) { ?>
+        <!-- PROFIL APPRENANT -->
         <section class="apprenant_profil">
             <!-- Image de profil et description -->
             <div class="picture_description grid grid-cols-1 lg:grid-cols-2 items-center px-[8%] lg:px-[3%]">
@@ -499,13 +500,14 @@ var_dump($userDatas);
                 <h2 class="font-bold font-title text-main-red italic text-[30px] mb-4">Mes projets Simplon</h2>
                 <div class="projets-simplon flex justify-center flex-wrap gap-6">
 
-                    <?php foreach ($userProjects as $projet){?>
+                    <?php foreach ($userProjects as $project){
+                        var_dump($project)?>
                     <!-- card projet -->
                     <article id="projet-card-1" class="project-card max-w-[500px] border-2 bg-main-white border-black rounded-lg p-4 mb-8 2xl:flex gap-6 2xl:p-6">
                         <!-- partie entreprise desktop -->
                         <div class="hidden 2xl:block w-1/3 border-r-2 border-main-gray pr-6">
                             <div class="my-2 flex-col">
-                                <div class="flex flex-wrap"><p class="font-title font-bold mr-2">Projet fourni par : </p><p><a href="lien vers la société" class="text-main-red underline font-bold text-sm">Pole formation CCI Ardennes</a></p></div>
+                                <div class="flex flex-wrap"><p class="font-title font-bold mr-2">Projet fourni par : </p><p><a href="<?= $project->company_link ?>" class="text-main-red underline font-bold text-sm"><?= $project->company_name ?></a></p></div>
                                 <div class="my-4 grow"><img class="" src="assets/img/logo" alt="logo de l'entreprise"></div>
                                 <div class="flex flex-wrap"><p class="font-title font-bold mr-2">Adresse :</p><p class="text-sm pt-0.5 text-left font-light">33 rue de la gare, 08000 Charleville-Mézières</p></div>
                             </div>
@@ -519,13 +521,13 @@ var_dump($userDatas);
                                 <tag> react</tag>
                             </div>
                             <!-- titre projet -->
-                            <h2 class="font-title text-main-red italic font-bold text-3xl my-2"><a href="lien du projet">Super projet de fou</a></h2>
-                            <div class="self-end flex w-3/4 justify-between italic border-b border-main-red"><span>Débuté le 25/03/2002</span><span>Fini le 25/03/2002</span></div>
+                            <h2 class="font-title text-main-red italic font-bold text-3xl my-2"><a href="lien du projet"><?= $project->name ?></a></h2>
+                            <div class="self-end flex w-3/4 justify-between italic border-b border-main-red"><span>Débuté le <?= $project->start ?></span><span>Fini le <?= $project->end ?></span></div>
                             <!-- contenu projet -->
                             <div class="text-base flex-grow flex-col">
-                                <p class="pl-[20%] line-clamp-5 mt-2 mb-4">The best kept secret of The Bahamas is the country’s sheer size and diversity. With 16 major islands, The Bahamas is an unmatched destination The best kept secret of The Bahamas is the country’s sheer size and diversity. With 16 major islands, The Bahamas is an unmatched destination The best kept secret of The Bahamas is the country’s sheer size and diversity. With 16 major islands, The Bahamas is an unmatched destination The best kept secret of The Bahamas is the country’s sheer size and diversity. With 16 major islands, The Bahamas is an unmatched destination The best kept secret of The Bahamas is the country’s sheer size and diversity. With 16 major islands, The Bahamas is an unmatched destination</p>
+                                <p class="pl-[20%] line-clamp-5 mt-2 mb-4"><?= $project->description ?></p>
                                 <div id="end" class="mt-auto">
-                                    <a href="page de la promo" class="bg-main-red py-2 px-4 rounded-full text-main-white my-2 hover:bg-main-white hover:text-main-red hover:border border-main-red">Développeurs Web 2023</a>
+                                    <a href="page de la promo" class="bg-main-red py-2 px-4 rounded-full text-main-white my-2 hover:bg-main-white hover:text-main-red hover:border border-main-red"><?= $project->promo ?></a>
                                     <div class="space-x-4 mt-4 mb-2 text-sm text-main-white [&>a]:bg-main-gray [&>a]:py-1 [&>a]:px-3 [&>a]:rounded-full">
                                         <a href="profil de l'apprenant" class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white">Nabil</a>
                                         <a href="profil de l'apprenant" class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white">Alexandre</a>

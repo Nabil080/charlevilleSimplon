@@ -68,15 +68,8 @@ function myProfile()
     $allStatus = $status->getAllStatus();
     $ProjectRepo = new ProjectRepository();
     $userProjects = $ProjectRepo->getUserProjects($id);
-    var_dump($userProjects);
-    // foreach ($userProjects as $userProject){
-    //     $eachProject = new ProjectRepository();
-    //     $userProject = $eachProject->getProjectById($userProject->id);
-    //     var_dump($userProject);
-    // }
-    // die;
     $Promo = new PromoRepository();
-    $userPromo = $Promo->getPromoByUserID($_SESSION['user']->id);
+    $userPromo = $Promo->getPromoByUserID($id);
     include 'view/public/profile.php';
 }
 
