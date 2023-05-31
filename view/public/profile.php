@@ -5,16 +5,19 @@ $title = "Espace personnel";
 <?php ob_start();
 // var_dump($userDatas);
 // var_dump($userProjects);
+// var_dump($_SESSION['user']->role->id);
 ?>
 <!-- Section photo et description -->
 <div class="background bg-main-white overflow-x-hidden min-h-[100vh]">
 
     
     <?php
-    if(!isset($isMyProfile) || $isMyProfile == false)
+    if($_SESSION['user']->role->id == 1){
+        $notMyProfile = '';
+    } elseif (!isset($isMyProfile) || $isMyProfile == false)
     {
         $notMyProfile = 'style="display:none"';
-    } else{
+    } else {
         $notMyProfile = '';
     }
     if ($userDatas->role->id == 5) {?>
@@ -23,7 +26,7 @@ $title = "Espace personnel";
             <!-- Image de profil -->
             <div class="picture_desc grid grid-cols-1 lg:grid-cols-2 items-center py-[50px] px-[8%] 2xl:px-[5%]">
                 <div class="picture max-h-screen lg:mr-5">
-                    <img class="w-full rounded-t-lg" src="assets/img/avatar/<?= $userDatas->avatar ?>" alt="Image de profil">
+                    <img class="w-full rounded-t-lg" src="<?= $userDatas->avatar ?>" alt="Image de profil">
                     <button class="bg-main-red w-full text-main-white text-[16px] lg:text-[28px] py-3 rounded-b-lg" <?= $notMyProfile; ?>>Changer ma photo de profil</button>
                 </div>
                 <div class="description lg:ml-5 h-[100%] flex flex-col">
@@ -109,7 +112,7 @@ $title = "Espace personnel";
             <div class="picture_description grid grid-cols-1 lg:grid-cols-2 items-center px-[8%] lg:px-[3%]">
                 <!-- Image de profil -->
                 <div class="picture max-h-screen mx-auto">
-                    <img class="max-w-full max-h-[600px] overflow-scroll rounded-t-lg" src="assets/img/avatar/<?= $userDatas->avatar ?>" alt="Image de profil">
+                    <img class="max-w-full max-h-[600px] overflow-scroll rounded-t-lg" src="<?= $userDatas->avatar ?>" alt="Image de profil">
                     <button class="bg-main-red w-full text-main-white text-[16px] lg:text-[28px] py-3 rounded-b-lg" <?= $notMyProfile; ?>>Changer ma photo de profil</button>
                 </div>
                 <!-- Description -->
@@ -328,7 +331,7 @@ $title = "Espace personnel";
                                 <article id="projet-card-1" class="project-card max-w-[400px] border-2 border-black rounded-lg p-4 2xl:flex gap-6 2xl:p-6">
                                     <!-- partie info projet -->
                                     <?php 
-                                var_dump($project) ?>
+                                // var_dump($project) ?>
                                     <div class="flex-col text-[12px] flex">
                                         <!-- titre projet -->
                                         <h2 class="font-title text-main-red italic font-bold text-[30px] my-2 text-center"><a href="lien du projet"><?= $project->name ?></a></h2>
@@ -336,17 +339,17 @@ $title = "Espace personnel";
                                         <!-- contenu projet -->
                                         <div class="text-base flex-grow flex-col">
                                             <p class="pl-[20%] line-clamp-5 mt-4 mb-4 text-[14px] font-medium text-end"><?= $project->description ?></p>
-                                            <div class="my-2 grow"><img class="w-2/3 flex mx-auto" src="" alt="image du projet"></div>
+                                            <div class="my-2 grow"><img class="w-2/3 flex mx-auto" src="<?= $project->model_image ?>" alt="image du projet"></div>
                                             <div id="end" class="mt-auto">
                                                 <!-- tags projet -->
                                                 <div class="uppercase space-x-4 my-4 [&>tag]:bg-main-gray [&>tag]:bg-opacity-10 [&>tag]:py-2 [&>tag]:px-4 [&>tag]:rounded-full flex justify-around">
-                                                    <tag> html</tag>
-                                                    <tag> css</tag>
-                                                    <tag> react</tag>
+                                                    <?php for ($i = 0; $i < count($project->tags); $i++) { ?>
+                                                    <tag><?= $project->tags[$i]->name ?></tag>
+                                                    <?php } ?>
                                                 </div>
                                             </div>
                                         </div>
-                                        <a href="https://wikipedia.com" class="bg-main-red py-2 px-4 rounded-full text-main-white text-center text-[16px] mx-auto my-2 hover:bg-main-white hover:text-main-red hover:border border-main-red">Voir le projet </a>
+                                        <a href="<?= $project->model_link ?>" class="bg-main-red py-2 px-4 rounded-full text-main-white text-center text-[16px] mx-auto my-2 hover:bg-main-white hover:text-main-red hover:border border-main-red">Voir le projet </a>
                                         <!-- Boutons modifier/supprimer le projet -->
                                         <div class="flex justify-between" <?= $notMyProfile; ?>>
                                             <div class="flex items-center pt-2">
@@ -445,7 +448,7 @@ $title = "Espace personnel";
                         <div class="hidden 2xl:block w-1/3 border-r-2 border-main-gray pr-6">
                             <div class="my-2 flex-col">
                                 <div class="flex flex-wrap"><p class="font-title font-bold mr-2">Projet fourni par : </p><p><a href="<?= $project->company_link ?>" class="text-main-red underline font-bold text-sm" target="_blank"><?= $project->company_name ?></a></p></div>
-                                <div class="my-4 grow"><img class="" src="assets/img/logo" alt="logo de l'entreprise"></div>
+                                <div class="my-4 grow"><img class="" src="<?= $project->company_image ?>" alt="logo de l'entreprise"></div>
                                 <div class="flex flex-wrap"><p class="font-title font-bold mr-2">Adresse :</p><p class="text-sm pt-0.5 text-left font-light"><?= $project->company_adress ?></p></div>
                             </div>
                         </div>
