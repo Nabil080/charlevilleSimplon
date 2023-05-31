@@ -119,6 +119,7 @@ class UserRepository extends ConnectBdd
         $stmt->closeCursor();
 
         return $data;
+
     }
     public function getIdByEmail($email)
     {

@@ -37,10 +37,27 @@ try {
         include 'view/public/all_projects.php';
     }
 
-    function projectGestionPage()
-    {
+  function projectGestionPage()
+  {
+    if ($_SESSION['user']->role-> id == 3) {
+        $projectRepository = new ProjectRepository;
+        $projects = $projectRepository->getEntrepriseProjects($_SESSION['user']->id);
         include 'view/public/project_gestion.php';
+    } else if ($_SESSION['user']->role-> id == 1){
+        $promoRepository = new PromoRepository;
+        $promos =   $promoRepository->getActivePromos();
+        $projectRepository = new ProjectRepository;
+        $projects = $projectRepository->getWaitingProjects();
+        include 'view/public/project_gestion.php';
+    } else if ($_SESSION['user']->role-> id == 2) {
+        $projectRepository = new ProjectRepository;
+        $projects = $projectRepository->getFormateurProjects($_SESSION['user']->id);
+        include 'view/public/project_gestion.php';
+    } else {
+        header('Location:?action=homepage');
     }
+
+  }
 
     // Profile
     function profilePage()

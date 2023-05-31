@@ -88,7 +88,7 @@ class PromoRepository extends ConnectBdd{
         $mois = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'];
         $explode  = substr($date, '5', '2');
         $date = date('d-m-Y', strtotime($date));
-        $findMois = $mois[($explode * 1) - 1];
+        $findMois = $mois[((int)$explode) - 1];
         $date = str_replace($explode, $findMois, $date);
         $date = str_replace("-", " ", $date);
         return $date;
@@ -143,12 +143,27 @@ class PromoRepository extends ConnectBdd{
         return $projects;
     }
 
-    public function getPromoStart($id) {
+    public function getPromoStart($id) 
+    {
         $req = $this->bdd->prepare("SELECT `promo_start` FROM `promo` WHERE `formation_id` = ?");
         $req->execute([$id]);
         $data = $req->fetch(PDO::FETCH_COLUMN);
         return $data;
     }
+
+    public function getActivePromos():array
+    {
+        $req = $this->bdd->prepare("SELECT * FROM promo WHERE status_id = ?");
+        $req->execute([12]);
+        $data = $req->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach($data as $key){
+            $promos[] = $this->getPromoById($key['promo_id']);
+        }
+
+        return $promos;
+    }
+    
     
 }
 

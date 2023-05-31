@@ -51,6 +51,20 @@ switch ($action) {
     case 'registerTreatment':
         registerTreatment();
         break;
+
+    // Gestions projet
+    case 'validationProjectTreatment':
+        validationProjectTreatment();
+        break;
+    case 'assignTeamToProject':
+        assignTeamToProject();
+        break;
+    case 'reSubmitProject':
+        reSubmitProject();
+        break;
+    // Envoie du traitement d'activation de compte
+    // Envoie du traitement du formulaire de connexion
+
     case 'accountActivation':
         activationAccountTreatment();
         break;
@@ -66,6 +80,7 @@ switch ($action) {
     case 'logOut':
         logOut();
         break;
+
     // Envoie du traitement pagination tous les projets
     case 'projectsPagination':
         projectsPagination();

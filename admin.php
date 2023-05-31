@@ -23,4 +23,6 @@ switch ($action) {
     // Afficher le CRUD users choisie
     // Afficher le CRUD des formations
     // Afficher le CRUD des promos(candidature apprennant)
+    // Validation projet
+
 }
