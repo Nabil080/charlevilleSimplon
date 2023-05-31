@@ -206,7 +206,6 @@ class ProjectRepository extends ConnectBdd{
         $projects = [];
 
         foreach($datas as $data){
-
             $project = $projectRepository->getProjectById($data);
             array_push($projects, $project);
         }   
@@ -278,6 +277,13 @@ class ProjectRepository extends ConnectBdd{
             array_push($projects, $project);
         }
         return $projects;
+    }
+
+    public function reSubmitProject(int $id):bool
+    {
+        $req = $this->bdd->prepare("UPDATE project SET status_id = 9 WHERE project_id = ?");
+        $bool = $req->execute([$id]);
+        return $bool;
     }
 }
 

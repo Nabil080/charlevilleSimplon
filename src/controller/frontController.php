@@ -48,13 +48,10 @@ function projectGestionPage()
         $projectRepository = new ProjectRepository;
         $projects = $projectRepository->getWaitingProjects();
         include 'view/public/project_gestion.php';
-
     } else if ($_SESSION['user']->role-> id == 2) {
         $projectRepository = new ProjectRepository;
         $projects = $projectRepository->getFormateurProjects($_SESSION['user']->id);
-
         include 'view/public/project_gestion.php';
-
     } else {
         header('Location:?action=homepage');
     }

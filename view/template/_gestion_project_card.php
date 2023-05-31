@@ -8,14 +8,18 @@
         echo $project->start;
     } ?></p>
         <i class="fa fa-circle ml-2 mt-1 
-        <?php if (isset($project->status) && $project->status->id == 10 || $project->status->id = 12) { ?>
+        <?php if (isset($project->status) && ($project->status->id == 10 || $project->status->id == 12)) { ?>
             text-green-500
         <?php } else if (isset($project->status) && $project->status->id == 11) { ?>
             text-red-500
         <?php } else if (isset($project->status) && $project->status->id == 9) { ?>
             text-orange-500
-        <?php } ?> animate-pulse"></i>
+        <?php } ?> animate-pulse">
+        </i>
     </div>
+    <a href="?action=modifProjet&id=<?= $project->id ?>" type="submit" class="whitespace-nowrap absolute -top-8 right-0 font-bold text-xl hover:text-main-red cursor-pointer">
+        <p>Modifier <i class="fa-solid fa-pen-to-square"></i></p>
+    </a>
         <!-- card projet -->
         <div id="projet-card-1" class="project-card max-w-[1000px] border-2 border-black rounded-lg p-4 md:flex gap-6  md:p-6">
             <!-- partie entreprise desktop -->
@@ -59,7 +63,7 @@
                                 <a href="?action=profilePage&id=<?=$user->id?>" class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white">
                                     <?=$user->surname?>
                                 </a>
-                            <?php } ?>
+                            <?php }  ?>
                         </div>
                         <a href="?action=projectPage&id=<?=$project->id?>" class="block float-left text-xs md:!text-base lg:!text-lg ">Voir le projet <i class="fa fa-arrow-right"></i></a>
                     </div>
@@ -82,7 +86,9 @@
             </div>
         </div>
         <!-- boutons projet -->
-        <?php if (isset($_SESSION['user']) && $_SESSION['user']->role->id == 3 && $project->status->id == 9 ) { ?> <!--1-->
+        <?php 
+        if (isset($_SESSION['user']) && $_SESSION['user']->role->id == 1 && $project->status->id == 9) { 
+             ?> <!--1-->
             <form id="<?= $x ?>" class="validationProjectForm mt-6 flex lg:text-lg [&>div]:grid [&>div]:place-content-center">
                 <!-- refuser -->
                 <button type="submit" onclick="refuseProject(<?= $i ?>, <?= $x ?>)" class="w-fit px-6 md:!flex gap-2 md:items-center hover:text-main-red cursor-pointer">
@@ -107,7 +113,7 @@
                 </button>
             </form>
         <?php $i ++;
-         } else if (isset($_SESSION['user']) && $_SESSION['user']->role->id == 3 && $project->status->id == 10) { ?> <!--2-->
+         } else if (isset($_SESSION['user']) && $_SESSION['user']->role->id == 2 && $project->status->id == 10) { ?> <!--2-->
             <form id="team<?= $x ?>" class="validationTeamForm mt-6 flex lg:text-lg [&>div]:grid [&>div]:place-content-center">
                 <!-- refuser -->
                 <p class="w-fit px-6 md:!flex gap-2  md:items-center hover:text-main-red cursor-pointer">
@@ -115,7 +121,8 @@
                 </p>
                 <!-- select promo -->
                 <div class="grow">
-                    <?php $apprenants = $promoRepository->getAllApprenants($project->promo->id);?>
+                    <?php $promoRepository = new PromoRepository;
+                    $apprenants = $promoRepository->getAllApprenants($project->promo->id);?>
                     <div data-dropdown-toggle="user-dropdown" class="text-center w-full cursor-pointer">Sélectionner les apprenants <i class="fa fa-chevron-down"></i></div>
                     
                     <select id="user-dropdown" multiple class="hidden z-20 w-fit" name="team[]" id="">
@@ -133,6 +140,10 @@
                     <p  class="hidden md:block"> Accepter</p><i class="fa-solid fa-check"></i>
                 </button>
             </form>
-        <?php } ?>
+        <?php }  else if (isset($_SESSION['user']) && $_SESSION['user']->role->id == 3 && $project->status->id == 11) {?>
+            <a type="submit" href="?action=reSubmitProject&id=<?= $project->id ?>" class="w-fit px-6 md:flex md:items-center mx-auto gap-2 hover:text-main-red cursor-pointer">
+                <p class="hidden md:block">Accepter</p><i class="fa-solid fa-check"></i>
+            </a>
+        <?php }  ?>
         <div class="w-4/5 h-1 border-b-2 my-12 mx-auto"></div>
     </article>

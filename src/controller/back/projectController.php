@@ -64,9 +64,18 @@ function assignTeamToProject()
         "message" => "Le statut a été modifée comme tel",
         "projets" => $bools,
     );
-
+    
     echo json_encode($response);
 
+}
+
+function reSubmitProject()
+{
+    $id = $_GET['id'];
+    $projectRepository = new ProjectRepository;
+    $bool = $projectRepository->reSubmitProject($id);
+    header('Location:?action=projectGestionPage');
+    
 }
 
 ?>

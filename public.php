@@ -47,6 +47,9 @@ switch ($action) {
     case 'assignTeamToProject':
         assignTeamToProject();
         break;
+    case 'reSubmitProject':
+        reSubmitProject();
+        break;
     // Envoie du traitement d'activation de compte
     // Envoie du traitement du formulaire de connexion
 
