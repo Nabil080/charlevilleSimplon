@@ -36,26 +36,33 @@ window.addEventListener("scroll", function () { // Ecoute le scroll sur la page
 
 // Gestion de validation de promotion
 
-const validationForm = document.getElementById("validationForm");
-const showValidation = document.getElementById("showValidation");
-const inputsValidation = validationForm.querySelectorAll("input");
-const numberCheckedContainer = document.getElementById("numberChecked");
-let containerValidation = 0;
-let reset = 0;
+const validationForm = document.querySelectorAll("form.validationForm");
+// console.log(validationForm)
+validationForm.forEach(form => {
+    // console.log(form);
+    const validationDiv = form.querySelector(".validationDiv")
+    // console.log(validationDiv);
+    const showValidation = form.querySelector(".showValidation");
+    // console.log(showValidation);
+    const inputsValidation = validationDiv.querySelectorAll("input");
+    const numberCheckedContainer = form.querySelector(".numberChecked");
+    let containerValidation = 0;
+    let reset = 0;
 
+    
 for (i = 0; i < inputsValidation.length; i++) { // Pour chaque input
-    inputsValidation[i].addEventListener("change", (e) => { // Surveille si un input change 
-            if (typeof containerValidation !== 'undefined' && containerValidation !== 0) { // Si le container des input est déja défini, le supprime 
+    inputsValidation[i].addEventListener("change", (e) => { // Surveille si un input change
+            if (typeof containerValidation !== 'undefined' && containerValidation !== 0) { // Si le container des input est déja défini, le supprime
                 containerValidation.remove();
             }
 
             let allText = [];  // Remet le tableau qui contient les input en vide
-            let boolInput = true; // Défini un booléan 
+            let boolInput = true; // Défini un booléan
             let numberChecked = 0; // Réinitialise le nombre des inputs checked
             numberCheckedContainer.textContent = ""; // Réinitialise le container de comptage des inputs checked
 
             showValidation.insertAdjacentHTML("beforeend", "<div class='pl-4 transition-all' id='containerValidation'></div>"); // Crée la div qui contient les input
-            containerValidation = document.getElementById("containerValidation"); // Relie la variable au container crée 
+            containerValidation = document.getElementById("containerValidation"); // Relie la variable au container crée
             
             inputsValidation.forEach(input => { // pour chaque input verifie si elle est checked
                 if (input.checked) {
@@ -77,5 +84,8 @@ for (i = 0; i < inputsValidation.length; i++) { // Pour chaque input
             numberCheckedContainer.textContent += numberChecked; // Rajoute en texte le nombre d'elements checked
     });
 };
+
+})
+
 
 

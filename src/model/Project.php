@@ -82,10 +82,11 @@ class ProjectRepository extends ConnectBdd
         $Status = $statusRepo->getStatusById($data['status_id']);
         $project->status = $Status;
 
-        // $Promo = new Promo;
-        $promoRepo = new PromoRepository;
-        $Promo = $promoRepo->getPromoById($data['promo_id']);
-        $project->promo = $Promo;
+        if(isset($data['promo_id'])){
+            $promoRepo = new PromoRepository;
+            $Promo = $promoRepo->getPromoById($data['promo_id']);
+            $project->promo = $Promo;
+        }
 
         // $formationRepo = new FormationRepository;
         // $Formation = $formationRepo->getFormationById($data['formation_id']);
@@ -104,6 +105,7 @@ class ProjectRepository extends ConnectBdd
 
         $project->start = null;
         $project->end = null;
+      
         if($data['status_id'] == 12){
             $projectDateStart = new PromoRepository;
             $project->start = $projectDateStart->formateDate($data['project_start']);
@@ -120,6 +122,7 @@ class ProjectRepository extends ConnectBdd
             $projectDateEnd = new PromoRepository;
             $project->end = $projectDateEnd->formateDate($data['project_end']);
         }
+
         return $project;
     }
 
@@ -128,7 +131,7 @@ class ProjectRepository extends ConnectBdd
         $projects = [];
         $limit = $limitRequest == null ? "" : "LIMIT " . $limitRequest;
 
-        $req = $this->bdd->prepare("SELECT project_id FROM project $limit");
+        $req = $this->bdd->prepare("SELECT project_id FROM project $limit ORDER BY status_id ASC");
         $req->execute();
         $data = $req->fetchAll(PDO::FETCH_ASSOC);
 
@@ -203,6 +206,7 @@ class ProjectRepository extends ConnectBdd
         $projectRepository = new ProjectRepository;
         $projects = [];
 
+
         foreach($datas as $data){
             $project = $projectRepository->getProjectById($data);
             array_push($projects, $project);
@@ -219,13 +223,6 @@ class ProjectRepository extends ConnectBdd
         }
         $req = $this->bdd->prepare("UPDATE project SET status_id = ? WHERE project_id = ?");
         $bool = $req->execute([$status_id, $id]);
-        return $bool;
-    }
-
-    public function assignProjectToPromo(int $projectId ,int $promoId):bool
-    {
-        $req = $this->bdd->prepare("UPDATE project SET promo_id = ? WHERE project_id = ?");
-        $bool = $req->execute([$promoId, $projectId]);
         return $bool;
     }
 
@@ -275,6 +272,162 @@ class ProjectRepository extends ConnectBdd
             array_push($projects, $project);
         }
         return $projects;
+    }
+    
+    public function deleteProject($id):void
+    {
+        $req = $this->bdd->prepare("DELETE FROM progress WHERE project_id =?");
+        $req->execute([$id]);
+        $req->closeCursor();
+
+        $req = $this->bdd->prepare("DELETE FROM project_tag WHERE project_id =?");
+        $req->execute([$id]);
+        $req->closeCursor();
+
+        $req = $this->bdd->prepare("DELETE FROM project_team WHERE project_id =?");
+        $req->execute([$id]);
+        $req->closeCursor();
+
+        $req = $this->bdd->prepare("DELETE FROM project WHERE project_id =?");
+        $req->execute([$id]);
+        $req->closeCursor();
+    }
+
+    public function updateProjectStatus(string $validation, int $id):bool
+    {
+        if ($validation == "accept") {
+            $status_id = 10;
+        } else if ($validation == "refused") {
+            $status_id = 11;
+        }
+        $req = $this->bdd->prepare("UPDATE project SET status_id = ? WHERE project_id = ?");
+        $bool = $req->execute([$status_id, $id]);
+
+
+        return $bool;
+    }
+
+    public function assignProjectToPromo(int $projectId ,int $promoId):bool
+    {
+        $req = $this->bdd->prepare("UPDATE project SET promo_id = ? WHERE project_id = ?");
+        $bool = $req->execute([$promoId, $projectId]);
+        return $bool;
+    }
+
+    public function updateProject($post,$files):void
+    {
+        $error = false;
+
+        $project = securizeString($post['project']);
+        if($project === false){
+            // message d'erreurs dans securizeString
+            $error = true;
+        }
+        
+        $description = securizeString($post['description']);
+        if($description === false){
+            // message d'erreurs dans securizeString
+            $error = true;
+        }
+
+        $link = securizeString($post['link']);
+        if($link === false){
+            // message d'erreurs dans securizeString
+            $error = true;
+        }
+
+
+        $query = "UPDATE project SET project_name = ?, project_description = ?, project_company_link = ?, user_id = ?";
+        $execute = [$project,$description,$link,3];
+
+        // traitment fichier pdf
+        if($files['pdf']['error'] == 0){
+            $pdf = securizePdf($files['pdf']);
+            if($pdf === false){
+                // message d'erreurs dans securizePdf
+                $error = true;
+            }
+            $query .= ", project_file = ?";
+            $execute[] = $pdf;
+        }
+
+        // traitment image
+        if($files['image']['error'] == 0){
+            $image = securizeImage($files['image']);
+            if($image === false){
+                // message d'erreurs dans securizePdf
+                $error = true;
+            }
+            $query .= ", project_company_image = ?";
+            $execute[] = $image;
+        }
+        
+        $execute[] = $_POST['project_id'];
+        if($error === false){
+            $req = $this->bdd->prepare($query."WHERE project_id = ?");
+            $req->execute($execute);
+            // REMPLACE 3 PAR SESSION USER ID
+
+            $response = array(
+                "status" => "success",
+                "message" => "Le projet a bien été modifié.",
+            );
+        
+            echo json_encode($response);
+        }
+    }
+
+    public function addProject($post,$files):void
+    {
+        $error = false;
+        // traitement company name
+        $company = isset($post['company']) ? $post['company'] : 'Simplon';
+        $adress = isset($post['adress']) ? $post['adress'] : '17 rue de la grande mare lool';
+
+        // traitment fichier pdf
+        $pdf = securizePdf($_FILES['pdf']);
+        if($pdf === false){
+            // message d'erreurs dans securizePdf
+            $error = true;
+        }
+
+        // traitment image
+        $image = securizeImage($files['image']);
+        if($image === false){
+            // message d'erreurs dans securizePdf
+            $error = true;
+        }
+        
+        $project = securizeString($post['project']);
+        if($project === false){
+            // message d'erreurs dans securizeString
+            $error = true;
+        }
+        
+        $description = securizeString($post['description']);
+        if($description === false){
+            // message d'erreurs dans securizeString
+            $error = true;
+        }
+
+        $link = securizeString($post['link']);
+        if($link === false){
+            // message d'erreurs dans securizeString
+            $error = true;
+        }
+
+        if($error === false){
+            $req = $this->bdd->prepare("INSERT INTO project (project_name,project_description,project_company_name,project_company_link,user_id, project_file, project_company_image, project_company_adress) VALUES (?,?,?,?,?,?,?,?)");
+            $req->execute([$project,$description,$company,$link,3, $pdf, $image, $adress]);
+            // REMPLACE 3 PAR SESSION USER ID
+
+            $response = array(
+                "status" => "success",
+                "message" => "Le projet a bien été ajouté.",
+            );
+        
+            echo json_encode($response);
+        }
     }
 
     public function reSubmitProject(int $id):bool

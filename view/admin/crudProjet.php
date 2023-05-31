@@ -8,6 +8,9 @@
                 <?= "" ?> Nom de l'entreprise
             </th>
             <th scope="col" class="px-4 py-3 text-center">
+                <?= "" ?> Type de projet
+            </th>
+            <th scope="col" class="px-4 py-3 text-center">
                 <?= "" ?> Promotion
             </th>
             <th scope="col" class="px-4 py-3 text-center">
@@ -22,24 +25,30 @@
         </tr>
     </thead>
     <tbody class="border-2">
-        <?php for ($i = 0; $i < 10; $i++) { ?>
+        <?php foreach($projects as $project) { ?>
             <tr class="border-2 border-gray-800">
-                <th scope="row" class="px-4 py-3 font-medium text-gray-900 border whitespace-nowrap ">Super projet de fou
+                <th scope="row" class="px-4 py-3 font-medium text-gray-900 border whitespace-nowrap "><?=$project->name?>
                 </th>
                 <td class="px-4 py-3 border">
-                    La boulangerie géniale
+                    <a href="<?=$project->company_link?>" target="_blank"><?=$project->company_name?></a>
                 </td>
                 <td class="px-4 py-3 border">
-                    <?php if (!isset($assignation)) { ?>
-                        <form method="post" action="assignProject">
-                            <select name="promotion" class="w-full">
-                                <?php if (isset($promotions)) {
-                                    foreach ($promotions as $promotion) { ?>
-                                        <option value="<?= $promotion ?>">
-                                            $promotion
+                    <?=$project->type->name?>
+                </td>
+                <td class="px-4 py-3 border">
+                    <?php if (isset($project->promo)){
+                            echo $project->promo->name;
+                        }else{?>
+                        <form method="post" action="?action=assignProject">
+                            <input type="hidden" name="project" value="<?=$project->id?>">
+                            <select name="promo" class="w-full">
+                                <?php
+                                    foreach ($promos as $promo) { ?>
+                                        <option value="<?= $promo->id ?>">
+                                            <?=$promo->name?>
                                         </option>
                                     <?php }
-                                } ?>
+                                ?>
                             </select>
                             <button type="submit" name="submit"
                                 class="block cursor-pointer w-full text-white bg-main-red hover:bg-red-800 focus:ring-4
@@ -47,18 +56,19 @@
                                 Assigner
                             </button>
                         </form>
-                    <?php } ?>
+                    <?php
+                    } ?>
                 </td>
                 <td class="px-4 py-3 border">
 
-                    <a href="$cahier des charges" class="block cursor-pointer w-full md:w-1/2 text-white bg-main-gray hover:bg-red-800 focus:ring-4 focus:outline-none 
+                    <a href="<?=$project->file?>" donwload="<?=$project->name?>" class="block cursor-pointer w-full md:w-1/2 text-white bg-main-gray hover:bg-red-800 focus:ring-4 focus:outline-none 
                                      font-medium rounded-lg text-sm px-5 py-2.5 mt-2 mx-auto text-center"
                         type="button">
                         <i class="fa-solid fa-file"></i>
                     </a>
                 </td>
                 <td class="px-4 py-3 border">
-                    <a href="$link page projet" class="block cursor-pointer w-full md:w-1/2 text-white bg-main-gray hover:bg-red-800 focus:ring-4 focus:outline-none 
+                    <a href="?action=projectPage&id=<?=$project->id?>" class="block cursor-pointer w-full md:w-1/2 text-white bg-main-gray hover:bg-red-800 focus:ring-4 focus:outline-none 
                                      font-medium rounded-lg text-sm px-5 py-2.5 mt-2 mx-auto text-center"
                         type="button">
                         <i class="fa-solid fa-link"></i>
@@ -78,16 +88,17 @@
                         class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow  ">
                         <ul class="py-1 text-sm text-gray-700 " aria-labelledby="apple-imac-27-dropdown-button">
                             <li>
-                                <a href="#" class="block py-2 px-4">Modifier</a>
+                                <a href="?action=addProject&id=<?=$project->id?>" class="block py-2 px-4">Modifier</a>
                             </li>
                         </ul>
                         <div class="py-1">
-                            <a href="#" class="block py-2 px-4 text-sm text-gray-700">Supprimer</a>
+                            <a data-modal-target="modal-delete-<?= $project->id ?>" data-modal-toggle="modal-delete-<?= $project->id ?>" class="cursor-pointer block py-2 px-4 text-sm text-gray-700">Supprimer</a>
                         </div>
                     </div>
                 </td>
             </tr>
         <?php
+    include("view/admin/modalDelete.php");
         }
         ?>
 

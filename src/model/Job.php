@@ -21,14 +21,24 @@ class JobRepository extends ConnectBdd{
 
         $Job->id = $data['job_id'];
         $Job->name = $data['job_name'];
-
-        $Formation = new Formation;
-        $formationRepo = new FormationRepository;
-        $Formation = $formationRepo->getFormationById($data['formation_id']);
-        $Job->formation = $Formation;
+        $Job->formation = $data['formation_id'];
 
 
         return $Job;
+    }
+
+    public function getJobsByFormationId($id):array
+    {
+        $jobs = [];
+        $req = $this->bdd->prepare("SELECT job_id FROM job WHERE formation_id = ?");
+        $req->execute([$id]);
+        $data = $req->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach($data as $key){
+            $jobs[] = $this->getJobById($key['job_id']);
+        }
+
+        return $jobs;
     }
 
     public function getJobName($id) {

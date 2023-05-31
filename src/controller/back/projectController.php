@@ -25,6 +25,33 @@ function projectsPagination()
 
 }
 
+function deleteProject()
+{
+    $projectRepo = new ProjectRepository ;
+    $projectRepo->deleteProject($_GET['id']);
+
+    $response = array(
+        "status" => "success",
+        "message" => "Le projet a bien été supprimé.",
+    );
+
+    echo json_encode($response);
+}
+
+function assignProject()
+{
+    $projectRepo = new ProjectRepository ;
+    $projectRepo->updateProjectStatus('accept',$_POST['project']);
+    $projectRepo->assignProjectToPromo($_POST['project'],$_POST['promo']);
+
+    $response = array(
+        "status" => "success",
+        "message" => "Le projet a bien été assigné.",
+    );
+ 
+    echo json_encode($response);
+}
+
 function validationProjectTreatment() 
 {
     $projectRepository = new ProjectRepository;
@@ -65,10 +92,19 @@ function assignTeamToProject()
         "projets" => $bools,
     );
     
-    echo json_encode($response);
 
+
+function addProjectTraitement()
+{
+    $projectRepo = new ProjectRepository;
+    $projectRepo->addProject($_POST,$_FILES);
 }
 
+function updateProjectTraitement()
+{
+    $projectRepo = new ProjectRepository;
+    $projectRepo->updateProject($_POST,$_FILES);
+}
 function reSubmitProject()
 {
     $id = $_GET['id'];

@@ -28,8 +28,19 @@ if (isset($_GET['action']) && $_GET['action'] !== '' && !isset($_GET['admin'])) 
                         break;
                         // Afficher le formulaire de modification du projet
 
-                        // Envoi du formulaire d'ajoute de projet
-                        // Envoi du formulaire de moficiation de projet
+                // Envoi du formulaire d'ajout de projet
+                case 'addProjectTraitement':
+                    addProjectTraitement();
+                    break;
+                // Envoi du formulaire de moficiation de projet
+                case 'updateProjectTraitement':
+                    updateProjectTraitement();
+                    break;
+            }
+            if ($_SESSION['user']['role'] <= 2) {
+                switch ($action) {
+                    // Envoie du formulaire de modification de projet (version modal)
+                    // Envoi de la demande de suppression de projet
                 }
                 if ($_SESSION['user']->role->id <= 2) {
 
@@ -49,3 +60,8 @@ if (isset($_GET['action']) && $_GET['action'] !== '' && !isset($_GET['admin'])) 
 } else {
     homepage();
 }
+
+// $repo = new PromoRepository;
+// $data = $repo->getPromoMailList(1);
+// var_dump($data);
+
