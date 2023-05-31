@@ -2,22 +2,21 @@
 session_start();
 //session_destroy();
 require 'src/model/ConnectBdd.php';
-
 // var_dump($_SESSION);
+
 
 if (isset($_GET['action']) && $_GET['action'] !== '' && !isset($_GET['admin'])) {
     $action = $_GET['action'];
     require 'public.php';
     if (isset($_SESSION['user'])) {
-        if ($_SESSION['user']->role_id >=4) {
+        if ($_SESSION['user']->role_id >= 4) {
             switch ($action) {
                 // Afficher son profil perso
                 case 'myProfile':
                     myProfile();
                     break;
             }
-        }
-        else if ($_SESSION['user']->role_id <= 3) {
+        } else if ($_SESSION['user']->role_id <= 3) {
             switch ($action) {
                 // Afficher le CRUD de projet (Gestion de projet)
                 case 'projectGestionPage':

@@ -1,7 +1,8 @@
 <?php
 require_once('src/model/ConnectBdd.php');
 
-class Project {
+class Project
+{
     public $id;
     public $name;
     public $description;
@@ -31,9 +32,10 @@ class Project {
     //     return true
     // }
 
-    public function getProjectLevel(){
+    public function getProjectLevel()
+    {
         $formationRepo = new FormationRepository();
-        
+
         $level = $formationRepo->getFormationLevel($this->promo->formation_id);
 
         return $level;
@@ -41,12 +43,15 @@ class Project {
 
 }
 
-class ProjectRepository extends ConnectBdd{
-    public function __construct(){
-        parent::__construct ();
+class ProjectRepository extends ConnectBdd
+{
+    public function __construct()
+    {
+        parent::__construct();
     }
 
-    public function getProjectById($projectId){
+    public function getProjectById($projectId)
+    {
         $project = new Project;
 
         $req = $this->bdd->prepare("SELECT * FROM project WHERE project_id = ?");
@@ -66,14 +71,10 @@ class ProjectRepository extends ConnectBdd{
         $project->model_image = $data['project_model_image'];
         $project->model_link = $data['project_model_link'];
 
-        $User = new User;
-        $userRepo = new UsersRepository;
-        $User = $userRepo->getUserById($data['user_id']);
+        $User = new User($data['user_id']);
         $project->user = $User;
 
-        $Formator = new User;
-        $userRepo = new UsersRepository;
-        $Formator = $userRepo->getUserById($data['user_id_project_formator']);
+        $Formator = new User($data['user_id_project_formator']);
         $project->formator = $Formator;
 
         $Status = new Status;
@@ -101,10 +102,12 @@ class ProjectRepository extends ConnectBdd{
 
         $project->team = $this->getProjectUsers($data['project_id']);
 
-        $project->start = $project->start = $data['project_start'];;
-        $project->end = $project->end = $data['project_end'];;
+        $project->start = $project->start = $data['project_start'];
+        ;
+        $project->end = $project->end = $data['project_end'];
+        ;
 
-        if($data['status_id'] == 12){
+        if ($data['status_id'] == 12) {
             $project->start = $data['project_start'];
             $project->end = 'En cours';
         }
@@ -118,17 +121,17 @@ class ProjectRepository extends ConnectBdd{
         return $project;
     }
 
-      public function getAllProjects($limitRequest = null):array
+    public function getAllProjects($limitRequest = null): array
     {
         $projects = [];
-        $limit = $limitRequest == null ? "" : "LIMIT ".$limitRequest;
+        $limit = $limitRequest == null ? "" : "LIMIT " . $limitRequest;
 
         $req = $this->bdd->prepare("SELECT project_id FROM project $limit");
         $req->execute();
         $data = $req->fetchAll(PDO::FETCH_ASSOC);
 
 
-        foreach($data as $key){
+        foreach ($data as $key) {
             $Project = new Project;
             $projectRepo = new ProjectRepository;
             $Project = $projectRepo->getProjectById($key['project_id']);
@@ -141,33 +144,31 @@ class ProjectRepository extends ConnectBdd{
 
     public function getProjectsDate()
     {
-        $dates =  [];
+        $dates = [];
         $req = $this->bdd->prepare("SELECT project_start FROM project WHERE project_start IS NOT NULL");
         $req->execute();
         $data = $req->fetchAll(PDO::FETCH_COLUMN);
 
-        foreach($data as $key){
+        foreach ($data as $key) {
             $start = date_create($key);
-            $year = date_format($start,"Y");
+            $year = date_format($start, "Y");
 
-            $dates[] = $year ;
+            $dates[] = $year;
         }
-            
+
         $uniqueDates = array_unique($dates);
         return $uniqueDates;
     }
 
-    public function getProjectUsers($id):array
+    public function getProjectUsers($id): array
     {
         $team = [];
         $req = $this->bdd->prepare("SELECT `user_id` FROM `project_team` WHERE `project_id` = ? ");
         $req->execute([$id]);
         $data = $req->fetchAll(PDO::FETCH_ASSOC);
 
-        foreach($data as $key){
-            $User = new User;
-            $userRepo = new UsersRepository;
-            $User = $userRepo->getUserById($key['user_id']);
+        foreach ($data as $key) {
+            $User = new User($key['user_id']);
 
             $team[] = $User;
         }
@@ -175,14 +176,14 @@ class ProjectRepository extends ConnectBdd{
         return $team;
     }
 
-    public function getUserProjects($id):array
+    public function getUserProjects($id): array
     {
         $projects = [];
         $req = $this->bdd->prepare("SELECT project_id FROM project_team WHERE user_id = ?");
         $req->execute([$id]);
         $datas = $req->fetchAll(PDO::FETCH_COLUMN);
 
-        foreach($datas as $data){
+        foreach ($datas as $data) {
             $project = new Project;
 
             $req = $this->bdd->prepare("SELECT project_id, project_name FROM project WHERE project_id = ?");

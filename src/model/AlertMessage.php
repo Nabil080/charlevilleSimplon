@@ -10,7 +10,7 @@
     //<p id="$nameid_error" class="error mt-2 text-sm text-red-600"></p>
     //<p id="content_success" class="success mt-2 text-sm text-green-600"></p>
 
-    public function getError($location, $error)
+    public function getError($location, $error, $boolNavbar = null)
     {
         $this->type = 'errorMessage';
         $this->location = $location . '_error';
@@ -26,7 +26,7 @@
         ];
         return $test;
     }
-    public function getSuccess($success)
+    public function getSuccess($success, $boolNavbar = null)
     {
         $this->type = 'successMessage';
         $this->location = 'content_succes';

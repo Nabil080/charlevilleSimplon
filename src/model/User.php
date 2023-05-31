@@ -24,6 +24,7 @@ class User
     private $user_nationality;
     private $user_status;
     private $role_id;
+    private $role_name;
     public $highlight;
 
     public function __construct($id)
@@ -31,9 +32,9 @@ class User
         $UserRepo = new UserRepository;
         $user = $UserRepo->getUserById($id);
         $this->setUser($user);
-    
+
     }
-    public function getUser()
+    public function getUser(): object
     {
         return $this;
     }
@@ -67,6 +68,7 @@ class User
         $this->user_token = $account['user_token'];
         $this->user_status = $account['status_name'];
         $this->role_id = $account['role_id'];
+        $this->role_name = $account['role_name'];
     }
 
 
@@ -74,7 +76,8 @@ class User
 
 class UserRepository extends ConnectBdd
 {
-    public function InsertUser($account): void {
+    public function InsertUser($account): void
+    {
         $Mail = new Mail;
         $token = $Mail->tokenMail('activateUser', $account['email']);
         $pass = password_hash($account['password'], PASSWORD_BCRYPT);
@@ -108,7 +111,7 @@ class UserRepository extends ConnectBdd
     }
 
     /* Get */
-    public function getUserById($id):array
+    public function getUserById($id): array
     {
         $req = "SELECT * FROM `user` AS u LEFT JOIN `status` AS s ON u.status_id = s.status_id LEFT JOIN `role` AS r ON u.role_id = r.role_id WHERE `user_id` = ?";
         $stmt = $this->bdd->prepare($req);
@@ -120,7 +123,7 @@ class UserRepository extends ConnectBdd
     }
     public function getIdByEmail($email)
     {
-        $req = "SELECT user_id FROM `user` AS u LEFT JOIN `status` AS s ON u.status_id = s.status_id WHERE user_email= ?";
+        $req = "SELECT user_id FROM `user` WHERE user_email= ?";
         $stmt = $this->bdd->prepare($req);
         $stmt->execute([$email]);
         $user_id = $stmt->fetch();

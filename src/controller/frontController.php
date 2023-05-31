@@ -74,8 +74,8 @@ function registerPage()
 {
     $boolCompany = (isset($_GET['company'])) ? 1 : 0;
     $formation_id = (isset($_GET['formation_id'])) ? $_GET['formation_id'] : 0;
-
     include 'view/public/register.php';
+
 }
 
 function accountActivationPage()
@@ -115,6 +115,7 @@ function crudProjetPage()
     include 'view/admin/_projects.php';
 }
 
-function projectFormPage() {
+function projectFormPage()
+{
     include 'view/admin/projectAddForm.php';
 }
