@@ -143,6 +143,7 @@ class PromoRepository extends ConnectBdd
         $req->execute([$user_id, $promo_id]);
         $data = $req->fetch();
         return (empty($data) && $data == false) ? true : false;
+    }
 
       public function getActivePromos():array
     {
