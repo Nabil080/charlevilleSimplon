@@ -74,7 +74,6 @@ class User
         $this->user_status = $account['status_name'];
         $this->user_status_date = $account['user_status_date'];
         $this->role_id = $account['role_id'];
-        $this->role_name = $account['role_name'];
     }
 
 }
