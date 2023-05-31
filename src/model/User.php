@@ -428,31 +428,44 @@ $stmt->execute([$pass, $email]);
 
     public function updateUserPersonnalInfos(array $post):void
     {
-        // var_dump($post);
-        $query = "UPDATE `user` SET `user_surname` = ?, `user_name` = ?, `user_place` = ?, `user_email` = ?, `user_phone` = ?";
-        $execute = [$post['surname'],$post['name'],$post['adress'],$post['email'],$post['phone']];
+        var_dump($post);
+        $error = false;
 
-        // UPDATE ENTREPRISE
-        if($post['role'] == 3){
 
-        }
+        // Sécuriser les variables
 
-        // UPDATE FORMATOR
-        // UPDATE CANDIDAT:APPRENANT
-        if($post['role'] == 5 || $post['role'] == 4){
-            $query .= ", `user_birth_date` = ?, `user_birth_place` = ?, `user_nationality` = ?";
-            $push = [$post['birth_date'],$post['birth_place'],$post['nationality']];
+        if($error === false){
+            $query = "UPDATE `user` SET `user_surname` = ?, `user_name` = ?, `user_place` = ?, `user_email` = ?, `user_phone` = ?";
+            $execute = [$post['surname'],$post['name'],$post['adress'],$post['email'],$post['phone']];
+
+            // UPDATE PAS ENTREPRISE
+            if($post['role'] != 3){
+                $query .= ", `user_birth_date` = ?, `user_birth_place` = ?, `user_nationality` = ?";
+                $push = [$post['birth_date'],$post['birth_place'],$post['nationality']];
+                $execute = array_merge($execute,$push);
+            }else{
+            // UPDATE ENTREPRISE
+                $query .= ", `user_company` = ?";
+                $push = [$post['company']];
+                $execute = array_merge($execute,$push);
+            }
+
+            // UPDATE CANDIDAT/APPRENANT
+            if($post['role'] == 5 || $post['role'] == 4){
+                $query .= ", `user_numero_pe` = ?";
+                $push = [$post['number']];
+                $execute = array_merge($execute,$push);
+            }
+
+            $query .= " WHERE `user_id` = ?";
+            $push = [$post['user']];
             $execute = array_merge($execute,$push);
+
+            // var_dump($query);
+            // var_dump($execute);
+            $req = $this->bdd->prepare($query);
+            $req->execute($execute);
         }
 
-
-        $query .= " WHERE `user_id` = ?";
-        $push = [$post['role']];
-        $execute = array_merge($execute,$push);
-        var_dump($query);
-        var_dump($execute);
-        $req = $this->bdd->prepare($query);
-        $req->execute($execute);
-
-}
+    }
 }

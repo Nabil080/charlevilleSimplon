@@ -52,16 +52,16 @@
                     // INPUT PAS FORMATEUR/ENTREPRISE
                     if($user->role->id > 3){ ?>
                     <div>
-                        <label for="" class="block mb-2 text-sm font-medium  text-main-red">Numéro Pôle Emploi</label>
-                        <input type="text" name="" class=" border text-sm rounded-md block w-full p-2.5 border-main-red text-black" value="<?=$user->numero_pe?>" required>
+                        <label for="number" class="block mb-2 text-sm font-medium  text-main-red">Numéro Pôle Emploi</label>
+                        <input type="text" name="number" class=" border text-sm rounded-md block w-full p-2.5 border-main-red text-black" value="<?=$user->numero_pe?>" required>
                     </div>
                     <?php } ?>
 
                     <!-- INPUT ENTREPRISE -->
                     <?php if($user->role->id == 3){ ?>
                     <div>
-                        <label for="" class="block mb-2 text-sm font-medium  text-main-red">Entreprise</label>
-                        <input type="text" name="" class=" border text-sm rounded-md block w-full p-2.5 border-main-red text-black" value="<?=$user->company?>" required>
+                        <label for="company" class="block mb-2 text-sm font-medium  text-main-red">Entreprise</label>
+                        <input type="text" name="company" class=" border text-sm rounded-md block w-full p-2.5 border-main-red text-black" value="<?=$user->company?>" required>
                     </div>
                     <?php }?>
                     <button type="submit" class="w-full my-4 uppercase font-title text-main-white bg-main-red hover:bg-red-800 font-medium rounded-md text-sm px-5 py-2.5 text-center ">Modifier</button>
