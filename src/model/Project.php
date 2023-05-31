@@ -112,7 +112,6 @@ class ProjectRepository extends ConnectBdd{
             $project->end = 'En cours';
         }
 
-
         return $project;
     }
 
@@ -150,7 +149,7 @@ class ProjectRepository extends ConnectBdd{
 
             $dates[] = $year ;
         }
-            
+
         $uniqueDates = array_unique($dates);
         return $uniqueDates;
     }

@@ -425,4 +425,34 @@ $stmt->execute([$pass, $email]);
         $req = $this->bdd->prepare("DELETE FROM `user` WHERE `user_id` = ?");
         $req->execute([$_POST['user_id']]);
     }
+
+    public function updateUserPersonnalInfos(array $post):void
+    {
+        // var_dump($post);
+        $query = "UPDATE `user` SET `user_surname` = ?, `user_name` = ?, `user_place` = ?, `user_email` = ?, `user_phone` = ?";
+        $execute = [$post['surname'],$post['name'],$post['adress'],$post['email'],$post['phone']];
+
+        // UPDATE ENTREPRISE
+        if($post['role'] == 3){
+
+        }
+
+        // UPDATE FORMATOR
+        // UPDATE CANDIDAT:APPRENANT
+        if($post['role'] == 5 || $post['role'] == 4){
+            $query .= ", `user_birth_date` = ?, `user_birth_place` = ?, `user_nationality` = ?";
+            $push = [$post['birth_date'],$post['birth_place'],$post['nationality']];
+            $execute = array_merge($execute,$push);
+        }
+
+
+        $query .= " WHERE `user_id` = ?";
+        $push = [$post['role']];
+        $execute = array_merge($execute,$push);
+        var_dump($query);
+        var_dump($execute);
+        $req = $this->bdd->prepare($query);
+        $req->execute($execute);
+
+}
 }

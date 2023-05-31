@@ -40,6 +40,11 @@ switch ($action) {
         deleteLearner();
         break;
 
+    // Traitement modification USER
+    case 'updateUserPersonnalInfos':
+        updateUserPersonnalInfos();
+        break;
+
     // Traitement suppression totale USER
     case 'deleteUser':
         deleteUser();

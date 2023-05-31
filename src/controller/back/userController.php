@@ -163,6 +163,7 @@ function deleteLearner()
 
 function deleteUser()
 {
+    // Check si admin
     var_dump($_POST);
     $userRepo = new UsersRepository;
     $userRepo->deleteUser($_POST['user_id']);
@@ -175,4 +176,12 @@ function assignFormator()
     $userRepo = new UsersRepository;
     $req = $userRepo->bdd->prepare("UPDATE user SET `role_id` = ? WHERE `user_id` = ?");
     $req->execute([2, $_POST['user_id']]);
+}
+
+function updateUserPersonnalInfos()
+{
+    // Check si admin
+    // var_dump($_POST);
+    $userRepo = new UsersRepository;
+    $userRepo->updateUserPersonnalInfos($_POST);
 }
