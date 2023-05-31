@@ -442,8 +442,16 @@ $stmt->execute([$pass, $email]);
         $email = securizeMail($post['email']);
         $phone = securizePhone($post['phone']);
 
-        $user = securizeInteger($post['user']);
         $role = securizeInteger($post['role']);
+        if($role === false){
+            $error = true;
+        }
+
+        $user = securizeInteger($post['user']);
+        if($user === false){
+            $error = true;
+        }
+
 
         // UPDATE GENERALE
         if($surname === false || $name === false || $adress === false || $email === false || $phone === false ){
@@ -504,7 +512,7 @@ $stmt->execute([$pass, $email]);
 
 
         // FAIT LA REQUETE SI 0 ERREURS
-        if($error === false && $user === false){
+        if($error === false){
             $query .= " WHERE `user_id` = ?";
             $push = [$user];
             $execute = array_merge($execute,$push);
