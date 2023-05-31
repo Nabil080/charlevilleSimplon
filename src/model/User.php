@@ -429,36 +429,84 @@ $stmt->execute([$pass, $email]);
     public function updateUserPersonnalInfos(array $post):void
     {
         var_dump($post);
+        $query = "";
+        $execute = [];
         $error = false;
 
 
-        // Sécuriser les variables
 
-        if($error === false){
+        // Sécurisation variables générales
+        $surname = securizeString($post['surname']);
+        $name = securizeString($post['name']);
+        $adress = securizeString($post['adress']);
+        $email = securizeMail($post['email']);
+        $phone = securizePhone($post['phone']);
+
+        $user = securizeInteger($post['user']);
+        $role = securizeInteger($post['role']);
+
+        // UPDATE GENERALE
+        if($surname === false || $name === false || $adress === false || $email === false || $phone === false ){
+            $error = true;
+        }else{
             $query = "UPDATE `user` SET `user_surname` = ?, `user_name` = ?, `user_place` = ?, `user_email` = ?, `user_phone` = ?";
-            $execute = [$post['surname'],$post['name'],$post['adress'],$post['email'],$post['phone']];
+            $execute = [$surname,$name,$adress,$email,$phone];
+        }
 
-            // UPDATE PAS ENTREPRISE
-            if($post['role'] != 3){
-                $query .= ", `user_birth_date` = ?, `user_birth_place` = ?, `user_nationality` = ?";
-                $push = [$post['birth_date'],$post['birth_place'],$post['nationality']];
-                $execute = array_merge($execute,$push);
+
+
+        // UPDATE PAS ENTREPRISE
+        if($post['role'] != 3){
+            // Sécurisation variables pas entreprise
+            $birth_date = securizeString($post['birth_date']);
+            $birth_place = securizeString($post['birth_place']);
+            $nationality = securizeString($post['nationality']);
+
+            if($birth_date === false || $birth_place === false || $nationality === false){
+                $error = true;
             }else{
-            // UPDATE ENTREPRISE
+                $query .= ", `user_birth_date` = ?, `user_birth_place` = ?, `user_nationality` = ?";
+                $push = [$birth_date,$birth_place,$nationality];
+                $execute = array_merge($execute,$push);
+            }
+        }else{
+
+
+
+        // UPDATE ENTREPRISE
+        // Sécurisation variables entreprise
+        $company = securizeString($post['company']);
+
+            if($company === false){
+                $error = true;
+            }else{
                 $query .= ", `user_company` = ?";
                 $push = [$post['company']];
                 $execute = array_merge($execute,$push);
             }
+        }
 
-            // UPDATE CANDIDAT/APPRENANT
-            if($post['role'] == 5 || $post['role'] == 4){
+
+
+        // UPDATE CANDIDAT/APPRENANT
+        if($post['role'] == 5 || $post['role'] == 4){
+            // Sécurisation variables candidat/apprenant
+            $number = securizeString($post['number']);
+                if($number === false){
+                    $error = true;
+                }else{
                 $query .= ", `user_numero_pe` = ?";
-                $push = [$post['number']];
+                $push = [$number];
                 $execute = array_merge($execute,$push);
             }
+        }
 
+
+
+        // FAIT LA REQUETE SI 0 ERREURS
+        if($error === false && $user === false){
             $query .= " WHERE `user_id` = ?";
-            $push = [$post['user']];
+            $push = [$user];
             $execute = array_merge($execute,$push);
 
             // var_dump($query);
@@ -466,6 +514,5 @@ $stmt->execute([$pass, $email]);
             $req = $this->bdd->prepare($query);
             $req->execute($execute);
         }
-
     }
 }

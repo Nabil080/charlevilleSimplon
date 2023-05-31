@@ -71,7 +71,7 @@
                 </td>
             </tr>
         <?php
-            include("view/admin/apprenant/modalUpdateApprenant.php");
+            include("view/admin/modalUpdateUser.php");
             include("view/admin/modalInfos.php");
             include("view/admin/modalProjet.php");
         };
