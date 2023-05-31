@@ -1,6 +1,14 @@
 {
   "errorMessage": [
     {
+      "name": "notForm",
+      "message": "Nous n'avons pas reçu de formulaire. Si le problème persiste, envoyer un message au support."
+    },
+    {
+      "name": "errorForm",
+      "message": "Un à plusieurs champ(s) sont incorrects. Merci de bien vouloir les corriger."
+    },
+    {
       "name": "emptyField",
       "message": "Le champ est vide."
     },
@@ -10,7 +18,7 @@
     },
     {
       "name": "passwordNotIdentical",
-      "message": "Les mots de passes ne sont pas identique."
+      "message": "Les mots de passe ne sont pas identiques."
     },
     {
       "name": "existingEmail",
@@ -19,6 +27,18 @@
     {
       "name": "loginIncorrect",
       "message": "Oups ! Connexion incorrect."
+    },
+    {
+      "name": "ErrorCompanyRegister",
+      "message": "Erreur ! Une formation à était lu lors d'une inscription d'entreprise."
+    },
+    {
+      "name": "NoTrainingChosen",
+      "message": "Erreur ! Il n'y pas de formation lu."
+    },
+    {
+      "name": "duplicateCandidate",
+      "message": ""
     }
   ],
   "successMessage": [
@@ -29,6 +49,18 @@
     {
       "name": "login",
       "message": "Vous avez réussi à vous connecter."
+    },
+    {
+      "name": "succesCandidate",
+      "message": ""
+    },
+    {
+      "name": "mailForgetPassword",
+      "message": "<span class='font-bold'>Envoie réussi !</span><br> Si un compte appartient à cet email, vous recevrez un lien de demande reset de mot de passse."
+    },
+    {
+      "name": "resetPassword",
+      "message": "<span class='font-bold'>Changement réussi !</span><br>Le mot de passe à bien était changé. Vous pouvez maintenant vous connecter."
     }
   ]
 }

@@ -84,4 +84,6 @@ switch ($action) {
     case 'assignProject':
         assignProject();
         break;
+    // Validation projet
+
 }

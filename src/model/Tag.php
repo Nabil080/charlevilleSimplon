@@ -14,7 +14,7 @@ class TagRepository extends ConnectBdd{
     public function getTagById($id):object
     {
         $Tag = new Tag;
-        $req = $this->bdd->prepare("SELECT * FROM `tag` WHERE `tag_id` = ?");
+        $req = $this->bdd->prepare("SELECT * FROM tag WHERE tag_id = ?");
         $req->execute([$id]);
         $data = $req->fetch(PDO::FETCH_ASSOC);
 
@@ -55,7 +55,13 @@ class TagRepository extends ConnectBdd{
 
         return $tags;
     }
+
+    public function getAllTags()
+    {
+        $req = $this->bdd->prepare("SELECT * FROM tag");
+        $req->execute();
+        $allTags = $req->fetchAll(PDO::FETCH_ASSOC);
+
+        return $allTags;
+    }
 }
-
-
-?>

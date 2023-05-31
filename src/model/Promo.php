@@ -5,7 +5,8 @@ require_once('src/model/Status.php');
 
 
 
-class Promo {
+class Promo
+{
     public int $id;
     public string $name;
     public $start;
@@ -16,7 +17,7 @@ class Promo {
 
 
 
-    public function __construct ($id, $name, $start, $end, $status, $formation_id)
+    public function __construct($id, $name, $start, $end, $status, $formation_id)
     {
         $this->id = $id;
         $this->start = $start;
@@ -30,12 +31,20 @@ class Promo {
     }
 }
 
-class PromoRepository extends ConnectBdd{
-    public function __construct(){
+class PromoRepository extends ConnectBdd
+{
+    public function __construct()
+    {
         parent::__construct();
     }
-
-    public function getPromoById(int $id):object
+    public function InsertCandidateInPromo($user_id, $promo_id): void
+    {
+        $req = "INSERT INTO `promo_candidate`(`user_id`,`promo_id`) VALUE (?,?)";
+        $stmt = $this->bdd->prepare($req);
+        $stmt->execute([$user_id, $promo_id]);
+        $stmt->closeCursor();
+    }
+    public function getPromoById(int $id): object
     {
         $promoRepository = new PromoRepository;
         $req = $this->bdd->prepare("SELECT * FROM `promo` WHERE `promo_id` = ?");
@@ -43,12 +52,12 @@ class PromoRepository extends ConnectBdd{
         $data = $req->fetch(PDO::FETCH_ASSOC);
 
         $Promo = new Promo(
-        $data['promo_id'], 
-        $data['promo_name'], 
-        $promoRepository->formateDate($data['promo_start']),
-        $promoRepository->formateDate($data['promo_end']),
-        $data['status_id'],
-        $data['formation_id']
+            $data['promo_id'],
+            $data['promo_name'],
+            $promoRepository->formateDate($data['promo_start']),
+            $promoRepository->formateDate($data['promo_end']),
+            $data['status_id'],
+            $data['formation_id']
         );
 
         return $Promo;
@@ -56,12 +65,13 @@ class PromoRepository extends ConnectBdd{
 
     public function getPromos(): array
     {
-        
+
         $promoRepository = new PromoRepository;
         $req = $this->bdd->prepare("SELECT * FROM `promo`");
         $req->execute();
         $datas = $req->fetchAll(PDO::FETCH_ASSOC);
         $promos = [];
+
 
         foreach ($datas as $data)
         {
@@ -72,25 +82,12 @@ class PromoRepository extends ConnectBdd{
                 $promoRepository->formateDate($data['promo_end']),
                 $data['status_id'],
                 $data['formation_id']
-                );
+            );
 
             array_push($promos, $Promo);
 
         }
-
-
         return $promos;
-    }
-
-    public function formateDate($date):string
-    {
-        $mois = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'];
-        $explode  = substr($date, '5', '2');
-        $date = date('d-m-Y', strtotime($date));
-        $findMois = $mois[((int)$explode) - 1];
-        $date = str_replace($explode, $findMois, $date);
-        $date = str_replace("-", " ", $date);
-        return $date;
     }
 
     public function getPromoDate($id):array
@@ -113,28 +110,29 @@ class PromoRepository extends ConnectBdd{
         $req = $this->bdd->prepare("SELECT user_id FROM promo_user WHERE promo_id = ?");
         $req->execute([$id]);
         $datas = $req->fetchAll(PDO::FETCH_COLUMN);
-        $UsersRepository = new UsersRepository;
+        $UsersRepository = new UserRepository;
         $users = [];
-        
+
         foreach ($datas as $data) {
-            $user = $UsersRepository->getUserById($data);
+            $user = new User($data);
             array_push($users, $user);
         }
         return $users;
     }
 
-    public function getAllFormateurs($id):array 
+    public function getAllFormateurs($id): array
     {
         $req = $this->bdd->prepare("SELECT user_id FROM promo_user 
         WHERE promo_id = ?");
         $req->execute([$id]);
         $datas = $req->fetchAll(PDO::FETCH_COLUMN);
-        $UsersRepository = new UsersRepository;
+      
+        $UsersRepository = new UserRepository;
         $users = [];
         
         foreach ($datas as $data) {
-            $user = $UsersRepository->getUserById($data);
-            if ($user->role->name == "Formateur") {
+            $user = new User($data);
+            if ($user->role_id->name == "Formateur") {
                 array_push($users, $user);
             }
         }
@@ -159,6 +157,96 @@ class PromoRepository extends ConnectBdd{
 
         return $usersId;
     }
+  
+    public function getPromoStart($id) 
+    {
+        $req = $this->bdd->prepare("SELECT `promo_start` FROM `promo` WHERE `formation_id` = ?");
+        $req->execute([$id]);
+        $data = $req->fetch(PDO::FETCH_COLUMN);
+        return $data;
+    }
+
+    public function getIdOpenPromoByFormationId($formation_id)
+    {
+        $req = $this->bdd->prepare("SELECT `promo_id` FROM `promo` WHERE `formation_id` = ? AND `status_id` = ?");
+        $req->execute([$formation_id, 14]);
+        $data = $req->fetch(PDO::FETCH_COLUMN);
+        return $data;
+    }
+    public function CheckDuplicateCandidate($user_id, $promo_id)
+    {
+        $req = $this->bdd->prepare("SELECT * FROM `promo_candidate` WHERE `user_id` = ? AND `promo_id` = ?");
+        $req->execute([$user_id, $promo_id]);
+        $data = $req->fetch();
+        return (empty($data) && $data == false) ? true : false;
+    }
+    $req = $this->bdd->prepare("SELECT * FROM `promo_candidate` WHERE `user_id` = ? AND `promo_id` = ?");
+    $req->execute([$user_id, $promo_id]);
+    $data = $req->fetch();
+    return (empty($data) && $data == false) ? true : false;
+    }
+
+    public function getActivePromos():array
+    {
+        $req = $this->bdd->prepare("SELECT * FROM promo WHERE status_id = ?");
+        $req->execute([12]);
+        $data = $req->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach($data as $key){
+            $promos[] = $this->getPromoById($key['promo_id']);
+        }
+
+        return $promos;
+    }
+
+    public function getPromoByUserID($id)
+    {
+        $req = $this->bdd->prepare("SELECT * FROM `promo_candidate` WHERE `user_id` = ?");
+        $req->execute([$id]);
+        $data = $req->fetch(PDO::FETCH_ASSOC);
+
+        if (empty($data))
+        {
+            $req = $this->bdd->prepare("SELECT * FROM `promo_refused` WHERE `user_id` = ?");
+            $req->execute([$id]);
+            $data = $req->fetch(PDO::FETCH_ASSOC);
+
+            if (empty($data))
+            {
+                $req = $this->bdd->prepare("SELECT * FROM `promo_user` WHERE `user_id` = ?");
+                $req->execute([$id]);
+                $data = $req->fetch(PDO::FETCH_ASSOC);
+
+                if (empty($data))
+                {
+                    return "Cet utilisateur n'appartient à aucune promotion en cours ou ayant existé.";
+                }
+                else
+                {
+                $Promo_datas = $this->getPromoById($data['user_id']);
+                return $Promo_datas;
+                }
+            }
+            else
+            {
+            $Promo_datas = $this->getPromoById($data['user_id']);
+            return $Promo_datas;
+            }
+        }
+        else
+        {
+        $Promo_datas = $this->getPromoById($data['user_id']);
+        return $Promo_datas;
+        }
+    }
+    
+    public function formateDate($date):string
+    {
+        setlocale(LC_TIME,'fr_FR','french','French_France.1252','fr_FR.ISO8859-1','fra');
+        $datefmt = new IntlDateFormatter('fr_FR', 0, 0, NULL, NULL, 'dd MMMM yyyy');
+        $formatedDate = $datefmt->format(date_create($date));
+        return $formatedDate;
+    }
 
     public function getPromoProjects($id):array
     {
@@ -168,7 +256,7 @@ class PromoRepository extends ConnectBdd{
         $datas = $req->fetchAll(PDO::FETCH_COLUMN);
         $ProjectRepository = new ProjectRepository;
         $projects = [];
-        
+
         foreach ($datas as $data) {
             $project = $ProjectRepository->getProjectById($data);
             array_push($projects, $project);
@@ -349,7 +437,5 @@ class PromoRepository extends ConnectBdd{
         $req = $this->bdd->prepare("UPDATE promo SET promo_name = ?, promo_start = ?, promo_end = ?, formation_id = ? WHERE promo_id = ?");
         $req->execute([$formation,$POST['start'],$POST['end'],$POST['formation']],$POST['promo']);
     }
+
 }
-
-
-?>

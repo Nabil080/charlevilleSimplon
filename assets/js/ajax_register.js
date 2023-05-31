@@ -1,38 +1,18 @@
-const loginForm = document.querySelector("#login-form");
+const registerForm = document.querySelector('#register-form');
+registerForm.addEventListener('submit', function (event) {
+    event.preventDefault(); // prevent default form submission behavior
 
-loginForm.addEventListener("submit", function (event) {
-  event.preventDefault(); // prevent default form submission behavior
-
-  // handle form submission with fetch
-  const formData = new FormData(loginForm);
-  fetch("index.php?action=loginTreatment", {
-    method: "POST",
-    body: formData,
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      console.log(data);
-
-      data.forEach(function (element) {
-        // Tout effacer les erreurs déjà afficher.
-        let alertMessages = document.getElementsByClassName("success");
-        for (let i = 0; i < alertMessages.length; i++) {
-          alertMessages[i].remove();
-        }
-
-        alertMessages = document.getElementsByClassName("error");
-        for (let i = 0; i < alertMessages.length; i++) {
-          alertMessages[i].remove();
-        }
-
-        let id = element["successMessage"]
-          ? "content_success"
-          : element["location"];
-        console.log(id);
-
-        const input = document.getElementById(id);
-        input.insertAdjacentHTML("afterend", element["message"]);
-      });
+    // handle form submission with fetch
+    const formData = new FormData(registerForm);
+    fetch('index.php?action=registerTreatment', {
+        method: 'POST',
+        body: formData
     })
-    .catch((error) => console.error(error));
+        .then(response => response.json())
+        .then(data => {
+            //console.log(data);
+            deleteAlert();
+            showAlert(data);
+        })
+        .catch(error => console.error(error));
 });

@@ -1,4 +1,9 @@
 <?php
+
+// TEMP POUR TEST SANS CONNEXION
+$user = new UserRepository();
+$_SESSION['user'] = $user->getUserById(1);
+
 switch ($action) {
     case 'allFormationsPage':
         allFormationsPage();
@@ -12,8 +17,18 @@ switch ($action) {
         break;
     // Afficher le formulaire de pré-inscription.
     case 'registerPage':
-        registerPage();
+        if (!isset($_SESSION['user']))
+            registerPage();
+        if (isset($_SESSION['user']) && $_SESSION['user']->role_id == 5)
+            CandidatePromo();
+        else
+            homepage();
         break;
+    //afficher la page d'activation de compte
+    case 'accountActivationPage':
+        accountActivationPage();
+        break;
+
     // Afficher toutes les promos
     case 'allPromotionsPage':
         allPromotionsPage();
@@ -36,13 +51,53 @@ switch ($action) {
         contactPage();
         break;
 
-    // Envoie du traitement du formulaire d'inscription
+
+
+    // Inscription & ActivationForm & RestPasswordForm
+    case 'registerPage':
+        (isset($_SESSION['user'])) ? registerPage() : registerPage();
+        break;
+    //afficher la page d'activation de compte
+    case 'accountActivationPage':
+        accountActivationPage();
+        break;
+    case 'resetPasswordForm':
+        resetPasswordForm();
+        break;
+
+    // Traitement de la partie Compte 
     case 'registerTreatment':
         registerTreatment();
+        break;
+
+    // Gestions projet
+    case 'validationProjectTreatment':
+        validationProjectTreatment();
+        break;
+    case 'assignTeamToProject':
+        assignTeamToProject();
+        break;
+    case 'reSubmitProject':
+        reSubmitProject();
         break;
     // Envoie du traitement d'activation de compte
     // Envoie du traitement du formulaire de connexion
 
+    case 'accountActivation':
+        activationAccountTreatment();
+        break;
+    case 'sendMailResetPasswordTreatment':
+        sendMailResetPasswordTreatment();
+        break;
+    case 'resetPasswordTreatment':
+        resetPasswordTreatment();
+        break;
+    case 'loginTreatment':
+        loginTreatment();
+        break;
+    case 'logOut':
+        logOut();
+        break;
     // Envoie du traitement pagination tous les projets
     case 'projectsPagination':
         projectsPagination();

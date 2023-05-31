@@ -14,7 +14,7 @@
             savoir plus</a>
     </div>
     <div class="flex justify-center items-center">
-        <p class="pb-2 text-[16px] text-center italic"><?= $promo->status->name ?> <?= $promo->end; ?></p>
+        <p class="pb-2 text-[16px] text-center italic"><?= $promo->status->name ?> le <?= $promo->end; ?></p>
         <span class="w-4 h-4 border-[1px] bg-main-green rounded-full ml-2 mb-2 animate-pulse"></span>
         
     </div>

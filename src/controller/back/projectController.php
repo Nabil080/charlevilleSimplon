@@ -17,7 +17,7 @@ function projectsPagination()
 
     $response = array(
         "status" => "success",
-        "message" => "Un string des cards a été retourné",
+        "message" => "La requête a été modifée comme tel",
         "projets" => $projectsHTML,
     );
 
@@ -48,10 +48,51 @@ function assignProject()
         "status" => "success",
         "message" => "Le projet a bien été assigné.",
     );
+ 
+    echo json_encode($response);
+}
 
+function validationProjectTreatment() 
+{
+    $projectRepository = new ProjectRepository;
+    $projectId = $_POST['projectId'];
+    if (isset($_POST['validation'])){
+        $validation = $_POST['validation'];
+        $promoId = $_POST['promo'];
+        $projectRepository->assignProjectToPromo($projectId, $promoId);
+    } else {
+        $validation = "refused";
+    }
+
+    $bool = $projectRepository->updateProjectStatus($validation, $projectId);
+    
+    $response = array(
+        "status" => "success",
+        "message" => "Le statut a été modifée comme tel",
+        "projets" => $bool,
+    );
     echo json_encode($response);
 
 }
+
+function assignTeamToProject()
+{
+    $projectRepository = new ProjectRepository;
+    if (isset($_POST) && isset($_POST['team']) && isset($_POST['projectId'])) {
+        $projectId = $_POST['projectId'];
+        $apprenants = $_POST['team'];
+    } else {
+        header('Location:?action=projectGestionPage');
+    }
+    $bools = $projectRepository->assignTeamToProject($projectId, $apprenants);
+
+    $response = array(
+        "status" => "success",
+        "message" => "Le statut a été modifée comme tel",
+        "projets" => $bools,
+    );
+    
+
 
 function addProjectTraitement()
 {
@@ -64,4 +105,13 @@ function updateProjectTraitement()
     $projectRepo = new ProjectRepository;
     $projectRepo->updateProject($_POST,$_FILES);
 }
+function reSubmitProject()
+{
+    $id = $_GET['id'];
+    $projectRepository = new ProjectRepository;
+    $bool = $projectRepository->reSubmitProject($id);
+    header('Location:?action=projectGestionPage');
+    
+}
+
 ?>
