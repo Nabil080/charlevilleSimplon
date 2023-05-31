@@ -17,7 +17,10 @@
                 <?= "" ?> Contact
             </th>
             <th scope="col" class="px-4 py-3 text-center">
-                <span class="sr-only">Edit</span>
+                <?= "" ?> Modifier
+            </th>
+            <th scope="col" class="px-4 py-3 text-center">
+                <?= "" ?> Supprimer
             </th>
         </tr>
     </thead>
@@ -48,6 +51,11 @@
                     </button>
                 </td>
                 <td class="px-4 py-3 mx-auto items-center text-center">
+                    <button data-modal-target="modal-update-<?=$user->id?>" data-modal-toggle="modal-update-<?=$user->id?>"  class="block w-full md:w-auto text-white bg-main-gray hover:bg-gray-900 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 mt-2 mx-auto text-center">
+                        <i class="fa-solid fa-pen-to-square text-main-white"></i>
+                    </button>
+                </td>
+                <td class="px-4 py-3 mx-auto items-center text-center">
                     <form action="?action=deleteUser" method="post">
                         <input type="hidden" name="user_id" value=<?= $user->id ?>>
                         <button class="block w-full md:w-auto text-white bg-main-gray hover:bg-gray-900 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 mt-2 mx-auto text-center" type="submit">
@@ -57,6 +65,7 @@
                 </td>
             </tr>
         <?php
+            include("view/admin/modalUpdateUser.php");
             include("view/admin/modalInfos.php");
             include("view/admin/modalProjet.php");
         }

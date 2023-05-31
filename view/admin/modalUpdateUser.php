@@ -1,3 +1,8 @@
+<?php
+if(isset($candidate)){
+    $user = $candidate;
+} ?>
+
 <!-- Modal de connexion -->
 <section id="modal-update-<?=$user->id?>" data-modal-placement="center" tabindex="-1" aria-hidden="true" class="backdrop:brightness-50 fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] md:h-full">
     <div class="relative w-full h-fit max-w-md md:h-auto">
@@ -38,7 +43,7 @@
                     <?php if($user->role->id != 3){ ?>
                     <div>
                         <label for="birth_date" class="block mb-2 text-sm font-medium  text-main-red">Date de naissance</label>
-                        <input type="text" name="birth_date" class=" border text-sm rounded-md block w-full p-2.5 border-main-red text-black" value="<?=$user->birth_date?>" required>
+                        <input type="date" name="birth_date" class=" border text-sm rounded-md block w-full p-2.5 border-main-red text-black" value="<?=$user->birth_date?>" required>
                     </div>
                     <div>
                         <label for="birth_place" class="block mb-2 text-sm font-medium  text-main-red">Lieu de naissance</label>

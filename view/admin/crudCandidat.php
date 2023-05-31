@@ -5,9 +5,8 @@
             <th scope="col" class="px-4 py-3 text-center"><?= "" ?> Prénom</th>
             <th scope="col" class="px-4 py-3 text-center"><?= "" ?> Candidatures</th>
             <th scope="col" class="px-4 py-3 text-center"><?= "" ?> Contact</th>
-            <th scope="col" class="px-4 py-3 text-center">Supprimer
-                <span class="sr-only">Edit</span>
-            </th>
+            <th scope="col" class="px-4 py-3 text-center">Modifier</th>
+            <th scope="col" class="px-4 py-3 text-center">Supprimer</th>
         </tr>
     </thead>
     <tbody class="border-2">
@@ -41,6 +40,11 @@
                     </button>
                 </td>
                 <td class="px-4 py-3 mx-auto items-center text-center">
+                    <button data-modal-target="modal-update-<?=$candidate->id?>" data-modal-toggle="modal-update-<?=$candidate->id?>"  class="block w-full md:w-auto text-white bg-main-gray hover:bg-gray-900 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 mt-2 mx-auto text-center">
+                        <i class="fa-solid fa-pen-to-square text-main-white"></i>
+                    </button>
+                </td>
+                <td class="px-4 py-3 mx-auto items-center text-center">
                     <form action="?action=deleteCandidate" method="post">
                         <input type="hidden" name="user_id" value=<?=$candidate->id?>>
                         <input type="hidden" name="promo_id" value=<?=$UserRepo->getUserPromo('candidature',$candidate->id)[0]->id?>>
@@ -51,6 +55,7 @@
                 </td>
             </tr>
         <?php
+            include("view/admin/modalUpdateUser.php");
             include("view/admin/modalCandidature.php");
         }
         ?>
