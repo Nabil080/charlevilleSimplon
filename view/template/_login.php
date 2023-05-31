@@ -41,13 +41,11 @@
                     <div>
                         <div class="text-sm font-bold text-main-gray">
                             Mot de passe oublié ? <a onclick="switchDiv('co','paco')"
-                                class="hover:underline text-main-red cursor-pointer">Le réinitialiser</a>
+                                class="hover:underline text-main-red cursor-pointer">Réinitialiser</a>
                         </div>
                         <div class="text-sm font-bold text-main-gray">
-                            Pas de compte ? S'inscrire: <a href="?action=registerPage&company="
-                                class="hover:underline text-main-red cursor-pointer">Entreprise</a> / <a
-                                href="?action=registerPage"
-                                class="hover:underline text-main-red cursor-pointer">Candidat</a>
+                            Pas de compte ? <a href="?action=registerPage&company="
+                                class="hover:underline text-main-red cursor-pointer">S'inscrire (Entreprise)</a>
                         </div>
                     </div>
                 </form>
@@ -57,10 +55,12 @@
                 <h3 class="mb-4 text-xl uppercase w-fit mx-auto font-bold font-title text-main-red">Mot de passe oublié
                 </h3>
                 <form class="space-y-6" id="forget-form" method="post">
+                    <div id="forget_succesContent" class="alertContent">
+                    </div>
                     <div>
-                        <label for="email" class="block mb-2 text-sm font-medium  text-main-red">Votre adresse
+                        <label for="email_forget" class="block mb-2 text-sm font-medium  text-main-red">Votre adresse
                             mail</label>
-                        <input type="email" name="email" id="email_forget"
+                        <input type="email" name="email_forget" id="email_forget"
                             class=" border text-sm rounded-md block w-full p-2.5 border-main-red text-main-red"
                             placeholder="Exemple@mail.com" required>
                     </div>

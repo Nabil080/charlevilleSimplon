@@ -5,39 +5,42 @@ require_once 'src/model/Tag.php';
 
 class User
 {
-    private $user_id;
-    private $user_name;
-    private $user_surname;
-    private $user_email;
-    private $user_password;
-    private $user_avatar;
-    private $user_company;
-    private $user_description;
-    private $user_linkedin;
-    private $user_github;
-    private $user_token;
-    private $user_id_poleEmploi;
-    private $user_phone;
-    private $user_adress;
-    private $user_birth_date;
-    private $user_birth_place;
-    private $user_nationality;
-    private $user_status;
-    private $role_id;
-    private $role_name;
-    public $highlight;
+    public $user_id;
+    public $user_name;
+    public $user_surname;
+    public $user_email;
+    public $user_password;
+    public $user_avatar;
+    public $user_company;
+    public $user_phone;
+    public $user_adress;
+    public $user_description;
+    public $user_linkedin;
+    public $user_github;
+    public $user_token;
+    public $user_id_poleEmploi;
+    public $user_birth_date;
+    public $user_birth_place;
+    public $user_nationality;
+    public $user_status;
+    public $status_date;
+    public $role_id;
+    public $user_tags;
+    public $user_highlight;
+    public $user_cv;
+    public $user_projects;
 
     public function __construct($id)
     {
         $UserRepo = new UserRepository;
         $user = $UserRepo->getUserById($id);
         $this->setUser($user);
-
     }
     public function getUser(): object
     {
         return $this;
     }
+
     public function setUser($account): void
     {
         /* base */
@@ -57,8 +60,11 @@ class User
         $this->user_description = $account['user_description'];
         $this->user_linkedin = (!null) ? $account['user_linkedin'] : '';
         $this->user_github = (!null) ? $account['user_github'] : '';
+        $this->user_highlight = (!null) ? $account['user_highlight'] : '';
+        $this->user_cv = (!null) ? $account['user_cv'] : '';
+        $this->user_projects = (!null) ? $account['user_projects'] : '';
 
-        /* Propesct */
+        /* Prospect */
         $this->user_id_poleEmploi = $account['user_numero_pe'];
         $this->user_birth_date = $account['user_birth_date'];
         $this->user_birth_place = $account['user_birth_place'];
@@ -67,10 +73,11 @@ class User
         /* Utility */
         $this->user_token = $account['user_token'];
         $this->user_status = $account['status_name'];
+        $this->status_date = $account['status_date'];
         $this->role_id = $account['role_id'];
         $this->role_name = $account['role_name'];
+        $this->user_tags = $account['user_tags'];
     }
-
 
 }
 
@@ -79,7 +86,9 @@ class UserRepository extends ConnectBdd
     public function InsertUser($account): void
     {
         $Mail = new Mail;
-        $token = $Mail->tokenMail('activateUser', $account['email']);
+        $Mail->sendMailActivationAccount($account['email']);
+        $token = $Mail->getToken();
+
         $pass = password_hash($account['password'], PASSWORD_BCRYPT);
 
         $req = "INSERT INTO `user`(`user_name`,`user_surname`, `user_email`, `user_password`, `user_token`,`user_place`,`user_phone`,`user_company`,`user_numero_pe`,`user_birth_place`,`user_birth_date`,`user_nationality`,`role_id`) VALUE(?,?,?,?,?,?,?,?,?,?,?,?,?)";
@@ -119,6 +128,11 @@ class UserRepository extends ConnectBdd
         $data = $stmt->fetch(PDO::FETCH_ASSOC);
         $stmt->closeCursor();
 
+        $Tags = new Tag;
+        $tagRepo = new TagRepository;
+        $Tags = $tagRepo->getUserTags($data['user_id']);
+        $data->tags = $Tags;
+      
         return $data;
     }
     public function getIdByEmail($email)
@@ -130,6 +144,16 @@ class UserRepository extends ConnectBdd
         $stmt->closeCursor();
 
         return ($user_id != false) ? $user_id['user_id'] : false;
+    }
+    public function getMailByToken($token)
+    {
+        $req = "SELECT user_email FROM user WHERE user_token = ?";
+        $stmt = $this->bdd->prepare($req);
+        $stmt->execute([$token]);
+        $results = $stmt->fetch();
+        $stmt->closeCursor();
+
+        return (isset($results['user_email']) && is_string($results['user_email'])) ? $results['user_email'] : false;
     }
 
     public function getUserSession($id)
@@ -153,7 +177,6 @@ class UserRepository extends ConnectBdd
         $stmt->closeCursor();
 
         return ($account) ? true : false;
-
     }
     public function checkPassword($id, $mdp): bool
     {
@@ -164,25 +187,17 @@ class UserRepository extends ConnectBdd
         $stmt->closeCursor();
         $mdpuser = $mdpuser->user_password;
 
-        $mdpval = password_verify($mdp, $mdpuser);
-        return $mdpval;
-    }
-    public function checkToken($token)
-    {
-        $req = "SELECT user_email FROM user WHERE user_token = ?";
-        $stmt = $this->bdd->prepare($req);
-        $stmt->execute([$token]);
-        $results = $stmt->fetch();
-        $stmt->closeCursor();
 
-        return (isset($results['user_email']) && is_string($results['user_email'])) ? $results['user_email'] : false;
+        $bool = (password_verify($mdp, $mdpuser) || $mdp === $mdpuser) ? true : false;
+        return $bool;
     }
+
     /* Utility */
-    public function addToken($email, $token): void
+    public function addToken($user_id, $token): void
     {
-        $req = "UPDATE `user` SET `user_token` = ? WHERE user_email = ?";
+        $req = "UPDATE `user` SET `user_token` = ? WHERE user_id = ?";
         $stmt = $this->bdd->prepare($req);
-        $stmt->execute([$token, $email]);
+        $stmt->execute([$token, $user_id]);
         $stmt->closeCursor();
     }
     public function activateUsers($email, $token): void

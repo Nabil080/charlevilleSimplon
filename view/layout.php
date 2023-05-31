@@ -17,28 +17,28 @@
     <script src="build/ckeditor.js"></script>
     <script src="https://kit.fontawesome.com/eb7aa99f8d.js" crossorigin="anonymous"></script>
     <script>
-    tailwind.config = {
-        theme: {
-            fontFamily: {
-                sans: 'Roboto',
-                title: 'Montserrat',
-            },
-            extend: {
-                colors: {
-                    'main': {
-                        red: '#BD3124',
-                        white: '#FFFF',
-                        gray: '#4F4F4F',
-                        lightred: '#F6DADE',
-                        lightgray: '#F2F2F3',
-                        blue: '#4A9AE6',
-                        green: '#A2EF4D',
-                        orange: '#ff7f00',
+        tailwind.config = {
+            theme: {
+                fontFamily: {
+                    sans: 'Roboto',
+                    title: 'Montserrat',
+                },
+                extend: {
+                    colors: {
+                        'main': {
+                            red: '#BD3124',
+                            white: '#FFFF',
+                            gray: '#4F4F4F',
+                            lightred: '#F6DADE',
+                            lightgray: '#F2F2F3',
+                            blue: '#4A9AE6',
+                            green: '#A2EF4D',
+                            orange: '#ff7f00',
+                        }
                     }
                 }
             }
         }
-    }
     </script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.css" rel="stylesheet" />
     <link href="assets/css/nav.css" rel="stylesheet" />
@@ -56,7 +56,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
     <script src="https://kit.fontawesome.com/eb7aa99f8d.js" crossorigin="anonymous"></script>
     <script src="assets/js/nav.js"></script>
-    <script src="assets/js/ajax_form.js"></script>
+    <script src="assets/js/ajax_modalLogin.js"></script>
+    <script src="assets/js/ajax_function.js"></script>
     <script src="assets/js/function.js"></script>
     <?php if (isset($script))
         echo $script; ?>

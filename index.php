@@ -4,7 +4,6 @@ session_start();
 require 'src/model/ConnectBdd.php';
 // var_dump($_SESSION);
 
-
 if (isset($_GET['action']) && $_GET['action'] !== '' && !isset($_GET['admin'])) {
     $action = $_GET['action'];
     require 'public.php';
@@ -16,7 +15,7 @@ if (isset($_GET['action']) && $_GET['action'] !== '' && !isset($_GET['admin'])) 
                     myProfile();
                     break;
             }
-        } else if ($_SESSION['user']->role_id <= 3) {
+            if ($_SESSION['user']->role->id <= 3) {
             switch ($action) {
                 // Afficher le CRUD de projet (Gestion de projet)
                 case 'projectGestionPage':
@@ -32,7 +31,8 @@ if (isset($_GET['action']) && $_GET['action'] !== '' && !isset($_GET['admin'])) 
                 // Envoi du formulaire d'ajoute de projet
                 // Envoi du formulaire de moficiation de projet
             }
-            if ($_SESSION['user']->role_id <= 2) {
+            if ($_SESSION['user']->role->id <= 2) {
+
                 switch ($action) {
                     // Envoie du formulaire de modification de projet (version modal)
                     // Envoi de la demande de suppression de projet
@@ -46,7 +46,3 @@ if (isset($_GET['action']) && $_GET['action'] !== '' && !isset($_GET['admin'])) 
 } else {
     homepage();
 }
-
-// $repo = new ProjectRepository;
-// $data = $repo->getProjectsDate();
-// var_dump($data);

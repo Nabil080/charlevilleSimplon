@@ -23,6 +23,15 @@ class StatusRepository extends ConnectBdd{
 
         return $Status;
     }
+
+    public function getAllStatus()
+    {
+        $req = $this->bdd->prepare("SELECT * FROM status");
+        $req->execute();
+        $allStatus = $req->fetchAll(PDO::FETCH_ASSOC);
+
+        return $allStatus;
+    }
 }
 
 

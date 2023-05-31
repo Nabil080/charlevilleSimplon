@@ -83,37 +83,37 @@ $title = "Inscription";
             </div>
             <div class="w-full md:w-2/3 mb-6 md:mb-3">
                 <label for="surname" class="block mb-2 text-[14px] font-medium">Prénom</label>
-                <input type="text" id="surname" name="surname" placeholder="Votre prénom"
+                <input type="text" id="surname" name="surname" placeholder="Votre prénom" required
                     class="bg-main-white border border-main-red text-[18px] rounded-[5px] block w-full p-2.5">
                 <p id="surname_error" class="errorAlert mt-2 text-sm text-red-600 dark:text-red-500"></p>
             </div>
             <div class="w-full md:w-2/3 mb-6 md:mb-3">
                 <label for="email" class="block mb-2 text-[14px] font-medium">Email</label>
-                <input type="email" id="email" name="email" placeholder="Votre email"
+                <input type="email" id="email" name="email" placeholder="Votre email" required
                     class="bg-main-white border border-main-red text-[18px] rounded-[5px] block w-full p-2.5">
                 <p id="email_error" class="errorAlert mt-2 text-sm text-red-600 dark:text-red-500"></p>
             </div>
             <div class="w-full md:w-2/3 mb-6 md:mb-3">
                 <label for="phone" class="block mb-2 text-[14px] font-medium">Téléphone</label>
-                <input type="tel" id="phone" name="phone" pattern="[0][1-9]{9}" placeholder="07256533**"
+                <input type="tel" id="phone" name="phone" pattern="[0][1-9]{9}" placeholder="07256533**" required
                     class="bg-main-white border border-main-red text-[18px] rounded-[5px] block w-full p-2.5">
                 <p id="phone_error" class="errorAlert mt-2 text-sm text-red-600 dark:text-red-500"></p>
             </div>
             <div class="w-full md:w-2/3 mb-6 md:mb-3">
                 <label for="adress" class="block mb-2 text-[14px] font-medium">Adresse</label>
-                <input type="text" id="adress" name="adress" placeholder="2 rue Du Général de Gaulle"
+                <input type="text" id="adress" name="adress" placeholder="2 rue Du Général de Gaulle" required
                     class="bg-main-white border border-main-red text-[18px] rounded-[5px] block w-full p-2.5">
                 <p id="adress_error" class="errorAlert mt-2 text-sm text-red-600 dark:text-red-500"></p>
             </div>
             <div class="w-full md:w-2/3 mb-6 md:mb-3">
                 <label for="postal" class="block mb-2 text-[14px] font-medium">Code Postal</label>
-                <input type="text" id="postal" name="postal" placeholder="75000"
+                <input type="text" id="postal" name="postal" placeholder="75000" required
                     class="bg-main-white border border-main-red text-[18px] rounded-[5px] block w-full p-2.5">
                 <p id="postal_error" class="errorAlert mt-2 text-sm text-red-600 dark:text-red-500"></p>
             </div>
             <div class="w-full md:w-2/3 mb-6 md:mb-3">
                 <label for="city" class="block mb-2 text-[14px] font-medium">Ville</label>
-                <input type="text" id="city" name="city" placeholder="Paris"
+                <input type="text" id="city" name="city" placeholder="Paris" required
                     class="bg-main-white border border-main-red text-[18px] rounded-[5px] block w-full p-2.5">
                 <p id="city_error" class="errorAlert mt-2 text-sm text-red-600 dark:text-red-500"></p>
             </div>
