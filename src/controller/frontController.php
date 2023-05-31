@@ -34,8 +34,8 @@ try {
         include 'view/public/all_projects.php';
     }
 
-  function projectGestionPage()
-  {
+    function projectGestionPage()
+    {
     if ($_SESSION['user']->role-> id == 3) {
         $projectRepository = new ProjectRepository;
         $projects = $projectRepository->getEntrepriseProjects($_SESSION['user']->id);
@@ -54,24 +54,24 @@ try {
         header('Location:?action=homepage');
     }
 
-  }
-  
+    }
+
 // Profile
 function profilePage()
 {
     if (!isset($_GET['id'])) {
-        if (!isset($_SESSION['user']->id)) {
+        if (!isset($_SESSION['user']['user_id'])) {
             homepage();
         } else {
             myProfile();
         }
     }
-    else if (isset($_GET['id']) && $_GET['id'] == $_SESSION['user']->id) {
+    else if (isset($_GET['id']) && $_GET['id'] == $_SESSION['user']['user_id']) {
         myProfile();
     }
     else {
         $id = $_GET['id'];
-        $user = new UsersRepository();
+        $user = new UserRepository();
         $userDatas = $user->getUserById($id);
         $tags = new TagRepository();
         $allTags = $tags->getAllTags();
@@ -89,22 +89,22 @@ function myProfile()
 {
     $isMyProfile = false;
     if (!isset($_GET['id'])) {
-        if (!isset($_SESSION['user']->id)) {
+        if (!isset($_SESSION['user']['user_id'])) {
             homepage();
         } else {
-            $id = $_SESSION['user']->id;
+            $id = $_SESSION['user']['user_id'];
             $isMyProfile = true;
         }
     }
-    else if (isset($_GET['id']) && $_GET['id'] == $_SESSION['user']->id) {
-        $id = $_SESSION['user']->id;
+    else if (isset($_GET['id']) && $_GET['id'] == $_SESSION['user']['user_id']) {
+        $id = $_SESSION['user']['user_id'];
         $isMyProfile = true;
     }
     else {
         $id = $_GET['id'];
         profilePage();
     }
-    $user = new UsersRepository();
+    $user = new UserRepository();
     $userDatas = $user->getUserById($id);
     $tags = new TagRepository();
     $allTags = $tags->getAllTags();

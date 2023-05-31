@@ -85,11 +85,11 @@ class PromoRepository extends ConnectBdd{
         $req = $this->bdd->prepare("SELECT user_id FROM promo_user WHERE promo_id = ?");
         $req->execute([$id]);
         $datas = $req->fetchAll(PDO::FETCH_COLUMN);
-        $UsersRepository = new UsersRepository;
+        $UsersRepository = new UserRepository;
         $users = [];
         
         foreach ($datas as $data) {
-            $user = $UsersRepository->getUserById($data);
+            $user = new User($data);
             array_push($users, $user);
         }
         return $users;
@@ -101,32 +101,16 @@ class PromoRepository extends ConnectBdd{
         WHERE promo_id = ?");
         $req->execute([$id]);
         $datas = $req->fetchAll(PDO::FETCH_COLUMN);
-        $UsersRepository = new UsersRepository;
+        $UsersRepository = new UserRepository;
         $users = [];
         
         foreach ($datas as $data) {
-            $user = $UsersRepository->getUserById($data);
-            if ($user->role->name == "Formateur") {
+            $user = new User($data);
+            if ($user->role_id->name == "Formateur") {
                 array_push($users, $user);
             }
         }
         return $users;
-    }
-
-    public function getPromoProjects($id):array
-    {
-        $req = $this->bdd->prepare("SELECT project_id FROM project 
-        WHERE promo_id = ?");
-        $req->execute([$id]);
-        $datas = $req->fetchAll(PDO::FETCH_COLUMN);
-        $ProjectRepository = new ProjectRepository;
-        $projects = [];
-        
-        foreach ($datas as $data) {
-            $project = $ProjectRepository->getProjectById($data);
-            array_push($projects, $project);
-            }
-        return $projects;
     }
 
     public function getPromoStart($id) 
@@ -149,7 +133,6 @@ class PromoRepository extends ConnectBdd{
 
         return $promos;
     }
-}
 
     public function getPromoByUserID($id)
     {

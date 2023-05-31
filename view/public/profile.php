@@ -2,12 +2,15 @@
 $title = "Espace personnel";
 ?>
 
-<?php ob_start();?>
+<?php ob_start();
+var_dump($userDatas);
+var_dump($userProjects);
+?>
 <!-- Section photo et description -->
 <div class="background bg-main-white overflow-x-hidden min-h-[100vh]">
 
     <?php
-    if($_SESSION['user']->role->id == 1){
+    if($_SESSION['user']['role_id'] == 1){
         $notMyProfile = '';
     } elseif (!isset($isMyProfile) || $isMyProfile == false)
     {
@@ -15,13 +18,13 @@ $title = "Espace personnel";
     } else {
         $notMyProfile = '';
     }
-    if ($userDatas->role->id == 5) {?>
+    if ($userDatas['role_id'] == 5) {?>
         <!-- PROFIL PROSPECT -->
         <section class="prospect_profil">
             <!-- Image de profil -->
             <div class="picture_desc grid grid-cols-1 lg:grid-cols-2 items-center py-[50px] px-[8%] 2xl:px-[5%]">
                 <div class="picture max-h-screen lg:mr-5">
-                    <img class="w-full rounded-t-lg" src="<?= $userDatas->avatar ?>" alt="Image de profil">
+                    <img class="w-full rounded-t-lg" src="<?= $userDatas['user_avatar'] ?>" alt="Image de profil">
                     <button class="bg-main-red w-full text-main-white text-[16px] lg:text-[28px] py-3 rounded-b-lg" <?= $notMyProfile; ?>>Changer ma photo de profil</button>
                 </div>
                 <div class="description lg:ml-5 h-[100%] flex flex-col">
@@ -100,7 +103,7 @@ $title = "Espace personnel";
         </section>
     <?php } ?>
 
-    <?php if ($userDatas->role->id == 4 || $userDatas->role->id == 2 || $_SESSION['user']->role->id == 1) { ?>
+    <?php if ($userDatas['role_id'] == 4 || $userDatas['role_id'] == 2 || $_SESSION['user']['role_id'] == 1) { ?>
         <!-- PROFIL APPRENANT -->
         <section class="apprenant_profil">
             <!-- Image de profil et description -->
@@ -134,7 +137,7 @@ $title = "Espace personnel";
                                 <?php if ($userDatas->status->id == 6){?> bg-main-green<?php }?>
                                 <?php if ($userDatas->status->id == 2){?> bg-main-orange<?php }?>">
                             </span>
-                            <span class="text-[16px] flex justify-center italic"><?= $userDatas->status->name ?> depuis <?=  substr($userDatas->status_date, 0,-6) ?></span>
+                            <span class="text-[16px] flex justify-center italic"><?= $userDatas->status->name ?> depuis <?=  substr($userDatas['status_date'], 0,-6) ?></span>
                             <div onclick="swapDivsById('user-status','user-status-update')" class="cursor-pointer" <?= $notMyProfile; ?>>
                                 <i class="fa-solid fa-pen text-main-red w-[20px] ml-3"></i>
                                 <span class="sm:inline-block text-[10px] lg:text-base text-main-red"> Modifier</span>
