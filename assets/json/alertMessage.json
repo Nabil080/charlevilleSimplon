@@ -35,6 +35,10 @@
     {
       "name": "NoTrainingChosen",
       "message": "Erreur ! Il n'y pas de formation lu."
+    },
+    {
+      "name": "duplicateCandidate",
+      "message": ""
     }
   ],
   "successMessage": [
@@ -45,6 +49,10 @@
     {
       "name": "login",
       "message": "Vous avez réussi à vous connecter."
+    },
+    {
+      "name": "succesCandidate",
+      "message": ""
     },
     {
       "name": "mailForgetPassword",

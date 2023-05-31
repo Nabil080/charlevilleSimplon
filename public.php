@@ -15,6 +15,19 @@ switch ($action) {
     case 'promotionPage':
         promotionPage();
         break;
+    // Afficher le formulaire de pré-inscription.
+    case 'registerPage':
+        if (!isset($_SESSION['user']))
+            registerPage();
+        if (isset($_SESSION['user']) && $_SESSION['user']->role_id == 5)
+            CandidatePromo();
+        else
+            homepage();
+        break;
+    //afficher la page d'activation de compte
+    case 'accountActivationPage':
+        accountActivationPage();
+        break;
 
     // Afficher toutes les promos
     case 'allPromotionsPage':
@@ -85,10 +98,8 @@ switch ($action) {
     case 'logOut':
         logOut();
         break;
-
     // Envoie du traitement pagination tous les projets
     case 'projectsPagination':
         projectsPagination();
         break;
-
 }
