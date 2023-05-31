@@ -1,6 +1,12 @@
 <?php
 $promoRepo = new PromoRepository;
 $promos = $promoRepo->getActivePromos();
+$userRepo = new UsersRepository;
+$companies = $userRepo->getAllCompanies();
+$companyMails = [];
+foreach($companies as $company){
+    $companyMails[] = $company->email;
+}
 ?>
 
 <div>
@@ -86,7 +92,7 @@ $promos = $promoRepo->getActivePromos();
                             <!-- <?php } ?> -->
                         </ul>
                         <li class="flex items-center">
-                            <input type="checkbox" name="allEntreprise">
+                            <input type="checkbox" name="<?=join(",",$companyMails)?>">
                             <a
                                 class="flex items-center w-full p-2 text-2xl md:text-xl transition duration-75 rounded-lg pl-11 group ">Entreprise</a>
                         </li>

@@ -14,9 +14,9 @@ const navbarContact = document.querySelector("#dropdown-contact")
 const navbarContactButton = document.querySelector("#contactValidation")
 const checkboxes = navbarContact.querySelectorAll("input[type=checkbox]")
 
+navbarContactButton.addEventListener('click', (event) => {
 let mailList = []
 
-navbarContactButton.addEventListener('click', (event) => {
   checkboxes.forEach(checkbox => {
     if(checkbox.checked){
       // (console.log(checkbox))
