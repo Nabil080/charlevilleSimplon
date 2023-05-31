@@ -21,14 +21,14 @@ function addPromotion(){
             "status" => "success",
             "message" => "La promotion a bien été ajouté.",
         );
-    
+
         echo json_encode($response);
     }else{
         $response = array(
             "status" => "failure",
             "message" => "La promotion n'a pas été ajouté.",
         );
-    
+
         echo json_encode($response);
     }
 }

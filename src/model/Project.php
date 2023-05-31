@@ -111,11 +111,6 @@ class ProjectRepository extends ConnectBdd{
             $project->start = $data['project_start'];
             $project->end = 'En cours';
         }
-        // if($data['status_id'] == 13){
-        //     $project->start = $data['project_start'];
-        //     $project->end = $data['project_end'];
-        // }
-
 
 
         return $project;
