@@ -5,26 +5,30 @@ require_once 'src/model/Tag.php';
 
 class User
 {
-    private $user_id;
-    private $user_name;
-    private $user_surname;
-    private $user_email;
-    private $user_password;
-    private $user_avatar;
-    private $user_company;
-    private $user_description;
-    private $user_linkedin;
-    private $user_github;
-    private $user_token;
-    private $user_id_poleEmploi;
-    private $user_phone;
-    private $user_adress;
-    private $user_birth_date;
-    private $user_birth_place;
-    private $user_nationality;
-    private $user_status;
-    private $role_id;
-    public $highlight;
+    public $user_id;
+    public $user_name;
+    public $user_surname;
+    public $user_email;
+    public $user_password;
+    public $user_avatar;
+    public $user_company;
+    public $user_phone;
+    public $user_adress;
+    public $user_description;
+    public $user_linkedin;
+    public $user_github;
+    public $user_token;
+    public $user_id_poleEmploi;
+    public $user_birth_date;
+    public $user_birth_place;
+    public $user_nationality;
+    public $user_status;
+    public $status_date;
+    public $role_id;
+    public $user_tags;
+    public $user_highlight;
+    public $user_cv;
+    public $user_projects;
 
     public function __construct($id)
     {
@@ -56,8 +60,11 @@ class User
         $this->user_description = $account['user_description'];
         $this->user_linkedin = (!null) ? $account['user_linkedin'] : '';
         $this->user_github = (!null) ? $account['user_github'] : '';
+        $this->user_highlight = (!null) ? $account['user_highlight'] : '';
+        $this->user_cv = (!null) ? $account['user_cv'] : '';
+        $this->user_projects = (!null) ? $account['user_projects'] : '';
 
-        /* Propesct */
+        /* Prospect */
         $this->user_id_poleEmploi = $account['user_numero_pe'];
         $this->user_birth_date = $account['user_birth_date'];
         $this->user_birth_place = $account['user_birth_place'];
@@ -66,7 +73,9 @@ class User
         /* Utility */
         $this->user_token = $account['user_token'];
         $this->user_status = $account['status_name'];
+        $this->status_date = $account['status_date'];
         $this->role_id = $account['role_id'];
+        $this->user_tags = $account['user_tags'];
     }
 
 }
@@ -118,8 +127,12 @@ class UserRepository extends ConnectBdd
         $data = $stmt->fetch(PDO::FETCH_ASSOC);
         $stmt->closeCursor();
 
+        $Tags = new Tag;
+        $tagRepo = new TagRepository;
+        $Tags = $tagRepo->getUserTags($data['user_id']);
+        $data->tags = $Tags;
+      
         return $data;
-
     }
     public function getIdByEmail($email)
     {
@@ -163,7 +176,6 @@ class UserRepository extends ConnectBdd
         $stmt->closeCursor();
 
         return ($account) ? true : false;
-
     }
     public function checkPassword($id, $mdp): bool
     {

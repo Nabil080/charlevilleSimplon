@@ -1,7 +1,4 @@
 <?php
-require_once("src/model/Promo.php");
-require_once("src/model/Formation.php");
-
 try {
     function homepage()
     {
@@ -58,12 +55,67 @@ try {
     }
 
   }
-
-    // Profile
-    function profilePage()
-    {
+  
+// Profile
+function profilePage()
+{
+    if (!isset($_GET['id'])) {
+        if (!isset($_SESSION['user']->id)) {
+            homepage();
+        } else {
+            myProfile();
+        }
+    }
+    else if (isset($_GET['id']) && $_GET['id'] == $_SESSION['user']->id) {
+        myProfile();
+    }
+    else {
+        $id = $_GET['id'];
+        $user = new UsersRepository();
+        $userDatas = $user->getUserById($id);
+        $tags = new TagRepository();
+        $allTags = $tags->getAllTags();
+        $status = new StatusRepository();
+        $allStatus = $status->getAllStatus();
+        $ProjectRepo = new ProjectRepository();
+        $userProjects = $ProjectRepo->getUserProjects($id);
+        $Promo = new PromoRepository();
+        $userPromo = $Promo->getPromoByUserID($id);
         include 'view/public/profile.php';
     }
+}
+
+function myProfile()
+{
+    $isMyProfile = false;
+    if (!isset($_GET['id'])) {
+        if (!isset($_SESSION['user']->id)) {
+            homepage();
+        } else {
+            $id = $_SESSION['user']->id;
+            $isMyProfile = true;
+        }
+    }
+    else if (isset($_GET['id']) && $_GET['id'] == $_SESSION['user']->id) {
+        $id = $_SESSION['user']->id;
+        $isMyProfile = true;
+    }
+    else {
+        $id = $_GET['id'];
+        profilePage();
+    }
+    $user = new UsersRepository();
+    $userDatas = $user->getUserById($id);
+    $tags = new TagRepository();
+    $allTags = $tags->getAllTags();
+    $status = new StatusRepository();
+    $allStatus = $status->getAllStatus();
+    $ProjectRepo = new ProjectRepository();
+    $userProjects = $ProjectRepo->getUserProjects($id);
+    $Promo = new PromoRepository();
+    $userPromo = $Promo->getPromoByUserID($id);
+    include 'view/public/profile.php';
+}
 
     // Promotion
     function allPromotionsPage()
@@ -148,5 +200,4 @@ try {
     }
 } catch (Exception $error) {
     echo 'Exception reçue : ', $e->getMessage(), "\n";
-
 }
