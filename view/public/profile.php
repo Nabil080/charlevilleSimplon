@@ -2,15 +2,10 @@
 $title = "Espace personnel";
 ?>
 
-<?php ob_start();
-// var_dump($userDatas);
-// var_dump($userProjects);
-// var_dump($_SESSION['user']->role->id);
-?>
+<?php ob_start();?>
 <!-- Section photo et description -->
 <div class="background bg-main-white overflow-x-hidden min-h-[100vh]">
 
-    
     <?php
     if($_SESSION['user']->role->id == 1){
         $notMyProfile = '';
@@ -105,7 +100,7 @@ $title = "Espace personnel";
         </section>
     <?php } ?>
 
-    <?php if ($userDatas->role->id == 4 || $userDatas->role->id == 2) { ?>
+    <?php if ($userDatas->role->id == 4 || $userDatas->role->id == 2 || $_SESSION['user']->role->id == 1) { ?>
         <!-- PROFIL APPRENANT -->
         <section class="apprenant_profil">
             <!-- Image de profil et description -->
