@@ -101,20 +101,24 @@ class ProjectRepository extends ConnectBdd{
 
         $project->team = $this->getProjectUsers($data['project_id']);
 
-        $project->start = $project->start = $data['project_start'];;
-        $project->end = $project->end = $data['project_end'];
-
-        // if($data['status_id'] == 12){
-        //     $project->start = $data['project_start'];
-        //     $project->end = 'En cours';
-        // }
-        //  if($data['status_id'] == 13){
-        //      $project->start = $data['project_start'];
-        //      $project->end = $data['project_end'];
-        //  }
-
-
-
+        $project->start = null;
+        $project->end = null;
+        if($data['status_id'] == 12){
+            $projectDateStart = new PromoRepository;
+            $project->start = $projectDateStart->formateDate($data['project_start']);
+            $project->end = 'En cours';
+        }
+        if($data['status_id'] == 12){
+            $projectDateStart = new PromoRepository;
+            $project->start = $projectDateStart->formateDate($data['project_start']);
+            $project->end = 'En cours';
+        }
+        if($data['status_id'] == 13){
+            $projectDateStart = new PromoRepository;
+            $project->start = $projectDateStart->formateDate($data['project_start']);
+            $projectDateEnd = new PromoRepository;
+            $project->end = $projectDateEnd->formateDate($data['project_end']);
+        }
         return $project;
     }
 
@@ -284,6 +288,23 @@ class ProjectRepository extends ConnectBdd{
         $req = $this->bdd->prepare("UPDATE project SET status_id = 9 WHERE project_id = ?");
         $bool = $req->execute([$id]);
         return $bool;
+    }
+
+    public function getUserProjects($id):array
+    {
+        $projects = [];
+        $req = $this->bdd->prepare("SELECT project_id FROM project_team WHERE user_id = ?");
+        $req->execute([$id]);
+        $datas = $req->fetchAll(PDO::FETCH_COLUMN);
+
+        foreach($datas as $data){
+            $project = new Project;
+            $projectRepo = new ProjectRepository;
+            $project = $projectRepo->getProjectById($data);
+            array_push($projects, $project);
+        }
+
+        return $projects;
     }
 }
 
