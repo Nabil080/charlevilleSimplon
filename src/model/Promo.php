@@ -139,6 +139,11 @@ class PromoRepository extends ConnectBdd
     }
     public function CheckDuplicateCandidate($user_id, $promo_id)
     {
+        $req = $this->bdd->prepare("SELECT * FROM `promo_candidate` WHERE `user_id` = ? AND `promo_id` = ?");
+        $req->execute([$user_id, $promo_id]);
+        $data = $req->fetch();
+        return (empty($data) && $data == false) ? true : false;
+    }
     $req = $this->bdd->prepare("SELECT * FROM `promo_candidate` WHERE `user_id` = ? AND `promo_id` = ?");
     $req->execute([$user_id, $promo_id]);
     $data = $req->fetch();
