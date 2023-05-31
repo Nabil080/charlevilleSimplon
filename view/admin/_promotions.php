@@ -2,13 +2,15 @@
 
 <?php ob_start();
 
-include("view/admin/crudPromotion.php");
-include("view/admin/modalApprenant.php");
-include("view/admin/modalFormateur.php");
-include("view/admin/modalValidationPromo.php");
-include("view/admin/modalProjet.php");
+include("view/admin/promo/crudPromotion.php");
 include("view/admin/modalContact.php");
+include("view/admin/promo/modalAddPromotion.php");
 
 $content = ob_get_clean(); ?>
 
+<?php ob_start();?>
+
+<script src="assets/js/promo_validation.js"></script>
+
+<?php $script = ob_get_clean(); ?>
 <?php include 'view/layout_admin.php'; ?>

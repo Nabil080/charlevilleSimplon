@@ -72,7 +72,9 @@ class PromoRepository extends ConnectBdd
         $datas = $req->fetchAll(PDO::FETCH_ASSOC);
         $promos = [];
 
-        foreach ($datas as $data) {
+
+        foreach ($datas as $data)
+        {
             $Promo = new Promo(
                 $data['promo_id'],
                 $data['promo_name'],
@@ -87,7 +89,22 @@ class PromoRepository extends ConnectBdd
         }
         return $promos;
     }
-  
+
+    public function getPromoDate($id):array
+    {
+        $dates = [];
+
+        $req = $this->bdd->prepare("SELECT promo_start, promo_end FROM promo WHERE promo_id = ?");
+        $req->execute([$id]);
+        $data = $req->fetch();
+
+        $dates['start'] = $data['promo_start'] ;
+        $dates['end'] = $data['promo_end'] ;
+
+
+        return $dates;
+    }
+
     public function getAllApprenants($id):array 
     {
         $req = $this->bdd->prepare("SELECT user_id FROM promo_user WHERE promo_id = ?");
@@ -122,6 +139,25 @@ class PromoRepository extends ConnectBdd
         return $users;
     }
 
+    public function getPromoUsersId($id):array
+    {
+        $usersId = [];
+
+        if($this->getPromoById($id)->status->id == 9){
+            $req = $this->bdd->prepare("SELECT user_id FROM promo_candidate WHERE promo_id = ?");
+        }else{
+            $req = $this->bdd->prepare("SELECT user_id FROM promo_user WHERE promo_id = ?");
+        }
+        $req->execute([$id]);
+        $datas = $req->fetchAll(PDO::FETCH_ASSOC);
+        
+        foreach ($datas as $data) {
+            $usersId[] = $data['user_id'];
+        }
+
+        return $usersId;
+    }
+  
     public function getPromoStart($id) 
     {
         $req = $this->bdd->prepare("SELECT `promo_start` FROM `promo` WHERE `formation_id` = ?");
@@ -143,8 +179,14 @@ class PromoRepository extends ConnectBdd
         $req->execute([$user_id, $promo_id]);
         $data = $req->fetch();
         return (empty($data) && $data == false) ? true : false;
+    }
+    $req = $this->bdd->prepare("SELECT * FROM `promo_candidate` WHERE `user_id` = ? AND `promo_id` = ?");
+    $req->execute([$user_id, $promo_id]);
+    $data = $req->fetch();
+    return (empty($data) && $data == false) ? true : false;
+    }
 
-      public function getActivePromos():array
+    public function getActivePromos():array
     {
         $req = $this->bdd->prepare("SELECT * FROM promo WHERE status_id = ?");
         $req->execute([12]);
@@ -221,4 +263,179 @@ class PromoRepository extends ConnectBdd
             }
         return $projects;
     }
+
+    public function getPromoStart($id) {
+        $req = $this->bdd->prepare("SELECT `promo_start` FROM `promo` WHERE `formation_id` = ?");
+        $req->execute([$id]);
+        $data = $req->fetch(PDO::FETCH_COLUMN);
+        return $data;
+    }
+
+    public function getActivePromos():array
+    {
+        $req = $this->bdd->prepare("SELECT * FROM `promo` WHERE status_id = ?");
+        $req->execute([12]);
+        $data = $req->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach($data as $key){
+            $promos[] = $this->getPromoById($key['promo_id']);
+        }
+
+        return $promos;
+    }
+
+    public function getPromoMailList($id):array
+    {
+        $mailList = [];
+        $usersId = $this->getPromoUsersId($id);
+
+        foreach($usersId as $userId){
+            $req = $this->bdd->prepare("SELECT user_email FROM `user` WHERE user_id = ?");
+            $req->execute([$userId]);
+            $data = $req->fetch();
+
+            $mailList[] = $data['user_email'];
+        }
+
+        return $mailList;
+    }
+
+    public function getPromoCandidates($id):array
+    {
+        $req = $this->bdd->prepare("SELECT user_id FROM promo_candidate WHERE promo_id = ?");
+        $req->execute([$id]);
+        $datas = $req->fetchAll(PDO::FETCH_ASSOC);
+        $UsersRepository = new UsersRepository;
+        $users = [];
+        
+        foreach ($datas as $data) {
+            $User = $UsersRepository->getUserById($data['user_id']);
+            $users[] = $User;
+        }
+
+        return $users;
+    }
+
+    public function deletePromo($id):void
+    {
+        $req = $this->bdd->prepare("DELETE FROM promo_candidate WHERE promo_id =?");
+        $req->execute([$id]);
+        $req->closeCursor();
+
+        $req = $this->bdd->prepare("DELETE FROM promo_user WHERE promo_id =?");
+        $req->execute([$id]);
+        $req->closeCursor();
+
+        $req = $this->bdd->prepare("DELETE FROM promo_refused WHERE promo_id =?");
+        $req->execute([$id]);
+        $req->closeCursor();
+
+        $projects = $this->getPromoProjects($id);
+        $projectRepo = new ProjectRepository;
+        foreach ($projects as $project) {
+            $projectRepo->deleteProject($project->id);
+        }
+
+        $req = $this->bdd->prepare("DELETE FROM promo WHERE promo_id =?");
+        $req->execute([$id]);
+        $req->closeCursor();
+
+    }
+
+    public function validatePromo($promoId, array $accepted, array $rejected):void
+    {
+        $UserRepo = new UsersRepository;
+        $acceptedMails = [];
+        $refusedMails = [];
+        $headers = "From: simplon@mail.com\r\n";
+        $headers .= "Reply-To: simplon@mail.com\r\n";
+        $headers .= "Content-Type: text/plain; charset=utf-8\r\n";
+        
+        $req = $this->bdd->prepare("UPDATE promo SET status_id = ? WHERE promo_id = ?");
+        $req->execute([12,$promoId]);
+        $req->closeCursor();
+
+        foreach($accepted as $userId){
+            $this->validatePromoUser($promoId,$userId);
+            $acceptedMails[] = $UserRepo->getUserMail($userId);
+        }
+
+        $Promo = $this->getPromoById($promoId);
+
+        $to = join(",",$acceptedMails);
+        $subject = "Vous avez été accepté pour votre formation $Promo->name";
+        $message = "Bonjour,\r\n\r\n
+            Vous avez été accepté pour la formation de : $Promo->name  \r\n\r\n
+            Bienvenue à Simplon ! La formation débute le $Promo->start et se termine le $Promo->end. \r\n\r\n
+            Cordialement,\r\n
+            Jordan Kunys";
+        mail($to, $subject, $message, $headers);
+
+        foreach($rejected as $userId){
+            $this->rejectPromoUser($promoId,$userId);
+            $refusedMails[] = $UserRepo->getUserMail($userId);
+        }
+
+        $to = join(",",$refusedMails);
+        $subject = "Vous avez malheureusement été refusé pour votre formation $Promo->name";
+        $message = "Bonjour,\r\n\r\n
+            Vous avez été refusé pour la formation de : $Promo->name  \r\n\r\n
+            Mais n'abandonnez pas ! Formez vous via notre plateforme en ligne ! \r\n\r\n
+            Cordialement,\r\n
+            Jordan Kunys";
+        mail($to, $subject, $message, $headers);
+    }
+
+    public function validatePromoUser($promoId, $userId):void
+    {
+        $req = $this->bdd->prepare("INSERT INTO promo_user (promo_id, user_id) VALUES (?,?)");
+        $req->execute([$promoId,$userId]);
+        $req->closeCursor();
+
+        $req = $this->bdd->prepare("DELETE FROM promo_candidate WHERE promo_id = ? AND user_id = ?");
+        $req->execute([$promoId,$userId]);
+        $req->closeCursor();
+    }
+
+    public function rejectPromoUser($promoId, $userId):void
+    {
+        $req = $this->bdd->prepare("INSERT INTO promo_refused (promo_id, user_id) VALUES (?,?)");
+        $req->execute([$promoId,$userId]);
+        $req->closeCursor();
+
+        $req = $this->bdd->prepare("DELETE FROM promo_candidate WHERE promo_id = ? AND user_id = ?");
+        $req->execute([$promoId,$userId]);
+        $req->closeCursor();
+    }
+
+    public function addPromo(array $POST):void
+    {
+        $FormationRepo = new FormationRepository;
+        $formation = $FormationRepo->getFormationById($POST['formation'])->name;
+
+        $req = $this->bdd->prepare("INSERT INTO promo (promo_name,promo_start,promo_end,formation_id) VALUES (?,?,?,?)");
+        $req->execute([$formation,$POST['start'],$POST['end'],$POST['formation']]);
+
+        var_dump($POST);
+
+        $lastId = $this->bdd->lastInsertId();
+        if(isset($POST['formators'])){
+            foreach($POST['formators'] as $formator){
+                $req = $this->bdd->prepare("INSERT INTO promo_user (user_id,promo_id) VALUES (?,?)");
+                $req->execute([$formator,$lastId]);
+            }
+        }
+    }
+
+    public function updatePromo(array $POST):void
+    {
+        var_dump($POST);
+        $FormationRepo = new FormationRepository;
+        $formation = $FormationRepo->getFormationById($POST['formation'])->name;
+        var_dump($formation);
+
+        $req = $this->bdd->prepare("UPDATE promo SET promo_name = ?, promo_start = ?, promo_end = ?, formation_id = ? WHERE promo_id = ?");
+        $req->execute([$formation,$POST['start'],$POST['end'],$POST['formation']],$POST['promo']);
+    }
+
 }

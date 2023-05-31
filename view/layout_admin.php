@@ -64,6 +64,7 @@
     <script src="https://kit.fontawesome.com/eb7aa99f8d.js" crossorigin="anonymous"></script>
     <script src="assets/js/function.js"></script>
     <script src="assets/js/crud.js"></script>
+    <script src="assets/js/crudNabil.js"></script>
     <?php if (isset($script))
         echo $script; ?>
 </body>

@@ -95,7 +95,8 @@ $title = "Inscription";
             </div>
             <div class="w-full md:w-2/3 mb-6 md:mb-3">
                 <label for="phone" class="block mb-2 text-[14px] font-medium">Téléphone</label>
-                <input type="tel" id="phone" name="phone" pattern="[0][1-9]{9}" placeholder="07256533**" required
+                <input type="tel" id="phone" name="phone" pattern="[0][0-9]{9}" placeholder="07256533**"
+
                     class="bg-main-white border border-main-red text-[18px] rounded-[5px] block w-full p-2.5">
                 <p id="phone_error" class="errorAlert mt-2 text-sm text-red-600 dark:text-red-500"></p>
             </div>

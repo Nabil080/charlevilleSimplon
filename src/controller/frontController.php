@@ -166,38 +166,69 @@ function registerPage()
     }
 
 
-    // ==================  Admin  ======================
+// ==================  Admin  ======================
 
-    function crudCandidatePage()
-    {
-        include 'view/admin/_candidate.php';
+function crudCandidatePage()
+{
+    $UserRepo = new UsersRepository;
+    $candidates = $UserRepo->getAllCandidates();
+
+    include 'view/admin/_candidate.php';
+}  
+  
+  
+function crudLearnerPage()
+{
+    $UserRepo = new UsersRepository;
+    $learners = $UserRepo->getAllLearners();
+    $formators = $UserRepo->getAllFormators();
+    $PromoRepo = new PromoRepository;
+    $promos = $PromoRepo->getActivePromos();
+
+    include 'view/admin/_learner.php';
+}
+
+function crudCompanyPage()
+{
+    $UserRepo = new UsersRepository;
+    $companies = $UserRepo->getAllCompanies();
+    include 'view/admin/_company.php';
+}
+
+function crudPromotionPage()
+{
+    $PromoRepo = new PromoRepository;
+    $promos = $PromoRepo->getPromos();
+
+    $UserRepo = new UsersRepository;
+    $FormationRepo = new FormationRepository;
+    $formators = $UserRepo->getAllFormators();
+    $formations = $FormationRepo->getAllFormations();
+
+    include 'view/admin/_promotions.php';
+}
+
+function crudProjetPage()
+{
+    $ProjectRepo = new ProjectRepository;
+    $projects = $ProjectRepo->getAllProjects();
+    $PromoRepo = new PromoRepository;
+    $promos = $PromoRepo->getActivePromos();
+    include 'view/admin/_projects.php';
+}
+
+function projectFormPage() {
+    $UserRepo = new UsersRepository;
+    // $User = $UserRepo->getUserById($_SESSION['user']->role_id);
+    $User = $UserRepo->getUserById(3);
+    if(isset($_GET['id'])){
+        $projectRepo = new ProjectRepository;
+        $project=$projectRepo->getProjectById($_GET['id']);
     }
 
-    function crudLearnerPage()
-    {
-        include 'view/admin/_learner.php';
-    }
+    include 'view/admin/projectAddForm.php';
+}
 
-    function crudCompanyPage()
-    {
-        include 'view/admin/_company.php';
-    }
-
-    function crudPromotionPage()
-    {
-        include 'view/admin/_promotions.php';
-    }
-
-    function crudProjetPage()
-    {
-        include 'view/admin/_projects.php';
-    }
-
-
-    function projectFormPage()
-    {
-        include 'view/admin/projectAddForm.php';
-    }
 } catch (Exception $error) {
     echo 'Exception reçue : ', $error->getMessage(), "\n";
 }
