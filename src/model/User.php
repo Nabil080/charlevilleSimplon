@@ -36,7 +36,7 @@ class User
         $user = $UserRepo->getUserById($id);
         $this->setUser($user);
     }
-    public function getUser()
+    public function getUser(): object
     {
         return $this;
     }
@@ -74,6 +74,7 @@ class User
         $this->user_status = $account['status_name'];
         $this->user_status_date = $account['user_status_date'];
         $this->role_id = $account['role_id'];
+        $this->role_name = $account['role_name'];
     }
 
 }
@@ -129,7 +130,7 @@ class UserRepository extends ConnectBdd
     }
     public function getIdByEmail($email)
     {
-        $req = "SELECT user_id FROM `user` AS u LEFT JOIN `status` AS s ON u.status_id = s.status_id WHERE user_email= ?";
+        $req = "SELECT user_id FROM `user` WHERE user_email= ?";
         $stmt = $this->bdd->prepare($req);
         $stmt->execute([$email]);
         $user_id = $stmt->fetch();

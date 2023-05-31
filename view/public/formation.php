@@ -1,7 +1,6 @@
 <?php $title = "Développeur Web et Web Mobile"; ?>
 
 <?php ob_start(); ?>
-
 <main class="pb-10">
     <h2
         class="py-5 bg-white text-center text-[24px] md:text-[36px] lg:text-[48px] font-bold font-title text-main-red uppercase">
@@ -72,7 +71,7 @@
             </aside>
         </div>
         <div class="mt-20 pb-10 hidden md:block text-center">
-            <a href="index.php?action=registerPage"
+            <a href="index.php?action=registerPage&formation_id=1"
                 class="px-10 py-3 border border-2  border-main-red text-main-white font-bold text-lg uppercase bg-main-red rounded-lg hover:bg-main-white hover:text-main-red">
                 Postuler à la formation</a>
         </div>
@@ -217,7 +216,7 @@
     </div>
 </section>
 <div class="bg-main-lightgray md:hidden pb-10 text-center">
-    <a href="index.php?action=registerPage"
+    <a href="index.php?action=registerPage&formation_id=1"
         class="px-10 py-3 border border-2 border-main-red text-main-white font-bold text-lg uppercase bg-main-red rounded-lg hover:bg-main-white hover:text-main-red">
         Postuler à la formation
     </a>

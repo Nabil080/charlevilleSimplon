@@ -10,7 +10,7 @@
     private $styleError = "p-2 border-2 border-red-700 rounded-lg bg-red-200 text-red-500";
 
 
-    public function getError($location, $error)
+    public function getError($location, $error, $boolNavbar = null)
     {
         $this->type = 'errorMessage';
         $this->name = $error;
@@ -30,6 +30,7 @@
         ];
         return $test;
     }
+    public function getSuccess($success, $boolNavbar = null)
     public function getSuccess($success, $navbarBool)
     {
         $file_path = 'view/template/_succesMessage.php';

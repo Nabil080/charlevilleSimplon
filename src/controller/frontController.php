@@ -117,6 +117,14 @@ function myProfile()
     include 'view/public/profile.php';
 }
 
+// Register
+function registerPage()
+{
+    $boolCompany = (isset($_GET['company'])) ? 1 : 0;
+    $formation_id = (isset($_GET['formation_id'])) ? $_GET['formation_id'] : 0;
+    include 'view/public/register.php';
+
+}
     // Promotion
     function allPromotionsPage()
     {
@@ -137,15 +145,6 @@ function myProfile()
         $formateurs = $PromoRepository->getAllFormateurs($id);
         $allProjects = $PromoRepository->getPromoProjects($id);
         include 'view/public/promotion.php';
-    }
-
-    // Register
-    function registerPage()
-    {
-        $boolCompany = (isset($_GET['company'])) ? 1 : 0;
-        $formation_id = (isset($_GET['formation_id'])) ? $_GET['formation_id'] : 0;
-
-        include 'view/public/register.php';
     }
 
     function accountActivationPage()
@@ -194,10 +193,11 @@ function myProfile()
         include 'view/admin/_projects.php';
     }
 
+
     function projectFormPage()
     {
         include 'view/admin/projectAddForm.php';
     }
 } catch (Exception $error) {
-    echo 'Exception reçue : ', $e->getMessage(), "\n";
+    echo 'Exception reçue : ', $error->getMessage(), "\n";
 }
