@@ -75,6 +75,7 @@ function profilePage()
         $userDatas = $user->getUserById($id);
         $tags = new TagRepository();
         $allTags = $tags->getAllTags();
+        $userTags = $tags->getUserTags($id);
         $status = new StatusRepository();
         $allStatus = $status->getAllStatus();
         $ProjectRepo = new ProjectRepository();
@@ -108,6 +109,7 @@ function myProfile()
     $userDatas = $user->getUserById($id);
     $tags = new TagRepository();
     $allTags = $tags->getAllTags();
+    $userTags = $tags->getUserTags($id);
     $status = new StatusRepository();
     $allStatus = $status->getAllStatus();
     $ProjectRepo = new ProjectRepository();

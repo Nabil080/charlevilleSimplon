@@ -3,8 +3,8 @@ $title = "Espace personnel";
 ?>
 
 <?php ob_start();
-var_dump($userDatas);
-// var_dump($userProjects);
+// var_dump($userDatas);
+// var_dump($userPromo->name);
 ?>
 <!-- Section photo et description -->
 <div class="background bg-main-white overflow-x-hidden min-h-[100vh]">
@@ -28,27 +28,27 @@ var_dump($userDatas);
                     <button class="bg-main-red w-full text-main-white text-[16px] lg:text-[28px] py-3 rounded-b-lg" <?= $notMyProfile; ?>>Changer ma photo de profil</button>
                 </div>
                 <div class="description lg:ml-5 h-[100%] flex flex-col">
-                    <h1 class="text-main-red font-title text-[28px] lg:text-[48px] font-semibold pt-5 text-center lg:text-left"><span class="uppercase"><?= $userDatas->name ?></span> <?= $userDatas->surname ?></h1>
+                    <h1 class="text-main-red font-title text-[28px] lg:text-[48px] font-semibold pt-5 text-center lg:text-left"><span class="uppercase"><?= $userDatas['user_name'] ?></span> <?= $userDatas['user_surname'] ?></h1>
                     <div class="text-desc rounded-[5px] border-[1px] border-main-border mt-2 grow lg:flex lg:flex-col lg:justify-between">
                         <p class="text-[20px] text-justify pt-4 px-3 pb-2 lg:pb-0">Candidature pour la formation <?= $userPromo->name ?></p>
                         <div class="formation_status flex justify-center items-center px-3">
-                            <span class="text-[28px] flex justify-center pt-1 pb-2 italic">Statut : <?= $userDatas->status->name ?></span>
+                            <span class="text-[28px] flex justify-center pt-1 pb-2 italic">Statut : <?= $userDatas['status_name'] ?></span>
                             <span class="w-6 h-6 border-[1px rounded-full ml-2 
-                                <?php if ($userDatas->status->id == 7){?> bg-main-red<?php }?>
-                                <?php if ($userDatas->status->id == 6){?> bg-main-green<?php }?>
-                                <?php if ($userDatas->status->id == 2){?> bg-main-orange<?php }?>"></span>
+                                <?php if ($userDatas['status_id'] == 7){?> bg-main-red<?php }?>
+                                <?php if ($userDatas['status_id'] == 6){?> bg-main-green<?php }?>
+                                <?php if ($userDatas['status_id'] == 2){?> bg-main-orange<?php }?>"></span>
                         </div>
                         <div class="h-0 border-[2px] border-main-red w-1/2 mb-5"></div>
                         <ul class="text-justify px-3 pb-3 text-[16px] lg:text-[18px] leading-loose ml-8">
-                            <li class="list-disc">Nom : <?= $userDatas->name ?></li>
-                            <li class="list-disc">Prénom : <?= $userDatas->surname ?> </li>
-                            <li class="list-disc">Adresse : <?= $userDatas->adress ?></li>
-                            <li class="list-disc">Email : <?= $userDatas->email ?></li>
-                            <li class="list-disc">Téléphone : <?= $userDatas->phone ?></li>
-                            <li class="list-disc">Date de naissance : <?= $userDatas->birth_date ?></li>
-                            <li class="list-disc">Lieu de naissance : <?= $userDatas->birth_place ?></li>
-                            <li class="list-disc">Nationalité : <?= $userDatas->nationality ?></li>
-                            <li class="list-disc">Numéro Pôle Emploi : <?= $userDatas->numero_pe ?></li>
+                            <li class="list-disc">Nom : <?= $userDatas['user_name'] ?></li>
+                            <li class="list-disc">Prénom : <?= $userDatas['user_surname'] ?> </li>
+                            <li class="list-disc">Adresse : <?= $userDatas['user_place'] ?></li>
+                            <li class="list-disc">Email : <?= $userDatas['user_email'] ?></li>
+                            <li class="list-disc">Téléphone : <?= $userDatas['user_phone'] ?></li>
+                            <li class="list-disc">Date de naissance : <?= $userDatas['user_birth_date'] ?></li>
+                            <li class="list-disc">Lieu de naissance : <?= $userDatas['user_birth_place'] ?></li>
+                            <li class="list-disc">Nationalité : <?= $userDatas['user_nationality'] ?></li>
+                            <li class="list-disc">Numéro Pôle Emploi : <?= $userDatas['user_numero_pe'] ?></li>
                         </ul>
                         <button data-modal-target="modify-prospect_data-modal" data-modal-toggle="modify-prospect_data-modal" class="bg-main-red w-full lg:w-3/5 text-main-white text-[18px] uppercase py-3 rounded-b-lg lg:rounded-none lg:mb-4 lg:flex lg:justify-center lg:mx-auto" <?= $notMyProfile; ?>>Editer ma candidature</button>
                         <!-- Modal de modification des informations persos -->
@@ -65,23 +65,23 @@ var_dump($userDatas);
                                         <form class="space-y-6" action="" method="post">
                                             <div>
                                                 <label for="email" class="block mb-1 text-sm font-medium  text-main-red">E-mail</label>
-                                                <input type="email" name="email" id="email" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" placeholder="<?= $userDatas->email ?>">
+                                                <input type="email" name="email" id="email" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" placeholder="<?= $userDatas['user_email'] ?>">
                                             </div>
                                             <div>
                                                 <label for="phone" class="block mb-1 text-sm font-medium  text-main-red">Téléphone</label>
-                                                <input type="phone" name="phone" id="phone" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" placeholder="<?= $userDatas->phone ?>">
+                                                <input type="phone" name="phone" id="phone" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" placeholder="<?= $userDatas['user_phone'] ?>">
                                             </div>
                                             <div>
                                                 <label for="adress" class="block mb-1 text-sm font-medium  text-main-red">Adresse</label>
-                                                <input type="adress" name="adress" id="adress" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" placeholder="<?= $userDatas->adress ?>">
+                                                <input type="adress" name="adress" id="adress" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" placeholder="<?= $userDatas['user_place'] ?>">
                                             </div>
                                             <div>
                                                 <label for="numero_pe" class="block mb-1 text-sm font-medium  text-main-red">Numéro Pôle Emploi</label>
-                                                <input type="numero_pe" name="numero_pe" id="numero_pe" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" placeholder="<?= $userDatas->numero_pe ?>">
+                                                <input type="numero_pe" name="numero_pe" id="numero_pe" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" placeholder="<?= $userDatas['user_numero_pe'] ?>">
                                             </div>
                                             <div>
                                                 <label for="nationality" class="block mb-1 text-sm font-medium  text-main-red">Nationalité</label>
-                                                <input type="nationality" name="nationality" id="nationality" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" placeholder="<?= $userDatas->nationality ?>">
+                                                <input type="nationality" name="nationality" id="nationality" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" placeholder="<?= $userDatas['user_nationality'] ?>">
                                             </div>
                                             <div>
                                                 <label for="new_password" class="block mb-1 text-sm font-medium text-main-red">Choisir un nouveau mot de passe</label>
@@ -110,13 +110,13 @@ var_dump($userDatas);
             <div class="picture_description grid grid-cols-1 lg:grid-cols-2 items-center px-[8%] lg:px-[3%]">
                 <!-- Image de profil -->
                 <div class="picture max-h-screen mx-auto">
-                    <img class="max-w-full max-h-[600px] overflow-scroll rounded-t-lg" src="<?= $userDatas->avatar ?>" alt="Image de profil">
+                    <img class="max-w-full max-h-[600px] overflow-scroll rounded-t-lg" src="<?= $userDatas['user_avatar'] ?>" alt="Image de profil">
                     <button class="bg-main-red w-full text-main-white text-[16px] lg:text-[28px] py-3 rounded-b-lg" <?= $notMyProfile; ?>>Changer ma photo de profil</button>
                 </div>
                 <!-- Description -->
                 <div class="description lg:ml-5 h-[100%] flex flex-col">
                     <div class="edit_profil flex justify-center lg:justify-normal items-center pt-5">
-                        <h1 id="title" class="text-main-red font-title text-[28px] lg:text-[48px] font-semibold text-center pr-5"><span class="uppercase"><?= $userDatas->name ?></span> <?= $userDatas->surname ?></h1>
+                        <h1 id="title" class="text-main-red font-title text-[28px] lg:text-[48px] font-semibold text-center pr-5"><span class="uppercase"><?= $userDatas['user_name'] ?></span> <?= $userDatas['user_surname'] ?></h1>
                     </div>
                     <!-- Statut -->
                     <div class="formation_status flex justify-center lg:justify-normal items-center px-3 mt-2">
@@ -133,11 +133,11 @@ var_dump($userDatas);
 
                         <div id="user-status" class="flex items-center pt-1 pb-2">
                             <span class="w-6 h-6 border-[1px] rounded-full mr-2 animate-pulse
-                                <?php if ($userDatas->status->id == 7){?> bg-main-red<?php }?>
-                                <?php if ($userDatas->status->id == 6){?> bg-main-green<?php }?>
-                                <?php if ($userDatas->status->id == 2){?> bg-main-orange<?php }?>">
+                                <?php if ($userDatas['status_id'] == 7){?> bg-main-red<?php }?>
+                                <?php if ($userDatas['status_id'] == 6){?> bg-main-green<?php }?>
+                                <?php if ($userDatas['status_id'] == 2){?> bg-main-orange<?php }?>">
                             </span>
-                            <span class="text-[16px] flex justify-center italic"><?= $userDatas->status->name ?> depuis <?=  substr($userDatas['status_date'], 0,-6) ?></span>
+                            <span class="text-[16px] flex justify-center italic"><?= $userDatas['status_name'] ?> depuis <?=  substr($userDatas['user_status_date'], 0,-6) ?></span>
                             <div onclick="swapDivsById('user-status','user-status-update')" class="cursor-pointer" <?= $notMyProfile; ?>>
                                 <i class="fa-solid fa-pen text-main-red w-[20px] ml-3"></i>
                                 <span class="sm:inline-block text-[10px] lg:text-base text-main-red"> Modifier</span>
@@ -147,11 +147,11 @@ var_dump($userDatas);
                     <!-- Texte de description -->
                     <div class="text_description rounded-[5px] border-[1px] border-main-border bg-main-lightgray mt-5 grow lg:flex lg:flex-col lg:justify-between">
                         <div id="description" class="lg:p-4 flex flex-col ">
-                            <p class="text-[18px] text-justify pt-4 px-3 pb-2 lg:pb-0"><?= $userDatas->description ?></p>
+                            <p class="text-[18px] text-justify pt-4 px-3 pb-2 lg:pb-0"><?= $userDatas['user_description'] ?></p>
                         </div>
                         <form id="description-update" class="hidden h-full">
                             <textarea name="description" id="editor" class="h-full overflow-scroll">
-                            <?= $userDatas->description ?>
+                            <?= $userDatas['user_description'] ?>
                             </textarea>
                             <button type="submit" class="py-2 px-4 bg-main-red border-main-white border text-main-white my-4 mr-4">Modifier <i class="fa-solid fa-check"></i></button>
                             <span onclick="swapDivsById('description','description-update')" class="cursor-pointer">Annuler <i class="fa-solid fa-xmark"></i></span>
@@ -162,7 +162,7 @@ var_dump($userDatas);
 
                     <div class="flex flex-col lg:flex-row justify-center my-3 lg:my-0 lg:mt-4">
                         <div id="cv" class="flex items-center justify-center lg:flex-row flex-col my-4 lg:my-0 lg:mx-auto">
-                            <a href="upload/cv/<?= $userDatas->cv ?>" class="bg-main-red text-main-white text-[16px] rounded-[5px] mx-auto py-3 lg:py-1 px-2 lg:px-4" target="_blank">Voir le C.V.</a>
+                            <a href="upload/cv/<?= $userDatas['user_cv']?>" class="bg-main-red text-main-white text-[16px] rounded-[5px] mx-auto py-3 lg:py-1 px-2 lg:px-4" target="_blank">Voir le C.V.</a>
                             <div onclick="swapDivsById('cv','cv-update')" class="modify-cv cursor-pointer flex items-center pt-2 pl-3" <?= $notMyProfile; ?>>
                                 <i class="fa-solid fa-download text-main-red w-[20px]"></i>
                                 <span class="text-[10px] text-main-red">Modifier mon C.V.</span>
@@ -173,7 +173,7 @@ var_dump($userDatas);
                             <button type="submit"><i class="fa-solid fa-check text-main-red"></i></button>
                             <i onclick="swapDivsById('cv','cv-update')" class="fa-solid fa-xmark text-main-red cursor-pointer"></i>
                         </form>
-                        <a href="mailto:<?= $userDatas->email ?>" class="flex items-center my-4 bg-main-red text-main-white text-[16px] rounded-[5px] mx-auto py-3 lg:py-1 px-2 lg:px-4">Contacter</a>
+                        <a href="mailto:<?= $userDatas['user_email'] ?>" class="flex items-center my-4 bg-main-red text-main-white text-[16px] rounded-[5px] mx-auto py-3 lg:py-1 px-2 lg:px-4">Contacter</a>
                     </div>
                 </div>
             </div>
@@ -189,21 +189,21 @@ var_dump($userDatas);
                         <div id="links">
                             <div class="sites flex items-center px-3 mt-2 mb-4 lg:mb-5">
                                 <span class="w-6 h-6 border-[1px] bg-main-red rounded-full mr-2"></span>
-                                <a href="<?= $userDatas->linkedin ?>"><?= $userDatas->linkedin ?></a>
+                                <a href="<?= $userDatas['user_linkedin'] ?>"><?= $userDatas['user_linkedin'] ?></a>
                             </div>
                             <div class="sites flex items-center px-3 mt-2 mb-4 lg:mb-8">
                                 <span class="w-6 h-6 border-[1px] bg-main-red rounded-full mr-2"></span>
-                                <a href="<?= $userDatas->github ?>"><?= $userDatas->github ?></a>
+                                <a href="<?= $userDatas['user_github'] ?>"><?= $userDatas['user_github'] ?></a>
                             </div>
                         </div>
                         <form id="links-update" class="hidden space-y-2">
                             <div class="space-x-4">
-                                <input type="text" value="<?= $userDatas->linkedin ?>" placeholder="lien linkedin">
+                                <input type="text" value="<?= $userDatas['user_linkedin'] ?>" placeholder="lien linkedin">
                                 <button type="submit"><i class="fa-solid fa-check text-main-red"></i></button>
                                 <i onclick="swapDivsById('cv','cv-update')" class="fa-solid fa-xmark text-main-red cursor-pointer"></i>
                             </div>
                             <div class="space-x-4">
-                                <input type="text" value="<?= $userDatas->github ?>" placeholder="lien github">
+                                <input type="text" value="<?= $userDatas['user_github'] ?>" placeholder="lien github">
                                 <button type="submit"><i class="fa-solid fa-check text-main-red"></i></button>
                                 <i onclick="swapDivsById('cv','cv-update')" class="fa-solid fa-xmark text-main-red cursor-pointer"></i>
                             </div>
@@ -223,10 +223,8 @@ var_dump($userDatas);
                             <span onclick="swapDivsById('description','description-update')" class="cursor-pointer">Annuler <i class="fa-solid fa-xmark"></i></span>
                         </form>
                         <div id="skills" class="flex gap-4 justify-center sm:justify-normal mx-auto sm:px-4 mt-2 lg:mt-7 mb-4 flex-wrap">
-                            <?php foreach ($userDatas->tags as $tag) { ?>
-                                <a href="">
+                            <?php foreach ($userTags as $tag) { ?>
                                     <p class="bg-[#F2F2F3] px-4 py-1 border-main-gray border-2 text-[14px] lg:text-[16px] rounded-[50px] mb-2"><?= $tag->name ?></p>
-                                </a>
                             <?php } ?>
                         </div>
                         <!-- Modifier ses infos persos -->
@@ -298,7 +296,7 @@ var_dump($userDatas);
 
                     <!-- Section : projet phare -->
                     <section class="sectionChange">
-                        <iframe class="w-full min-h-[300px] lg:min-h-[500px]" src="<?= $userDatas->highlight ?>" title="iframe du projet phare"></iframe>
+                        <iframe class="w-full min-h-[300px] lg:min-h-[500px]" src="<?= $userDatas['user_highlight'] ?>" title="iframe du projet phare"></iframe>
                         <!-- Boutons modifier/supprimer le projet -->
                         <div class="boutons lg:flex lg:flex-row lg:justify-between" <?= $notMyProfile; ?>>
                             <div id="main-project" class="flex justify-between mt-5 mx-5 mb-2">
@@ -468,7 +466,7 @@ var_dump($userDatas);
                                     <a href="index.php?action=promotionPage&id=<?= $project->promo->id ?>" class="bg-main-red py-2 px-4 rounded-full text-main-white my-2 hover:bg-main-white hover:text-main-red hover:border border-main-red"><?= $project->promo->name ?></a>
                                     <div class="space-x-4 mt-4 mb-2 text-sm text-main-white [&>a]:bg-main-gray [&>a]:py-1 [&>a]:px-3 [&>a]:rounded-full">
                                         <?php for ($i = 0; $i < count($project->team); $i++) { ?>
-                                        <a href="index.php?action=profilePage&id=<?= $project->team[$i]->id ?>" class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white"><?= $project->team[$i]->surname ?> <?= $project->team[$i]->name ?></a>
+                                        <a href="index.php?action=profilePage&id=<?= $project->team[$i]->user_id ?>" class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white"><?= $project->team[$i]->user_surname ?> <?= $project->team[$i]->user_name ?></a>
                                         <?php } ?>
                                     </div>
                                     <a href="index.php?action=projectPage&id=<?= $project->id ?>" class="block float-left text-xs">Voir le projet <i class="fa fa-arrow-right"></i></a>
