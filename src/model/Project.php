@@ -123,7 +123,7 @@ class ProjectRepository extends ConnectBdd
         return $project;
     }
 
-    public function getAllProjects($limitRequest = null): array
+    public function getAllProjects($limitRequest = null):array
     {
         $projects = [];
         $limit = $limitRequest == null ? "" : "LIMIT " . $limitRequest;
@@ -169,7 +169,7 @@ class ProjectRepository extends ConnectBdd
         $req->execute([$id]);
         $data = $req->fetchAll(PDO::FETCH_ASSOC);
 
-        foreach ($data as $key) {
+        foreach($data as $key){
             $User = new User($key['user_id']);
 
             $team[] = $User;
@@ -187,14 +187,9 @@ class ProjectRepository extends ConnectBdd
 
         foreach ($datas as $data) {
             $project = new Project;
-
-            $req = $this->bdd->prepare("SELECT project_id, project_name FROM project WHERE project_id = ?");
-            $req->execute([$data]);
-            $data = $req->fetch(PDO::FETCH_ASSOC);
-
-            $project->id = $data['project_id'];
-            $project->name = $data['project_name'];
-
+            $projectRepo = new ProjectRepository;
+            $project = $projectRepo->getProjectById($data);
+            array_push($projects, $project);
         }
 
         return $projects;
@@ -287,23 +282,6 @@ class ProjectRepository extends ConnectBdd
         $req = $this->bdd->prepare("UPDATE project SET status_id = 9 WHERE project_id = ?");
         $bool = $req->execute([$id]);
         return $bool;
-    }
-
-    public function getUserProjects($id):array
-    {
-        $projects = [];
-        $req = $this->bdd->prepare("SELECT project_id FROM project_team WHERE user_id = ?");
-        $req->execute([$id]);
-        $datas = $req->fetchAll(PDO::FETCH_COLUMN);
-
-        foreach($datas as $data){
-            $project = new Project;
-            $projectRepo = new ProjectRepository;
-            $project = $projectRepo->getProjectById($data);
-            array_push($projects, $project);
-        }
-
-        return $projects;
     }
 }
 

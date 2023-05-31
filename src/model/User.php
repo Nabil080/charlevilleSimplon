@@ -23,7 +23,7 @@ class User
     public $user_birth_place;
     public $user_nationality;
     public $user_status;
-    public $status_date;
+    public $user_status_date;
     public $role_id;
     public $user_tags;
     public $user_highlight;
@@ -62,7 +62,6 @@ class User
         $this->user_github = (!null) ? $account['user_github'] : '';
         $this->user_highlight = (!null) ? $account['user_highlight'] : '';
         $this->user_cv = (!null) ? $account['user_cv'] : '';
-        $this->user_projects = (!null) ? $account['user_projects'] : '';
 
         /* Prospect */
         $this->user_id_poleEmploi = $account['user_numero_pe'];
@@ -73,10 +72,9 @@ class User
         /* Utility */
         $this->user_token = $account['user_token'];
         $this->user_status = $account['status_name'];
-        $this->status_date = $account['status_date'];
+        $this->user_status_date = $account['user_status_date'];
         $this->role_id = $account['role_id'];
         $this->role_name = $account['role_name'];
-        $this->user_tags = $account['user_tags'];
     }
 
 }
@@ -128,11 +126,6 @@ class UserRepository extends ConnectBdd
         $data = $stmt->fetch(PDO::FETCH_ASSOC);
         $stmt->closeCursor();
 
-        $Tags = new Tag;
-        $tagRepo = new TagRepository;
-        $Tags = $tagRepo->getUserTags($data['user_id']);
-        $data->tags = $Tags;
-      
         return $data;
     }
     public function getIdByEmail($email)

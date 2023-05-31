@@ -1,7 +1,7 @@
 <?php
 
 // TEMP POUR TEST SANS CONNEXION
-$user = new UsersRepository();
+$user = new UserRepository();
 $_SESSION['user'] = $user->getUserById(1);
 
 switch ($action) {
