@@ -1,41 +1,61 @@
 <?php
-function homepage()
-{
-    include 'view/public/homepage.php';
-}
-function contactPage()
-{
-    include 'view/public/contact.php';
-}
+try {
+    function homepage()
+    {
+        include 'view/public/homepage.php';
+    }
+    function contactPage()
+    {
+        include 'view/public/contact.php';
+    }
 
-// Formation 
-function allFormationsPage()
-{
-    include 'view/public/allFormations.php';
-}
+    // Formation 
+    function allFormationsPage()
+    {
+        $formationRepository = new FormationRepository;
+        $formations = $formationRepository->getAllFormations();
+        include 'view/public/allFormations.php';
+    }
 
-function formationPage()
-{
-    include 'view/public/formation.php';
-}
+    function formationPage()
+    {
+        include 'view/public/formation.php';
+    }
 
-// Project 
+    // Project 
 
-function projectPage()
-{
-    include 'view/public/project.php';
-}
+    function projectPage()
+    {
+        include 'view/public/project.php';
+    }
 
-function allProjectsPage()
-{
-    include 'view/public/all_projects.php';
-}
+    function allProjectsPage()
+    {
+        include 'view/public/all_projects.php';
+    }
 
-function projectGestionPage()
-{
-    include 'view/public/project_gestion.php';
-}
+  function projectGestionPage()
+  {
+    if ($_SESSION['user']->role-> id == 3) {
+        $projectRepository = new ProjectRepository;
+        $projects = $projectRepository->getEntrepriseProjects($_SESSION['user']->id);
+        include 'view/public/project_gestion.php';
+    } else if ($_SESSION['user']->role-> id == 1){
+        $promoRepository = new PromoRepository;
+        $promos =   $promoRepository->getActivePromos();
+        $projectRepository = new ProjectRepository;
+        $projects = $projectRepository->getWaitingProjects();
+        include 'view/public/project_gestion.php';
+    } else if ($_SESSION['user']->role-> id == 2) {
+        $projectRepository = new ProjectRepository;
+        $projects = $projectRepository->getFormateurProjects($_SESSION['user']->id);
+        include 'view/public/project_gestion.php';
+    } else {
+        header('Location:?action=homepage');
+    }
 
+  }
+  
 // Profile
 function profilePage()
 {
@@ -97,50 +117,87 @@ function myProfile()
     include 'view/public/profile.php';
 }
 
-// Promotion
-function allPromotionsPage()
-{
-    include 'view/public/all_promotions.php';
-}
-function promotionPage()
-{
-    include 'view/public/promotion.php';
-}
+    // Promotion
+    function allPromotionsPage()
+    {
+        $PromoRepository = new PromoRepository;
+        $promos = $PromoRepository->getPromos();
+        include 'view/public/all_promotions.php';
+    }
+    function promotionPage()
+    {
+        if (isset($_GET['id_promo'])) {
+            $id = $_GET['id_promo'];
+        } else {
+            $id = 1;
+        }
+        $PromoRepository = new PromoRepository;
+        $promo = $PromoRepository->getPromoById($id);
+        $apprenants = $PromoRepository->getAllApprenants($id);
+        $formateurs = $PromoRepository->getAllFormateurs($id);
+        $allProjects = $PromoRepository->getPromoProjects($id);
+        include 'view/public/promotion.php';
+    }
 
-// Register
-function registerPage()
-{
-    include 'view/public/register.php';
-}
+    // Register
+    function registerPage()
+    {
+        $boolCompany = (isset($_GET['company'])) ? 1 : 0;
+        $formation_id = (isset($_GET['formation_id'])) ? $_GET['formation_id'] : 0;
+
+        include 'view/public/register.php';
+    }
+
+    function accountActivationPage()
+    {
+        $etat = activationAccountTreatment();
+        include 'view/public/accountActivation.php';
+    }
 
 
-// ==================  Admin  ======================
+    function resetPasswordForm()
+    {
+        $token = $_GET['token'];
+        $etat = checkToken();
+        if ($etat === true) {
+            include 'view/public/resetPassword.php';
+        } else {
+            throw new Exception($etat[1]);
+        }
+    }
 
-function crudCandidatePage()
-{
-    include 'view/admin/_candidate.php';
-}
 
-function crudLearnerPage()
-{
-    include 'view/admin/_learner.php';
-}
+    // ==================  Admin  ======================
 
-function crudCompanyPage()
-{
-    include 'view/admin/_company.php';
-}
+    function crudCandidatePage()
+    {
+        include 'view/admin/_candidate.php';
+    }
 
-function crudPromotionPage()
-{
-    include 'view/admin/_promotions.php';
-}
+    function crudLearnerPage()
+    {
+        include 'view/admin/_learner.php';
+    }
 
-function crudProjetPage()
-{
-    include 'view/admin/_projects.php';
-}
+    function crudCompanyPage()
+    {
+        include 'view/admin/_company.php';
+    }
 
-function projectFormPage() {
-    include 'view/admin/projectAddForm.php';
+    function crudPromotionPage()
+    {
+        include 'view/admin/_promotions.php';
+    }
+
+    function crudProjetPage()
+    {
+        include 'view/admin/_projects.php';
+    }
+
+    function projectFormPage()
+    {
+        include 'view/admin/projectAddForm.php';
+    }
+} catch (Exception $error) {
+    echo 'Exception reçue : ', $e->getMessage(), "\n";
 }

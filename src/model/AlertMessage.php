@@ -1,34 +1,67 @@
 <?php class AlertMessage
 {
-    public $type;
-    public $name;
-    public $location;
+    private $type;
+    private $name;
+    private $location;
     public $message;
+
+    private $alertMessage = 'assets/json/alertMessage.json';
+    private $styleSucces = "p-2 border-2 border-green-700 rounded-lg bg-green-200 text-green-500";
+    private $styleError = "p-2 border-2 border-red-700 rounded-lg bg-red-200 text-red-500";
+
 
     public function getError($location, $error)
     {
         $this->type = 'errorMessage';
-        $this->location = $location;
         $this->name = $error;
+        $this->message = $this->getMessage();
 
-        $message = $this->createAlert();
-        $this->message = $message;
+        if (!stristr($location, '_errorContent')) {
+            $this->location = $location . '_error';
+        } else {
+            $this->location = $location;
+            $this->message = "<p class='" . $this->styleError . "'>" . $this->message . "<p>";
+        }
 
         $test = [
             'successMessage' => 0,
-            'location' => $location,
+            'location' => $this->location,
             'message' => $this->message,
         ];
         return $test;
     }
-    public function getSuccess($location, $success)
+    public function getSuccess($success, $navbarBool)
     {
+        $file_path = 'view/template/_succesMessage.php';
         $this->type = 'successMessage';
-        $this->location = $location;
         $this->name = $success;
+        $this->message = $this->getMessage();
 
-        $message = $this->createAlert();
-        $this->message = $message;
+
+        // $navbarBool correspond à vérifier si on le met sur le content de 
+        // la page (false) ou en général sur le navbar (true)
+        if ($navbarBool) {
+            $this->location = 'navbar_succesContent';
+            if (file_exists($file_path)) {
+                // Lit le contenu du fichier
+                $succesMessage = file_get_contents($file_path);
+
+                // Insère le message prédéfini dans l'élément avec l'ID "content_success"
+                $succesMessage = str_replace(
+                    '<div id="content_success" class="ml-3 text-sm font-medium">',
+                    '<div id="content_success" class="ml-3 text-sm font-medium">' . $this->message,
+                    $succesMessage
+                );
+
+            } else {
+                var_dump('Le ficher n\'est pas trouvée.');
+            }
+
+        } else {
+            $this->location = ($success == 'mailForgetPassword') ? 'forget_succesContent' : 'succesContent';
+
+            $this->message = "<p class='" . $this->styleSucces . "'>" . $this->message . "<p>";
+        }
 
         $test = [
             'successMessage' => 1,
@@ -38,26 +71,10 @@
         return $test;
     }
 
-
-
-    private function createAlert()
-    {
-        $message = $this->getMessage();
-        $location = $this->location;
-        $alert = "";
-
-        if ($this->type == "errorMessage") {
-            $alert = '<p id="' . $location . '_error" class="error mt-2 text-sm text-red-600 dark:text-red-500">' . $message . '</p>';
-        } elseif ($this->type == "successMessage") {
-            $alert = '<p id="' . $location . '_success" class="success mt-2 text-sm text-green-600 dark:text-green-500">' . $message . '</p>';
-        }
-        return $alert;
-
-    }
     private function getMessage()
     {
-        $messageData = file_get_contents('assets/json/alertMessage.json');
-        $data = json_decode($messageData, true);
+
+        $data = json_decode(file_get_contents($this->alertMessage), true);
 
         foreach ($data[$this->type] as $row) {
             if ($row['name'] == $this->name) {

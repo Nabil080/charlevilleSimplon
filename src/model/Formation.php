@@ -1,5 +1,7 @@
 <?php
 require_once('src/model/ConnectBdd.php');
+require_once('src/model/Promo.php');
+
 
 class Formation
 {
@@ -8,7 +10,31 @@ class Formation
     public $description;
     public $duration;
     public $level;
+    public $diploma;
+    public $image;
     public $status;
+    public $preview;
+    public array $jobs;
+
+    public function __construct($id, $name, $description,$duration, $level, $diploma, $image, $preview, $status)
+    {
+
+        $this->id = $id;
+        $this->name = $name;
+        $this->description = $description;
+        $this->duration = $duration;
+        $this->level = $level;
+        $this->diploma = $diploma;
+        $this->image = $image;
+        $this->preview = $preview;
+
+        $statusRepo = new StatusRepository;
+        $this->status = $statusRepo->getStatusById($status);
+
+        $jobRepo = new JobRepository;
+        $this->jobs = $jobRepo->getJobsByFormationId($id);
+    }
+
 }
 class FormationRepository extends ConnectBdd
 {
@@ -19,48 +45,78 @@ class FormationRepository extends ConnectBdd
 
     public function getFormationById($id):object
     {
-        $Formation = new Formation;
-        $req = $this->bdd->prepare("SELECT * FROM `formation` WHERE `formation_id` = ?");
+        
+        $req = $this->bdd->prepare("SELECT * FROM formation WHERE formation_id = ?");
         $req->execute([$id]);
         $data = $req->fetch(PDO::FETCH_ASSOC);
 
-        $Formation->id = $data['formation_id'];
-        $Formation->name = $data['formation_name'];
-        $Formation->description = $data['formation_description'];
-        $Formation->duration = $data['formation_duration'];
-        $Formation->level = $data['formation_level'];
-
-        $Status = new Status;
-        $statusRepo = new StatusRepository;
-        $Status = $statusRepo->getStatusById($data['status_id']);
-        $Formation->status = $Status;
+        $Formation = new Formation (
+            $data['formation_id'],
+            $data['formation_name'],
+            $data['formation_description'],
+            $data['formation_duration'],
+            $data['formation_level'],
+            $data['formation_diploma'],
+            $data['formation_image'],
+            $data['formation_preview'],
+            $data['status_id'],
+        );
 
         return $Formation;
     }
 
-    public function getFormations()
+    public function getFormationLevel($id):string
     {
-        $req = $this->bdd->prepare('SELECT * FROM formation');
+        $req = $this->bdd->prepare("SELECT formation_level FROM formation WHERE formation_id = ?");
+        $req->execute([$id]);
+        $data = $req->fetch(PDO::FETCH_ASSOC);
+
+        return $data['formation_level'];
+    }
+
+    public function getFormationName($id):string
+    {
+        $req = $this->bdd->prepare("SELECT formation_name FROM formation WHERE formation_id = ?");
+        $req->execute([$id]);
+        $data = $req->fetch(PDO::FETCH_ASSOC);
+        var_dump($data);
+        var_dump($id);
+
+        return $data['formation_name'];
+    }
+
+    public function getAllFormations():array
+    {
+        $formationRepository = new FormationRepository;
+        $req = $this->bdd->prepare('SELECT formation_id FROM formation');
         $req->execute();
-        $datas = $req->fetchAll();
+        $datas = $req->fetchAll(PDO::FETCH_COLUMN);
         $formations = [];
+
+        foreach ($datas as $data) {
+            $formation = $formationRepository->getFormationById($data);
+            array_push($formations, $formation);
+        }
+
+        return $formations;
+    }
+
+    public function getFormationLevels()
+    {
+        $levels =  [];
+        $req = $this->bdd->prepare("SELECT formation_level FROM formation WHERE formation_level IS NOT NULL");
+        $req->execute();
+        $data = $req->fetchAll(PDO::FETCH_COLUMN);
+
+        foreach($data as $level){
+            $levels[] = $level ;
+        }
+            
+        $uniqueLevels = array_unique($levels);
+
         
-        foreach($datas as $formationBdd)
-        {
-            $article = new Article();
-            $avatar = new AuthorRepository();
-            $avatar = $avatar->getDataByAuthorId($articleBdd['id_user']);
-            $article->id = $articleBdd['id_article'];
-            $article->title = $articleBdd['title_article'];
-            $article->image = $articleBdd['image_article'];
-            $article->description = $articleBdd['description_article'];
-            $article->author = $articleBdd['author_article'];
-            $article->date = $articleBdd['date_article'];
-            $article->id_author = $articleBdd['id_user'];
-            $article->author_avatar = $avatar;
-            $articles[] = $article;
-        } 
-        return $articles;
+        return $uniqueLevels;
+
     }
 }
 
