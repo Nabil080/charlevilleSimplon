@@ -3,6 +3,9 @@ session_start();
 //session_destroy();
 require 'src/model/ConnectBdd.php';
 
+$_SESSION['user'] = new User(4);
+
+
 // var_dump($_SESSION);
 
 if (isset($_GET['action']) && $_GET['action'] !== '' && !isset($_GET['admin'])) {

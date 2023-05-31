@@ -46,13 +46,16 @@ class ProjectRepository extends ConnectBdd{
         parent::__construct ();
     }
 
-    public function getProjectById($projectId){
+    public function getProjectById(int $projectId): object
+    {
         $project = new Project;
 
         $req = $this->bdd->prepare("SELECT * FROM project WHERE project_id = ?");
         $req->execute([$projectId]);
         $data = $req->fetch(PDO::FETCH_ASSOC);
-
+        if (is_bool($data)) {
+            header('Location:?action=homepage');  
+        }
         $project->id = $data['project_id'];
         $project->name = $data['project_name'];
         $project->description = $data['project_description'];
@@ -66,15 +69,11 @@ class ProjectRepository extends ConnectBdd{
         $project->model_image = $data['project_model_image'];
         $project->model_link = $data['project_model_link'];
 
-        $User = new User;
-        $userRepo = new UsersRepository;
-        $User = $userRepo->getUserById($data['user_id']);
+        $User = new User($data['user_id']);
         $project->user = $User;
 
-        $Formator = new User;
-        $userRepo = new UsersRepository;
-        $Formator = $userRepo->getUserById($data['user_id_project_formator']);
-        $project->formator = $Formator;
+        $User = new User($data['user_id_project_formator']);
+        $project->user = $User;
 
         $Status = new Status;
         $statusRepo = new StatusRepository;
@@ -165,10 +164,7 @@ class ProjectRepository extends ConnectBdd{
         $data = $req->fetchAll(PDO::FETCH_ASSOC);
 
         foreach($data as $key){
-            $User = new User;
-            $userRepo = new UsersRepository;
-            $User = $userRepo->getUserById($key['user_id']);
-
+            $User = new User($key['user_id']);
             $team[] = $User;
         }
 
@@ -191,9 +187,9 @@ class ProjectRepository extends ConnectBdd{
 
             $project->id = $data['project_id'];
             $project->name = $data['project_name'];
+            array_push($projects, $project);
 
         }
-
         return $projects;
     }
 
@@ -242,12 +238,16 @@ class ProjectRepository extends ConnectBdd{
             }
             if ($bool == true) {
                 $req = $this->bdd->prepare("UPDATE project SET status_id = 12 WHERE project_id = ?");
-                $req->execute([$projectId]);
+                $bool = $req->execute([$projectId]);
                 $req = $this->bdd->prepare("UPDATE project SET project_start = CURRENT_TIMESTAMP() WHERE project_id = ?");
-                $req->execute([$projectId]);
+                $bool = $req->execute([$projectId]);
+                array_push($bools, $bool);
+                return $bools;
             }
             return $bools;
         }
+        return $bools;
+
     }
 
     public function getWaitingProjects(): array
@@ -284,6 +284,146 @@ class ProjectRepository extends ConnectBdd{
         $req = $this->bdd->prepare("UPDATE project SET status_id = 9 WHERE project_id = ?");
         $bool = $req->execute([$id]);
         return $bool;
+    }
+
+    public function updateProjectTitle(int $id, array $post):bool
+    {
+        $req = $this->bdd->prepare("UPDATE project SET project_name = ? WHERE project_id = ?");
+        $bool = $req->execute([$post['title'], $id]);
+        return $bool;
+    }
+
+    public function updateProjectUsers(int $id, string $type, array $post):bool | array
+    {
+        $bools = [];
+
+        if ($type == "apprenants") {
+            $users = $post['students'];
+            $actualTeam = $post['actualTeam'];
+        } else if ($type == "formateurs") {
+            $users = $post['formators'];
+            $actualTeam = $post['actualFormatorTeam'];
+        }
+        if (is_array($users) && !empty($users)) {
+            foreach ($actualTeam as $student) {
+            $req = $this->bdd->prepare('DELETE FROM project_team WHERE project_id = ? AND user_id = ?');
+            $bool = $req->execute([$id, $student]);
+            }
+        } else { 
+            $req = $this->bdd->prepare('DELETE FROM project_team WHERE project_id = ? AND user_id =');
+            $bool = $req->execute([$id, $users]);
+        }
+        
+        if (is_array($users) && !empty($users)) {
+            foreach ($users as $apprenant) {
+            $req = $this->bdd->prepare('INSERT INTO project_team (project_id, user_id) VALUES (?,?)');
+            $bool = $req->execute([$id, (int)$apprenant]);
+            array_push($bools, $bool);
+            }
+        } else {
+            $req = $this->bdd->prepare('INSERT INTO project_team (project_id, user_id) VALUES (?,?)');
+            $bool = $req->execute([$id, (int)$users]);
+            array_push($bools, $bool);
+        }
+
+        return $bools;
+    }
+        // PROGRESS 
+    public function updateProjectProgress(int $id, array $post):bool
+    {
+        $name = htmlspecialchars($post['name'], ENT_QUOTES);
+        $number = htmlspecialchars($post['number'], ENT_QUOTES);
+        $progressId = htmlspecialchars($post['id'], ENT_QUOTES);
+
+            if (!empty($name) && !empty($number)) {
+                $req = $this->bdd->prepare("UPDATE progress SET progress_name = ?, progress_number = ? WHERE project_id = ? AND progress_id = ?");
+                $bool = $req->execute([$name, $number, $id, $progressId]);
+            } else if(empty($name)) {
+                $req = $this->bdd->prepare("UPDATE progress SET progress_number = ? WHERE project_id = ? AND progress_id = ?");
+                $bool = $req->execute([$number, $id, $progressId]);
+            } else {
+                $req = $this->bdd->prepare("UPDATE progress SET progress_name = ? WHERE project_id = ? AND progress_id = ?");
+                $bool = $req->execute([$name, $id, $progressId]);
+            }
+        
+        return $bool;
+    }
+
+    public function updateProjectImage(int $id, array $files, array $post): bool
+    {
+        $path = 'upload/project/maquette/';
+        $image = securizeImage($files['image'], $path);
+        if (isset($post['lien'])) {
+            $lien = htmlspecialchars($post['lien'], ENT_QUOTES);
+            $req = $this->bdd->prepare("UPDATE project SET project_model_link = ? WHERE project_id = ?");
+            $bool = $req->execute([$lien, $id]);
+        }
+        if($image === false){
+            $error = true;
+            die;
+        }
+        if (!empty($image)) { 
+           $req = $this->bdd->prepare("UPDATE project SET project_model_image = ? WHERE project_id = ?");
+            $bool = $req->execute([$image, $id]);
+        }
+        return $bool;
+    }
+
+    
+    public function updateProjectGithub(int $id, array $post):bool
+    {
+        $github = htmlspecialchars($post['github'], ENT_QUOTES);
+        $req = $this->bdd->prepare('UPDATE project SET project_github = ? WHERE project_id = ?');
+        $bool = $req->execute([$github, $id]);
+        return $bool;
+    }
+
+    public function updateProjectCharge(int $id, array $files):bool
+    {
+        $path = 'upload/project/charges/';
+        $pdf = securizePdf($files['pdf'], $path);
+        if($pdf === false){
+            $error = true;
+            die;
+        }
+        if (!empty($pdf)) { 
+           $req = $this->bdd->prepare("UPDATE project SET project_file = ? WHERE project_id = ?");
+            $bool = $req->execute([$pdf, $id]);
+        }
+        return $bool;
+    }
+
+    public function updateProjectLink(int $id, array $post)
+    {
+        $link = htmlspecialchars($post['link'], ENT_QUOTES);
+        $req = $this->bdd->prepare('UPDATE project SET project_model_link = ? WHERE project_id = ?');
+        $bool = $req->execute([$link, $id]);
+        return $bool;
+    }
+
+    public function updateCompanyNote(int $id, array $post)
+    {
+        $isSafe = securizeText($post['companyNotes']);
+        if ($isSafe == true) {
+            $req = $this->bdd->prepare('UPDATE project SET project_description = ? WHERE project_id = ?');
+            $bool = $req->execute([$post['companyNotes'], $id]);
+            return $bool;
+        } else {
+            return $isSafe;
+        }
+    }
+
+    public function updateStudentsNote(int $id, array $post)
+    {
+        $isSafe = securizeText($post['studentsNote']);
+        if ($isSafe == true) {
+            $req = $this->bdd->prepare('UPDATE project SET project_notes = ? WHERE project_id = ?');
+            $bool = $req->execute([$post['studentsNote'], $id]);
+            return $bool;
+        } else {
+
+            return $isSafe;
+        }
     }
 }
 

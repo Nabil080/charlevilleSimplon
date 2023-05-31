@@ -99,11 +99,10 @@ class PromoRepository extends ConnectBdd{
         $req = $this->bdd->prepare("SELECT user_id FROM promo_user WHERE promo_id = ?");
         $req->execute([$id]);
         $datas = $req->fetchAll(PDO::FETCH_COLUMN);
-        $UsersRepository = new UsersRepository;
         $users = [];
         
         foreach ($datas as $data) {
-            $user = $UsersRepository->getUserById($data);
+            $user = new User($data);
             array_push($users, $user);
         }
         return $users;
@@ -115,12 +114,12 @@ class PromoRepository extends ConnectBdd{
         WHERE promo_id = ?");
         $req->execute([$id]);
         $datas = $req->fetchAll(PDO::FETCH_COLUMN);
-        $UsersRepository = new UsersRepository;
+        $UsersRepository = new UserRepository;
         $users = [];
         
         foreach ($datas as $data) {
-            $user = $UsersRepository->getUserById($data);
-            if ($user->role->name == "Formateur") {
+            $user = new User($data);
+            if ($user->role_id == "2") {
                 array_push($users, $user);
             }
         }

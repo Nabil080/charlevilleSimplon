@@ -5,7 +5,13 @@ class Progress {
     public $id;
     public $name;
     public $number;
-    public $project;
+
+    public function __construct($id, $name, $number)
+    {
+        $this->id = $id;
+        $this->name = $name;
+        $this->number = $number;
+    }
 }
 
 class ProgressRepository extends ConnectBdd{
@@ -13,24 +19,20 @@ class ProgressRepository extends ConnectBdd{
         parent::__construct();
     }
 
-    public function getProgressById($id):object
+    public function getProgressByProjectId($id):array
     {
-        $Progress = new Progress;
-        $req = $this->bdd->prepare("SELECT * FROM `progress` WHERE `progress_id` = ?");
+        $req = $this->bdd->prepare("SELECT * FROM `progress` WHERE `project_id` = ?");
         $req->execute([$id]);
-        $data = $req->fetch(PDO::FETCH_ASSOC);
-
-        $Progress->id = $data['progress_id'];
-        $Progress->name = $data['progress_name'];
-        $Progress->number = $data['progress_number'];
-
-        $Project = new Project;
-        $projectRepo = new ProjectRepository;
-        $Project = $projectRepo->getProjectById($data['Project_id']);
-        $Progress->project = $Project;
-
-        return $Progress;
+        $datas = $req->fetchAll(PDO::FETCH_ASSOC);
+        $allProgress = [];
+        foreach ($datas as $data) {
+            $Progress = new Progress($data['progress_id'], $data['progress_name'], $data['progress_number']);
+            array_push($allProgress, $Progress);
+        }
+    
+        return $allProgress;
     }
+
 }
 
 

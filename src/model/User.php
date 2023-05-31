@@ -5,25 +5,25 @@ require_once 'src/model/Tag.php';
 
 class User
 {
-    private $user_id;
-    private $user_name;
-    private $user_surname;
-    private $user_email;
-    private $user_password;
-    private $user_avatar;
-    private $user_company;
-    private $user_description;
-    private $user_linkedin;
-    private $user_github;
-    private $user_token;
-    private $user_id_poleEmploi;
-    private $user_phone;
-    private $user_adress;
-    private $user_birth_date;
-    private $user_birth_place;
-    private $user_nationality;
-    private $user_status;
-    private $role_id;
+    public $user_id;
+    public $user_name;
+    public $user_surname;
+    public $user_email;
+    public $user_password;
+    public $user_avatar;
+    public $user_company;
+    public $user_description;
+    public $user_linkedin;
+    public $user_github;
+    public $user_token;
+    public $user_id_poleEmploi;
+    public $user_phone;
+    public $user_adress;
+    public $user_birth_date;
+    public $user_birth_place;
+    public $user_nationality;
+    public $user_status;
+    public $role_id;
     public $highlight;
 
     public function __construct($id)

@@ -49,40 +49,7 @@
                       </ul>
                   </div>
               </div>
-              <i class="md:ml-2 fa-solid fa-users text-[44px] sm:text-[62px] justify-self-center  md:text-[20px]" style="color: #BD3124;"></i>
-              <p class="text-[24px] sm:text-[36px] md:text-[20px] xl:text-[24px]"><a href="?action=allPromotionsPage">Promotions</a></p>
-              <i class="md:ml-2 fa-solid fa-book text-[44px] sm:text-[62px] justify-self-center  md:text-[20px]"  style="color: #BD3124;"></i>
-              <p class="text-[24px] sm:text-[36px] md:text-[20px] xl:text-[24px]"><a href="?action=allProjectsPage">Projets</a></p>
-              <i class="md:ml-2 fa-solid fa-user text-[44px] sm:text-[62px] justify-self-center  md:text-[20px]"  style="color: #BD3124;"></i>
-              <?php if (isset($_SESSION['user']->role->id)){
-                      if ($_SESSION['user']->role->id == 3) {?>
-                <p class="text-[24px] sm:text-[36px] md:text-[20px] xl:text-[24px]"><a href="?action=projectGestionPage">Mes Projets</a></p>
-                  <?php } else { ?>
-                <p class="text-[24px] sm:text-[36px] md:text-[20px] xl:text-[24px]"><a href="">Compte</a></p>
-              <?php 
-              }
-              } else {
-              ?>
-                <p class="text-[24px] sm:text-[36px] md:text-[20px] xl:text-[24px] cursor-pointer" data-modal-target="login-modal" data-modal-toggle="login-modal">Connexion</p>
-              <?php 
-              } 
-              ?>
-          </div>
-        </div>
-      </div>
-      <?php 
-        if (isset($_SESSION['define'])) { 
-      ?>
-        <div class="w-full  justify-center hidden md:flex">
-          <a href="#" class="text-center bg-main-red px-5 py-1 rounded-[5px] text-[20px] text-main-white">Admin</a>
-        </div>
-      <?php
-        }
-      ?>
-</nav>
-                    </div>
-                </div>
-                <i class="md:ml-2 fa-solid fa-users text-[44px] sm:text-[62px] justify-self-center  md:text-[20px]"
+              <i class="md:ml-2 fa-solid fa-users text-[44px] sm:text-[62px] justify-self-center  md:text-[20px]"
                     style="color: #BD3124;"></i>
                 <p class="text-[24px] sm:text-[36px] md:text-[20px] xl:text-[24px]"><a
                         href="?action=allPromotionsPage">Promotions</a></p>
@@ -140,3 +107,5 @@
         } ?>
     </div>
 </nav>
+                    
+                
