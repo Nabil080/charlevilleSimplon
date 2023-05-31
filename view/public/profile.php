@@ -4,7 +4,7 @@ $title = "Espace personnel";
 
 <?php ob_start();
 var_dump($userDatas);
-var_dump($userProjects);
+// var_dump($userProjects);
 ?>
 <!-- Section photo et description -->
 <div class="background bg-main-white overflow-x-hidden min-h-[100vh]">
