@@ -29,12 +29,13 @@
                 <h2 class="font-title text-main-red italic font-bold text-3xl my-2"><a href="?action=projectPage&id=<?=$project->id?>"><?=$project->name?></a></h2>
                 <div class="self-end flex w-3/4 justify-between italic border-b border-main-red">
                     <?php if(isset($project->start)){ ?><span>Débuté le <?=date('d-m-Y', strtotime($project->start))?></span><?php }
-                    if(isset($project->end)){ ?><span>Fini le <?=date('d-m-Y', strtotime($project->end))?></span><?php } ?></div>
+                    if(isset($project->end)){ ?><span>Fini le <?=date('d-m-Y', strtotime($project->end))?></span><?php } ?>
+                </div>
                 <!-- contenu projet -->
                 <div class="text-base flex-grow flex-col">
                     <p class="pl-[20%] line-clamp-5 mt-2 mb-4"><?=$project->description?></p>
                     <div id="end" class="mt-auto">
-                        <a href="page de la promo"
+                        <a href="?action=promotionPage&id=<?= $project->promo->id ?>"
                             class="bg-main-red py-2 px-4 rounded-full text-main-white my-2 hover:bg-main-white hover:text-main-red hover:border border-main-red">
                             <?=$project->promo->name?>
                         </a>
@@ -64,4 +65,9 @@
                     <p class="text-sm pt-0.5 text-left font-light"><?=$project->company_adress?></p>
                 </div>
             </div>
+            <!-- data filtres-->
+            <div class="hidden" formation-filter="formation-<?=$project->promo->formation_id?>"></div>
+            <div class="hidden" year-filter="<?=$project->start?>"></div>
+            <div class="hidden" level-filter="<?=$project->getProjectLevel()?>"></div>
+
         </article>

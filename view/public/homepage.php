@@ -104,11 +104,11 @@ ob_start();
                 lg:flex-row lg:justify-center lg:gap-10 [&>button]:lg:w-1/3 [&>button]:lg:h-full [&>button]:lg:py-[0vh]
                 [&>button]:xl:h-50 xl:mx-[8vw]">
                 <button class="hover:bg-main-white hover:text-main-red hover:border-main-red hover:-translate-y-4"
-                onclick="window.location.href = '?action=allFormationsPage'">
+                    onclick="window.location.href = '?action=allFormationsPage'">
                     Nos formations
                 </button>
                 <button class="hover:bg-main-white hover:text-main-red hover:border-main-red hover:-translate-y-4"
-                onclick="window.location.href = '?action=allProjectsPage'">
+                    onclick="window.location.href = '?action=allProjectsPage'">
                     Nos projets
                 </button>
             </div>
@@ -129,7 +129,6 @@ ob_start();
 </section>
 
 <?php include('view/template/_login.php') ?>
-<?php include('view/template/_loginCompany.php') ?>
 
 
 <?php
