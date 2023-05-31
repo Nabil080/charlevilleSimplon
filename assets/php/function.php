@@ -1,0 +1,289 @@
+<?php 
+
+function securizeString(string $string = null)
+{
+
+    if(!isset($string) OR empty($string) OR strlen($string) < 3){
+        if(strlen($string) < 3){
+            $response = array(
+                "status" => "failure",
+                "message" => "Un champ est trop court"
+            );
+            echo json_encode($response);
+        }else{
+
+            $response = array(
+                "status" => "failure",
+                "message" => "Un champ est invalide"
+            );
+
+            echo json_encode($response);
+        }
+        return false;
+    }else{
+        $safe_string = filter_var(trim($string), FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+        return $safe_string;
+    }
+}
+
+function securizeMail(string $mail = null)
+{
+    if(!isset($mail) OR empty($mail) OR !filter_var($mail, FILTER_VALIDATE_EMAIL)){
+
+        $response = array(
+            "status" => "failure",
+            "message" => "Email invalide"
+        );
+        echo json_encode($response);
+        return false;
+    }else{
+        $safe_mail = filter_var(trim($mail), FILTER_SANITIZE_EMAIL);
+
+        return $safe_mail;
+    }
+}
+
+function securizeInteger(string|int $int = null)
+{
+    if(!isset($int) OR empty($int) OR is_numeric($int) === false){
+
+        $response = array(
+            "status" => "failure",
+            "message" => "Nombre invalide"
+        );
+        echo json_encode($response);
+        return false;
+    }else{
+
+        return (int)$int;
+    }
+}
+
+function securizePhone(string $phone = null)
+{
+    $pattern = '/^[0-9]{10}+$/';
+
+    if(isset($phone) AND preg_match($pattern, $phone)){
+
+        return $phone;
+    }else{
+        $response = array(
+            "status" => "failure",
+            "message" => "Numéro de téléphone invalide"
+        );
+        echo json_encode($response);
+
+        return false;
+    }
+}
+
+function securizePassword(string $password, string $confirm_password)
+{
+    $pattern = '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{6,}$/';
+
+    if(isset($password) AND preg_match($pattern, $password) && $confirm_password == $password){
+        $hashed_password = password_hash($password, PASSWORD_BCRYPT);
+
+        return $hashed_password;
+    }else{
+        if($confirm_password != $password){
+
+            $response = array(
+                "status" => "failure",
+                "message" => "Les mots de passes ne correspondent pas"
+            );
+            echo json_encode($response);
+
+            return false;
+        }
+
+        if(!preg_match($pattern, $password)){
+
+            $response = array(
+                "status" => "failure",
+                "message" => "Mot de passe invalide ! (Une majuscule, un chiffre et un charactère spécial minimum)"
+            );
+            echo json_encode($response);
+
+            return false;
+        }
+    }
+
+}
+
+function securizeImage(array $filesImage, string $path){
+    if(!empty($filesImage))
+        {
+        $nameFile = $filesImage['name'];
+        $typeFile = $filesImage['type'];
+        $tmpFile = $filesImage['tmp_name'];
+        $errorFile = $filesImage['error'];
+        $sizeFile = $filesImage['size'];
+
+        $extensions = ['png', 'jpg', 'jpeg', 'gif', 'jiff'];
+        $type = ['image/png', 'image/jpg', 'image/jpeg', 'image/gif', 'image/jiff'];
+
+        $extension = explode('.', $nameFile);
+
+
+        $max_size = 8000000;
+
+
+        if(in_array($typeFile, $type))
+        {
+            if(count($extension) <=2 && in_array(strtolower(end($extension)), $extensions))
+            {
+                if($sizeFile <= $max_size && $errorFile == 0)
+                {
+                    if(move_uploaded_file($tmpFile, $path.$image = uniqid() . '.' . end($extension)) )
+                    {
+                        // $response = array(
+                        //     "status" => "success",
+                        //     "message" => "L'image a bien été upload'"
+                        // );
+                        // echo json_encode($response);
+                        return $path.$image;
+                    }
+                    else
+                    {
+                        $response = array(
+                            "status" => "failure",
+                            "message" => "Echec de l'upload de l'image"
+                        );
+                        echo json_encode($response);
+
+                        return false;
+                    }
+                }
+                else
+                {
+                    $response = array(
+                        "status" => "failure",
+                        "message" => "Le poids de l'image est trop élevé"
+                    );
+                    echo json_encode($response);
+
+                    return false;
+                }
+            }
+            else
+            {
+                $response = array(
+                    "status" => "failure",
+                    "message" => "Merci d'upload une image !"
+                );
+                echo json_encode($response);
+
+                return false;
+            }
+        }
+        else
+        {
+            $response = array(
+                "status" => "failure",
+                "message" => "Type non autorisé !"
+            );
+            echo json_encode($response);
+
+            return false;
+        }
+    }else{
+
+        $response = array(
+            "status" => "failure",
+            "message" => "Le fichier est vide !"
+        );
+        echo json_encode($response);
+
+        return false;
+    }
+}
+
+function securizePdf(array $filesPdf, string $path){
+    if(!empty($filesPdf))
+        {
+        $nameFile = $filesPdf['name'];
+        $typeFile = $filesPdf['type'];
+        $tmpFile = $filesPdf['tmp_name'];
+        $errorFile = $filesPdf['error'];
+        $sizeFile = $filesPdf['size'];
+
+        $extensions = ['pdf'];
+        $type = ['application/pdf'];
+
+        $extension = explode('.', $nameFile);
+
+
+        $max_size = 8000000;
+
+
+        if(in_array($typeFile, $type))
+        {
+            if(count($extension) <=2 && in_array(strtolower(end($extension)), $extensions))
+            {
+                if($sizeFile <= $max_size && $errorFile == 0)
+                {
+                    if(move_uploaded_file($tmpFile, $path.$pdf = uniqid() . '.' . end($extension)) )
+                    {
+                        // $response = array(
+                        //     "status" => "",
+                        //     "message" => "Le cahier des charges a bien été upload'"
+                        // );
+                        // echo json_encode($response);
+                        return $path.$pdf;
+                    }
+                    else
+                    {
+                        $response = array(
+                            "status" => "failure",
+                            "message" => "Echec de l'upload du cahier des charges"
+                        );
+                        echo json_encode($response);
+
+                        return false;
+                    }
+                }
+                else
+                {
+                    $response = array(
+                        "status" => "failure",
+                        "message" => "Le poids du cahier des charges est trop élevé"
+                    );
+                    echo json_encode($response);
+
+                    return false;
+                }
+            }
+            else
+            {
+                $response = array(
+                    "status" => "failure",
+                    "message" => "Merci d'upload un pdf !"
+                );
+                echo json_encode($response);
+
+                return false;
+            }
+        }
+        else
+        {
+            $response = array(
+                "status" => "failure",
+                "message" => "Type non autorisé !"
+            );
+            echo json_encode($response);
+
+            return false;
+        }
+    }else{
+
+        $response = array(
+            "status" => "failure",
+            "message" => "Le fichier est vide !"
+        );
+        echo json_encode($response);
+
+        return false;
+    }
+}

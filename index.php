@@ -13,6 +13,9 @@ if (isset($_GET['action']) && $_GET['action'] !== '' && !isset($_GET['admin'])) 
                 case 'myProfile':
                     myProfile();
                     break;
+                case 'updateUserElements':
+                    updateUserElements();
+                    break;
             }
             if ($_SESSION['user']['role_id'] <= 3) {
                 switch ($action) {

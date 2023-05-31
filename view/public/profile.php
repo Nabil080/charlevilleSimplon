@@ -33,7 +33,7 @@ $title = "Espace personnel";
                         <p class="text-[20px] text-justify pt-4 px-3 pb-2 lg:pb-0">Candidature pour la formation <?= $userPromo->name ?></p>
                         <div class="formation_status flex justify-center items-center px-3">
                             <span class="text-[28px] flex justify-center pt-1 pb-2 italic">Statut : <?= $userDatas['status_name'] ?></span>
-                            <span class="w-6 h-6 border-[1px rounded-full ml-2 
+                            <span class="w-6 h-6 border rounded-full ml-2 
                                 <?php if ($userDatas['status_id'] == 7){?> bg-main-red<?php }?>
                                 <?php if ($userDatas['status_id'] == 6){?> bg-main-green<?php }?>
                                 <?php if ($userDatas['status_id'] == 2){?> bg-main-orange<?php }?>"></span>
@@ -111,8 +111,18 @@ $title = "Espace personnel";
                 <!-- Image de profil -->
                 <div class="picture max-h-screen mx-auto">
                     <img class="max-w-full max-h-[600px] overflow-scroll rounded-t-lg" src="<?= $userDatas['user_avatar'] ?>" alt="Image de profil">
-                    <button class="bg-main-red w-full text-main-white text-[16px] lg:text-[28px] py-3 rounded-b-lg" <?= $notMyProfile; ?>>Changer ma photo de profil</button>
+                    <div id="avatar" <?= $notMyProfile; ?>>
+                        <div onclick="swapDivsById('avatar','avatar-update')">
+                            <button type="submit" class="bg-main-red w-full text-main-white text-[16px] lg:text-[28px] py-3 rounded-b-lg" <?= $notMyProfile; ?>>Changer ma photo de profil</button>
+                        </div>
+                    </div>
+                    <form id="avatar-update" method="POST" action="?action=updateUserElements&type=avatar&id=<?=$userDatas['user_id']?>" class="hidden space-x-4" enctype="multipart/form-data">
+                        <input type="file" name="avatar">
+                        <button type="submit"><i class="fa-solid fa-check text-main-red"></i></button>
+                        <i onclick="swapDivsById('avatar','avatar-update')" class="fa-solid fa-xmark text-main-red cursor-pointer"></i>
+                    </form>
                 </div>
+
                 <!-- Description -->
                 <div class="description lg:ml-5 h-[100%] flex flex-col">
                     <div class="edit_profil flex justify-center lg:justify-normal items-center pt-5">
@@ -127,6 +137,8 @@ $title = "Espace personnel";
                                     <option value="<?= $eachStatus['status_id']?>"><?= $eachStatus['status_name'] ?></option>
                                 <?php } ?>
                             </select>
+                            <span>Depuis le :</span>
+                            <input type="date" id="user_status_date" name="user_status_date" class="border-main-red px-4 py-2">
                             <button type="submit"><i class="fa-solid fa-check text-main-red"></i></button>
                             <i onclick="swapDivsById('user-status','user-status-update')" class="fa-solid fa-xmark text-main-red cursor-pointer"></i>
                         </form>
@@ -162,13 +174,13 @@ $title = "Espace personnel";
 
                     <div class="flex flex-col lg:flex-row justify-center my-3 lg:my-0 lg:mt-4">
                         <div id="cv" class="flex items-center justify-center lg:flex-row flex-col my-4 lg:my-0 lg:mx-auto">
-                            <a href="upload/cv/<?= $userDatas['user_cv']?>" class="bg-main-red text-main-white text-[16px] rounded-[5px] mx-auto py-3 lg:py-1 px-2 lg:px-4" target="_blank">Voir le C.V.</a>
+                            <a href="<?= $userDatas['user_cv']?>" class="bg-main-red text-main-white text-[16px] rounded-[5px] mx-auto py-3 lg:py-1 px-2 lg:px-4" target="_blank">Voir le C.V.</a>
                             <div onclick="swapDivsById('cv','cv-update')" class="modify-cv cursor-pointer flex items-center pt-2 pl-3" <?= $notMyProfile; ?>>
                                 <i class="fa-solid fa-download text-main-red w-[20px]"></i>
                                 <span class="text-[10px] text-main-red">Modifier mon C.V.</span>
                             </div>
                         </div>
-                        <form id="cv-update" class="hidden space-x-4">
+                        <form id="cv-update" method="POST" action="?action=updateUserElements&type=cv&id=<?=$userDatas['user_id']?>" class="hidden space-x-4" enctype="multipart/form-data">
                             <input type="file" name="cv">
                             <button type="submit"><i class="fa-solid fa-check text-main-red"></i></button>
                             <i onclick="swapDivsById('cv','cv-update')" class="fa-solid fa-xmark text-main-red cursor-pointer"></i>

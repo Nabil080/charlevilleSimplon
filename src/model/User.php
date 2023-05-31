@@ -82,7 +82,7 @@ class UserRepository extends ConnectBdd
 {
     public function InsertUser($account): void
     {
-        $Mail = new Mail;
+        $Mail = new Mail();
         $Mail->sendMailActivationAccount($account['email']);
         $token = $Mail->getToken();
 
@@ -199,4 +199,49 @@ class UserRepository extends ConnectBdd
         $stmt->execute([2, '', $token, $email]);
         $stmt->closeCursor();
     }
+
+    /* Update */
+    public function updateUserAvatar(int $id, string $type, array $array): bool | array
+    {
+        // traitement image
+        $path = "assets/upload/avatar/";
+        $image = securizeImage($array, $path);
+        if($image === false){
+            // message d'erreurs dans securizeImage
+            $error = true;
+        }
+        if (!empty($image)) { 
+            $bools = [];
+            $req = $this->bdd->prepare("UPDATE user SET user_avatar = ? WHERE user_id = ?");
+            $bool = $req->execute([$image, $id]);
+            return $bool;
+        }
+    }
+
+    public function updateUserCV(int $id, string $type, array $array): bool | array
+    {
+        // traitement pdf
+        $path = 'assets/upload/cv/';
+        $pdf = securizePdf($_FILES['cv'], $path);
+        if($pdf === false){
+            $error = true;
+        }
+        if (!empty($pdf)) { 
+            $bools = [];
+            $req = $this->bdd->prepare("UPDATE user SET user_cv = ? WHERE user_id = ?");
+            $bool = $req->execute([$pdf, $id]);
+            return $bool;
+        }
+    }
+
+    // public function updateUserEmail(int $id, string $type, array $post): bool | array
+    // {
+    //     $bools = [];
+
+    //     if ($type == "title") { // TITLE
+    //         $req = $this->bdd->prepare("UPDATE user SET project_name = ? WHERE project_id = ?");
+    //         $bool = $req->execute([$post['title'], $id]);
+    //         return $bool;
+    //     }
+    // }
 }
