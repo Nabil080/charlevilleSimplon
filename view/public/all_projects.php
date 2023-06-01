@@ -27,7 +27,7 @@
         <div id="formation-dropdown" class="dropdown-toggle w-1/4 border-main-red border rounded-t-lg rounded-b-lg sm:relative">
         <button onclick="toggleDropdown('formation-dropdown')" class="relative w-full py-2"><i class="fa fa-filter text-xs"></i> Formation</button>
         <!-- dropdown formations -->
-            <div class="filter-dropdown dropdown hidden absolute box-content -translate-x-[1px] z-10 w-[calc(100%-2rem)] sm:w-full -translate-y-1 border rounded-b-lg rounded-tr-lg sm:rounded-tr-none text-start bg-main-white sm:border-t-transparent border-main-red">
+            <div class="filter-dropdown dropdown hidden absolute box-content -translate-x-[1px] z-20 w-[calc(100%-2rem)] sm:w-full -translate-y-1 border rounded-b-lg rounded-tr-lg sm:rounded-tr-none text-start bg-main-white sm:border-t-transparent border-main-red">
                 <?php foreach($formations as $formation){ ?>
                     <div class="flex gap-2 text-xs my-2 px-2"><input class="my-auto" id="formation-<?=$formation->id?>" type="checkbox" value="formation-<?=$formation->id?>"><label for="formation-<?=$formation->id?>"><?=$formation->name?></label></div>
                 <?php } ?>

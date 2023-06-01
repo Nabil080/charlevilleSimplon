@@ -88,7 +88,7 @@ $apprenant->tags = $tagRepo->getUserTags($apprenant->user_id);
                 </div>
             </div>
 
-            <button class="clipper2 h-[25%] sm:h-[25%] xl:h-[20%] bg-main-red block text-white z-10 relative text-[20px] text-[22px] font-bold font-main-title w-full">Voir le profil</button>
+            <button class="clipper2 h-[25%] sm:h-[25%] xl:h-[20%] bg-main-red block text-white z-10 relative text-[20px] text-[22px] font-bold font-main-title w-full"><a href="?action=profilePage&id=<?= $apprenant->user_id ?>">Voir le profil</a></button>
           
         </div>
         <div class="hidden clipper sm:flex w-full z-10 bg-center bg-cover grayscale" 
