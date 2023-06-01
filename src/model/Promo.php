@@ -279,18 +279,6 @@ class PromoRepository extends ConnectBdd
         return $projects;
     }
 
-    public function getActivePromos():array
-    {
-        $req = $this->bdd->prepare("SELECT * FROM `promo` WHERE status_id = ?");
-        $req->execute([12]);
-        $data = $req->fetchAll(PDO::FETCH_ASSOC);
-
-        foreach($data as $key){
-            $promos[] = $this->getPromoById($key['promo_id']);
-        }
-
-        return $promos;
-    }
 
     public function getPromoMailList($id):array
     {
