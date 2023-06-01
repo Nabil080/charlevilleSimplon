@@ -163,7 +163,7 @@ class PromoRepository extends ConnectBdd
 
     public function getPromoStart($id) 
     {
-        $req = $this->bdd->prepare("SELECT `promo_start` FROM `promo` WHERE `formation_id` = ?");
+        $req = $this->bdd->prepare("SELECT `promo_start` FROM `promo` WHERE `promo_id` = ?");
         $req->execute([$id]);
         $data = $req->fetch(PDO::FETCH_COLUMN);
         return $data;
@@ -171,7 +171,7 @@ class PromoRepository extends ConnectBdd
 
     public function getPromoEnd($id) 
     {
-        $req = $this->bdd->prepare("SELECT `promo_end` FROM `promo` WHERE `formation_id` = ?");
+        $req = $this->bdd->prepare("SELECT `promo_end` FROM `promo` WHERE `promo_id` = ?");
         $req->execute([$id]);
         $data = $req->fetch(PDO::FETCH_COLUMN);
         return $data;
@@ -421,10 +421,29 @@ class PromoRepository extends ConnectBdd
         var_dump($POST);
         $FormationRepo = new FormationRepository;
         $formation = $FormationRepo->getFormationById($POST['formation'])->name;
-        var_dump($formation);
+
+        $promoName = getPromoName($formation,$POST['start']);
 
         $req = $this->bdd->prepare("UPDATE promo SET promo_name = ?, promo_start = ?, promo_end = ?, formation_id = ? WHERE promo_id = ?");
-        $req->execute([$formation,$POST['start'],$POST['end'],$POST['formation']],$POST['promo']);
+        $req->execute([$promoName,$POST['start'],$POST['end'],$POST['formation'],$POST['promo']]);
+
+
+        if(isset($POST['formators'])){
+
+            $formators = $this->getAllFormateurs($POST['promo']);
+            var_dump($formators);
+            if(is_array($formators)){
+                foreach($formators as $formator){
+                    $req = $this->bdd->prepare("DELETE FROM promo_user WHERE user_id = ? AND promo_id = ?");
+                    $req->execute([$formator->user_id, $POST['promo']]);
+                }
+            }
+
+            foreach($POST['formators'] as $formator){
+                $req = $this->bdd->prepare("INSERT INTO promo_user (user_id,promo_id) VALUES (?,?)");
+                $req->execute([$formator,$POST['promo']]);
+            }
+        }
     }
 
 }

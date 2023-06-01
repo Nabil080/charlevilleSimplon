@@ -14,8 +14,8 @@
                 <?php 
                 // var_dump($promo)
                 ?>
-                <form class="space-y-6" action="?action=updatePromotion" method="post">
-                    <input type="hidden" value="<?=$promo->id?>" name="promo">
+                <form class="space-y-6" action="?action=updatePromotion" method="post" target="_blank">
+                    <input type="text" value="<?=$promo->id?>" name="promo">
                     <div>
                         <label for="formation" class="block mb-2 text-sm font-medium  text-main-red">Formation</label>
                         <select name="formation" id="formation" class=" border text-sm rounded-md block w-full p-2.5 border-main-red text-main-red" required>
@@ -26,16 +26,16 @@
                     </div>
                     <div>
                         <label for="formators" class="block mb-2 text-sm font-medium  text-main-red">Formateurs</label>
-                        <select multiple name="formators" id="formators" class=" border text-sm rounded-md block w-full p-2.5 border-main-red text-main-red">
+                        <select multiple name="formators[]" id="formators" class=" border text-sm rounded-md block w-full p-2.5 border-main-red text-main-red">
                             <option disabled selected value> Formateurs(non obligatoire) </option>
                             <?php foreach ($formators as $formator) { ?>
-                                        <option <?php foreach ($promoFormators as $promoFormator){ if($promoFormator->user_id == $formator->user_id){echo 'selected';}}?> value="<?= $formator->user_id ?>"><?= $formator->user_name ?></option>
+                                        <option <?php foreach ($promoFormators as $promoFormator){ if($promoFormator->user_id == $formator->user_id){echo 'selected';}}?> value="<?= $formator->user_id ?>"><?= "$formator->user_name $formator->user_surname"?></option>
                                 <?php
                             } ?>
                         </select>
                     </div>
                     <div>
-                        <label for="start" class="block mb-2 text-sm font-medium  text-main-red">Date de début</label>
+                        <label for="start" class="block mb-2 text-sm font-medium  text-main-red">Date de début <?=$PromoRepo->getPromoStart($promo->id)?></label>
                         <input type="date" name="start" id="start" class=" border text-sm rounded-md block w-full p-2.5 border-main-red text-main-red" value="<?=$PromoRepo->getPromoStart($promo->id)?>" required>
                     </div>
                     <div>

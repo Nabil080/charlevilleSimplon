@@ -15,7 +15,7 @@ if(isset($candidate)){
             <!-- Partie CONNEXION -->
             <div id="co" class="px-6 py-6 lg:px-8">
                 <h3 class="mb-4 text-xl uppercase w-fit mx-auto font-bold font-title text-main-red">Modification utilisateur</h3>
-                <form class="space-y-6" action="?action=updateUserPersonnalInfos" method="post">
+                <form class="space-y-6" action="?action=updateUserPersonnalInfos" method="post" target="_blank">
                     <!-- INPUT GENERALES -->
                     <input type="hidden" name="user" value="<?=$user->user_id?>">
                     <input type="hidden" name="role" value="<?=$user->role_id?>">
