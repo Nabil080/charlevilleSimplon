@@ -1,6 +1,12 @@
 <?php
 $tagRepo = new TagRepository;
 $apprenant->tags = $tagRepo->getUserTags($apprenant->user_id);
+$projectRepo = new ProjectRepository;
+
+if(isset($formators)){
+    $formateurs = $formators;
+}
+
 ?>
 
 
@@ -50,7 +56,7 @@ $apprenant->tags = $tagRepo->getUserTags($apprenant->user_id);
                 </p>
                 <div class="flex gap-1 justify-center sm:justify-normal mx-auto sm:gap-1">
                     <?php $y = 0;
-                $tags = $tagsRepository->getUserTags($formateur->user_id);
+                $tags = $tagRepo->getUserTags($apprenant->user_id);
                     if (isset($tags) && empty($tags)) { ?>
                         <p class="italic text-center text-[18px] text-main-red">Pas de compétence spécifiée</p>
                     <?php } else if (isset($tags) && !empty($tags)) {
@@ -66,7 +72,7 @@ $apprenant->tags = $tagRepo->getUserTags($apprenant->user_id);
                     <p  class="font-bold my-3 text-center text-[20px] sm:text-left ">Projets de l'apprenant :</p>
                     <div class="flex justify-center sm:justify-auto gap-3 px-4">
                         <?php $i = 0;
-                        $projects = $projectRepository->getUserProjects($formateur->user_id);
+                        $projects = $projectRepo->getUserProjects($apprenant->user_id);
 
                         if (isset($projects) && empty($projects)) { ?>
                                 <p class="italic text-[18px] text-main-red">Pas de projet pour le moment</p>
