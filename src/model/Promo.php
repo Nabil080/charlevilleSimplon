@@ -115,6 +115,7 @@ class PromoRepository extends ConnectBdd
 
         foreach ($datas as $data) {
             $user = new User($data);
+            $user = new User($data);
             array_push($users, $user);
         }
         return $users;

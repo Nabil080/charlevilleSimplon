@@ -80,6 +80,10 @@ switch ($action) {
     case 'reSubmitProject':
         reSubmitProject();
         break;
+    // Gestion projet personnel
+    case 'updateProjectElement':
+        updateProjectElement();
+        break;
     // Envoie du traitement d'activation de compte
     // Envoie du traitement du formulaire de connexion
 
