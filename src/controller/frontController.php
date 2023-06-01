@@ -218,12 +218,11 @@ function crudProjetPage()
 }
 
 function projectFormPage() {
-    $UserRepo = new UserRepository;
-    // $User = $UserRepo->new User($_SESSION['user']->role_id);
-    $User = new User(3);
+
+    $User = new User($_SESSION['user']->role_id);
     if(isset($_GET['id'])){
         $projectRepo = new ProjectRepository;
-        $project=$projectRepo->getProjectById($_GET['id']);
+        $project = $projectRepo->getProjectById($_GET['id']);
     }
 
     include 'view/admin/projectAddForm.php';

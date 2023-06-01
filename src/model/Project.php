@@ -74,8 +74,10 @@ class ProjectRepository extends ConnectBdd
         $User = new User($data['user_id']);
         $project->user = $User;
 
-        $Formator = new User($data['user_id_project_formator']);
-        $project->formator = $Formator;
+        if(isset($data['user_id_project_formator'])){
+            $Formator = new User($data['user_id_project_formator']);
+            $project->formator = $Formator;
+        }
 
         $Status = new Status;
         $statusRepo = new StatusRepository;
@@ -383,13 +385,13 @@ class ProjectRepository extends ConnectBdd
             // message d'erreurs dans securizePdf
             $error = true;
         }
-        
+
         $project = securizeString($post['project']);
         if($project === false){
             // message d'erreurs dans securizeString
             $error = true;
         }
-        
+
         $description = securizeString($post['description']);
         if($description === false){
             // message d'erreurs dans securizeString
@@ -404,14 +406,14 @@ class ProjectRepository extends ConnectBdd
 
         if($error === false){
             $req = $this->bdd->prepare("INSERT INTO project (project_name,project_description,project_company_name,project_company_link,user_id, project_file, project_company_image, project_company_adress) VALUES (?,?,?,?,?,?,?,?)");
-            $req->execute([$project,$description,$company,$link,3, $pdf, $image, $adress]);
+            $req->execute([$project,$description,$company,$link,$_SESSION['user']->user_id, $pdf, $image, $adress]);
             // REMPLACE 3 PAR SESSION USER ID
 
             $response = array(
                 "status" => "success",
                 "message" => "Le projet a bien été ajouté.",
             );
-        
+
             echo json_encode($response);
         }
     }

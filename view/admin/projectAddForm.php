@@ -9,7 +9,7 @@
             <img src="assets/img/autres/projet.jpg" alt="image de décoration" class="img-fluid" />
         </div>
         <div class="md:w-1/2">
-            <form id="projectForm" enctype="multipart/form-data" class="flex flex-col items-center gap-6">
+            <form id="projectForm" enctype="multipart/form-data" class="flex flex-col items-center gap-6" target="_blank">
                 <?php if(isset($project)){?>
                     <input type="hidden" name="project_id" value="<?=$project->id?>">
                 <?php } ?>

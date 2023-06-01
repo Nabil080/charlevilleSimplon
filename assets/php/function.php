@@ -124,7 +124,7 @@ function securizePassword(string $password, string $confirm_password)
 function securizeImage(array $filesImage){
     if(!empty($filesImage))
         {
-        $path = 'assets/upload/company/';
+        $path = 'assets/upload/company_logo/';
         $nameFile = $filesImage['name'];
         $typeFile = $filesImage['type'];
         $tmpFile = $filesImage['tmp_name'];

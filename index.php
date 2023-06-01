@@ -67,6 +67,6 @@ if (isset($_GET['action']) && $_GET['action'] !== '' && !isset($_GET['admin'])) 
     homepage();
 }
 
-$repo = new PromoRepository;
-$data = $repo->getPromoDate(2);
-var_dump($data);
+// $repo = new PromoRepository;
+// $data = $repo->getPromoDate(2);
+// var_dump($data);
