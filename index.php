@@ -67,6 +67,6 @@ if (isset($_GET['action']) && $_GET['action'] !== '' && !isset($_GET['admin'])) 
     homepage();
 }
 
-// $repo = new UserRepository;
-// $data = $repo->getUserPromo('candidature',1);
-// var_dump($data);
+$repo = new UserRepository;
+$data = $repo->getUserSimplonProjects(2);
+var_dump($data);
