@@ -169,7 +169,7 @@ $title = "Espace personnel";
                             <p class="text-[18px] text-justify pt-4 px-3 pb-2 lg:pb-0"><?= $userDatas['user_description'] ?></p>
                         </div>
                         <form id="description-update" class="hidden h-full">
-                            <textarea name="description" id="editor" class="h-full overflow-scroll">
+                            <textarea name="description" id="editor" class="text-editor h-full overflow-scroll">
                             <?= $userDatas['user_description'] ?>
                             </textarea>
                             <button type="submit" class="py-2 px-4 bg-main-red border-main-white border text-main-white my-4 mr-4">Modifier <i class="fa-solid fa-check"></i></button>
@@ -205,24 +205,27 @@ $title = "Espace personnel";
                             <h3 class="font-title text-[24px] font-bold uppercase lg:mb-3">Sites web
                             <i onclick="swapDivsById('links','links-update')" class="fa-solid fa-pen cursor-pointer text-main-red w-[20px] pl-3" <?= $notMyProfile; ?>></i></h3>
                         </div>
-                        <div id="links">
-                            <div class="sites flex items-center px-3 mt-2 mb-4 lg:mb-5">
-                                <span class="w-6 h-6 border-[1px] bg-main-red rounded-full mr-2"></span>
-                                <a href="<?= $userDatas['user_linkedin'] ?>"><?= $userDatas['user_linkedin'] ?></a>
-                                <p id="linkedin_error" class="errorAlert mt-2 text-sm text-red-600 dark:text-red-500"></p>
-                            </div>
-                            <div class="sites flex items-center px-3 mt-2 mb-4 lg:mb-8">
-                                <span class="w-6 h-6 border-[1px] bg-main-red rounded-full mr-2"></span>
-                                <a href="<?= $userDatas['user_github'] ?>"><?= $userDatas['user_github'] ?></a>
-                                <p id="github_error" class="errorAlert mt-2 text-sm text-red-600 dark:text-red-500"></p>
-                            </div>
-                        </div>
-                        <form id="links-update" method="POST" action="?action=updateUserElements&type=links&id=<?=$userDatas['user_id']?>" class="hidden space-y-2">
-                                <input name="user_linkedin" type="url" value="<?= $userDatas['user_linkedin'] ?>" placeholder="lien linkedin" class="space-x-4">
-                                <input name="user_github" type="url" value="<?= $userDatas['user_linkedin'] ?>" placeholder="lien github" class="space-x-4">
-                            <button type="submit"><i class="fa-solid fa-check text-main-red"></i></button>
-                            <i onclick="swapDivsById('links','links-update')" class="fa-solid fa-xmark text-main-red cursor-pointer"></i>
-                        </form>
+                            <form id="links-form" method="POST" action="?action=updateUserElements&type=links&id=<?=$userDatas['user_id']?>">
+                                <div id="links">
+                                    <div class="sites flex items-center px-3 mt-2 mb-4 lg:mb-5">
+                                        <span class="w-6 h-6 border-[1px] bg-main-red rounded-full mr-2"></span>
+                                        <a href="<?= $userDatas['user_linkedin'] ?>"><?= $userDatas['user_linkedin'] ?></a>
+                                        <p id="linkedin_error" class="errorAlert mt-2 text-sm text-red-600 dark:text-red-500"></p>
+                                    </div>
+                                    <div class="sites flex items-center px-3 mt-2 mb-4 lg:mb-8">
+                                        <span class="w-6 h-6 border-[1px] bg-main-red rounded-full mr-2"></span>
+                                        <a href="<?= $userDatas['user_github'] ?>"><?= $userDatas['user_github'] ?></a>
+                                        <p id="github_error" class="errorAlert mt-2 text-sm text-red-600 dark:text-red-500"></p>
+                                    </div>
+                                </div>
+                                <div id="links-update" class="hidden space-y-2">
+                                    <input name="user_linkedin" type="url" value="<?= $userDatas['user_linkedin'] ?>" placeholder="lien linkedin" class="space-x-4">
+                                    <input name="user_github" type="url" value="<?= $userDatas['user_linkedin'] ?>" placeholder="lien github" class="space-x-4">
+                                    <button type="submit"><i class="fa-solid fa-check text-main-red"></i></button>
+                                    <i onclick="swapDivsById('links','links-update')" class="fa-solid fa-xmark text-main-red cursor-pointer"></i>
+                                </div>
+                            </form>
+
                         <div class="modify-skills flex items-center pt-2  lg:mt-5">
                             <h3 class="font-title text-[24px] font-bold uppercase lg:mb-3">Compétences
                             <i onclick="swapDivsById('skills','skills-update')" class="fa-solid fa-pen cursor-pointer text-main-red w-[20px] pl-3" <?= $notMyProfile; ?>></i></h3>
@@ -313,7 +316,7 @@ $title = "Espace personnel";
                         </div>
                     </section>
 
-                    <!-- Section : projet phare -->
+                    <!-- SECTION PROJET PHARE -->
                     <section class="sectionChange border">
                         <?php if (empty($userDatas['user_highlight'])){?>
                             <div class="w-full h-full text-main-black font-title font-bold py-5 px-5">
@@ -322,7 +325,7 @@ $title = "Espace personnel";
                         <?php }else{?>
                             <iframe class="w-full min-h-[300px] lg:min-h-[500px]" src="<?= $userDatas['user_highlight'] ?>" title="iframe du projet phare"></iframe>
                             <?php }?>
-                        <!-- Boutons modifier/supprimer le projet -->
+                        <!-- Boutons modifier/supprimer le projet phare -->
                         <div class="boutons lg:flex lg:flex-row lg:justify-between" <?= $notMyProfile; ?>>
                             <?php if (!empty($userDatas['user_highlight'])){?>
                             <div id="main-project" class="flex justify-between mt-5 mx-5 mb-2">
@@ -338,28 +341,69 @@ $title = "Espace personnel";
                                 -->
                             </div>
                             <?php }?>
-                            <!-- Bouton ajouter un projet perso -->
+                            <!-- Bouton ajouter un projet phare -->
                             <?php
                             if (empty($userDatas['user_highlight'])){?>
-                            <divs data-modal-target="main-project-update" data-modal-toggle="main-project-update" class="flex items-center justify-end mt-5 mb-2 cursor-pointer" <?= $notMyProfile; ?>>
+                            <div data-modal-target="main-project-update" data-modal-toggle="main-project-update" class="flex items-center justify-end mt-5 mb-2 cursor-pointer" <?= $notMyProfile; ?>>
                                 <span class="w-[40px] h-[40px] border bg-main-red rounded-full mr-2 flex items-center justify-center"><i class="fa-solid fa-plus text-main-white text-[25px] font-bold"></i></span>
                                 <p class="text-main-red italic text-[18px] font-semibold mr-4">Ajouter mon projet phare</p>
-                            </divs>
+                            </div>
                             <?php }?>
+                        </div>
+                    </section>
+
+                    <!-- Modal modification/ajout de projet phare -->
+                    <section id="main-project-update" data-modal-placement="center" tabindex="-1" aria-hidden="true" class="backdrop:brightness-50 fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto lg:inset-0 h-[calc(100%-1rem)] lg:h-full">
+                        <div class="relative w-full h-fit max-w-lg lg:h-auto">
+                            <div class="relative bg-main-white border-main-red border-2 rounded-lg text-main-red">
+                                <button type="button" class="absolute top-3 right-2.5 text-main-red bg-transparent rounded-lg text-sm p-1.5 ml-auto inline-flex items-center hover: hover:border border-main-red" data-modal-hide="modify-data-modal">
+                                    <svg data-modal-hide="main-project-update" aria-hidden="true" class="w-5 h-5 text-main-light" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                                    <span class="sr-only">Close modal</span>
+                                </button>
+                                <!-- Partie MODIFICATION -->
+                                <div id="co" class="px-6 py-6 lg:px-8">
+                                    <h3 class="mb-4 text-medium uppercase w-fit mx-auto font-bold font-title text-main-red">Modifier mon projet phare</h3>
+                                    <form id="highlight_form" class="space-y-6" action="?action=updateUserElements&type=highlight&id=<?=$userDatas['user_id']?>" method="post" enctype="multipart/form-data">
+                                        <div>
+                                            <input id="modifyInput" type="hidden" name="modifyInput" value="add" />
+                                            <label for="type" class="block mb-1 text-sm font-medium  text-main-red">Type de fichier</label>
+                                            <select name="text" id="file_type" class="border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red">
+                                                <option selected disabled>Type de fichier à mettre en avant</option>
+                                                <option value="website">Mettre en avant un site</option>
+                                                <option value="pdf">Mettre en avant un pdf</option>
+                                                <option value="image">Mettre en avant une image</option>
+                                            </select>
+                                        </div>
+                                        <div id="website_input" class="hidden">
+                                            <label for="website" class="block mb-1 text-sm font-medium text-main-red">Lien du site à mettre en avant</label>
+                                            <input type="text" name="website" id="website" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red">
+                                        </div>
+                                        <div id="pdf_input" class="hidden">
+                                            <label for="pdf" class="block mb-1 text-sm font-medium text-main-red">PDF à mettre en avant</label>
+                                            <input type="file" name="pdf" id="pdf" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red">
+                                        </div>
+                                        <div id="image_input" class="hidden">
+                                            <label for="image" class="block mb-1 text-sm font-medium text-main-red">Image à mettre en avant</label>
+                                            <input type="file" name="image" id="image" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red">
+                                        </div>
+                                        <button type="submit" class="w-full uppercase font-title text-main-white bg-main-red hover:bg-red-800 font-medium rounded-lg text-sm px-5 py-1.5 text-center ">Modifier</button>
+                                    </form>
+                                </div>
+                            </div>
                         </div>
                     </section>
                     <!-- Fin de la section : projet phare -->
 
-                    <!-- Section : mes projets persos -->
+                    <!-- SECTION PROJETS PERSO -->
                     <section class="sectionChange hidden border">
                         <div class="projet-cards w-11/12 mt-2 gap-6 mx-auto flex flex-col justify-center lg:flex-row lg:flex-wrap">
                             <!-- card projet -->
                             <?php foreach ($userProjects as $project){
-                                if($project->type->id == 2) { ?>
+                                if($project->type->id == 2) {
+                                    $userPersonnalProjects = [];
+                                    array_push($userPersonnalProjects, $project);?>
                                 <article id="projet-card-1" class="project-card max-w-[400px] border-2 border-black rounded-lg p-4 2xl:flex gap-6 2xl:p-6">
                                     <!-- partie info projet -->
-                                    <?php 
-                                // var_dump($project) ?>
                                     <div class="flex-col text-[12px] flex">
                                         <!-- titre projet -->
                                         <h2 class="font-title text-main-red italic font-bold text-[30px] my-2 text-center"><a href="lien du projet"><?= $project->name ?></a></h2>
@@ -380,90 +424,138 @@ $title = "Espace personnel";
                                         </div>
                                         <a href="<?= $project->model_link ?>" class="bg-main-red py-2 px-4 rounded-full text-main-white text-center text-[16px] mx-auto my-2 hover:bg-main-white hover:text-main-red hover:border border-main-red">Voir le projet </a>
                                         <!-- Boutons modifier/supprimer le projet -->
-                                        <div class="flex justify-between" <?= $notMyProfile; ?>>
-                                            <div class="flex items-center pt-2">
+                                        <div class="flex justify-between " <?= $notMyProfile; ?>>
+                                            <div data-modal-target="modify_my_project<?= $project->id ?>" data-modal-toggle="modify_my_project<?= $project->id ?>" class="flex items-center pt-2 cursor-pointer">
                                                 <i class="fa-solid fa-pen fa-xl text-main-red "></i>
                                                 <span class="hidden lg:block text-[10px] text-main-red">Modifier</span>
                                             </div>
-                                            <div data-modal-target="confirm_delete_project" data-modal-toggle="confirm_delete_project" class="flex items-center pt-2 cursor-pointer">
+                                            <div data-modal-target="confirm_delete_project<?= $project->id ?>" data-modal-toggle="confirm_delete_project<?= $project->id ?>" class="flex items-center pt-2 cursor-pointer">
                                                 <i class="fa-solid fa-trash-can fa-xl text-main-red "></i>
                                                 <span class="hidden lg:block text-[10px] text-main-red">Supprimer</span>
                                             </div>
                                         </div>
                                     </div>
                                 </article>
-                            <?php }} ?>
+                                
+                                <!-- Modal modifier projet perso -->
+                                <section id="modify_my_project<?= $project->id ?>" data-modal-placement="center" tabindex="-1" aria-hidden="true" class="backdrop:brightness-50 fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto lg:inset-0 h-[calc(100%-1rem)] lg:h-full">
+                                    <div class="relative w-full h-fit max-w-lg lg:h-auto">
+                                        <div class="relative bg-main-white border-main-red border-2 rounded-lg text-main-red">
+                                            <button type="button" class="absolute top-3 right-2.5 text-main-red bg-transparent rounded-lg text-sm p-1.5 ml-auto inline-flex items-center hover: hover:border border-main-red" data-modal-hide="modify_my_project<?= $project->id ?>">
+                                                <svg data-modal-hide="modify_my_project<?= $project->id ?>" aria-hidden="true" class="w-5 h-5 text-main-light" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                                                <span class="sr-only">Close modal</span>
+                                            </button>
+                                            <div id="co" class="px-6 py-6 lg:px-8">
+                                                <h3 class="mb-4 text-medium uppercase w-fit mx-auto font-bold font-title text-main-red">Modifier mon projet perso</h3>
+                                                <form method="POST" action="?action=updateUserElements&type=addMyProject&id=<?=$userDatas['user_id']?>" class="space-y-6" enctype="multipart/form-data">
+                                                    <div>
+                                                        <label for="modif_title" class="block mb-1 text-sm font-medium text-main-red">Titre de votre projet</label>
+                                                        <input type="text" name="title" id="modif_title" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" placeholder="Titre de mon projet" value="<?= $project->name ?>">
+                                                    </div>
+                                                    <div>
+                                                        <label for="modif_description" class="block mb-1 text-sm font-medium text-main-red">Description de votre projet</label>
+                                                        <textarea name="description" id="modif_description" rows="6" cols="50" class="border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" placeholder=""><?= $project->description ?></textarea>
+                                                    </div>
+                                                    <div>
+                                                        <label for="modif_image" class="block mb-1 text-sm font-medium text-main-red">Ajouter une image à votre projet perso</label>
+                                                        <input type="file" name="image" id="modif_image" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" placeholder="" value="<?= $project->model_image ?>">
+                                                    </div>
+                                                    <div>
+                                                        <label for="modif_tags" class="block mb-1 text-sm font-medium  text-main-red">Sélectionner les technos utilisées</label>
+                                                        <select multiple name="skills[]" id="modif_tags">
+                                                            <option disabled selected>Sélectionner des compétences</option>
+                                                            <?php foreach ($allTags as $eachTag){ ?>
+                                                                <option value="<?= $eachTag['tag_id']?>"><?= $eachTag['tag_name'] ?></option>
+                                                            <?php } ?>
+                                                        </select>
+                                                    </div>
+                                                    <div>
+                                                        <label for="modif_url" class="block mb-1 text-sm font-medium  text-main-red">Ajouter un lien direct vers le projet</label>
+                                                        <input type="url" name="url" id="modif_url" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" placeholder="http://..." value="<?= $project->model_link ?>">
+                                                    </div>
+                                                    <button type="submit" class="w-full uppercase font-title text-main-white bg-main-red hover:bg-red-800 font-medium rounded-lg text-sm px-5 py-1.5 text-center ">Ajouter ce projet aux projets persos</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+
+                                <!-- Modal suppression de projet perso -->
+                                <section id="confirm_delete_project<?= $project->id ?>" data-modal-placement="center" tabindex="-1" aria-hidden="true" class="backdrop:brightness-50 fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto lg:inset-0 h-[calc(100%-1rem)] lg:h-full">
+                                    <div class="relative w-full h-fit max-w-lg lg:h-auto">
+                                        <div class="relative bg-main-white border-main-red border-2 rounded-lg text-main-red">
+                                            <button type="button" class="absolute top-3 right-2.5 text-main-red bg-transparent rounded-lg text-sm p-1.5 ml-auto inline-flex items-center hover: hover:border border-main-red" data-modal-hide="confirm_delete_project<?= $project->id ?>">
+                                                <svg data-modal-hide="confirm_delete_project<?= $project->id ?>" aria-hidden="true" class="w-5 h-5 text-main-light" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                                                <span class="sr-only">Close modal</span>
+                                            </button>
+                                            <form class="px-6 py-6 lg:px-8">
+                                                <h3 class="mb-4 text-medium uppercase w-fit mx-auto font-bold font-title text-main-red">Supprimer mon projet perso</h3>
+                                                <p class="mb-2">Supprimer définitivement le projet : <?= $project->name ?> ?</p>
+                                                <button type="submit" class="w-full uppercase font-title text-main-white bg-main-red hover:bg-red-800 font-medium rounded-lg text-sm px-5 py-1.5 text-center ">Valider</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </section>
+                                <?php }}
+                                    if (empty($userPersonnalProjects)) {?>
+                                        <div class="w-full h-full text-main-black font-title font-bold py-5 px-5">
+                                            <p>Cet utilisateur n'a pas encore publié de projet personnel</p>
+                                        </div>
+                                <?php } ?>
                         </div>
                         <!-- Bouton ajouter un projet perso -->
-                        <div class="flex items-center justify-end mb-5 mt-2 mr-3" <?= $notMyProfile; ?>>
+                        <div data-modal-target="my-project-add" data-modal-toggle="my-project-add" class="flex items-center justify-end mb-5 mt-2 mr-3 cursor-pointer" <?= $notMyProfile; ?>>
                             <span class="w-[40px] h-[40px] border bg-main-red rounded-full mr-2 flex items-center justify-center"><i class="fa-solid fa-plus text-main-white text-[25px] font-bold"></i></span>
                             <p class="text-main-red italic text-[18px] font-semibold">Ajouter un projet perso</p>
+                        </div>
+                    </section>
+
+                    <!-- Modal ajout de projet perso -->
+                    <section id="my-project-add" data-modal-placement="center" tabindex="-1" aria-hidden="true" class="backdrop:brightness-50 fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto lg:inset-0 h-[calc(100%-1rem)] lg:h-full">
+                        <div class="relative w-full h-fit max-w-lg lg:h-auto">
+                            <div class="relative bg-main-white border-main-red border-2 rounded-lg text-main-red">
+                                <button type="button" class="absolute top-3 right-2.5 text-main-red bg-transparent rounded-lg text-sm p-1.5 ml-auto inline-flex items-center hover: hover:border border-main-red" data-modal-hide="modify-data-modal">
+                                    <svg data-modal-hide="my-project-add" aria-hidden="true" class="w-5 h-5 text-main-light" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                                    <span class="sr-only">Close modal</span>
+                                </button>
+                                <!-- Formulaire d'ajout -->
+                                <div id="co" class="px-6 py-6 lg:px-8">
+                                    <h3 class="mb-4 text-medium uppercase w-fit mx-auto font-bold font-title text-main-red">Ajouter un projet perso</h3>
+                                    <form method="POST" action="?action=updateUserElements&type=addMyProject&id=<?=$userDatas['user_id']?>" class="space-y-6" enctype="multipart/form-data">
+                                        <div>
+                                            <label for="add_title" class="block mb-1 text-sm font-medium text-main-red">Titre de votre projet</label>
+                                            <input type="text" name="title" id="add_title" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" placeholder="Titre de mon projet">
+                                        </div>
+                                        <div>
+                                            <label for="add_description" class="block mb-1 text-sm font-medium text-main-red">Description de votre projet</label>
+                                            <textarea name="description" id="add_description" rows="6" cols="50" class="border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" placeholder=""></textarea>
+                                        </div>
+                                        <div>
+                                            <label for="add_image" class="block mb-1 text-sm font-medium text-main-red">Ajouter une image à votre projet perso</label>
+                                            <input type="file" name="image" id="add_image" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" placeholder="">
+                                        </div>
+                                        <div>
+                                            <label for="add_tags" class="block mb-1 text-sm font-medium  text-main-red">Sélectionner les technos utilisées</label>
+                                            <select multiple name="skills[]">
+                                                <option disabled selected>Sélectionner des compétences</option>
+                                                <?php foreach ($allTags as $eachTag){ ?>
+                                                    <option value="<?= $eachTag['tag_id']?>"><?= $eachTag['tag_name'] ?></option>
+                                                <?php } ?>
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <label for="add_url" class="block mb-1 text-sm font-medium  text-main-red">Ajouter un lien direct vers le projet</label>
+                                            <input type="url" name="url" id="add_url" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" placeholder="http://...">
+                                        </div>
+                                        <button type="submit" class="w-full uppercase font-title text-main-white bg-main-red hover:bg-red-800 font-medium rounded-lg text-sm px-5 py-1.5 text-center ">Ajouter ce projet aux projets persos</button>
+                                    </form>
+                                </div>
+                            </div>
                         </div>
                     </section>
                     <!-- Fin de la section : mes projets perso -->
                 </div>
             </div>
-
-
-            <!-- Modal modification de projet phare -->
-            <section id="main-project-update" data-modal-placement="center" tabindex="-1" aria-hidden="true" class="backdrop:brightness-50 fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto lg:inset-0 h-[calc(100%-1rem)] lg:h-full">
-                <div class="relative w-full h-fit max-w-lg lg:h-auto">
-                    <div class="relative bg-main-white border-main-red border-2 rounded-lg text-main-red">
-                        <button type="button" class="absolute top-3 right-2.5 text-main-red bg-transparent rounded-lg text-sm p-1.5 ml-auto inline-flex items-center hover: hover:border border-main-red" data-modal-hide="modify-data-modal">
-                            <svg data-modal-hide="main-project-update" aria-hidden="true" class="w-5 h-5 text-main-light" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-                            <span class="sr-only">Close modal</span>
-                        </button>
-                        <!-- Partie MODIFICATION -->
-                        <div id="co" class="px-6 py-6 lg:px-8">
-                            <h3 class="mb-4 text-medium uppercase w-fit mx-auto font-bold font-title text-main-red">Modifier mon projet phare</h3>
-                            <form id="highlight_form" class="space-y-6" action="?action=updateUserElements&type=highlight&id=<?=$userDatas['user_id']?>" method="post" enctype="multipart/form-data">
-                                <div>
-                                    <input id="modifyInput" type="hidden" name="modifyInput" value="add" />
-                                    <label for="type" class="block mb-1 text-sm font-medium  text-main-red">Type de fichier</label>
-                                    <select name="text" id="file_type" class="border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red">
-                                        <option selected disabled>Type de fichier à mettre en avant</option>
-                                        <option value="website">Mettre en avant un site</option>
-                                        <option value="pdf">Mettre en avant un pdf</option>
-                                        <option value="image">Mettre en avant une image</option>
-                                    </select>
-                                </div>
-                                <div id="website_input" class="hidden">
-                                    <label for="website" class="block mb-1 text-sm font-medium text-main-red">Lien du site à mettre en avant</label>
-                                    <input type="text" name="website" id="website" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red">
-                                </div>
-                                <div id="pdf_input" class="hidden">
-                                    <label for="pdf" class="block mb-1 text-sm font-medium text-main-red">PDF à mettre en avant</label>
-                                    <input type="file" name="pdf" id="pdf" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red">
-                                </div>
-                                <div id="image_input" class="hidden">
-                                    <label for="image" class="block mb-1 text-sm font-medium text-main-red">Image à mettre en avant</label>
-                                    <input type="file" name="image" id="image" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red">
-                                </div>
-                                <button type="submit" class="w-full uppercase font-title text-main-white bg-main-red hover:bg-red-800 font-medium rounded-lg text-sm px-5 py-1.5 text-center ">Modifier</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Modal suppression de projet perso -->
-            <section id="confirm_delete_project" data-modal-placement="center" tabindex="-1" aria-hidden="true" class="backdrop:brightness-50 fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto lg:inset-0 h-[calc(100%-1rem)] lg:h-full">
-                <div class="relative w-full h-fit max-w-lg lg:h-auto">
-                    <div class="relative bg-main-white border-main-red border-2 rounded-lg text-main-red">
-                        <button type="button" class="absolute top-3 right-2.5 text-main-red bg-transparent rounded-lg text-sm p-1.5 ml-auto inline-flex items-center hover: hover:border border-main-red" data-modal-hide="modify-data-modal">
-                            <svg data-modal-hide="modify-data-modal" aria-hidden="true" class="w-5 h-5 text-main-light" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-                            <span class="sr-only">Close modal</span>
-                        </button>
-                        <!-- Partie MODIFICATION -->
-                        <div id="co" class="px-6 py-6 lg:px-8">
-                            <h3 class="mb-4 text-medium uppercase w-fit mx-auto font-bold font-title text-main-red">Modifier mon projet phare</h3>
-                                <p class="mb-2">Supprimer $nom du projet ?</p>
-                                <button type="submit" class="w-full uppercase font-title text-main-white bg-main-red hover:bg-red-800 font-medium rounded-lg text-sm px-5 py-1.5 text-center ">Valider</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </section>
 
             <!-- Section : Mes projets Simplon -->
             <section class="px-[8%] 2xl:px-[5%] bg-main-lightgray py-8">

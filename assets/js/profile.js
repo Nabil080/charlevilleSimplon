@@ -1,3 +1,4 @@
+// Ajouter un listener sur le selecteur de choix dans l'ajout de projet phare
 const websiteHighlight = document.getElementById('website_input');
 const pdfHighlight = document.getElementById('pdf_input');
 const imageHighlight = document.getElementById('image_input');
@@ -23,10 +24,31 @@ selectHighlight.addEventListener('change', () => {
     }
 })
 
+// Mofifier la modal d'ajout de projet phare en add ou en modify
 const modifHighlightButton = document.getElementById('modif-modal-button');
 const modifyInput = document.getElementById('modifyInput');
 
 modifHighlightButton.addEventListener('click', () => {
     modifyInput.value = 'modify';
-})
+});
 
+// Afficher messages d'erreur lors de la modification des liens github et linkedin
+// const linksForm = document.querySelector('#links-form');
+// linksForm.addEventListener('submit', function (event) {
+//     event.preventDefault();
+
+//     const formData = new FormData(linksForm);
+//     var userID = parseInt('<?php echo $userDatas["user_id"]; ?>');
+//     fetch('index.php?action=updateUserElements&type=links&id='+userID, {
+//         method: 'POST',
+//         body: formData
+//     })
+//         .then(response => response.json())
+//         .then(data => {
+//             console.log(data);
+//             deleteAlert();
+//             showAlert(data);
+//         })
+//         .catch(error => console.error(error));
+
+// });

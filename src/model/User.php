@@ -269,12 +269,14 @@ class UserRepository extends ConnectBdd
                 $errorTable[] = $AlertMessage->getError('github_error', 'ErrorGithubLink');
             }
         }
-        // TRAITEMENT DE L'ERREUR EN AJAX A REVOIR
-        // if (!empty($errorTable)) {
-        //     $errorJson = json_encode($errorTable);
-        //     echo $errorJson;
-        // }
-        return $bools;
+        if (!empty($errorTable)) {
+            $errorJson = json_encode($errorTable);
+            header('HTTP/1.0 400 Bad Request');
+            echo $errorJson . '<br><p>Veuillez vérifier le(s) lien(s) envoyé(s).</p>';
+            exit();
+        } else {
+            return $bools;
+        }
     }
 
     public function updateUserSkills(int $id, array $array): bool | array
