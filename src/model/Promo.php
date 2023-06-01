@@ -160,10 +160,18 @@ class PromoRepository extends ConnectBdd
 
         return $usersId;
     }
-  
+
     public function getPromoStart($id) 
     {
         $req = $this->bdd->prepare("SELECT `promo_start` FROM `promo` WHERE `formation_id` = ?");
+        $req->execute([$id]);
+        $data = $req->fetch(PDO::FETCH_COLUMN);
+        return $data;
+    }
+
+    public function getPromoEnd($id) 
+    {
+        $req = $this->bdd->prepare("SELECT `promo_end` FROM `promo` WHERE `formation_id` = ?");
         $req->execute([$id]);
         $data = $req->fetch(PDO::FETCH_COLUMN);
         return $data;
@@ -233,11 +241,6 @@ class PromoRepository extends ConnectBdd
         return $formatedDate;
     }
 
-    public function unformateDate($date):string
-    {
-        
-        
-    }
 
     public function getPromoProjects($id):array
     {

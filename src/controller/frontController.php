@@ -31,6 +31,7 @@ try {
 
     function allProjectsPage()
     {
+        
         include 'view/public/all_projects.php';
     }
 

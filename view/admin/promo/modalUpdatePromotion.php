@@ -28,8 +28,7 @@
                         <label for="formators" class="block mb-2 text-sm font-medium  text-main-red">Formateurs</label>
                         <select multiple name="formators" id="formators" class=" border text-sm rounded-md block w-full p-2.5 border-main-red text-main-red">
                             <option disabled selected value> Formateurs(non obligatoire) </option>
-                            <?php foreach ($formators as $formator) {
-                                    ?>
+                            <?php foreach ($formators as $formator) { ?>
                                         <option <?php foreach ($promoFormators as $promoFormator){ if($promoFormator->user_id == $formator->user_id){echo 'selected';}}?> value="<?= $formator->user_id ?>"><?= $formator->user_name ?></option>
                                 <?php
                             } ?>
@@ -37,11 +36,11 @@
                     </div>
                     <div>
                         <label for="start" class="block mb-2 text-sm font-medium  text-main-red">Date de début</label>
-                        <input type="date" name="start" id="start" class=" border text-sm rounded-md block w-full p-2.5 border-main-red text-main-red" value="<?=$promo->start?>" required>
+                        <input type="date" name="start" id="start" class=" border text-sm rounded-md block w-full p-2.5 border-main-red text-main-red" value="<?=$PromoRepo->getPromoStart($promo->id)?>" required>
                     </div>
                     <div>
                         <label for="end" class="block mb-2 text-sm font-medium  text-main-red">Date de fin</label>
-                        <input type="date" name="end" id="end" class=" border text-sm rounded-md block w-full p-2.5 border-main-red text-main-red" value="<?=$promo->end?>" required>
+                        <input type="date" name="end" id="end" class=" border text-sm rounded-md block w-full p-2.5 border-main-red text-main-red" value="<?=$PromoRepo->getPromoEnd($promo->id)?>" required>
                     </div>
                     <button type="submit" class="w-full uppercase font-title text-main-white bg-main-red hover:bg-red-800 font-medium rounded-md text-sm px-5 py-2.5 text-center ">Valider</button>
                 </form>
