@@ -14,9 +14,13 @@
             <button onclick="toggleDropdown('year-dropdown')" class="relative w-full py-2"><i class="fa fa-filter text-xs"></i> Précédentes promotions</button>
         <!-- dropdown yearss -->
             <div class="filter-dropdown dropdown hidden absolute box-content -translate-x-[1px] z-10 w-full sm:w-full -translate-y-1 border rounded-b-lg text-start bg-main-white border-t-transparent border-main-red">
-                <?php foreach($promos as $promo){?>
+                <?php $promoYears = [];
+                foreach($promos as $promo){
+                    if (!in_array($promo->year, $promoYears)) {?>
                     <div class="flex gap-2 text-xs my-2 px-2"><input class="my-auto" id="<?=$promo->year?>" type="checkbox" value="<?=$promo->year?>"><label for="<?=$promo->year?>"><?=$promo->year?></label></div>
-                <?php } ?>
+                <?php }
+                 array_push($promoYears, $promo->year); 
+                } ?>
             </div>
         </div>
 

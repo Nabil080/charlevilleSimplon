@@ -88,7 +88,7 @@ function loadProjects(projets,number){
     // * DEFINT LE NOMBRE TOTAL DE PROJETS
     const allProjectsCount = projets.length
     // * AFFICHE LE NOMBRE DE PROJETS CORRESPONDANTS
-    projectGrid.innerHTML = `<h3 id="project-count" class="w-[100%] text-center text-main-red mt-6 ">${projectsCount} projets correspondants sur ${allProjectsCount}</h3>`;
+    projectGrid.innerHTML = `<h3 id="promo-count" class="w-[100%] text-center text-main-red mt-6 ">${projectsCount} promotions correspondantes sur ${allProjectsCount}</h3>`;
 
 
     // * TRANSFORME L'ARRAY EN STRING ET L'INSERE

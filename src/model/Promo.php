@@ -14,8 +14,6 @@ class Promo
     public  $status;
     public $year;
     public $status_id;
-
-    public $status;
     public $formation_id;
 
 
@@ -30,7 +28,7 @@ class Promo
         $this->formation_id = $formation_id;
 
         $statusRepo = new StatusRepository;
-        $Status = $statusRepo->getStatusById($status);
+        $Status = $statusRepo->getStatusById($status_id);
         $this->status = $Status;
     }
 }
