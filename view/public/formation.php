@@ -1,80 +1,61 @@
 <?php $title = "Développeur Web et Web Mobile"; ?>
 
 <?php ob_start(); ?>
-<main class="pb-10">
-    <h2
-        class="py-5 bg-white text-center text-[24px] md:text-[36px] lg:text-[48px] font-bold font-title text-main-red uppercase">
-        Développeur Web
-        et Web Mobile
-    </h2>
-    <div class="bg-white px-[10%] xl:px-[15%]">
+<main class="pb-10 px-[10%]">
 
-        <div class="flex justify-center md:gap-10 lg:gap-20">
-            <div
-                class="w-full p-5 lg:bg-main-lightgray lg:border-2 lg:border-gray lg:rounded-lg lg:shadow-[2px_0_3px_2px_rgba(0,0,0,0.5)]">
-                <div class="text-[16px] md:text-[20px] text-justify flex flex-col gap-5">
-                    <p>
-                        De l’analyse du besoin à la mise en ligne, en passant par l’interface et la base de données,
-                        le·la
-                        développeur·se web conçoit et programme des applications web.
-                    </p>
-                    <p>
-                        Le⋅a développeur·se web réalise l’ensemble des fonctionnalités d’un site ou d’une application
-                        web.
-                        Le⋅a
-                        développeur·se web analyse les besoins des clients consignés au préalable dans un cahier des
-                        charges
-                        par
-                        le
-                        chef de projet. Il·elle préconise et met en œuvre une solution technique pour concevoir des
-                        sites
-                        sur
-                        mesure
-                        ou
-                        adapter des solutions techniques existantes.
-                    </p>
+    <div class="flex flex-col lg:flex-row justify-center items-center lg:items-start gap-5 md:gap-10 lg:gap-10">
+        <div class="w-full">
+            <h2 class="pb-10 bg-white text-center text-[24px] md:text-[36px] lg:text-[42px] font-bold font-title text-main-red
+    uppercase">
+                Développeur Web
+                et Web Mobile
+            </h2>
+            <div class="text-[16px] md:text-[20px] text-justify flex flex-col gap-5">
+                <?= $description ?>
+            </div>
+        </div>
 
-                    <p class="font-bold text-main-red">
-                        Le métier de développeur Web s’articule alors autour de 2 activités principales :
-                    </p>
-
-                    <p>
-                        Développer la partie front-end d’une application web ou web mobile en intégrant les
-                        recommandations
-                        de
-                        sécurité
-                    </p>
-                    <p>
-                        Développer la partie back-end d’une application web ou web mobile en intégrant les
-                        recommandations
-                        de
-                        sécurité
-                    </p>
-                </div>
+        <aside class="md:w-4/5 lg:w-1/2 pb-5 border-2 border-main-gray rounded-lg ">
+            <div class="lg:h-[180px]">
+                <img class="w-full h-auto rounded-t-lg lg:h-full bg-cover" src="assets/img/formations/devweb"
+                    alt="Formation">
             </div>
 
-            <aside
-                class="hidden max-w-[300px] p-5 lg:flex border-2 border-main-gray rounded-lg text-center flex-col gap-10">
-                <h5 class="text-[20px] font-bold">Chiffres clés du secteur</h5>
-                <div>
-                    <p class="text-[48px] text-main-red font-bold pb-3">+ 3.6%</p>
-                    <p class="text-[16px] font-medium">Croissance du secteur du numérique en 2018</p>
+            <div class="mx-5 py-5 flex flex-col items-center gap-5">
+                <h5 class="text-[28px] xl:text-[24px] text-main-red text-center font-bold font-title">Chiffres clés
+                    du
+                    secteur
+                </h5>
+                <div class="flex flex-col sm:flex-row lg:flex-col justify-center wrap gap-5 text-center">
+                    <div class="md:w-1/3 lg:w-full">
+                        <p class="text-[24px] text-main-red font-bold">+ 3.6%</p>
+                        <p class="text-[16px] font-medium">Croissance du secteur du numérique en 2018</p>
+                    </div>
+                    <div class="md:w-1/3 lg:w-full">
+                        <p class="text-[24px] text-main-red font-bold">232 000</p>
+                        <p class="text-[16px] font-medium">postes seraient à pourvoir entre 2017 et 2027</p>
+                    </div>
+                    <div class="md:w-1/3 lg:w-full">
+                        <p class="text-[24px] text-main-red font-bold">49 015 €</p>
+                        <p class="text-[16px] font-medium">revenu annuel brut moyen d'un Développeur Web</p>
+                    </div>
                 </div>
-                <div>
-                    <p class="text-[48px] text-main-red font-bold pb-3">232 000</p>
-                    <p class="text-[16px] font-medium">postes seraient à pourvoir entre 2017 et 2027</p>
-                </div>
-                <div>
-                    <p class="text-[48px] text-main-red font-bold pb-3">49 015 €</p>
-                    <p class="text-[16px] font-medium">revenu annuel brut moyen d'un $nom_de_la_formation</p>
-                </div>
-            </aside>
-        </div>
-        <div class="mt-20 pb-10 hidden md:block text-center">
-            <a href="index.php?action=registerPage&formation_id=1"
-                class="px-10 py-3 border border-2  border-main-red text-main-white font-bold text-lg uppercase bg-main-red rounded-lg hover:bg-main-white hover:text-main-red">
-                Postuler à la formation</a>
-        </div>
+                <hr class="w-48 h-1 mx-auto bg-gray-100 border-0 rounded dark:bg-gray-700">
+                <h5 class="text-[28px] xl:text-[24px] text-main-red font-bold font-title">Métiers Visée</h5>
+                <ul class="grid grid-cols-1 gap-x-8 gap-y-2 sm:grid-cols-2 lg:sm:grid-cols-1 ">
+                    <li>Développeur Web et Mobile</li>
+                    <li>Développeur d'application</li>
+                    <li>Développeur front</li>
+                    <li>Développeur backend</li>
+                </ul>
+            </div>
+
+        </aside>
+    </div>
+    <div class="mt-20 pb-10 hidden md:block text-center">
+        <a href="index.php?action=registerPage&formation_id=1"
+            class="px-10 py-3 border border-2  border-main-red text-main-white font-bold text-lg uppercase bg-main-red rounded-lg hover:bg-main-white hover:text-main-red">
+            Postuler à la formation</a>
     </div>
 </main>
 
@@ -221,20 +202,7 @@
         Postuler à la formation
     </a>
 </div>
-<section class="bg-main-lightgray pb-5 px-[10%] xl:px-[15%]">
-    <div class="pb-3 flex items-center gap-4 text-main-red items-center">
-        <i class="fa-sharp fa-solid fa-briefcase fa-2xl"></i>
-        <h3 class="text-[30px] lg:text-[40px] font-bold">Métier ciblé</h3>
-    </div>
-    <div class="pb-5">
-        <ul class="ml-10 list-disc">
-            <li>Développeur Web et Mobile</li>
-            <li>Développeur d'application</li>
-            <li>Développeur front</li>
-            <li>Développeur backend</li>
-        </ul>
-    </div>
-</section>
+
 <section class="bg-main-lightgray pb-20 px-[10%] xl:px-[15%]">
     <div class="pb-3 flex items-center gap-4 text-main-red">
         <i class="fa fa-sharp fa-solid fa-graduation-cap fa-2xl"></i>

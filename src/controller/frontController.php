@@ -19,7 +19,21 @@ try {
 
     function formationPage()
     {
-        include 'view/public/formation.php';
+        $formation_id = $_GET['formation_id'];
+        if (is_int($formation_id)) {
+            $Formation = new FormationRepository;
+            $formation_main = $Formation->getFormationById($formation_id);
+
+            $Stat = new StatRepository;
+            $formation_stat = $Stat->getStatById($formation_id);
+
+            $Job = new JobRepository;
+            $formation_job = '';
+
+            include 'view/public/formation.php';
+        } {
+            throw new Exception('error_404');
+        }
     }
 
     // Project 
@@ -34,26 +48,54 @@ try {
         include 'view/public/all_projects.php';
     }
 
-  function projectGestionPage()
-  {
-    if ($_SESSION['user']->role-> id == 3) {
-        $projectRepository = new ProjectRepository;
-        $projects = $projectRepository->getEntrepriseProjects($_SESSION['user']->id);
-        include 'view/public/project_gestion.php';
-    } else if ($_SESSION['user']->role-> id == 1){
-        $promoRepository = new PromoRepository;
-        $promos =   $promoRepository->getActivePromos();
-        $projectRepository = new ProjectRepository;
-        $projects = $projectRepository->getWaitingProjects();
-        include 'view/public/project_gestion.php';
-    } else if ($_SESSION['user']->role-> id == 2) {
-        $projectRepository = new ProjectRepository;
-        $projects = $projectRepository->getFormateurProjects($_SESSION['user']->id);
-        include 'view/public/project_gestion.php';
-    } else {
-        header('Location:?action=homepage');
+    function projectGestionPage()
+    {
+        if ($_SESSION['user']->role->id == 3) {
+            $projectRepository = new ProjectRepository;
+            $projects = $projectRepository->getEntrepriseProjects($_SESSION['user']->id);
+            include 'view/public/project_gestion.php';
+        } else if ($_SESSION['user']->role->id == 1) {
+            $promoRepository = new PromoRepository;
+            $promos = $promoRepository->getActivePromos();
+            $projectRepository = new ProjectRepository;
+            $projects = $projectRepository->getWaitingProjects();
+            include 'view/public/project_gestion.php';
+        } else if ($_SESSION['user']->role->id == 2) {
+            $projectRepository = new ProjectRepository;
+            $projects = $projectRepository->getFormateurProjects($_SESSION['user']->id);
+            include 'view/public/project_gestion.php';
+        } else {
+            header('Location:?action=homepage');
+        }
+
     }
 
+    // Profile
+    function profilePage()
+    {
+        if (!isset($_GET['id'])) {
+            if (!isset($_SESSION['user']['user_id'])) {
+                homepage();
+            } else {
+                myProfile();
+            }
+        } else if (isset($_GET['id']) && $_GET['id'] == $_SESSION['user']['user_id']) {
+            myProfile();
+        } else {
+            $id = $_GET['id'];
+            $user = new UserRepository();
+            $userDatas = $user->getUserById($id);
+            $tags = new TagRepository();
+            $allTags = $tags->getAllTags();
+            $status = new StatusRepository();
+            $allStatus = $status->getAllStatus();
+            $ProjectRepo = new ProjectRepository();
+            $userProjects = $ProjectRepo->getUserProjects($id);
+            $Promo = new PromoRepository();
+            $userPromo = $Promo->getPromoByUserID($id);
+            include 'view/public/profile.php';
+        }
+    }
   }
   
 // Profile
@@ -117,14 +159,14 @@ function myProfile()
     include 'view/public/profile.php';
 }
 
-// Register
-function registerPage()
-{
-    $boolCompany = (isset($_GET['company'])) ? 1 : 0;
-    $formation_id = (isset($_GET['formation_id'])) ? $_GET['formation_id'] : 0;
-    include 'view/public/register.php';
+    // Register
+    function registerPage()
+    {
+        $boolCompany = (isset($_GET['company'])) ? 1 : 0;
+        $formation_id = (isset($_GET['formation_id'])) ? $_GET['formation_id'] : 0;
+        include 'view/public/register.php';
 
-}
+    }
     // Promotion
     function allPromotionsPage()
     {

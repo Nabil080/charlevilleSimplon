@@ -1,9 +1,5 @@
 <?php
 
-// TEMP POUR TEST SANS CONNEXION
-$user = new UsersRepository();
-$_SESSION['user'] = $user->getUserById(1);
-
 switch ($action) {
     case 'allFormationsPage':
         allFormationsPage();
