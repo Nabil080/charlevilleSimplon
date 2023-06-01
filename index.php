@@ -67,7 +67,6 @@ if (isset($_GET['action']) && $_GET['action'] !== '' && !isset($_GET['admin'])) 
     homepage();
 }
 
-// $repo = new PromoRepository;
-// $data = $repo->getPromoMailList(1);
+// $repo = new UserRepository;
+// $data = $repo->getUserPromo('candidature',1);
 // var_dump($data);
-
