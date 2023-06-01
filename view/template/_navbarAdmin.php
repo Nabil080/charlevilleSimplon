@@ -5,7 +5,7 @@ $userRepo = new UserRepository;
 $companies = $userRepo->getAllCompanies();
 $companyMails = [];
 foreach($companies as $company){
-    $companyMails[] = $company->email;
+    $companyMails[] = $company->user_email;
 }
 ?>
 
