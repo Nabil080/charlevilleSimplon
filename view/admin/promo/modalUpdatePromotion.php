@@ -11,6 +11,9 @@
             <!-- Partie CONNEXION -->
             <div id="co" class="px-6 py-6 lg:px-8">
                 <h3 class="mb-4 text-xl uppercase w-fit mx-auto font-bold font-title text-main-red">Ajout de promo</h3>
+                <?php 
+                // var_dump($promo)
+                ?>
                 <form class="space-y-6" action="?action=updatePromotion" method="post">
                     <input type="hidden" value="<?=$promo->id?>" name="promo">
                     <div>
@@ -27,7 +30,7 @@
                             <option disabled selected value> Formateurs(non obligatoire) </option>
                             <?php foreach ($formators as $formator) {
                                     ?>
-                                        <option <?php foreach ($promoFormators as $promoFormator){ if($promoFormator->id == $formator->id){echo 'selected';}}?> value="<?= $formator->id ?>"><?= $formator->name ?></option>
+                                        <option <?php foreach ($promoFormators as $promoFormator){ if($promoFormator->user_id == $formator->user_id){echo 'selected';}}?> value="<?= $formator->user_id ?>"><?= $formator->user_name ?></option>
                                 <?php
                             } ?>
                         </select>

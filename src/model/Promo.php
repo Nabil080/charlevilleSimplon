@@ -105,17 +105,20 @@ class PromoRepository extends ConnectBdd
         return $dates;
     }
 
-    public function getAllApprenants($id):array 
+    public function getAllApprenants($id):array
     {
         $req = $this->bdd->prepare("SELECT user_id FROM promo_user WHERE promo_id = ?");
         $req->execute([$id]);
         $datas = $req->fetchAll(PDO::FETCH_COLUMN);
+
         $UsersRepository = new UserRepository;
         $users = [];
 
         foreach ($datas as $data) {
             $user = new User($data);
-            array_push($users, $user);
+            if ($user->role_id == 4) {
+                array_push($users, $user);
+            }
         }
         return $users;
     }
@@ -126,10 +129,10 @@ class PromoRepository extends ConnectBdd
         WHERE promo_id = ?");
         $req->execute([$id]);
         $datas = $req->fetchAll(PDO::FETCH_COLUMN);
-      
+
         $UsersRepository = new UserRepository;
         $users = [];
-        
+
         foreach ($datas as $data) {
             $user = new User($data);
             if ($user->role_id == 2) {
@@ -228,6 +231,12 @@ class PromoRepository extends ConnectBdd
         $datefmt = new IntlDateFormatter('fr_FR', 0, 0, NULL, NULL, 'dd MMMM yyyy');
         $formatedDate = $datefmt->format(date_create($date));
         return $formatedDate;
+    }
+
+    public function unformateDate($date):string
+    {
+        
+        
     }
 
     public function getPromoProjects($id):array
