@@ -1,4 +1,13 @@
-<?php 
+<?php
+
+function getPromoName(string $formation, string $date)
+{
+    $dateArray = explode("-", $date);
+    $year = $dateArray[0];
+    $promo = "$formation $year";
+
+    return $promo;
+}
 
 function securizeString(string $string = null)
 {

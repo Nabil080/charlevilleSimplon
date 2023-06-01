@@ -1,7 +1,7 @@
 <?php if(isset($user)){?>
 
 <!-- Extra Large Modal -->
-<div id="modal-projet-<?=$user->id?>" tabindex="-1"
+<div id="modal-projet-<?=$user->user_id?>" tabindex="-1"
     class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
     <div class="relative w-full max-w-7xl max-h-full">
         <!-- Modal content -->
@@ -13,7 +13,7 @@
                 </h3>
                 <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 
                 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 
-                dark:hover:text-white" data-modal-hide="modal-projet-<?=$user->id?>">
+                dark:hover:text-white" data-modal-hide="modal-projet-<?=$user->user_id?>">
                     <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
                         xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd"
@@ -26,35 +26,36 @@
             <!-- Modal body -->
             <div class="p-6 space-y-6">
                 <div class="background bg-main-white overflow-x-hidden min-h-[100vh]">
-                    <?php if($user->role->id != 3){?>
+                    <?php if($user->role_id > 3 ){?>
                     <div class="mx-auto w-11/12 lg:max-w-[800px] flex justify-between mb-8 lg:mb-16">
                         <div class="flex w-full">
-                            <div onclick="swapDivsById('simplon_projects_<?=$user->id?>','perso_projects_<?=$user->id?>')" class="tabChange cursor-pointer px-0 transition-all duration-[0.4s] bg-main-red w-1/2 text-center text-main-white font-title text-lg md:text-xl lg:text-2xl font-bold py-2 md:py-4">
+                            <div onclick="swapDivsById('simplon_projects_<?=$user->user_id?>','perso_projects_<?=$user->user_id?>')" class="tabChange cursor-pointer px-0 transition-all duration-[0.4s] bg-main-red w-1/2 text-center text-main-white font-title text-lg md:text-xl lg:text-2xl font-bold py-2 md:py-4">
                                 <p class="select-none">Projets simplon</p>
                             </div>
-                            <div onclick="swapDivsById('simplon_projects_<?=$user->id?>','perso_projects_<?=$user->id?>')" class="tabChange cursor-pointer px-0 transition-all duration-[0.4s] bg-main-gray w-1/2 text-center text-main-white font-title text-lg md:text-xl lg:text-2xl font-bold py-2 md:py-4">
+                            <div onclick="swapDivsById('simplon_projects_<?=$user->user_id?>','perso_projects_<?=$user->user_id?>')" class="tabChange cursor-pointer px-0 transition-all duration-[0.4s] bg-main-gray w-1/2 text-center text-main-white font-title text-lg md:text-xl lg:text-2xl font-bold py-2 md:py-4">
                                 <p class="select-none">Projets perso</p>
                             </div>
                         </div>
                     </div>
-                    <section id="simplon_projects_<?=$user->id?>" class="sectionChange">
+                    <section id="simplon_projects_<?=$user->user_id?>" class="sectionChange">
                         <?php 
-                            $projects = $UserRepo->getUserSimplonProjects($user->id);
+                            var_dump($user->user_id);
+                            $projects = $UserRepo->getUserSimplonProjects($user->user_id);
                             foreach($projects as $project){
                                 include('view/template/_project_card.php');
                             }
                         ?>
                     </section>
-                    <section id="perso_projects_<?=$user->id?>" class="sectionChange hidden projet-cards w-11/12 mt-2 gap-6 mx-auto flex flex-col justify-center lg:flex-row lg:flex-wrap">
+                    <section id="perso_projects_<?=$user->user_id?>" class="sectionChange hidden projet-cards w-11/12 mt-2 gap-6 mx-auto flex flex-col justify-center lg:flex-row lg:flex-wrap">
                     <?php 
-                            $projects = $UserRepo->getUserPersonnalProjects($user->id);
+                            $projects = $UserRepo->getUserPersonnalProjects($user->user_id);
                             foreach($projects as $project){
                                 include('view/template/_project_perso_card.php');
                             }
                         ?>
                     </section>
                     <?php }else{
-                        $projects = $UserRepo->getUserSubmittedProjects($user->id);
+                        $projects = $UserRepo->getUserSubmittedProjects($user->user_id);
                         foreach($projects as $project){
                             include('view/template/_project_card.php');
                         }
@@ -64,7 +65,7 @@
 
                 <!-- Modal footer -->
                 <div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
-                    <button data-modal-hide="modal-projet-<?=$user->id?>" type="button" class="text-gray-500 bg-white hover:bg-gray-100 
+                    <button data-modal-hide="modal-projet-<?=$user->user_id?>" type="button" class="text-gray-500 bg-white hover:bg-gray-100 
                 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium 
                 px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 
                 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Fermer</button>

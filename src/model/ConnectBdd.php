@@ -1,6 +1,6 @@
 <?php
 require_once 'src/controller/frontController.php';
-require 'src/controller/back/userController.php';
+require_once 'src/controller/back/userController.php';
 require_once 'src/controller/back/promotionController.php';
 require_once 'src/controller/back/projectController.php';
 require_once 'assets/php/function.php';

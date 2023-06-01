@@ -1,8 +1,8 @@
 <?php
 session_start();
-//session_destroy();
+// session_destroy();
 require 'src/model/ConnectBdd.php';
-
+// var_dump($_SESSION['user']);
 $_SESSION['user'] = (object) array(
     'user_id' => 1,
     'status_id' => 1,
@@ -16,18 +16,15 @@ if (isset($_GET['action']) && $_GET['action'] !== '' && !isset($_GET['admin'])) 
     require 'public.php';
 
     if (isset($_SESSION['user'])) {
-
         if ($_SESSION['user']->role_id == 2 || $_SESSION['user']->role_id > 3) {
-
             switch ($action) {
                 // Afficher son profil perso
                 case 'myProfile':
                     myProfile();
                     break;
             }
-        }
 
-            if ($_SESSION['user']->role_id  <= 3) {
+            if ($_SESSION['user']->role_id <= 3) {
                 switch ($action) {
                     // Afficher le CRUD de projet (Gestion de projet)
                     case 'projectGestionPage':
@@ -40,14 +37,15 @@ if (isset($_GET['action']) && $_GET['action'] !== '' && !isset($_GET['admin'])) 
                         break;
                         // Afficher le formulaire de modification du projet
 
-                // Envoi du formulaire d'ajout de projet
-                case 'addProjectTraitement':
-                    addProjectTraitement();
-                    break;
-                // Envoi du formulaire de moficiation de projet
-                case 'updateProjectTraitement':
-                    updateProjectTraitement();
-                    break;
+                    // Envoi du formulaire d'ajout de projet
+                    case 'addProjectTraitement':
+                        addProjectTraitement();
+                        break;
+                    // Envoi du formulaire de moficiation de projet
+                    case 'updateProjectTraitement':
+                        updateProjectTraitement();
+                        break;
+                }
             }
             if ($_SESSION['user']->role_id <= 2) {
                 switch ($action) {
@@ -74,5 +72,5 @@ if (isset($_GET['action']) && $_GET['action'] !== '' && !isset($_GET['admin'])) 
 }
 
 // $repo = new PromoRepository;
-// $data = $repo->getPromoMailList(1);
+// $data = $repo->getPromoDate(2);
 // var_dump($data);

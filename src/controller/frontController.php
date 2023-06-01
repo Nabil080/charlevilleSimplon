@@ -63,6 +63,7 @@ try {
 
     function allProjectsPage()
     {
+        
         include 'view/public/all_projects.php';
     }
 
@@ -104,7 +105,7 @@ function profilePage()
     else {
         $id = $_GET['id'];
         $user = new UserRepository();
-        $userDatas = $user->getUserById($id);
+        $userDatas = new User($id);
         $tags = new TagRepository();
         $allTags = $tags->getAllTags();
         $status = new StatusRepository();
@@ -136,8 +137,7 @@ function myProfile()
         $id = $_GET['id'];
         profilePage();
     }
-    $user = new UserRepository();
-    $userDatas = $user->getUserById($id);
+    $userDatas = new User($id);
     $tags = new TagRepository();
     $allTags = $tags->getAllTags();
     $status = new StatusRepository();
@@ -253,13 +253,12 @@ function crudProjetPage()
     include 'view/admin/_projects.php';
 }
 
-function projectFormPage() {
-    $UserRepo = new UserRepository;
-    // $User = $UserRepo->getUserById($_SESSION['user']->role_id);
-    $User = $UserRepo->getUserById(3);
+function projectFormPage() 
+{
+    $User = new User($_SESSION['user']->role_id);
     if(isset($_GET['id'])){
         $projectRepo = new ProjectRepository;
-        $project=$projectRepo->getProjectById($_GET['id']);
+        $project = $projectRepo->getProjectById($_GET['id']);
     }
 
     include 'view/admin/projectAddForm.php';

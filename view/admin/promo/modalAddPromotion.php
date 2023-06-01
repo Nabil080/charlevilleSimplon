@@ -9,7 +9,7 @@
             <!-- Partie CONNEXION -->
             <div id="co" class="px-6 py-6 lg:px-8">
                 <h3 class="mb-4 text-xl uppercase w-fit mx-auto font-bold font-title text-main-red">Ajout de promo</h3>
-                <form class="space-y-6" action="?action=addPromotion" method="post">
+                <form class="space-y-6" action="?action=addPromotion" method="post" target="_blank">
                     <div>
                         <label for="formation" class="block mb-2 text-sm font-medium  text-main-red">Formation</label>
                         <select name="formation" id="formation" class=" border text-sm rounded-md block w-full p-2.5 border-main-red text-main-red" required>
@@ -23,7 +23,7 @@
                         <select name="formators[]" multiple id="formators" class=" border text-sm rounded-md block w-full p-2.5 border-main-red text-main-red">
                             <option disabled selected value> Formateurs(non obligatoire) </option>
                             <?php foreach($formators as $formator){?>
-                                <option value="<?=$formator->id?>"><?=$formator->name?></option>
+                                <option value="<?=$formator->user_id?>"><?=$formator->user_name?></option>
                             <?php } ?>
                         </select>
                     </div>

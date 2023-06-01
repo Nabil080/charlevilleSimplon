@@ -255,7 +255,6 @@ try {
         }
     }
 
-
 function contactUsers()
 {
     var_dump($_POST);

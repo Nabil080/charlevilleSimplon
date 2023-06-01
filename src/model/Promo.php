@@ -109,17 +109,20 @@ class PromoRepository extends ConnectBdd
         return $dates;
     }
 
-    public function getAllApprenants($id):array 
+    public function getAllApprenants($id):array
     {
         $req = $this->bdd->prepare("SELECT user_id FROM promo_user WHERE promo_id = ?");
         $req->execute([$id]);
         $datas = $req->fetchAll(PDO::FETCH_COLUMN);
-        $UserRepository = new UserRepository;
+
+        $UsersRepository = new UserRepository;
         $users = [];
 
         foreach ($datas as $data) {
             $user = new User($data);
-            array_push($users, $user);
+            if ($user->role_id == 4) {
+                array_push($users, $user);
+            }
         }
         return $users;
     }
@@ -130,13 +133,15 @@ class PromoRepository extends ConnectBdd
         WHERE promo_id = ?");
         $req->execute([$id]);
         $datas = $req->fetchAll(PDO::FETCH_COLUMN);
-      
-        $UserRepository = new UserRepository;
+
+        $UsersRepository = new UserRepository;
+
         $users = [];
-        
+
         foreach ($datas as $data) {
             $user = new User($data);
-            if ($user->role_id == "2") {
+
+            if ($user->role_id == 2) {
                 array_push($users, $user);
             }
         }
@@ -161,10 +166,18 @@ class PromoRepository extends ConnectBdd
 
         return $usersId;
     }
-  
+
     public function getPromoStart($id) 
     {
-        $req = $this->bdd->prepare("SELECT `promo_start` FROM `promo` WHERE `formation_id` = ?");
+        $req = $this->bdd->prepare("SELECT `promo_start` FROM `promo` WHERE `promo_id` = ?");
+        $req->execute([$id]);
+        $data = $req->fetch(PDO::FETCH_COLUMN);
+        return $data;
+    }
+
+    public function getPromoEnd($id) 
+    {
+        $req = $this->bdd->prepare("SELECT `promo_end` FROM `promo` WHERE `promo_id` = ?");
         $req->execute([$id]);
         $data = $req->fetch(PDO::FETCH_COLUMN);
         $promoRepository = new PromoRepository;
@@ -184,8 +197,7 @@ class PromoRepository extends ConnectBdd
         $req = $this->bdd->prepare("SELECT * FROM `promo_candidate` WHERE `user_id` = ? AND `promo_id` = ?");
         $req->execute([$user_id, $promo_id]);
         $data = $req->fetch();
-        return (empty($data) && $data == false) ? true : false;
-    
+        return (empty($data) && $data == false) ? true : false;    
     }
 
     public function getActivePromos():array
@@ -250,6 +262,7 @@ class PromoRepository extends ConnectBdd
         return $formatedDate;
     }
 
+
     public function getPromoProjects($id):array
     {
         $req = $this->bdd->prepare("SELECT project_id FROM project 
@@ -266,6 +279,18 @@ class PromoRepository extends ConnectBdd
         return $projects;
     }
 
+    public function getActivePromos():array
+    {
+        $req = $this->bdd->prepare("SELECT * FROM `promo` WHERE status_id = ?");
+        $req->execute([12]);
+        $data = $req->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach($data as $key){
+            $promos[] = $this->getPromoById($key['promo_id']);
+        }
+
+        return $promos;
+    }
 
     public function getPromoMailList($id):array
     {
@@ -288,11 +313,11 @@ class PromoRepository extends ConnectBdd
         $req = $this->bdd->prepare("SELECT user_id FROM promo_candidate WHERE promo_id = ?");
         $req->execute([$id]);
         $datas = $req->fetchAll(PDO::FETCH_ASSOC);
-        $UserRepository = new UserRepository;
+        $UsersRepository = new UserRepository;
         $users = [];
         
         foreach ($datas as $data) {
-            $User = $UserRepository->getUserById($data['user_id']);
+            $User = new User($data['user_id']);
             $users[] = $User;
         }
 
@@ -396,8 +421,10 @@ class PromoRepository extends ConnectBdd
         $FormationRepo = new FormationRepository;
         $formation = $FormationRepo->getFormationById($POST['formation'])->name;
 
+        $promoName = getPromoName($formation,$POST['start']);
+
         $req = $this->bdd->prepare("INSERT INTO promo (promo_name,promo_start,promo_end,formation_id) VALUES (?,?,?,?)");
-        $req->execute([$formation,$POST['start'],$POST['end'],$POST['formation']]);
+        $req->execute([$promoName,$POST['start'],$POST['end'],$POST['formation']]);
 
         var_dump($POST);
 
@@ -415,10 +442,29 @@ class PromoRepository extends ConnectBdd
         var_dump($POST);
         $FormationRepo = new FormationRepository;
         $formation = $FormationRepo->getFormationById($POST['formation'])->name;
-        var_dump($formation);
+
+        $promoName = getPromoName($formation,$POST['start']);
 
         $req = $this->bdd->prepare("UPDATE promo SET promo_name = ?, promo_start = ?, promo_end = ?, formation_id = ? WHERE promo_id = ?");
-        $req->execute([$formation,$POST['start'],$POST['end'],$POST['formation']],$POST['promo']);
+        $req->execute([$promoName,$POST['start'],$POST['end'],$POST['formation'],$POST['promo']]);
+
+
+        if(isset($POST['formators'])){
+
+            $formators = $this->getAllFormateurs($POST['promo']);
+            var_dump($formators);
+            if(is_array($formators)){
+                foreach($formators as $formator){
+                    $req = $this->bdd->prepare("DELETE FROM promo_user WHERE user_id = ? AND promo_id = ?");
+                    $req->execute([$formator->user_id, $POST['promo']]);
+                }
+            }
+
+            foreach($POST['formators'] as $formator){
+                $req = $this->bdd->prepare("INSERT INTO promo_user (user_id,promo_id) VALUES (?,?)");
+                $req->execute([$formator,$POST['promo']]);
+            }
+        }
     }
 
 }

@@ -9,14 +9,14 @@
             <img src="assets/img/autres/projet.jpg" alt="image de décoration" class="img-fluid" />
         </div>
         <div class="md:w-1/2">
-            <form id="projectForm" enctype="multipart/form-data" class="flex flex-col items-center gap-6">
+            <form id="projectForm" enctype="multipart/form-data" class="flex flex-col items-center gap-6" target="_blank">
                 <?php if(isset($project)){?>
                     <input type="hidden" name="project_id" value="<?=$project->id?>">
                 <?php } ?>
-                <?php if(isset($User->company)){?>
-                    <h3 class="font-title text-main-red font-bold text-[20px] md:text-[24px]"><?=$User->company?></h3>
-                    <input type="hidden" name="company" value="<?=$User->company?>" /> <!-- Variable à mettre -->
-                    <input type="hidden" name="adress" value="<?=$User->adress?>" /> <!-- Variable à mettre -->
+                <?php if(isset($user->user_company)){?>
+                    <h3 class="font-title text-main-red font-bold text-[20px] md:text-[24px]"><?=$user->user_company?></h3>
+                    <input type="hidden" name="company" value="<?=$user->user_company?>" /> <!-- Variable à mettre -->
+                    <input type="hidden" name="adress" value="<?=$user->user_adress?>" /> <!-- Variable à mettre -->
                 <?php } ?>
                 <div class="w-full md:w-2/3">
                     <label for="project" class="block mb-2 text-[16px] font-medium">Nom du projet</label>
