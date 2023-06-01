@@ -39,7 +39,7 @@
                     </div>
                     <section id="simplon_projects_<?=$user->user_id?>" class="sectionChange">
                         <?php 
-                            var_dump($user->user_id);
+                            // var_dump($user->user_id);
                             $projects = $UserRepo->getUserSimplonProjects($user->user_id);
                             foreach($projects as $project){
                                 include('view/template/_project_card.php');

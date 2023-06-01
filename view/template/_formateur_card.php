@@ -3,14 +3,14 @@
         <!-- <img src="upload\promotion\devWeb2023\efz.png" class="w-[78px] z-20 mx-auto my-auto"> -->
     </div>
     <p class="text-[18px] font-main-title font-bold pt-4">
-        <?php if (isset($formateur->user_surname)) { 
+        <?php if (isset($formateur->user_surname)) {
             echo($formateur->user_surname);
         } else if(!isset($formateur->user_surname)) {
             echo("Prénom");
         }
         ?>
-        <span class="uppercase"> 
-            <?php if (isset($formateur->user_name)) { 
+        <span class="uppercase">
+            <?php if (isset($formateur->user_name)) {
                 echo($formateur->user_name);
             } else if(!isset($formateur->user_name)) {
                 echo("Nom");
