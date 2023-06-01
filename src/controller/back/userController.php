@@ -263,38 +263,68 @@ try {
     function updateUserElements()
     {
 
-        if ((!isset($_GET['id']) && $_GET['id'] == null) && (!isset($_GET['type']) && $_GET['type'] == null)){
+    if ((!isset($_GET['id']) && $_GET['id'] == null) && (!isset($_GET['type']) && $_GET['type'] == null)) {
 
-            // header('Location:?action=projectPage&id=3');
-        } else if ((isset($_GET['id']) && $_GET['id'] !== null) && (isset($_GET['type']) && $_GET['type'] !== null)) {
-            $type = $_GET['type'];
-            $id = $_GET['id'];
+        // header('Location:?action=projectPage&id=3');
+    } elseif ((isset($_GET['id']) && $_GET['id'] !== null) && (isset($_GET['type']) && $_GET['type'] !== null)) {
+        $type = $_GET['type'];
+        $id = $_GET['id'];
+    }
+    $userRepository = new UserRepository();
+    if (isset($_POST) && !empty($_POST)) {
+        $array = $_POST;
+        if ($type == 'status') {
+            $bools = $userRepository->updateUserStatus($id, $array);
+            header('Location:?action=profilePage&id='.$_GET['id']);
+        } elseif ($type == 'links') {
+            $bools = $userRepository->updateUserLinks($id, $array);
+            header('Location:?action=profilePage&id='.$_GET['id']);
+        } elseif ($type == 'skills') {
+            $bools = $userRepository->updateUserSkills($id, $array);
+            header('Location:?action=profilePage&id='.$_GET['id']);
+        } elseif ($type == 'datas') {
+            if (!empty($array)) {
+                if (isset($array['password']) && !empty($array['password'])) {
+                    $password = $array['password'];
+                    $UserRepo = new UserRepository();
+                    $bool = $UserRepo->checkPassword($id, $password);
+                    if ($bool) {
+                        $bools = $userRepository->updateUserDatas($id, $array);
+                        header('Location:?action=profilePage&id='.$_GET['id']);
+                    } else {
+                        // erreur : le mdp ne correspond pas
+                    }
+                } else {
+                    // erreur : il faut entrer son mot de passe pour valider les modifications
+                }
+            } else {
+                // erreur : tous les champs sont vides
+            }
         }
-        $userRepository = new UserRepository;
-        if (isset($_POST) && !empty($_POST)) {
-            $array = $_POST;
-            if ($type == 'password'){
-                $bools = $userRepository->updateUserPassword($id, $type, $array);
-            } elseif ($type == 'email'){
-                $array = $_POST;
-                $bools = $userRepository->updateUserEmail($id, $type, $array);
+        elseif ($type == 'highlight') {
+            if ($array['modifyInput'] == 'modify' || $array['modifyInput'] == 'add') {
+                $bools = $userRepository->updateUserHighlight($id, $array);
+                header('Location:?action=profilePage&id='.$_GET['id']);
+            } else {
+                // erreur : vous devez choisir si vous souhaitez ajouter ou modifier le projet phare
             }
+            $bools = $userRepository->updateUserHighlight($id, $array);
+            header('Location:?action=profilePage&id='.$_GET['id']);
+        }
         } elseif (isset($_FILES) && !empty($_FILES)) {
-            if ($type == 'avatar'){
+            if ($type == 'avatar') {
                 $array = $_FILES['avatar'];
-                $bools = $userRepository->updateUserAvatar($id, $type, $array);
+                $bools = $userRepository->updateUserAvatar($id, $array);
                 header('Location:?action=profilePage&id='.$_GET['id']);
-            }
-            elseif ($type == 'cv'){
+            } elseif ($type == 'cv') {
                 $array = $_FILES['cv'];
-                $bools = $userRepository->updateUserCV($id, $type, $array);
+                $bools = $userRepository->updateUserCV($id, $array);
                 header('Location:?action=profilePage&id='.$_GET['id']);
             }
-    
+
         } else {
             // header('Location:?action=projectPage&id='.$_GET['id']);
         }
-
     }
 
 } catch (Exception $error) {

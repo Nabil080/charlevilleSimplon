@@ -39,7 +39,16 @@
     {
       "name": "duplicateCandidate",
       "message": ""
+    },
+    {
+      "name": "ErrorLinkedinLink",
+      "message": "Veuillez entrer un lien LinkedIn valide."
+    },
+    {
+      "name": "ErrorGithubLink",
+      "message": "Veuillez entrer un lien Github valide."
     }
+    
   ],
   "successMessage": [
     {
