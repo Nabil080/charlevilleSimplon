@@ -76,9 +76,9 @@ switch ($action) {
     case 'reSubmitProject':
         reSubmitProject();
         break;
-    // Envoie du traitement d'activation de compte
-    // Envoie du traitement du formulaire de connexion
 
+
+    // Traitrement du compte
     case 'accountActivation':
         activationAccountTreatment();
         break;
@@ -97,5 +97,9 @@ switch ($action) {
     // Envoie du traitement pagination tous les projets
     case 'projectsPagination':
         projectsPagination();
+        break;
+    //Traitement d'envoie de message
+    case 'contactTreatment':
+        contactTreatment();
         break;
 }

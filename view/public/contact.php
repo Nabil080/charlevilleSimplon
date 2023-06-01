@@ -39,7 +39,7 @@
             class="mb-32 mt-8 bg-main-lightgray py-4 w-11/12 mx-auto rounded-[5px] border-2 border-main-red text-center">
             <div class="max-w-[700px] mx-auto px-3 lg:px-6">
                 <h2 class="text-3xl font-bold mb-12">Nous contactez</h2>
-                <form>
+                <form id="contact-form">
                     <div class="form-group mb-6">
                         <input type="text" class="form-control block
                   w-full
@@ -53,7 +53,8 @@
                   transition
                   ease-in-out
                   m-0
-                  focus:bg-white focus:border-main-green focus:outline-none" id="exampleInput7" placeholder="Nom">
+                  focus:bg-white focus:border-main-green focus:outline-none" id="name" placeholder="Nom">
+                        <p id="name_error" class="errorAlert mt-2 text-sm text-red-600 dark:text-red-500"></p>
                     </div>
                     <div class="form-group mb-6">
                         <input type="text" class="form-control block
@@ -68,7 +69,8 @@
                   transition
                   ease-in-out
                   m-0
-                  focus:bg-white focus:border-main-green focus:outline-none" id="exampleInput7" placeholder="Prénom">
+                  focus:bg-white focus:border-main-green focus:outline-none" id="surname" placeholder="Prénom">
+                        <p id="surname_error" class="errorAlert mt-2 text-sm text-red-600 dark:text-red-500"></p>
                     </div>
                     <div class="form-group mb-6">
                         <input type="email" class="form-control block
@@ -85,6 +87,7 @@
                   m-0
                   focus:text-gray-700  focus:border-main-green focus:outline-none" id="exampleInput8"
                             placeholder="Adresse mail">
+                        <p id="email_error" class="errorAlert mt-2 text-sm text-red-600 dark:text-red-500"></p>
                     </div>
                     <div class="form-group mb-6">
                         <textarea class="
@@ -102,8 +105,10 @@
                   ease-in-out
                   m-0
                   focus:text-gray-700 focus:border-main-green focus:outline-none
-                " id="exampleFormControlTextarea13" rows="3" placeholder="Message"></textarea>
+                " id="message" name="message" rows="3" placeholder="Message"></textarea>
+                        <p id="message_error" class="errorAlert mt-2 text-sm text-red-600 dark:text-red-500"></p>
                     </div>
+                    <div id="contact_errorContent"></div>
                     <button type="submit" class="
                 w-1/2
                 px-6
@@ -137,7 +142,7 @@
 <?php $link = ob_get_clean(); ?>
 
 <?php ob_start(); ?>
-<script src=""></script>
+<script src="assets/js/ajax_contact.js"></script>
 <?php $script = ob_get_clean(); ?>
 
 <?php require 'view/layout.php'; ?>

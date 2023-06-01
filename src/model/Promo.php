@@ -87,8 +87,8 @@ class PromoRepository extends ConnectBdd
         }
         return $promos;
     }
-  
-    public function getAllApprenants($id):array 
+
+    public function getAllApprenants($id): array
     {
         $req = $this->bdd->prepare("SELECT user_id FROM promo_user WHERE promo_id = ?");
         $req->execute([$id]);
@@ -121,24 +121,7 @@ class PromoRepository extends ConnectBdd
         return $users;
     }
 
-    public function getPromoProjects($id): array
-    {
-        $req = $this->bdd->prepare("SELECT project_id FROM project 
-        WHERE promo_id = ?");
-        $req->execute([$id]);
-        $datas = $req->fetchAll(PDO::FETCH_COLUMN);
-        $ProjectRepository = new ProjectRepository;
-        $projects = [];
-
-        foreach ($datas as $data) {
-            $project = $ProjectRepository->getProjectById($data);
-            array_push($projects, $project);
-        }
-        return $projects;
-    }
-
-
-    public function getPromoStart($id) 
+    public function getPromoStart($id)
     {
         $req = $this->bdd->prepare("SELECT `promo_start` FROM `promo` WHERE `formation_id` = ?");
         $req->execute([$id]);
@@ -159,20 +142,19 @@ class PromoRepository extends ConnectBdd
         $req->execute([$user_id, $promo_id]);
         $data = $req->fetch();
         return (empty($data) && $data == false) ? true : false;
-
-      public function getActivePromos():array
+    }
+    public function getActivePromos(): array
     {
         $req = $this->bdd->prepare("SELECT * FROM promo WHERE status_id = ?");
         $req->execute([12]);
         $data = $req->fetchAll(PDO::FETCH_ASSOC);
 
-        foreach($data as $key){
+        foreach ($data as $key) {
             $promos[] = $this->getPromoById($key['promo_id']);
         }
 
         return $promos;
     }
-}
 
     public function getPromoByUserID($id)
     {
@@ -180,50 +162,41 @@ class PromoRepository extends ConnectBdd
         $req->execute([$id]);
         $data = $req->fetch(PDO::FETCH_ASSOC);
 
-        if (empty($data))
-        {
+        if (empty($data)) {
             $req = $this->bdd->prepare("SELECT * FROM `promo_refused` WHERE `user_id` = ?");
             $req->execute([$id]);
             $data = $req->fetch(PDO::FETCH_ASSOC);
 
-            if (empty($data))
-            {
+            if (empty($data)) {
                 $req = $this->bdd->prepare("SELECT * FROM `promo_user` WHERE `user_id` = ?");
                 $req->execute([$id]);
                 $data = $req->fetch(PDO::FETCH_ASSOC);
 
-                if (empty($data))
-                {
+                if (empty($data)) {
                     return "Cet utilisateur n'appartient à aucune promotion en cours ou ayant existé.";
+                } else {
+                    $Promo_datas = $this->getPromoById($data['user_id']);
+                    return $Promo_datas;
                 }
-                else
-                {
+            } else {
                 $Promo_datas = $this->getPromoById($data['user_id']);
                 return $Promo_datas;
-                }
             }
-            else
-            {
+        } else {
             $Promo_datas = $this->getPromoById($data['user_id']);
             return $Promo_datas;
-            }
-        }
-        else
-        {
-        $Promo_datas = $this->getPromoById($data['user_id']);
-        return $Promo_datas;
         }
     }
-    
-    public function formateDate($date):string
+
+    public function formateDate($date): string
     {
-        setlocale(LC_TIME,'fr_FR','french','French_France.1252','fr_FR.ISO8859-1','fra');
+        setlocale(LC_TIME, 'fr_FR', 'french', 'French_France.1252', 'fr_FR.ISO8859-1', 'fra');
         $datefmt = new IntlDateFormatter('fr_FR', 0, 0, NULL, NULL, 'dd MMMM yyyy');
         $formatedDate = $datefmt->format(date_create($date));
         return $formatedDate;
     }
 
-    public function getPromoProjects($id):array
+    public function getPromoProjects($id): array
     {
         $req = $this->bdd->prepare("SELECT project_id FROM project 
         WHERE promo_id = ?");
@@ -235,7 +208,7 @@ class PromoRepository extends ConnectBdd
         foreach ($datas as $data) {
             $project = $ProjectRepository->getProjectById($data);
             array_push($projects, $project);
-            }
+        }
         return $projects;
     }
 }

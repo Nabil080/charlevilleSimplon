@@ -49,19 +49,6 @@ if (isset($_GET['action']) && $_GET['action'] !== '' && !isset($_GET['admin'])) 
                 }
             }
         }
-    } else {
-        homepage();
-    }
-}
-                switch ($action) {
-                    // Envoie du formulaire de modification de projet (version modal)
-                    // Envoi de la demande de suppression de projet
-                }
-                if ($_SESSION['user']->role_id == 1) {
-                    require 'admin.php';
-                }
-            }
-        }
     }
 } else {
     homepage();

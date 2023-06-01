@@ -1,35 +1,47 @@
 <?php
 require_once('src/model/ConnectBdd.php');
 
-class Stat {
-    public $id;
-    public $name;
-    public $number;
-    public $formation;
-}
+class Stat
+{
+    private $id;
+    private $name;
+    private $number;
 
-class StatRepository extends ConnectBdd{
-    public function __construct(){
-        parent::__construct();
+    public function __construct($data)
+    {
+        $this->id = $data['stat_id'];
+        $this->name = $data['stat_name'];
+        $this->number = $data['stat_number'];
     }
 
-    public function getStatById($id):object
+    public function getName()
     {
-        $Stat = new Stat;
-        $req = $this->bdd->prepare("SELECT * FROM `stat` WHERE `stat_id` = ?");
-        $req->execute([$id]);
-        $data = $req->fetch(PDO::FETCH_ASSOC);
+        return $this->name;
+    }
 
-        $Stat->id = $data['stat_id'];
-        $Stat->name = $data['stat_name'];
-        $Stat->number = $data['stat_number'];
+    public function getNumber()
+    {
+        return $this->number;
+    }
+}
 
-        $Formation = new Formation;
-        $formationRepo = new FormationRepository;
-        $Formation = $formationRepo->getFormationById($data['formation_id']);
-        $Stat->formation = $Formation;
+class StatRepository extends ConnectBdd
+{
+    public function getStats($formation_id): array
+    {
+        $req = $this->bdd->prepare("SELECT * FROM `stat` WHERE `formation_id` = ?");
+        $req->execute([$formation_id]);
+        $data = $req->fetchAll(PDO::FETCH_ASSOC);
 
-        return $Stat;
+        $statTable = array();
+        foreach ($data as $stat) {
+            $statTable[] = [
+                'stat_number' => $stat['stat_number'],
+                'stat_name' => $stat['stat_name']
+            ];
+        }
+
+        return $statTable;
     }
 }
 

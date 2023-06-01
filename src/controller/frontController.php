@@ -19,19 +19,28 @@ try {
 
     function formationPage()
     {
-        $formation_id = $_GET['formation_id'];
-        if (is_int($formation_id)) {
+        $formation_id = (int) $_GET['id'];
+        if (is_int($formation_id) && $formation_id > 0) {
             $Formation = new FormationRepository;
-            $formation_main = $Formation->getFormationById($formation_id);
-
             $Stat = new StatRepository;
-            $formation_stat = $Stat->getStatById($formation_id);
-
             $Job = new JobRepository;
-            $formation_job = '';
+            $Activity = new ActivityRepository;
+            $Requirement = new RequirementRepository;
+            $Program = new ProgramRepository;
+            $Fee = new FeeRepository;
+            $Certification = new CertificationRepository;
+
+            $formation_main = $Formation->getFormationById($formation_id);
+            $formation_stat = $Stat->getStats($formation_id);
+            $formation_job = $Job->getJobName($formation_id);
+            $formation_activity = $Activity->getActivityByFormation($formation_id);
+            $formation_admission = $Requirement->getRequirementByFormation($formation_id);
+            $formation_program = $Program->getProgramByFormation($formation_id);
+            $formation_fee = $Fee->getFeeByFormation($formation_id);
+            $formation_certification = $Certification->getCertificationByFormation($formation_id);
 
             include 'view/public/formation.php';
-        } {
+        } else {
             throw new Exception('error_404');
         }
     }
@@ -74,17 +83,16 @@ try {
     function profilePage()
     {
         if (!isset($_GET['id'])) {
-            if (!isset($_SESSION['user']['user_id'])) {
+            if (!isset($_SESSION['user']->id)) {
                 homepage();
             } else {
                 myProfile();
             }
-        } else if (isset($_GET['id']) && $_GET['id'] == $_SESSION['user']['user_id']) {
+        } else if (isset($_GET['id']) && $_GET['id'] == $_SESSION['user']->id) {
             myProfile();
         } else {
             $id = $_GET['id'];
-            $user = new UserRepository();
-            $userDatas = $user->getUserById($id);
+            $user = new User($id);
             $tags = new TagRepository();
             $allTags = $tags->getAllTags();
             $status = new StatusRepository();
@@ -96,25 +104,25 @@ try {
             include 'view/public/profile.php';
         }
     }
-  }
-  
-// Profile
-function profilePage()
-{
-    if (!isset($_GET['id'])) {
-        if (!isset($_SESSION['user']->id)) {
-            homepage();
+
+    function myProfile()
+    {
+        $isMyProfile = false;
+        if (!isset($_GET['id'])) {
+            if (!isset($_SESSION['user']->id)) {
+                homepage();
+            } else {
+                $id = $_SESSION['user']->id;
+                $isMyProfile = true;
+            }
+        } else if (isset($_GET['id']) && $_GET['id'] == $_SESSION['user']->id) {
+            $id = $_SESSION['user']->id;
+            $isMyProfile = true;
         } else {
-            myProfile();
+            $id = $_GET['id'];
+            profilePage();
         }
-    }
-    else if (isset($_GET['id']) && $_GET['id'] == $_SESSION['user']->id) {
-        myProfile();
-    }
-    else {
-        $id = $_GET['id'];
-        $user = new UsersRepository();
-        $userDatas = $user->getUserById($id);
+        $user = new User($id);
         $tags = new TagRepository();
         $allTags = $tags->getAllTags();
         $status = new StatusRepository();
@@ -123,41 +131,9 @@ function profilePage()
         $userProjects = $ProjectRepo->getUserProjects($id);
         $Promo = new PromoRepository();
         $userPromo = $Promo->getPromoByUserID($id);
+
         include 'view/public/profile.php';
     }
-}
-
-function myProfile()
-{
-    $isMyProfile = false;
-    if (!isset($_GET['id'])) {
-        if (!isset($_SESSION['user']->id)) {
-            homepage();
-        } else {
-            $id = $_SESSION['user']->id;
-            $isMyProfile = true;
-        }
-    }
-    else if (isset($_GET['id']) && $_GET['id'] == $_SESSION['user']->id) {
-        $id = $_SESSION['user']->id;
-        $isMyProfile = true;
-    }
-    else {
-        $id = $_GET['id'];
-        profilePage();
-    }
-    $user = new UsersRepository();
-    $userDatas = $user->getUserById($id);
-    $tags = new TagRepository();
-    $allTags = $tags->getAllTags();
-    $status = new StatusRepository();
-    $allStatus = $status->getAllStatus();
-    $ProjectRepo = new ProjectRepository();
-    $userProjects = $ProjectRepo->getUserProjects($id);
-    $Promo = new PromoRepository();
-    $userPromo = $Promo->getPromoByUserID($id);
-    include 'view/public/profile.php';
-}
 
     // Register
     function registerPage()

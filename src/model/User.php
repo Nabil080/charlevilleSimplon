@@ -25,6 +25,7 @@ class User
     public $user_status;
     public $status_date;
     public $role_id;
+    public $role_name;
     public $user_tags;
     public $user_highlight;
     public $user_cv;
@@ -132,7 +133,7 @@ class UserRepository extends ConnectBdd
         $tagRepo = new TagRepository;
         $Tags = $tagRepo->getUserTags($data['user_id']);
         $data->tags = $Tags;
-      
+
         return $data;
     }
     public function getIdByEmail($email)

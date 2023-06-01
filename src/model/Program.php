@@ -1,40 +1,30 @@
 <?php
 require_once('src/model/ConnectBdd.php');
 
-class Program {
+class Program
+{
     public $id;
     public $name;
     public $formation;
     public $layout;
 }
 
-class ProgramRepository extends ConnectBdd{
-    public function __construct(){
+class ProgramRepository extends ConnectBdd
+{
+    public function __construct()
+    {
         parent::__construct();
     }
 
-    public function getProgramById($id):object
+    public function getProgramByFormation($formation_id): array
     {
         $Program = new Program;
-        $req = $this->bdd->prepare("SELECT * FROM `programme` WHERE `programme_id` = ?");
-        $req->execute([$id]);
-        $data = $req->fetch(PDO::FETCH_ASSOC);
+        $req = $this->bdd->prepare("SELECT `programme_name`,`programme_layout_name` FROM `programme` as pr INNER JOIN `programme_layout` as pl ON pr.programme_layout_id = pl.programme_layout_id WHERE pr.formation_id = ?");
+        $req->execute([$formation_id]);
+        $data = $req->fetchAll(PDO::FETCH_ASSOC);
 
-        $Program->id = $data['programme_id'];
-        $Program->name = $data['programme_name'];
+        return $data;
 
-        $Formation = new Formation;
-        $formationRepo = new FormationRepository;
-        $Formation = $formationRepo->getFormationById($data['formation_id']);
-        $Program->formation = $Formation;
-
-        $ProgramLayout = new ProgramLayout;
-        $ProgramLayoutRepo = new ProgramLayoutRepository;
-        $ProgramLayout = $ProgramLayoutRepo->getProgramLayoutById($data['programme_layout_id']);
-        $Program->layout = $ProgramLayout;
-
-
-        return $Program;
     }
 }
 
