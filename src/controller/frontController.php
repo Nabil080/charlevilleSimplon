@@ -72,7 +72,7 @@ function profilePage()
     else {
         $id = $_GET['id'];
         $user = new UserRepository();
-        $userDatas = $user->getUserById($id);
+        $userDatas = new User($id);
         $tags = new TagRepository();
         $allTags = $tags->getAllTags();
         $status = new StatusRepository();
@@ -104,8 +104,7 @@ function myProfile()
         $id = $_GET['id'];
         profilePage();
     }
-    $user = new UserRepository();
-    $userDatas = $user->getUserById($id);
+    $userDatas = new User($id);
     $tags = new TagRepository();
     $allTags = $tags->getAllTags();
     $status = new StatusRepository();
@@ -170,7 +169,7 @@ function registerPage()
 
 function crudCandidatePage()
 {
-    $UserRepo = new UsersRepository;
+    $UserRepo = new UserRepository;
     $candidates = $UserRepo->getAllCandidates();
 
     include 'view/admin/_candidate.php';
@@ -179,7 +178,7 @@ function crudCandidatePage()
   
 function crudLearnerPage()
 {
-    $UserRepo = new UsersRepository;
+    $UserRepo = new UserRepository;
     $learners = $UserRepo->getAllLearners();
     $formators = $UserRepo->getAllFormators();
     $PromoRepo = new PromoRepository;
@@ -190,7 +189,7 @@ function crudLearnerPage()
 
 function crudCompanyPage()
 {
-    $UserRepo = new UsersRepository;
+    $UserRepo = new UserRepository;
     $companies = $UserRepo->getAllCompanies();
     include 'view/admin/_company.php';
 }
@@ -200,7 +199,7 @@ function crudPromotionPage()
     $PromoRepo = new PromoRepository;
     $promos = $PromoRepo->getPromos();
 
-    $UserRepo = new UsersRepository;
+    $UserRepo = new UserRepository;
     $FormationRepo = new FormationRepository;
     $formators = $UserRepo->getAllFormators();
     $formations = $FormationRepo->getAllFormations();
@@ -218,9 +217,9 @@ function crudProjetPage()
 }
 
 function projectFormPage() {
-    $UserRepo = new UsersRepository;
-    // $User = $UserRepo->getUserById($_SESSION['user']->role_id);
-    $User = $UserRepo->getUserById(3);
+    $UserRepo = new UserRepository;
+    // $User = $UserRepo->new User($_SESSION['user']->role_id);
+    $User = new User(3);
     if(isset($_GET['id'])){
         $projectRepo = new ProjectRepository;
         $project=$projectRepo->getProjectById($_GET['id']);

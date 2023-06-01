@@ -1,7 +1,7 @@
 <?php
 $promoRepo = new PromoRepository;
 $promos = $promoRepo->getActivePromos();
-$userRepo = new UsersRepository;
+$userRepo = new UserRepository;
 $companies = $userRepo->getAllCompanies();
 $companyMails = [];
 foreach($companies as $company){

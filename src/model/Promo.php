@@ -132,7 +132,7 @@ class PromoRepository extends ConnectBdd
         
         foreach ($datas as $data) {
             $user = new User($data);
-            if ($user->role_id->name == "Formateur") {
+            if ($user->role_id == 2) {
                 array_push($users, $user);
             }
         }
@@ -179,24 +179,6 @@ class PromoRepository extends ConnectBdd
         $req->execute([$user_id, $promo_id]);
         $data = $req->fetch();
         return (empty($data) && $data == false) ? true : false;
-    }
-    $req = $this->bdd->prepare("SELECT * FROM `promo_candidate` WHERE `user_id` = ? AND `promo_id` = ?");
-    $req->execute([$user_id, $promo_id]);
-    $data = $req->fetch();
-    return (empty($data) && $data == false) ? true : false;
-    }
-
-    public function getActivePromos():array
-    {
-        $req = $this->bdd->prepare("SELECT * FROM promo WHERE status_id = ?");
-        $req->execute([12]);
-        $data = $req->fetchAll(PDO::FETCH_ASSOC);
-
-        foreach($data as $key){
-            $promos[] = $this->getPromoById($key['promo_id']);
-        }
-
-        return $promos;
     }
 
     public function getPromoByUserID($id)
@@ -264,13 +246,6 @@ class PromoRepository extends ConnectBdd
         return $projects;
     }
 
-    public function getPromoStart($id) {
-        $req = $this->bdd->prepare("SELECT `promo_start` FROM `promo` WHERE `formation_id` = ?");
-        $req->execute([$id]);
-        $data = $req->fetch(PDO::FETCH_COLUMN);
-        return $data;
-    }
-
     public function getActivePromos():array
     {
         $req = $this->bdd->prepare("SELECT * FROM `promo` WHERE status_id = ?");
@@ -305,11 +280,11 @@ class PromoRepository extends ConnectBdd
         $req = $this->bdd->prepare("SELECT user_id FROM promo_candidate WHERE promo_id = ?");
         $req->execute([$id]);
         $datas = $req->fetchAll(PDO::FETCH_ASSOC);
-        $UsersRepository = new UsersRepository;
+        $UsersRepository = new UserRepository;
         $users = [];
         
         foreach ($datas as $data) {
-            $User = $UsersRepository->getUserById($data['user_id']);
+            $User = new User($data['user_id']);
             $users[] = $User;
         }
 
@@ -344,7 +319,7 @@ class PromoRepository extends ConnectBdd
 
     public function validatePromo($promoId, array $accepted, array $rejected):void
     {
-        $UserRepo = new UsersRepository;
+        $UserRepo = new UserRepository;
         $acceptedMails = [];
         $refusedMails = [];
         $headers = "From: simplon@mail.com\r\n";

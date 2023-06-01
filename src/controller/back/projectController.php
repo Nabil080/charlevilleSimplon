@@ -91,7 +91,7 @@ function assignTeamToProject()
         "message" => "Le statut a été modifée comme tel",
         "projets" => $bools,
     );
-    
+}
 
 
 function addProjectTraitement()

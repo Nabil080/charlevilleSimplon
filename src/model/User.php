@@ -209,7 +209,7 @@ class UserRepository extends ConnectBdd
         $data = $req->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ($data as $candidate) {
-            $candidates[] = $this->getUserById($candidate['user_id']);
+            $candidates[] = new User($candidate['user_id']);
         }
 
         return $candidates;
@@ -225,7 +225,7 @@ class UserRepository extends ConnectBdd
         $data = $req->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ($data as $learner) {
-            $learners[] = $this->getUserById($learner['user_id']);
+            $learners[] = new User($learner['user_id']);
         }
 
         return $learners;
@@ -240,7 +240,7 @@ class UserRepository extends ConnectBdd
         $data = $req->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ($data as $company) {
-            $companies[] = $this->getUserById($company['user_id']);
+            $companies[] = new User($company['user_id']);
         }
 
         return $companies;
@@ -255,7 +255,7 @@ class UserRepository extends ConnectBdd
         $data = $req->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ($data as $formator) {
-            $formators[] = $this->getUserById($formator['user_id']);
+            $formators[] = new User($formator['user_id']);
         }
 
         return $formators;

@@ -63,7 +63,7 @@ function validatePromotion(){
 
     echo json_encode($response);
 }
-  
+
 function CandidatePromo()
 {
     if ($_GET) {

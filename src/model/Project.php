@@ -293,20 +293,6 @@ class ProjectRepository extends ConnectBdd
         $req->closeCursor();
     }
 
-    public function updateProjectStatus(string $validation, int $id):bool
-    {
-        if ($validation == "accept") {
-            $status_id = 10;
-        } else if ($validation == "refused") {
-            $status_id = 11;
-        }
-        $req = $this->bdd->prepare("UPDATE project SET status_id = ? WHERE project_id = ?");
-        $bool = $req->execute([$status_id, $id]);
-
-
-        return $bool;
-    }
-
     public function assignProjectToPromo(int $projectId ,int $promoId):bool
     {
         $req = $this->bdd->prepare("UPDATE project SET promo_id = ? WHERE project_id = ?");

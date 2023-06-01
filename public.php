@@ -1,9 +1,5 @@
 <?php
 
-// TEMP POUR TEST SANS CONNEXION
-$user = new UserRepository();
-$_SESSION['user'] = $user->getUserById(1);
-
 switch ($action) {
     case 'allFormationsPage':
         allFormationsPage();
@@ -52,15 +48,6 @@ switch ($action) {
         break;
 
 
-
-    // Inscription & ActivationForm & RestPasswordForm
-    case 'registerPage':
-        (isset($_SESSION['user'])) ? registerPage() : registerPage();
-        break;
-    //afficher la page d'activation de compte
-    case 'accountActivationPage':
-        accountActivationPage();
-        break;
     case 'resetPasswordForm':
         resetPasswordForm();
         break;
