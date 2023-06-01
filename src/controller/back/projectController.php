@@ -91,7 +91,7 @@ function assignTeamToProject()
         "message" => "Le statut a été modifée comme tel",
         "projets" => $bools,
     );
-    
+}
 
 
 function addProjectTraitement()
@@ -160,8 +160,8 @@ function updateProjectElement()
     if ($type == "studentsNote") {
         $bool = $projectRepository->updateStudentsNote($id, $array);
     }
-    header("Location:?action=projectPage&id=". $_GET['id']);
+    // header("Location:?action=projectPage&id=". $_GET['id']);
 }
 
-}
+
 ?>

@@ -563,6 +563,7 @@ class ProjectRepository extends ConnectBdd
         if ($isSafe == true) {
             $req = $this->bdd->prepare('UPDATE project SET project_notes = ? WHERE project_id = ?');
             $bool = $req->execute([$post['studentsNote'], $id]);
+            var_dump($bool);
             return $bool;
         } else {
 

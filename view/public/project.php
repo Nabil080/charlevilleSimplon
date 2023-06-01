@@ -260,15 +260,19 @@
             <div id="company-notes" class="m-4 lg:w-4/5">
                 <?= $project->description ?>
             </div>
+            <br>
             <?php if ($isMyProject == true) { ?>
-            <!-- formulaire d'edit -->
-            <form id="company-notes-update" action="?action=updateProjectElement&id=<?= $project->id ?>&type=companyNote" method="POST" class="hidden w-full m-4" method="post" action="">
-                <textarea name="companyNotes" id="editor" class="w-full" rows="10">
-                    <?= $project->description ?>
-                </textarea>
-                <button type="submit" class="py-2 px-4 bg-main-red border-main-white border text-main-white my-4 mr-4">Modifier <i class="fa-solid fa-check"></i></button>
-                <span onclick="swapDivsById('company-notes','company-notes-update')" class="cursor-pointer">Annuler <i class="fa-solid fa-xmark"></i></span>
-            </form>
+
+                <!-- formulaire d'edit -->
+                <form id="company-notes-update" action="?action=updateProjectElement&id=<?= $project->id ?>&type=companyNote" method="POST" class="hidden w-full m-4" method="post" action="">
+                    <textarea name="companyNotes" id="editor" class="w-full" rows="10">
+                        <?= $project->description ?>
+                        <br>
+                    </textarea>
+                    <button type="submit" class="py-2 px-4 bg-main-red border-main-white border text-main-white my-4 mr-4">Modifier <i class="fa-solid fa-check"></i></button>
+                    <span onclick="swapDivsById('company-notes','company-notes-update')" class="cursor-pointer">Annuler <i class="fa-solid fa-xmark"></i></span>
+                </form>
+
             <?php } ?>
             <!-- ANIMATION ASIDE -->
             <div class="hidden lg:grid w-1/5 place-items-center">
@@ -292,7 +296,7 @@
             <?php if ($isMyProject == true) { ?>
             <!-- formulaire d'edit -->
             <form id="notes-update" action="?action=updateProjectElement&id=<?= $project->id ?>&type=studentsNote" method="POST" class="hidden w-full m-4" method="post" action="">
-                <textarea name="studentsNote" id="editor" class="w-full" rows="10">
+                <textarea name="studentsNote" id="editor" class="w-full" rows="auto">
                     <?= $project->notes ?>
                 </textarea>
                 <button type="submit" class="py-2 px-4 bg-main-red border-main-white border text-main-white my-4 mr-4">Modifier <i class="fa-solid fa-check"></i></button>
