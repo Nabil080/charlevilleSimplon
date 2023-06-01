@@ -31,7 +31,7 @@
         return $test;
     }
     public function getSuccess($success, $boolNavbar = null)
-    public function getSuccess($success, $navbarBool)
+
     {
         $file_path = 'view/template/_succesMessage.php';
         $this->type = 'successMessage';

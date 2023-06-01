@@ -1,9 +1,5 @@
 <?php
 
-// TEMP POUR TEST SANS CONNEXION
-$user = new UserRepository();
-$_SESSION['user'] = $user->getUserById(1);
-
 switch ($action) {
     case 'allFormationsPage':
         allFormationsPage();
@@ -23,10 +19,6 @@ switch ($action) {
             CandidatePromo();
         else
             homepage();
-        break;
-    //afficher la page d'activation de compte
-    case 'accountActivationPage':
-        accountActivationPage();
         break;
 
     // Afficher toutes les promos
@@ -49,14 +41,7 @@ switch ($action) {
     // Afficher la page contact
     case 'contactPage':
         contactPage();
-        break;
-
-
-
-    // Inscription & ActivationForm & RestPasswordForm
-    case 'registerPage':
-        (isset($_SESSION['user'])) ? registerPage() : registerPage();
-        break;
+        break;  
     //afficher la page d'activation de compte
     case 'accountActivationPage':
         accountActivationPage();
@@ -80,9 +65,16 @@ switch ($action) {
     case 'reSubmitProject':
         reSubmitProject();
         break;
+    // Gestion projet personnel
+    case 'updateProjectElement':
+        updateProjectElement();
+        break;
     // Envoie du traitement d'activation de compte
     // Envoie du traitement du formulaire de connexion
-
+    // Envoie du traitement des filtres toutes les promos par années
+    case 'promosFilter':
+        promosFilter();
+        break;
     case 'accountActivation':
         activationAccountTreatment();
         break;
