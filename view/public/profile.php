@@ -266,23 +266,27 @@ $title = "Espace personnel";
                                         </div>
                                         <div>
                                             <label for="phone" class="block mb-1 text-sm font-medium  text-main-red">Téléphone</label>
-                                            <input type="phone" name="phone" id="phone" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" placeholder="" value="<?= $userDatas['user_phone'] ?>">
+                                            <input type="tel" name="phone" id="phone" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" placeholder="" value="<?= $userDatas['user_phone'] ?>">
                                         </div>
                                         <div>
                                             <label for="adress" class="block mb-1 text-sm font-medium  text-main-red">Adresse</label>
-                                            <input type="adress" name="adress" id="adress" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" placeholder="" value="<?= $userDatas['user_place'] ?>">
+                                            <input type="text" name="adress" id="adress" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" placeholder="" value="<?= $userDatas['user_place'] ?>">
                                         </div>
                                         <div>
                                             <label for="numero_pe" class="block mb-1 text-sm font-medium  text-main-red">Numéro Pôle Emploi</label>
-                                            <input type="numero_pe" name="numero_pe" id="numero_pe" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" placeholder="" value="<?= $userDatas['user_numero_pe'] ?>">
+                                            <input type="text" name="numero_pe" id="numero_pe" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" placeholder="" value="<?= $userDatas['user_numero_pe'] ?>">
                                         </div>
                                         <div>
                                             <label for="nationality" class="block mb-1 text-sm font-medium  text-main-red">Nationalité</label>
-                                            <input type="nationality" name="nationality" id="nationality" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" placeholder="" value="<?= $userDatas['user_nationality'] ?>">
+                                            <input type="text" name="nationality" id="nationality" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" placeholder="" value="<?= $userDatas['user_nationality'] ?>">
                                         </div>
                                         <div>
                                             <label for="new_password" class="block mb-1 text-sm font-medium text-main-red">Choisir un nouveau mot de passe</label>
-                                            <input type="new_password" name="new_password" id="new_password" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" placeholder="">
+                                            <input type="password" name="new_password" id="new_password" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" placeholder="">
+                                        </div>
+                                        <div>
+                                            <label for="confirm_new_password" class="block mb-1 text-sm font-medium text-main-red">Confirmez votre nouveau mot de passe</label>
+                                            <input type="password" name="confirm_new_password" id="confirm_new_password" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" placeholder="">
                                         </div>
                                         <div>
                                             <label for="password" class="block mb-1 text-sm font-medium  text-main-red">Veuillez confirmer vos modifications en entrant votre (ancien) mot de passe.</label>

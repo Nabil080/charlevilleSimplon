@@ -296,20 +296,24 @@ class UserRepository extends ConnectBdd
     public function updateUserDatas(int $id, array $array): bool | array
     {
         $bools = [];
-        $email = $array['email'];
-        $phone = $array['phone'];
-        $adress = $array['adress'];
-        $numero_pe = $array['numero_pe'];
-        $nationality = $array['nationality'];
+        $email = securizeMail($array['email']);
+        $phone = securizePhone($array['phone']);
+        $adress = securizeString($array['adress']);
+        $numero_pe = securizeInteger($array['numero_pe']);
+        $nationality = securizeString($array['nationality']);
         $new_password = $array['new_password'];
+        $confirm_new_password = $array['confirm_new_password'];
+        if (isset($new_password) && !empty($new_password) && isset($confirm_new_password) && !empty($confirm_new_password)) {
+            $checkNewPassword = securizePassword($new_password, $confirm_new_password);
+            if ($checkNewPassword) {
+                $req = $this->bdd->prepare("UPDATE user SET user_password = ? WHERE user_id = ?");
+                $bool = $req->execute([$new_password]);
+                array_push($bools, $bool);
+            }
+        }
         $req = $this->bdd->prepare("UPDATE user SET user_email = ?, user_numero_pe =?, user_phone = ?, user_place = ?, user_nationality = ? WHERE user_id = ?");
         $bool = $req->execute([$email, $numero_pe, $phone, $adress, $nationality, $id]);
         array_push($bools, $bool);
-        if (isset($new_password) && !empty($new_password)){
-            $req = $this->bdd->prepare("UPDATE user SET user_password = ? WHERE user_id = ?");
-            $bool = $req->execute([$new_password]);
-            array_push($bools, $bool);
-        }
 
         return $bools;
     }

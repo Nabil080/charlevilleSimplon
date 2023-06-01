@@ -283,7 +283,6 @@ try {
             $bools = $userRepository->updateUserSkills($id, $array);
             header('Location:?action=profilePage&id='.$_GET['id']);
         } elseif ($type == 'datas') {
-            if (!empty($array)) {
                 if (isset($array['password']) && !empty($array['password'])) {
                     $password = $array['password'];
                     $UserRepo = new UserRepository();
@@ -292,14 +291,11 @@ try {
                         $bools = $userRepository->updateUserDatas($id, $array);
                         header('Location:?action=profilePage&id='.$_GET['id']);
                     } else {
-                        // erreur : le mdp ne correspond pas
+                        // erreur : Votre mot de passe est incorrect
                     }
                 } else {
                     // erreur : il faut entrer son mot de passe pour valider les modifications
                 }
-            } else {
-                // erreur : tous les champs sont vides
-            }
         }
         elseif ($type == 'highlight') {
             if ($array['modifyInput'] == 'modify' || $array['modifyInput'] == 'add') {
