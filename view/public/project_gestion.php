@@ -27,7 +27,7 @@
         $i = 0;
         $x = 0;
         $y = 0;
-        if ($_SESSION['user']->role->id == 2) {
+        if ($_SESSION['user']->role_id == 2) {
             foreach ($projects as $projets) { 
                 foreach ($projets as $project) {
                     if ($project->status->id == 10) {

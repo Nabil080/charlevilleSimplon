@@ -109,6 +109,7 @@ function acceptProject(i, x)
     if (validationProjectForm.length >= 0) {
         validationProjectForm[i].insertAdjacentHTML("beforeend", "<input type='hidden' name='validation' value='accept'>");
         traitementStatusProject(i);
+        form.classList.add("hidden");
         const curr = "status" + x;
         const status = document.getElementById(curr);
         const icone = status.getElementsByTagName('i');

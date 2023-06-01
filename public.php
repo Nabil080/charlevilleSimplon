@@ -20,10 +20,6 @@ switch ($action) {
         else
             homepage();
         break;
-    //afficher la page d'activation de compte
-    case 'accountActivationPage':
-        accountActivationPage();
-        break;
 
     // Afficher toutes les promos
     case 'allPromotionsPage':
@@ -45,9 +41,11 @@ switch ($action) {
     // Afficher la page contact
     case 'contactPage':
         contactPage();
+        break;  
+    //afficher la page d'activation de compte
+    case 'accountActivationPage':
+        accountActivationPage();
         break;
-
-
     case 'resetPasswordForm':
         resetPasswordForm();
         break;
@@ -67,9 +65,16 @@ switch ($action) {
     case 'reSubmitProject':
         reSubmitProject();
         break;
+    // Gestion projet personnel
+    case 'updateProjectElement':
+        updateProjectElement();
+        break;
     // Envoie du traitement d'activation de compte
     // Envoie du traitement du formulaire de connexion
-
+    // Envoie du traitement des filtres toutes les promos par années
+    case 'promosFilter':
+        promosFilter();
+        break;
     case 'accountActivation':
         activationAccountTreatment();
         break;
