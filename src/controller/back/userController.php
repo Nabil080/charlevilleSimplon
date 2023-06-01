@@ -254,7 +254,6 @@ try {
             echo $errorJson;
         }
     }
-}
 
 function contactUsers()
 {
@@ -291,7 +290,7 @@ function deleteCandidate()
 {
     // Check si admin
     var_dump($_POST);
-    $userRepo = new UsersRepository;
+    $userRepo = new UserRepository;
     $req = $userRepo->bdd->prepare("DELETE FROM `promo_candidate` WHERE `user_id` = ? AND `promo_id` = ?");
     $req->execute([$_POST['user_id'], $_POST['promo_id']]);
 }
@@ -300,7 +299,7 @@ function deleteLearner()
 {
     // Check si admin
     var_dump($_POST);
-    $userRepo = new UsersRepository;
+    $userRepo = new UserRepository;
     $req = $userRepo->bdd->prepare("DELETE FROM `promo_user` WHERE `user_id` = ? AND `promo_id` = ?");
     $req->execute([$_POST['user_id'], $_POST['promo_id']]);
 
@@ -310,7 +309,7 @@ function deleteUser()
 {
     // Check si admin
     var_dump($_POST);
-    $userRepo = new UsersRepository;
+    $userRepo = new UserRepository;
     $userRepo->deleteUser($_POST['user_id']);
 }
 
@@ -318,7 +317,7 @@ function assignFormator()
 {
     // Check si admin
     var_dump($_POST);
-    $userRepo = new UsersRepository;
+    $userRepo = new UserRepository;
     $req = $userRepo->bdd->prepare("UPDATE user SET `role_id` = ? WHERE `user_id` = ?");
     $req->execute([2, $_POST['user_id']]);
 }
@@ -327,7 +326,7 @@ function updateUserPersonnalInfos()
 {
     // Check si admin
     // var_dump($_POST);
-    $userRepo = new UsersRepository;
+    $userRepo = new UserRepository;
     $userRepo->updateUserPersonnalInfos($_POST);
 }
 

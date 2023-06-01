@@ -23,9 +23,9 @@
                         <div  class="validationDiv pl-4 p-2 text-md">
                             <?php $y = 0;
                             foreach ($candidates as $candidate) { ?>
-                                <input type="checkbox" data-name="<?=$candidate->name?>" value="<?=$candidate->id?>">
-                                <a href="?action=profilePage&id=<?=$candidate->id?>" target="_blank">
-                                    <p class="inline ml-4"><?=$candidate->name?></p>
+                                <input type="checkbox" data-name="<?=$candidate->user_name?>" value="<?=$candidate->user_id?>">
+                                <a href="?action=profilePage&id=<?=$candidate->user_id?>" target="_blank">
+                                    <p class="inline ml-4"><?=$candidate->user_name?></p>
                                 </a>
                                 <br>
                             <?php $y++;

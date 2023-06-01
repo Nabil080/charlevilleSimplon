@@ -22,6 +22,7 @@ class User
     public $user_birth_date;
     public $user_birth_place;
     public $user_nationality;
+    public $user_status_id;
     public $user_status;
     public $user_status_date;
     public $role_id;
@@ -71,6 +72,7 @@ class User
 
         /* Utility */
         $this->user_token = $account['user_token'];
+        $this->user_status_id = $account['status_id'];
         $this->user_status = $account['status_name'];
         $this->user_status_date = $account['user_status_date'];
         $this->role_id = $account['role_id'];

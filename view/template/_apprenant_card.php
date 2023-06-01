@@ -1,28 +1,34 @@
+<?php
+$tagRepo = new TagRepository;
+$apprenant->tags = $tagRepo->getUserTags($apprenant->user_id);
+?>
+
+
 <div id="home" class="grid place-items-center overflow-hidden border-4 max-w-[400px] justify-self-center mx-auto sm:w-auto sm:max-w-full">
     <div class="wrapper relative grid grid-rows-[50%_50%] max-h-[520px] min-[400px]:grid-rows-[55%_45%]  min-[400px]:max-h-[700px] grid-cols-1 sm:gap-0 sm:h-[350px] sm:grid-cols-[6fr_4fr] sm:grid-rows-1 sm:aspect-[16/9]">
         <div class="sm:hidden mx-auto overflow-hidden object-fill">
-            <img class="max-w-full h-auto grayscale" 
-            src="<?php if (isset($apprenant->avatar)) {
-                echo ($apprenant->avatar);
-            } else if (!isset($apprenant->avatar)) {
+            <img class="max-w-full h-auto grayscale"
+            src="<?php if (isset($apprenant->user_avatar)) {
+                echo ($apprenant->user_avatar);
+            } else if (!isset($apprenant->user_avatar)) {
                 echo ("https://images.unsplash.com/photo-1580707578919-892eb22db615?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTV8fG1hbiUyMHBvcnRyYWl0fGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=60");
             }
-            ?>" 
+            ?>"
             alt="">
         </div>
         <div class="content-splitter pt-4 sm:pt-4 flex flex-col gap-4">
             <div class="left flex flex-col flex-grow gap-4 px-4 w-[minmax(80px,80%)]">
                 <p class="text-[22px] md:text-[24px] text-center sm:text-left  font-main-title font-bold leading-1 inline">
-                    <?php if (isset($apprenant->surname)) { 
-                        echo($apprenant->surname);
-                    } else if(!isset($apprenant->surname)) {
+                    <?php if (isset($apprenant->user_surname)) { 
+                        echo($apprenant->user_surname);
+                    } else if(!isset($apprenant->user_surname)) {
                         echo("Prénom");
                     }
                     ?>
                     <span class="uppercase"> 
-                        <?php if (isset($apprenant->name)) { 
-                            echo($apprenant->name);
-                        } else if(!isset($apprenant->name)) {
+                        <?php if (isset($apprenant->user_name)) { 
+                            echo($apprenant->user_name);
+                        } else if(!isset($apprenant->user_name)) {
                             echo("Nom");
                         }
                         ?>
@@ -32,15 +38,15 @@
                 <p class="text-[20px] md:text-[18px] text-center sm:text-left  sm:whitespace-nowrap">
 
                     <i class="fa-solid fa-circle 
-                    <?php if (isset($apprenant->status->id) && $apprenant->status->id < 6) { 
+                    <?php if (isset($apprenant->user_status_id) && $apprenant->user_status_id < 6) { 
                         echo("text-red-500"); 
                     } 
-                    else if (isset($apprenant->status->id) && $apprenant->status->id > 6) {
+                    else if (isset($apprenant->user_status_id) && $apprenant->user_status_id > 6) {
                         echo("text-green-500");
                     }?>
                      animate-pulse duration-[2s] mr-1"></i>
-                    <?= $apprenant->status->name; ?> depuis
-                    <?= substr($apprenant->status_date, 0, 4); ?>
+                    <?= $apprenant->user_status; ?> depuis
+                    <?= substr($apprenant->user_status_date, 0, 4); ?>
                 </p>
                 <div class="flex gap-1 justify-center sm:justify-normal mx-auto sm:gap-1">
                     <?php $y = 0;
@@ -84,9 +90,9 @@
         </div>
         <div class="hidden clipper sm:flex w-full z-10 bg-center bg-cover grayscale" 
         style="background-image: url(
-        <?php if (isset($apprenant->avatar)) {
-                echo ($apprenant->avatar);
-            } else if (!isset($apprenant->avatar)) {
+        <?php if (isset($apprenant->user_avatar)) {
+                echo ($apprenant->user_avatar);
+            } else if (!isset($apprenant->user_avatar)) {
                 echo ("https://images.unsplash.com/photo-1580707578919-892eb22db615?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTV8fG1hbiUyMHBvcnRyYWl0fGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=60");
             }
         ?> 

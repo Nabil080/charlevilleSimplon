@@ -42,8 +42,8 @@
                         <div
                             class="space-x-4 mt-4 mb-2 text-sm text-main-white [&>a]:bg-main-gray [&>a]:py-1 [&>a]:px-3 [&>a]:rounded-full">
                             <?php foreach($project->team as $user){ ?>
-                                <a href="?action=profilePage&id=<?=$user->id?>" class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white">
-                                    <?=$user->surname?>
+                                <a href="?action=profilePage&id=<?=$user->user_id?>" class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white">
+                                    <?=$user->user_surname?>
                                 </a>
                             <?php } ?>
                         </div>

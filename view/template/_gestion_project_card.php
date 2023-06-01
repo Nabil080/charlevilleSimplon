@@ -60,8 +60,8 @@
                         </a>
                         <div class="space-x-4 mt-4 mb-2 text-sm md:!text-base lg:!text-lg text-main-white [&>a]:bg-main-gray [&>a]:py-1 [&>a]:px-3 [&>a]:rounded-full">
                             <?php foreach($project->team as $user){ ?>
-                                <a href="?action=profilePage&id=<?=$user->id?>" class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white">
-                                    <?=$user->surname?>
+                                <a href="?action=profilePage&id=<?=$user->user_id?>" class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white">
+                                    <?=$user->user_surname?>
                                 </a>
                             <?php }  ?>
                         </div>
@@ -127,7 +127,7 @@
                     
                     <select id="user-dropdown" multiple class="hidden z-20 w-fit" name="team[]" id="">
                        <?php foreach ($apprenants as $apprenant) { ?>
-                            <option value="<?= $apprenant->id ?>"><?= $apprenant->name ?> <?= $apprenant->surname ?></option>
+                            <option value="<?= $apprenant->id ?>"><?= $apprenant->user_name ?> <?= $apprenant->user_surname ?></option>
                         <?php } 
                         $y ++; // Compte le nombre de formulaire
                         ?>
