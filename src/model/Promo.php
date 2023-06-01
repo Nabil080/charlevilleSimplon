@@ -11,18 +11,22 @@ class Promo
     public string $name;
     public $start;
     public $end;
+    public  $status;
+    public $year;
+    public $status_id;
 
     public $status;
     public $formation_id;
 
 
 
-    public function __construct($id, $name, $start, $end, $status, $formation_id)
+    public function __construct (int $id, $name, $start, $end, $year,$formation_id, $status_id) 
     {
         $this->id = $id;
         $this->start = $start;
         $this->name = $name;
         $this->end = $end;
+        $this->year = $year;
         $this->formation_id = $formation_id;
 
         $statusRepo = new StatusRepository;
@@ -52,12 +56,13 @@ class PromoRepository extends ConnectBdd
         $data = $req->fetch(PDO::FETCH_ASSOC);
 
         $Promo = new Promo(
-            $data['promo_id'],
-            $data['promo_name'],
-            $promoRepository->formateDate($data['promo_start']),
-            $promoRepository->formateDate($data['promo_end']),
-            $data['status_id'],
-            $data['formation_id']
+        $data['promo_id'], 
+        $data['promo_name'], 
+        $promoRepository->formateDate($data['promo_start']),
+        $promoRepository->formateDate($data['promo_end']),
+        $data['promo_year'],
+        $data['formation_id'],
+        $data['status_id']
         );
 
         return $Promo;
@@ -80,9 +85,10 @@ class PromoRepository extends ConnectBdd
                 $data['promo_name'],
                 $promoRepository->formateDate($data['promo_start']),
                 $promoRepository->formateDate($data['promo_end']),
-                $data['status_id'],
-                $data['formation_id']
-            );
+                $data['promo_year'],
+                $data['formation_id'],
+                $data['status_id']
+                );
 
             array_push($promos, $Promo);
 
