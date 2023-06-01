@@ -1,6 +1,8 @@
 <?php $title = "Tout les promotions"; ?>
 
-<?php ob_start(); ?>
+<?php ob_start(); 
+        ?>
+
 <main class="px-[5%]">
     <h2 class="pb-10 text-main-red text-[24px] md:text-[48px] font-bold text-center">Nos promotions</h2>
     <div class="pb-10 flex justify-evenly gap-5">

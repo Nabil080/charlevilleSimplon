@@ -163,5 +163,5 @@ function updateProjectElement()
     header("Location:?action=projectPage&id=". $_GET['id']);
 }
 
-
+}
 ?>

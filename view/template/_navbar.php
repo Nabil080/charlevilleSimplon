@@ -82,6 +82,10 @@
                                     <a href="#" class="block px-4 py-2 text-[22px] sm:text-[32px] md:text-[20px]">Admin</a>
                                 </li>
                                 <li class="md:hover:bg-main-lightred">
+                                    <a href="?action=projectGestionPage&id=<?= $_SESSION['user']->user_id ?>" class="block px-4 py-2 text-[22px] sm:text-[32px] md:text-[20px]">Mes Projets</a>
+                                </li>
+
+                                <li class="md:hover:bg-main-lightred">
                                     <a href="index.php?action=logOut"
                                         class="block px-4 py-2 text-[22px] sm:text-[32px] md:text-[20px]">Déconnexion</a>
                                 </li>

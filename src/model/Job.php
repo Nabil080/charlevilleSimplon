@@ -33,7 +33,7 @@ class JobRepository extends ConnectBdd{
         $req = $this->bdd->prepare("SELECT job_id FROM job WHERE formation_id = ?");
         $req->execute([$id]);
         $data = $req->fetchAll(PDO::FETCH_ASSOC);
-
+        
         foreach($data as $key){
             $jobs[] = $this->getJobById($key['job_id']);
         }

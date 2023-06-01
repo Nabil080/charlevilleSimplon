@@ -299,19 +299,6 @@ class ProjectRepository extends ConnectBdd
         $req->closeCursor();
     }
 
-    public function updateProjectStatus(string $validation, int $id):bool
-    {
-        if ($validation == "accept") {
-            $status_id = 10;
-        } else if ($validation == "refused") {
-            $status_id = 11;
-        }
-        $req = $this->bdd->prepare("UPDATE project SET status_id = ? WHERE project_id = ?");
-        $bool = $req->execute([$status_id, $id]);
-
-
-        return $bool;
-    }
 
     public function assignProjectToPromo(int $projectId ,int $promoId):bool
     {
@@ -508,7 +495,7 @@ class ProjectRepository extends ConnectBdd
 
     public function updateProjectImage(int $id, array $files, array $post): bool
     {
-        $path = 'upload/project/maquette/';
+        $path = 'assets/upload/project/maquette/';
         $image = securizeImage($files['image'], $path);
         if (isset($post['lien'])) {
             $lien = htmlspecialchars($post['lien'], ENT_QUOTES);
@@ -537,7 +524,7 @@ class ProjectRepository extends ConnectBdd
 
     public function updateProjectCharge(int $id, array $files):bool
     {
-        $path = 'upload/project/charges/';
+        $path = 'assets/upload/project/charges/';
         $pdf = securizePdf($files['pdf'], $path);
         if($pdf === false){
             $error = true;
