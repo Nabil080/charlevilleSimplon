@@ -23,7 +23,7 @@
                         <select name="formators[]" multiple id="formators" class=" border text-sm rounded-md block w-full p-2.5 border-main-red text-main-red">
                             <option disabled selected value> Formateurs(non obligatoire) </option>
                             <?php foreach($formators as $formator){?>
-                                <option value="<?=$formator->id?>"><?=$formator->name?></option>
+                                <option value="<?=$formator->user_id?>"><?=$formator->user_name?></option>
                             <?php } ?>
                         </select>
                     </div>

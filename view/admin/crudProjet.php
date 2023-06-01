@@ -61,7 +61,7 @@
                 </td>
                 <td class="px-4 py-3 border">
 
-                    <a href="<?=$project->file?>" donwload="<?=$project->name?>" class="block cursor-pointer w-full md:w-1/2 text-white bg-main-gray hover:bg-red-800 focus:ring-4 focus:outline-none 
+                    <a href="<?=$project->file?>" download="<?=$project->name?>" class="block cursor-pointer w-full md:w-1/2 text-white bg-main-gray hover:bg-red-800 focus:ring-4 focus:outline-none 
                                      font-medium rounded-lg text-sm px-5 py-2.5 mt-2 mx-auto text-center"
                         type="button">
                         <i class="fa-solid fa-file"></i>
