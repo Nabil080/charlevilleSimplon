@@ -49,6 +49,10 @@ try {
                 if ($_POST['password'] !== $_POST['confirm_password']) {
                     $errorTable[] = $AlertMessage->getError('password', 'passwordNotIdentical');
                 }
+                $pattern = '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{6,}$/';
+                if (!preg_match($pattern, $_POST['password'])){
+                    $errorTable[] = $AlertMessage->getError('password','passwordNotSafe');
+                }
             }
 
 
