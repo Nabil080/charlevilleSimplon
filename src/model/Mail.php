@@ -18,7 +18,7 @@ class Mail
             $this->to = $this->emailSupport;
         }
         if ($name !== null && $surname !== null) {
-            $this->signature = "\r\n\r\n\r\n\r\nCordialement,\r\n\r\n" . $name . " " . $surname;
+            $this->signature = "\r\n\r\nCordialement,\r\n" . $name . " " . $surname;
         }
         $this->$message = $message . $this->signature;
     }
@@ -38,6 +38,10 @@ class Mail
     public function getMessage()
     {
         return $this->message;
+    }
+    public function getSignature()
+    {
+        return $this->signature;
     }
 }
 
@@ -72,37 +76,41 @@ class MailRepository extends ConnectBdd
 
     public function sendMailActivationAccount($email): void
     {
-        $Mail = new Mail;
-
+        $Mail = new Mail('', $email);
+        $sender = $Mail->getSender();
+        $signature = $Mail->getSignature();
         $this->generateToken();
-        $to = $email;
+
+        $to = $Mail->getTo();
         $subject = "Confirmation de votre inscription";
         $message = "Bonjour,\r\n\r\n
             Pour activer votre compte, veuillez cliquer sur le lien ci-dessous : \r\n\r\n
             http://localhost/projet_dev_v2/index.php?action=registerPage&token=$this->token\r\n\r\n
-            " . $Mail->signature;
-        $headers = "From: $Mail->sender\r\n";
-        $headers .= "Reply-To: $Mail->sender\r\n";
+            " . $signature;
+        $headers = "From: $sender\r\n";
+        $headers .= "Reply-To: $sender\r\n";
         $headers .= "Content-Type: text/plain; charset=utf-8\r\n";
-        //mail($to, $subject, $message, $headers);
+        mail($to, $subject, $message, $headers);
     }
     public function sendMailResetPassword($email): void
     {
-        $Mail = new Mail;
-
+        $Mail = new Mail('', $email);
+        $sender = $Mail->getSender();
+        $signature = $Mail->getSignature();
         $this->generateToken();
-        $to = $email;
+
+        $to = $Mail->getTo();
         $subject = "Demande de changement de mot de passe";
         $message = "Bonjour,\r\n\r\n
 
             Pour changer votre mot de passe, veuillez cliquer sur le lien ci-dessous : \r\n\r\n
             http://localhost/projet_dev_v2/index.php?action=resetPasswordForm&token=$this->token\r\n\r\n
             Si vous n'avez pas fait de demande, il suffit d'ignorer se message. \r\n\r\n
-            " . $this->signature;
-        $headers = "From: $Mail->sender\r\n";
-        $headers .= "Reply-To: $Mail->sender\r\n";
+            " . $signature;
+        $headers = "From: $sender\r\n";
+        $headers .= "Reply-To: $sender\r\n";
         $headers .= "Content-Type: text/plain; charset=utf-8\r\n";
-        //mail($to, $subject, $message, $headers);
+        mail($to, $subject, $message, $headers);
     }
 
 }

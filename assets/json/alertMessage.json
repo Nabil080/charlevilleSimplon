@@ -65,6 +65,10 @@
     {
       "name": "resetPassword",
       "message": "<span class='font-bold'>Changement réussi !</span><br>Le mot de passe a bien été changé. Vous pouvez maintenant vous connecter."
+    },
+    {
+      "name": "sendMail",
+      "message": "Votre message à bien était envoyé."
     }
   ]
 }
