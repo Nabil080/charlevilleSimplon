@@ -61,14 +61,14 @@ const getProjets = (limitStart = 0,limitEnd = 6) => {
 
 
 async function updateData(currentPage = 1){
-    showLoading();
+    showLoading()
     let limitStart = (currentPage - 1) * projectsPerPage
     let limitEnd = projectsPerPage
-    console.log(limitStart,limitEnd)
+    // console.log(limitStart,limitEnd)
 
     data = await getProjets(limitStart,limitEnd)
         stopLoading()
-        
+        console.log(data);
 
         // TODO: CREATION DE LA PAGINATION
 
@@ -76,8 +76,19 @@ async function updateData(currentPage = 1){
         let nextRange = (currentPage * projectsPerPage )
         // console.log(prevRange,nextRange)
         // console.log(currentPage)
+        const allProjectsCount = data.total
         let projectsCount = data.filtered
         let pageCount = Math.ceil(projectsCount / projectsPerPage);
+
+
+        // * ACTIVE/DESACTIVE BOUTON PRECEDENT
+        if(currentPage == 1){
+            firstPage.classList.add('opacity-30', 'select-none', 'pointer-events-none')
+            prevPage.classList.add('opacity-30', 'select-none', 'pointer-events-none')
+        }else{
+            firstPage.classList.remove('opacity-30', 'select-none', 'pointer-events-none')
+            prevPage.classList.remove('opacity-30', 'select-none', 'pointer-events-none')
+        }
 
 
         // * AFFICHE LA PAGINATION
@@ -101,6 +112,32 @@ async function updateData(currentPage = 1){
             })
         })
 
+        firstPage.addEventListener('click', (e) => {
+            updateData(1)
+        })
+        prevPage.addEventListener('click', (e) => {
+            updateData(currentPage - 1)
+        })
+
+        nextPage.addEventListener('click', (e) => {
+            updateData(currentPage + 1)
+        })
+        lastPage.addEventListener('click', (e) => {
+            updateData(pageCount)
+        })
+
+        // * ACTIVE/DESACTIVE BOUTON SUIVANT
+        if(currentPage == pageCount){
+            lastPage.classList.add('opacity-30','select-none', 'pointer-events-none')
+            nextPage.classList.add('opacity-30', 'select-none', 'pointer-events-none')
+        }else{
+            lastPage.classList.remove('opacity-30','select-none', 'pointer-events-none')
+            nextPage.classList.remove('opacity-30', 'select-none', 'pointer-events-none')
+        }
+
+        // * AFFICHE LE NOMBRE DE PROJETS CORRESPONDANTS
+        projectGrid.innerHTML = `<h3 id="project-count" class="max-w-[766px] text-main-red mt-6 xl:col-span-2">${projectsCount} projets correspondants sur ${allProjectsCount}</h3>`;
+        // * AFFICHE LES PROJETS CORRESPONDANTS
         projectGrid.innerHTML += data.projets.join('');
 }
 
@@ -239,13 +276,6 @@ updateData();
 //         .map((projet) => projet)
 
 
-//     // * DEFINIT LE NOMBRE DE PROJETS FILTRES
-//     const projectsCount = filteredProjects.length
-//     // console.log(projectsCount)
-//     // * DEFINT LE NOMBRE TOTAL DE PROJETS
-//     const allProjectsCount = projets.length
-//     // * AFFICHE LE NOMBRE DE PROJETS CORRESPONDANTS
-//     projectGrid.innerHTML = `<h3 id="project-count" class="max-w-[766px] text-main-red mt-6 xl:col-span-2">${projectsCount} projets correspondants sur ${allProjectsCount}</h3>`;
 
 
 //     // TODO: CREATION DE LA PAGINATION
@@ -262,14 +292,14 @@ updateData();
 //     // console.log(currentPage)
 
     
-//     // * ACTIVE/DESACTIVE BOUTON PRECEDENT
-//     if(currentPage == 1){
-//         firstPage.classList.add('opacity-30', 'select-none', 'pointer-events-none')
-//         prevPage.classList.add('opacity-30', 'select-none', 'pointer-events-none')
-//     }else{
-//         firstPage.classList.remove('opacity-30', 'select-none', 'pointer-events-none')
-//         prevPage.classList.remove('opacity-30', 'select-none', 'pointer-events-none')
-//     }
+    // // * ACTIVE/DESACTIVE BOUTON PRECEDENT
+    // if(currentPage == 1){
+    //     firstPage.classList.add('opacity-30', 'select-none', 'pointer-events-none')
+    //     prevPage.classList.add('opacity-30', 'select-none', 'pointer-events-none')
+    // }else{
+    //     firstPage.classList.remove('opacity-30', 'select-none', 'pointer-events-none')
+    //     prevPage.classList.remove('opacity-30', 'select-none', 'pointer-events-none')
+    // }
 
 //     // * AFFICHE LA PAGINATION
 //     paginationDiv.innerHTML = '';
