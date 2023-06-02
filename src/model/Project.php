@@ -153,6 +153,24 @@ class ProjectRepository extends ConnectBdd
         return $projects;
     }
 
+    public function getProjectsNumber():int
+    {
+        $req = $this->bdd->prepare("SELECT COUNT(*) FROM project");
+        $req->execute();
+        $data = $req->fetch(PDO::FETCH_COLUMN);
+
+        return $data;
+    }
+
+    public function getFilteredProjectsNumber($filter):int
+    {
+        $req = $this->bdd->prepare("SELECT COUNT(*) FROM project WHERE $filter");
+        $req->execute();
+        $data = $req->fetch(PDO::FETCH_COLUMN);
+
+        return $data;
+    }
+
     public function getProjectsDate()
     {
         $dates = [];

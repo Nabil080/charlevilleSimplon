@@ -53,7 +53,7 @@ const getProjets = () => {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({limit: `${limitStart},${limitEnd}`})
+        body: JSON.stringify({limitStart: limitStart, limitEnd: limitEnd})
     })
     .then((response) => response.text())
     .then((data) => {

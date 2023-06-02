@@ -6,11 +6,19 @@ function projectsPagination()
     $jsonData = file_get_contents('php://input',true);
     $data = json_decode($jsonData);
 
-    $limit = $data->limit;
-
-
     $projectRepo = new ProjectRepository ;
+
+
+
+    $limitStart = $data->limitStart;
+    $limitEnd = $data->limitEnd;
+    $limit = "$limitStart,$limitEnd";
+
+    $filter = "1 = 1";
+
+    $filtered = $projectRepo->getFilteredProjectsNumber($filter);
     $projects = $projectRepo->getAllProjects($limit);
+    $total = $projectRepo->getProjectsNumber();
 
     $projectsHTML = [];
     foreach($projects as $project){
@@ -24,6 +32,8 @@ function projectsPagination()
     $response = array(
         "status" => "success",
         "message" => "La requête a été modifée comme tel",
+        "total" => $total,
+        "filtered" => $filtered,
         "projets" => $projectsHTML,
     );
 
