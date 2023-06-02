@@ -59,6 +59,39 @@ const getProjets = () => {
     .then((data) => {
         data = JSON.parse(data);
 
+        console.log(data.filtered);
+
+    // TODO: CREATION DE LA PAGINATION
+    // * VARIABLES POUR LA PAGINATION
+    let projectsPerPage = 6;
+    let projectsCount = data.filtered
+    let pageCount = Math.ceil(projectsCount / projectsPerPage);
+
+    let paginationRange = 3
+    // currentPage = number
+    // if(number == 'last'){currentPage = pageCount}
+
+    const prevRange = ( currentPage - 1 ) * projectsPerPage
+    const nextRange = (currentPage * projectsPerPage )
+    console.log(prevRange,nextRange)
+    // console.log(currentPage)
+
+
+        // * AFFICHE LA PAGINATION
+    paginationDiv.innerHTML = '';
+    for(page = 1; page <= pageCount; page++){
+        if(page > currentPage - paginationRange && page < currentPage + paginationRange){
+            if(page == currentPage){
+                paginationDiv.innerHTML += `<button id="${page}" class="bg-main-red text-main-white">${page}</button>`;
+            }else{
+                paginationDiv.innerHTML += `<button id="${page}" class="hover:bg-main-red hover:text-main-white">${page}</button>`;
+            }
+        }
+    }
+
+
+
+
         return data.projets
     })
 }
