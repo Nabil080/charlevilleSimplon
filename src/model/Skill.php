@@ -1,35 +1,33 @@
 <?php
 require_once('src/model/ConnectBdd.php');
 
-class Skill {
+class Skill
+{
     public $id;
     public $name;
     public $activity;
 }
 
-class SkillRepository extends ConnectBdd{
-    public function __construct(){
+class SkillRepository extends ConnectBdd
+{
+    public function __construct()
+    {
         parent::__construct();
     }
 
-    public function getSkillById($id):object
+    public function getSkillByActivity($activity_id): array
     {
         $Skill = new Skill;
-        $req = $this->bdd->prepare("SELECT * FROM `skill` WHERE `skill_id` = ?");
-        $req->execute([$id]);
-        $data = $req->fetch(PDO::FETCH_ASSOC);
+        $req = $this->bdd->prepare("SELECT skill_Name FROM `skill` WHERE `activity_id` = ?");
+        $req->execute([$activity_id]);
+        $data = $req->fetchAll(PDO::FETCH_ASSOC);
 
-        $Skill->id = $data['skill_id'];
-        $Skill->name = $data['skill_name'];
+        $skillTable = array();
+        foreach ($data as $skillName) {
+            $skillTable[] = $skillName['skill_Name'];
+        }
 
-        $Activity = new Activity;
-        $activityRepo = new ActivityRepository;
-        $Activity = $activityRepo->getActivityById($data['activity_id']);
-        $Skill->activity = $Activity;
-
-        return $Skill;
+        return $skillTable;
     }
 }
-
-
 ?>

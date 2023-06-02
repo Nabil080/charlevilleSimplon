@@ -3,14 +3,14 @@
         <!-- <img src="upload\promotion\devWeb2023\efz.png" class="w-[78px] z-20 mx-auto my-auto"> -->
     </div>
     <p class="text-[18px] font-main-title font-bold pt-4">
-        <?php if (isset($formateur->user_surname)) { 
+        <?php if (isset($formateur->user_surname)) {
             echo($formateur->user_surname);
         } else if(!isset($formateur->user_surname)) {
             echo("Prénom");
         }
         ?>
-        <span class="uppercase"> 
-            <?php if (isset($formateur->user_name)) { 
+        <span class="uppercase">
+            <?php if (isset($formateur->user_name)) {
                 echo($formateur->user_name);
             } else if(!isset($formateur->user_name)) {
                 echo("Nom");
@@ -22,7 +22,7 @@
     <div class="flex overflow-x-scroll gap-3 px-4 min-w-[270px] max-w-[270px] sm:min-w-[295px] pb-4">
         <!-- MAXIMUM 6 TAG -->
         <?php $y = 0;
-            $tags = $tagsRepository->getUserTags($formateur->user_id);
+            $tags = $tagRepo->getUserTags($formateur->user_id);
 
                 if (isset($tags) && empty($tags)) { ?>
                     <p class="italic text-center text-[18px] text-main-red">Pas de compétence spécifiée</p>

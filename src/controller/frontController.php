@@ -20,7 +20,30 @@ try {
 
     function formationPage()
     {
-        include 'view/public/formation.php';
+        $formation_id = (int) $_GET['id'];
+        if (is_int($formation_id) && $formation_id > 0) {
+            $Formation = new FormationRepository;
+            $Stat = new StatRepository;
+            $Job = new JobRepository;
+            $Activity = new ActivityRepository;
+            $Requirement = new RequirementRepository;
+            $Program = new ProgramRepository;
+            $Fee = new FeeRepository;
+            $Certification = new CertificationRepository;
+
+            $formation_main = $Formation->getFormationById($formation_id);
+            $formation_stat = $Stat->getStats($formation_id);
+            $formation_job = $Job->getJobName($formation_id);
+            $formation_activity = $Activity->getActivityByFormation($formation_id);
+            $formation_admission = $Requirement->getRequirementByFormation($formation_id);
+            $formation_program = $Program->getProgramByFormation($formation_id);
+            $formation_fee = $Fee->getFeeByFormation($formation_id);
+            $formation_certification = $Certification->getCertificationByFormation($formation_id);
+
+            include 'view/public/formation.php';
+        } else {
+            throw new Exception('error_404');
+        }
     }
 
     // Project 
@@ -95,9 +118,11 @@ function profilePage()
     if (!isset($_GET['id'])) {
         if (!isset($_SESSION['user']['user_id'])) {
             homepage();
+
         } else {
-            myProfile();
+            header('Location:?action=homepage');
         }
+
     }
     else if (isset($_GET['id']) && $_GET['id'] == $_SESSION['user']['user_id']) {
         myProfile();
@@ -106,6 +131,7 @@ function profilePage()
         $id = $_GET['id'];
         $user = new UserRepository();
         $userDatas = new User($id);
+
         $tags = new TagRepository();
         $allTags = $tags->getAllTags();
         $status = new StatusRepository();
@@ -114,6 +140,7 @@ function profilePage()
         $userProjects = $ProjectRepo->getUserProjects($id);
         $Promo = new PromoRepository();
         $userPromo = $Promo->getPromoByUserID($id);
+
         include 'view/public/profile.php';
     }
 }
@@ -157,6 +184,7 @@ function registerPage()
     include 'view/public/register.php';
 
 }
+
     // Promotion
     function allPromotionsPage()
     {

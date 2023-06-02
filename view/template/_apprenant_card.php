@@ -1,6 +1,12 @@
 <?php
 $tagRepo = new TagRepository;
 $apprenant->tags = $tagRepo->getUserTags($apprenant->user_id);
+$projectRepo = new ProjectRepository;
+
+if(isset($formators)){
+    $formateurs = $formators;
+}
+
 ?>
 
 
@@ -50,7 +56,7 @@ $apprenant->tags = $tagRepo->getUserTags($apprenant->user_id);
                 </p>
                 <div class="flex gap-1 justify-center sm:justify-normal mx-auto sm:gap-1">
                     <?php $y = 0;
-                $tags = $tagsRepository->getUserTags($formateur->user_id);
+                $tags = $tagRepo->getUserTags($apprenant->user_id);
                     if (isset($tags) && empty($tags)) { ?>
                         <p class="italic text-center text-[18px] text-main-red">Pas de compétence spécifiée</p>
                     <?php } else if (isset($tags) && !empty($tags)) {
@@ -66,7 +72,7 @@ $apprenant->tags = $tagRepo->getUserTags($apprenant->user_id);
                     <p  class="font-bold my-3 text-center text-[20px] sm:text-left ">Projets de l'apprenant :</p>
                     <div class="flex justify-center sm:justify-auto gap-3 px-4">
                         <?php $i = 0;
-                        $projects = $projectRepository->getUserProjects($formateur->user_id);
+                        $projects = $projectRepo->getUserProjects($apprenant->user_id);
 
                         if (isset($projects) && empty($projects)) { ?>
                                 <p class="italic text-[18px] text-main-red">Pas de projet pour le moment</p>
@@ -88,7 +94,7 @@ $apprenant->tags = $tagRepo->getUserTags($apprenant->user_id);
                 </div>
             </div>
 
-            <button class="clipper2 h-[25%] sm:h-[25%] xl:h-[20%] bg-main-red block text-white z-10 relative text-[20px] text-[22px] font-bold font-main-title w-full">Voir le profil</button>
+            <button class="clipper2 h-[25%] sm:h-[25%] xl:h-[20%] bg-main-red block text-white z-10 relative text-[20px] text-[22px] font-bold font-main-title w-full"><a href="?action=profilePage&id=<?= $apprenant->user_id ?>">Voir le profil</a></button>
           
         </div>
         <div class="hidden clipper sm:flex w-full z-10 bg-center bg-cover grayscale" 
