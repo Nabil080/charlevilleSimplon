@@ -121,10 +121,9 @@ function securizePassword(string $password, string $confirm_password)
 
 }
 
-function securizeImage(array $filesImage){
+function securizeImage(array $filesImage,string $path){
     if(!empty($filesImage))
         {
-        $path = 'assets/upload/company_logo/';
         $nameFile = $filesImage['name'];
         $typeFile = $filesImage['type'];
         $tmpFile = $filesImage['tmp_name'];
@@ -210,10 +209,10 @@ function securizeImage(array $filesImage){
     }
 }
 
-function securizePdf(array $filesPdf){
+function securizePdf(array $filesPdf, string $path){
     if(!empty($filesPdf))
         {
-        $path = 'assets/upload/pdf/';
+            var_dump($filesPdf);
         $nameFile = $filesPdf['name'];
         $typeFile = $filesPdf['type'];
         $tmpFile = $filesPdf['tmp_name'];
@@ -296,5 +295,29 @@ function securizePdf(array $filesPdf){
         echo json_encode($response);
 
         return false;
+    }
+}
+
+function securizeText(string $text):bool
+{
+    $array = ['<script', '<script>', '</script>', '<iframe', '<iframe>', '</iframe>', '<img', '<link', '<link>', 'href',
+     'src', 'SELECT', 'DELETE', 'DROP', 'INSERT INTO', '<a', '<a>'];
+    $bools = [];
+    foreach ($array as $key) {
+        if (str_contains($text, $key)) {
+            $bool = true;
+            array_push($bools, $bool);
+        } else if (!str_contains($text, $key)) {
+            $bool = false;
+            array_push($bools, $bool);
+        }
+    }
+    
+    if (in_array(true, $bools)) {
+        $isSafe = false;
+        return $isSafe;
+    } else if (!in_array(true, $bools)) {
+        $isSafe = true;
+        return $isSafe;
     }
 }

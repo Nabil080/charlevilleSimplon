@@ -9,17 +9,21 @@ $_SESSION['user'] = (object) array(
     'role_id' => 1,
 );
 
+// var_dump($_SESSION);
+
 if (isset($_GET['action']) && $_GET['action'] !== '' && !isset($_GET['admin'])) {
     $action = $_GET['action'];
     require 'public.php';
+
     if (isset($_SESSION['user'])) {
-        if ($_SESSION['user']->role_id <= 4) {
+        if ($_SESSION['user']->role_id == 2 || $_SESSION['user']->role_id > 3) {
             switch ($action) {
                 // Afficher son profil perso
                 case 'myProfile':
                     myProfile();
                     break;
             }
+
             if ($_SESSION['user']->role_id <= 3) {
                 switch ($action) {
                     // Afficher le CRUD de projet (Gestion de projet)

@@ -30,7 +30,7 @@ $title = "Toutes nos formations";
     <h1 class="text-main-red font-title text-center text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold pt-4 md:py-8">Nos formations</h1>
 
     <div class="large_screen md:mx-2">
-        <div class="section-cards grid place-content-center md:flex md:flex-wrap md:justify-around">
+        <div class="section-cards grid  place-content-center md:flex md:flex-wrap md:justify-around">
             <?php foreach ($formations as $formation) {
                 include('view/template/_formation_card.php');
             } ?>
@@ -97,7 +97,7 @@ $title = "Toutes nos formations";
             <div class="border-2 hidden sm:block border-main-red w-[300vw] absolute z-0 h-0 top-1/2 -left-full"></div>
             <li class="z-10 w-2/3 cursor-pointer">
                 <div onclick="changeTab(0)"
-                    class="tabChange rounded-[5px] text-main-white bg-main-red p-2 grid items-center justify-center">
+                    class="tabChange rounded-[5px] text-main-white !bg-main-red p-2 grid items-center justify-center">
                     <span class="lg:text-xl text-md font-semibold">2013</span>
                 </div>
             </li>

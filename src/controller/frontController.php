@@ -13,6 +13,7 @@ try {
     function allFormationsPage()
     {
         $formationRepository = new FormationRepository;
+        $promoRepository = new PromoRepository;
         $formations = $formationRepository->getAllFormations();
         include 'view/public/allFormations.php';
     }
@@ -26,6 +27,37 @@ try {
 
     function projectPage()
     {
+        $projectRepository = new ProjectRepository;
+        $promoRepository = new PromoRepository;
+        $progressRepository = new ProgressRepository;
+        $isMyProject = false;
+        if (isset($_SESSION['user'])) {
+            $userProject = $projectRepository->getUserProjects($_SESSION['user']->role_id);
+            foreach ($userProject as $project){
+                if (isset($_GET['id']) && $_GET['id'] == $project->id) {
+                    $isMyProject = true;
+                }
+            }
+        }
+        if (!isset($_GET['id'])) {
+            header('Location:?action=homepage');
+        }
+        
+        if ($_SESSION['user']->role_id == 1) {
+            $isMyProject = true;
+        }
+        if (isset($_GET['id']) && $_GET['id'] !== 0) {
+            $id = $_GET['id'];
+        } else {
+            $id = 3;
+        }
+        
+
+        $project = $projectRepository->getProjectById($id);
+        $team = $projectRepository->getProjectUsers($id);
+        $promoUsers = $promoRepository->getAllApprenants($project->promo->id);
+        $promoFormateurs = $promoRepository->getAllFormateurs($project->promo->id);
+        $allProgress = $progressRepository->getProgressByProjectId($id);
         include 'view/public/project.php';
     }
 
@@ -37,19 +69,19 @@ try {
 
     function projectGestionPage()
     {
-    if ($_SESSION['user']->role-> id == 3) {
+    if ($_SESSION['user']->role_id == 3) {
         $projectRepository = new ProjectRepository;
-        $projects = $projectRepository->getEntrepriseProjects($_SESSION['user']->id);
+        $projects = $projectRepository->getEntrepriseProjects($_SESSION['user']['user_id']);
         include 'view/public/project_gestion.php';
-    } else if ($_SESSION['user']->role-> id == 1){
+    } else if ($_SESSION['user']->role_id  == 1){
         $promoRepository = new PromoRepository;
         $promos =   $promoRepository->getActivePromos();
         $projectRepository = new ProjectRepository;
         $projects = $projectRepository->getWaitingProjects();
         include 'view/public/project_gestion.php';
-    } else if ($_SESSION['user']->role-> id == 2) {
+    } else if ($_SESSION['user']->role_id  == 2) {
         $projectRepository = new ProjectRepository;
-        $projects = $projectRepository->getFormateurProjects($_SESSION['user']->id);
+        $projects = $projectRepository->getFormateurProjects($_SESSION['user']['user_id']);
         include 'view/public/project_gestion.php';
     } else {
         header('Location:?action=homepage');
@@ -131,6 +163,7 @@ function registerPage()
         $PromoRepository = new PromoRepository;
         $promos = $PromoRepository->getPromos();
         include 'view/public/all_promotions.php';
+
     }
     function promotionPage()
     {
@@ -140,10 +173,13 @@ function registerPage()
             $id = 1;
         }
         $PromoRepository = new PromoRepository;
+        $tagsRepository = new TagRepository;
+        $projectRepository = new ProjectRepository;
         $promo = $PromoRepository->getPromoById($id);
         $apprenants = $PromoRepository->getAllApprenants($id);
         $formateurs = $PromoRepository->getAllFormateurs($id);
         $allProjects = $PromoRepository->getPromoProjects($id);
+
         include 'view/public/promotion.php';
     }
 
@@ -217,8 +253,8 @@ function crudProjetPage()
     include 'view/admin/_projects.php';
 }
 
-function projectFormPage() {
-
+function projectFormPage() 
+{
     $User = new User($_SESSION['user']->role_id);
     if(isset($_GET['id'])){
         $projectRepo = new ProjectRepository;

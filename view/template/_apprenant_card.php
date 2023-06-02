@@ -50,10 +50,11 @@ $apprenant->tags = $tagRepo->getUserTags($apprenant->user_id);
                 </p>
                 <div class="flex gap-1 justify-center sm:justify-normal mx-auto sm:gap-1">
                     <?php $y = 0;
-                    if (isset($apprenant->tags) && empty($apprenant->tags)) { ?>
+                $tags = $tagsRepository->getUserTags($formateur->user_id);
+                    if (isset($tags) && empty($tags)) { ?>
                         <p class="italic text-center text-[18px] text-main-red">Pas de compétence spécifiée</p>
-                    <?php } else if (isset($apprenant->tags) && !empty($apprenant->tags)) {
-                        foreach ($apprenant->tags as $tag) { ?>
+                    <?php } else if (isset($tags) && !empty($tags)) {
+                        foreach ($tags as $tag) { ?>
                         <p class="bg-[#F2F2F3] px-4 py-1 border-main-gray border-2 text-[16px] rounded-[50px]"><?= $tag->name ?></p>
                     <?php $y++;
                             if ($y == 3) {
@@ -65,10 +66,12 @@ $apprenant->tags = $tagRepo->getUserTags($apprenant->user_id);
                     <p  class="font-bold my-3 text-center text-[20px] sm:text-left ">Projets de l'apprenant :</p>
                     <div class="flex justify-center sm:justify-auto gap-3 px-4">
                         <?php $i = 0;
-                        if (isset($apprenant->tags) && empty($apprenant->projects)) { ?>
+                        $projects = $projectRepository->getUserProjects($formateur->user_id);
+
+                        if (isset($projects) && empty($projects)) { ?>
                                 <p class="italic text-[18px] text-main-red">Pas de projet pour le moment</p>
-                            <?php } else if (isset($apprenant->tags) && !empty($apprenant->tags)) {
-                                foreach ($apprenant->projects as $project) {
+                            <?php } else if (isset($projects) && !empty($projects)) {
+                                foreach ($projects as $project) {
                                     ?>
                                     <a href="">
                                         <p class="bg-main-gray text-main-white px-4 py-1 text-[14px] rounded-[50px]"><?= substr($project->name, 0, 15) . ".." ;?></p>

@@ -1,14 +1,15 @@
 <!-- Card formation -->
 <div class="card_formation flex flex-col max-w-[445px] rounded-[5px] border-[1px] m-3 border-main-border md:w-2/5">
-    <img class="max-h-[140px] md:max-h-[200px] w-full" src="assets/img/formations/devweb" alt="Formation">
-    <h3 class="text-main-red font-title font-semibold text-lg pl-3 mt-3 text-center md:text-2xl xl:text-3xl">
+    <img class="max-h-[140px] md:max-h-[200px] w-full" src="<?= $formation->image ?>" alt="Formation">
+    <h3 class="text-main-red font-title font-semibold h-auto text-lg pl-3 mt-3 text-center md:text-2xl xl:text-3xl">
         <?= $formation->name; ?>
     </h3>
     <h4 class="text-main-gray font-main text-sm  italic pl-3 text-center">
         <?= $formation->level; ?> / <?= $formation->diploma; ?>
     </h4>
     <div class="hidden md:flex flex-col flex-grow px-8 py-4 text-[16px]">
-        <h5 class="text-main-red font-main pb-2 font-semibold">Le métier de <span class="italic"><?= $formation->job_name; ?></span> s’articule
+        
+        <h5 class="text-main-red font-main pb-2 font-semibold">Le métier de <span class="italic"><?= $formation->name; ?></span> s’articule
             autour de plusieurs activités principales :</h5>
         <ul class="space-y-2 list-disc pl-4">
             <?= $formation->preview ;?>
@@ -16,7 +17,10 @@
     </div>
     <div class="formation_status flex justify-center items-center">
         <h5 class="text-main-gray font-main text-sm md:text-[16px] italic text-center my-3">
-            <?= $formation->status->name; ?> <?= $formation->start; ?></h5>
+            <?= $formation->status->name; ?> <?php 
+            $start = $promoRepository->getPromoStart($formation->id); 
+            echo $start; ?>
+            </h5>
         <span class="w-4 h-4 border-[1px] bg-main-green rounded-full ml-2 animate-pulse"></span>
     </div>
     <div class="card_buttons flex  justify-around pb-6 pt-2">
