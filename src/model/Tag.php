@@ -69,3 +69,4 @@ class TagRepository extends ConnectBdd
 
         return $allTags;
     }
+}

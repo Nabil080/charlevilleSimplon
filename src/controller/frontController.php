@@ -143,7 +143,7 @@ function profilePage()
 
         include 'view/public/profile.php';
     }
-
+}
 
 function myProfile()
 {

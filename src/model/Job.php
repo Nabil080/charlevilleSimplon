@@ -46,7 +46,7 @@ class JobRepository extends ConnectBdd
             $jobTable[] = $job;
         }
         return $jobTable;
-
+    }
     public function getJobsByFormationId($id):array
     {
         $jobs = [];
@@ -63,7 +63,7 @@ class JobRepository extends ConnectBdd
 
 
     }
-}
+
 
 
 ?>

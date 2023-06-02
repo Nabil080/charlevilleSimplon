@@ -66,7 +66,7 @@
         <ul class="grid grid-cols-2 lg:grid-cols-4 " id="myTab" data-tabs-toggle="#myTabContent" role="tablist">
             <li class="border border-white">
                 <button onclick="changeTab(0);"
-                    class="tabChange transition-all duration-[0.4s] cursor-pointer bg-main-red w-full p-5 inline-flex justify-center items-center gap-3 text-[16px] md:text-[28px] text-white aria-selected:bg-main-red aria-selected:text-white aria-selected:hover:text-white">
+                    class="tabChange transition-all duration-[0.4s] cursor-pointer !bg-main-red w-full p-5 inline-flex justify-center items-center gap-3 text-[16px] md:text-[28px] text-white aria-selected:bg-main-red aria-selected:text-white aria-selected:hover:text-white">
                     <i class="fa-sharp fa-solid fa-trophy fa-lg"></i>
                     Compétence
                 </button>
