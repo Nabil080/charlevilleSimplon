@@ -42,11 +42,12 @@ const yearCheckboxes = document.querySelectorAll("#year-dropdown input");
 const levelCheckboxes = document.querySelectorAll("#level-dropdown input");
 const filterReset = document.querySelector('#filter-reset');
 
-let currentPage = 1
-let limitStart = 0
-let limitEnd = 6
 
-const getProjets = () => {
+let projectsPerPage = 6;
+
+let paginationRange = 3
+
+const getProjets = (limitStart = 0,limitEnd = 6) => {
 
     return fetch('?action=projectsPagination',{
         method: 'POST',
@@ -55,55 +56,55 @@ const getProjets = () => {
         },
         body: JSON.stringify({limitStart: limitStart, limitEnd: limitEnd})
     })
-    .then((response) => response.text())
-    .then((data) => {
-        data = JSON.parse(data);
-
-        console.log(data.filtered);
-
-    // TODO: CREATION DE LA PAGINATION
-    // * VARIABLES POUR LA PAGINATION
-    let projectsPerPage = 6;
-    let projectsCount = data.filtered
-    let pageCount = Math.ceil(projectsCount / projectsPerPage);
-
-    let paginationRange = 3
-    // currentPage = number
-    // if(number == 'last'){currentPage = pageCount}
-
-    const prevRange = ( currentPage - 1 ) * projectsPerPage
-    const nextRange = (currentPage * projectsPerPage )
-    console.log(prevRange,nextRange)
-    // console.log(currentPage)
-
-
-        // * AFFICHE LA PAGINATION
-    paginationDiv.innerHTML = '';
-    for(page = 1; page <= pageCount; page++){
-        if(page > currentPage - paginationRange && page < currentPage + paginationRange){
-            if(page == currentPage){
-                paginationDiv.innerHTML += `<button id="${page}" class="bg-main-red text-main-white">${page}</button>`;
-            }else{
-                paginationDiv.innerHTML += `<button id="${page}" class="hover:bg-main-red hover:text-main-white">${page}</button>`;
-            }
-        }
-    }
-
-
-
-
-        return data.projets
-    })
+    .then((data) => data.json())
 }
 
 
-showLoading();
-getProjets()
-.then((projets) =>{
-    stopLoading()
-    projectGrid.innerHTML += projets.join('');
-})
+async function updateData(currentPage = 1){
+    showLoading();
+    let limitStart = (currentPage - 1) * projectsPerPage
+    let limitEnd = projectsPerPage
+    console.log(limitStart,limitEnd)
 
+    data = await getProjets(limitStart,limitEnd)
+        stopLoading()
+        
+
+        // TODO: CREATION DE LA PAGINATION
+
+        let prevRange = ( currentPage - 1 ) * projectsPerPage
+        let nextRange = (currentPage * projectsPerPage )
+        // console.log(prevRange,nextRange)
+        // console.log(currentPage)
+        let projectsCount = data.filtered
+        let pageCount = Math.ceil(projectsCount / projectsPerPage);
+
+
+        // * AFFICHE LA PAGINATION
+        paginationDiv.innerHTML = '';
+        for(page = 1; page <= pageCount; page++){
+            if(page > currentPage - paginationRange && page < currentPage + paginationRange){
+                if(page == currentPage){
+                    paginationDiv.innerHTML += `<button id="${page}" class="bg-main-red text-main-white">${page}</button>`;
+                }else{
+                    paginationDiv.innerHTML += `<button id="${page}" class="hover:bg-main-red hover:text-main-white">${page}</button>`;
+                }
+            }
+        }
+
+        // * AJOUTE LES EVENT LISTENERS
+        paginationDiv.querySelectorAll('button').forEach(button => 
+        {
+            button.addEventListener('click', (e) => {
+                console.log(Number(e.target.id))
+                updateData(Number(e.target.id))
+            })
+        })
+
+        projectGrid.innerHTML += data.projets.join('');
+}
+
+updateData();
 
 
 
