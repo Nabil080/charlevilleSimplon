@@ -110,18 +110,19 @@ class ProjectRepository extends ConnectBdd
 
         $project->start = null;
         $project->end = null;
-      
+
         if($data['status_id'] == 12){
+
             $projectDateStart = new PromoRepository;
             $project->start = $projectDateStart->formateDate($data['project_start']);
             $project->end = 'En cours';
         }
-        if($data['status_id'] == 12){
+        if ($data['status_id'] == 12) {
             $projectDateStart = new PromoRepository;
             $project->start = $projectDateStart->formateDate($data['project_start']);
             $project->end = 'En cours';
         }
-        if($data['status_id'] == 13){
+        if ($data['status_id'] == 13) {
             $projectDateStart = new PromoRepository;
             $project->start = $projectDateStart->formateDate($data['project_start']);
             $projectDateEnd = new PromoRepository;
@@ -186,6 +187,7 @@ class ProjectRepository extends ConnectBdd
         return $team;
     }
 
+
     public function getUserProjects($id): array
     {
         $projects = [];
@@ -203,6 +205,7 @@ class ProjectRepository extends ConnectBdd
     }
 
     public function getEntrepriseProjects(int $id):array 
+
     {
         $req = $this->bdd->prepare("SELECT project_id FROM project WHERE user_id = ?");
         $req->execute([$id]);
@@ -211,14 +214,16 @@ class ProjectRepository extends ConnectBdd
         $projects = [];
 
 
+
         foreach($datas as $data){
+
             $project = $projectRepository->getProjectById($data);
             array_push($projects, $project);
-        }   
+        }
         return $projects;
     }
 
-    public function updateProjectStatus(string $validation, int $id):bool
+    public function updateProjectStatus(string $validation, int $id): bool
     {
         if ($validation == "accept") {
             $status_id = 10;
@@ -230,7 +235,9 @@ class ProjectRepository extends ConnectBdd
         return $bool;
     }
 
+
     public function assignTeamToProject(int $projectId, array $apprenants):array
+
     {
         $bools = [];
         if (is_array($apprenants)) {
@@ -424,14 +431,16 @@ class ProjectRepository extends ConnectBdd
         }
     }
 
-    public function reSubmitProject(int $id):bool
+    public function reSubmitProject(int $id): bool
     {
         $req = $this->bdd->prepare("UPDATE project SET status_id = 9 WHERE project_id = ?");
         $bool = $req->execute([$id]);
         return $bool;
     }
 
+
     public function updateProjectTitle(int $id, array $post):bool
+
     {
         $req = $this->bdd->prepare("UPDATE project SET project_name = ? WHERE project_id = ?");
         $bool = $req->execute([$post['title'], $id]);
@@ -469,6 +478,7 @@ class ProjectRepository extends ConnectBdd
             $req = $this->bdd->prepare('INSERT INTO project_team (project_id, user_id) VALUES (?,?)');
             $bool = $req->execute([$id, (int)$users]);
             array_push($bools, $bool);
+
         }
 
         return $bools;
