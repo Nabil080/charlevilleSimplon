@@ -158,7 +158,7 @@
 <div onclick="swapDivsById('github','github-update');swapDivsById('link','link-update');swapDivsById('pdf','pdf-update')" class="w-fit mx-auto relative -top-10 text-main-red cursor-pointer"><i class="fa-solid fa-pen cursor-pointer"></i> Modifier les liens</div>
 
 <!-- tabulation entreprise/apprenants -->
-<section class="max-w-[1200px] mx-auto">
+<section class="max-w-[1200px] w-full mx-auto">
     <div class="flex w-full">
         <div onclick="changeTab(0)" class="tabChange cursor-pointer px-0 transition-all duration-[0.4s] bg-main-red w-1/2 text-center text-main-white font-title text-lg md:text-xl lg:text-2xl font-bold py-2 md:py-4">
             <p class="select-none">Demandes de l'entreprise</p>

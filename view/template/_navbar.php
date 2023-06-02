@@ -1,3 +1,9 @@
+<?php
+$formationRepo = new FormationRepository;
+$formations = $formationRepo->getAllFormations();
+?>
+
+
 <nav id="navbar" class="w-[100vw] fixed top-0 left-0 z-40 transition-all duration-[0.3s]">
 
     <div
@@ -29,23 +35,16 @@
                           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" ></path>
                       </svg>
                   </button>
-                  <div id="dropdown" class="z-50 border-main-lightgray hidden bg-main-white rounded-lg shadow w-full mr-4 pl-0 border-main-lightgray">
+                  <div id="dropdown" class="z-50 border-main-lightgray hidden bg-main-white rounded-lg shadow w-fit mr-4 pl-0 border-main-lightgray">
                       <ul class="z-50 relative py-2 md:py-0 px-2 md:px-0 text-sm leading-9 sm:leading-[60px] text-gray-700 divide-y border-2 border-main-red divide-main-red rounded-[4px]" aria-labelledby="dropdownDefaultButton">
                         <li class="md:hover:bg-main-lightred">
                           <a href="?action=allFormationsPage" class="block px-4 py-2 text-[22px] sm:text-[32px] md:text-[20px] ">Découvrir nos formations</a>
                         </li>
-                        <li class="md:hover:bg-main-lightred">
-                          <a href="?action=formationPage&id=1" class="block px-4 py-2 text-[22px] sm:text-[32px] md:text-[20px]">Devellopeur Web / Web mobile</a>
-                        </li>
-                        <li class="md:hover:bg-main-lightred">
-                          <a href="?action=formationPage&id=2" class="block px-4 py-2 text-[22px] sm:text-[32px] md:text-[20px]">Référent Digital</a>
-                        </li>
-                        <li class="md:hover:bg-main-lightred">
-                          <a href="?action=formationPage&id=3" class="block px-4 py-2 text-[22px] sm:text-[32px] md:text-[20px]">Technicien supérieur système et réseaux</a>
-                        </li>
-                        <li class="md:hover:bg-main-lightred">
-                          <a href="?action=formationPage&id=4" class="block px-4 py-2 text-[22px] sm:text-[32px] md:text-[20px]">Concepteur développeur d'applications</a>
-                        </li>
+                        <?php foreach($formations as $formation){ ?>
+                          <li class="md:hover:bg-main-lightred">
+                            <a href="?action=formationPage&id=<?=$formation->id?>" class="block px-4 py-2 text-[22px] sm:text-[32px] md:text-[20px]"><?=$formation->name?></a>
+                          </li>
+                        <?php } ?>
                       </ul>
                   </div>
               </div>
