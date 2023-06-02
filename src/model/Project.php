@@ -137,7 +137,7 @@ class ProjectRepository extends ConnectBdd
         $projects = [];
         $limit = $limitRequest == null ? "" : "LIMIT " . $limitRequest;
 
-        $req = $this->bdd->prepare("SELECT project_id FROM project $limit ORDER BY status_id ASC");
+        $req = $this->bdd->prepare("SELECT project_id FROM project ORDER BY status_id ASC $limit");
         $req->execute();
         $data = $req->fetchAll(PDO::FETCH_ASSOC);
 

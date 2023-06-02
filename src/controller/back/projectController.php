@@ -3,8 +3,14 @@
 
 function projectsPagination()
 {
+    $jsonData = file_get_contents('php://input',true);
+    $data = json_decode($jsonData);
+
+    $limit = $data->limit;
+
+
     $projectRepo = new ProjectRepository ;
-    $projects = $projectRepo->getAllProjects();
+    $projects = $projectRepo->getAllProjects($limit);
 
     $projectsHTML = [];
     foreach($projects as $project){

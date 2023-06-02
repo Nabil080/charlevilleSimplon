@@ -82,8 +82,8 @@ if (isset($_GET['action']) && $_GET['action'] !== '' && !isset($_GET['admin'])) 
     homepage();
 }
 
-// $repo = new PromoRepository;
-// $data = $repo->getPromoDate(2);
+// $repo = new ProjectRepository;
+// $data = $repo->getAllProjects();
 // var_dump($data);
 
 // $connect = new ConnectBdd;
