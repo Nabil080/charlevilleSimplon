@@ -254,7 +254,83 @@ try {
             echo $errorJson;
         }
     }
-    function logOut()
+
+function contactUsers()
+{
+    var_dump($_POST);
+
+    if(isset($_POST['message'])){
+        $send=trim(htmlspecialchars(strip_tags($_POST['send']),ENT_QUOTES));
+        $objet=trim(htmlspecialchars(strip_tags($_POST['object']),ENT_QUOTES));
+        $message=trim(htmlspecialchars(strip_tags($_POST['message']),ENT_QUOTES));
+
+        $name = "Simplon Charleville";
+        $email = "simplon.charleville@gmail.com";
+    
+    
+        if(!empty($name)&&!empty($email)&&!empty($objet)&&!empty($message)){
+            $to = $send;
+            $email_subject = $objet;
+            $bodyParagraphs = ["Name: {$name}", "Email: {$email}", "Message:", $message];
+            $email_body = join(PHP_EOL, $bodyParagraphs);
+            $headers = ['From' => $email, 'Reply-To' => $email, 'Content-type' => 'text/html; charset=utf-8'];
+            if (mail($to, $email_subject, $email_body, $headers)){
+                echo 'envoi réussi';
+            }else{
+                echo 'envoi échoué';
+            }
+        }else{
+            echo 'éléments manquants';
+        }
+    
+    }
+}
+
+function deleteCandidate()
+{
+    // Check si admin
+    var_dump($_POST);
+    $userRepo = new UserRepository;
+    $req = $userRepo->bdd->prepare("DELETE FROM `promo_candidate` WHERE `user_id` = ? AND `promo_id` = ?");
+    $req->execute([$_POST['user_id'], $_POST['promo_id']]);
+}
+
+function deleteLearner()
+{
+    // Check si admin
+    var_dump($_POST);
+    $userRepo = new UserRepository;
+    $req = $userRepo->bdd->prepare("DELETE FROM `promo_user` WHERE `user_id` = ? AND `promo_id` = ?");
+    $req->execute([$_POST['user_id'], $_POST['promo_id']]);
+
+}
+
+function deleteUser()
+{
+    // Check si admin
+    var_dump($_POST);
+    $userRepo = new UserRepository;
+    $userRepo->deleteUser($_POST['user_id']);
+}
+
+function assignFormator()
+{
+    // Check si admin
+    var_dump($_POST);
+    $userRepo = new UserRepository;
+    $req = $userRepo->bdd->prepare("UPDATE user SET `role_id` = ? WHERE `user_id` = ?");
+    $req->execute([2, $_POST['user_id']]);
+}
+
+function updateUserPersonnalInfos()
+{
+    // Check si admin
+    // var_dump($_POST);
+    $userRepo = new UserRepository;
+    $userRepo->updateUserPersonnalInfos($_POST);
+}
+
+function logOut()
     {
         unset($_SESSION['user']);
         header('Location: index.php');

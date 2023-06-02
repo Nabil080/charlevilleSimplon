@@ -44,6 +44,7 @@ const filterReset = document.querySelector('#filter-reset');
 
 let currentPage = 1
 
+
 const getProjets = () => {
 
     return fetch('?action=projectsPagination')

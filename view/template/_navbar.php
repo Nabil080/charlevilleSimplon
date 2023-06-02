@@ -1,4 +1,4 @@
-<nav id="navbar" class="w-[100vw] fixed top-0 left-0 z-40 transition-all duration-[0.3s]">
+<nav id="navbar" class="w-[100vw] fixed top-0  shadow-[3px_5px_10px] shadow-[#1111114d] blur-[0.2px] left-0 z-40 transition-all duration-[0.3s]">
 
     <div
         class="grid grid-cols-2 transition-all duration-[0.2s] items-center bg-main-white border-t-[4px] md:grid-cols-[20%_80%] border-main-red">
@@ -49,40 +49,7 @@
                       </ul>
                   </div>
               </div>
-              <i class="md:ml-2 fa-solid fa-users text-[44px] sm:text-[62px] justify-self-center  md:text-[20px]" style="color: #BD3124;"></i>
-              <p class="text-[24px] sm:text-[36px] md:text-[20px] xl:text-[24px]"><a href="?action=allPromotionsPage">Promotions</a></p>
-              <i class="md:ml-2 fa-solid fa-book text-[44px] sm:text-[62px] justify-self-center  md:text-[20px]"  style="color: #BD3124;"></i>
-              <p class="text-[24px] sm:text-[36px] md:text-[20px] xl:text-[24px]"><a href="?action=allProjectsPage">Projets</a></p>
-              <i class="md:ml-2 fa-solid fa-user text-[44px] sm:text-[62px] justify-self-center  md:text-[20px]"  style="color: #BD3124;"></i>
-              <?php if (isset($_SESSION['user']->role->id)){
-                      if ($_SESSION['user']->role->id == 3) {?>
-                <p class="text-[24px] sm:text-[36px] md:text-[20px] xl:text-[24px]"><a href="?action=projectGestionPage">Mes Projets</a></p>
-                  <?php } else { ?>
-                <p class="text-[24px] sm:text-[36px] md:text-[20px] xl:text-[24px]"><a href="">Compte</a></p>
-              <?php 
-              }
-              } else {
-              ?>
-                <p class="text-[24px] sm:text-[36px] md:text-[20px] xl:text-[24px] cursor-pointer" data-modal-target="login-modal" data-modal-toggle="login-modal">Connexion</p>
-              <?php 
-              } 
-              ?>
-          </div>
-        </div>
-      </div>
-      <?php 
-        if (isset($_SESSION['define'])) { 
-      ?>
-        <div class="w-full  justify-center hidden md:flex">
-          <a href="#" class="text-center bg-main-red px-5 py-1 rounded-[5px] text-[20px] text-main-white">Admin</a>
-        </div>
-      <?php
-        }
-      ?>
-</nav>
-                    </div>
-                </div>
-                <i class="md:ml-2 fa-solid fa-users text-[44px] sm:text-[62px] justify-self-center  md:text-[20px]"
+              <i class="md:ml-2 fa-solid fa-users text-[44px] sm:text-[62px] justify-self-center  md:text-[20px]"
                     style="color: #BD3124;"></i>
                 <p class="text-[24px] sm:text-[36px] md:text-[20px] xl:text-[24px]"><a
                         href="?action=allPromotionsPage">Promotions</a></p>
@@ -115,6 +82,10 @@
                                     <a href="#" class="block px-4 py-2 text-[22px] sm:text-[32px] md:text-[20px]">Admin</a>
                                 </li>
                                 <li class="md:hover:bg-main-lightred">
+                                    <a href="?action=projectGestionPage&id=<?= $_SESSION['user']->user_id ?>" class="block px-4 py-2 text-[22px] sm:text-[32px] md:text-[20px]">Mes Projets</a>
+                                </li>
+
+                                <li class="md:hover:bg-main-lightred">
                                     <a href="index.php?action=logOut"
                                         class="block px-4 py-2 text-[22px] sm:text-[32px] md:text-[20px]">Déconnexion</a>
                                 </li>
@@ -140,3 +111,5 @@
         } ?>
     </div>
 </nav>
+                    
+                

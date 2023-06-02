@@ -22,8 +22,9 @@ class User
     public $user_birth_date;
     public $user_birth_place;
     public $user_nationality;
+    public $user_status_id;
     public $user_status;
-    public $status_date;
+    public $user_status_date;
     public $role_id;
     public $role_name;
     public $user_tags;
@@ -63,7 +64,6 @@ class User
         $this->user_github = (!null) ? $account['user_github'] : '';
         $this->user_highlight = (!null) ? $account['user_highlight'] : '';
         $this->user_cv = (!null) ? $account['user_cv'] : '';
-        $this->user_projects = (!null) ? $account['user_projects'] : '';
 
         /* Prospect */
         $this->user_id_poleEmploi = $account['user_numero_pe'];
@@ -73,11 +73,10 @@ class User
 
         /* Utility */
         $this->user_token = $account['user_token'];
+        $this->user_status_id = $account['status_id'];
         $this->user_status = $account['status_name'];
-        $this->status_date = $account['status_date'];
+        $this->user_status_date = $account['user_status_date'];
         $this->role_id = $account['role_id'];
-        $this->role_name = $account['role_name'];
-        $this->user_tags = $account['user_tags'];
     }
 
 }
@@ -128,11 +127,6 @@ class UserRepository extends ConnectBdd
         $stmt->execute([$id]);
         $data = $stmt->fetch(PDO::FETCH_ASSOC);
         $stmt->closeCursor();
-
-        $Tags = new Tag;
-        $tagRepo = new TagRepository;
-        $Tags = $tagRepo->getUserTags($data['user_id']);
-        $data->tags = $Tags;
 
         return $data;
     }
@@ -207,5 +201,292 @@ class UserRepository extends ConnectBdd
         $stmt = $this->bdd->prepare($req);
         $stmt->execute([2, '', $token, $email]);
         $stmt->closeCursor();
+    }
+  
+   public function getAllCandidates(): array
+    {
+        $candidates = [];
+        $query = "SELECT `user_id` FROM `user` WHERE `role_id` = ?";
+        $req = $this->bdd->prepare($query);
+        $req->execute([5]);
+        $data = $req->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach ($data as $candidate) {
+            $candidates[] = new User($candidate['user_id']);
+        }
+
+        return $candidates;
+    }
+
+    public function getAllLearners(): array
+    {
+        $learners = [];
+        $formators = [];
+        $query = "SELECT `user_id` FROM `user` WHERE `role_id` = ? ";
+        $req = $this->bdd->prepare($query);
+        $req->execute([4]);
+        $data = $req->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach ($data as $learner) {
+            $learners[] = new User($learner['user_id']);
+        }
+
+        return $learners;
+    }
+
+    public function getAllCompanies(): array
+    {
+        $companies = [];
+        $query = "SELECT `user_id` FROM `user` WHERE `role_id` = ? ";
+        $req = $this->bdd->prepare($query);
+        $req->execute([3]);
+        $data = $req->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach ($data as $company) {
+            $companies[] = new User($company['user_id']);
+        }
+
+        return $companies;
+    }
+
+    public function getAllFormators(): array
+    {
+        $formators = [];
+        $query = "SELECT `user_id` FROM `user` WHERE `role_id` = ? ";
+        $req = $this->bdd->prepare($query);
+        $req->execute([2]);
+        $data = $req->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach ($data as $formator) {
+            $formators[] = new User($formator['user_id']);
+        }
+
+        return $formators;
+    }
+
+
+    public function getUserPromo($option,$userId):array
+    {
+        $promos = [];
+        $promoRepo = new PromoRepository;
+
+        if($option == 'candidature'){
+            $req = $this->bdd->prepare("SELECT `promo_id` FROM promo_candidate WHERE user_id = ?");
+            $req->execute([$userId]);
+            $data = $req->fetchAll(PDO::FETCH_ASSOC);
+
+            foreach($data as $key){
+                $promos[] = $promoRepo->getPromoById($key['promo_id']);
+            }
+        }
+
+        if($option == 'apprenant'){
+            $req = $this->bdd->prepare("SELECT `promo_id` FROM promo_user WHERE user_id = ?");
+            $req->execute([$userId]);
+            $data = $req->fetchAll(PDO::FETCH_ASSOC);
+
+            foreach($data as $key){
+                $promos[] = $promoRepo->getPromoById($key['promo_id']);
+            }
+        }
+
+        if($option == 'refusé'){
+            $req = $this->bdd->prepare("SELECT `promo_id` FROM promo_refused WHERE user_id = ?");
+            $req->execute([$userId]);
+            $data = $req->fetchAll(PDO::FETCH_ASSOC);
+
+            foreach($data as $key){
+                $promos[] = $promoRepo->getPromoById($key['promo_id']);
+            }
+        }
+
+        return $promos;
+    }
+
+    public function getUserSimplonProjects($id):array
+    {
+        $projects = [];
+        $req = $this->bdd->prepare("SELECT project_id FROM project_team WHERE user_id = ?");
+        $req->execute([$id]);
+        $data = $req->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach($data as $key){
+            $projectRepo = new ProjectRepository;
+            $Project = $projectRepo->getProjectById($key['project_id']);
+
+            if($Project->type->id != 2){
+                $projects[] = $Project;
+            }
+        }
+
+
+        return $projects;
+    }
+
+    public function getUserPersonnalProjects($id):array
+    {
+        $projects = [];
+        $req = $this->bdd->prepare("SELECT project_id FROM project_team WHERE user_id = ?");
+        $req->execute([$id]);
+        $data = $req->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach($data as $key){
+            $projectRepo = new ProjectRepository;
+            $Project = $projectRepo->getProjectById($key['project_id']);
+
+            if($Project->type->id == 2){
+                $projects[] = $Project;
+            }
+        }
+
+
+        return $projects;
+    }
+
+    public function getUserSubmittedProjects($id):array
+    {
+        $projects = [];
+        $req = $this->bdd->prepare("SELECT project_id FROM project WHERE user_id = ?");
+        $req->execute([$id]);
+        $data = $req->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach($data as $key){
+            $projectRepo = new ProjectRepository;
+            $Project = $projectRepo->getProjectById($key['project_id']);
+            $projects[] = $Project;
+        }
+
+        return $projects;
+    }
+
+    public function getUserMail($userId):string
+    {
+        $req = $this->bdd->prepare("SELECT `user_email` FROM `user` WHERE `user_id` = ?");
+        $req->execute([$userId]);
+        $data = $req->fetch();
+
+        return $data['user_email'];
+    }
+
+    public function deleteUser($userId):void
+    {
+        $req = $this->bdd->prepare("DELETE FROM `user_tag` WHERE `user_id` = ?");
+        $req->execute([$_POST['user_id']]);
+
+        $req = $this->bdd->prepare("DELETE FROM `promo_user` WHERE `user_id` = ?");
+        $req->execute([$_POST['user_id']]);
+
+        $req = $this->bdd->prepare("DELETE FROM `promo_refused` WHERE `user_id` = ?");
+        $req->execute([$_POST['user_id']]);
+
+        $req = $this->bdd->prepare("DELETE FROM `promo_candidate` WHERE `user_id` = ?");
+        $req->execute([$_POST['user_id']]);
+
+        $req = $this->bdd->prepare("DELETE FROM `project_team` WHERE `user_id` = ?");
+        $req->execute([$_POST['user_id']]);
+
+        $req = $this->bdd->prepare("DELETE FROM `project` WHERE `user_id` = ?");
+        $req->execute([$_POST['user_id']]);
+
+        $req = $this->bdd->prepare("DELETE FROM `user` WHERE `user_id` = ?");
+        $req->execute([$_POST['user_id']]);
+    }
+
+    public function updateUserPersonnalInfos(array $post):void
+    {
+        var_dump($post);
+        $query = "";
+        $execute = [];
+        $error = false;
+
+
+
+        // Sécurisation variables générales
+        $surname = securizeString($post['surname']);
+        $name = securizeString($post['name']);
+        $adress = securizeString($post['adress']);
+        $email = securizeMail($post['email']);
+        $phone = securizePhone($post['phone']);
+
+        $role = securizeInteger($post['role']);
+        if($role === false){
+            $error = true;
+        }
+
+        $user = securizeInteger($post['user']);
+        if($user === false){
+            $error = true;
+        }
+
+
+        // UPDATE GENERALE
+        if($surname === false || $name === false || $adress === false || $email === false || $phone === false ){
+            $error = true;
+        }else{
+            $query = "UPDATE `user` SET `user_surname` = ?, `user_name` = ?, `user_place` = ?, `user_email` = ?, `user_phone` = ?";
+            $execute = [$surname,$name,$adress,$email,$phone];
+        }
+
+
+
+        // UPDATE PAS ENTREPRISE
+        if($post['role'] != 3){
+            // Sécurisation variables pas entreprise
+            $birth_date = securizeString($post['birth_date']);
+            $birth_place = securizeString($post['birth_place']);
+            $nationality = securizeString($post['nationality']);
+
+            if($birth_date === false || $birth_place === false || $nationality === false){
+                $error = true;
+            }else{
+                $query .= ", `user_birth_date` = ?, `user_birth_place` = ?, `user_nationality` = ?";
+                $push = [$birth_date,$birth_place,$nationality];
+                $execute = array_merge($execute,$push);
+            }
+        }else{
+
+
+
+        // UPDATE ENTREPRISE
+        // Sécurisation variables entreprise
+        $company = securizeString($post['company']);
+
+            if($company === false){
+                $error = true;
+            }else{
+                $query .= ", `user_company` = ?";
+                $push = [$post['company']];
+                $execute = array_merge($execute,$push);
+            }
+        }
+
+
+
+        // UPDATE CANDIDAT/APPRENANT
+        if($post['role'] == 5 || $post['role'] == 4){
+            // Sécurisation variables candidat/apprenant
+            $number = securizeString($post['number']);
+                if($number === false){
+                    $error = true;
+                }else{
+                $query .= ", `user_numero_pe` = ?";
+                $push = [$number];
+                $execute = array_merge($execute,$push);
+            }
+        }
+
+
+
+        // FAIT LA REQUETE SI 0 ERREURS
+        if($error === false){
+            $query .= " WHERE `user_id` = ?";
+            $push = [$user];
+            $execute = array_merge($execute,$push);
+
+            // var_dump($query);
+            // var_dump($execute);
+            $req = $this->bdd->prepare($query);
+            $req->execute($execute);
+        }
     }
 }

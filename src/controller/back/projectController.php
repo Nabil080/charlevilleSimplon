@@ -25,6 +25,33 @@ function projectsPagination()
 
 }
 
+function deleteProject()
+{
+    $projectRepo = new ProjectRepository ;
+    $projectRepo->deleteProject($_GET['id']);
+
+    $response = array(
+        "status" => "success",
+        "message" => "Le projet a bien été supprimé.",
+    );
+
+    echo json_encode($response);
+}
+
+function assignProject()
+{
+    $projectRepo = new ProjectRepository ;
+    $projectRepo->updateProjectStatus('accept',$_POST['project']);
+    $projectRepo->assignProjectToPromo($_POST['project'],$_POST['promo']);
+
+    $response = array(
+        "status" => "success",
+        "message" => "Le projet a bien été assigné.",
+    );
+ 
+    echo json_encode($response);
+}
+
 function validationProjectTreatment() 
 {
     $projectRepository = new ProjectRepository;
@@ -64,11 +91,20 @@ function assignTeamToProject()
         "message" => "Le statut a été modifée comme tel",
         "projets" => $bools,
     );
-    
-    echo json_encode($response);
-
 }
 
+
+function addProjectTraitement()
+{
+    $projectRepo = new ProjectRepository;
+    $projectRepo->addProject($_POST,$_FILES);
+}
+
+function updateProjectTraitement()
+{
+    $projectRepo = new ProjectRepository;
+    $projectRepo->updateProject($_POST,$_FILES);
+}
 function reSubmitProject()
 {
     $id = $_GET['id'];
@@ -77,5 +113,55 @@ function reSubmitProject()
     header('Location:?action=projectGestionPage');
     
 }
+
+function updateProjectElement()
+{
+    $projectRepository = new ProjectRepository;
+
+    if ((!isset($_GET['id']) && $_GET['id'] == null) && (!isset($_GET['type']) && $_GET['type'] == null)){
+
+        // header('Location:?action=projectPage&id=3');
+    } else if ((isset($_GET['id']) && $_GET['id'] !== null) && (isset($_GET['type']) && $_GET['type'] !== null)) {
+        $type = $_GET['type'];
+        $id = $_GET['id'];
+    }
+    if (isset($_POST) && !empty($_POST)) {
+        $array = $_POST;
+    } else {
+        // header('Location:?action=projectPage&id='.$_GET['id']);
+    }
+    if ($type == "title") {
+        $bool = $projectRepository->updateProjectTitle($id, $array);
+    }
+    if ($type == "apprenants" || $type == "formateurs") { 
+        $bool = $projectRepository->updateProjectUsers($id, $type, $array);
+    }
+    if ($type == "progress") {
+        $bool = $projectRepository->updateProjectProgress($id, $array);
+    }
+    if ($type == "image") {
+        $files = $_FILES;
+        $post = $_POST;
+        $bool = $projectRepository->updateProjectImage($id, $files, $post);
+    }
+    if ($type == "github") {
+        $bool = $projectRepository->updateProjectGithub($id, $array);
+    }
+    if ($type == "pdf") {
+        $files = $_FILES;
+        $bool = $projectRepository->updateProjectCharge($id, $files);
+    }
+    if ($type == "link") {
+        $bool = $projectRepository->updateProjectLink($id, $array);
+    }
+    if ($type == "companyNote") {
+        $bool = $projectRepository->updateCompanyNote($id, $array);
+    }
+    if ($type == "studentsNote") {
+        $bool = $projectRepository->updateStudentsNote($id, $array);
+    }
+    // header("Location:?action=projectPage&id=". $_GET['id']);
+}
+
 
 ?>

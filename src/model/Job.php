@@ -36,6 +36,7 @@ class JobRepository extends ConnectBdd
 
     public function getJobName($formation_id): array
     {
+
         $req = $this->bdd->prepare("SELECT `job_name` FROM `job` WHERE `formation_id` = ?");
         $req->execute([$formation_id]);
         $data = $req->fetchAll(PDO::FETCH_ASSOC);
@@ -44,8 +45,23 @@ class JobRepository extends ConnectBdd
         foreach ($data as $job) {
             $jobTable[] = $job;
         }
-
         return $jobTable;
+
+    public function getJobsByFormationId($id):array
+    {
+        $jobs = [];
+        $req = $this->bdd->prepare("SELECT job_id FROM job WHERE formation_id = ?");
+        $req->execute([$id]);
+        $data = $req->fetchAll(PDO::FETCH_ASSOC);
+        
+        foreach($data as $key){
+            $jobs[] = $this->getJobById($key['job_id']);
+        }
+
+        return $jobs;
+    }
+
+
     }
 }
 

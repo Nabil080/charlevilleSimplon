@@ -36,7 +36,10 @@
         ];
         return $test;
     }
-    public function getSuccess($success, $navbarBool)
+
+  
+    public function getSuccess($success, $navbarBool = null)
+
     {
         $file_path = 'view/template/_succesMessage.php';
         $this->type = 'successMessage';
