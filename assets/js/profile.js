@@ -32,23 +32,27 @@ modifHighlightButton.addEventListener('click', () => {
     modifyInput.value = 'modify';
 });
 
-// Afficher messages d'erreur lors de la modification des liens github et linkedin
-// const linksForm = document.querySelector('#links-form');
-// linksForm.addEventListener('submit', function (event) {
-//     event.preventDefault();
+// Suppression de projet perso
 
-//     const formData = new FormData(linksForm);
-//     var userID = parseInt('<?php echo $userDatas["user_id"]; ?>');
-//     fetch('index.php?action=updateUserElements&type=links&id='+userID, {
-//         method: 'POST',
-//         body: formData
-//     })
-//         .then(response => response.json())
-//         .then(data => {
-//             console.log(data);
-//             deleteAlert();
-//             showAlert(data);
-//         })
-//         .catch(error => console.error(error));
+const deleteMyProject = document.getElementById('delete-my-project');
+const forms = deleteMyProject.getElementsByTagName('form');
+let formData =null;
 
-// });
+for (i = 0; i < forms.length; i++) {
+    forms[i].addEventListener('submit', (event) => {
+        event.preventDefault();
+        formData = new FormData(forms[i]);
+        fetch('index.php?action=deleteMyProject', {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => response.json())
+            .then(data => {
+                //console.log(data);
+                deleteAlert();
+                showAlert(data);
+            })
+            .catch(error => console.error(error));
+    });
+}
+

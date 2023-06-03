@@ -74,22 +74,25 @@ class ProjectRepository extends ConnectBdd
         $User = new User($data['user_id']);
         $project->user = $User;
 
-        $Formator = new User($data['user_id_project_formator']);
-        $project->formator = $Formator;
+        if (isset($data['user_id_project_formator'])) {
+            $Formator = new User($data['user_id_project_formator']);
+            $project->formator = $Formator;
+        }
 
         $Status = new Status;
         $statusRepo = new StatusRepository;
         $Status = $statusRepo->getStatusById($data['status_id']);
         $project->status = $Status;
 
+        if (isset($data['promo_id'])) {
         // $Promo = new Promo;
         $promoRepo = new PromoRepository;
         $Promo = $promoRepo->getPromoById($data['promo_id']);
         $project->promo = $Promo;
-
         // $formationRepo = new FormationRepository;
         // $Formation = $formationRepo->getFormationById($data['formation_id']);
         // $project->formation = $Formation;
+        }
 
         $Type = new Type;
         $typeRepo = new TypeRepository;
@@ -160,6 +163,15 @@ class ProjectRepository extends ConnectBdd
 
         $uniqueDates = array_unique($dates);
         return $uniqueDates;
+    }
+
+    public function getProjectImage(int $id): array
+    {
+        $req = $this->bdd->prepare("SELECT project_model_image FROM project WHERE project_id =?");
+        $req->execute(array($id));
+        $image = $req->fetch(PDO::FETCH_ASSOC);
+
+        return $image;
     }
 
     public function getProjectUsers($id): array

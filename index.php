@@ -1,6 +1,6 @@
 <?php
 session_start();
-//session_destroy();
+// session_destroy();
 require 'src/model/ConnectBdd.php';
 // var_dump($_SESSION);
 
@@ -15,6 +15,9 @@ if (isset($_GET['action']) && $_GET['action'] !== '' && !isset($_GET['admin'])) 
                     break;
                 case 'updateUserElements':
                     updateUserElements();
+                    break;
+                case 'deleteMyProject':
+                    deleteMyProject();
                     break;
             }
             if ($_SESSION['user']['role_id'] <= 3) {

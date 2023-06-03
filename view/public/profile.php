@@ -123,10 +123,11 @@ $title = "Espace personnel";
                             <button type="submit" class="bg-main-red w-full text-main-white text-[16px] lg:text-[28px] py-3 rounded-b-lg" <?= $notMyProfile; ?>>Changer ma photo de profil</button>
                         </div>
                     </div>
-                    <form id="avatar-update" method="POST" action="?action=updateUserElements&type=avatar&id=<?=$userDatas['user_id']?>" class="hidden space-x-4" enctype="multipart/form-data">
+                    <form id="avatar-update" method="POST" action="?action=updateUserElements&type=avatar&id=<?=$userDatas['user_id']?>" class="hidden space-x-4 pt-2" enctype="multipart/form-data">
                         <input type="file" name="avatar">
                         <button type="submit"><i class="fa-solid fa-check text-main-red"></i></button>
                         <i onclick="swapDivsById('avatar','avatar-update')" class="fa-solid fa-xmark text-main-red cursor-pointer"></i>
+                        <p class="italic font-semibold text-center">Format portrait recommandé. Taille max: 4 Mo</p>
                     </form>
                 </div>
 
@@ -152,9 +153,9 @@ $title = "Espace personnel";
 
                         <div id="user-status" class="flex items-center pt-1 pb-2">
                             <span class="w-6 h-6 border-[1px] rounded-full mr-2 animate-pulse
-                                <?php if ($userDatas['status_id'] == 7){?> bg-main-red<?php }?>
-                                <?php if ($userDatas['status_id'] == 6){?> bg-main-green<?php }?>
-                                <?php if ($userDatas['status_id'] == 2){?> bg-main-orange<?php }?>">
+                                <?php if ($userDatas['status_id'] == 4){?> bg-main-red<?php }?>
+                                <?php if ($userDatas['status_id'] == 13){?> bg-main-green<?php }?>
+                                <?php if ($userDatas['status_id'] == 11){?> bg-main-orange<?php }?>">
                             </span>
                             <span class="text-[16px] flex justify-center italic"><?= $userDatas['status_name'] ?> depuis <?=  substr($userDatas['user_status_date'], 0,-6) ?></span>
                             <div onclick="swapDivsById('user-status','user-status-update')" class="cursor-pointer" <?= $notMyProfile; ?>>
@@ -168,7 +169,7 @@ $title = "Espace personnel";
                         <div id="description" class="lg:p-4 flex flex-col ">
                             <p class="text-[18px] text-justify pt-4 px-3 pb-2 lg:pb-0"><?= $userDatas['user_description'] ?></p>
                         </div>
-                        <form id="description-update" class="hidden h-full">
+                        <form method="POST" action="?action=updateUserElements&type=description&id=<?=$userDatas['user_id']?>" id="description-update" class="hidden h-full">
                             <textarea name="description" id="editor" class="text-editor h-full overflow-scroll">
                             <?= $userDatas['user_description'] ?>
                             </textarea>
@@ -221,8 +222,10 @@ $title = "Espace personnel";
                                 <div id="links-update" class="hidden space-y-2">
                                     <input name="user_linkedin" type="url" value="<?= $userDatas['user_linkedin'] ?>" placeholder="lien linkedin" class="space-x-4">
                                     <input name="user_github" type="url" value="<?= $userDatas['user_linkedin'] ?>" placeholder="lien github" class="space-x-4">
-                                    <button type="submit"><i class="fa-solid fa-check text-main-red"></i></button>
-                                    <i onclick="swapDivsById('links','links-update')" class="fa-solid fa-xmark text-main-red cursor-pointer"></i>
+                                    <div class="flex justify-center">
+                                        <button type="submit" class="py-2 px-4 bg-main-red border-main-white border text-main-white my-4 mr-4">Modifier <i class="fa-solid fa-check"></i></button>
+                                        <span onclick="swapDivsById('links','links-update')" class="cursor-pointer border my-4 mr-4 py-2 px-4">Annuler <i class="fa-solid fa-xmark"></i></span>
+                                    </div>
                                 </div>
                             </form>
 
@@ -230,15 +233,17 @@ $title = "Espace personnel";
                             <h3 class="font-title text-[24px] font-bold uppercase lg:mb-3">Compétences
                             <i onclick="swapDivsById('skills','skills-update')" class="fa-solid fa-pen cursor-pointer text-main-red w-[20px] pl-3" <?= $notMyProfile; ?>></i></h3>
                         </div>
-                        <form id="skills-update" method="POST" action="?action=updateUserElements&type=skills&id=<?=$userDatas['user_id']?>" class="hidden">
+                        <form id="skills-update" method="POST" action="?action=updateUserElements&type=skills&id=<?=$userDatas['user_id']?>" class="hidden flex flex-col">
                             <select multiple name="skills[]">
                                 <option disabled selected>Sélectionner des compétences</option>
                                 <?php foreach ($allTags as $eachTag){ ?>
                                     <option value="<?= $eachTag['tag_id']?>"><?= $eachTag['tag_name'] ?></option>
                                 <?php } ?>
                             </select>
-                            <button type="submit" class="py-2 px-4 bg-main-red border-main-white border text-main-white my-4 mr-4">Modifier <i class="fa-solid fa-check"></i></button>
-                            <span onclick="swapDivsById('skills','skills-update')" class="cursor-pointer">Annuler <i class="fa-solid fa-xmark"></i></span>
+                            <div class="flex justify-center">
+                                <button type="submit" class="py-2 px-4 bg-main-red border-main-white border text-main-white my-4 mr-4">Modifier <i class="fa-solid fa-check"></i></button>
+                                <span onclick="swapDivsById('skills','skills-update')" class="cursor-pointer border my-4 mr-4 py-2 px-4">Annuler <i class="fa-solid fa-xmark"></i></span>
+                            </div>
                         </form>
                         <div id="skills" class="flex gap-4 justify-center sm:justify-normal mx-auto sm:px-4 mt-2 lg:mt-7 mb-4 flex-wrap">
                             <?php foreach ($userTags as $tag) { ?>
@@ -396,7 +401,7 @@ $title = "Espace personnel";
 
                     <!-- SECTION PROJETS PERSO -->
                     <section class="sectionChange hidden border">
-                        <div class="projet-cards w-11/12 mt-2 gap-6 mx-auto flex flex-col justify-center lg:flex-row lg:flex-wrap">
+                        <div id="delete-my-project" class="projet-cards w-11/12 mt-2 gap-6 mx-auto flex flex-col justify-center lg:flex-row lg:flex-wrap">
                             <!-- card projet -->
                             <?php foreach ($userProjects as $project){
                                 if($project->type->id == 2) {
@@ -422,7 +427,7 @@ $title = "Espace personnel";
                                                 </div>
                                             </div>
                                         </div>
-                                        <a href="<?= $project->model_link ?>" class="bg-main-red py-2 px-4 rounded-full text-main-white text-center text-[16px] mx-auto my-2 hover:bg-main-white hover:text-main-red hover:border border-main-red">Voir le projet </a>
+                                        <a href="<?= $project->model_link ?>" class="bg-main-red py-2 px-4 rounded-full text-main-white text-center text-[16px] mx-auto my-2 hover:bg-main-white hover:text-main-red hover:border border-main-red" target="_blank">Voir le projet </a>
                                         <!-- Boutons modifier/supprimer le projet -->
                                         <div class="flex justify-between " <?= $notMyProfile; ?>>
                                             <div data-modal-target="modify_my_project<?= $project->id ?>" data-modal-toggle="modify_my_project<?= $project->id ?>" class="flex items-center pt-2 cursor-pointer">
@@ -447,7 +452,7 @@ $title = "Espace personnel";
                                             </button>
                                             <div id="co" class="px-6 py-6 lg:px-8">
                                                 <h3 class="mb-4 text-medium uppercase w-fit mx-auto font-bold font-title text-main-red">Modifier mon projet perso</h3>
-                                                <form method="POST" action="?action=updateUserElements&type=addMyProject&id=<?=$userDatas['user_id']?>" class="space-y-6" enctype="multipart/form-data">
+                                                <form method="POST" action="?action=updateUserElements&type=modifyMyProject&id=<?=$userDatas['user_id']?>&projectID=<?= $project->id ?>" class="space-y-6" enctype="multipart/form-data">
                                                     <div>
                                                         <label for="modif_title" class="block mb-1 text-sm font-medium text-main-red">Titre de votre projet</label>
                                                         <input type="text" name="title" id="modif_title" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" placeholder="Titre de mon projet" value="<?= $project->name ?>">
@@ -488,7 +493,8 @@ $title = "Espace personnel";
                                                 <svg data-modal-hide="confirm_delete_project<?= $project->id ?>" aria-hidden="true" class="w-5 h-5 text-main-light" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
                                                 <span class="sr-only">Close modal</span>
                                             </button>
-                                            <form class="px-6 py-6 lg:px-8">
+                                            <form method="POST" class="px-6 py-6 lg:px-8">
+                                                <input type="hidden" name="project_id" value="<?= $project->id?>">
                                                 <h3 class="mb-4 text-medium uppercase w-fit mx-auto font-bold font-title text-main-red">Supprimer mon projet perso</h3>
                                                 <p class="mb-2">Supprimer définitivement le projet : <?= $project->name ?> ?</p>
                                                 <button type="submit" class="w-full uppercase font-title text-main-white bg-main-red hover:bg-red-800 font-medium rounded-lg text-sm px-5 py-1.5 text-center ">Valider</button>
@@ -524,15 +530,15 @@ $title = "Espace personnel";
                                     <form method="POST" action="?action=updateUserElements&type=addMyProject&id=<?=$userDatas['user_id']?>" class="space-y-6" enctype="multipart/form-data">
                                         <div>
                                             <label for="add_title" class="block mb-1 text-sm font-medium text-main-red">Titre de votre projet</label>
-                                            <input type="text" name="title" id="add_title" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" placeholder="Titre de mon projet">
+                                            <input type="text" name="title" id="add_title" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" placeholder="Titre de mon projet" required>
                                         </div>
                                         <div>
                                             <label for="add_description" class="block mb-1 text-sm font-medium text-main-red">Description de votre projet</label>
-                                            <textarea name="description" id="add_description" rows="6" cols="50" class="border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" placeholder=""></textarea>
+                                            <textarea name="description" id="add_description" rows="6" cols="50" class="border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" placeholder="" required></textarea>
                                         </div>
                                         <div>
                                             <label for="add_image" class="block mb-1 text-sm font-medium text-main-red">Ajouter une image à votre projet perso</label>
-                                            <input type="file" name="image" id="add_image" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" placeholder="">
+                                            <input type="file" name="image" id="add_image" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" placeholder="" required>
                                         </div>
                                         <div>
                                             <label for="add_tags" class="block mb-1 text-sm font-medium  text-main-red">Sélectionner les technos utilisées</label>

@@ -123,7 +123,6 @@ class UserRepository extends ConnectBdd
         $stmt->execute([$id]);
         $data = $stmt->fetch(PDO::FETCH_ASSOC);
         $stmt->closeCursor();
-
         return $data;
     }
     public function getIdByEmail($email)
@@ -207,7 +206,7 @@ class UserRepository extends ConnectBdd
         $image = securizeImage($array, $path);
         if($image === false){
             // message d'erreurs dans securizeImage
-            $error = true;
+            return $image;
         }
         if (!empty($image)) { 
             $req = $this->bdd->prepare("UPDATE user SET user_avatar = ? WHERE user_id = ?");
@@ -238,6 +237,21 @@ class UserRepository extends ConnectBdd
         $req = $this->bdd->prepare("UPDATE user SET status_id = ?, user_status_date = ? WHERE user_id = ?");
         $bool = $req->execute([$user_status, $user_status_date, $id]);
         return $bool;
+    }
+
+    public function updateUserDescription(int $id, array $array): bool | array
+    {
+        $user_description = $array['description'];
+        $checkText = securizeText($user_description);
+        if ($checkText === false){
+            header('HTTP/1.0 400 Bad Request');
+            echo '<br><p>Le texte envoyé est invalide ou contient des balises non acceptées</p>';
+            exit();
+        } else {
+            $req = $this->bdd->prepare("UPDATE user SET user_description =? WHERE user_id =?");
+            $bool = $req->execute([$user_description, $id]);
+            return $bool;
+        }
     }
 
     public function updateUserLinks(int $id, array $array): bool | array
@@ -313,7 +327,7 @@ class UserRepository extends ConnectBdd
                 array_push($bools, $bool);
             }
         }
-        $req = $this->bdd->prepare("UPDATE user SET user_email = ?, user_numero_pe =?, user_phone = ?, user_place = ?, user_nationality = ? WHERE user_id = ?");
+        $req = $this->bdd->prepare("UPDATE user SET user_email = ?, user_numero_pe = ?, user_phone = ?, user_place = ?, user_nationality = ? WHERE user_id = ?");
         $bool = $req->execute([$email, $numero_pe, $phone, $adress, $nationality, $id]);
         array_push($bools, $bool);
 
@@ -365,5 +379,75 @@ class UserRepository extends ConnectBdd
             }
         }
         return $bool;
+    }
+
+    public function addMyProject(int $id, array $array): bool | array
+    {
+        $bools = [];
+        $title = securizeString($array['title']);
+        $description = securizeString($array['description']);
+        $url = securizeString($array['url']);
+        $skills = $array['skills'];
+        $image = $_FILES['image']['name'];
+            $path = 'assets/upload/profile/highlight/';
+            $checkImage = securizeImage($_FILES['image'], $path);
+            if ($checkImage &&!empty($image)){
+                $req = $this->bdd->prepare("INSERT INTO project (project_name, project_description, project_model_image, project_model_link, user_id, status_id, type_id, project_start) VALUES (?, ?, ?, ?, ?, 12, 2, CURRENT_TIMESTAMP())");
+                $bool = $req->execute([$title, $description, $checkImage, $url, $id]);
+                array_push($bools, $bool);
+                $lastID = $this->bdd->lastInsertID();
+                var_dump($lastID);
+                $request = $this->bdd->prepare("INSERT INTO project_team (project_id, user_id) VALUES (?, ?)");
+                $bool2 = $request->execute([(int)$lastID, $id]);
+                array_push($bools, $bool2);
+                foreach ($skills as $skill) {
+                    $req = $this->bdd->prepare("INSERT INTO project_tag (project_id, tag_id) VALUES (?, ?)");
+                    $bool3 = $req->execute([$lastID, $skill]);
+                    array_push($bools, $bool3);
+                    }
+            } else {
+                // erreur : vous devez envoyer un fichier image valide
+            }
+        return $bools;
+    }
+
+    public function modifyMyProject(int $id, array $array, int $projectID): bool | array
+    {
+        $bools = [];
+        $title = securizeString($array['title']);
+        $description = securizeString($array['description']);
+        $url = securizeString($array['url']);
+        if (isset($array['skills'])) {
+            $skills = $array['skills'];
+        } else {
+            $tagRepo = new TagRepository;
+            $tags = $tagRepo->getProjectTags($projectID);
+            $skills = $tags;
+        }
+        if (isset($array['image'])) {
+            $image = $_FILES['image']['name'];
+            $path = 'assets/upload/profile/highlight/';
+            $checkImage = securizeImage($_FILES['image'], $path);
+        } else {
+            $projectRepo = new ProjectRepository;
+            $image = $projectRepo->getProjectImage($projectID);
+            $checkImage = $image['project_model_image'];
+        }
+        if ($checkImage &&!empty($checkImage)) {
+            $req = $this->bdd->prepare("UPDATE project SET project_name = ?, project_description = ?, project_model_image = ?, project_model_link = ?, user_id = ?, status_id = 12, type_id = 2, project_start = CURRENT_TIMESTAMP() WHERE project_id = ?");
+            $bool = $req->execute([$title, $description, $checkImage, $url, $id, $projectID]);
+            array_push($bools, $bool);
+            $removeSkills = $this->bdd->prepare("DELETE FROM project_tag WHERE project_id =?");
+            $clearSkills = $removeSkills->execute([$projectID]);
+            foreach ($skills as $skill) {
+                $req = $this->bdd->prepare("INSERT INTO project_tag (project_id, tag_id) VALUES (?, ?)");
+                $bool2 = $req->execute([$projectID, $skill->id]);
+                array_push($bools, $bool2);
+            }
+        } else {
+             // erreur : vous devez envoyer un fichier image valide
+        }
+
+        return $bools;
     }
 }

@@ -294,8 +294,7 @@ try {
                         } else {
                             // erreur : Vous devez entrer votre mot de passe pour valider les modifications
                         }
-                }
-                elseif ($type == 'highlight') {
+                } elseif ($type == 'highlight') {
                     if ($array['modifyInput'] == 'modify' || $array['modifyInput'] == 'add') {
                         $bools = $userRepository->updateUserHighlight($id, $array);
                         header('Location:?action=profilePage&id='.$_GET['id']);
@@ -303,6 +302,20 @@ try {
                         // erreur : Vous devez choisir si vous souhaitez ajouter ou modifier le projet phare
                     }
                     $bools = $userRepository->updateUserHighlight($id, $array);
+                    header('Location:?action=profilePage&id='.$_GET['id']);
+                } elseif ($type == 'addMyProject') {
+                    $bools = $userRepository->addMyProject($id, $array);
+                    header('Location:?action=profilePage&id='.$_GET['id']);
+                } elseif ($type == 'modifyMyProject') {
+                    if (isset($_GET['projectID']) && $_GET['projectID'] !== null){
+                        $projectID = $_GET['projectID'];
+                        $bools = $userRepository->modifyMyProject($id, $array, $projectID);
+                        header('Location:?action=profilePage&id='.$_GET['id']);
+                    } else {
+                        // erreur : l'ID du projet doit être défini
+                    }
+                } elseif ($type == 'description') {
+                    $bools = $userRepository->updateUserDescription($id, $array);
                     header('Location:?action=profilePage&id='.$_GET['id']);
                 }
             } elseif (isset($_FILES) && !empty($_FILES)) {
@@ -322,6 +335,10 @@ try {
         } else {
             // erreur : vous n'êtes pas autorisé à modifier les données de cet utilisateur
         }
+    }
+
+    function deleteMyProject() {
+        var_dump($_POST);
     }
 
 } catch (Exception $error) {
