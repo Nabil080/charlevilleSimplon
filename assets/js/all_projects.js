@@ -60,13 +60,27 @@ const getProjets = (limitStart = 0,limitEnd = 6) => {
             formationFilters.push(checkbox.dataset.formationId)
         }
     })
-    console.log(formationFilters)
     let formationString = formationFilters.map(id => `formation_id = ${id}`).join(' OR ') ;
     console.log(formationString)
 
+    // * DEFINIT LES FILTRES ANNÉES
+    const yearFilters = []
+    yearCheckboxes.forEach(checkbox => {
+        // * AJOUTE LES CHECKBOX CHECK
+        if(checkbox.checked){
+            yearFilters.push(checkbox.dataset.year)
+        }
+    })
+    let yearString = yearFilters.map(year => `YEAR(project_start) = ${year}`).join(' OR ') ;
+    console.log(yearString)
 
 
-    let filterString = formationString; 
+
+    // Récupère un array des filtres non vides
+    const filtersArray = [formationString, yearString].filter(Boolean);
+    // les transformes en string pour la requete
+    const filterString = filtersArray.join(" AND ");
+    console.log(filterString);
     return fetch('?action=projectsPagination',{
         method: 'POST',
         headers: {
@@ -170,9 +184,16 @@ async function updateData(currentPage = 1){
 
 }
 
+// lance la fonction au départ + a chaque changement de filtre
 updateData();
 
 formationCheckboxes.forEach(checkbox => {
+    checkbox.addEventListener('change', (e) => {
+        updateData()
+    })
+})
+
+yearCheckboxes.forEach(checkbox => {
     checkbox.addEventListener('change', (e) => {
         updateData()
     })
@@ -237,33 +258,8 @@ formationCheckboxes.forEach(checkbox => {
 
 // function loadProjects(projets,number){
 
-//     // * DEFINIT LES FILTRES FORMATION
-//     const formationFilters = [];
-//     formationCheckboxes.forEach(checkbox => {
-//         // * AJOUTE LES CHECKBOX CHECK
-//         if(checkbox.checked){
-//             formationFilters.push(checkbox.value)
-//         }
-//     })
-//     // * SI ARRAY VIDE GERE L'ERREUR :
-//     if(formationFilters.length === 0){
-//         formationFilters.push('')
-//     }
-//     // console.log(formationFilters)
 
-//     // * DEFINIT LES FILTRES ANNÉES
-//     const yearFilters = []
-//     yearCheckboxes.forEach(checkbox => {
-//         // * AJOUTE LES CHECKBOX CHECK
-//         if(checkbox.checked){
-//             yearFilters.push(checkbox.value)
-//         }
-//     })
-//     // * SI ARRAY VIDE GERE L'ERREUR :
-//     if(yearFilters.length === 0){
-//         yearFilters.push('')
-//     }
-//     // console.log(yearFilters)
+
 
 //     // * DEFINIT LES FILTRES NIVEAUX
 //     const levelFilters = []
