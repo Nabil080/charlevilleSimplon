@@ -132,17 +132,19 @@ class ProjectRepository extends ConnectBdd
         return $project;
     }
 
-    public function getAllProjects($limitRequest = null, $filters = null, $order = null):array
+    public function getAllProjects($limitRequest = null, $filters = null, $execute = null, $order = null):array
     {
         $projects = [];
         $filters = $filters === null ? "" : "WHERE $filters";
+        $execute = $execute === null ? [] : explode(",",$execute);
         $order = $order === null ? "ORDER BY project.status_id ASC" : "ORDER BY $order";
         $limit = $limitRequest === null ? "" : "LIMIT $limitRequest";
 
         $query = "SELECT project_id FROM project JOIN formation ON project.formation_id = formation.formation_id $filters $order $limit";
         // var_dump($query);
+        // var_dump($execute);
         $req = $this->bdd->prepare($query);
-        $req->execute();
+        $req->execute($execute);
         $data = $req->fetchAll(PDO::FETCH_ASSOC);
 
 
@@ -166,13 +168,15 @@ class ProjectRepository extends ConnectBdd
         return $data;
     }
 
-    public function getFilteredProjectsNumber($filters = null):int
+    public function getFilteredProjectsNumber($filters = null,$execute = null):int
     {
         $filters = $filters === null ? "" : "WHERE $filters";
+        $execute = $execute === null ? [] : explode(",",$execute);
         $query = "SELECT COUNT(*) FROM project JOIN formation ON project.formation_id = formation.formation_id $filters"; 
         // var_dump($query);
+        // var_dump($execute);
         $req = $this->bdd->prepare($query);
-        $req->execute();
+        $req->execute($execute);
         $data = $req->fetch(PDO::FETCH_COLUMN);
 
         return $data;

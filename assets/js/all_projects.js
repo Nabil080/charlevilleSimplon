@@ -60,8 +60,11 @@ const getProjets = (limitStart = 0,limitEnd = 6) => {
             formationFilters.push(checkbox.dataset.formationId)
         }
     })
-    let formationString = formationFilters.map(id => `project.formation_id = ${id}`).join(' OR ') ;
+    let formationString = formationFilters.map(id => `project.formation_id = ?`).join(' OR ') ;
+    if(formationString != ""){formationString = `(${formationString})`}
+    let formationExecute = formationFilters.map(id => `${id}`)
     console.log(`Filtre de formations : ${formationString}`)
+    console.log(`Execute de formations : ${formationExecute}`)
 
     // * DEFINIT LES FILTRES ANNÉES
     const yearFilters = []
@@ -71,8 +74,11 @@ const getProjets = (limitStart = 0,limitEnd = 6) => {
             yearFilters.push(checkbox.dataset.year)
         }
     })
-    let yearString = yearFilters.map(year => `YEAR(project. project_start) = ${year}`).join(' OR ') ;
+    let yearString = yearFilters.map(year => `YEAR(project. project_start) = ?`).join(' OR ') ;
+    if(yearString != ""){yearString = `(${yearString})`}
+    let yearExecute = yearFilters.map(year => `${year}`)
     console.log(`Filtre d'années : ${yearString}`)
+    console.log(`Execute d'années : ${yearExecute}`)
 
     // * DEFINIT LES FILTRES NIVEAUX
     const levelFilters = []
@@ -82,22 +88,28 @@ const getProjets = (limitStart = 0,limitEnd = 6) => {
             levelFilters.push(checkbox.dataset.level)
         }
     })
-    let levelString = levelFilters.map(level => `formation.formation_level = '${level}'`).join(' OR ') ;
+    let levelString = levelFilters.map(level => `formation.formation_level = ?`).join(' OR ') ;
+    if(levelString != ""){levelString = `(${levelString})`}
+    let levelExecute = levelFilters.map(level => `${level}`)
     console.log(`Filtre de niveau : ${levelString}`)
+    console.log(`Execute de niveau : ${levelExecute}`)
 
     // * DEFINIT LES FILTRES RECHERCHE
-    console.log(searchInput.value.toLowerCase())
-    let searchString = searchInput.value ? `project.project_name LIKE '%${searchInput.value}%'
-    OR project.project_description LIKE '%${searchInput.value}%' 
-    OR project.project_notes LIKE '%${searchInput.value}%'
-    OR project.project_company_name LIKE '%${searchInput.value}%'` : '' ;
+    let searchString = searchInput.value ? `(project.project_name LIKE ?
+    OR project.project_description LIKE ? 
+    OR project.project_notes LIKE ?
+    OR project.project_company_name LIKE ?)` : '' ;
+    let searchExecute = searchInput.value? `%${searchInput.value}%,%${searchInput.value}%,%${searchInput.value}%,%${searchInput.value}%` : '' ;
 
 
     // Récupère un array des filtres non vides
     const filtersArray = [formationString, yearString, levelString,searchString].filter(Boolean);
+    const ExecuteArray = [formationExecute, yearExecute, levelExecute,searchExecute].filter(arr => arr.length > 0);
     // les transformes en string pour la requete
     const filterString = filtersArray.join(" AND ");
+    const filterExecute = ExecuteArray.join(",");
     console.log(`requête envoyée :  WHERE ${filterString}`)
+    console.log(`execute envoyée : [${filterExecute}]`)
     return fetch('?action=projectsPagination',{
         method: 'POST',
         headers: {
@@ -106,7 +118,9 @@ const getProjets = (limitStart = 0,limitEnd = 6) => {
         body: JSON.stringify({
             limitStart: limitStart,
             limitEnd: limitEnd,
-            filter: filterString})
+            filter: filterString,
+            execute: filterExecute
+        })
     })
     .then((data) => data.json())
 }

@@ -8,17 +8,16 @@ function projectsPagination()
 
     $projectRepo = new ProjectRepository ;
 
-
-
     $limitStart = $data->limitStart;
     $limitEnd = $data->limitEnd;
     $limit = "$limitStart,$limitEnd";
 
     $filter = empty($data->filter) ? null : $data->filter;
+    $execute = empty($data->execute) ? null : $data->execute;
 
     $total = $projectRepo->getProjectsNumber();
-    $filtered = $projectRepo->getFilteredProjectsNumber($filter);
-    $projects = $projectRepo->getAllProjects($limit,$filter);
+    $filtered = $projectRepo->getFilteredProjectsNumber($filter,$execute);
+    $projects = $projectRepo->getAllProjects($limit,$filter,$execute);
 
     $projectsHTML = [];
     foreach($projects as $project){
@@ -31,9 +30,10 @@ function projectsPagination()
 
     $response = array(
         "status" => "success",
-        "message" => "La requête a été modifée comme tel",
+        "message" => "Les projets ont bien été récupérés d'après les critères ci dessous.",
         "total" => $total,
         "filtered" => $filtered,
+        "query" => "WHERE $filter",
         "limit" => $limit,
         "projets" => $projectsHTML,
     );
