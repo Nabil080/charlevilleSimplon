@@ -9,14 +9,6 @@ $_SESSION['user'] = (object) array(
     'role_id' => 1,
 );
 
-// var_dump($_SESSION);
-// TEMP POUR TEST SANS CONNEXION
-$_SESSION['user'] = (object) array(
-    'user_id' => 1,
-    'role_id' => 5,
-    'status_id' => 2
-);
-
 if (isset($_GET['action']) && $_GET['action'] !== '' && !isset($_GET['admin'])) {
     $action = $_GET['action'];
     require 'public.php';

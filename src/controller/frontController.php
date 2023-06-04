@@ -275,7 +275,7 @@ function crudPromotionPage()
 function crudProjetPage()
 {
     $ProjectRepo = new ProjectRepository;
-    $projects = $ProjectRepo->getAllProjects();
+    $projects = $ProjectRepo->getAllProjects(6);
     $PromoRepo = new PromoRepository;
     $promos = $PromoRepo->getActivePromos();
     include 'view/admin/_projects.php';
