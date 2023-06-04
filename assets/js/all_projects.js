@@ -42,19 +42,40 @@ const yearCheckboxes = document.querySelectorAll("#year-dropdown input");
 const levelCheckboxes = document.querySelectorAll("#level-dropdown input");
 const filterReset = document.querySelector('#filter-reset');
 
-
+// pagination
 let projectsPerPage = 6;
-
 let paginationRange = 3
+// filtres
+let filterString = '';
+
+
 
 const getProjets = (limitStart = 0,limitEnd = 6) => {
 
+    formationFilters = [];
+    // * DEFINIT LES FILTRES FORMATION
+    formationCheckboxes.forEach(checkbox => {
+        // * AJOUTE LES CHECKBOX CHECK
+        if(checkbox.checked){
+            formationFilters.push(checkbox.dataset.formationId)
+        }
+    })
+    console.log(formationFilters)
+    let formationString = formationFilters.map(id => `formation_id = ${id}`).join(' OR ') ;
+    console.log(formationString)
+
+
+
+    let filterString = formationString; 
     return fetch('?action=projectsPagination',{
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({limitStart: limitStart, limitEnd: limitEnd})
+        body: JSON.stringify({
+            limitStart: limitStart,
+            limitEnd: limitEnd,
+            filter: filterString})
     })
     .then((data) => data.json())
 }
@@ -143,13 +164,19 @@ async function updateData(currentPage = 1){
         // * AFFICHE LES PROJETS CORRESPONDANTS
         projectGrid.innerHTML += data.projets.join('');
         // * SCROLL EN BAS
-        if(scrollBool === true){
+        if(currentPage != 1){
             document.querySelector('footer').scrollIntoView();
         }
 
 }
 
 updateData();
+
+formationCheckboxes.forEach(checkbox => {
+    checkbox.addEventListener('change', (e) => {
+        updateData()
+    })
+})
 
 
 // showLoading();

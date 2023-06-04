@@ -14,11 +14,11 @@ function projectsPagination()
     $limitEnd = $data->limitEnd;
     $limit = "$limitStart,$limitEnd";
 
-    $filter = "1 = 1";
+    $filter = empty($data->filter) ? null : $data->filter;
 
-    $filtered = $projectRepo->getFilteredProjectsNumber($filter);
-    $projects = $projectRepo->getAllProjects($limit);
     $total = $projectRepo->getProjectsNumber();
+    $filtered = $projectRepo->getFilteredProjectsNumber($filter);
+    $projects = $projectRepo->getAllProjects($limit,$filter);
 
     $projectsHTML = [];
     foreach($projects as $project){

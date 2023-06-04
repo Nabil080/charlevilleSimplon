@@ -132,12 +132,15 @@ class ProjectRepository extends ConnectBdd
         return $project;
     }
 
-    public function getAllProjects($limitRequest = null):array
+    public function getAllProjects($limitRequest = null, $filters = null, $order = null):array
     {
         $projects = [];
-        $limit = $limitRequest == null ? "" : "LIMIT " . $limitRequest;
+        $filters = $filters === null ? "" : "WHERE $filters";
+        $order = $order === null ? "ORDER BY status_id ASC" : "ORDER BY $order";
+        $limit = $limitRequest === null ? "" : "LIMIT $limitRequest";
 
-        $req = $this->bdd->prepare("SELECT project_id FROM project ORDER BY status_id ASC $limit");
+        $req = $this->bdd->prepare("SELECT project_id FROM project $filters $order $limit");
+        // var_dump($req);
         $req->execute();
         $data = $req->fetchAll(PDO::FETCH_ASSOC);
 
@@ -162,9 +165,11 @@ class ProjectRepository extends ConnectBdd
         return $data;
     }
 
-    public function getFilteredProjectsNumber($filter):int
+    public function getFilteredProjectsNumber($filters = null):int
     {
-        $req = $this->bdd->prepare("SELECT COUNT(*) FROM project WHERE $filter");
+        $filters = $filters === null ? "" : "WHERE $filters";
+        
+        $req = $this->bdd->prepare("SELECT COUNT(*) FROM project $filters");
         $req->execute();
         $data = $req->fetch(PDO::FETCH_COLUMN);
 

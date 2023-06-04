@@ -29,7 +29,7 @@
         <!-- dropdown formations -->
             <div class="filter-dropdown dropdown hidden absolute box-content -translate-x-[1px] z-20 w-[calc(100%-2rem)] sm:w-full -translate-y-1 border rounded-b-lg rounded-tr-lg sm:rounded-tr-none text-start bg-main-white sm:border-t-transparent border-main-red">
                 <?php foreach($formations as $formation){ ?>
-                    <div class="flex gap-2 text-xs my-2 px-2"><input class="my-auto" id="formation-<?=$formation->id?>" type="checkbox" value="formation-<?=$formation->id?>"><label for="formation-<?=$formation->id?>"><?=$formation->name?></label></div>
+                    <div class="flex gap-2 text-xs my-2 px-2"><input class="my-auto" id="formation-<?=$formation->id?>" type="checkbox" data-formation-id="<?=$formation->id?>"><label for="formation-<?=$formation->id?>"><?=$formation->name?></label></div>
                 <?php } ?>
             </div>
         </div>
