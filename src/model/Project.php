@@ -132,13 +132,19 @@ class ProjectRepository extends ConnectBdd
         return $project;
     }
 
-    public function getAllProjects($limitRequest = null):array
+    public function getAllProjects($limitRequest = null, $filters = null, $execute = null, $order = null):array
     {
         $projects = [];
-        $limit = $limitRequest == null ? "" : "LIMIT " . $limitRequest;
+        $filters = $filters === null ? "" : "WHERE $filters";
+        $execute = $execute === null ? [] : explode(",",$execute);
+        $order = $order === null ? "ORDER BY project.status_id ASC" : "ORDER BY $order";
+        $limit = $limitRequest === null ? "" : "LIMIT $limitRequest";
 
-        $req = $this->bdd->prepare("SELECT project_id FROM project $limit ORDER BY status_id ASC");
-        $req->execute();
+        $query = "SELECT project_id FROM project JOIN formation ON project.formation_id = formation.formation_id $filters $order $limit";
+        // var_dump($query);
+        // var_dump($execute);
+        $req = $this->bdd->prepare($query);
+        $req->execute($execute);
         $data = $req->fetchAll(PDO::FETCH_ASSOC);
 
 
@@ -151,6 +157,29 @@ class ProjectRepository extends ConnectBdd
         }
 
         return $projects;
+    }
+
+    public function getProjectsNumber():int
+    {
+        $req = $this->bdd->prepare("SELECT COUNT(*) FROM project");
+        $req->execute();
+        $data = $req->fetch(PDO::FETCH_COLUMN);
+
+        return $data;
+    }
+
+    public function getFilteredProjectsNumber($filters = null,$execute = null):int
+    {
+        $filters = $filters === null ? "" : "WHERE $filters";
+        $execute = $execute === null ? [] : explode(",",$execute);
+        $query = "SELECT COUNT(*) FROM project JOIN formation ON project.formation_id = formation.formation_id $filters"; 
+        // var_dump($query);
+        // var_dump($execute);
+        $req = $this->bdd->prepare($query);
+        $req->execute($execute);
+        $data = $req->fetch(PDO::FETCH_COLUMN);
+
+        return $data;
     }
 
     public function getProjectsDate()
