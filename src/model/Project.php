@@ -169,8 +169,8 @@ class ProjectRepository extends ConnectBdd
     public function getFilteredProjectsNumber($filters = null):int
     {
         $filters = $filters === null ? "" : "WHERE $filters";
-        
         $query = "SELECT COUNT(*) FROM project JOIN formation ON project.formation_id = formation.formation_id $filters"; 
+        // var_dump($query);
         $req = $this->bdd->prepare($query);
         $req->execute();
         $data = $req->fetch(PDO::FETCH_COLUMN);

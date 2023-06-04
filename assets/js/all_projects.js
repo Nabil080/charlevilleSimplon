@@ -85,9 +85,16 @@ const getProjets = (limitStart = 0,limitEnd = 6) => {
     let levelString = levelFilters.map(level => `formation.formation_level = '${level}'`).join(' OR ') ;
     console.log(`Filtre de niveau : ${levelString}`)
 
+    // * DEFINIT LES FILTRES RECHERCHE
+    console.log(searchInput.value.toLowerCase())
+    let searchString = searchInput.value ? `project.project_name LIKE '%${searchInput.value}%'
+    OR project.project_description LIKE '%${searchInput.value}%' 
+    OR project.project_notes LIKE '%${searchInput.value}%'
+    OR project.project_company_name LIKE '%${searchInput.value}%'` : '' ;
+
 
     // Récupère un array des filtres non vides
-    const filtersArray = [formationString, yearString, levelString].filter(Boolean);
+    const filtersArray = [formationString, yearString, levelString,searchString].filter(Boolean);
     // les transformes en string pour la requete
     const filterString = filtersArray.join(" AND ");
     console.log(`requête envoyée :  WHERE ${filterString}`)
@@ -197,6 +204,16 @@ async function updateData(currentPage = 1){
 // lance la fonction au départ + a chaque changement de filtre
 updateData();
 
+let timeoutId;
+
+searchInput.addEventListener('input', (e) => {
+    clearTimeout(timeoutId);
+
+    timeoutId = setTimeout(() => {
+        updateData();
+    }, 500); // Adjust the delay time (in milliseconds) according to your needs
+});
+
 formationCheckboxes.forEach(checkbox => {
     checkbox.addEventListener('change', (e) => {
         updateData()
@@ -215,6 +232,7 @@ levelCheckboxes.forEach(checkbox => {
     })
 })
 
+
 filterReset.addEventListener('click', (e) => {
     document.querySelectorAll('input[type=checkbox]').forEach(checkbox => {
         checkbox.checked = false
@@ -223,136 +241,3 @@ filterReset.addEventListener('click', (e) => {
     updateData();
 })
 
-
-
-//     searchInput.addEventListener('input', (e) => {
-//         loadProjects(projets,1)
-//     })
-
-//     filterReset.addEventListener('click', (e) => {
-//         document.querySelectorAll('input[type=checkbox]').forEach(checkbox => {
-//             checkbox.checked = false
-//         })
-//         closeAllDropdowns();
-//         loadProjects(projets,1)
-//     })
-
-//     firstPage.addEventListener('click', (e) => {
-//         loadProjects(projets,1)
-//     })
-//     prevPage.addEventListener('click', (e) => {
-//         loadProjects(projets,currentPage - 1)
-//     })
-
-//     nextPage.addEventListener('click', (e) => {
-//         loadProjects(projets,currentPage + 1)
-//     })
-//     lastPage.addEventListener('click', (e) => {
-//         loadProjects(projets,'last')
-//     })
-
-// })
-// .catch((error) => {
-//     console.error(error);
-// });
-
-
-// function loadProjects(projets,number){
-
-
-
-
-
-//     // ! CREATION DE L'ARRAY PROJETS FILTRES A PARTIR DE L'ARRAY TOUS LES PROJETS
-//         // * CREATION DU NOUVEL ARRAY VIA .MAP
-//         const filteredProjects = projets
-//         // * FILTRES FORMATIONS
-//         .filter((projet) => {
-//             // ? exemple : const formationFilters = ['concepteurs développeurs', 'web', 'Référent'];
-//             return formationFilters.some(filter =>
-//             projet.toLowerCase().includes(filter.toLowerCase())
-//             );
-//         })
-//         // * FILTRES ANNÉES
-//         .filter((projet) => {
-//             // ? exemple : const yearFilters = ['2023', '2022', '2021', '2018'];
-//             return yearFilters.some(filter =>
-//             projet.toLowerCase().includes(filter.toLowerCase())
-//             );
-//         })
-//         // * FILTRES NIVEAUX
-//         .filter((projet) => {
-//             // ? exemple : const levelFilters = ['Bac+5', 'Bac+4', 'Bac+3', 'Bac+2', 'Bac+1'];
-//             return levelFilters.some(filter =>
-//             projet.toLowerCase().includes(filter.toLowerCase())
-//             );
-//         })
-//         // * FILTRES RECHERCHE
-//         .filter((projet) =>
-//             projet.toLowerCase().includes(searchInput.value.toLowerCase())
-//         )
-//         .map((projet) => projet)
-
-
-
-
-//     // TODO: CREATION DE LA PAGINATION
-//     // * VARIABLES POUR LA PAGINATION
-//     let projectsPerPage = 6;
-//     let pageCount = Math.ceil(projectsCount / projectsPerPage);
-//     let paginationRange = 3
-//     currentPage = number
-//     if(number == 'last'){currentPage = pageCount}
-
-//     const prevRange = ( currentPage - 1 ) * projectsPerPage
-//     const nextRange = (currentPage * projectsPerPage ) 
-//     console.log(prevRange,nextRange)
-//     // console.log(currentPage)
-
-    
-    // // * ACTIVE/DESACTIVE BOUTON PRECEDENT
-    // if(currentPage == 1){
-    //     firstPage.classList.add('opacity-30', 'select-none', 'pointer-events-none')
-    //     prevPage.classList.add('opacity-30', 'select-none', 'pointer-events-none')
-    // }else{
-    //     firstPage.classList.remove('opacity-30', 'select-none', 'pointer-events-none')
-    //     prevPage.classList.remove('opacity-30', 'select-none', 'pointer-events-none')
-    // }
-
-//     // * AFFICHE LA PAGINATION
-//     paginationDiv.innerHTML = '';
-//     for(page = 1; page <= pageCount; page++){
-//         if(page > currentPage - paginationRange && page < currentPage + paginationRange){
-//             if(page == currentPage){
-//                 paginationDiv.innerHTML += `<button id="${page}" class="bg-main-red text-main-white">${page}</button>`;
-//             }else{
-//                 paginationDiv.innerHTML += `<button id="${page}" class="hover:bg-main-red hover:text-main-white">${page}</button>`;
-//             }
-//         }
-//     }
-//     // * AJOUTE LES EVENT LISTENERS
-//     paginationDiv.querySelectorAll('button').forEach(button => 
-//     {
-//         button.addEventListener('click', (e) => {
-//             console.log(Number(e.target.id))
-//             loadProjects(projets,Number(e.target.id))
-//         })
-//     })
-
-//     // * ACTIVE/DESACTIVE BOUTON SUIVANT
-//     if(currentPage == pageCount){
-//         lastPage.classList.add('opacity-30','select-none', 'pointer-events-none')
-//         nextPage.classList.add('opacity-30', 'select-none', 'pointer-events-none')
-//     }else{
-//         lastPage.classList.remove('opacity-30','select-none', 'pointer-events-none')
-//         nextPage.classList.remove('opacity-30', 'select-none', 'pointer-events-none')
-//     }
-
-//     // * LIMITE LES LES PROJETS AFFICHEES
-//     const limitedProjects = filteredProjects.slice(prevRange,nextRange)
-//     // * TRANSFORME L'ARRAY EN STRING ET L'INSERE
-//     projectGrid.innerHTML += limitedProjects.join('');
-
-
-
-// }
