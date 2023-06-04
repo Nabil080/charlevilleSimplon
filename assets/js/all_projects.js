@@ -60,8 +60,8 @@ const getProjets = (limitStart = 0,limitEnd = 6) => {
             formationFilters.push(checkbox.dataset.formationId)
         }
     })
-    let formationString = formationFilters.map(id => `formation_id = ${id}`).join(' OR ') ;
-    console.log(formationString)
+    let formationString = formationFilters.map(id => `project.formation_id = ${id}`).join(' OR ') ;
+    console.log(`Filtre de formations : ${formationString}`)
 
     // * DEFINIT LES FILTRES ANNÉES
     const yearFilters = []
@@ -71,16 +71,26 @@ const getProjets = (limitStart = 0,limitEnd = 6) => {
             yearFilters.push(checkbox.dataset.year)
         }
     })
-    let yearString = yearFilters.map(year => `YEAR(project_start) = ${year}`).join(' OR ') ;
-    console.log(yearString)
+    let yearString = yearFilters.map(year => `YEAR(project. project_start) = ${year}`).join(' OR ') ;
+    console.log(`Filtre d'années : ${yearString}`)
 
+    // * DEFINIT LES FILTRES NIVEAUX
+    const levelFilters = []
+    levelCheckboxes.forEach(checkbox => {
+        // * AJOUTE LES CHECKBOX CHECK
+        if(checkbox.checked){
+            levelFilters.push(checkbox.dataset.level)
+        }
+    })
+    let levelString = levelFilters.map(level => `formation.formation_level = '${level}'`).join(' OR ') ;
+    console.log(`Filtre de niveau : ${levelString}`)
 
 
     // Récupère un array des filtres non vides
-    const filtersArray = [formationString, yearString].filter(Boolean);
+    const filtersArray = [formationString, yearString, levelString].filter(Boolean);
     // les transformes en string pour la requete
     const filterString = filtersArray.join(" AND ");
-    console.log(filterString);
+    console.log(`requête envoyée :  WHERE ${filterString}`)
     return fetch('?action=projectsPagination',{
         method: 'POST',
         headers: {
@@ -199,30 +209,21 @@ yearCheckboxes.forEach(checkbox => {
     })
 })
 
+levelCheckboxes.forEach(checkbox => {
+    checkbox.addEventListener('change', (e) => {
+        updateData()
+    })
+})
 
-// showLoading();
-// getProjets()
-// .then((projets) => {
-//     stopLoading();
-//     loadProjects(projets,1)
+filterReset.addEventListener('click', (e) => {
+    document.querySelectorAll('input[type=checkbox]').forEach(checkbox => {
+        checkbox.checked = false
+    })
+    closeAllDropdowns();
+    updateData();
+})
 
-//     formationCheckboxes.forEach(checkbox => {
-//         checkbox.addEventListener('change', (e) => {
-//             loadProjects(projets,1)
-//         })
-//     })
 
-//     yearCheckboxes.forEach(checkbox => {
-//         checkbox.addEventListener('change', (e) => {
-//             loadProjects(projets,1)
-//         })
-//     })
-
-//     levelCheckboxes.forEach(checkbox => {
-//         checkbox.addEventListener('change', (e) => {
-//             loadProjects(projets,1)
-//         })
-//     })
 
 //     searchInput.addEventListener('input', (e) => {
 //         loadProjects(projets,1)
@@ -261,19 +262,6 @@ yearCheckboxes.forEach(checkbox => {
 
 
 
-//     // * DEFINIT LES FILTRES NIVEAUX
-//     const levelFilters = []
-//     levelCheckboxes.forEach(checkbox => {
-//         // * AJOUTE LES CHECKBOX CHECK
-//         if(checkbox.checked){
-//             levelFilters.push(checkbox.value)
-//         }
-//     })
-//     // * SI ARRAY VIDE GERE L'ERREUR :
-//     if(levelFilters.length === 0){
-//         levelFilters.push('')
-//     }
-//     // console.log(levelFilters)
 
 //     // ! CREATION DE L'ARRAY PROJETS FILTRES A PARTIR DE L'ARRAY TOUS LES PROJETS
 //         // * CREATION DU NOUVEL ARRAY VIA .MAP

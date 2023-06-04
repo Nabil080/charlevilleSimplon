@@ -47,7 +47,7 @@
         <!-- dropdown levels -->
             <div class="filter-dropdown dropdown hidden absolute box-content -translate-x-[1px] z-10 w-full sm:w-full -translate-y-1 border rounded-b-lg text-start bg-main-white border-t-transparent border-main-red">
                 <?php foreach($formationsLevel as $level){?>
-                    <div class="flex gap-2 text-xs my-2 px-2"><input class="my-auto" id="<?=$level?>" type="checkbox" value="<?=$level?>"><label for="<?=$level?>"><?=$level?></label></div>
+                    <div class="flex gap-2 text-xs my-2 px-2"><input class="my-auto" id="<?=$level?>" type="checkbox" data-level="<?=$level?>"><label for="<?=$level?>"><?=$level?></label></div>
                 <?php } ?>
             </div>
         </div>
