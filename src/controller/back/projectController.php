@@ -34,6 +34,7 @@ function projectsPagination()
         "message" => "La requête a été modifée comme tel",
         "total" => $total,
         "filtered" => $filtered,
+        "limit" => $limit,
         "projets" => $projectsHTML,
     );
 

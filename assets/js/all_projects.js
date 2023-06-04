@@ -59,9 +59,27 @@ const getProjets = (limitStart = 0,limitEnd = 6) => {
     .then((data) => data.json())
 }
 
+        firstPage.addEventListener('click', (e) => {
+            updateData()
+        })
+        prevPage.addEventListener('click', (e) => {
+            activePage = document.querySelector("button[data-active]")
+            updateData(Number(activePage.dataset.active) - 1)
+        })
+
+        nextPage.addEventListener('click', (e) => {
+            activePage = document.querySelector("button[data-active]").dataset.active
+            updateData(Number(activePage) + 1)
+        })
+        lastPage.addEventListener('click', (e) => {
+            pageCount = document.querySelector("[data-page-count]").dataset.pageCount
+            updateData(pageCount)
+        })
+
 
 async function updateData(currentPage = 1){
     showLoading()
+    console.log(currentPage);
     let limitStart = (currentPage - 1) * projectsPerPage
     let limitEnd = projectsPerPage
     // console.log(limitStart,limitEnd)
@@ -96,7 +114,7 @@ async function updateData(currentPage = 1){
         for(page = 1; page <= pageCount; page++){
             if(page > currentPage - paginationRange && page < currentPage + paginationRange){
                 if(page == currentPage){
-                    paginationDiv.innerHTML += `<button id="${page}" class="bg-main-red text-main-white">${page}</button>`;
+                    paginationDiv.innerHTML += `<button id="${page}" data-active="${page}" class="bg-main-red text-main-white pointer-events-none ">${page}</button>`;
                 }else{
                     paginationDiv.innerHTML += `<button id="${page}" class="hover:bg-main-red hover:text-main-white">${page}</button>`;
                 }
@@ -107,23 +125,8 @@ async function updateData(currentPage = 1){
         paginationDiv.querySelectorAll('button').forEach(button => 
         {
             button.addEventListener('click', (e) => {
-                console.log(Number(e.target.id))
                 updateData(Number(e.target.id))
             })
-        })
-
-        firstPage.addEventListener('click', (e) => {
-            updateData(1)
-        })
-        prevPage.addEventListener('click', (e) => {
-            updateData(currentPage - 1)
-        })
-
-        nextPage.addEventListener('click', (e) => {
-            updateData(currentPage + 1)
-        })
-        lastPage.addEventListener('click', (e) => {
-            updateData(pageCount)
         })
 
         // * ACTIVE/DESACTIVE BOUTON SUIVANT
@@ -136,13 +139,17 @@ async function updateData(currentPage = 1){
         }
 
         // * AFFICHE LE NOMBRE DE PROJETS CORRESPONDANTS
-        projectGrid.innerHTML = `<h3 id="project-count" class="max-w-[766px] text-main-red mt-6 xl:col-span-2">${projectsCount} projets correspondants sur ${allProjectsCount}</h3>`;
+        projectGrid.innerHTML = `<h3 id="project-count" class="max-w-[766px] text-main-red mt-6 xl:col-span-2" data-page-count="${pageCount}">${projectsCount} projets correspondants sur ${allProjectsCount}</h3>`;
         // * AFFICHE LES PROJETS CORRESPONDANTS
         projectGrid.innerHTML += data.projets.join('');
+        // * SCROLL EN BAS
+        if(scrollBool === true){
+            document.querySelector('footer').scrollIntoView();
+        }
+
 }
 
 updateData();
-
 
 
 // showLoading();
