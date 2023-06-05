@@ -20,6 +20,7 @@ function projectsPagination()
     $projects = $projectRepo->getAllProjects($limit,$filter,$execute);
 
     $projectsHTML = [];
+    // var_dump($projects);
     foreach($projects as $project){
         ob_start();
             include('view/template/_project_card.php');
