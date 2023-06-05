@@ -2,20 +2,14 @@
 try {
     function homepage()
     {
+        $formationRepository = new FormationRepository;
+        $promoRepository = new PromoRepository;
+        $formations = $formationRepository->getAllFormations();
         include 'view/public/homepage.php';
     }
     function contactPage()
     {
         include 'view/public/contact.php';
-    }
-
-    // Formation 
-    function allFormationsPage()
-    {
-        $formationRepository = new FormationRepository;
-        $promoRepository = new PromoRepository;
-        $formations = $formationRepository->getAllFormations();
-        include 'view/public/allFormations.php';
     }
 
     function formationPage()

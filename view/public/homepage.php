@@ -195,61 +195,66 @@ $title = "Toutes nos formations";
         </div>
     </div>
     <!-- Section Banniere et notre histoire -->
-    <section class="pb-10 my-8">
-        <img src="assets/img/autres/campus.png" alt="mur du campus" class="w-full img-fluid" />
+    <section class="pb-4 md:pb-10 my-4 md:my-8 relative min-h-[350px] ">
+        <h3 id="commentTitle" class="text-main-gray font-title text-center text-[20px] lg:text-[32px] italic lg:w-3/4 lg:mx-auto 
+        font-semibold md:py-5 mt-4 mb-4 md:mb-8">
+            Nos apprenant.e.s témoignent 
+        </h3>
+        <div id="commentSection" class="grid lg:grid-cols-2 w-10/12 mx-auto justify-items-center">
+        </div>
     </section>
 
 
 
-    <div class="section_history relative">
+    <div class="section_history relative overflow-x-hidden">
         <h2
             class="text-main-red font-title text-center text-[24px] lg:text-[42px] italic lg:text-left lg:w-3/4 lg:mx-auto font-semibold py-5 mt-4 mb-8">
             Notre histoire</h2>
         <!-- Timeline -->
         <ol id="translateList" class="flex w-[300%] sm:w-full lg:w-3/4 sm:animate-none
          sm:translate-x-0 sm:opacity-100 sm:relative sm:flex-row sm:mx-auto lg:relative
-          transition-all duration-[0.5s] overflow-x-hidden sm:overflow-x-clip lg:flex md:justify-around md:gap-6">
+          transition-all duration-[0.5s]  sm:overflow-x-clip lg:flex md:justify-around md:gap-6">
             <div class="border-2 hidden sm:block border-main-red w-[300vw] absolute z-0 h-0 top-1/2 -left-full"></div>
             <li class="z-10 w-2/3 cursor-pointer">
-                <div onclick="changeTab(0)"
-                    class="tabChange rounded-[5px] text-main-white !bg-main-red p-2 grid items-center justify-center">
+                <div onclick="changeDateTab(0)"
+                    class="tabDateChange rounded-[5px] text-main-white !bg-main-red p-2 grid items-center justify-center">
                     <span class="lg:text-xl text-md font-semibold">2013</span>
                 </div>
             </li>
             <li class="z-10 w-2/3 cursor-pointer">
-                <div onclick="changeTab(1)"
-                    class="tabChange bg-main-gray rounded-[5px] animate-pulse sm:animate-none text-main-white p-2 grid items-center justify-center">
+                <div onclick="changeDateTab(1)"
+                    class="tabDateChange bg-main-gray rounded-[5px] animate-pulse sm:animate-none text-main-white p-2 grid items-center justify-center">
                     <span class="lg:text-xl text-md font-semibold">2014-2015</span>
                 </div>
             </li>
             <li class="z-10 w-2/3 cursor-pointer">
-                <div onclick="changeTab(2)"
-                    class="tabChange bg-main-gray rounded-[5px] text-main-white p-2 grid items-center justify-center">
+                <div onclick="changeDateTab(2)"
+                    class="tabDateChange bg-main-gray rounded-[5px] text-main-white p-2 grid items-center justify-center">
                     <span class="lg:text-xl text-md font-semibold">2016-2017</span>
                 </div>
             </li>
             <li class="z-10 w-2/3 cursor-pointer">
-                <div onclick="changeTab(3)"
-                    class="tabChange bg-main-gray rounded-[5px] text-main-white p-2 grid items-center justify-center">
+                <div onclick="changeDateTab(3)"
+                    class="tabDateChange bg-main-gray rounded-[5px] text-main-white p-2 grid items-center justify-center">
                     <span class="lg:text-xl text-md font-semibold">2018-2019</span>
                 </div>
             </li>
             <li class="z-10 w-2/3 cursor-pointer">
-                <div onclick="changeTab(4)"
-                    class="tabChange bg-main-gray rounded-[5px] text-main-white p-2 grid items-center justify-center">
+                <div onclick="changeDateTab(4)"
+                    class="tabDateChange bg-main-gray rounded-[5px] text-main-white p-2 grid items-center justify-center">
                     <span class="lg:text-xl text-md font-semibold">2020-2021</span>
                 </div>
             </li>
             <li class="z-10 w-2/3 cursor-pointer sm:hidden">
-                <div onclick="changeTab('back')"
-                    class="tabChange  bg-main-gray rounded-[5px] text-main-white p-2 grid items-center justify-center">
+                <div onclick="changeDateTab('back')"
+                    class="tabDateChange  bg-main-gray rounded-[5px] text-main-white p-2 grid items-center justify-center">
                     <span class="lg:text-xl text-md font-semibold">Début de Simplon</span>
                 </div>
             </li>
         </ol>
 
         <div class="mx-7 lg:mx-[15%] lg:mt-16 my-8">
-            <div class="sectionChange transition-all duration-[1.5s]">
+            <div class="sectionDateChange transition-all duration-[1.5s]">
                 <h3 class="text-[20px] md:text-[32px] font-bold font-title">2013</h3>
                 <p class="text-[16px]"> L’aventure de Simplon débute en 2013 avec Frédéric Bardeau, Andrei Vladescu-Olt
                     et Erwan Kezzar.
@@ -263,7 +268,7 @@ $title = "Toutes nos formations";
                     femmes de 18 à 52 ans, de Bac-15 à Bac+15 et des personnes provenant de 17 nationalités différentes.
                 </p>
             </div>
-            <div class="hidden sectionChange transition-all duration-[1.5s]">
+            <div class="hidden sectionDateChange transition-all duration-[1.5s]">
                 <h3 class="text-[20px] md:text-[32px] font-bold font-title">2014 - 2015</h3>
                 <p class="text-[16px]"> Simplon se développe rapidement en dehors de Montreuil via un mécanisme de
                     "franchise sociale" et des fabriques commencent à
@@ -279,7 +284,7 @@ $title = "Toutes nos formations";
                     s'Engage en 2014,
                     fellow Ashoka et sélectionnée par EPIC en 2015.</p>
             </div>
-            <div class="hidden sectionChange transition-all duration-[1.5s]">
+            <div class="hidden sectionDateChange transition-all duration-[1.5s]">
                 <h3 class="text-[20px] md:text-[32px] font-bold font-title">2016 - 2017</h3>
                 <p class="text-[16px]"> Simplon devient le premier réseau de formation labellisées par l'Etat en France
                     "Grande Ecole du Numérique" et se développe à l’international :
@@ -295,7 +300,7 @@ $title = "Toutes nos formations";
                     grands comptes. DigitESS nait à ce
                     moment là pour accompagner la transition numérique des acteurs à impact positif.</p>
             </div>
-            <div class="hidden sectionChange transition-all duration-[1.5s]">
+            <div class="hidden sectionDateChange transition-all duration-[1.5s]">
                 <h3 class="text-[20px] md:text-[32px] font-bold font-title">2018 - 2019</h3>
                 <p class="text-[16px]"> Au moment de fêter ses 6 ans, Simplon.co lève 12 millions d’euros auprès de son
                     pool d’investisseurs de l’Économie sociale
@@ -309,7 +314,7 @@ $title = "Toutes nos formations";
                     compte 78 Fabriques dont 24 à l’étranger.
                     Simplon Prod dépasse les 150 projets ESS réalisés et Simplon Corp le millier de salarié formé.</p>
             </div>
-            <div class="hidden sectionChange transition-all duration-[1.5s]">
+            <div class="hidden sectionDateChange transition-all duration-[1.5s]">
                 <h3 class="text-[20px] md:text-[32px] font-bold font-title">2020 - 2021</h3>
                 <p class="text-[16px]"> En 2020, Simplon poursuit le développement de son impact social dans un contexte
                     de crise sanitaire inédit.

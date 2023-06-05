@@ -3,7 +3,7 @@
         class="grid grid-cols-2 transition-all duration-[0.2s] items-center  border-t-[4px] md:grid-cols-[20%_80%] border-main-red">
         <a href="index.php"><img src="assets/img/simplonblanc.png" alt="Logo Simplon" class="w-[150px]" /></a>
         <i onclick="changeNavFunction()"
-            class="fa-solid fa-bars text-[39px] justify-self-end  mr-6 sm:mr-8 mb-1 md:!hidden hiddenIcon"></i>
+            class="fa-solid fa-bars text-[39px] justify-self-end text-white mr-6 sm:mr-8 mb-1 md:!hidden hiddenIcon"></i>
         <i onclick="changeNavFunction()"
             class="fa-solid fa-xmark text-[46px] justify-self-end mr-6 mb-1 sm:mr-8 md:!hidden hiddenIcon"
             style="display: none"></i>
@@ -67,7 +67,7 @@
                             </svg>
                         </button>
                         <div id="dropdownAccount"
-                            class="z-50 border-main-lightgray hidden bg-gray-400 bg-opacity-80  text-main-white blur-[0.3px] rounded-lg shadow text-center w-fit mr-4 pl-0">
+                            class="z-50 border-main-lightgray min-w-[300px] hidden bg-gray-400 bg-opacity-80  text-main-white blur-[0.3px] rounded-lg shadow text-center w-fit mr-4 pl-0">
                             <ul class="z-50 relative py-2 md:py-0 px-2 md:px-0 text-sm leading-9 sm:leading-[60px] divide-y border-2 border-main-red divide-main-red rounded-[4px]"
                                 aria-labelledby="dropdownAccountDefaultButton">
                                 <li class="md:hover:bg-gray-700  xl:px-16">
