@@ -96,7 +96,7 @@ const getProjets = (limitStart = 0,limitEnd = 6) => {
 
     // * DEFINIT LES FILTRES RECHERCHE
     let searchString = searchInput.value ? `(project.project_name LIKE ?
-    OR project.project_description LIKE ? 
+    OR project.project_description LIKE ?
     OR project.project_notes LIKE ?
     OR project.project_company_name LIKE ?)` : '' ;
     let searchExecute = searchInput.value? `%${searchInput.value}%,%${searchInput.value}%,%${searchInput.value}%,%${searchInput.value}%` : '' ;

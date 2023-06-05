@@ -238,9 +238,9 @@ function crudCandidatePage()
     $candidates = $UserRepo->getAllCandidates();
 
     include 'view/admin/_candidate.php';
-}  
-  
-  
+}
+
+
 function crudLearnerPage()
 {
     $UserRepo = new UserRepository;

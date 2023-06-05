@@ -202,8 +202,27 @@ class UserRepository extends ConnectBdd
         $stmt->execute([2, '', $token, $email]);
         $stmt->closeCursor();
     }
-  
-   public function getAllCandidates(): array
+
+    public function getLearnersAndFormators($limitRequest = null, $filters = null, $execute = null, $order = null):array
+    {
+        $filters = $filters === null ? "" : "WHERE $filters";
+        $execute = $execute === null ? [] : explode(",",$execute);
+        $order = $order === null ? "ORDER BY user.role_id ASC" : "ORDER BY $order";
+        $limit = $limitRequest === null ? "" : "LIMIT $limitRequest";
+
+        $query = "SELECT `user_id` FROM `user` $filters $order $limit";
+        $req = $this->bdd->prepare($query);
+        $req->execute($execute);
+        $data = $req->fetchAll(PDO::FETCH_ASSOC);
+
+
+        foreach ($data as $key) {
+            $users[] = new User($key['user_id']);
+        }
+
+        return $users;
+    }
+    public function getAllCandidates(): array
     {
         $candidates = [];
         $query = "SELECT `user_id` FROM `user` WHERE `role_id` = ?";

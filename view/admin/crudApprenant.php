@@ -75,13 +75,13 @@
             include("view/admin/modalInfos.php");
             include("view/admin/modalProjet.php");
         };
-        foreach ($learners as $user) { ?>
+        foreach ($users as $user) { ?>
             <tr class="border-2 border-gray-800">
                 <th scope="row" class="px-4 py-3 font-medium text-gray-900 border whitespace-nowrap "><?=$user->user_name?>
                 </th>
                 <td class="px-4 py-3 border"><?=$user->user_surname?></td>
                 <td class="px-4 py-3 border">
-                <?php 
+                <?php
                         foreach($UserRepo->getUserPromo('apprenant',$user->user_id) as $promo){
                             echo "<p class='text-center italic font-bold underline'>$promo->name</p>";
                         }
