@@ -1,10 +1,11 @@
 <?php
-$title = "Accueil";
-ob_start();
+$title = "Toutes nos formations";
 ?>
 
+<?php ob_start(); ?>
+
 <!-- background -->
-<section class="w-screen h-[100dvh] bg-cover bg-center relative"
+<section class="w-screen h-[90dvh] lg:h-[100dvh] bg-cover bg-center relative"
     style="background-image: url(assets/img/homepage_image_blur.jpg);">
     <video autoplay muted loop class="h-screen hidden lg:block blur-sm absolute w-screen object-cover">
         <source src="assets/img/homepage_video.mp4" type="video/mp4">
@@ -13,17 +14,7 @@ ob_start();
     <div id="homepage-overlay"
         class="absolute w-full h-full py-4 px-4 bg-main-gray bg-opacity-60 flex flex-col [&>div]:mx-auto text-center">
         <!-- HEADER -->
-        <div class="h-1/3 lg:h-[48%] grid place-content-center">
-            <img class="h-full mx-auto lg:mx-0 lg:absolute lg:top-0 lg:left-8 lg:h-1/4 " src="assets/img/logo.png"
-                alt="logo simplon charleville-mézières">
-            <div class="hidden lg:grid absolute top-0 right-8 h-1/4">
-                <div class="w-fit mx-8 relative h-fit my-auto cursor-pointer" data-modal-target="login-modal"
-                    data-modal-toggle="login-modal">
-                    <i class="fa fa-user text-[80px] text-main-red"></i>
-                    <p class="underline text-main-white whitespace-nowrap">Se connecter</p>
-                    <!-- <button data-modal-target="login-modal" data-modal-toggle="login-modal" class="font-main absolute -bottom-6 -right-2 underline text-main-white whitespace-nowrap">Se connecter</button> -->
-                </div>
-            </div>
+        <div class="h-1/4 lg:h-[48%] grid place-content-center">
             <h1 class="hidden lg:block uppercase font-title h-full text-main-white text-[60px] font-bold text-center">
                 Simplon <br> charleville-mézières</h1>
         </div>
@@ -104,7 +95,7 @@ ob_start();
                 lg:flex-row lg:justify-center lg:gap-10 [&>button]:lg:w-1/3 [&>button]:lg:h-full [&>button]:lg:py-[0vh]
                 [&>button]:xl:h-50 xl:mx-[8vw]">
                 <button class="hover:bg-main-white hover:text-main-red hover:border-main-red hover:-translate-y-4"
-                    onclick="window.location.href = '?action=allFormationsPage'">
+                    onclick="window.location.href = '#allFormationsTitle'">
                     Nos formations
                 </button>
                 <button class="hover:bg-main-white hover:text-main-red hover:border-main-red hover:-translate-y-4"
@@ -128,11 +119,11 @@ ob_start();
     </div>
 </section>
 
-<div class="background bg-main-white">
+<div id="allFormationsTitle"  class="background bg-main-white pt-4 md:pt-12">
     <!-- Chiffres clés, invisibles en mobile -->
     <div class="key_numbers hidden md:flex md:justify-center border-t-[4px] border-b-[4px] border-main-red py-5 w-full">
         <div class="numbers_container px-5 flex w-full">
-            <div class="number1 flex w-1/3 items-center">
+            <div class="number1 flex w-1/3 items-center ">
                 <span
                     class="bg-main-red rounded-[5px] text-main-white border border-main-white   text-xl xl:text-3xl p-4 aspect-square flex items-center justify-center">142</span>
                 <p class="font-title text-lg lg:text-xl italic pl-2">Simplonien.ne.s depuis la création</p>
@@ -344,8 +335,6 @@ ob_start();
 <?php $script = ob_get_clean(); ?>
 
 
-<?php $content = ob_get_clean(); 
+<?php $content = ob_get_clean(); ?>
 
-require('view/layout_home.php');
-
-?>
+<?php require 'view/layout_home.php'; ?>
