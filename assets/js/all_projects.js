@@ -111,7 +111,7 @@ const getProjets = (limitStart = 0,limitEnd = 6) => {
     const filterExecute = ExecuteArray.join(",");
     console.log(`requête envoyée :  WHERE ${filterString}`)
     console.log(`execute envoyée : [${filterExecute}]`)
-    return fetch('?action=projectsPagination',{
+    return fetch('?action=allProjectsPagination',{
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

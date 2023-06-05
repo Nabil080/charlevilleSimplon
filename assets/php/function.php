@@ -136,7 +136,7 @@ function securizeImage(array $filesImage,string $path){
         $extension = explode('.', $nameFile);
 
 
-        $max_size = 1000000;
+        $max_size = 8000000;
 
 
         if(in_array($typeFile, $type))
@@ -212,7 +212,7 @@ function securizeImage(array $filesImage,string $path){
 function securizePdf(array $filesPdf, string $path){
     if(!empty($filesPdf))
         {
-            var_dump($filesPdf);
+            // var_dump($filesPdf);
         $nameFile = $filesPdf['name'];
         $typeFile = $filesPdf['type'];
         $tmpFile = $filesPdf['tmp_name'];
@@ -225,7 +225,7 @@ function securizePdf(array $filesPdf, string $path){
         $extension = explode('.', $nameFile);
 
 
-        $max_size = 1000000;
+        $max_size = 8000000;
 
 
         if(in_array($typeFile, $type))

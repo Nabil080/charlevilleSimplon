@@ -1,7 +1,7 @@
 <?php
 
 
-function projectsPagination()
+function allProjectsPagination()
 {
     $jsonData = file_get_contents('php://input',true);
     $data = json_decode($jsonData);
@@ -41,6 +41,48 @@ function projectsPagination()
     echo json_encode($response);
 
 }
+function projectPagination()
+{
+    $jsonData = file_get_contents('php://input',true);
+    $data = json_decode($jsonData);
+
+    $projectRepo = new ProjectRepository ;
+
+    $limitStart = $data->limitStart;
+    $limitEnd = $data->limitEnd;
+    $limit = "$limitStart,$limitEnd";
+
+    $filter = empty($data->filter) ? null : $data->filter;
+    $execute = empty($data->execute) ? null : $data->execute;
+
+    $total = $projectRepo->getProjectsNumber();
+    $filtered = $projectRepo->getFilteredProjectsNumber($filter,$execute);
+    $projects = $projectRepo->getAllProjects($limit,$filter,$execute);
+
+    $projectsHTML = [];
+    foreach($projects as $project){
+        ob_start();
+            include("view/admin/projet/table_row.php");
+            include("view/admin/modalDelete.php");
+        $content = ob_get_clean();
+
+        $projectsHTML[]= $content;
+    }
+
+    $response = array(
+        "status" => "success",
+        "message" => "Les projets ont bien été récupérés d'après les critères ci dessous.",
+        "total" => $total,
+        "filtered" => $filtered,
+        "query" => "WHERE $filter",
+        "limit" => $limit,
+        "projets" => $projectsHTML,
+    );
+
+    echo json_encode($response);
+
+}
+
 
 function deleteProject()
 {

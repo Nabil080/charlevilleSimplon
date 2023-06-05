@@ -235,7 +235,6 @@ function registerPage()
 function crudCandidatePage()
 {
     $UserRepo = new UserRepository;
-    $candidates = $UserRepo->getAllCandidates(3);
 
     include 'view/admin/_candidate.php';
 }
@@ -244,7 +243,6 @@ function crudCandidatePage()
 function crudLearnerPage()
 {
     $UserRepo = new UserRepository;
-    $users = $UserRepo->getLearnersAndFormators(6);
     $PromoRepo = new PromoRepository;
     $promos = $PromoRepo->getActivePromos();
 
@@ -254,7 +252,6 @@ function crudLearnerPage()
 function crudCompanyPage()
 {
     $UserRepo = new UserRepository;
-    $companies = $UserRepo->getAllCompanies();
     include 'view/admin/_company.php';
 }
 
@@ -274,7 +271,7 @@ function crudPromotionPage()
 function crudProjetPage()
 {
     $ProjectRepo = new ProjectRepository;
-    $projects = $ProjectRepo->getAllProjects(6);
+    $projects = $ProjectRepo->getAllProjects(10);
     $PromoRepo = new PromoRepository;
     $promos = $PromoRepo->getActivePromos();
     include 'view/admin/_projects.php';

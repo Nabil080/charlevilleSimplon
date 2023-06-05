@@ -36,4 +36,4 @@
 
     </tbody>
 </table>
-<div id="loading"c></div>
+<div id="loading"></div>
