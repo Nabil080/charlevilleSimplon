@@ -22,7 +22,7 @@
     <div class="flex overflow-x-scroll gap-3 px-4 min-w-[270px] max-w-[270px] sm:min-w-[295px] pb-4">
         <!-- MAXIMUM 6 TAG -->
         <?php $y = 0;
-            $tags = $tagRepo->getUserTags($formateur->user_id);
+            $tags = $tagsRepository->getUserTags($formateur->user_id);
 
                 if (isset($tags) && empty($tags)) { ?>
                     <p class="italic text-center text-[18px] text-main-red">Pas de compétence spécifiée</p>
