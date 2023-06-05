@@ -11,7 +11,7 @@ const candidateNumber = document.querySelector('#candidates-number')
 const searchInput = document.querySelector('#simple-search');
 
 // Variables nécessaires à la pagination
-const projectsPerPage = 1
+const projectsPerPage = 2
 const paginationRange = 3
 
 let filterString = '';
@@ -72,7 +72,6 @@ async function updateData(currentPage = 1){
         let projectsCount = data.filtered
         let pageCount = Math.ceil(projectsCount / projectsPerPage);
 
-
         // * ACTIVE/DESACTIVE BOUTON PRECEDENT
         if(currentPage == 1){
             firstPage.classList.add('opacity-30', 'select-none', 'pointer-events-none')
@@ -120,11 +119,25 @@ async function updateData(currentPage = 1){
         if(currentPage != pageCount){
             candidatesRange.innerHTML = `${limitStart + 1}-${limitStart + projectsPerPage}`
         }else{
-            candidatesRange.innerHTML = `${limitStart + 1}-${allProjectsCount}`
+            candidatesRange.innerHTML = `${limitStart + 1}-${projectsCount}`
         }
-        candidateNumber.innerHTML = allProjectsCount
+        candidateNumber.innerHTML = projectsCount
         // * AFFICHE LES CANDIDATS CORRESPONDANTS
         candidateTable.innerHTML = data.candidates.join('');
+
+        // * CREER LES MODALS :
+        const modalButtons = document.querySelectorAll('tbody [data-modal-target]')
+        console.log(modalButtons)
+        modalButtons.forEach(button => {
+            button.addEventListener('click',(event) => {
+                event.preventDefault()
+
+                // alert(button.dataset.modalTarget)
+                let modal = document.getElementById(button.dataset.modalTarget)
+                modal.classList.toggle('hidden')
+            })
+        })
+
 }
 
 updateData()
