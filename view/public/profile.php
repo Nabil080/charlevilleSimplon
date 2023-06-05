@@ -4,7 +4,7 @@ $title = "Espace personnel";
 
 <?php ob_start();
 // var_dump($userDatas);
-// var_dump($userPromo->name);
+var_dump($userPromo);
 ?>
 <!-- Section photo et description -->
 <div class="background bg-main-white overflow-x-hidden min-h-[100vh]">
@@ -20,7 +20,7 @@ $title = "Espace personnel";
         $notMyProfile = '';
     }
 
-    // Gestion page profil prospect ou profil apprenant
+    // Gestion page profil prospect
     if ($userDatas['role_id'] == 5) {?>
 
         <!-- PROFIL PROSPECT -->
@@ -34,14 +34,8 @@ $title = "Espace personnel";
                 <div class="description lg:ml-5 h-[100%] flex flex-col">
                     <h1 class="text-main-red font-title text-[28px] lg:text-[48px] font-semibold pt-5 text-center lg:text-left"><span class="uppercase"><?= $userDatas['user_name'] ?></span> <?= $userDatas['user_surname'] ?></h1>
                     <div class="text-desc rounded-[5px] border-[1px] border-main-border mt-2 grow lg:flex lg:flex-col lg:justify-between">
-                        <p class="text-[20px] text-justify pt-4 px-3 pb-2 lg:pb-0">Candidature pour la formation <?= $userPromo->name ?></p>
-                        <div class="formation_status flex justify-center items-center px-3">
-                            <span class="text-[28px] flex justify-center pt-1 pb-2 italic">Statut : <?= $userDatas['status_name'] ?></span>
-                            <span class="w-6 h-6 border rounded-full ml-2 
-                                <?php if ($userDatas['status_id'] == 7){?> bg-main-red<?php }?>
-                                <?php if ($userDatas['status_id'] == 6){?> bg-main-green<?php }?>
-                                <?php if ($userDatas['status_id'] == 2){?> bg-main-orange<?php }?>"></span>
-                        </div>
+                        <p class="text-[20px] text-justify pt-4 px-3 pb-2 lg:pb-0">Candidature pour les formations : <?= $userPromo->name ?></p>
+
                         <div class="h-0 border-[2px] border-main-red w-1/2 mb-5"></div>
                         <ul class="text-justify px-3 pb-3 text-[16px] lg:text-[18px] leading-loose ml-8">
                             <li class="list-disc">Nom : <?= $userDatas['user_name'] ?></li>
@@ -66,36 +60,36 @@ $title = "Espace personnel";
                                     <!-- Partie MODIFICATION -->
                                     <div id="co" class="px-6 py-6 lg:px-8">
                                         <h3 class="mb-4 text-medium uppercase w-fit mx-auto font-bold font-title text-main-red">Modifier mes informations personnelles</h3>
-                                        <form class="space-y-6" action="" method="post">
+                                        <form class="space-y-6 [&_input]:text-black" action="" method="post">
                                             <div>
                                                 <label for="email" class="block mb-1 text-sm font-medium  text-main-red">E-mail</label>
-                                                <input type="email" name="email" id="email" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" placeholder="<?= $userDatas['user_email'] ?>">
+                                                <input type="email" name="email" id="email" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" value="<?= $userDatas['user_email'] ?>">
                                             </div>
                                             <div>
                                                 <label for="phone" class="block mb-1 text-sm font-medium  text-main-red">Téléphone</label>
-                                                <input type="phone" name="phone" id="phone" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" placeholder="<?= $userDatas['user_phone'] ?>">
+                                                <input type="phone" name="phone" id="phone" pattern="[0][1-9]{9}" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" value="<?= $userDatas['user_phone'] ?>">
                                             </div>
                                             <div>
                                                 <label for="adress" class="block mb-1 text-sm font-medium  text-main-red">Adresse</label>
-                                                <input type="adress" name="adress" id="adress" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" placeholder="<?= $userDatas['user_place'] ?>">
+                                                <input type="text" name="adress" id="adress" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" value="<?= $userDatas['user_place'] ?>">
                                             </div>
                                             <div>
                                                 <label for="numero_pe" class="block mb-1 text-sm font-medium  text-main-red">Numéro Pôle Emploi</label>
-                                                <input type="numero_pe" name="numero_pe" id="numero_pe" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" placeholder="<?= $userDatas['user_numero_pe'] ?>">
+                                                <input type="text" name="numero_pe" id="numero_pe" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" value="<?= $userDatas['user_numero_pe'] ?>">
                                             </div>
                                             <div>
                                                 <label for="nationality" class="block mb-1 text-sm font-medium  text-main-red">Nationalité</label>
-                                                <input type="nationality" name="nationality" id="nationality" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" placeholder="<?= $userDatas['user_nationality'] ?>">
+                                                <input type="text" name="nationality" id="nationality" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" value="<?= $userDatas['user_nationality'] ?>">
                                             </div>
                                             <div>
-                                                <label for="new_password" class="block mb-1 text-sm font-medium text-main-red">Choisir un nouveau mot de passe</label>
-                                                <input type="new_password" name="new_password" id="new_password" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" placeholder="">
+                                                <label for="new_password" class="block mb-1 text-sm font-medium text-main-red">Choisir un nouveau mot de passe* <span class="text-main-gray italic">Optionnel</span></label>
+                                                <input type="password" name="new_password" id="new_password" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" placeholder="Nouveau mot de passe">
                                             </div>
                                             <div>
                                                 <label for="password" class="block mb-1 text-sm font-medium  text-main-red">Veuillez confirmer vos modifications en entrant votre (ancien) mot de passe.</label>
-                                                <input type="password" name="password" id="password" placeholder="*********" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" required>
+                                                <input type="password" name="password" id="password" placeholder="Ancien mot de passe" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" required>
                                             </div>
-                                            <button type="submit" class="w-full uppercase font-title text-main-white bg-main-red hover:bg-red-800 font-medium rounded-lg text-sm px-5 py-1.5 text-center ">Se connecter</button>
+                                            <button type="submit" class="w-full uppercase font-title text-main-white bg-main-red hover:bg-red-800 font-medium rounded-lg text-sm px-5 py-1.5 text-center ">Modifier</button>
                                         </form>
                                     </div>
                                 </div>
@@ -108,9 +102,9 @@ $title = "Espace personnel";
     <?php } ?>
 
     <?php
-    // Gestion page profil prospect ou profil apprenant
+    // Gestion page profil apprenant/formateur/admin
     if ($userDatas['role_id'] == 4 || $userDatas['role_id'] == 2 || $_SESSION['user']['role_id'] == 1) { ?>
-    
+
         <!-- PROFIL APPRENANT -->
         <section class="apprenant_profil">
             <!-- Image de profil et description -->
