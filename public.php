@@ -2,7 +2,7 @@
 
 // TEMP POUR TEST SANS CONNEXION
 $user = new UserRepository();
-$_SESSION['user'] = $user->getUserById(2);
+$_SESSION['user'] = $user->getUserById(1);
 
 switch ($action) {
     case 'allFormationsPage':
@@ -65,7 +65,7 @@ switch ($action) {
         resetPasswordForm();
         break;
 
-    // Traitement de la partie Compte 
+    // Traitement de la partie Compte
     case 'registerTreatment':
         registerTreatment();
         break;

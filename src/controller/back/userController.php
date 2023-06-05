@@ -280,6 +280,7 @@ try {
                     $bools = $userRepository->updateUserSkills($id, $array);
                     header('Location:?action=profilePage&id='.$_GET['id']);
                 } elseif ($type == 'datas') {
+                    var_dump($_POST);
                         if (isset($array['password']) && !empty($array['password'])) {
                             $password = $array['password'];
                             $UserRepo = new UserRepository();

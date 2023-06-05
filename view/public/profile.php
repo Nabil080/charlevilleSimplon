@@ -4,7 +4,7 @@ $title = "Espace personnel";
 
 <?php ob_start();
 // var_dump($userDatas);
-var_dump($userPromo);
+// var_dump($userPromo);
 ?>
 <!-- Section photo et description -->
 <div class="background bg-main-white overflow-x-hidden min-h-[100vh]">
@@ -21,7 +21,7 @@ var_dump($userPromo);
     }
 
     // Gestion page profil prospect
-    if ($userDatas['role_id'] == 5) {?>
+    if ($userDatas['role_id'] == 5) { ?>
 
         <!-- PROFIL PROSPECT -->
         <section class="prospect_profil">
@@ -34,7 +34,7 @@ var_dump($userPromo);
                 <div class="description lg:ml-5 h-[100%] flex flex-col">
                     <h1 class="text-main-red font-title text-[28px] lg:text-[48px] font-semibold pt-5 text-center lg:text-left"><span class="uppercase"><?= $userDatas['user_name'] ?></span> <?= $userDatas['user_surname'] ?></h1>
                     <div class="text-desc rounded-[5px] border-[1px] border-main-border mt-2 grow lg:flex lg:flex-col lg:justify-between">
-                        <p class="text-[20px] text-justify pt-4 px-3 pb-2 lg:pb-0">Candidature pour les formations : <?= $userPromo->name ?></p>
+                        <p class="text-[20px] text-justify pt-4 px-3 pb-2 lg:pb-0">Candidature pour les formations : <?php foreach($userPromo[0] as $promo){ echo "<a class='text-main-red underline' href='?action=formationPage&id=$promo->id'>$promo->name</a> <br>";} ?></p>
 
                         <div class="h-0 border-[2px] border-main-red w-1/2 mb-5"></div>
                         <ul class="text-justify px-3 pb-3 text-[16px] lg:text-[18px] leading-loose ml-8">
@@ -60,7 +60,7 @@ var_dump($userPromo);
                                     <!-- Partie MODIFICATION -->
                                     <div id="co" class="px-6 py-6 lg:px-8">
                                         <h3 class="mb-4 text-medium uppercase w-fit mx-auto font-bold font-title text-main-red">Modifier mes informations personnelles</h3>
-                                        <form class="space-y-6 [&_input]:text-black" action="" method="post">
+                                        <form class="space-y-6 [&_input]:text-black" action="?action=updateUserElements&type=datas&id=<?=$userDatas['user_id']?>" method="post">
                                             <div>
                                                 <label for="email" class="block mb-1 text-sm font-medium  text-main-red">E-mail</label>
                                                 <input type="email" name="email" id="email" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" value="<?= $userDatas['user_email'] ?>">
@@ -87,7 +87,7 @@ var_dump($userPromo);
                                             </div>
                                             <div>
                                                 <label for="password" class="block mb-1 text-sm font-medium  text-main-red">Veuillez confirmer vos modifications en entrant votre (ancien) mot de passe.</label>
-                                                <input type="password" name="password" id="password" placeholder="Ancien mot de passe" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" required>
+                                                <input type="password" name="password" id="password" placeholder="Ancien mot de passe" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red">
                                             </div>
                                             <button type="submit" class="w-full uppercase font-title text-main-white bg-main-red hover:bg-red-800 font-medium rounded-lg text-sm px-5 py-1.5 text-center ">Modifier</button>
                                         </form>
