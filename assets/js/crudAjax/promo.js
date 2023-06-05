@@ -39,21 +39,18 @@ let filterExecute = '';
 const getProjets = (limitStart = 0,limitEnd = 6) => {
 
     // * DEFINIT LES FILTRES RECHERCHE
-    let searchString = searchInput.value ? `(promo.promo_name LIKE ?
-        OR promo.promo_description LIKE ?
-        OR promo.promo_notes LIKE ?
-        OR promo.promo_company_name LIKE ?)` : '' ;
-        let searchExecute = searchInput.value? `%${searchInput.value}%,%${searchInput.value}%,%${searchInput.value}%,%${searchInput.value}%` : '' ;
+    let searchString = searchInput.value ? `(promo.promo_name LIKE ?)` : '' ;
+    let searchExecute = searchInput.value? `%${searchInput.value}%` : '' ;
 
 
-        // Récupère un array des filtres non vides
-        const filtersArray = [searchString].filter(Boolean);
-        const ExecuteArray = [searchExecute].filter(arr => arr.length > 0);
-        // les transformes en string pour la requete
-        const filterString = filtersArray.join(" AND ");
-        const filterExecute = ExecuteArray.join(",");
-        console.log(`requête envoyée :  WHERE ${filterString}`)
-        console.log(`execute envoyée : [${filterExecute}]`)
+    // Récupère un array des filtres non vides
+    const filtersArray = [searchString].filter(Boolean);
+    const ExecuteArray = [searchExecute].filter(arr => arr.length > 0);
+    // les transformes en string pour la requete
+    const filterString = filtersArray.join(" AND ");
+    const filterExecute = ExecuteArray.join(",");
+    console.log(`requête envoyée :  WHERE ${filterString}`)
+    console.log(`execute envoyée : [${filterExecute}]`)
 
     return fetch('?action=promotionPagination',{
         method: 'POST',
