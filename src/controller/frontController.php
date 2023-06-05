@@ -73,6 +73,7 @@ function profilePage()
         $id = $_GET['id'];
         $user = new UserRepository();
         $userDatas = $user->getUserById($id);
+        // var_dump('hi');
         if($userDatas['role_id'] == 1 || $userDatas['role_id'] == 3){
             homepage();
         } elseif($userDatas['role_id'] == 2){
@@ -124,6 +125,8 @@ function myProfile()
                 $allStatus = $status->getAllStatus();
                 $ProjectRepo = new ProjectRepository();
                 $userProjects = $ProjectRepo->getUserProjects($id);
+                $Promo = new PromoRepository();
+                $userPromo = $Promo->getPromoByUserID($id);
                 include 'view/public/profile.php';
             } else {
                 $tags = new TagRepository();
