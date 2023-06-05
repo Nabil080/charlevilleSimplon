@@ -74,6 +74,6 @@ if (isset($_GET['action']) && $_GET['action'] !== '' && !isset($_GET['admin'])) 
     homepage();
 }
 
-// $repo = new UserRepository;
-// $data = $repo->getFilteredCandidatesNumber();
-// var_dump($data);
+// $UserRepo = new UserRepository;
+// $users = $UserRepo->getLearnersAndFormators();
+// var_dump($users);

@@ -244,8 +244,7 @@ function crudCandidatePage()
 function crudLearnerPage()
 {
     $UserRepo = new UserRepository;
-    $learners = $UserRepo->getAllLearners();
-    $formators = $UserRepo->getAllFormators();
+    $users = $UserRepo->getLearnersAndFormators(6);
     $PromoRepo = new PromoRepository;
     $promos = $PromoRepo->getActivePromos();
 

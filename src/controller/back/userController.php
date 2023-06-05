@@ -382,6 +382,97 @@ function candidatePagination()
     echo json_encode($response);
 
 }
+function learnerPagination()
+{
+    $jsonData = file_get_contents('php://input',true);
+    $data = json_decode($jsonData);
+
+    $UserRepo = new UserRepository ;
+    $PromoRepo = new PromoRepository;
+
+
+    $limitStart = $data->limitStart;
+    $limitEnd = $data->limitEnd;
+    $limit = "$limitStart,$limitEnd";
+
+    $filter = empty($data->filter) ? null : $data->filter;
+    $execute = empty($data->execute) ? null : $data->execute;
+
+    $total = $UserRepo->getLearnersAndFormatorsNumber();
+    $filtered = $UserRepo->getFilteredLearnersAndFormatorsNumber($filter,$execute);
+    $users = $UserRepo->getLearnersAndFormators($limit,$filter,$execute);
+
+    $usersHTML = [];
+    foreach($users as $user){
+        ob_start();
+            include("view/admin/apprenant/table_row.php");
+            include("view/admin/modalUpdateUser.php");
+            include("view/admin/modalInfos.php");
+            include("view/admin/modalProjet.php");
+        $content = ob_get_clean();
+
+        $usersHTML[]= $content;
+    }
+
+    $response = array(
+        "status" => "success",
+        "message" => "Les utilisateurs ont bien été récupérés d'après les critères ci dessous.",
+        "total" => $total,
+        "filtered" => $filtered,
+        "query" => "WHERE $filter",
+        "limit" => $limit,
+        "candidates" => $usersHTML,
+    );
+
+    echo json_encode($response);
+
+}
+function companyPagination()
+{
+    $jsonData = file_get_contents('php://input',true);
+    $data = json_decode($jsonData);
+
+    $UserRepo = new UserRepository ;
+    $PromoRepo = new PromoRepository;
+
+    var_dump($data);
+
+    $limitStart = $data->limitStart;
+    $limitEnd = $data->limitEnd;
+    $limit = "$limitStart,$limitEnd";
+
+    $filter = empty($data->filter) ? null : $data->filter;
+    $execute = empty($data->execute) ? null : $data->execute;
+
+    $total = $UserRepo->getCompaniesNumber();
+    $filtered = $UserRepo->getFilteredCompaniesNumber($filter,$execute);
+    $users = $UserRepo->getAllCompanies($limit,$filter,$execute);
+
+    $usersHTML = [];
+    foreach($users as $user){
+        ob_start();
+            include("view/admin/apprenant/table_row.php");
+            include("view/admin/modalUpdateUser.php");
+            include("view/admin/modalInfos.php");
+            include("view/admin/modalProjet.php");
+        $content = ob_get_clean();
+
+        $usersHTML[]= $content;
+    }
+
+    $response = array(
+        "status" => "success",
+        "message" => "Les utilisateurs ont bien été récupérés d'après les critères ci dessous.",
+        "total" => $total,
+        "filtered" => $filtered,
+        "query" => "WHERE $filter",
+        "limit" => $limit,
+        "candidates" => $usersHTML,
+    );
+
+    echo json_encode($response);
+
+}
 
 } catch (Exception $error) {
     echo 'Exception reçue : ', $e->getMessage(), "\n";

@@ -37,8 +37,8 @@ $formations = $formationRepo->getAllFormations();
                     <?php if ($_GET['action'] == "crudCandidatePage") { ?>
                         Filtrer par formation
                     <?php }
-                    if (isset($apprenantPage) && $apprenantPage == 1) { ?>
-                        Filtrer par promotion
+                    if ($_GET['action'] == "crudLearnerPage") { ?>
+                        Filtrer par formation
                     <?php }
                     if (isset($promotionPage) && $promotionPage == 1) { ?>
                         Filtrer par année
