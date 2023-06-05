@@ -87,7 +87,7 @@ $title = "Espace personnel";
                                             </div>
                                             <div>
                                                 <label for="password" class="block mb-1 text-sm font-medium  text-main-red">Veuillez confirmer vos modifications en entrant votre (ancien) mot de passe.</label>
-                                                <input type="password" name="password" id="password" placeholder="Ancien mot de passe" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red">
+                                                <input type="password" name="password" id="password" placeholder="Ancien mot de passe" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" required>
                                             </div>
                                             <button type="submit" class="w-full uppercase font-title text-main-white bg-main-red hover:bg-red-800 font-medium rounded-lg text-sm px-5 py-1.5 text-center ">Modifier</button>
                                         </form>
