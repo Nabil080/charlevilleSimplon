@@ -15,7 +15,7 @@
                 // var_dump($promo)
                 ?>
                 <form class="space-y-6" action="?action=updatePromotion" method="post" target="_blank">
-                    <input type="text" value="<?=$promo->id?>" name="promo">
+                    <input type="hidden" value="<?=$promo->id?>" name="promo">
                     <div>
                         <label for="formation" class="block mb-2 text-sm font-medium  text-main-red">Formation</label>
                         <select name="formation" id="formation" class=" border text-sm rounded-md block w-full p-2.5 border-main-red text-main-red" required>

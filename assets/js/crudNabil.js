@@ -28,5 +28,6 @@ function updateContact(){
     contactInput.value = mailList.join(',');
     console.log(mailList);
   })
-
 }
+
+updateContact()

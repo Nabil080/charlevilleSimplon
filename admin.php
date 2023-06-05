@@ -41,6 +41,10 @@ switch ($action) {
     case 'projectPagination':
         projectPagination();
         break;
+    // Envoie du traitement pagination crud candidat
+    case 'promotionPagination':
+        promotionPagination();
+        break;
 
 
     // Traitement formulaire de CONTACT
