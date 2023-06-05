@@ -2,7 +2,7 @@
 
 // TEMP POUR TEST SANS CONNEXION
 $user = new UserRepository();
-$_SESSION['user'] = $user->getUserById(1);
+$_SESSION['user'] = $user->getUserById(2);
 
 switch ($action) {
     case 'allFormationsPage':

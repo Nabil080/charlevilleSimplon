@@ -262,7 +262,6 @@ try {
 
     function updateUserElements()
     {
-
         if ((!isset($_GET['id']) || $_GET['id'] == null) && (!isset($_GET['type']) || $_GET['type'] == null)) {
             // erreur 404 page not found : Vous devez renseigner un id utilisateur et un type de modification
         } elseif ((isset($_GET['id']) && $_GET['id'] == $_SESSION['user']['user_id']) && (isset($_GET['type']) && $_GET['type'] !== null)) {
@@ -338,7 +337,17 @@ try {
     }
 
     function deleteMyProject() {
-        var_dump($_POST);
+        if (isset($_POST['project_id'])) {
+            $id = $_POST['project_id'];
+            $projectRepo = new ProjectRepository();
+            $bools = $projectRepo->deleteProject($id);
+            $response = array(
+                        "status" => "success",
+                        "message" => "Le projet a bien été supprimé.",
+                        "project_id" => $id,
+                    );
+                    echo json_encode($response);
+        }
     }
 
 } catch (Exception $error) {

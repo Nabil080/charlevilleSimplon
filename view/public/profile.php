@@ -133,8 +133,23 @@ $title = "Espace personnel";
 
                 <!-- Description -->
                 <div class="description lg:ml-5 h-[100%] flex flex-col">
-                    <div class="edit_profil flex justify-center lg:justify-normal items-center pt-5">
+                    <div class="edit_profil flex flex-col lg:justify-normal items-start pt-5">
                         <h1 id="title" class="text-main-red font-title text-[28px] lg:text-[48px] font-semibold text-center pr-5"><span class="uppercase"><?= $userDatas['user_name'] ?></span> <?= $userDatas['user_surname'] ?></h1>
+                        <h2 class="font-title text-[14px] lg:text-[24px] font-semibold pr-5">
+                            <?php if($userDatas['role_id'] == 4) { ?>
+                                <a href="?action=promotionPage&id=<?= $userPromo[2][0]->id ?>" class="font-title text-[10px] lg:text-[18px] my-5 bg-main-red py-2 px-4 rounded-full text-main-white hover:bg-main-white hover:text-main-red hover:border border-main-red"><?= $userPromo[2][0]->name ?></a>
+                            <?php } ?>
+                            <?php if ($userDatas['role_id'] == 2) { ?>
+                                <p class="font-title text-[10px] lg:text-[18px] pb-4">Ce formateur est actuellement en charge des promotions :</p>
+                                <ul>
+                                    <?php foreach ($userPromo[2] as $promo) { ?>
+                                    <li class="font-title text-[10px] lg:text-[18px] mb-4">
+                                        <a href="?action=promotionPage&id=<?= $promo->id ?>" class="bg-main-red py-2 px-4 rounded-full text-main-white my-2 hover:bg-main-white hover:text-main-red hover:border border-main-red"><?= $promo->name ?></a>
+                                    </li>
+                                    <?php } ?>
+                                </ul>
+                                <?php } ?>
+                        </h2>
                     </div>
                     <!-- Statut -->
                     <div class="formation_status flex justify-center lg:justify-normal items-center px-3 mt-2">
@@ -322,38 +337,48 @@ $title = "Espace personnel";
                     </section>
 
                     <!-- SECTION PROJET PHARE -->
-                    <section class="sectionChange border">
-                        <?php if (empty($userDatas['user_highlight'])){?>
-                            <div class="w-full h-full text-main-black font-title font-bold py-5 px-5">
-                                <p>Cet utilisateur n'a pas de projet phare</p>
-                            </div>
-                        <?php }else{?>
-                            <iframe class="w-full min-h-[300px] lg:min-h-[500px]" src="<?= $userDatas['user_highlight'] ?>" title="iframe du projet phare"></iframe>
-                            <?php }?>
-                        <!-- Boutons modifier/supprimer le projet phare -->
-                        <div class="boutons lg:flex lg:flex-row lg:justify-between" <?= $notMyProfile; ?>>
-                            <?php if (!empty($userDatas['user_highlight'])){?>
-                            <div id="main-project" class="flex justify-between mt-5 mx-5 mb-2">
-                                <div id="modif-modal-button" data-modal-target="main-project-update" data-modal-toggle="main-project-update" class="flex items-center pt-2 lg:mr-10 cursor-pointer">
-                                    <i class="fa-solid fa-pen fa-xl text-main-red "></i>
-                                    <span class="hidden lg:block text-[15px] ml-3 text-main-red">Modifier mon projet phare</span>
+                    <section class="sectionChange border h-[480px] lg:h-[580px]">
+                        <div class="projet-phare">
+                            <?php if (empty($userDatas['user_highlight'])){?>
+                                <div class="w-full h-full text-main-black font-title font-bold py-5 px-5">
+                                    <p>Cet utilisateur n'a pas encore de projet phare</p>
                                 </div>
-                                <!--
-                                <div onclick="deleteUserHighlight($userid)" class="flex items-center pt-2 cursor-pointer">
-                                    <i class="fa-solid fa-trash-can fa-xl text-main-red "></i>
-                                    <span class="hidden lg:block text-[15px] ml-3 text-main-red">Supprimer</span>
+                            <?php }else{
+                                $info = pathinfo($userDatas['user_highlight']);
+                                if ($info["extension"] == "pdf") { ?>
+                                <div class="md:hidden flex flex-col items-center text-main-black font-title font-bold py-5 px-5">
+                                    <p class="mb-5">Vous ne pouvez pas afficher ce pdf sur mobile, mais vous pouvez toutefois le consulter en ouvrant la page suivante :</p>
+                                    <a href="<?= $userDatas['user_highlight']?>" class="bg-main-red text-main-white text-[16px] rounded-[5px] mx-auto py-3 lg:py-1 px-2 lg:px-4" target="_blank">Voir le projet phare</a>
                                 </div>
-                                -->
-                            </div>
-                            <?php }?>
-                            <!-- Bouton ajouter un projet phare -->
-                            <?php
-                            if (empty($userDatas['user_highlight'])){?>
-                            <div data-modal-target="main-project-update" data-modal-toggle="main-project-update" class="flex items-center justify-end mt-5 mb-2 cursor-pointer" <?= $notMyProfile; ?>>
-                                <span class="w-[40px] h-[40px] border bg-main-red rounded-full mr-2 flex items-center justify-center"><i class="fa-solid fa-plus text-main-white text-[25px] font-bold"></i></span>
-                                <p class="text-main-red italic text-[18px] font-semibold mr-4">Ajouter mon projet phare</p>
-                            </div>
-                            <?php }?>
+                                <iframe class="hidden md:block w-full min-h-[400px] lg:min-h-[500px]" src="<?= $userDatas['user_highlight'] ?>" title="iframe du projet phare"></iframe>
+                            <?php } else {?>
+                                <iframe class="w-full min-h-[400px] lg:min-h-[500px]" src="<?= $userDatas['user_highlight'] ?>" title="iframe du projet phare"></iframe>
+                            <?php }}?>
+                                <!-- Boutons modifier/supprimer le projet phare -->
+                                <div class="boutons lg:flex lg:flex-row lg:justify-between" <?= $notMyProfile; ?>>
+                                    <?php if (!empty($userDatas['user_highlight'])){?>
+                                    <div id="main-project" class="flex justify-between mt-5 mx-5 mb-2">
+                                        <div id="modif-modal-button" data-modal-target="main-project-update" data-modal-toggle="main-project-update" class="flex items-center pt-2 lg:mr-10 cursor-pointer">
+                                            <i class="fa-solid fa-pen fa-xl text-main-red "></i>
+                                            <span class="block text-[15px] ml-3 text-main-red">Modifier mon projet phare</span>
+                                        </div>
+                                        <!--
+                                        <div onclick="deleteUserHighlight($userid)" class="flex items-center pt-2 cursor-pointer">
+                                            <i class="fa-solid fa-trash-can fa-xl text-main-red "></i>
+                                            <span class="hidden lg:block text-[15px] ml-3 text-main-red">Supprimer</span>
+                                        </div>
+                                        -->
+                                    </div>
+                                    <?php }?>
+                                    <!-- Bouton ajouter un projet phare -->
+                                    <?php
+                                    if (empty($userDatas['user_highlight'])){?>
+                                    <div data-modal-target="main-project-update" data-modal-toggle="main-project-update" class="flex items-center mt-5 mb-2 cursor-pointer" <?= $notMyProfile; ?>>
+                                        <span class="w-[40px] h-[40px] border bg-main-red rounded-full mr-2 flex items-center justify-center"><i class="fa-solid fa-plus text-main-white text-[25px] font-bold"></i></span>
+                                        <p class="text-main-red italic text-[18px] font-semibold mr-4">Ajouter mon projet phare</p>
+                                    </div>
+                                    <?php }?>
+                                </div>
                         </div>
                     </section>
 
@@ -400,24 +425,24 @@ $title = "Espace personnel";
                     <!-- Fin de la section : projet phare -->
 
                     <!-- SECTION PROJETS PERSO -->
-                    <section class="sectionChange hidden border">
-                        <div id="delete-my-project" class="projet-cards w-11/12 mt-2 gap-6 mx-auto flex flex-col justify-center lg:flex-row lg:flex-wrap">
+                    <section class="sectionChange hidden border h-[480px] lg:h-[580px] overflow-y-scroll">
+                        <div id="delete-my-project" class="projet-cards w-11/12 mt-2 gap-6 mx-auto flex flex-col items-center justify-center lg:flex-row lg:flex-wrap">
                             <!-- card projet -->
                             <?php foreach ($userProjects as $project){
                                 if($project->type->id == 2) {
                                     $userPersonnalProjects = [];
                                     array_push($userPersonnalProjects, $project);?>
-                                <article id="projet-card-1" class="project-card max-w-[400px] border-2 border-black rounded-lg p-4 2xl:flex gap-6 2xl:p-6">
+                                <article id="project-card<?= $project->id ?>" class="project-card w-[300px] lg:w-[400px] h-[700px] border-2 border-black rounded-lg p-4 2xl:flex gap-6 2xl:p-6">
                                     <!-- partie info projet -->
-                                    <div class="flex-col text-[12px] flex">
+                                    <div class="flex-col text-[12px] flex w-full">
                                         <!-- titre projet -->
                                         <h2 class="font-title text-main-red italic font-bold text-[30px] my-2 text-center"><a href="lien du projet"><?= $project->name ?></a></h2>
                                         <div class=" flex w-full justify-between italic border-b border-main-red"><span>Publié le <?= $project->start ?></span></div>
                                         <!-- contenu projet -->
                                         <div class="text-base flex-grow flex-col">
-                                            <p class="pl-[20%] line-clamp-5 mt-4 mb-4 text-[14px] font-medium text-end"><?= $project->description ?></p>
+                                            <p class="pl-[20%] line-clamp-5 mt-4 mb-4 text-[14px] font-medium text-end overflow-y-scroll"><?= $project->description ?></p>
                                             <br>
-                                            <div class="my-2 grow"><img class="w-2/3 flex mx-auto" src="<?= $project->model_image ?>" alt="image du projet"></div>
+                                            <div class="my-2 grow h-[200px] overflow-y-scroll"><img class="w-full flex mx-auto" src="<?= $project->model_image ?>" alt="image du projet"></div>
                                             <div id="end" class="mt-auto">
                                                 <!-- tags projet -->
                                                 <div class="uppercase space-x-4 my-4 [&>tag]:bg-main-gray [&>tag]:bg-opacity-10 [&>tag]:py-2 [&>tag]:px-4 [&>tag]:rounded-full flex justify-around">
@@ -478,7 +503,7 @@ $title = "Espace personnel";
                                                         <label for="modif_url" class="block mb-1 text-sm font-medium  text-main-red">Ajouter un lien direct vers le projet</label>
                                                         <input type="url" name="url" id="modif_url" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" placeholder="http://..." value="<?= $project->model_link ?>">
                                                     </div>
-                                                    <button type="submit" class="w-full uppercase font-title text-main-white bg-main-red hover:bg-red-800 font-medium rounded-lg text-sm px-5 py-1.5 text-center ">Ajouter ce projet aux projets persos</button>
+                                                    <button type="submit" class="w-full uppercase font-title text-main-white bg-main-red hover:bg-red-800 font-medium rounded-lg text-sm px-5 py-1.5 text-center ">Valider les modifications</button>
                                                 </form>
                                             </div>
                                         </div>
@@ -493,11 +518,11 @@ $title = "Espace personnel";
                                                 <svg data-modal-hide="confirm_delete_project<?= $project->id ?>" aria-hidden="true" class="w-5 h-5 text-main-light" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
                                                 <span class="sr-only">Close modal</span>
                                             </button>
-                                            <form method="POST" class="px-6 py-6 lg:px-8">
+                                            <form method="POST" class="delete-form px-6 py-6 lg:px-8">
                                                 <input type="hidden" name="project_id" value="<?= $project->id?>">
                                                 <h3 class="mb-4 text-medium uppercase w-fit mx-auto font-bold font-title text-main-red">Supprimer mon projet perso</h3>
                                                 <p class="mb-2">Supprimer définitivement le projet : <?= $project->name ?> ?</p>
-                                                <button type="submit" class="w-full uppercase font-title text-main-white bg-main-red hover:bg-red-800 font-medium rounded-lg text-sm px-5 py-1.5 text-center ">Valider</button>
+                                                <button type="submit" data-modal-hide="confirm_delete_project<?= $project->id ?>" class="w-full uppercase font-title text-main-white bg-main-red hover:bg-red-800 font-medium rounded-lg text-sm px-5 py-1.5 text-center ">Valider</button>
                                             </form>
                                         </div>
                                     </div>

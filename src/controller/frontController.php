@@ -73,16 +73,32 @@ function profilePage()
         $id = $_GET['id'];
         $user = new UserRepository();
         $userDatas = $user->getUserById($id);
-        $tags = new TagRepository();
-        $allTags = $tags->getAllTags();
-        $userTags = $tags->getUserTags($id);
-        $status = new StatusRepository();
-        $allStatus = $status->getAllStatus();
-        $ProjectRepo = new ProjectRepository();
-        $userProjects = $ProjectRepo->getUserProjects($id);
-        $Promo = new PromoRepository();
-        $userPromo = $Promo->getPromoByUserID($id);
-        include 'view/public/profile.php';
+        if($userDatas['role_id'] == 1 || $userDatas['role_id'] == 3){
+            homepage();
+        } elseif($userDatas['role_id'] == 2){
+            // gérer rôle formateur : ne pas afficher promo
+            $tags = new TagRepository();
+            $allTags = $tags->getAllTags();
+            $userTags = $tags->getUserTags($id);
+            $status = new StatusRepository();
+            $allStatus = $status->getAllStatus();
+            $ProjectRepo = new ProjectRepository();
+            $userProjects = $ProjectRepo->getUserProjects($id);
+            $Promo = new PromoRepository();
+            $userPromo = $Promo->getPromoByUserID($id);
+            include 'view/public/profile.php';
+        } else {
+            $tags = new TagRepository();
+            $allTags = $tags->getAllTags();
+            $userTags = $tags->getUserTags($id);
+            $status = new StatusRepository();
+            $allStatus = $status->getAllStatus();
+            $ProjectRepo = new ProjectRepository();
+            $userProjects = $ProjectRepo->getUserProjects($id);
+            $Promo = new PromoRepository();
+            $userPromo = $Promo->getPromoByUserID($id);
+            include 'view/public/profile.php';
+        }
     }
 }
 
@@ -95,28 +111,71 @@ function myProfile()
         } else {
             $id = $_SESSION['user']['user_id'];
             $isMyProfile = true;
+            $user = new UserRepository();
+            $userDatas = $user->getUserById($id);
+            if($userDatas['role_id'] == 1 || $userDatas['role_id'] == 3){
+                homepage();
+            } elseif($userDatas['role_id'] == 2){
+                // gérer rôle formateur : ne pas afficher promo
+                $tags = new TagRepository();
+                $allTags = $tags->getAllTags();
+                $userTags = $tags->getUserTags($id);
+                $status = new StatusRepository();
+                $allStatus = $status->getAllStatus();
+                $ProjectRepo = new ProjectRepository();
+                $userProjects = $ProjectRepo->getUserProjects($id);
+                include 'view/public/profile.php';
+            } else {
+                $tags = new TagRepository();
+                $allTags = $tags->getAllTags();
+                $userTags = $tags->getUserTags($id);
+                $status = new StatusRepository();
+                $allStatus = $status->getAllStatus();
+                $ProjectRepo = new ProjectRepository();
+                $userProjects = $ProjectRepo->getUserProjects($id);
+                $Promo = new PromoRepository();
+                $userPromo = $Promo->getPromoByUserID($id);
+                include 'view/public/profile.php';
+        }
         }
     }
     else if (isset($_GET['id']) && $_GET['id'] == $_SESSION['user']['user_id']) {
         $id = $_SESSION['user']['user_id'];
         $isMyProfile = true;
+        $user = new UserRepository();
+        $userDatas = $user->getUserById($id);
+        if($userDatas['role_id'] == 1 || $userDatas['role_id'] == 3){
+            homepage();
+        } elseif($userDatas['role_id'] == 2){
+            // gérer rôle formateur : ne pas afficher promo
+            $tags = new TagRepository();
+            $allTags = $tags->getAllTags();
+            $userTags = $tags->getUserTags($id);
+            $status = new StatusRepository();
+            $allStatus = $status->getAllStatus();
+            $ProjectRepo = new ProjectRepository();
+            $userProjects = $ProjectRepo->getUserProjects($id);
+            $Promo = new PromoRepository();
+            $userPromo = $Promo->getPromoByUserID($id);
+            include 'view/public/profile.php';
+        } else {
+            $tags = new TagRepository();
+            $allTags = $tags->getAllTags();
+            $userTags = $tags->getUserTags($id);
+            $status = new StatusRepository();
+            $allStatus = $status->getAllStatus();
+            $ProjectRepo = new ProjectRepository();
+            $userProjects = $ProjectRepo->getUserProjects($id);
+            $Promo = new PromoRepository();
+            $userPromo = $Promo->getPromoByUserID($id);
+            include 'view/public/profile.php';
+        }
     }
     else {
         $id = $_GET['id'];
         profilePage();
     }
-    $user = new UserRepository();
-    $userDatas = $user->getUserById($id);
-    $tags = new TagRepository();
-    $allTags = $tags->getAllTags();
-    $userTags = $tags->getUserTags($id);
-    $status = new StatusRepository();
-    $allStatus = $status->getAllStatus();
-    $ProjectRepo = new ProjectRepository();
-    $userProjects = $ProjectRepo->getUserProjects($id);
-    $Promo = new PromoRepository();
-    $userPromo = $Promo->getPromoByUserID($id);
-    include 'view/public/profile.php';
+    
 }
 
 // Register
