@@ -10,7 +10,7 @@
                 <?= $formation_main->name ?>
             </h2>
             <div class="text-[16px] md:text-[20px] text-justify flex flex-col gap-5">
-                <?= htmlspecialchars_decode($formation_main->description) ?>
+                <?= $formation_main->description ?>
             </div>
         </div>
 
@@ -93,7 +93,7 @@
                 </button>
             </li>
         </ul>
-        <div id="myTabContent" class="bg-white pb-10 px-4">
+        <div id="myTabContent" class="bg-white pb-10 px-8">
             <div class="sectionChange text-[16px] lg:text-[20px]">
                 <?php foreach ($formation_activity as $activity) { ?>
                 <div class="py-4">
@@ -103,7 +103,7 @@
                     <p class="pb-3 text-[16px] text-main-blue font-bold">
                         <?= $activity['ref'] ?>
                     </p>
-                    <ul class="list-outside list-disc ml-10">
+                    <ul class="list-outside list-disc ml-5 md:ml-10 [&>li]:pb-2">
                         <?php foreach ($activity['skill'] as $skill) { ?>
                         <li>
                             <?= $skill ?>
@@ -114,10 +114,10 @@
                 </div>
                 <?php } ?>
             </div>
-            <div class="sectionChange hidden px-4 bg-white text-[16px] lg:text-[20px]">
+            <div class="sectionChange hidden bg-white text-[16px] lg:text-[20px]">
                 <div class="py-4">
                     <h3 class="pb-3 text-main-red text-[20px] lg:text-[36px] font-bold">Pas de prérequis mais…</h3>
-                    <ul class="list-outside list-disc ml-10">
+                    <ul class="list-outside list-disc ml-5 md:ml-10 [&>li]:pb-2">
                         <?php foreach ($formation_admission as $require) { ?>
                         <li>
                             <?= $require ?>
@@ -126,20 +126,22 @@
                     </ul>
                 </div>
             </div>
-            <div class="sectionChange hidden px-4 bg-white text-[16px] lg:text-[20px]">
+            <div class="sectionChange hidden bg-white text-[16px] lg:text-[20px]">
                 <?php foreach ($formation_program as $program) { ?>
                 <div class="py-4">
                     <h3 class="pb-3 text-main-red text-[20px] lg:text-[36px] font-bold">
                         <?= $program['programme_layout_name'] ?>
                     </h3>
-                    <?= htmlspecialchars_decode($program['programme_name']); ?>
+                    <ul class="list-outside list-disc ml-5 md:ml-10 [&>li]:pb-2">
+                        <?= $program['programme_name'] ?>
+                    </ul>
                 </div>
                 <?php } ?>
             </div>
-            <div class="sectionChange hidden px-4 bg-white text-[16px] lg:text-[20px]">
+            <div class="sectionChange hidden bg-white text-[16px] lg:text-[20px]">
                 <div class="py-4">
                     <h3 class="pb-3 text-main-red text-[20px] lg:text-[36px] font-bold">Frais de scolarité</h3>
-                    <ul class="list-outside list-disc ml-10">
+                    <ul class="list-outside list-disc ml-5 md:ml-10 [&>li]:pb-2">
                         <?php foreach ($formation_fee as $fee) { ?>
                         <li>
                             <?= $fee ?>
@@ -169,17 +171,18 @@
             <?= $certification['certification_name'] ?>
         </h6>
         <a href="<?= $certification['certification_link'] ?>" target="_blank">
-            <div class="pb-5 flex gap-10 text-main-blue font-bold">
+            <div class="pb-5 flex md:gap-10 items-center text-main-blue font-bold">
                 <p>
                     <?= $certification['certification_ref'] ?>
                 </p>
+                <p class="md:hidden h-[30px] mx-2 border-l-2 border-main-blue"></p>
                 <p>
                     <?= $certification['certification_refName'] ?>
                 </p>
             </div>
         </a>
-        <div class="ml-5">
-            <?= htmlspecialchars_decode($certification['certification_description']) ?>
+        <div class="[&>ul]:ml-5 md:ml-10">
+            <?= $certification['certification_description'] ?>
         </div>
     </div>
     <?php } ?>
