@@ -1,7 +1,7 @@
 <?php
-$tagRepo = new TagRepository;
-$apprenant->tags = $tagRepo->getUserTags($apprenant->user_id);
 $projectRepo = new ProjectRepository;
+$tagsRepository = new TagRepository;
+
 
 if(isset($formators)){
     $formateurs = $formators;
@@ -56,7 +56,7 @@ if(isset($formators)){
                 </p>
                 <div class="flex gap-1 justify-center sm:justify-normal mx-auto sm:gap-1">
                     <?php $y = 0;
-                $tags = $tagRepo->getUserTags($apprenant->user_id);
+                $tags = $tagsRepository->getUserTags($apprenant->user_id);
                     if (isset($tags) && empty($tags)) { ?>
                         <p class="italic text-center text-[18px] text-main-red">Pas de compétence spécifiée</p>
                     <?php } else if (isset($tags) && !empty($tags)) {

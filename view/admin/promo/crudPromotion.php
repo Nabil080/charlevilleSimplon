@@ -28,7 +28,8 @@
         </tr>
     </thead>
     <tbody class="border-2">
-        <?php foreach ($promos as $promo) {
+        <?php 
+        foreach ($promos as $promo) {
             $mailList = $PromoRepo->getPromoMailList($promo->id);
             include("view/admin/promo/table_row.php");
             if ($promo->status->id != 9) {

@@ -30,7 +30,7 @@ const candidateNumber = document.querySelector('#candidates-number')
 const searchInput = document.querySelector('#simple-search');
 
 // Variables nécessaires à la pagination
-const projectsPerPage = 1
+const projectsPerPage = 2
 const paginationRange = 3
 
 let filterString = '';
