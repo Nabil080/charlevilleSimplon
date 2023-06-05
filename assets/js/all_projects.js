@@ -47,6 +47,7 @@ let projectsPerPage = 6;
 let paginationRange = 3
 // filtres
 let filterString = '';
+let filterExecute = '';
 
 
 
@@ -124,24 +125,6 @@ const getProjets = (limitStart = 0,limitEnd = 6) => {
     })
     .then((data) => data.json())
 }
-
-        firstPage.addEventListener('click', (e) => {
-            updateData()
-        })
-        prevPage.addEventListener('click', (e) => {
-            activePage = document.querySelector("button[data-active]")
-            updateData(Number(activePage.dataset.active) - 1)
-        })
-
-        nextPage.addEventListener('click', (e) => {
-            activePage = document.querySelector("button[data-active]").dataset.active
-            updateData(Number(activePage) + 1)
-        })
-        lastPage.addEventListener('click', (e) => {
-            pageCount = document.querySelector("[data-page-count]").dataset.pageCount
-            updateData(pageCount)
-        })
-
 
 async function updateData(currentPage = 1){
     showLoading()
@@ -255,3 +238,19 @@ filterReset.addEventListener('click', (e) => {
     updateData();
 })
 
+firstPage.addEventListener('click', (e) => {
+    updateData()
+})
+prevPage.addEventListener('click', (e) => {
+    activePage = document.querySelector("button[data-active]")
+    updateData(Number(activePage.dataset.active) - 1)
+})
+
+nextPage.addEventListener('click', (e) => {
+    activePage = document.querySelector("button[data-active]").dataset.active
+    updateData(Number(activePage) + 1)
+})
+lastPage.addEventListener('click', (e) => {
+    pageCount = document.querySelector("[data-page-count]").dataset.pageCount
+    updateData(pageCount)
+})

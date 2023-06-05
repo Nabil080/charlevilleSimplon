@@ -235,7 +235,7 @@ function registerPage()
 function crudCandidatePage()
 {
     $UserRepo = new UserRepository;
-    $candidates = $UserRepo->getAllCandidates();
+    $candidates = $UserRepo->getAllCandidates(3);
 
     include 'view/admin/_candidate.php';
 }
@@ -281,7 +281,7 @@ function crudProjetPage()
     include 'view/admin/_projects.php';
 }
 
-function projectFormPage() 
+function projectFormPage()
 {
     $User = new User($_SESSION['user']->role_id);
     if(isset($_GET['id'])){

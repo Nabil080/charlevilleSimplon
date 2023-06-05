@@ -335,10 +335,53 @@ function updateUserPersonnalInfos()
 }
 
 function logOut()
-    {
-        unset($_SESSION['user']);
-        header('Location: index.php');
+{
+    unset($_SESSION['user']);
+    header('Location: index.php');
+}
+
+function candidatePagination()
+{
+    $jsonData = file_get_contents('php://input',true);
+    $data = json_decode($jsonData);
+
+    $UserRepo = new UserRepository ;
+
+    $limitStart = $data->limitStart;
+    $limitEnd = $data->limitEnd;
+    $limit = "$limitStart,$limitEnd";
+
+    $filter = empty($data->filter) ? null : $data->filter;
+    $execute = empty($data->execute) ? null : $data->execute;
+
+    $total = $UserRepo->getCandidatesNumber();
+    $filtered = $UserRepo->getFilteredCandidatesNumber($filter,$execute);
+    $users = $UserRepo->getAllCandidates($limit,$filter,$execute);
+
+    $usersHTML = [];
+    foreach($users as $candidate){
+        ob_start();
+            include('view/admin/candidate/table_row.php');
+            include("view/admin/modalUpdateUser.php");
+            include("view/admin/modalCandidature.php");
+        $content = ob_get_clean();
+
+        $usersHTML[]= $content;
     }
+
+    $response = array(
+        "status" => "success",
+        "message" => "Les candidats ont bien été récupérés d'après les critères ci dessous.",
+        "total" => $total,
+        "filtered" => $filtered,
+        "query" => "WHERE $filter",
+        "limit" => $limit,
+        "candidates" => $usersHTML,
+    );
+
+    echo json_encode($response);
+
+}
 
 } catch (Exception $error) {
     echo 'Exception reçue : ', $e->getMessage(), "\n";

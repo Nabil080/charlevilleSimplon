@@ -25,6 +25,11 @@ switch ($action) {
     // Afficher le CRUD des formations
     // Afficher le CRUD des promos(candidature apprennant)
 
+    // Envoie du traitement pagination crud candidat
+    case 'candidatePagination':
+        candidatePagination();
+        break;
+
 
     // Traitement formulaire de CONTACT
     case 'contactUsers':
