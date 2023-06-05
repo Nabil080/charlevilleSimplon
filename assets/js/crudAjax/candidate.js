@@ -1,3 +1,4 @@
+// PAGINATION
 const candidateTable = document.querySelector('tbody');
 const paginationDiv = document.querySelector('#pagination');
 const prevPage = document.querySelector('#prev-page');
@@ -6,15 +7,34 @@ const firstPage = document.querySelector('#first-page');
 const lastPage = document.querySelector('#last-page');
 const candidatesRange = document.querySelector('#candidates-range')
 const candidateNumber = document.querySelector('#candidates-number')
+// FILTRES
+const searchInput = document.querySelector('#simple-search');
 
-
-const projectsPerPage = 3
-const paginationRange = 10
+// Variables nécessaires à la pagination
+const projectsPerPage = 1
+const paginationRange = 3
 
 let filterString = '';
 let filterExecute = '';
 
 const getProjets = (limitStart = 0,limitEnd = 6) => {
+
+    // * DEFINIT LES FILTRES RECHERCHE
+    let searchString = searchInput.value ? `(user.user_name LIKE ?
+        OR user.user_surname LIKE ?
+        OR user.user_description LIKE ?
+        OR user.user_place LIKE ?)` : '' ;
+        let searchExecute = searchInput.value? `%${searchInput.value}%,%${searchInput.value}%,%${searchInput.value}%,%${searchInput.value}%` : '' ;
+
+
+        // Récupère un array des filtres non vides
+        const filtersArray = [searchString].filter(Boolean);
+        const ExecuteArray = [searchExecute].filter(arr => arr.length > 0);
+        // les transformes en string pour la requete
+        const filterString = filtersArray.join(" AND ");
+        const filterExecute = ExecuteArray.join(",");
+        console.log(`requête envoyée :  WHERE ${filterString}`)
+        console.log(`execute envoyée : [${filterExecute}]`)
 
     return fetch('?action=candidatePagination',{
         method: 'POST',
@@ -108,6 +128,16 @@ async function updateData(currentPage = 1){
 }
 
 updateData()
+
+let timeoutId;
+
+searchInput.addEventListener('input', (e) => {
+    clearTimeout(timeoutId);
+
+    timeoutId = setTimeout(() => {
+        updateData();
+    }, 500); // Adjust the delay time (in milliseconds) according to your needs
+});
 
 firstPage.addEventListener('click', (e) => {
     updateData()
