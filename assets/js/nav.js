@@ -12,7 +12,11 @@ const body = document.body;
 removeHeight = - 150; // Définit la hauteur à laquelle la navbar disparait (150px du top)
 if (document.getElementById("homepage-overlay") !== null) { // Si c'est sur l'accueil passe à 70% de la hauteur de l'écran
   removeHeight = - (this.window.screen.height * 0.7);
+  window.addEventListener("onload", homepageNav(1));
+
 }
+
+const changeFunction = () => { console.log("salut")};
 
 function changeNavFunction () {
   if (document.getElementById("homepage-overlay") == null) {
@@ -61,7 +65,7 @@ window.addEventListener ("scroll", function () {
       if (typeof prevScrollTop == "undefined") {
         prevScrollTop = 0;
       } 
-    homepageNav();
+    homepageNav(0);
       // une fois que la hauteur définie a été scroll, enlève la navbar
       if (body.getBoundingClientRect().top > removeHeight && this.window.screen.width > 762) {
         nav.classList.remove("-translate-y-["+heightNav+"px]");
@@ -95,7 +99,10 @@ window.addEventListener ("scroll", function () {
   }
   );
 
-  function homepageNav()
+  //Navbar sur la page d'accueil
+
+
+  function homepageNav(y)
   {
     // Script Pour la page d'accueil
     if (document.getElementById("homepage-overlay") !== null) {
@@ -108,18 +115,17 @@ window.addEventListener ("scroll", function () {
         logo.classList.remove("w-[150px]");
         logo.classList.add("w-[171px]");
 
-      } else if (body.getBoundingClientRect().top > -30) {
-         
-        nav.classList.remove("bg-main-white"  );
-        nav.classList.add("text-main-white", "bg-gray-400", "bg-opacity-30");
+      } else if (body.getBoundingClientRect().top > -30 || y == 1) {
+
         changeNav.classList.remove("text-black");
+        nav.classList.remove("bg-main-white");
+        nav.classList.add("text-main-white", "bg-gray-400", "bg-opacity-30");
         logo.src = "assets/img/simplonblanc.png";
         logo.classList.add("w-[150px]");
         
       }
     }
   }
-  let logoColor = "white";
 
   function changeNavHomepageFunction () {
       // apparition nav inférieur
@@ -130,18 +136,15 @@ window.addEventListener ("scroll", function () {
       changeNav.classList.toggle("h-[100vh]");
       changeNav.classList.toggle("grid-rows-[10vh_10vh_10vh_10vh]");
       nav.classList.toggle("text-main-white"); 
-      if (logoColor == "white") 
+      if (logo.classList.contains("w-[150px]") == true) 
       {
         logo.src = "assets/img/navbar/logo-simplon.png";
         logo.classList.remove("w-[150px]");
-        console.log("salut");
-        logoColor = "black";
+
       }
-      if (logoColor == "black") {
+      if (logo.classList.contains("w-[150px]") == false) {
         logo.src = "assets/img/simplonblanc.png";
         logo.classList.add("w-[150px]");
-
-        logoColor = "white";
       }
 
       // changement d'icone
@@ -157,17 +160,17 @@ window.addEventListener ("scroll", function () {
           change[1].style.display = "block";
           change[1].classList.add("text-black");
           dropdown.classList.add("bg-main-white", "text-black");
-          dropdown.classList.remove("bg-opacity-90");
+          dropdown.classList.remove("bg-opacity-90", "blur-[0.3px]");
           dropdownAccount.classList.add("bg-main-white", "text-black");
-          dropdownAccount.classList.remove("bg-opacity-90");
+          dropdownAccount.classList.remove("bg-opacity-80", "blur-[0.3px]");
       } else {
           change[1].style.display = "none";
           change[1].classList.add("hidden");
           change[1].classList.add("text-black");
           dropdown.classList.remove("bg-main-white", "text-black");
-          dropdown.classList.add("bg-opacity-90");
+          dropdown.classList.add("bg-opacity-90", "blur-[0.3px]");
           dropdownAccount.classList.remove("bg-main-white", "text-black");
-          dropdownAccount.classList.add("bg-opacity-90");
+          dropdownAccount.classList.add("bg-opacity-80", "blur-[0.3px]");
       }
       change[1].classList.toggle("hidden");
       // changement de couleur nav superieur
