@@ -1,3 +1,4 @@
+
 <?php
 $formationRepo = new FormationRepository;
 $formations = $formationRepo->getAllFormations(); ?>
@@ -77,13 +78,6 @@ $formations = $formationRepo->getAllFormations(); ?>
               class="z-50 relative py-2 md:py-0 px-2 md:px-0 text-sm leading-9 sm:leading-[60px] text-gray-700 divide-y border-2 border-main-red divide-main-red rounded-[4px]"
               aria-labelledby="dropdownDefaultButton"
             >
-              <li class="md:hover:bg-main-lightred">
-                <a
-                  href="?action=allFormationsPage"
-                  class="block px-4 py-2 text-[22px] sm:text-[32px] md:text-[20px]"
-                  >Découvrir nos formations</a
-                >
-              </li>
               <?php foreach($formations as $formation){ ?>
               <li class="md:hover:bg-main-lightred">
                 <a
@@ -167,6 +161,7 @@ $formations = $formationRepo->getAllFormations(); ?>
                   >Mes Projets</a
                 >
               </li>
+
 
               <li class="md:hover:bg-main-lightred">
                 <a
