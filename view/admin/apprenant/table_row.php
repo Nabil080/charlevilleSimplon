@@ -1,4 +1,4 @@
-<tr class="border-2 border-gray-800">
+<tr class="border-2 border-gray-800 <?php if($user->role_id == 2){ echo 'bg-main-red bg-opacity-30';} ?>">
     <th scope="row" class="px-4 py-3 font-medium text-gray-900 border whitespace-nowrap "><?=$user->user_name?>
     </th>
     <td class="px-4 py-3 border"><?=$user->user_surname?></td>

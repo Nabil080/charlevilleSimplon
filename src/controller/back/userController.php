@@ -435,7 +435,7 @@ function companyPagination()
     $UserRepo = new UserRepository ;
     $PromoRepo = new PromoRepository;
 
-    var_dump($data);
+    // var_dump($data);
 
     $limitStart = $data->limitStart;
     $limitEnd = $data->limitEnd;
@@ -451,7 +451,7 @@ function companyPagination()
     $usersHTML = [];
     foreach($users as $user){
         ob_start();
-            include("view/admin/apprenant/table_row.php");
+            include('view/admin/entreprise/table_row.php');
             include("view/admin/modalUpdateUser.php");
             include("view/admin/modalInfos.php");
             include("view/admin/modalProjet.php");

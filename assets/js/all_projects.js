@@ -128,7 +128,7 @@ const getProjets = (limitStart = 0,limitEnd = 6) => {
 
 async function updateData(currentPage = 1){
         showLoading()
-    console.log(currentPage);
+    // console.log(currentPage);
     let limitStart = (currentPage - 1) * projectsPerPage
     let limitEnd = projectsPerPage
     // console.log(limitStart,limitEnd)

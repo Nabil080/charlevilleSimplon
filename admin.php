@@ -33,6 +33,10 @@ switch ($action) {
     case 'learnerPagination':
         learnerPagination();
         break;
+    // Envoie du traitement pagination crud candidat
+    case 'companyPagination':
+        companyPagination();
+        break;
 
 
     // Traitement formulaire de CONTACT

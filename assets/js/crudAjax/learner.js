@@ -72,7 +72,7 @@ const getProjets = (limitStart = 0,limitEnd = 6) => {
 
 async function updateData(currentPage = 1){
     showLoading()
-    console.log(currentPage);
+    // console.log(currentPage);
     let limitStart = (currentPage - 1) * projectsPerPage
     let limitEnd = projectsPerPage
     // console.log(limitStart,limitEnd)
@@ -143,7 +143,7 @@ async function updateData(currentPage = 1){
         candidateNumber.innerHTML = `sur <span class="font-semibold text-gray-900">${projectsCount}</span>`
         if(projectsCount === 0){
             candidatesRange.innerHTML = `Aucun utilisateur correspondant.`
-            candidateNumber.innerHTML + '';
+            candidateNumber.innerHTML = '';
         }
         // * AFFICHE LES CANDIDATS CORRESPONDANTS
         learnerTable.innerHTML = data.candidates.join('');

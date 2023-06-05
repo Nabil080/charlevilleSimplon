@@ -20,3 +20,5 @@
 
     </tbody>
 </table>
+
+<div id="loading"></div>
