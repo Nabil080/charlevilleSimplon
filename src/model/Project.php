@@ -295,6 +295,25 @@ class ProjectRepository extends ConnectBdd
         $bool = $req->execute([$id]);
         return $bool;
     }
+
+    public function deleteProject($id):void
+    {
+        $req = $this->bdd->prepare("DELETE FROM progress WHERE project_id =?");
+        $req->execute([$id]);
+        $req->closeCursor();
+
+        $req = $this->bdd->prepare("DELETE FROM project_tag WHERE project_id =?");
+        $req->execute([$id]);
+        $req->closeCursor();
+
+        $req = $this->bdd->prepare("DELETE FROM project_team WHERE project_id =?");
+        $req->execute([$id]);
+        $req->closeCursor();
+
+        $req = $this->bdd->prepare("DELETE FROM project WHERE project_id =?");
+        $req->execute([$id]);
+        $req->closeCursor();
+    }
 }
 
 ?>

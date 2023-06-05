@@ -33,26 +33,36 @@ modifHighlightButton.addEventListener('click', () => {
 });
 
 // Suppression de projet perso
-
 const deleteMyProject = document.getElementById('delete-my-project');
-const forms = deleteMyProject.getElementsByTagName('form');
-let formData =null;
+const forms = deleteMyProject.querySelectorAll('.delete-form');
+const fromDelete = deleteMyProject.getElementsByClassName('delete-form');
 
-for (i = 0; i < forms.length; i++) {
-    forms[i].addEventListener('submit', (event) => {
+let formData =null;
+// ajoute un listener sur la modale de suppression de projet
+forms.forEach(form => {
+        form.addEventListener('submit', (event) => {
         event.preventDefault();
-        formData = new FormData(forms[i]);
+        formData = new FormData(form);
         fetch('index.php?action=deleteMyProject', {
             method: 'POST',
             body: formData
         })
             .then(response => response.json())
+            // retirer l'élement du DOM
             .then(data => {
-                //console.log(data);
-                deleteAlert();
-                showAlert(data);
+                let elementToDelete = document.getElementById("project-card" + data.project_id);
+                elementToDelete.classList.add("opacity-80");
+                function fadeOut() {
+                    elementToDelete.classList.add("opacity-40", "grayscale");
+                };
+                setTimeout(fadeOut, 1000);
+                function deleteProject() {
+                    elementToDelete.classList.add("hidden");
+                }
+                setTimeout(deleteProject, 1000);
+                // deleteAlert();
+                // showAlert(data);
             })
             .catch(error => console.error(error));
     });
-}
-
+})
