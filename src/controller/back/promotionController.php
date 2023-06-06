@@ -136,16 +136,15 @@ function promotionPagination()
             include("view/admin/promo/table_row.php");
             if ($promo->status->id != 9) {
                 $apprenants = $PromoRepo->getAllApprenants($promo->id);
-                // var_dump($promo);
                 include("view/admin/modalApprenant.php");
             } else {
-                // $candidates = $PromoRepo->getPromoCandidates($promo->id);
-                // include("view/admin/promo/modalValidationPromo.php");
+                $candidates = $PromoRepo->getPromoCandidates($promo->id);
+                include("view/admin/promo/modalValidationPromo.php");
             }
 
             $promoFormators = $PromoRepo->getAllFormateurs($promo->id);
-            // include("view/admin/modalFormateur.php");
-            // include("view/admin/modalProjet.php");
+            include("view/admin/modalFormateur.php");
+            include("view/admin/modalProjet.php");
             // include("view/admin/promo/modalUpdatePromotion.php");
             // include("view/admin/modalDelete.php");
         $content = ob_get_clean();

@@ -34,18 +34,22 @@
                 <div class="text-base flex-grow flex-col">
                     <div class="pl-[20%] line-clamp-4 mt-2 mb-4"><?=$project->description?></div>
                     <div id="end" class="mt-auto">
-                        <?php if(isset($project->promo)) ?>
+                        <?php if(isset($project->promo)){?>
                         <a href="?action=promotionPage&id=<?= $project->promo->id ?>"
                             class="bg-main-red py-2 px-4 rounded-full text-main-white my-2 hover:bg-main-white hover:text-main-red hover:border border-main-red">
                             <?=$project->promo->name?>
                         </a>
+                        <?php } ?>
                         <div
                             class="space-x-4 mt-4 mb-2 text-sm text-main-white [&>a]:bg-main-gray [&>a]:py-1 [&>a]:px-3 [&>a]:rounded-full">
-                            <?php foreach($project->team as $user){ ?>
-                                <a href="?action=profilePage&id=<?=$user->user_id?>" class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white">
-                                    <?=$user->user_surname?>
+                            <?php 
+                            if(isset($project->team) && !empty($project->team)){
+                            foreach($project->team as $teamUser){ ?>
+                                <a href="?action=profilePage&id=<?=$teamUser->user_id?>" class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white">
+                                    <?=$teamUser->user_surname?>
                                 </a>
-                            <?php } ?>
+                            <?php }
+                            } ?>
                         </div>
                         <a href="?action=projectPage&id=<?=$project->id?>" class="block float-left text-xs">
                         Voir le projet <i class="fa fa-arrow-right"></i></a>
