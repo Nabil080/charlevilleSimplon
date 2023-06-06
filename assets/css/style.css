@@ -8,6 +8,6 @@ html {
     user-select: none;
 }
 
-.tabChange:hover{
-    filter: brightness(90%);
+.tabChange:hover {
+  filter: brightness(90%);
 }
