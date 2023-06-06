@@ -23,7 +23,6 @@
                     <?php foreach($project->tags as $tag){ ?>
                         <tag><?=$tag->name?></tag>
                     <?php } ?>
-                    <tag>React</tag>
                 </div>
                 <!-- titre projet -->
                 <h2 class="font-title text-main-red italic font-bold text-3xl my-2"><a href="?action=projectPage&id=<?=$project->id?>"><?=$project->name?></a></h2>

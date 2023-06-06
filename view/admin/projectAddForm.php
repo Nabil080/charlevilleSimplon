@@ -45,7 +45,7 @@
                 <div class="w-full md:w-2/3">
                     <label for="link" class="block mb-2 text-[14px] font-medium">Lien vers votre
                         entreprise</label>
-                    <input type="text" id="link" name="link" placeholder="Votre lien" <?php if(isset($project)){echo "value='$project->company_link'";}?>
+                    <input type="url" id="link" name="link" placeholder="Votre lien" <?php if(isset($project)){echo "value='$project->company_link'";}?>
                         class="bg-main-white border border-main-red text-[18px] rounded-[5px] block w-full p-2.5">
                 </div>
                 <div class="">

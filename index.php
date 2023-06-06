@@ -91,6 +91,6 @@ try {
 
 }
 
-// $UserRepo = new UserRepository;
-// $users = $UserRepo->getLearnersAndFormators();
-// var_dump($users);
+// $Repo = new ProjectRepository;
+// $data = $Repo->getAllProjects();
+// var_dump($data);

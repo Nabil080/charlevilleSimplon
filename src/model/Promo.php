@@ -502,8 +502,8 @@ class PromoRepository extends ConnectBdd
         $end = new DateTimeImmutable($ending_date);
         $interval_start = $origin->diff($start);
         $interval_end = $end->diff($origin);
-        var_dump($starting_date, $ending_date, $today);
-        var_dump($interval_start, $interval_end);
+        // var_dump($starting_date, $ending_date, $today);
+        // var_dump($interval_start, $interval_end);
         die;
         if ($interval_end->invert == 0 && $interval_end->days > 1)
         {

@@ -15,11 +15,15 @@
                 <input type="hidden" name="project" value="<?=$project->id?>">
                 <select name="promo" class="w-full">
                     <?php
+                    $promoRepo = new PromoRepository;
+                    $promos = $promoRepo->getActivePromos();
+                    if(!empty($promos)){
                         foreach ($promos as $promo) { ?>
                             <option value="<?= $promo->id ?>">
                                 <?=$promo->name?>
                             </option>
                         <?php }
+                    }
                     ?>
                 </select>
                 <button type="submit" name="submit"
