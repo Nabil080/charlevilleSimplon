@@ -268,7 +268,7 @@ try {
             $type = $_GET['type'];
             $id = $_GET['id'];
             $userRepository = new UserRepository();
-            if (isset($_POST)) {
+            if (isset($_POST) && !isset($_FILES)) {
                 $array = $_POST;
                 // var_dump($array);
                 if(!empty($array)){

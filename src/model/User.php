@@ -218,6 +218,7 @@ class UserRepository extends ConnectBdd
     public function updateUserCV(int $id, array $array): bool | array
     {
         // traitement pdf
+        $bool = [];
         $path = 'assets/upload/profile/cv/';
         $pdf = securizePdf($_FILES['cv'], $path);
         if($pdf === false){
@@ -226,8 +227,8 @@ class UserRepository extends ConnectBdd
         if (!empty($pdf)) { 
             $req = $this->bdd->prepare("UPDATE user SET user_cv = ? WHERE user_id = ?");
             $bool = $req->execute([$pdf, $id]);
-            return $bool;
         }
+        return $bool;
     }
 
     public function updateUserStatus(int $id, array $array): bool | array
