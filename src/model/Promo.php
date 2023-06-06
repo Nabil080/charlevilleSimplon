@@ -66,11 +66,38 @@ class PromoRepository extends ConnectBdd
         return $Promo;
     }
 
-    public function getPromos(): array
+    public function getPromosNumber():int
+    {
+        $req = $this->bdd->prepare("SELECT COUNT(*) FROM promo");
+        $req->execute();
+        $data = $req->fetch(PDO::FETCH_COLUMN);
+
+        return $data;
+    }
+
+    public function getFilteredPromosNumber($filters = null,$execute = null):int
+    {
+        $filters = $filters === null ? "" : "WHERE $filters";
+        $execute = $execute === null ? [] : explode(",",$execute);
+        $query = "SELECT COUNT(*) FROM promo $filters"; 
+        // var_dump($query);
+        // var_dump($execute);
+        $req = $this->bdd->prepare($query);
+        $req->execute($execute);
+        $data = $req->fetch(PDO::FETCH_COLUMN);
+
+        return $data;
+    }
+    public function getPromos($limitRequest = null, $filters = null, $execute = null, $order = null): array
     {
 
+        $filters = $filters === null ? "" : "WHERE $filters";
+        $execute = $execute === null ? [] : explode(",",$execute);
+        $order = $order === null ? "ORDER BY promo.status_id DESC" : "ORDER BY $order";
+        $limit = $limitRequest === null ? "" : "LIMIT $limitRequest";
+
         $promoRepository = new PromoRepository;
-        $req = $this->bdd->prepare("SELECT * FROM `promo`");
+        $req = $this->bdd->prepare("SELECT * FROM `promo` $filters $order $limit");
         $req->execute();
         $datas = $req->fetchAll(PDO::FETCH_ASSOC);
         $promos = [];

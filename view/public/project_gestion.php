@@ -40,8 +40,7 @@
             include('view/template/_gestion_project_card.php');
             $x ++;
         }}} ?>
-    
-        
+
 
 </section>
 </main>

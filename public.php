@@ -92,8 +92,8 @@ switch ($action) {
         logOut();
         break;
     // Envoie du traitement pagination tous les projets
-    case 'projectsPagination':
-        projectsPagination();
+    case 'allProjectsPagination':
+        allProjectsPagination();
         break;
     //Traitement d'envoie de message
     case 'contactTreatment':

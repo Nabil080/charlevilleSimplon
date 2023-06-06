@@ -9,6 +9,7 @@ require 'src/model/ConnectBdd.php';
 //     'role_id' => 1,
 // );
 
+
 // var_dump($_SESSION);
 // TEMP POUR TEST SANS CONNEXION
 // $_SESSION['user'] = (object) array(
@@ -82,12 +83,6 @@ if (isset($_GET['action']) && $_GET['action'] !== '' && !isset($_GET['admin'])) 
     homepage();
 }
 
-// $repo = new ProjectRepository;
-// $data = $repo->getAllProjects();
-// var_dump($data);
-
-// $connect = new ConnectBdd;
-// $req = $connect->bdd->prepare("INSERT INTO `project` (`project_id`, `project_name`, `project_description`, `project_file`, `project_notes`, `project_github`, `project_company_image`, `project_model_image`, `project_model_link`, `user_id`, `user_id_project_formator`, `status_id`, `promo_id`, `type_id`, `project_start`, `project_end`, `project_company_name`, `project_company_adress`, `project_company_link`, `formation_id`) VALUES (NULL, 'Un projet pour tester le chargement de la bdd', 'Je fous 20k projets dans la BDD pour voir combien de temps le fetch des data prends, blabla sinon vous ça va ? Moi ça va super bien cool de fou malade youhou eh ho matelot', 'upload/pdf/test.pdf', 'Salut les notes des apprenants', 'https://github.com/SirLauvel/charlevilleSimplon', 'upload/company_logo/test.jpg', 'upload/model/test.jpg', 'https://mockittapp.wondershare.com/proto/design/pb2lf6ool73aqhpc8', '3', '1', '9', '2', '1', '2023-06-01', '2023-06-30', 'Simplon', '8 rue des Caraïbes', 'simplon.co', '1');");
-// for ($i = 0; $i < 100;$i++){
-//     $req->execute();
-// }
+// $UserRepo = new UserRepository;
+// $users = $UserRepo->getLearnersAndFormators();
+// var_dump($users);

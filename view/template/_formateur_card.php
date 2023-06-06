@@ -1,3 +1,6 @@
+<?php $tagsRepository = new TagRepository; ?>
+
+
 <div class="grid grid-cols-auto flex-grow rounded-[5px] place-items-center justify-center items-center border-2 border-main-gray mx-auto min-w-[270px] max-w-[300px]">
     <div class="rounded-full bg-[url('<?= $formateur->user_avatar ?>')] flex place-items-center w-[130px] h-[130px] bg-main-lightred z-10 grayscale bg-cover bg-center">
         <!-- <img src="upload\promotion\devWeb2023\efz.png" class="w-[78px] z-20 mx-auto my-auto"> -->
