@@ -593,6 +593,10 @@ $title = "Espace personnel";
                 <h2 class="font-bold font-title text-main-red italic text-[30px] mb-4">Mes projets Simplon</h2>
                 <div class="projets-simplon flex justify-center flex-wrap gap-6">
 
+                    <?php if(empty($userProjects)){?>
+                        <p>Aucun projet simplon pour l'instant :(</p>
+                    <?php } ?>
+
                     <?php foreach ($userProjects as $project){
                         if($project->type->id == 1) { ?>
                     <!-- card projet -->
