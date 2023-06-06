@@ -448,7 +448,7 @@ $title = "Espace personnel";
                                 if($project->type->id == 2) {
                                     $userPersonnalProjects = [];
                                     array_push($userPersonnalProjects, $project);?>
-                                <article id="project-card<?= $project->id ?>" class="project-card w-[300px] lg:w-[400px] h-[700px] border-2 border-black rounded-lg p-4 2xl:flex gap-6 2xl:p-6">
+                                <article id="project-card<?= $project->id ?>" class="project-card w-[300px] lg:w-[400px] h-[700px] transition-opacity ease-linear duration-1000 border-2 border-black rounded-lg p-4 2xl:flex gap-6 2xl:p-6">
                                     <!-- partie info projet -->
                                     <div class="flex-col text-[12px] flex w-full">
                                         <!-- titre projet -->
@@ -534,7 +534,7 @@ $title = "Espace personnel";
                                                 <svg data-modal-hide="confirm_delete_project<?= $project->id ?>" aria-hidden="true" class="w-5 h-5 text-main-light" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
                                                 <span class="sr-only">Close modal</span>
                                             </button>
-                                            <form method="POST" class="delete-form px-6 py-6 lg:px-8">
+                                            <form class="delete-form px-6 py-6 lg:px-8">
                                                 <input type="hidden" name="project_id" value="<?= $project->id?>">
                                                 <h3 class="mb-4 text-medium uppercase w-fit mx-auto font-bold font-title text-main-red">Supprimer mon projet perso</h3>
                                                 <p class="mb-2">Supprimer définitivement le projet : <?= $project->name ?> ?</p>

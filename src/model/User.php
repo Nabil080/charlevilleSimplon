@@ -402,7 +402,7 @@ class UserRepository extends ConnectBdd
         $title = securizeString($array['title']);
         $description = securizeString($array['description']);
         $url = securizeString($array['url']);
-        $skills = $array['skills'];
+        $skills = isset($array['skills']) ? $array['skills'] : [];
         $image = $_FILES['image']['name'];
             $path = 'assets/upload/profile/highlight/';
             $checkImage = securizeImage($_FILES['image'], $path);

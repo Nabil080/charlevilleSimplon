@@ -28,9 +28,11 @@ selectHighlight.addEventListener('change', () => {
 const modifHighlightButton = document.getElementById('modif-modal-button');
 const modifyInput = document.getElementById('modifyInput');
 
-modifHighlightButton.addEventListener('click', () => {
-    modifyInput.value = 'modify';
-});
+if(modifHighlightButton !== null){
+    modifHighlightButton.addEventListener('click', () => {
+        modifyInput.value = 'modify';
+    });
+}
 
 // Suppression de projet perso
 const deleteMyProject = document.getElementById('delete-my-project');
@@ -55,11 +57,11 @@ forms.forEach(form => {
                 function fadeOut() {
                     elementToDelete.classList.add("opacity-40", "grayscale");
                 };
-                setTimeout(fadeOut, 1000);
                 function deleteProject() {
-                    elementToDelete.classList.add("hidden");
+                    elementToDelete.classList.add("!hidden",);
                 }
-                setTimeout(deleteProject, 1000);
+                setTimeout(fadeOut, 400);
+                setTimeout(deleteProject, 100);
                 // deleteAlert();
                 // showAlert(data);
             })
