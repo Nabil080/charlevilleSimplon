@@ -356,14 +356,14 @@ $title = "Espace personnel";
                     <section class="sectionChange border h-[480px] lg:h-[580px]">
                         <div class="projet-phare">
                             <?php if (empty($userDatas['user_highlight'])){?>
-                                <div class="w-full h-full text-main-black font-title font-bold py-5 px-5">
+                                <div class="w-full h-full text-main-black font-title font-bold pt-6 pl-6">
                                     <p>Cet utilisateur n'a pas encore de projet phare</p>
                                 </div>
                             <?php }else{
                                 $info = pathinfo($userDatas['user_highlight']);
                                 if ($info["extension"] == "pdf") { ?>
                                 <div class="md:hidden flex flex-col items-center text-main-black font-title font-bold py-5 px-5">
-                                    <p class="mb-5">Vous ne pouvez pas afficher ce pdf sur mobile, mais vous pouvez toutefois le consulter en ouvrant la page suivante :</p>
+                                    <p class="mb-5">Vous ne pouvez pas afficher ce fichier pdf sur mobile, mais vous pouvez toutefois le consulter en ouvrant la page suivante :</p>
                                     <a href="<?= $userDatas['user_highlight']?>" class="bg-main-red text-main-white text-[16px] rounded-[5px] mx-auto py-3 lg:py-1 px-2 lg:px-4" target="_blank">Voir le projet phare</a>
                                 </div>
                                 <iframe class="hidden md:block w-full min-h-[400px] lg:min-h-[500px]" src="<?= $userDatas['user_highlight'] ?>" title="iframe du projet phare"></iframe>
@@ -389,7 +389,7 @@ $title = "Espace personnel";
                                     <!-- Bouton ajouter un projet phare -->
                                     <?php
                                     if (empty($userDatas['user_highlight'])){?>
-                                    <div data-modal-target="main-project-update" data-modal-toggle="main-project-update" class="flex items-center mt-5 mb-2 cursor-pointer" <?= $notMyProfile; ?>>
+                                    <div data-modal-target="main-project-update" data-modal-toggle="main-project-update" class="flex items-center mt-5 ml-6 mb-2 cursor-pointer" <?= $notMyProfile; ?>>
                                         <span class="w-[40px] h-[40px] border bg-main-red rounded-full mr-2 flex items-center justify-center"><i class="fa-solid fa-plus text-main-white text-[25px] font-bold"></i></span>
                                         <p class="text-main-red italic text-[18px] font-semibold mr-4">Ajouter mon projet phare</p>
                                     </div>
@@ -442,7 +442,7 @@ $title = "Espace personnel";
 
                     <!-- SECTION PROJETS PERSO -->
                     <section class="sectionChange hidden border h-[480px] lg:h-[580px] overflow-y-scroll">
-                        <div id="delete-my-project" class="projet-cards w-11/12 mt-2 gap-6 mx-auto flex flex-col items-center justify-center lg:flex-row lg:flex-wrap">
+                        <div id="delete-my-project" class="projet-cards mt-6 gap-6 mx-6 flex flex-col items-center justify-center lg:flex-row lg:flex-wrap">
                             <!-- card projet -->
                             <?php foreach ($userProjects as $project){
                                 if($project->type->id == 2) {
@@ -545,7 +545,7 @@ $title = "Espace personnel";
                                 </section>
                                 <?php }}
                                     if (empty($userPersonnalProjects)) {?>
-                                        <div class="w-full h-full text-main-black font-title font-bold py-5 px-5">
+                                        <div class="w-full h-full text-main-black font-title font-bold ">
                                             <p>Cet utilisateur n'a pas encore publié de projet personnel</p>
                                         </div>
                                 <?php } ?>
