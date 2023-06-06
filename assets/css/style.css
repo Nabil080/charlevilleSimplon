@@ -1,7 +1,11 @@
-.disabled-button {
-  opacity: 0.5;
-  pointer-events: none;
-  user-select: none;
+html {
+    scroll-behavior: smooth;
+}
+
+.disabled-button{
+    opacity: 0.5;
+    pointer-events:none;
+    user-select: none;
 }
 
 .tabChange:hover {

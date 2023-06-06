@@ -28,7 +28,26 @@ switch ($action) {
     case 'updateFormationElement':
         updateFormation();
         break;
-
+    // Envoie du traitement pagination crud candidat
+    case 'candidatePagination':
+        candidatePagination();
+        break;
+    // Envoie du traitement pagination crud candidat
+    case 'learnerPagination':
+        learnerPagination();
+        break;
+    // Envoie du traitement pagination crud candidat
+    case 'companyPagination':
+        companyPagination();
+        break;
+    // Envoie du traitement pagination crud candidat
+    case 'projectPagination':
+        projectPagination();
+        break;
+    // Envoie du traitement pagination crud candidat
+    case 'promotionPagination':
+        promotionPagination();
+        break;
     // Traitement formulaire de CONTACT
     case 'contactUsers':
         contactUsers();

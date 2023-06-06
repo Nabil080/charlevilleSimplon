@@ -3,14 +3,20 @@ session_start();
 require 'src/model/ConnectBdd.php';
 
 // var_dump($_SESSION['user']);
+// $_SESSION['user'] = (object) array(
+//     'user_id' => 1,
+//     'status_id' => 1,
+//     'role_id' => 1,
+// );
+
 
 // var_dump($_SESSION);
 // TEMP POUR TEST SANS CONNEXION
-$_SESSION['user'] = (object) array(
-    'user_id' => 1,
-    'role_id' => 1,
-    'status_id' => 2
-);
+// $_SESSION['user'] = (object) array(
+//     'user_id' => 1,
+//     'role_id' => 5,
+//     'status_id' => 2
+// );
 
 try {
     if (isset($_GET['action']) && $_GET['action'] !== '' && !isset($_GET['admin'])) {
@@ -18,16 +24,21 @@ try {
         require 'public.php';
 
 
-        if (isset($_SESSION['user'])) {
-            if ($_SESSION['user']->role_id == 2 || $_SESSION['user']->role_id > 3) {
-                switch ($action) {
-                    // Afficher son profil perso
-                    case 'myProfile':
-                        myProfile();
-                        break;
-                }
+    if (isset($_SESSION['user'])) {
+        if ($_SESSION['user']->role_id == 2 || $_SESSION['user']->role_id > 3) {
+            switch ($action) {
+                // Afficher son profil perso
+                case 'myProfile':
+                    myProfile();
+                    break;
+                case 'updateUserElements':
+                    updateUserElements();
+                    break;
+                case 'deleteMyProject':
+                    deleteMyProject();
+                    break;
             }
-
+        }
             if ($_SESSION['user']->role_id <= 3) {
                 switch ($action) {
                     // Afficher le CRUD de projet (Gestion de projet)
@@ -59,12 +70,11 @@ try {
 
                 }
                 if ($_SESSION['user']->role_id <= 2) {
-
                     switch ($action) {
                         // Envoie du formulaire de modification de projet (version modal)
                         // Envoi de la demande de suppression de projet
                     }
-                    if ($_SESSION['user']->role_id == 1) {
+                    if ($_SESSION['user']['role_id'] == 1) {
                         require 'admin.php';
                     }
                 }
@@ -73,7 +83,7 @@ try {
             homepage();
         }
     } else {
-        homepage();
+        // homepage();
     }
 } catch (Exception $error) {
     echo 'Exception reçue : ', $error->getMessage(), "\n";
@@ -81,6 +91,6 @@ try {
 
 }
 
-// $repo = new PromoRepository;
-// $data = $repo->getPromoDate(2);
-// var_dump($data);
+// $UserRepo = new UserRepository;
+// $users = $UserRepo->getLearnersAndFormators();
+// var_dump($users);

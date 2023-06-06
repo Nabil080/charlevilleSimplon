@@ -1,10 +1,14 @@
 <?php
 
+// // TEMP POUR TEST SANS CONNEXION
+// $user = new UserRepository();
+// $_SESSION['user'] = $user->getUserById(2);
+
 switch ($action) {
     case 'allFormationsPage':
         allFormationsPage();
         break;
-    // Aficher la formation choisie
+    // Afficher la formation choisie
     case 'formationPage':
         formationPage();
         break;
@@ -50,7 +54,7 @@ switch ($action) {
         resetPasswordForm();
         break;
 
-    // Traitement de la partie Compte 
+    // Traitement de la partie Compte
     case 'registerTreatment':
         registerTreatment();
         break;
@@ -92,8 +96,8 @@ switch ($action) {
         logOut();
         break;
     // Envoie du traitement pagination tous les projets
-    case 'projectsPagination':
-        projectsPagination();
+    case 'allProjectsPagination':
+        allProjectsPagination();
         break;
     //Traitement d'envoie de message
     case 'contactTreatment':

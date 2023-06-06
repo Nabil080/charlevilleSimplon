@@ -1,7 +1,7 @@
 <?php
-$tagRepo = new TagRepository;
-$apprenant->tags = $tagRepo->getUserTags($apprenant->user_id);
 $projectRepo = new ProjectRepository;
+$tagsRepository = new TagRepository;
+
 
 if(isset($formators)){
     $formateurs = $formators;
@@ -56,7 +56,7 @@ if(isset($formators)){
                 </p>
                 <div class="flex gap-1 justify-center sm:justify-normal mx-auto sm:gap-1">
                     <?php $y = 0;
-                $tags = $tagRepo->getUserTags($apprenant->user_id);
+                $tags = $tagsRepository->getUserTags($apprenant->user_id);
                     if (isset($tags) && empty($tags)) { ?>
                         <p class="italic text-center text-[18px] text-main-red">Pas de compétence spécifiée</p>
                     <?php } else if (isset($tags) && !empty($tags)) {
@@ -79,7 +79,7 @@ if(isset($formators)){
                             <?php } else if (isset($projects) && !empty($projects)) {
                                 foreach ($projects as $project) {
                                     ?>
-                                    <a href="">
+                                    <a href="?action=projectPage&id=<?= $project->id ?>">
                                         <p class="bg-main-gray text-main-white px-4 py-1 text-[14px] rounded-[50px]"><?= substr($project->name, 0, 15) . ".." ;?></p>
                                     </a>
                                 <?php 
@@ -95,7 +95,7 @@ if(isset($formators)){
             </div>
 
             <button class="clipper2 h-[25%] sm:h-[25%] xl:h-[20%] bg-main-red block text-white z-10 relative text-[20px] text-[22px] font-bold font-main-title w-full"><a href="?action=profilePage&id=<?= $apprenant->user_id ?>">Voir le profil</a></button>
-          
+
         </div>
         <div class="hidden clipper sm:flex w-full z-10 bg-center bg-cover grayscale" 
         style="background-image: url(

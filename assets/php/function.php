@@ -1,13 +1,4 @@
-<?php
-
-function getPromoName(string $formation, string $date)
-{
-    $dateArray = explode("-", $date);
-    $year = $dateArray[0];
-    $promo = "$formation $year";
-
-    return $promo;
-}
+<?php 
 
 function securizeString(string $string = null)
 {
@@ -35,6 +26,45 @@ function securizeString(string $string = null)
         return $safe_string;
     }
 }
+
+function securizeUrl(string $string = null)
+{
+
+    $pattern = '/^https?:\\/\\/(?:www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b(?:[-a-zA-Z0-9()@:%_\\+.~#?&\\/=]*)$/';
+
+    if(!preg_match($pattern, $string) OR !isset($string) OR empty($string) OR strlen($string) < 3){
+        if(strlen($string) < 3){
+            $response = array(
+                "status" => "failure",
+                "message" => "Un champ est trop court"
+            );
+            echo json_encode($response);
+        }elseif(!isset($string) OR empty($string)){
+
+            $response = array(
+                "status" => "failure",
+                "message" => "Un champ est invalide"
+            );
+
+            echo json_encode($response);
+        }elseif(!preg_match($pattern, $string)){
+
+            $response = array(
+                "status" => "failure",
+                "message" => "Merci de rentrer une URL."
+            );
+
+            echo json_encode($response);
+        }
+        return false;
+    }else{
+        $safe_string = filter_var(trim($string), FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+        return $safe_string;
+    }
+}
+
+
 
 function securizeMail(string $mail = null)
 {
@@ -121,11 +151,11 @@ function securizePassword(string $password, string $confirm_password)
 
 }
 
-function securizeImage(array $filesImage,string $path){
+function securizeImage(array $filesImage, string $path){
     if(!empty($filesImage))
         {
         $nameFile = $filesImage['name'];
-        $typeFile = $filesImage['type'];
+        $typeFile = mime_content_type($filesImage['tmp_name']);
         $tmpFile = $filesImage['tmp_name'];
         $errorFile = $filesImage['error'];
         $sizeFile = $filesImage['size'];
@@ -136,7 +166,7 @@ function securizeImage(array $filesImage,string $path){
         $extension = explode('.', $nameFile);
 
 
-        $max_size = 1000000;
+        $max_size = 8000000;
 
 
         if(in_array($typeFile, $type))
@@ -209,12 +239,11 @@ function securizeImage(array $filesImage,string $path){
     }
 }
 
-function securizePdf(array $filesPdf, string $path){
-    if(!empty($filesPdf))
-        {
-            var_dump($filesPdf);
+function securizePdf(array $filesPdf, string $path)
+{
+    if(!empty($filesPdf)) {
         $nameFile = $filesPdf['name'];
-        $typeFile = $filesPdf['type'];
+        $typeFile = mime_content_type($filesPdf['tmp_name']);
         $tmpFile = $filesPdf['tmp_name'];
         $errorFile = $filesPdf['error'];
         $sizeFile = $filesPdf['size'];
@@ -225,26 +254,20 @@ function securizePdf(array $filesPdf, string $path){
         $extension = explode('.', $nameFile);
 
 
-        $max_size = 1000000;
+        $max_size = 8000000;
 
 
-        if(in_array($typeFile, $type))
-        {
-            if(count($extension) <=2 && in_array(strtolower(end($extension)), $extensions))
-            {
-                if($sizeFile <= $max_size && $errorFile == 0)
-                {
-                    if(move_uploaded_file($tmpFile, $path.$pdf = uniqid() . '.' . end($extension)) )
-                    {
+        if(in_array($typeFile, $type)) {
+            if(count($extension) <=2 && in_array(strtolower(end($extension)), $extensions)) {
+                if($sizeFile <= $max_size && $errorFile == 0) {
+                    if(move_uploaded_file($tmpFile, $path.$pdf = uniqid() . '.' . end($extension))) {
                         // $response = array(
                         //     "status" => "",
                         //     "message" => "Le cahier des charges a bien été upload'"
                         // );
                         // echo json_encode($response);
                         return $path.$pdf;
-                    }
-                    else
-                    {
+                    } else {
                         $response = array(
                             "status" => "failure",
                             "message" => "Echec de l'upload du cahier des charges"
@@ -253,9 +276,7 @@ function securizePdf(array $filesPdf, string $path){
 
                         return false;
                     }
-                }
-                else
-                {
+                } else {
                     $response = array(
                         "status" => "failure",
                         "message" => "Le poids du cahier des charges est trop élevé"
@@ -264,9 +285,7 @@ function securizePdf(array $filesPdf, string $path){
 
                     return false;
                 }
-            }
-            else
-            {
+            } else {
                 $response = array(
                     "status" => "failure",
                     "message" => "Merci d'upload un pdf !"
@@ -275,9 +294,7 @@ function securizePdf(array $filesPdf, string $path){
 
                 return false;
             }
-        }
-        else
-        {
+        } else {
             $response = array(
                 "status" => "failure",
                 "message" => "Type non autorisé !"
@@ -286,7 +303,7 @@ function securizePdf(array $filesPdf, string $path){
 
             return false;
         }
-    }else{
+    } else {
 
         $response = array(
             "status" => "failure",
@@ -312,7 +329,7 @@ function securizeText(string $text):bool
             array_push($bools, $bool);
         }
     }
-    
+
     if (in_array(true, $bools)) {
         $isSafe = false;
         return $isSafe;
@@ -320,4 +337,21 @@ function securizeText(string $text):bool
         $isSafe = true;
         return $isSafe;
     }
+}
+
+function formateDate($date):string
+{
+    setlocale(LC_TIME,'fr_FR','french','French_France.1252','fr_FR.ISO8859-1','fra');
+    $datefmt = new IntlDateFormatter('fr_FR', 0, 0, NULL, NULL, 'dd MMMM yyyy');
+    $formatedDate = $datefmt->format(date_create($date));
+    return $formatedDate;
+}
+
+function getPromoName(string $formation, string $date)
+{
+    $dateArray = explode("-", $date);
+    $year = $dateArray[0];
+    $promo = "$formation $year";
+
+    return $promo;
 }

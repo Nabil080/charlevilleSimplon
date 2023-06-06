@@ -35,6 +35,7 @@
                 <div class="text-base flex-grow flex-col">
                     <div class="pl-[20%] line-clamp-4 mt-2 mb-4"><?=$project->description?></div>
                     <div id="end" class="mt-auto">
+                        <?php if(isset($project->promo)) ?>
                         <a href="?action=promotionPage&id=<?= $project->promo->id ?>"
                             class="bg-main-red py-2 px-4 rounded-full text-main-white my-2 hover:bg-main-white hover:text-main-red hover:border border-main-red">
                             <?=$project->promo->name?>
@@ -68,6 +69,5 @@
             <!-- data filtres-->
             <div class="hidden" formation-filter="formation-<?=$project->promo->formation_id?>"></div>
             <div class="hidden" year-filter="<?=$project->start?>"></div>
-            <div class="hidden" level-filter="<?=$project->getProjectLevel()?>"></div>
 
         </article>

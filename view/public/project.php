@@ -1,4 +1,4 @@
-<?php $title = ""; ?>
+<?php $title = $project->name; ?>
 
 <?php ob_start(); ?>
 <!-- header -->
@@ -177,14 +177,13 @@
         <div class="grow flex flex-col justify-center">
             <?php $i = 0;
             foreach ($allProgress as $progress) { ?>
-            <!-- avancement 1 -->
-            <div id="progress<?= $progress->id ?>" class="mb-1 text-md sm:text-xl xl:text-2xl  text-start italic">
-                <?= $progress->name ?></div>
-            <!-- formulaire d'edit 1 -->
-
-            <div class="w-full bg-gray-200 rounded-full h-2.5 mb-4">
-                <div class="bg-green-600 h-2.5 rounded-full" style="width: <?= $progress->number ?>%"></div>
-            </div>
+                <!-- avancement 1 -->
+                <div id="progress<?= $progress->id ?>" class="mb-1 text-md sm:text-xl xl:text-2xl  text-start italic"><?= $progress->name ?></div>
+                <!-- formulaire d'edit 1 -->
+                
+                <div class="w-full bg-gray-200 rounded-full h-2.5 mb-4">
+                    <div class="progressBar bg-green-600 h-2.5 rounded-full" data-width="<?= $progress->number ?>" style="width: <?= $progress->number ?>%"></div>
+                </div>
             <?php if ($isMyProject == true) { ?>
 
             <form id="progress<?= $progress->id ?>-update"
@@ -242,7 +241,7 @@
         <?php } ?>
     </div>
     <!-- bouton 2 -->
-    <div class="flex mx-4 my-4 gap-4 h-max">
+    <div class="flex mx-8 my-4 gap-4 h-max">
         <?php if (isset($project->file)) { ?>
 
         <i class="fa-solid fa-file-pdf"></i>
@@ -299,8 +298,7 @@
 <!-- tabulation entreprise/apprenants -->
 <section class="max-w-[1200px] w-full mx-auto">
     <div class="flex w-full">
-        <div onclick="changeTab(0)"
-            class="tabChange cursor-pointer px-0 transition-all duration-[0.4s] !bg-main-red w-1/2 text-center text-main-white font-title text-lg md:text-xl lg:text-2xl font-bold py-2 md:py-4">
+        <div onclick="changeTab(0)" class="tabChange cursor-pointer px-0 transition-all duration-[0.4s] !bg-main-red w-1/2 flex items-center justify-center text-main-white font-title text-lg md:text-xl lg:text-2xl font-bold py-2 md:py-4">
             <p class="select-none">Demandes de l'entreprise</p>
         </div>
         <div onclick="changeTab(1)"
@@ -313,7 +311,7 @@
 
 
 <!-- CONTENU TAB -->
-<section class="max-w-[1200px] mx-auto flex">
+<section class="max-w-[1200px] mx-auto flex pb-5">
     <!-- CONTENU TAB ENTREPRISE -->
     <div class="sectionChange">
         <h2 class="text-center italic font-title text-xl lg:text-2xl font-semibold uppercase my-4">Demandes de
@@ -404,6 +402,7 @@
 <?php ob_start(); ?>
 
 <script src="assets/js/tabs.js"></script>
+<script src="assets/js/project.js"></script>
 <script src="assets/js/editor_setup.js"></script>
 
 <?php $script = ob_get_clean(); ?>

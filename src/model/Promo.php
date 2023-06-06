@@ -66,11 +66,38 @@ class PromoRepository extends ConnectBdd
         return $Promo;
     }
 
-    public function getPromos(): array
+    public function getPromosNumber():int
+    {
+        $req = $this->bdd->prepare("SELECT COUNT(*) FROM promo");
+        $req->execute();
+        $data = $req->fetch(PDO::FETCH_COLUMN);
+
+        return $data;
+    }
+
+    public function getFilteredPromosNumber($filters = null,$execute = null):int
+    {
+        $filters = $filters === null ? "" : "WHERE $filters";
+        $execute = $execute === null ? [] : explode(",",$execute);
+        $query = "SELECT COUNT(*) FROM promo $filters"; 
+        // var_dump($query);
+        // var_dump($execute);
+        $req = $this->bdd->prepare($query);
+        $req->execute($execute);
+        $data = $req->fetch(PDO::FETCH_COLUMN);
+
+        return $data;
+    }
+    public function getPromos($limitRequest = null, $filters = null, $execute = null, $order = null): array
     {
 
+        $filters = $filters === null ? "" : "WHERE $filters";
+        $execute = $execute === null ? [] : explode(",",$execute);
+        $order = $order === null ? "ORDER BY promo.status_id DESC" : "ORDER BY $order";
+        $limit = $limitRequest === null ? "" : "LIMIT $limitRequest";
+
         $promoRepository = new PromoRepository;
-        $req = $this->bdd->prepare("SELECT * FROM `promo`");
+        $req = $this->bdd->prepare("SELECT * FROM `promo` $filters $order $limit");
         $req->execute();
         $datas = $req->fetchAll(PDO::FETCH_ASSOC);
         $promos = [];
@@ -196,6 +223,7 @@ class PromoRepository extends ConnectBdd
         $data = $req->fetch(PDO::FETCH_COLUMN);
         return $data;
     }
+  
     public function CheckDuplicateCandidate($user_id, $promo_id)
     {
         $req = $this->bdd->prepare("SELECT * FROM `promo_candidate` WHERE `user_id` = ? AND `promo_id` = ?");
@@ -221,32 +249,41 @@ class PromoRepository extends ConnectBdd
 
     public function getPromoByUserID($id)
     {
+        $Promo_datas = [];
+        $candidate_datas = [];
         $req = $this->bdd->prepare("SELECT * FROM `promo_candidate` WHERE `user_id` = ?");
         $req->execute([$id]);
-        $data = $req->fetch(PDO::FETCH_ASSOC);
+        $datas = $req->fetchAll(PDO::FETCH_ASSOC);
+        foreach($datas as $data){
+            $data_candidate = $this->getPromoById($data['promo_id']);
+            array_push($candidate_datas, $data_candidate);
+        }
+        array_push($Promo_datas, $candidate_datas);
 
-        if (empty($data)) {
-            $req = $this->bdd->prepare("SELECT * FROM `promo_refused` WHERE `user_id` = ?");
-            $req->execute([$id]);
-            $data = $req->fetch(PDO::FETCH_ASSOC);
+        $refused_datas = [];
+        $req = $this->bdd->prepare("SELECT * FROM `promo_refused` WHERE `user_id` = ?");
+        $req->execute([$id]);
+        $datas = $req->fetchAll(PDO::FETCH_ASSOC);
+        foreach($datas as $data){
+            $data_refused = $this->getPromoById($data['promo_id']);
+            array_push($refused_datas, $data_refused);
+        }
+        array_push($Promo_datas, $refused_datas);
 
-            if (empty($data)) {
-                $req = $this->bdd->prepare("SELECT * FROM `promo_user` WHERE `user_id` = ?");
-                $req->execute([$id]);
-                $data = $req->fetch(PDO::FETCH_ASSOC);
+        $user_datas = [];
+        $req = $this->bdd->prepare("SELECT * FROM `promo_user` WHERE `user_id` = ?");
+        $req->execute([$id]);
+        $datas = $req->fetchAll(PDO::FETCH_ASSOC);
+        foreach($datas as $data){
+            $data_user = $this->getPromoById($data['promo_id']);
+            array_push($user_datas, $data_user);
+        }
+        array_push($Promo_datas, $user_datas);
 
-                if (empty($data)) {
-                    return "Cet utilisateur n'appartient à aucune promotion en cours ou ayant existé.";
-                } else {
-                    $Promo_datas = $this->getPromoById($data['user_id']);
-                    return $Promo_datas;
-                }
-            } else {
-                $Promo_datas = $this->getPromoById($data['user_id']);
-                return $Promo_datas;
-            }
+        if (empty($Promo_datas))
+        {
+            return "Cet utilisateur n'appartient à aucune promotion en cours ou ayant existé.";
         } else {
-            $Promo_datas = $this->getPromoById($data['user_id']);
             return $Promo_datas;
         }
     }

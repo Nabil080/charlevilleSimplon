@@ -93,10 +93,6 @@ class ProjectRepository extends ConnectBdd
             $project->promo = $Promo;
         }
 
-        // $formationRepo = new FormationRepository;
-        // $Formation = $formationRepo->getFormationById($data['formation_id']);
-        // $project->formation = $Formation;
-
         $Type = new Type;
         $typeRepo = new TypeRepository;
         $Type = $typeRepo->getTypeById($data['type_id']);
@@ -132,13 +128,22 @@ class ProjectRepository extends ConnectBdd
         return $project;
     }
 
-    public function getAllProjects($limitRequest = null):array
+    public function getAllProjects($limitRequest = null, $filters = null, $execute = null, $order = null):array
     {
         $projects = [];
-        $limit = $limitRequest == null ? "" : "LIMIT " . $limitRequest;
+        $filters = $filters === null ? "" : "WHERE $filters";
+        $execute = $execute === null ? [] : explode(",",$execute);
+        $order = $order === null ? "ORDER BY project.status_id ASC" : "ORDER BY $order";
+        $limit = $limitRequest === null ? "" : "LIMIT $limitRequest";
 
-        $req = $this->bdd->prepare("SELECT project_id FROM project $limit ORDER BY status_id ASC");
-        $req->execute();
+        $query =
+        "SELECT project.project_id FROM project
+        JOIN promo ON promo.promo_id = project.promo_id
+        JOIN formation ON promo.formation_id = formation.formation_id $filters $order $limit";
+        // var_dump($query);
+        // var_dump($execute);
+        $req = $this->bdd->prepare($query);
+        $req->execute($execute);
         $data = $req->fetchAll(PDO::FETCH_ASSOC);
 
 
@@ -151,6 +156,32 @@ class ProjectRepository extends ConnectBdd
         }
 
         return $projects;
+    }
+
+    public function getProjectsNumber():int
+    {
+        $req = $this->bdd->prepare("SELECT COUNT(*) FROM project");
+        $req->execute();
+        $data = $req->fetch(PDO::FETCH_COLUMN);
+
+        return $data;
+    }
+
+    public function getFilteredProjectsNumber($filters = null,$execute = null):int
+    {
+        $filters = $filters === null ? "" : "WHERE $filters";
+        $execute = $execute === null ? [] : explode(",",$execute);
+        $query =
+        "SELECT COUNT(*) FROM project
+        JOIN promo ON promo.promo_id = project.promo_id
+        JOIN formation ON promo.formation_id = formation.formation_id $filters";
+        // var_dump($query);
+        // var_dump($execute);
+        $req = $this->bdd->prepare($query);
+        $req->execute($execute);
+        $data = $req->fetch(PDO::FETCH_COLUMN);
+
+        return $data;
     }
 
     public function getProjectsDate()
@@ -169,6 +200,15 @@ class ProjectRepository extends ConnectBdd
 
         $uniqueDates = array_unique($dates);
         return $uniqueDates;
+    }
+
+    public function getProjectImage(int $id): array
+    {
+        $req = $this->bdd->prepare("SELECT project_model_image FROM project WHERE project_id =?");
+        $req->execute(array($id));
+        $image = $req->fetch(PDO::FETCH_ASSOC);
+
+        return $image;
     }
 
     public function getProjectUsers($id): array
@@ -343,7 +383,8 @@ class ProjectRepository extends ConnectBdd
 
         // traitment fichier pdf
         if($files['pdf']['error'] == 0){
-            $pdf = securizePdf($files['pdf']);
+            $path = "assets/upload/project/";
+            $pdf = securizePdf($files['pdf'], $path);
             if($pdf === false){
                 // message d'erreurs dans securizePdf
                 $error = true;
@@ -354,7 +395,8 @@ class ProjectRepository extends ConnectBdd
 
         // traitment image
         if($files['image']['error'] == 0){
-            $image = securizeImage($files['image']);
+            $path = "assets/upload/project/";
+            $image = securizeImage($files['image'], $path);
             if($image === false){
                 // message d'erreurs dans securizePdf
                 $error = true;
@@ -386,14 +428,15 @@ class ProjectRepository extends ConnectBdd
         $adress = isset($post['adress']) ? $post['adress'] : '17 rue de la grande mare lool';
 
         // traitment fichier pdf
-        $pdf = securizePdf($_FILES['pdf']);
+        $path = "assets/upload/project/";
+        $pdf = securizePdf($_FILES['pdf'], $path);
         if($pdf === false){
             // message d'erreurs dans securizePdf
             $error = true;
         }
 
         // traitment image
-        $image = securizeImage($files['image']);
+        $image = securizeImage($files['image'], $path);
         if($image === false){
             // message d'erreurs dans securizePdf
             $error = true;
@@ -437,7 +480,6 @@ class ProjectRepository extends ConnectBdd
         $bool = $req->execute([$id]);
         return $bool;
     }
-
 
     public function updateProjectTitle(int $id, array $post):bool
 
@@ -518,7 +560,7 @@ class ProjectRepository extends ConnectBdd
             die;
         }
         if (!empty($image)) { 
-           $req = $this->bdd->prepare("UPDATE project SET project_model_image = ? WHERE project_id = ?");
+            $req = $this->bdd->prepare("UPDATE project SET project_model_image = ? WHERE project_id = ?");
             $bool = $req->execute([$image, $id]);
         }
         return $bool;
@@ -542,7 +584,7 @@ class ProjectRepository extends ConnectBdd
             die;
         }
         if (!empty($pdf)) { 
-           $req = $this->bdd->prepare("UPDATE project SET project_file = ? WHERE project_id = ?");
+            $req = $this->bdd->prepare("UPDATE project SET project_file = ? WHERE project_id = ?");
             $bool = $req->execute([$pdf, $id]);
         }
         return $bool;
