@@ -35,13 +35,25 @@ class StatRepository extends ConnectBdd
 
         $statTable = array();
         foreach ($data as $stat) {
-            $statTable[] = [
+            $statTable[$stat['stat_id']] = [
                 'stat_number' => $stat['stat_number'],
                 'stat_name' => $stat['stat_name']
             ];
         }
 
         return $statTable;
+    }
+    public function udpdateNumber($stat_id, $stat_number): void
+    {
+        $req = "UPDATE `stat` SET stat_number = ? WHERE stat_id";
+        $stmt = $this->bdd->prepare($req);
+        $stmt->execute([$stat_number, $stat_id]);
+    }
+    public function udpdateName($stat_id, $stat_name): void
+    {
+        $req = "UPDATE `stat` SET stat_name = ? WHERE stat_id";
+        $stmt = $this->bdd->prepare($req);
+        $stmt->execute([$stat_name, $stat_id]);
     }
 }
 

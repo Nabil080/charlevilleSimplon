@@ -1,13 +1,13 @@
 <?php
 session_start();
-// session_destroy();
 require 'src/model/ConnectBdd.php';
+
 // var_dump($_SESSION['user']);
-$_SESSION['user'] = (object) array(
-    'user_id' => 1,
-    'status_id' => 1,
-    'role_id' => 1,
-);
+// $_SESSION['user'] = (object) array(
+//     'user_id' => 1,
+//     'status_id' => 1,
+//     'role_id' => 1,
+// );
 
 
 // var_dump($_SESSION);
@@ -18,9 +18,10 @@ $_SESSION['user'] = (object) array(
 //     'status_id' => 2
 // );
 
-if (isset($_GET['action']) && $_GET['action'] !== '' && !isset($_GET['admin'])) {
-    $action = $_GET['action'];
-    require 'public.php';
+try {
+    if (isset($_GET['action']) && $_GET['action'] !== '' && !isset($_GET['admin'])) {
+        $action = $_GET['action'];
+        require 'public.php';
 
 
     if (isset($_SESSION['user'])) {
@@ -30,11 +31,14 @@ if (isset($_GET['action']) && $_GET['action'] !== '' && !isset($_GET['admin'])) 
                 case 'myProfile':
                     myProfile();
                     break;
+                case 'updateUserElements':
+                    updateUserElements();
+                    break;
+                case 'deleteMyProject':
+                    deleteMyProject();
+                    break;
             }
-
         }
-
-
             if ($_SESSION['user']->role_id <= 3) {
                 switch ($action) {
                     // Afficher le CRUD de projet (Gestion de projet)
@@ -43,11 +47,11 @@ if (isset($_GET['action']) && $_GET['action'] !== '' && !isset($_GET['admin'])) 
                         break;
 
 
-                        // Afficher le formulaire d'ajout de projet
+                    // Afficher le formulaire d'ajout de projet
                     case 'addProject':
                         projectFormPage();
                         break;
-                        // Afficher le formulaire de modification du projet
+                    // Afficher le formulaire de modification du projet
 
                     // Envoi du formulaire d'ajout de projet
                     case 'addProjectTraitement':
@@ -66,21 +70,25 @@ if (isset($_GET['action']) && $_GET['action'] !== '' && !isset($_GET['admin'])) 
 
                 }
                 if ($_SESSION['user']->role_id <= 2) {
-
                     switch ($action) {
                         // Envoie du formulaire de modification de projet (version modal)
                         // Envoi de la demande de suppression de projet
                     }
-                    if ($_SESSION['user']->role_id == 1) {
+                    if ($_SESSION['user']['role_id'] == 1) {
                         require 'admin.php';
                     }
                 }
             }
+        } else {
+            homepage();
+        }
     } else {
-        homepage();
+        // homepage();
     }
-} else {
-    homepage();
+} catch (Exception $error) {
+    echo 'Exception reçue : ', $error->getMessage(), "\n";
+    // throw new Exception();
+
 }
 
 // $UserRepo = new UserRepository;

@@ -29,10 +29,10 @@
                     <?php if($user->role_id > 3 ){?>
                     <div class="mx-auto w-11/12 lg:max-w-[800px] flex justify-between mb-8 lg:mb-16">
                         <div class="flex w-full">
-                            <div onclick="swapDivsById('simplon_projects_<?=$user->user_id?>','perso_projects_<?=$user->user_id?>')" class="tabChange cursor-pointer px-0 transition-all duration-[0.4s] bg-main-red w-1/2 text-center text-main-white font-title text-lg md:text-xl lg:text-2xl font-bold py-2 md:py-4">
+                            <div onclick="swapDivsById('simplon_projects_<?=$user->user_id?>','perso_projects_<?=$user->user_id?>')" onclick="changeTab(0)" class="tabChange cursor-pointer px-0 transition-all duration-[0.4s] !bg-main-red w-1/2 text-center text-main-white font-title text-lg md:text-xl lg:text-2xl font-bold py-2 md:py-4">
                                 <p class="select-none">Projets simplon</p>
                             </div>
-                            <div onclick="swapDivsById('simplon_projects_<?=$user->user_id?>','perso_projects_<?=$user->user_id?>')" class="tabChange cursor-pointer px-0 transition-all duration-[0.4s] bg-main-gray w-1/2 text-center text-main-white font-title text-lg md:text-xl lg:text-2xl font-bold py-2 md:py-4">
+                            <div onclick="swapDivsById('simplon_projects_<?=$user->user_id?>','perso_projects_<?=$user->user_id?>')" onclick="changeTab(1)" class="tabChange cursor-pointer px-0 transition-all duration-[0.4s] bg-main-gray w-1/2 text-center text-main-white font-title text-lg md:text-xl lg:text-2xl font-bold py-2 md:py-4">
                                 <p class="select-none">Projets perso</p>
                             </div>
                         </div>

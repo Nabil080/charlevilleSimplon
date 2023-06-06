@@ -50,7 +50,11 @@
 
 <body class="w-[100vw] bg-main-white pt-20 min-h-screen flex flex-col">
     <?php require_once 'view/template/_navbar.php'; ?>
-    <?= $content ?>
+
+    <div class="pt-5">
+        <?= $content ?>
+    </div>
+    
 
     <?php include 'view/template/_login.php'; ?>
     <?php require_once 'view/template/_footer.php'; ?>
@@ -60,6 +64,7 @@
     <script src="assets/js/ajax_modalLogin.js"></script>
     <script src="assets/js/ajax_function.js"></script>
     <script src="assets/js/function.js"></script>
+    <script src="assets/js/editor_setup.js"></script>
     <?php if (isset($script))
         echo $script; ?>
 </body>

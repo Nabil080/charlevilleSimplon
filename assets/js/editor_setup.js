@@ -1,4 +1,4 @@
-const editors = document.querySelectorAll('textarea');
+const editors = document.querySelectorAll("textarea.text-editor")
 editors.forEach(editor => {
     ClassicEditor
             .create( editor,{

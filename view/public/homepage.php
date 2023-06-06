@@ -145,7 +145,9 @@ $title = "Toutes nos formations";
     <h1 class="text-main-red font-title text-center text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold pt-4 md:py-8">Nos formations</h1>
 
     <div class="large_screen md:mx-2">
+
         <div class="section-cards grid  place-content-center md:flex md:flex-wrap md:justify-between md:w-11/12 md:mx-auto lg:justify-around">
+
             <?php foreach ($formations as $formation) {
                 include('view/template/_formation_card.php');
             } ?>
@@ -189,7 +191,7 @@ $title = "Toutes nos formations";
             </p>
         </div>
         <div class="flex justify-center mt-4 lg:mt-8">
-            <a href=""
+            <a href="?action=allProjectsPage"
                 class="bg-main-red rounded-[5px] text-main-white border border-main-white hover:bg-main-white hover:text-main-red hover:border-main-red  font-semibold text-[16px] lg:text-[22px] font-main py-5 px-3 inline">Projets
                 réalisés par nos formations</a>
         </div>
@@ -197,7 +199,7 @@ $title = "Toutes nos formations";
     <!-- Section Banniere et notre histoire -->
     <section class="pb-4 md:pb-10 my-4 md:my-8 relative min-h-[350px] ">
         <h3 id="commentTitle" class="text-main-gray font-title text-center text-[20px] lg:text-[32px] italic lg:w-3/4 lg:mx-auto 
-        font-semibold md:py-5 mt-4 mb-4 md:mb-8">
+        font-semibold pt-10 md:py-5 mt-4 mb-4 md:mb-8">
             Nos apprenant.e.s témoignent 
         </h3>
         <div id="commentSection" class="grid lg:grid-cols-2 w-10/12 mx-auto justify-items-center">

@@ -1,4 +1,4 @@
-<div class="rounded-[5px] border border-main-border min-w-[330px] md:w-[400px]">
+<div class="rounded-[5px] border border-main-border min-w-[330px] md:w-[400px] pb-4">
     <img class="max-h-[140px] md:max-h-[200px] w-full" src="assets/img/formations/devweb" alt="Formation">
     <h3 class="text-main-red font-title text-[20px] pl-3 mt-3 md:pb-4 text-center md:text-[36px]"><?= $promo->name; ?></h3>
 

@@ -4,7 +4,9 @@ require_once 'src/controller/back/userController.php';
 require_once 'src/controller/back/promotionController.php';
 require_once 'src/controller/back/projectController.php';
 require_once 'src/controller/back/contactController.php';
+require_once 'src/controller/back/formationController.php';
 require_once 'assets/php/function.php';
+
 class ConnectBdd
 {
     public $bdd;
@@ -19,6 +21,7 @@ class ConnectBdd
         $this->bdd = new PDO("mysql:host=$host;dbname=$db;charset=utf8", $user, $pass, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
     }
 }
+
 require_once('src/model/Activity.php');
 require_once('src/model/AlertMessage.php');
 require_once('src/model/Certification.php');
