@@ -479,7 +479,7 @@ function companyPagination()
         // var_dump($_FILES);
         if ((!isset($_GET['id']) || $_GET['id'] == null) && (!isset($_GET['type']) || $_GET['type'] == null)) {
             // erreur 404 page not found : Vous devez renseigner un id utilisateur et un type de modification
-        } elseif ((isset($_GET['id']) && $_GET['id'] == $_SESSION['user']['user_id']) && (isset($_GET['type']) && $_GET['type'] !== null)) {
+        } elseif ((isset($_GET['id']) && $_GET['id'] == $_SESSION['user']->user_id) && (isset($_GET['type']) && $_GET['type'] !== null)) {
             $type = $_GET['type'];
             $id = $_GET['id'];
             $userRepository = new UserRepository();

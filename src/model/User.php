@@ -468,7 +468,6 @@ class UserRepository extends ConnectBdd
 
         return $bools;
     }
-}
     public function getLearnersAndFormators($limitRequest = null, $filters = null, $execute = null, $order = null):array
     {
         $filters = $filters === null ? "" : "AND $filters";

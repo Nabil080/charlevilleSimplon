@@ -88,7 +88,7 @@ try {
     {
     if ($_SESSION['user']->role_id == 3) {
         $projectRepository = new ProjectRepository;
-        $projects = $projectRepository->getEntrepriseProjects($_SESSION['user']['user_id']);
+        $projects = $projectRepository->getEntrepriseProjects($_SESSION['user']->user_id);
         include 'view/public/project_gestion.php';
     } else if ($_SESSION['user']->role_id  == 1){
         $promoRepository = new PromoRepository;
@@ -98,7 +98,7 @@ try {
         include 'view/public/project_gestion.php';
     } else if ($_SESSION['user']->role_id  == 2) {
         $projectRepository = new ProjectRepository;
-        $projects = $projectRepository->getFormateurProjects($_SESSION['user']['user_id']);
+        $projects = $projectRepository->getFormateurProjects($_SESSION['user']->user_id);
         include 'view/public/project_gestion.php';
     } else {
         header('Location:?action=homepage');
@@ -110,15 +110,16 @@ try {
 function profilePage()
 {
     if (!isset($_GET['id'])) {
-        if (!isset($_SESSION['user']['user_id'])) {
+        if (!isset($_SESSION['user']->user_id)) {
             homepage();
 
         } else {
-            header('Location:?action=homepage');
+            myprofile();
+            // header('Location:?action=homepage');
         }
 
     }
-    else if (isset($_GET['id']) && $_GET['id'] == $_SESSION['user']['user_id']) {
+    else if (isset($_GET['id']) && $_GET['id'] == $_SESSION['user']->user_id) {
         myProfile();
     }
     else {
@@ -126,9 +127,9 @@ function profilePage()
         $user = new UserRepository();
         $userDatas = new User($id);
         // var_dump('hi');
-        if($userDatas['role_id'] == 1 || $userDatas['role_id'] == 3){
+        if($userDatas->role_id == 1 || $userDatas->role_id == 3){
             homepage();
-        } elseif($userDatas['role_id'] == 2){
+        } elseif($userDatas->role_id == 2){
             // gérer rôle formateur : ne pas afficher promo
             $tags = new TagRepository();
             $allTags = $tags->getAllTags();
@@ -159,16 +160,16 @@ function myProfile()
 {
     $isMyProfile = false;
     if (!isset($_GET['id'])) {
-        if (!isset($_SESSION['user']['user_id'])) {
+        if (!isset($_SESSION['user']->user_id)) {
             homepage();
         } else {
-            $id = $_SESSION['user']['user_id'];
+            $id = $_SESSION['user']->user_id;
             $isMyProfile = true;
             $user = new UserRepository();
             $userDatas = new User($id);
-            if($userDatas['role_id'] == 1 || $userDatas['role_id'] == 3){
+            if($userDatas->role_id == 1 || $userDatas->role_id == 3){
                 homepage();
-            } elseif($userDatas['role_id'] == 2){
+            } elseif($userDatas->role_id == 2){
                 // gérer rôle formateur : ne pas afficher promo
                 $tags = new TagRepository();
                 $allTags = $tags->getAllTags();
@@ -194,14 +195,14 @@ function myProfile()
         }
         }
     }
-    else if (isset($_GET['id']) && $_GET['id'] == $_SESSION['user']['user_id']) {
-        $id = $_SESSION['user']['user_id'];
+    else if (isset($_GET['id']) && $_GET['id'] == $_SESSION['user']->user_id) {
+        $id = $_SESSION['user']->user_id;
         $isMyProfile = true;
         $user = new UserRepository();
         $userDatas = new User($id);
-        if($userDatas['role_id'] == 1 || $userDatas['role_id'] == 3){
+        if($userDatas->role_id == 1 || $userDatas->role_id == 3){
             homepage();
-        } elseif($userDatas['role_id'] == 2){
+        } elseif($userDatas->role_id == 2){
             // gérer rôle formateur : ne pas afficher promo
             $tags = new TagRepository();
             $allTags = $tags->getAllTags();

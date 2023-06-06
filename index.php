@@ -2,11 +2,11 @@
 session_start();
 // session_destroy();
 require 'src/model/ConnectBdd.php';
-// var_dump($_SESSION['user']);
+// var_dump($_SESSION['user']->user_id);
 // $_SESSION['user'] = (object) array(
-//     'user_id' => 1,
+//     'user_id' => 2,
 //     'status_id' => 1,
-//     'role_id' => 1,
+//     'role_id' => 4,
 // );
 
 
@@ -75,7 +75,7 @@ if (isset($_GET['action']) && $_GET['action'] !== '' && !isset($_GET['admin'])) 
                         // Envoie du formulaire de modification de projet (version modal)
                         // Envoi de la demande de suppression de projet
                     }
-                    if ($_SESSION['user']['role_id'] == 1) {
+                    if ($_SESSION['user']->role_id == 1) {
                         require 'admin.php';
                     }
                 }

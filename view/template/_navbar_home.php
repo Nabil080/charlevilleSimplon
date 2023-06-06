@@ -71,11 +71,11 @@
                             <ul class="z-50 relative py-2 md:py-0 px-2 md:px-0 text-sm leading-9 sm:leading-[60px] divide-y border-2 border-main-red divide-main-red rounded-[4px]"
                                 aria-labelledby="dropdownAccountDefaultButton">
                                 <li class="md:hover:bg-gray-700  xl:px-16">
-                                    <a href=""
+                                    <a href="?action=profilePage"
                                         class="block px-4 py-2 text-[22px] sm:text-[32px] md:text-[20px] ">Profile</a>
                                 </li>
                                 <li class="md:hover:bg-gray-700  xl:px-16">
-                                    <a href="#" class="block px-4 py-2 text-[22px] sm:text-[32px] md:text-[20px]">Admin</a>
+                                    <a href="?action=crudCandidatePage" class="block px-4 py-2 text-[22px] sm:text-[32px] md:text-[20px]">Admin</a>
                                 </li>
                                 <li class="md:hover:bg-gray-700  xl:px-16">
                                     <a href="?action=projectGestionPage&id=<?= $_SESSION['user']->user_id ?>" class="block px-4 py-2 text-[22px] sm:text-[32px] md:text-[20px]">Mes Projets</a>
