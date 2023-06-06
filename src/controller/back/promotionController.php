@@ -118,7 +118,6 @@ function promotionPagination()
 
     $PromoRepo = new PromoRepository ;
 
-    // var_dump($data);
     $limitStart = $data->limitStart;
     $limitEnd = $data->limitEnd;
     $limit = "$limitStart,$limitEnd";
@@ -137,10 +136,11 @@ function promotionPagination()
             include("view/admin/promo/table_row.php");
             if ($promo->status->id != 9) {
                 $apprenants = $PromoRepo->getAllApprenants($promo->id);
+                // var_dump($promo);
                 include("view/admin/modalApprenant.php");
             } else {
-                $candidates = $PromoRepo->getPromoCandidates($promo->id);
-                include("view/admin/promo/modalValidationPromo.php");
+                // $candidates = $PromoRepo->getPromoCandidates($promo->id);
+                // include("view/admin/promo/modalValidationPromo.php");
             }
 
             $promoFormators = $PromoRepo->getAllFormateurs($promo->id);
