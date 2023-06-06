@@ -432,7 +432,7 @@ $title = "Espace personnel";
                                             <label for="image" class="block mb-1 text-sm font-medium text-main-red">Image à mettre en avant</label>
                                             <input type="file" name="image" id="image" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red">
                                         </div>
-                                        <button type="submit" class="w-full uppercase font-title text-main-white bg-main-red hover:bg-red-800 font-medium rounded-lg text-sm px-5 py-1.5 text-center ">Modifier</button>
+                                        <button id="highlight-button" type="submit" class="w-full uppercase font-title text-main-white bg-main-red hover:bg-red-800 font-medium rounded-lg text-sm px-5 py-1.5 text-center disabled-button ">Modifier</button>
                                     </form>
                                 </div>
                             </div>

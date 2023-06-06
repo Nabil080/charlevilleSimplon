@@ -3,12 +3,14 @@ const websiteHighlight = document.getElementById('website_input');
 const pdfHighlight = document.getElementById('pdf_input');
 const imageHighlight = document.getElementById('image_input');
 const selectHighlight = document.getElementById('file_type');
+const updateButton = document.getElementById('highlight-button');
 
 selectHighlight.addEventListener('change', () => {
     const options = selectHighlight.getElementsByTagName('option');
     pdfHighlight.classList.add("hidden");
     imageHighlight.classList.add("hidden");
     websiteHighlight.classList.add("hidden");
+    updateButton.classList.remove('disabled-button')
     for (i = 0; i < options.length; i++) {
         if (options[i].selected) {
             if (options[i].value === 'pdf') {

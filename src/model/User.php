@@ -353,13 +353,12 @@ class UserRepository extends ConnectBdd
     {
 
         $request = "UPDATE user SET user_highlight = ? WHERE user_id = ?";
-        var_dump($array);
+        // var_dump($array);
         $bools = [];
         // Envoi d'un projet phare URL
         if ($array['text'] == 'website'){
             $website = $array['website'];
             $checkWebsite = securizeUrl($website);
-            var_dump($checkWebsite);
             if ($checkWebsite){
                 $req = $this->bdd->prepare($request);
                 $bool = $req->execute([$website, $id]);
