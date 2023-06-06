@@ -47,6 +47,7 @@ let projectsPerPage = 6;
 let paginationRange = 3
 // filtres
 let filterString = '';
+let filterExecute = '';
 
 
 
@@ -96,7 +97,7 @@ const getProjets = (limitStart = 0,limitEnd = 6) => {
 
     // * DEFINIT LES FILTRES RECHERCHE
     let searchString = searchInput.value ? `(project.project_name LIKE ?
-    OR project.project_description LIKE ? 
+    OR project.project_description LIKE ?
     OR project.project_notes LIKE ?
     OR project.project_company_name LIKE ?)` : '' ;
     let searchExecute = searchInput.value? `%${searchInput.value}%,%${searchInput.value}%,%${searchInput.value}%,%${searchInput.value}%` : '' ;
@@ -110,7 +111,7 @@ const getProjets = (limitStart = 0,limitEnd = 6) => {
     const filterExecute = ExecuteArray.join(",");
     console.log(`requête envoyée :  WHERE ${filterString}`)
     console.log(`execute envoyée : [${filterExecute}]`)
-    return fetch('?action=projectsPagination',{
+    return fetch('?action=allProjectsPagination',{
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -125,27 +126,9 @@ const getProjets = (limitStart = 0,limitEnd = 6) => {
     .then((data) => data.json())
 }
 
-        firstPage.addEventListener('click', (e) => {
-            updateData()
-        })
-        prevPage.addEventListener('click', (e) => {
-            activePage = document.querySelector("button[data-active]")
-            updateData(Number(activePage.dataset.active) - 1)
-        })
-
-        nextPage.addEventListener('click', (e) => {
-            activePage = document.querySelector("button[data-active]").dataset.active
-            updateData(Number(activePage) + 1)
-        })
-        lastPage.addEventListener('click', (e) => {
-            pageCount = document.querySelector("[data-page-count]").dataset.pageCount
-            updateData(pageCount)
-        })
-
-
 async function updateData(currentPage = 1){
-    showLoading()
-    console.log(currentPage);
+        showLoading()
+    // console.log(currentPage);
     let limitStart = (currentPage - 1) * projectsPerPage
     let limitEnd = projectsPerPage
     // console.log(limitStart,limitEnd)
@@ -255,3 +238,19 @@ filterReset.addEventListener('click', (e) => {
     updateData();
 })
 
+firstPage.addEventListener('click', (e) => {
+    updateData()
+})
+prevPage.addEventListener('click', (e) => {
+    activePage = document.querySelector("button[data-active]")
+    updateData(Number(activePage.dataset.active) - 1)
+})
+
+nextPage.addEventListener('click', (e) => {
+    activePage = document.querySelector("button[data-active]").dataset.active
+    updateData(Number(activePage) + 1)
+})
+lastPage.addEventListener('click', (e) => {
+    pageCount = document.querySelector("[data-page-count]").dataset.pageCount
+    updateData(pageCount)
+})

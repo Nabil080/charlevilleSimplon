@@ -378,7 +378,7 @@ class ProjectRepository extends ConnectBdd
 
         // traitment fichier pdf
         if($files['pdf']['error'] == 0){
-            $pdf = securizePdf($files['pdf']);
+            $pdf = securizePdf($files['pdf'],'assets/upload/pdf');
             if($pdf === false){
                 // message d'erreurs dans securizePdf
                 $error = true;
@@ -389,7 +389,7 @@ class ProjectRepository extends ConnectBdd
 
         // traitment image
         if($files['image']['error'] == 0){
-            $image = securizeImage($files['image']);
+            $image = securizeImage($files['image'],'assets/upload/project');
             if($image === false){
                 // message d'erreurs dans securizePdf
                 $error = true;
@@ -421,14 +421,14 @@ class ProjectRepository extends ConnectBdd
         $adress = isset($post['adress']) ? $post['adress'] : '17 rue de la grande mare lool';
 
         // traitment fichier pdf
-        $pdf = securizePdf($_FILES['pdf']);
+        $pdf = securizePdf($_FILES['pdf'],'assets/upload/pdf');
         if($pdf === false){
             // message d'erreurs dans securizePdf
             $error = true;
         }
 
         // traitment image
-        $image = securizeImage($files['image']);
+        $image = securizeImage($files['image'],'assets/upload/project');
         if($image === false){
             // message d'erreurs dans securizePdf
             $error = true;

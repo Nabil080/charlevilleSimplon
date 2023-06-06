@@ -1,5 +1,7 @@
 <?php
 $projectRepo = new ProjectRepository;
+$tagsRepository = new TagRepository;
+
 
 if(isset($formators)){
     $formateurs = $formators;

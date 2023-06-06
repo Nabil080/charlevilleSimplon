@@ -229,17 +229,14 @@ function registerPage()
 function crudCandidatePage()
 {
     $UserRepo = new UserRepository;
-    $candidates = $UserRepo->getAllCandidates();
 
     include 'view/admin/_candidate.php';
-}  
-  
-  
+}
+
+
 function crudLearnerPage()
 {
     $UserRepo = new UserRepository;
-    $learners = $UserRepo->getAllLearners();
-    $formators = $UserRepo->getAllFormators();
     $PromoRepo = new PromoRepository;
     $promos = $PromoRepo->getActivePromos();
 
@@ -249,15 +246,14 @@ function crudLearnerPage()
 function crudCompanyPage()
 {
     $UserRepo = new UserRepository;
-    $companies = $UserRepo->getAllCompanies();
     include 'view/admin/_company.php';
 }
 
 function crudPromotionPage()
 {
+    $tagsRepository = new TagRepository;
     $PromoRepo = new PromoRepository;
     $promos = $PromoRepo->getPromos();
-
     $UserRepo = new UserRepository;
     $FormationRepo = new FormationRepository;
     $formators = $UserRepo->getAllFormators();
@@ -269,13 +265,13 @@ function crudPromotionPage()
 function crudProjetPage()
 {
     $ProjectRepo = new ProjectRepository;
-    $projects = $ProjectRepo->getAllProjects();
+    $projects = $ProjectRepo->getAllProjects(10);
     $PromoRepo = new PromoRepository;
     $promos = $PromoRepo->getActivePromos();
     include 'view/admin/_projects.php';
 }
 
-function projectFormPage() 
+function projectFormPage()
 {
     $User = new User($_SESSION['user']->role_id);
     if(isset($_GET['id'])){
