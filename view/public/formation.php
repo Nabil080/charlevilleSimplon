@@ -9,9 +9,31 @@
     uppercase">
                 <?= $formation_main->name ?>
             </h2>
-            <div class="text-[16px] md:text-[20px] text-justify flex flex-col gap-5">
+            <!-- Affichage -->
+            <div id="description"
+                class="flex flex-col gap-3 max-h-[710px] overflow-hidden text-[16px] md:text-[20px] text-justify [&>ul]:list-disc [&_li]:pb-2">
+                <!-- bouton d'edit -->
+                <?php if ($isMyProject == true) { ?>
+                <i onclick="swapDivsById('description','description-update')"
+                    class="fa-solid fa-pen text-main-red cursor-pointer order-0 self-end"></i>
+                <?php } ?>
                 <?= $formation_main->description ?>
             </div>
+            <?php if ($isMyProject == true) { ?>
+            <!-- formulaire d'edit -->
+            <form id="description-update"
+                action="?action=updateFormationElement&id=<?= $formation_main->id ?>&type=description" method="POST"
+                class="hidden w-full p-4" method="post" action="">
+                <textarea name="description" class="w-full text-editor" rows="20">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <?= $formation_main->description ?>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </textarea>
+                <button type="submit"
+                    class="py-2 px-4 bg-main-red border-main-white border text-main-white my-4 mr-4">Modifier <i
+                        class="fa-solid fa-check"></i></button>
+                <span onclick="swapDivsById('description','description-update')" class="cursor-pointer">Annuler
+                    <i class="fa-solid fa-xmark"></i></span>
+            </form>
+            <?php } ?>
         </div>
 
         <aside class="md:w-4/5 lg:w-1/2 pb-5 border-2 border-main-gray rounded-lg ">
@@ -26,27 +48,99 @@
                     secteur
                 </h5>
                 <div class="flex flex-col sm:flex-row lg:flex-col justify-center gap-5 text-center">
-                    <?php foreach ($formation_stat as $stat) { ?>
-                    <div class="md:w-1/3 lg:w-full">
-                        <p class="text-[24px] text-main-red font-bold">
-                            <?= $stat['stat_number'] ?>
-                        </p>
+                    <?php foreach ($formation_stat as $key => $stat) { ?>
+                    <div id="stat_<?= $key ?>" class="md:w-1/3 lg:w-full">
+                        <div class="relative flex justify-center">
+                            <!-- bouton d'edit -->
+                            <?php if ($isMyProject == true) { ?>
+                            <i onclick="swapDivsById('stat_<?= $key ?>','stat-update-<?= $key ?>')"
+                                class="fa-solid fa-pen text-main-red cursor-pointer order-2 absolute top-0 right-0"></i>
+                            <?php } ?>
+                            <!-- Affichage -->
+                            <p class="text-[24px] text-main-red font-bold">
+                                <?= $stat['stat_number'] ?>
+                            </p>
+                        </div>
                         <p class="text-[16px] font-medium">
                             <?= $stat['stat_name'] ?>
                         </p>
                     </div>
+                    <!-- formulaire d'edit lien site -->
+                    <?php if ($isMyProject == true) { ?>
+                    <form id="stat-update-<?= $key ?>"
+                        action="?action=updateFormationElement&id=<?= $formation_main->id ?>&type=stat" method="POST"
+                        class="hidden w-full flex flex-col items-center gap-2">
+                        <input type="text" name="stat_number_<?= $key ?>" placeholder="<?= $stat['stat_number'] ?>"
+                            class="w-1/2 h-[30px] flex items-center justify-center border border-main-red rounded-md">
+                        <input type="text" name="stat_name_<?= $key ?>" placeholder="<?= $stat['stat_name'] ?>"
+                            class="w-full h-[30px] flex items-center justify-center border border-main-red rounded-md">
+                        <input type="hidden" name="stat_id" value="<?= $key ?>" />
+                        <div class="flex justify-center items-center gap-5">
+                            <button type="submit"><i class="fa-solid fa-check text-main-red"></i></button>
+                            <i onclick="swapDivsById('stat_<?= $key ?>','stat-update-<?= $key ?>')"
+                                class="fa-solid fa-xmark text-main-red cursor-pointer"></i>
+                        </div>
+                    </form>
+                    <?php } ?>
                     <?php } ?>
                 </div>
                 <hr class="w-48 h-1 mx-auto bg-gray-100 border-0 rounded dark:bg-gray-700">
-                <h5 class="text-[28px] lg:text-[20px] text-main-red font-bold font-title">Métiers Visée</h5>
-                <ul class="grid grid-cols-1 gap-x-8 gap-y-2 sm:grid-cols-2 lg:sm:grid-cols-1 ">
+                <div class="flex items-center gap-3">
+                    <h5 class="text-[28px] lg:text-[20px] text-main-red font-bold font-title">Métiers Visés</h5>
+                    <!-- bouton d'edit -->
+                    <?php if ($isMyProject == true) { ?>
+                    <i onclick="swapDivsById('jobContent','jobContent-update')"
+                        class="text-main-red fa-solid fa-pen fa-sm cursor-pointer"></i>
+                    <?php } ?>
+                </div>
+                <ul id="jobContent" class="grid grid-cols-1 gap-x-8 gap-y-2 sm:grid-cols-2 lg:sm:grid-cols-1 ">
                     <?php foreach ($formation_job as $job) { ?>
                     <li>
-                        <?= $job['job_name'] ?>
+                        <?= $job ?>
                     </li>
                     <?php } ?>
-
                 </ul>
+                <?php if ($isMyProject == true) { ?>
+                <form id="jobContent-update"
+                    action="?action=updateFormationElement&id=<?= $formation_main->id ?>&type=job" method="POST"
+                    class="hidden w-full p-4 flex flex-col" method="post" action="">
+                    <div class="pb-5 flex justify-center items-center">
+                        <div class="flex items-center mr-4">
+                            <input id="search-radio" type="radio" value="job-search" name="radio-job" checked
+                                value="job-search" checked
+                                class="radio-job w-4 h-4 text-main-red bg-gray-100 border-gray-300 focus:ring-main-red">
+                            <label for="search-radio" class="ml-2 text-sm font-medium text-gray-900">Recherche</label>
+                        </div>
+                        <div class="flex items-center mr-4">
+                            <input id="add-radio" type="radio" value="job-add" name="radio-job" value="job-add"
+                                class="radio-job w-4 h-4 text-main-red bg-gray-100 border-gray-300 focus:ring-main-red">
+                            <label for="add-radio" class="ml-2 text-sm font-medium text-gray-900">Ajouter</label>
+                        </div>
+                    </div>
+                    <div id="select_job" class="flex flex-col gap-3">
+                        <div id="job_selectContent">
+                        </div>
+                        <select class="scrollbar appearance-none border-main-red rounded-lg" multiple>
+                            <?php foreach ($job_all as $key => $job) { ?>
+                            <option value="<?= $key ?>">
+                                <?= $job ?>
+                            </option>
+                            <?php } ?>
+                        </select>
+                    </div>
+                    <div id="add_job" class="hidden">
+                        <label for="addJob" class="font-medium text-sm">Ajouter un nouveau métier</label>
+                        <input type="text" id="addJob" name="newJob" class="w-full border border-main-red rounded-lg" />
+                    </div>
+                    <div>
+                        <button type="submit" id="job-btn"
+                            class="py-2 px-4 bg-main-red border-main-white border text-main-white my-4 mr-4">Modifier
+                            <i class="fa-solid fa-check"></i></button>
+                        <span onclick="swapDivsById('jobContent','jobContent-update')" class="cursor-pointer">Annuler
+                            <i class="fa-solid fa-xmark"></i></span>
+                    </div>
+                </form>
+                <?php } ?>
             </div>
 
         </aside>
@@ -93,61 +187,212 @@
                 </button>
             </li>
         </ul>
-        <div id="myTabContent" class="bg-white pb-10 px-8">
+        <div id="myTabContent" class="relative bg-white pb-10 px-8">
             <div class="sectionChange text-[16px] lg:text-[20px]">
-                <?php foreach ($formation_activity as $activity) { ?>
-                <div class="py-4">
-                    <h3 class="text-main-red text-[20px] lg:text-[36px] font-bold">
-                        <?= $activity['name'] ?>
-                    </h3>
-                    <p class="pb-3 text-[16px] text-main-blue font-bold">
-                        <?= $activity['ref'] ?>
-                    </p>
-                    <ul class="list-outside list-disc ml-5 md:ml-10 [&>li]:pb-2">
-                        <?php foreach ($activity['skill'] as $skill) { ?>
-                        <li>
-                            <?= $skill ?>
-                        </li>
-                        <?php } ?>
-
-                    </ul>
+                <div id="activityAllContent">
+                    <!-- bouton d'edit -->
+                    <?php if ($isMyProject == true) { ?>
+                    <i onclick="swapDivsById('activityAllContent','activityAllContent-update')"
+                        class="absolute bottom-5 right-5 fa-solid fa-pen text-main-red fa-sm cursor-pointer">
+                        modifier</i>
+                    <?php } ?>
+                    <?php foreach ($formation_activity as $key => $activity) { ?>
+                    <div id="activityContent_<?= $key ?>" class="py-4">
+                        <div class="flex items-center gap-3">
+                            <h3 class="text-main-red text-[20px] lg:text-[36px] font-bold">
+                                <?= $activity['name'] ?>
+                            </h3>
+                            <!-- bouton d'edit -->
+                            <?php if ($isMyProject == true) { ?>
+                            <i onclick="swapDivsById('activityContent_<?= $key ?>','activityContent-update_<?= $key ?>')"
+                                class="text-main-red fa-solid fa-pen fa-sm cursor-pointer"></i>
+                            <?php } ?>
+                        </div>
+                        <p class="pb-3 text-[16px] text-main-blue font-bold">
+                            <?= $activity['ref'] ?>
+                        </p>
+                        <div class="[&>ul]:list-outside [&>ul]:list-disc [&>ul]:ml-5 [&>ul]:md:ml-10 [&_li]:pb-2">
+                            <?= $activity['skill'] ?>
+                        </div>
+                    </div>
+                    <!-- formulaire d'edit lien site -->
+                    <?php if ($isMyProject == true) { ?>
+                    <form id="activityContent-update_<?= $key ?>"
+                        action="?action=updateFormationElement&id=<?= $formation_main->id ?>&type=activity"
+                        method="POST" class="hidden w-full p-4" method="post" action="">
+                        <div class="flex flex-col md:flex-row">
+                            <input type="text" name="name" placeholder="<?= $activity['name'] ?>"
+                                class="w-full border-main-red" />
+                            <input type="text" name="ref" placeholder="<?= $activity['ref'] ?>"
+                                class="md:border-r-0 border-main-red" />
+                        </div>
+                        <textarea name="skill" class="text-editor border-t-0 border-main-red"
+                            rows="5"><?= $activity['skill'] ?></textarea>
+                        <input type="hidden" name="activity_id" value="<?= $key ?>" />
+                        <button type="submit" +
+                            class="py-2 px-4 bg-main-red border-main-white border text-main-white my-4 mr-4">Modifier <i
+                                class="fa-solid fa-check"></i></button>
+                        <span onclick="swapDivsById('activityContent_<?= $key ?>','activityContent-update_<?= $key ?>')"
+                            class="cursor-pointer">Annuler
+                            <i class="fa-solid fa-xmark"></i></span>
+                    </form>
+                    <?php } ?>
+                    <?php } ?>
                 </div>
+                <!-- formulaire d'edit lien site -->
+                <?php if ($isMyProject == true) { ?>
+                <form id="activityAllContent-update"
+                    action="?action=updateFormationElement&id=<?= $formation_main->id ?>&type=formation_activity"
+                    method="POST" class="hidden w-full p-4 flex flex-col" method="post" action="">
+                    <div class="flex flex-col gap-3">
+                        <div id="activity_selectContent">
+                        </div>
+                        <select id="select_activity" class="appearance-none border-main-red rounded-lg" multiple>
+                            <?php foreach ($activity_all as $key => $activity) { ?>
+                            <option value="<?= $key ?>">
+                                <?= $activity['name'] ?>
+                            </option>
+                            <?php } ?>
+                        </select>
+                    </div>
+                    <div>
+                        <button type="submit"
+                            class="py-2 px-4 bg-main-red border-main-white border text-main-white my-4 mr-4">Modifier
+                            <i class="fa-solid fa-check"></i></button>
+                        <span onclick="swapDivsById('activityAllContent','activityAllContent-update')"
+                            class="cursor-pointer">Annuler
+                            <i class="fa-solid fa-xmark"></i></span>
+                    </div>
+                </form>
                 <?php } ?>
             </div>
             <div class="sectionChange hidden bg-white text-[16px] lg:text-[20px]">
                 <div class="py-4">
-                    <h3 class="pb-3 text-main-red text-[20px] lg:text-[36px] font-bold">Pas de prérequis mais…</h3>
-                    <ul class="list-outside list-disc ml-5 md:ml-10 [&>li]:pb-2">
+                    <div class="pb-3 flex items-center gap-3">
+                        <h3 class="text-main-red text-[20px] lg:text-[36px] font-bold">Pas de prérequis mais…</h3>
+                        <!-- bouton d'edit -->
+                        <?php if ($isMyProject == true) { ?>
+                        <i onclick="swapDivsById('admissionContent','admissionContent-update')"
+                            class="fa-solid fa-pen text-main-red fa-sm cursor-pointer">
+                        </i>
+                        <?php } ?>
+                    </div>
+                    <ul id="admissionContent" class="list-outside list-disc ml-5 md:ml-10 [&>li]:pb-2">
                         <?php foreach ($formation_admission as $require) { ?>
                         <li>
                             <?= $require ?>
                         </li>
                         <?php } ?>
                     </ul>
+                    <!-- formulaire d'edit lien site -->
+                    <?php if ($isMyProject == true) { ?>
+                    <form id="admissionContent-update"
+                        action="?action=updateFormationElement&id=<?= $formation_main->id ?>&type=formation_requirement"
+                        method="POST" class="hidden w-full p-4 flex flex-col" method="post" action="">
+                        <div class="flex flex-col gap-3">
+                            <div class="flex flex-col" id="admission_selectContent">
+                            </div>
+                            <select id="select_admission" class="appearance-none border-main-red rounded-lg" multiple>
+                                <?php foreach ($admission_all as $key => $require) { ?>
+                                <option value="<?= $key ?>">
+                                    <?= $require ?>
+                                </option>
+                                <?php } ?>
+                            </select>
+                        </div>
+                        <div>
+                            <button type="submit"
+                                class="py-2 px-4 bg-main-red border-main-white border text-main-white my-4 mr-4">Modifier
+                                <i class="fa-solid fa-check"></i></button>
+                            <span onclick="swapDivsById('admissionContent','admissionContent-update')"
+                                class="cursor-pointer">Annuler
+                                <i class="fa-solid fa-xmark"></i></span>
+                        </div>
+                    </form>
+                    <?php } ?>
                 </div>
             </div>
             <div class="sectionChange hidden bg-white text-[16px] lg:text-[20px]">
-                <?php foreach ($formation_program as $program) { ?>
+                <?php foreach ($formation_program as $key => $program) { ?>
                 <div class="py-4">
-                    <h3 class="pb-3 text-main-red text-[20px] lg:text-[36px] font-bold">
-                        <?= $program['programme_layout_name'] ?>
-                    </h3>
-                    <ul class="list-outside list-disc ml-5 md:ml-10 [&>li]:pb-2">
+                    <div class="pb-3 w-full flex flex-between items-center gap-3">
+                        <h3 class="text-main-red text-[20px] lg:text-[36px] font-bold">
+                            <?= $program['programme_layout_name'] ?>
+                        </h3>
+                        <!-- bouton d'edit -->
+                        <?php if ($isMyProject == true) { ?>
+                        <i onclick="swapDivsById('program_name_<?= $key ?>','program_name-update_<?= $key ?>')"
+                            class="fa-solid fa-pen text-main-red fa-sm cursor-pointer"></i>
+                        <?php } ?>
+                    </div>
+                    <div id="program_name_<?= $key ?>"
+                        class="[&>ul]:list-outside [&>ul]:list-disc [&>ul]:ml-5 [&>ul]:md:ml-10 [&_li]:pb-2">
                         <?= $program['programme_name'] ?>
-                    </ul>
+                    </div>
+                    <!-- formulaire d'edit lien site -->
+                    <?php if ($isMyProject == true) { ?>
+                    <form id="program_name-update_<?= $key ?>"
+                        action="?action=updateFormationElement&id=<?= $formation_main->id ?>&type=program" method="POST"
+                        class="hidden w-full p-4" method="post" action="">
+                        <textarea name="description" class="w-full text-editor"
+                            rows="20"> <?= $program['programme_name'] ?></textarea>
+                        <input type="hidden" name="programme_layout_id"
+                            value="<?= $program['programme_layout_id'] ?>" />
+                        <button type="submit"
+                            class="py-2 px-4 bg-main-red border-main-white border text-main-white my-4 mr-4">Modifier <i
+                                class="fa-solid fa-check"></i></button>
+                        <span onclick="swapDivsById('program_name_<?= $key ?>','program_name-update_<?= $key ?>')"
+                            class="cursor-pointer">Annuler
+                            <i class="fa-solid fa-xmark"></i></span>
+                    </form>
+                    <?php } ?>
                 </div>
                 <?php } ?>
             </div>
             <div class="sectionChange hidden bg-white text-[16px] lg:text-[20px]">
                 <div class="py-4">
-                    <h3 class="pb-3 text-main-red text-[20px] lg:text-[36px] font-bold">Frais de scolarité</h3>
-                    <ul class="list-outside list-disc ml-5 md:ml-10 [&>li]:pb-2">
+                    <div class="pb-3 flex items-center gap-3">
+                        <h3 class="text-main-red text-[20px] lg:text-[36px] font-bold">Frais de scolarité</h3>
+                        <!-- bouton d'edit -->
+                        <?php if ($isMyProject == true) { ?>
+                        <i onclick="swapDivsById('feeContent','feeContent-update')"
+                            class="fa-solid fa-pen text-main-red fa-sm cursor-pointer"></i>
+                        <?php } ?>
+                    </div>
+                    <ul id="feeContent" class="list-outside list-disc ml-5 md:ml-10 [&>li]:pb-2">
                         <?php foreach ($formation_fee as $fee) { ?>
                         <li>
-                            <?= $fee ?>
+                            <?= $fee['fee_name'] ?>
                         </li>
                         <?php } ?>
                     </ul>
+                    <!-- formulaire d'edit lien site -->
+                    <?php if ($isMyProject == true) { ?>
+                    <form id="feeContent-update"
+                        action="?action=updateFormationElement&id=<?= $formation_main->id ?>&type=fee" method="POST"
+                        class="hidden w-full p-4 flex flex-col" method="post" action="">
+                        <div class="flex flex-col gap-3">
+                            <div id="fee_selectContent">
+                            </div>
+                            <select id="select_fee" class="w-2/3 md:w-1/2 appearance-none border-main-red rounded-lg"
+                                multiple>
+                                <?php foreach ($fee_all as $fee) { ?>
+                                <option value="<?= $fee['fee_id'] ?>">
+                                    <?= $fee['fee_name'] ?>
+                                </option>
+                                <?php } ?>
+                            </select>
+                        </div>
+                        <div>
+                            <button type="submit"
+                                class="py-2 px-4 bg-main-red border-main-white border text-main-white my-4 mr-4">Modifier
+                                <i class="fa-solid fa-check"></i></button>
+                            <span onclick="swapDivsById('feeContent','feeContent-update')"
+                                class="cursor-pointer">Annuler
+                                <i class="fa-solid fa-xmark"></i></span>
+                        </div>
+                    </form>
+                    <?php } ?>
                 </div>
             </div>
         </div>
@@ -161,30 +406,93 @@
 </div>
 
 <section class="bg-main-lightgray pb-20 px-[10%] xl:px-[15%]">
-    <div class="pb-3 flex items-center gap-4 text-main-red">
-        <i class="fa fa-sharp fa-solid fa-graduation-cap fa-2xl"></i>
-        <h3 class="text-[30px] lg:text-[40px] font-bold">Certifications</h3>
-    </div>
-    <?php foreach ($formation_certification as $certification) { ?>
-    <div class="pb-5">
-        <h6 class="font-bold font-title">
-            <?= $certification['certification_name'] ?>
-        </h6>
-        <a href="<?= $certification['certification_link'] ?>" target="_blank">
-            <div class="pb-5 flex md:gap-10 items-center text-main-blue font-bold">
-                <p>
-                    <?= $certification['certification_ref'] ?>
-                </p>
-                <p class="md:hidden h-[30px] mx-2 border-l-2 border-main-blue"></p>
-                <p>
-                    <?= $certification['certification_refName'] ?>
-                </p>
-            </div>
-        </a>
-        <div class="[&>ul]:ml-5 md:ml-10">
-            <?= $certification['certification_description'] ?>
+    <div class="flex items-center gap-3">
+        <div class="pb-3 flex items-center gap-4 text-main-red">
+            <i class="fa fa-sharp fa-solid fa-graduation-cap fa-2xl"></i>
+            <h3 class="text-[30px] lg:text-[40px] font-bold">Certifications</h3>
         </div>
+        <!-- bouton d'edit -->
+        <?php if ($isMyProject == true) { ?>
+        <i onclick="swapDivsById('certificationAllContent','certificationAllContent-update')"
+            class="fa-solid fa-pen text-main-red fa-sm cursor-pointer"></i>
+        <?php } ?>
     </div>
+    <h6 class="pb-3 font-bold font-title">
+        Formation certifiante délivrant une certification inscrite au Répertoire Spécifique
+    </h6>
+    <div id="certificationAllContent">
+        <?php foreach ($formation_certification as $key => $certification) { ?>
+        <div id="certificationContent_<?= $key ?>" class="pb-5">
+            <div class="pb-5 flex items-center gap-3 text-main-blue font-bold">
+                <p>
+                    <a href="<?= $certification['link'] ?>" target="_blank">
+                        <?= $certification['ref'] ?> <span
+                            class="h-[30px] mx-2 border-l-2 border-main-blue md:mx-8 md:border-0"></span>
+                        <?= $certification['name'] ?>
+                    </a>
+                </p>
+                <!-- bouton d'edit -->
+                <?php if ($isMyProject == true) { ?>
+                <i onclick="swapDivsById('certificationContent_<?= $key ?>','certificationContent-update_<?= $key ?>')"
+                    class="fa-solid fa-pen fa-sm cursor-pointer"></i>
+                <?php } ?>
+            </div>
+
+            <div class="[&>ul]:ml-5 md:ml-10">
+                <?= $certification['description'] ?>
+            </div>
+        </div>
+        <!-- formulaire d'edit lien site -->
+        <?php if ($isMyProject == true) { ?>
+        <form id="certificationContent-update_<?= $key ?>"
+            action="?action=updateFormationElement&id=<?= $formation_main->id ?>&type=certification" method="POST"
+            class="hidden w-full p-4" method="post" action="">
+            <div class="flex flex-col md:flex-row">
+                <input type="text" name="ref" placeholder="<?= $certification['ref'] ?>"
+                    class="md:border-r-0 border-main-red" />
+                <input type="text" name="name" placeholder="<?= $certification['name'] ?>"
+                    class="w-full border-main-red" />
+            </div>
+            <input type="text" name="link" placeholder="<?= $certification['link'] ?>"
+                class="w-full border-t-0 border-main-red" />
+            <textarea name="description" class="w-full text-editor border-t-0 border-main-red"
+                rows="5"><?= $certification['description'] ?></textarea>
+            <input type="hidden" name="certification_id" value="<?= $key ?>" />
+            <button type="submit" +
+                class="py-2 px-4 bg-main-red border-main-white border text-main-white my-4 mr-4">Modifier <i
+                    class="fa-solid fa-check"></i></button>
+            <span onclick="swapDivsById('certificationContent_<?= $key ?>','certificationContent-update_<?= $key ?>')"
+                class="cursor-pointer">Annuler
+                <i class="fa-solid fa-xmark"></i></span>
+        </form>
+        <?php } ?>
+        <?php } ?>
+    </div>
+    <!-- formulaire d'edit lien site -->
+    <?php if ($isMyProject == true) { ?>
+    <form id="certificationAllContent-update"
+        action="?action=updateFormationElement&id=<?= $formation_main->id ?>&type=formation_certification" method="POST"
+        class="hidden w-full p-4 flex flex-col" method="post" action="">
+        <div class="flex flex-col gap-3">
+            <div id="certification_selectContent">
+            </div>
+            <select id="select_certification" class="appearance-none border-main-red rounded-lg" multiple>
+                <?php foreach ($certification_all as $certification) { ?>
+                <option value="<?= $certification['certification_id'] ?>">
+                    <?= $certification['certification_name'] ?>
+                </option>
+                <?php } ?>
+            </select>
+        </div>
+        <div>
+            <button type="submit"
+                class="py-2 px-4 bg-main-red border-main-white border text-main-white my-4 mr-4">Modifier
+                <i class="fa-solid fa-check"></i></button>
+            <span onclick="swapDivsById('certificationAllContent','certificationAllContent-update')"
+                class="cursor-pointer">Annuler
+                <i class="fa-solid fa-xmark"></i></span>
+        </div>
+    </form>
     <?php } ?>
 </section>
 
@@ -194,6 +502,7 @@
 
 <?php ob_start(); ?>
 <script src="assets/js/tabs.js"></script>
+<script src="assets/js/event_formation.js"></script>
 <?php $script = ob_get_clean(); ?>
 
 <?php require 'view/layout.php'; ?>

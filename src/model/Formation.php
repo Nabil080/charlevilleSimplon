@@ -116,4 +116,22 @@ class FormationRepository extends ConnectBdd
         return $uniqueLevels;
 
     }
+    public function checkExistFormation($id): bool
+    {
+        $req = "SELECT formation_id FROM formation WHERE formation_id = ?";
+        $stmt = $this->bdd->prepare($req);
+        $stmt->execute([$id]);
+        $data = $stmt->fetch(PDO::PARAM_BOOL);
+
+        $bool = ($data != false) ? true : false;
+        //var_dump($bool);
+        return $bool;
+    }
+    public function updateDescription($description, $id): void
+    {
+        $req = "UPDATE `formation` SET formation_description = ? WHERE formation_id = ?";
+        $stmt = $this->bdd->prepare($req);
+        $stmt->execute([$description, $id]);
+        $stmt->fetch();
+    }
 }

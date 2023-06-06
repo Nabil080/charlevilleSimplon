@@ -55,7 +55,7 @@ $formations = $formationRepo->getAllFormations(); ?>
           >
             Formations
             <svg
-              class="w-8 h-8 ml-2"
+              class="w-8 h-8 ml-2 transition-all  duration-[1s]  linear"
               aria-hidden="true"
               fill="none"
               stroke="currentColor"
@@ -117,7 +117,7 @@ $formations = $formationRepo->getAllFormations(); ?>
           >
             Compte
             <svg
-              class="w-8 h-8 ml-2"
+              class="w-8 h-8 ml-2 transition-all  duration-[1s]  linear"
               aria-hidden="true"
               fill="none"
               stroke="currentColor"

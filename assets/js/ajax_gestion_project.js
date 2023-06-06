@@ -35,25 +35,25 @@ function assignTeamToProjectTreatment(i)
                 .then(data => {
                     console.log(data);
 
-                    data.forEach(function (element) {
-                        // Tout effacer les erreurs déjà afficher.
-                        let alertMessages = document.getElementsByClassName('success');
-                        for (let i = 0; i < alertMessages.length; i++) {
-                            alertMessages[i].remove();
-                        }
+                    // data.forEach(function (element) {
+                    //     // Tout effacer les erreurs déjà afficher.
+                    //     let alertMessages = document.getElementsByClassName('success');
+                    //     for (let i = 0; i < alertMessages.length; i++) {
+                    //         alertMessages[i].remove();
+                    //     }
 
-                        alertMessages = document.getElementsByClassName('error');
-                        for (let i = 0; i < alertMessages.length; i++) {
-                            alertMessages[i].remove();
-                        }
+                    //     alertMessages = document.getElementsByClassName('error');
+                    //     for (let i = 0; i < alertMessages.length; i++) {
+                    //         alertMessages[i].remove();
+                    //     }
 
 
-                        let id = (element['successMessage'] ? "content_success" : element['location']);
-                        console.log(id);
+                    //     let id = (element['successMessage'] ? "content_success" : element['location']);
+                    //     console.log(id);
 
-                        const input = document.getElementById(id);
-                        input.insertAdjacentHTML("afterend", element['message']);
-                    })
+                    //     const input = document.getElementById(id);
+                    //     input.insertAdjacentHTML("afterend", element['message']);
+                    // })
 
                 })
                 .catch(error => console.error(error));
@@ -77,25 +77,25 @@ function traitementStatusProject(i)
                 .then(data => {
                     console.log(data);
 
-                    data.forEach(function (element) {
-                        // Tout effacer les erreurs déjà afficher.
-                        let alertMessages = document.getElementsByClassName('success');
-                        for (let i = 0; i < alertMessages.length; i++) {
-                            alertMessages[i].remove();
-                        }
+                    // data.forEach(function (element) {
+                    //     // Tout effacer les erreurs déjà afficher.
+                    //     let alertMessages = document.getElementsByClassName('success');
+                    //     for (let i = 0; i < alertMessages.length; i++) {
+                    //         alertMessages[i].remove();
+                    //     }
 
-                        alertMessages = document.getElementsByClassName('error');
-                        for (let i = 0; i < alertMessages.length; i++) {
-                            alertMessages[i].remove();
-                        }
+                    //     alertMessages = document.getElementsByClassName('error');
+                    //     for (let i = 0; i < alertMessages.length; i++) {
+                    //         alertMessages[i].remove();
+                    //     }
 
 
-                        let id = (element['successMessage'] ? "content_success" : element['location']);
-                        console.log(id);
+                    //     let id = (element['successMessage'] ? "content_success" : element['location']);
+                    //     console.log(id);
 
-                        const input = document.getElementById(id);
-                        input.insertAdjacentHTML("afterend", element['message']);
-                    })
+                    //     const input = document.getElementById(id);
+                    //     input.insertAdjacentHTML("afterend", element['message']);
+                    // })
 
                 })
                 .catch(error => console.error(error));
@@ -109,6 +109,7 @@ function acceptProject(i, x)
     if (validationProjectForm.length >= 0) {
         validationProjectForm[i].insertAdjacentHTML("beforeend", "<input type='hidden' name='validation' value='accept'>");
         traitementStatusProject(i);
+        const form = document.getElementById(x);
         form.classList.add("hidden");
         const curr = "status" + x;
         const status = document.getElementById(curr);
