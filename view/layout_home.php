@@ -43,8 +43,12 @@
 
 <body class="w-[100dvw] overflow-x-hidden"></body>
 <?php require_once 'view/template/_navbar_home.php'; ?>
+<?php include 'view/template/_login.php'; ?>
 
     <?= $content ?>
+
+<?php require_once 'view/template/_footer.php'; ?>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
     <script src="assets/js/ajax_form.js"></script>
     <script src="assets/js/nav.js"></script>

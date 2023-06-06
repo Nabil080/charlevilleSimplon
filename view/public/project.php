@@ -1,4 +1,4 @@
-<?php $title = ""; ?>
+<?php $title = $project->name; ?>
 
 <?php ob_start(); ?>
 <!-- header -->
@@ -216,7 +216,7 @@
         <?php } ?>
     </div>
     <!-- bouton 2 -->
-    <div class="flex mx-4 my-4 gap-4 h-max">
+    <div class="flex mx-8 my-4 gap-4 h-max">
         <?php if (isset($project->file)) { ?>
 
         <i class="fa-solid fa-file-pdf"></i>
@@ -264,7 +264,7 @@
 <!-- tabulation entreprise/apprenants -->
 <section class="max-w-[1200px] w-full mx-auto">
     <div class="flex w-full">
-        <div onclick="changeTab(0)" class="tabChange cursor-pointer px-0 transition-all duration-[0.4s] !bg-main-red w-1/2 text-center text-main-white font-title text-lg md:text-xl lg:text-2xl font-bold py-2 md:py-4">
+        <div onclick="changeTab(0)" class="tabChange cursor-pointer px-0 transition-all duration-[0.4s] !bg-main-red w-1/2 flex items-center justify-center text-main-white font-title text-lg md:text-xl lg:text-2xl font-bold py-2 md:py-4">
             <p class="select-none">Demandes de l'entreprise</p>
         </div>
         <div onclick="changeTab(1)" class="tabChange cursor-pointer px-0 transition-all duration-[0.4s] bg-main-gray w-1/2 text-center text-main-white font-title text-lg md:text-xl lg:text-2xl font-bold py-2  md:py-4">
@@ -276,7 +276,7 @@
 
 
 <!-- CONTENU TAB -->
-<section class="max-w-[1200px] mx-auto flex">
+<section class="max-w-[1200px] mx-auto flex pb-5">
     <!-- CONTENU TAB ENTREPRISE -->
     <div class="sectionChange">
         <h2 class="text-center italic font-title text-xl lg:text-2xl font-semibold uppercase my-4">Demandes de

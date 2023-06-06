@@ -1,4 +1,4 @@
-<?php $title = "Développeur Web et Web Mobile"; ?>
+<?php $title = $formation_main->name; ?>
 
 <?php ob_start(); ?>
 <main class="pb-10 px-[10%]">

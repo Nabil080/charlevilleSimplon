@@ -1,6 +1,6 @@
 <!-- Card formation -->
 <div class="card_formation flex flex-col max-w-[445px] rounded-[5px] border-[1px] m-3 border-main-border md:w-2/5">
-    <img class="max-h-[140px] md:max-h-[200px] w-full" src="<?= $formation->image ?>" alt="Formation">
+    <img class="max-h-[160px] md:max-h-[200px] w-full" src="<?= $formation->image ?>" alt="Formation">
     <h3 class="text-main-red font-title font-semibold h-auto text-lg pl-3 mt-3 text-center md:text-2xl xl:text-3xl">
         <?= $formation->name; ?>
     </h3>

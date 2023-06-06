@@ -3,11 +3,11 @@ session_start();
 // session_destroy();
 require 'src/model/ConnectBdd.php';
 // var_dump($_SESSION['user']);
-$_SESSION['user'] = (object) array(
-    'user_id' => 1,
-    'status_id' => 1,
-    'role_id' => 1,
-);
+// $_SESSION['user'] = (object) array(
+//     'user_id' => 1,
+//     'status_id' => 1,
+//     'role_id' => 1,
+// );
 
 
 // var_dump($_SESSION);
@@ -77,7 +77,7 @@ if (isset($_GET['action']) && $_GET['action'] !== '' && !isset($_GET['admin'])) 
                 }
             }
     } else {
-        homepage();
+        // homepage();
     }
 } else {
     homepage();
