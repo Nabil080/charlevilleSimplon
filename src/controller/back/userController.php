@@ -270,9 +270,10 @@ try {
             $type = $_GET['type'];
             $id = $_GET['id'];
             $userRepository = new UserRepository();
-            if (isset($_POST) && !isset($_FILES)) {
+            if (isset($_POST) && empty($_FILES)) {
                 $array = $_POST;
                 // var_dump($array);
+
                 if(!empty($array)){
                     if ($type == 'status') {
                         $bools = $userRepository->updateUserStatus($id, $array);
@@ -314,12 +315,10 @@ try {
                 if ($type == 'highlight') {
                     if ($array['modifyInput'] == 'modify' || $array['modifyInput'] == 'add') {
                         $bools = $userRepository->updateUserHighlight($id, $array);
-                        header('Location:?action=profilePage&id='.$_GET['id']);
+                        // header('Location:?action=profilePage&id='.$_GET['id']);
                     } else {
                         // erreur : Vous devez choisir si vous souhaitez ajouter ou modifier le projet phare
                     }
-                    $bools = $userRepository->updateUserHighlight($id, $array);
-                    header('Location:?action=profilePage&id='.$_GET['id']);
                 } elseif ($type == 'addMyProject') {
                     $bools = $userRepository->addMyProject($id, $array);
                     header('Location:?action=profilePage&id='.$_GET['id']);

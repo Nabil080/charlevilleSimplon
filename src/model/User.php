@@ -353,12 +353,13 @@ class UserRepository extends ConnectBdd
     {
 
         $request = "UPDATE user SET user_highlight = ? WHERE user_id = ?";
-        
+        var_dump($array);
         $bools = [];
         // Envoi d'un projet phare URL
         if ($array['text'] == 'website'){
             $website = $array['website'];
-            $checkWebsite = securizeString($website);
+            $checkWebsite = securizeUrl($website);
+            var_dump($checkWebsite);
             if ($checkWebsite){
                 $req = $this->bdd->prepare($request);
                 $bool = $req->execute([$website, $id]);
@@ -393,7 +394,7 @@ class UserRepository extends ConnectBdd
                 // erreur : vous devez envoyer un fichier image valide
             }
         }
-        return $bool;
+        return $bools;
     }
 
     public function addMyProject(int $id, array $array): bool | array

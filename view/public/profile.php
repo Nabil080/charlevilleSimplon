@@ -227,7 +227,7 @@ $title = "Espace personnel";
                         </div>
                             <form id="links-form" method="POST" action="?action=updateUserElements&type=links&id=<?=$userDatas['user_id']?>">
                                 <div id="links">
-                                    <?php if(isset($userDatas['user_linkedin']) || isset($userDatas['user_github']) && empty($userDatas['user_linkedin'] && empty($userDatas['user_github']))){ ?>
+                                    <?php if(!isset($userDatas['user_linkedin']) || !isset($userDatas['user_github']) && empty($userDatas['user_linkedin'] && empty($userDatas['user_github']))){ ?>
                                         <p class="px-4">Pas de site web renseigné.</p>
                                     <?php } ?>
                                     <?php if(isset($userDatas['user_linkedin']) && !empty($userDatas['user_linkedin'])){ ?>
@@ -261,9 +261,9 @@ $title = "Espace personnel";
                         </div>
                         <form id="skills-update" method="POST" action="?action=updateUserElements&type=skills&id=<?=$userDatas['user_id']?>" class="hidden flex flex-col">
                             <select multiple name="skills[]">
-                                <option disabled selected>Sélectionner des compétences</option>
+                                <option selected disabled>Sélectionner des compétences</option>
                                 <?php foreach ($allTags as $eachTag){ ?>
-                                    <option value="<?= $eachTag['tag_id']?>"><?= $eachTag['tag_name'] ?></option>
+                                    <option value="<?= $eachTag['tag_id']?>" <?php if(in_array($eachTag['tag_id'],$userTags)){echo "selected";}?>   ><?= $eachTag['tag_name'] ?></option>
                                 <?php } ?>
                             </select>
                             <div class="flex justify-center">
@@ -422,7 +422,7 @@ $title = "Espace personnel";
                                         </div>
                                         <div id="website_input" class="hidden">
                                             <label for="website" class="block mb-1 text-sm font-medium text-main-red">Lien du site à mettre en avant</label>
-                                            <input type="text" name="website" id="website" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red">
+                                            <input type="url" name="website" id="website" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red">
                                         </div>
                                         <div id="pdf_input" class="hidden">
                                             <label for="pdf" class="block mb-1 text-sm font-medium text-main-red">PDF à mettre en avant</label>

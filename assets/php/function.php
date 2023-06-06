@@ -27,6 +27,45 @@ function securizeString(string $string = null)
     }
 }
 
+function securizeUrl(string $string = null)
+{
+
+    $pattern = '/^https?:\\/\\/(?:www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b(?:[-a-zA-Z0-9()@:%_\\+.~#?&\\/=]*)$/';
+
+    if(!preg_match($pattern, $string) OR !isset($string) OR empty($string) OR strlen($string) < 3){
+        if(strlen($string) < 3){
+            $response = array(
+                "status" => "failure",
+                "message" => "Un champ est trop court"
+            );
+            echo json_encode($response);
+        }elseif(!isset($string) OR empty($string)){
+
+            $response = array(
+                "status" => "failure",
+                "message" => "Un champ est invalide"
+            );
+
+            echo json_encode($response);
+        }elseif(!preg_match($pattern, $string)){
+
+            $response = array(
+                "status" => "failure",
+                "message" => "Merci de rentrer une URL."
+            );
+
+            echo json_encode($response);
+        }
+        return false;
+    }else{
+        $safe_string = filter_var(trim($string), FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+        return $safe_string;
+    }
+}
+
+
+
 function securizeMail(string $mail = null)
 {
     if(!isset($mail) OR empty($mail) OR !filter_var($mail, FILTER_VALIDATE_EMAIL)){
