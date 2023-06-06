@@ -28,7 +28,7 @@
         </tr>
     </thead>
     <tbody class="border-2">
-        <?php 
+        <?php
         foreach ($promos as $promo) {
             $mailList = $PromoRepo->getPromoMailList($promo->id);
             include("view/admin/promo/table_row.php");

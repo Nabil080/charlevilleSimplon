@@ -339,9 +339,11 @@ function crudCompanyPage()
 
 function crudPromotionPage()
 {
+
     $tagsRepository = new TagRepository;
     $PromoRepo = new PromoRepository;
     $promos = $PromoRepo->getPromos();
+    // var_dump($promos);
     $UserRepo = new UserRepository;
     $FormationRepo = new FormationRepository;
     $formators = $UserRepo->getAllFormators();
