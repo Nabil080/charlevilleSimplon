@@ -401,7 +401,6 @@ function learnerPagination()
     $total = $UserRepo->getLearnersAndFormatorsNumber();
     $filtered = $UserRepo->getFilteredLearnersAndFormatorsNumber($filter,$execute);
     $users = $UserRepo->getLearnersAndFormators($limit,$filter,$execute);
-
     $usersHTML = [];
     foreach($users as $user){
         ob_start();

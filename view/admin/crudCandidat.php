@@ -1,3 +1,4 @@
+<?php var_dump($candidate); ?>
 <table class="w-full text-sm text-left ">
     <thead class="text-xs text-gray-700 uppercase bg-main-red text-main-white ">
         <tr>
