@@ -49,7 +49,7 @@ try {
         $progressRepository = new ProgressRepository;
         $isMyProject = false;
         if (isset($_SESSION['user'])) {
-            $userProject = $projectRepository->getUserProjects($_SESSION['user']->role_id);
+            $userProject = $projectRepository->getUserProjects($_SESSION['user']->user_id);
             foreach ($userProject as $project){
                 if (isset($_GET['id']) && $_GET['id'] == $project->id) {
                     $isMyProject = true;

@@ -1,4 +1,4 @@
-<?php $title = ""; ?>
+<?php $title = $project->name; ?>
 
 <?php ob_start(); ?>
 <!-- header -->
@@ -276,7 +276,7 @@
 
 
 <!-- CONTENU TAB -->
-<section class="max-w-[1200px] mx-auto flex">
+<section class="max-w-[1200px] mx-auto flex pb-5">
     <!-- CONTENU TAB ENTREPRISE -->
     <div class="sectionChange">
         <h2 class="text-center italic font-title text-xl lg:text-2xl font-semibold uppercase my-4">Demandes de
