@@ -98,24 +98,6 @@ function formationPage()
         include 'view/public/project.php';
     }
 
-    if ($_SESSION['user']->role_id == 1) {
-        $isMyProject = true;
-    }
-    if (isset($_GET['id']) && $_GET['id'] !== 0) {
-        $id = $_GET['id'];
-    } else {
-        $id = 3;
-    }
-
-
-    $project = $projectRepository->getProjectById($id);
-    $team = $projectRepository->getProjectUsers($id);
-    $promoUsers = $promoRepository->getAllApprenants($project->promo->id);
-    $promoFormateurs = $promoRepository->getAllFormateurs($project->promo->id);
-    $allProgress = $progressRepository->getProgressByProjectId($id);
-    include 'view/public/project.php';
-}
-
 function allProjectsPage()
 {
 

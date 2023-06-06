@@ -83,7 +83,7 @@ try {
             homepage();
         }
     } else {
-        // homepage();
+        homepage();
     }
 } catch (Exception $error) {
     echo 'Exception reçue : ', $error->getMessage(), "\n";
