@@ -372,7 +372,8 @@ class ProjectRepository extends ConnectBdd
 
         // traitment fichier pdf
         if($files['pdf']['error'] == 0){
-            $pdf = securizePdf($files['pdf']);
+            $path = "assets/upload/project/";
+            $pdf = securizePdf($files['pdf'], $path);
             if($pdf === false){
                 // message d'erreurs dans securizePdf
                 $error = true;
@@ -383,7 +384,8 @@ class ProjectRepository extends ConnectBdd
 
         // traitment image
         if($files['image']['error'] == 0){
-            $image = securizeImage($files['image']);
+            $path = "assets/upload/project/";
+            $image = securizeImage($files['image'], $path);
             if($image === false){
                 // message d'erreurs dans securizePdf
                 $error = true;

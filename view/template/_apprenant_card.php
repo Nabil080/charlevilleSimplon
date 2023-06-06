@@ -77,7 +77,7 @@ if(isset($formators)){
                             <?php } else if (isset($projects) && !empty($projects)) {
                                 foreach ($projects as $project) {
                                     ?>
-                                    <a href="">
+                                    <a href="?action=projectPage&id=<?= $project->id ?>">
                                         <p class="bg-main-gray text-main-white px-4 py-1 text-[14px] rounded-[50px]"><?= substr($project->name, 0, 15) . ".." ;?></p>
                                     </a>
                                 <?php 
@@ -93,7 +93,7 @@ if(isset($formators)){
             </div>
 
             <button class="clipper2 h-[25%] sm:h-[25%] xl:h-[20%] bg-main-red block text-white z-10 relative text-[20px] text-[22px] font-bold font-main-title w-full"><a href="?action=profilePage&id=<?= $apprenant->user_id ?>">Voir le profil</a></button>
-          
+
         </div>
         <div class="hidden clipper sm:flex w-full z-10 bg-center bg-cover grayscale" 
         style="background-image: url(

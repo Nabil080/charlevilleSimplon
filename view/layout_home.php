@@ -43,6 +43,7 @@
 
 <body class="w-[100dvw] overflow-x-hidden"></body>
 <?php require_once 'view/template/_navbar_home.php'; ?>
+<?php include 'view/template/_login.php'; ?>
 
     <?= $content ?>
 

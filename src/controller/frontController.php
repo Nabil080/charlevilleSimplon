@@ -60,7 +60,7 @@ try {
             header('Location:?action=homepage');
         }
         
-        if ($_SESSION['user']->role_id == 1) {
+        if (isset($_SESSION['user']) && $_SESSION['user']->role_id == 1) {
             $isMyProject = true;
         }
         if (isset($_GET['id']) && $_GET['id'] !== 0) {
