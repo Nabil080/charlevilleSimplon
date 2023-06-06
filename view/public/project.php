@@ -154,7 +154,11 @@
             <!-- boutons d'edit -->
 
             <?php if ($isMyProject == true) { ?>
-                <i onclick="swapDivsById('progress1','progress1-update');swapDivsById('progress2','progress2-update');swapDivsById('progress3','progress3-update')" class="fa-solid fa-pen text-main-red cursor-pointer h-fit my-auto"></i></div>
+                <i onclick="
+                <?php foreach ($allProgress as $progress) { ?>
+                    swapDivsById('progress<?=$progress->id?>','progress<?=$progress->id?>-update')
+                <?php } ?>
+                    " class="fa-solid fa-pen text-main-red cursor-pointer h-fit my-auto"></i></div>
             <?php } ?>
         <div class="grow flex flex-col justify-center">
             <?php $i = 0;
@@ -176,16 +180,7 @@
                     <i onclick="swapDivsById('progress1','progress1-update')" class="fa-solid fa-xmark text-main-red cursor-pointer"></i>
                 </form>
             <?php } ?>
-            <?php $i++; } 
-            for ($y = $i; $y >= 3; $y ++) {   ?>
-                <div id="progress<?= $y ?>" class="mb-1 text-start italic">Non Défini</div>
-                <!-- formulaire d'edit 1 -->
-                <div class="w-full bg-gray-200 rounded-full h-2.5 mb-4">
-                    <div class="bg-green-600 h-2.5 rounded-full" style="width: 0%"></div>
-                </div>
-            <?php } 
-            ?>
-
+            <?php $i++; } ?>
         </div>
         <?php } else if (!isset($project->github)) {?>
             <p class="text-red-500 text-xl"> Pas de barre de progression pour le moment</p>
@@ -201,7 +196,7 @@
 
         <i class="fa-brands fa-github"></i>
 
-        <a id="github" href="<?= $project->github ?>" target="_blank" class="text-main-white bg-main-red grow h-[40px] flex items-center justify-center">Voir le github du projet</a>
+        <a id="github" href="<?= $project->github ?>" target="_blank" class="text-main-white px-4 bg-main-red grow h-[40px] flex items-center justify-center">Voir le github du projet</a>
         <!-- formulaire d'edit github -->
         <?php if ($isMyProject == true) { ?>
         <form id="github-update" action="?action=updateProjectElement&id=<?= $project->id ?>&type=github" method="POST" class="hidden w-full flex flex-wrap">
@@ -221,7 +216,7 @@
 
         <i class="fa-solid fa-file-pdf"></i>
 
-        <a id="pdf" href="<?= $project->file ?>" download class="text-main-white bg-main-red grow h-[40px] flex items-center justify-center">Télécharger le cahier des charges</a>
+        <a id="pdf" href="<?= $project->file ?>" download class="text-main-white px-4 bg-main-red grow h-[40px] flex items-center justify-center">Télécharger le cahier des charges</a>
         <?php if ($isMyProject == true) { ?>
         <!-- formulaire d'edit cahier des charges -->
         <form id="pdf-update" enctype="multipart/form-data" action="?action=updateProjectElement&id=<?= $project->id ?>&type=pdf" method="POST" class="hidden w-full flex flex-wrap">
@@ -241,7 +236,7 @@
         <i class="fa-brands fa-chrome"></i>
 
         <a id="link" href="<?= $project->model_link ?>" target="_blank" class="<?php if (!isset($project->model_link)) { ?> disabled-button <?php } ?>
-         text-main-white bg-main-red grow h-[40px] flex items-center justify-center">Lien vers le site</a>
+         text-main-white bg-main-red grow h-[40px] flex items-center px-4 justify-center">Lien vers le site</a>
         <!-- formulaire d'edit lien site -->
         <?php if ($isMyProject == true) { ?>
         <form id="link-update" action="?action=updateProjectElement&id=<?= $project->id ?>&type=link" method="POST" class="hidden w-full flex flex-wrap">

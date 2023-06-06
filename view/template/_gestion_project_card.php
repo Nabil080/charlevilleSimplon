@@ -17,7 +17,7 @@
         <?php } ?> animate-pulse">
         </i>
     </div>
-    <a href="?action=modifProjet&id=<?= $project->id ?>" type="submit" class="whitespace-nowrap absolute -top-8 right-0 font-bold text-xl hover:text-main-red cursor-pointer">
+    <a href="?action=addProject&id=<?=$project->id ?>" type="submit" class="whitespace-nowrap absolute -top-8 right-0 font-bold text-xl hover:text-main-red cursor-pointer">
         <p>Modifier <i class="fa-solid fa-pen-to-square"></i></p>
     </a>
         <!-- card projet -->

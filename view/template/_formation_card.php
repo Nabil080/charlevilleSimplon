@@ -1,6 +1,6 @@
 <!-- Card formation -->
 <div class="card_formation flex flex-col max-w-[445px] rounded-[5px] border-[1px] m-3 border-main-border md:w-2/5">
-    <img class="max-h-[140px] md:max-h-[200px] w-full" src="<?= $formation->image ?>" alt="Formation">
+    <img class="max-h-[180px] md:max-h-[200px] w-full" src="<?= $formation->image ?>" alt="Formation">
     <h3 class="text-main-red font-title font-semibold h-auto text-lg pl-3 mt-3 text-center md:text-2xl xl:text-3xl">
         <?= $formation->name; ?>
     </h3>
@@ -25,21 +25,21 @@
     </div>
     <div class="card_buttons flex  justify-around pb-6 pt-2">
         <a href="index.php?action=formationPage&id=<?= $formation->id; ?>"
-            class="bg-main-red rounded-[5px] text-main-white border border-main-white hover:bg-main-white hover:text-main-red hover:border-main-red  text-center font-medium flex items-center justify-center text-sm font-main w-1/3 py-2 px-3">En
+            class="bg-main-red rounded-[5px] min-h-[58px] text-main-white border border-main-white hover:bg-main-white hover:text-main-red hover:border-main-red  text-center font-medium flex items-center justify-center text-sm font-main w-1/3 py-2 px-3">En
             savoir plus</a>
         <?php if ($formation->status->id == 14 ) {?>
             <a href="index.php?action=registerPage"
-                class="bg-main-red rounded-[5px] text-main-white border border-main-white hover:bg-main-white hover:text-main-red hover:border-main-red  text-center font-medium flex items-center justify-center text-sm font-main w-1/3 py-2 px-2">Postuler
+                class="bg-main-red rounded-[5px] min-h-[58px] text-main-white border border-main-white hover:bg-main-white hover:text-main-red hover:border-main-red  text-center font-medium flex items-center justify-center text-sm font-main w-1/3 py-2 px-2">Postuler
                 à la formation
             </a>
         <?php } else if ($formation->status->id == 13) { ?>
             <a href="#"
-                class="bg-green-700 rounded-[5px] cursor-default text-main-white border  text-center font-medium flex items-center justify-center text-sm font-main w-1/3 py-2 px-2">
+                class="bg-green-700 rounded-[5px] min-h-[58px] cursor-default text-main-white border  text-center font-medium flex items-center justify-center text-sm font-main w-1/3 py-2 px-2">
                 Prochaine session bientot
             </a>
         <?php } else if ($formation->status->id == 12) { ?>
             <a href="#"
-                class="bg-main-gray rounded-[5px] cursor-default text-main-white border  text-center font-medium flex items-center justify-center text-sm font-main w-1/3 py-2 px-2">
+                class="bg-main-gray rounded-[5px] min-h-[58px] cursor-default text-main-white border  text-center font-medium flex items-center justify-center text-sm font-main w-1/3 py-2 px-2">
                 Session en cours
             </a>
         <?php } ?>

@@ -194,6 +194,11 @@ function registerPage()
         } else {
             $id = 1;
         }
+        if (isset($_GET['project']) && $_GET['project'] == 1) {
+            $seeProjects = true;
+        } else {
+            $seeProjects = false;
+        }
         $PromoRepository = new PromoRepository;
         $tagsRepository = new TagRepository;
         $projectRepository = new ProjectRepository;

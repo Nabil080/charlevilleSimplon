@@ -16,8 +16,6 @@ if (document.getElementById("homepage-overlay") !== null) { // Si c'est sur l'ac
 
 }
 
-const changeFunction = () => { console.log("salut")};
-
 function changeNavFunction () {
   if (document.getElementById("homepage-overlay") == null) {
     // apparition nav inférieur
@@ -65,7 +63,7 @@ window.addEventListener ("scroll", function () {
       if (typeof prevScrollTop == "undefined") {
         prevScrollTop = 0;
       } 
-    homepageNav(0);
+      homepageNav(0);
       // une fois que la hauteur définie a été scroll, enlève la navbar
       if (body.getBoundingClientRect().top > removeHeight && this.window.screen.width > 762) {
         nav.classList.remove("-translate-y-["+heightNav+"px]");
@@ -89,13 +87,6 @@ window.addEventListener ("scroll", function () {
         }
       }
     }
-    /*
-    const contentSuccess = document.getElementById("content_succes");
-    if (nav.classList.contains("-translate-y-["+heightNav+"]")) { // si la navbar est caché fait remonté l'aside jusqu'en haut
-      contentSuccess.classList.add("-translate-y-20");
-    } else {    // Si la navbar apparait fait redescendre l'aside
-      contentSuccess.classList.remove("-translate-y-20");
-    }*/
   }
   );
 
@@ -110,6 +101,7 @@ window.addEventListener ("scroll", function () {
         
         nav.classList.add("bg-main-white");
         nav.classList.remove("text-main-white", "bg-gray-400", "bg-opacity-30");
+        change[0].classList.remove("text-main-white");
         changeNav.classList.add("text-black");
         logo.src = "assets/img/navbar/logo-simplon.png";
         logo.classList.remove("w-[150px]");
@@ -122,6 +114,7 @@ window.addEventListener ("scroll", function () {
         nav.classList.add("text-main-white", "bg-gray-400", "bg-opacity-30");
         logo.src = "assets/img/simplonblanc.png";
         logo.classList.add("w-[150px]");
+        logo.classList.remove("w-[171px]");
         
       }
     }
@@ -136,15 +129,17 @@ window.addEventListener ("scroll", function () {
       changeNav.classList.toggle("h-[100vh]");
       changeNav.classList.toggle("grid-rows-[10vh_10vh_10vh_10vh]");
       nav.classList.toggle("text-main-white"); 
+
       if (logo.classList.contains("w-[150px]") == true) 
       {
         logo.src = "assets/img/navbar/logo-simplon.png";
         logo.classList.remove("w-[150px]");
+        logo.classList.add("w-[171px]");
+      } else if (logo.classList.contains("w-[150px]") == false) {
 
-      }
-      if (logo.classList.contains("w-[150px]") == false) {
         logo.src = "assets/img/simplonblanc.png";
         logo.classList.add("w-[150px]");
+        logo.classList.remove("w-[171px]");
       }
 
       // changement d'icone
@@ -185,32 +180,3 @@ window.addEventListener ("scroll", function () {
     
   }
   
-//      } else if (window.matchMedia("(max-width: 768px)").matches) {
-//         if (changeNav.classList.contains("h-[100vh]")) {
-//             changeNav.classList.toggle("hidden");
-//             changeNav.offsetHeight;
-//             changeNav.classList.toggle("translate-x-[80vw]");
-//             changeNav.classList.toggle("h-[100vh]");
-//             changeNav.classList.toggle("grid-rows-[10vh_10vh_10vh_10vh]");
-//             div.classList.toggle("bg-main-white");
-//             div.classList.toggle("bg-main-lightred");
-//                 // changement d'icone
-//             // if (change[0].classList.contains("hidden")) {
-//             //     change[0].classList.toggle("hidden");
-//             //     change[0].style.display = "block";
-//             // } else {
-//             //     change[0].style.display = "none";
-//             //     change[0].classList.toggle("hidden");
-//             // }
-//             if (!change[1].classList.contains("hidden")) {
-//                 change[1].classList.remove("hidden");
-//                 change[1].style.display = "block";
-//             } else {
-//                 change[1].style.display = "none";
-//                 change[1].classList.add("hidden");
-//                 change[0].classList.toggle("hidden");
-//                 change[0].style.display = "block";
-//             }
-//          }
-//     }
-//  })
