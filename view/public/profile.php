@@ -223,16 +223,23 @@ $title = "Espace personnel";
                         </div>
                             <form id="links-form" method="POST" action="?action=updateUserElements&type=links&id=<?=$userDatas['user_id']?>">
                                 <div id="links">
-                                    <div class="sites flex items-center px-3 mt-2 mb-4 lg:mb-5">
-                                        <span class="w-6 h-6 border-[1px] bg-main-red rounded-full mr-2"></span>
-                                        <a href="<?= $userDatas['user_linkedin'] ?>"><?= $userDatas['user_linkedin'] ?></a>
-                                        <p id="linkedin_error" class="errorAlert mt-2 text-sm text-red-600 dark:text-red-500"></p>
-                                    </div>
-                                    <div class="sites flex items-center px-3 mt-2 mb-4 lg:mb-8">
-                                        <span class="w-6 h-6 border-[1px] bg-main-red rounded-full mr-2"></span>
-                                        <a href="<?= $userDatas['user_github'] ?>"class="line-clamp-1"><?= $userDatas['user_github'] ?></a>
-                                        <p id="github_error" class="errorAlert mt-2 text-sm text-red-600 dark:text-red-500"></p>
-                                    </div>
+                                    <?php if(isset($userDatas['user_linkedin']) || isset($userDatas['user_github']) && empty($userDatas['user_linkedin'] && empty($userDatas['user_github']))){ ?>
+                                        <p class="px-4">Pas de site web renseigné.</p>
+                                    <?php } ?>
+                                    <?php if(isset($userDatas['user_linkedin']) && !empty($userDatas['user_linkedin'])){ ?>
+                                        <div class="sites flex items-center px-3 mt-2 mb-4 lg:mb-5">
+                                            <span class="w-6 h-6 border-[1px] bg-main-red rounded-full mr-2"></span>
+                                            <a href="<?= $userDatas['user_linkedin'] ?>"><?= $userDatas['user_linkedin'] ?></a>
+                                            <p id="linkedin_error" class="errorAlert mt-2 text-sm text-red-600 dark:text-red-500"></p>
+                                        </div>
+                                    <?php } ?>
+                                    <?php if(isset($userDatas['user_github']) && !empty($userDatas['user_github'])){ ?>
+                                        <div class="sites flex items-center px-3 mt-2 mb-4 lg:mb-8">
+                                            <span class="w-6 h-6 border-[1px] bg-main-red rounded-full mr-2"></span>
+                                            <a href="<?= $userDatas['user_github'] ?>"class="line-clamp-1"><?= $userDatas['user_github'] ?></a>
+                                            <p id="github_error" class="errorAlert mt-2 text-sm text-red-600 dark:text-red-500"></p>
+                                        </div>
+                                    <?php } ?>
                                 </div>
                                 <div id="links-update" class="hidden space-y-2">
                                     <input name="user_linkedin" type="url" value="<?= $userDatas['user_linkedin'] ?>" placeholder="lien linkedin" class="space-x-4">
