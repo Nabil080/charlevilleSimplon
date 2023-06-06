@@ -285,6 +285,7 @@ function promotionPage()
         $PromoRepository = new PromoRepository;
         $tagsRepository = new TagRepository;
         $projectRepository = new ProjectRepository;
+        $formationRepository = new FormationRepository;
         $promo = $PromoRepository->getPromoById($id);
         $apprenants = $PromoRepository->getAllApprenants($id);
         $formateurs = $PromoRepository->getAllFormateurs($id);

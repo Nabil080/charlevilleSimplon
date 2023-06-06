@@ -91,6 +91,6 @@ try {
 
 }
 
-// $Repo = new ProjectRepository;
-// $data = $Repo->getAllProjects();
+// $Repo = new FormationRepository;
+// $data = $Repo->getAllFormations();
 // var_dump($data);

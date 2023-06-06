@@ -1,5 +1,5 @@
 <!-- Modal de modification promo -->
-<section id="modal-update-<?= $promo->id ?>" data-modal-placement="center" tabindex="-1" aria-hidden="true" class="backdrop:brightness-50 fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] md:h-full">
+<section id="modal-update-<?= $promo->id ?>" data-modal-placement="center" tabindex="-1" aria-hidden="true" class="hidden grid place-content-center w-full h-full bg-black bg-opacity-50 backdrop:brightness-50 fixed top-0 left-0 right-0 z-50 p-4 overflow-x-hidden overflow-y-auto md:inset-0  md:h-full">
     <div class="relative w-full h-fit max-w-md md:h-auto">
         <div class="relative bg-main-white border-main-red border-2 rounded-md text-main-red">
             <button type="button" class="absolute top-3 right-2.5 text-main-red bg-transparent rounded-md text-sm p-1.5 ml-auto inline-flex items-center hover: hover:border border-main-red" data-modal-hide="modal-update-<?=$promo->id?>">
@@ -19,7 +19,10 @@
                     <div>
                         <label for="formation" class="block mb-2 text-sm font-medium  text-main-red">Formation</label>
                         <select name="formation" id="formation" class=" border text-sm rounded-md block w-full p-2.5 border-main-red text-main-red" required>
-                            <?php foreach ($formations as $formation) { ?>
+                            <?php
+                            $formationRepo = new FormationRepository;
+                            $formations = $formationRepo->getAllFormations();
+                                foreach ($formations as $formation) { ?>
                                 <option <?php if($promo->formation_id == $formation->id){echo 'selected';} ?> value="<?= $formation->id ?>"><?= $formation->name ?></option>
                             <?php } ?>
                         </select>
@@ -28,14 +31,17 @@
                         <label for="formators" class="block mb-2 text-sm font-medium  text-main-red">Formateurs</label>
                         <select multiple name="formators[]" id="formators" class=" border text-sm rounded-md block w-full p-2.5 border-main-red text-main-red">
                             <option disabled selected value> Formateurs(non obligatoire) </option>
-                            <?php foreach ($formators as $formator) { ?>
+                                <?php
+                                $userRepo = new UserRepository; 
+                                $formators = $userRepo->getAllFormators();
+                            foreach ($formators as $formator) { ?>
                                         <option <?php foreach ($promoFormators as $promoFormator){ if($promoFormator->user_id == $formator->user_id){echo 'selected';}}?> value="<?= $formator->user_id ?>"><?= "$formator->user_name $formator->user_surname"?></option>
                                 <?php
                             } ?>
                         </select>
                     </div>
                     <div>
-                        <label for="start" class="block mb-2 text-sm font-medium  text-main-red">Date de début <?=$PromoRepo->getPromoStart($promo->id)?></label>
+                        <label for="start" class="block mb-2 text-sm font-medium  text-main-red">Date de début</label>
                         <input type="date" name="start" id="start" class=" border text-sm rounded-md block w-full p-2.5 border-main-red text-main-red" value="<?=$PromoRepo->getPromoStart($promo->id)?>" required>
                     </div>
                     <div>

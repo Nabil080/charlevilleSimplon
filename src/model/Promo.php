@@ -214,8 +214,7 @@ class PromoRepository extends ConnectBdd
         $req = $this->bdd->prepare("SELECT `promo_end` FROM `promo` WHERE `promo_id` = ?");
         $req->execute([$id]);
         $data = $req->fetch(PDO::FETCH_COLUMN);
-        $promoRepository = new PromoRepository;
-        $data = $promoRepository->formateDate($data);
+
         return $data;
     }
 

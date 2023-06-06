@@ -145,7 +145,7 @@ function promotionPagination()
             $promoFormators = $PromoRepo->getAllFormateurs($promo->id);
             include("view/admin/modalFormateur.php");
             include("view/admin/modalProjet.php");
-            // include("view/admin/promo/modalUpdatePromotion.php");
+            include("view/admin/promo/modalUpdatePromotion.php");
             // include("view/admin/modalDelete.php");
         $content = ob_get_clean();
 
