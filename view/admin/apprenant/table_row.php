@@ -4,9 +4,9 @@
     <td class="px-4 py-3 border"><?=$user->user_surname?></td>
     <td class="px-4 py-3 border">
     <?php
-            // foreach($UserRepo->getUserPromo('apprenant',$user->user_id) as $promo){
-            //     echo "<p class='text-center italic font-bold underline'>$promo->name</p>";
-            // }
+            foreach($UserRepo->getUserPromo('apprenant',$user->user_id) as $promo){
+                echo "<p class='text-center italic font-bold underline'>$promo->name</p>";
+            }
         ?>
     </td>
     <td class="px-4 py-3 border">
