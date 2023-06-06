@@ -180,7 +180,9 @@ $title = "Espace personnel";
                     <!-- Texte de description -->
                     <div class="text_description rounded-[5px] border-[1px] border-main-border bg-main-lightgray mt-5 grow lg:flex lg:flex-col lg:justify-between">
                         <div id="description" class="lg:p-4 flex flex-col ">
-                            <p class="text-[18px] text-justify pt-4 px-3 pb-2 lg:pb-0"><?= $userDatas['user_description'] ?></p>
+                            <p class="text-[18px] text-justify pt-4 px-3 pb-2 lg:pb-0"><?php if(isset($userDatas['user_description']) && !empty($userDatas['user_description'])){ echo $userDatas['user_description'];}else{
+                                echo "Pas de description renseignée";
+                            } ?></p>
                         </div>
                         <form method="POST" action="?action=updateUserElements&type=description&id=<?=$userDatas['user_id']?>" id="description-update" class="hidden h-full">
                             <textarea name="description" id="editor" class="text-editor h-full overflow-scroll">
