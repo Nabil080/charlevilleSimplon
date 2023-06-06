@@ -26,7 +26,7 @@ $title = "Espace personnel";
         <!-- PROFIL PROSPECT -->
         <section class="prospect_profil">
             <!-- Image de profil -->
-            <div class="picture_desc grid grid-cols-1 lg:grid-cols-2 items-center py-[50px] px-[8%] 2xl:px-[5%]">
+            <div class="border-2 picture_desc grid grid-cols-1 lg:grid-cols-2 items-center py-[50px] px-[8%] 2xl:px-[5%]">
                 <div class="picture max-h-screen lg:mr-5">
                     <img class="w-full rounded-t-lg" src="<?= $userDatas['user_avatar'] ?>" alt="Image de profil">
                     <button class="bg-main-red w-full text-main-white text-[16px] lg:text-[28px] py-3 rounded-b-lg" <?= $notMyProfile; ?>>Changer ma photo de profil</button>
@@ -67,7 +67,7 @@ $title = "Espace personnel";
                                             </div>
                                             <div>
                                                 <label for="phone" class="block mb-1 text-sm font-medium  text-main-red">Téléphone</label>
-                                                <input type="phone" name="phone" id="phone" pattern="[0][1-9]{9}" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" value="<?= $userDatas['user_phone'] ?>">
+                                                <input type="phone" name="phone" id="phone" pattern="[0][0-9]{9}" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" value="<?= $userDatas['user_phone'] ?>">
                                             </div>
                                             <div>
                                                 <label for="adress" class="block mb-1 text-sm font-medium  text-main-red">Adresse</label>
@@ -84,6 +84,10 @@ $title = "Espace personnel";
                                             <div>
                                                 <label for="new_password" class="block mb-1 text-sm font-medium text-main-red">Choisir un nouveau mot de passe* <span class="text-main-gray italic">Optionnel</span></label>
                                                 <input type="password" name="new_password" id="new_password" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" placeholder="Nouveau mot de passe">
+                                            </div>
+                                            <div>
+                                                <label for="confirm_new_password" class="block mb-1 text-sm font-medium text-main-red">Confirmez votre nouveau mot de passe</label>
+                                                <input type="password" name="confirm_new_password" id="confirm_new_password" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" placeholder="Répétez le nouveau mot de passe">
                                             </div>
                                             <div>
                                                 <label for="password" class="block mb-1 text-sm font-medium  text-main-red">Veuillez confirmer vos modifications en entrant votre (ancien) mot de passe.</label>
@@ -110,7 +114,7 @@ $title = "Espace personnel";
             <!-- Image de profil et description -->
             <div class="picture_description grid grid-cols-1 lg:grid-cols-2 items-center px-[8%] lg:px-[3%]">
                 <!-- Image de profil -->
-                <div class="picture max-h-screen mx-auto">
+                <div class="border-2 picture max-h-screen mx-auto">
                     <img class="max-w-full max-h-[600px] overflow-scroll rounded-t-lg" src="<?= $userDatas['user_avatar'] ?>" alt="Image de profil">
                     <div id="avatar" <?= $notMyProfile; ?>>
                         <div onclick="swapDivsById('avatar','avatar-update')">
@@ -191,7 +195,7 @@ $title = "Espace personnel";
 
                     <div class="flex flex-col lg:flex-row justify-center my-3 lg:my-0 lg:mt-4">
                         <div id="cv" class="flex items-center justify-center lg:flex-row flex-col my-4 lg:my-0 lg:mx-auto">
-                            <a href="<?= $userDatas['user_cv']?>" download class="bg-main-red text-main-white text-[16px] rounded-[5px] mx-auto py-3 lg:py-1 px-2 lg:px-4" target="_blank">Voir le C.V.</a>
+                            <a href="<?=$userDatas['user_cv']?>" download class="bg-main-red text-main-white text-[16px] rounded-[5px] mx-auto py-3 lg:py-1 px-2 lg:px-4" target="_blank">Voir le C.V.</a>
                             <div onclick="swapDivsById('cv','cv-update')" class="modify-cv cursor-pointer flex items-center pt-2 pl-3" <?= $notMyProfile; ?>>
                                 <i class="fa-solid fa-download text-main-red w-[20px]"></i>
                                 <span class="text-[10px] text-main-red">Modifier mon C.V.</span>
@@ -206,6 +210,8 @@ $title = "Espace personnel";
                     </div>
                 </div>
             </div>
+
+            <div class="h-1 w-1/2 bg-main-red mx-auto my-8"></div>
 
             <div class="liens_modal_projets lg:flex lg:flex-row lg:mt-20 lg:px-[3%] lg:mb-8">
                 <div class="liens_modal lg:w-1/3">
@@ -224,13 +230,13 @@ $title = "Espace personnel";
                                     </div>
                                     <div class="sites flex items-center px-3 mt-2 mb-4 lg:mb-8">
                                         <span class="w-6 h-6 border-[1px] bg-main-red rounded-full mr-2"></span>
-                                        <a href="<?= $userDatas['user_github'] ?>"><?= $userDatas['user_github'] ?></a>
+                                        <a href="<?= $userDatas['user_github'] ?>"class="line-clamp-1"><?= $userDatas['user_github'] ?></a>
                                         <p id="github_error" class="errorAlert mt-2 text-sm text-red-600 dark:text-red-500"></p>
                                     </div>
                                 </div>
                                 <div id="links-update" class="hidden space-y-2">
                                     <input name="user_linkedin" type="url" value="<?= $userDatas['user_linkedin'] ?>" placeholder="lien linkedin" class="space-x-4">
-                                    <input name="user_github" type="url" value="<?= $userDatas['user_linkedin'] ?>" placeholder="lien github" class="space-x-4">
+                                    <input name="user_github" type="url" value="<?= $userDatas['user_github'] ?>" placeholder="lien github" class="space-x-4">
                                     <div class="flex justify-center">
                                         <button type="submit" class="py-2 px-4 bg-main-red border-main-white border text-main-white my-4 mr-4">Modifier <i class="fa-solid fa-check"></i></button>
                                         <span onclick="swapDivsById('links','links-update')" class="cursor-pointer border my-4 mr-4 py-2 px-4">Annuler <i class="fa-solid fa-xmark"></i></span>
@@ -283,31 +289,31 @@ $title = "Espace personnel";
                                         </div>
                                         <div>
                                             <label for="phone" class="block mb-1 text-sm font-medium  text-main-red">Téléphone</label>
-                                            <input type="tel" name="phone" id="phone" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" placeholder="" value="<?= $userDatas['user_phone'] ?>">
+                                            <input type="tel" name="phone" id="phone" pattern="[0][0-9]{9}" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" placeholder="06 xx xx xx xx" value="<?= $userDatas['user_phone'] ?>">
                                         </div>
                                         <div>
                                             <label for="adress" class="block mb-1 text-sm font-medium  text-main-red">Adresse</label>
-                                            <input type="text" name="adress" id="adress" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" placeholder="" value="<?= $userDatas['user_place'] ?>">
+                                            <input type="text" name="adress" id="adress" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" placeholder="Votre adresse" value="<?= $userDatas['user_place'] ?>">
                                         </div>
                                         <div>
                                             <label for="numero_pe" class="block mb-1 text-sm font-medium  text-main-red">Numéro Pôle Emploi</label>
-                                            <input type="text" name="numero_pe" id="numero_pe" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" placeholder="" value="<?= $userDatas['user_numero_pe'] ?>">
+                                            <input type="text" name="numero_pe" id="numero_pe" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" placeholder="Votre numéro pole emploi" value="<?= $userDatas['user_numero_pe'] ?>">
                                         </div>
                                         <div>
                                             <label for="nationality" class="block mb-1 text-sm font-medium  text-main-red">Nationalité</label>
-                                            <input type="text" name="nationality" id="nationality" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" placeholder="" value="<?= $userDatas['user_nationality'] ?>">
+                                            <input type="text" name="nationality" id="nationality" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" placeholder="Votre nationalité" value="<?= $userDatas['user_nationality'] ?>">
                                         </div>
                                         <div>
-                                            <label for="new_password" class="block mb-1 text-sm font-medium text-main-red">Choisir un nouveau mot de passe</label>
-                                            <input type="password" name="new_password" id="new_password" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" placeholder="">
+                                            <label for="new_password" class="block mb-1 text-sm font-medium text-main-red">Choisir un nouveau mot de passe* <span class="text-main-gray italic">Optionnel</span></label>
+                                            <input type="password" name="new_password" id="new_password" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" placeholder="Votre nouveau mot de passe">
                                         </div>
                                         <div>
                                             <label for="confirm_new_password" class="block mb-1 text-sm font-medium text-main-red">Confirmez votre nouveau mot de passe</label>
-                                            <input type="password" name="confirm_new_password" id="confirm_new_password" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" placeholder="">
+                                            <input type="password" name="confirm_new_password" id="confirm_new_password" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" placeholder="Répétez le mot de passe">
                                         </div>
                                         <div>
                                             <label for="password" class="block mb-1 text-sm font-medium  text-main-red">Veuillez confirmer vos modifications en entrant votre (ancien) mot de passe.</label>
-                                            <input type="password" name="password" id="password" placeholder="*********" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" required>
+                                            <input type="password" name="password" id="password" placeholder="Votre ancien mot de passe" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" required>
                                         </div>
                                         <button type="submit" class="w-full uppercase font-title text-main-white bg-main-red hover:bg-red-800 font-medium rounded-lg text-sm px-5 py-1.5 text-center ">Modifier mes informations</button>
                                     </form>

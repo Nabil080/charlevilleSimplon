@@ -270,6 +270,7 @@ try {
             $userRepository = new UserRepository();
             if (isset($_POST) && !empty($_POST)) {
                 $array = $_POST;
+                var_dump($array);
                 if ($type == 'status') {
                     $bools = $userRepository->updateUserStatus($id, $array);
                     header('Location:?action=profilePage&id='.$_GET['id']);
@@ -286,7 +287,7 @@ try {
                             $bool = $UserRepo->checkPassword($id, $password);
                             if ($bool) {
                                 $bools = $userRepository->updateUserDatas($id, $array);
-                                header('Location:?action=profilePage&id='.$_GET['id']);
+                                // header('Location:?action=profilePage&id='.$_GET['id']);
                             } else {
                                 // erreur : Votre mot de passe est incorrect
                             }

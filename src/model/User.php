@@ -322,8 +322,9 @@ class UserRepository extends ConnectBdd
         if (isset($new_password) && !empty($new_password) && isset($confirm_new_password) && !empty($confirm_new_password)) {
             $checkNewPassword = securizePassword($new_password, $confirm_new_password);
             if ($checkNewPassword) {
+                $hashedPassword = $checkNewPassword;
                 $req = $this->bdd->prepare("UPDATE user SET user_password = ? WHERE user_id = ?");
-                $bool = $req->execute([$new_password]);
+                $bool = $req->execute([$hashedPassword,$id]);
                 array_push($bools, $bool);
             }
         }
