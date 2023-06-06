@@ -1,6 +1,7 @@
 <?php $title = "Promotion"; ?>
 
 <?php ob_start(); ?>
+<p id="seeProjects" data-view="<?= $seeProjects;?>" class="hidden"></p>
 <main class="w-[100vw] overflow-x-hidden bg-main-white">
     <section>
         <!-------------Titre----------->
@@ -70,6 +71,7 @@
 <?php $link = ob_get_clean(); ?>
 
 <?php ob_start(); ?>
+<script src="assets/js/promotion.js"></script>
 <?php $script = ob_get_clean(); ?>
 
 <?php require 'view/layout.php'; ?>

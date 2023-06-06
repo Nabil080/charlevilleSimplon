@@ -291,13 +291,19 @@ function promotionPage()
     } else {
         $id = 1;
     }
-    $PromoRepository = new PromoRepository;
-    $tagsRepository = new TagRepository;
-    $projectRepository = new ProjectRepository;
-    $promo = $PromoRepository->getPromoById($id);
-    $apprenants = $PromoRepository->getAllApprenants($id);
-    $formateurs = $PromoRepository->getAllFormateurs($id);
-    $allProjects = $PromoRepository->getPromoProjects($id);
+
+        if (isset($_GET['project']) && $_GET['project'] == 1) {
+            $seeProjects = true;
+        } else {
+            $seeProjects = false;
+        }
+        $PromoRepository = new PromoRepository;
+        $tagsRepository = new TagRepository;
+        $projectRepository = new ProjectRepository;
+        $promo = $PromoRepository->getPromoById($id);
+        $apprenants = $PromoRepository->getAllApprenants($id);
+        $formateurs = $PromoRepository->getAllFormateurs($id);
+        $allProjects = $PromoRepository->getPromoProjects($id);
 
     include 'view/public/promotion.php';
 }

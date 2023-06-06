@@ -3,7 +3,7 @@
         class="grid grid-cols-2 transition-all duration-[0.2s] items-center  border-t-[4px] md:grid-cols-[20%_80%] border-main-red">
         <a href="index.php"><img src="assets/img/simplonblanc.png" alt="Logo Simplon" class="w-[150px]" /></a>
         <i onclick="changeNavFunction()"
-            class="fa-solid fa-bars text-[39px] justify-self-end text-white mr-6 sm:mr-8 mb-1 md:!hidden hiddenIcon"></i>
+            class="fa-solid fa-bars text-[39px] justify-self-end text-main-white mr-6 sm:mr-8 mb-1 md:!hidden hiddenIcon"></i>
         <i onclick="changeNavFunction()"
             class="fa-solid fa-xmark text-[46px] justify-self-end mr-6 mb-1 sm:mr-8 md:!hidden hiddenIcon"
             style="display: none"></i>

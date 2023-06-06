@@ -16,6 +16,7 @@ function changeTab(y) {
     sectionChange[y].classList.remove("hidden");
     tabChange[y].classList.add("!bg-main-red","bg-main-red");
 }
+
 function switchDiv(id1, id2) {
     console.log(id1 + " " + id2);
     const div1 = document.getElementById(id1);
@@ -28,3 +29,24 @@ function switchDiv(id1, id2) {
         div2.style.display = "block";
     }
 }
+
+const buttons = document.querySelectorAll("button");
+clickableButtons = [];
+let count = 0;
+buttons.forEach(button => {
+    if (button.dataset.dropdownToggle !== null) {
+        let fleche = button.getElementsByTagName('svg');
+        if (fleche[0] !== undefined) {
+            clickableButtons.push(buttons[count]);
+        }
+        count ++;
+    }
+})
+clickableButtons.forEach(button => {
+    button.addEventListener('click', () => {
+       fleche = button.getElementsByTagName('svg');
+        fleche[0].classList.toggle('rotate-180');
+
+    });
+});
+
