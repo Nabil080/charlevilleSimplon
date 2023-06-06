@@ -49,6 +49,10 @@ try {
                 if ($_POST['password'] !== $_POST['confirm_password']) {
                     $errorTable[] = $AlertMessage->getError('password', 'passwordNotIdentical');
                 }
+                $pattern = '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{6,}$/';
+                if (!preg_match($pattern, $_POST['password'])){
+                    $errorTable[] = $AlertMessage->getError('password','passwordNotSafe');
+                }
             }
 
 
@@ -254,11 +258,220 @@ try {
             echo $errorJson;
         }
     }
-    function logOut()
-    {
-        unset($_SESSION['user']);
-        header('Location: index.php');
+
+function contactUsers()
+{
+    var_dump($_POST);
+
+    if(isset($_POST['message'])){
+        $send=trim(htmlspecialchars(strip_tags($_POST['send']),ENT_QUOTES));
+        $objet=trim(htmlspecialchars(strip_tags($_POST['object']),ENT_QUOTES));
+        $message=trim(htmlspecialchars(strip_tags($_POST['message']),ENT_QUOTES));
+
+        $name = "Simplon Charleville";
+        $email = "simplon.charleville@gmail.com";
+    
+    
+        if(!empty($name)&&!empty($email)&&!empty($objet)&&!empty($message)){
+            $to = $send;
+            $email_subject = $objet;
+            $bodyParagraphs = ["Name: {$name}", "Email: {$email}", "Message:", $message];
+            $email_body = join(PHP_EOL, $bodyParagraphs);
+            $headers = ['From' => $email, 'Reply-To' => $email, 'Content-type' => 'text/html; charset=utf-8'];
+            if (mail($to, $email_subject, $email_body, $headers)){
+                echo 'envoi réussi';
+            }else{
+                echo 'envoi échoué';
+            }
+        }else{
+            echo 'éléments manquants';
+        }
+    
     }
+}
+
+function deleteCandidate()
+{
+    // Check si admin
+    var_dump($_POST);
+    $userRepo = new UserRepository;
+    $req = $userRepo->bdd->prepare("DELETE FROM `promo_candidate` WHERE `user_id` = ? AND `promo_id` = ?");
+    $req->execute([$_POST['user_id'], $_POST['promo_id']]);
+}
+
+function deleteLearner()
+{
+    // Check si admin
+    var_dump($_POST);
+    $userRepo = new UserRepository;
+    $req = $userRepo->bdd->prepare("DELETE FROM `promo_user` WHERE `user_id` = ? AND `promo_id` = ?");
+    $req->execute([$_POST['user_id'], $_POST['promo_id']]);
+
+}
+
+function deleteUser()
+{
+    // Check si admin
+    var_dump($_POST);
+    $userRepo = new UserRepository;
+    $userRepo->deleteUser($_POST['user_id']);
+}
+
+function assignFormator()
+{
+    // Check si admin
+    var_dump($_POST);
+    $userRepo = new UserRepository;
+    $req = $userRepo->bdd->prepare("UPDATE user SET `role_id` = ? WHERE `user_id` = ?");
+    $req->execute([2, $_POST['user_id']]);
+}
+
+function updateUserPersonnalInfos()
+{
+    // Check si admin
+    // var_dump($_POST);
+    $userRepo = new UserRepository;
+    $userRepo->updateUserPersonnalInfos($_POST);
+}
+
+function logOut()
+{
+    unset($_SESSION['user']);
+    header('Location: index.php');
+}
+
+function candidatePagination()
+{
+    $jsonData = file_get_contents('php://input',true);
+    $data = json_decode($jsonData);
+
+    $UserRepo = new UserRepository ;
+
+    $limitStart = $data->limitStart;
+    $limitEnd = $data->limitEnd;
+    $limit = "$limitStart,$limitEnd";
+
+    $filter = empty($data->filter) ? null : $data->filter;
+    $execute = empty($data->execute) ? null : $data->execute;
+
+    $total = $UserRepo->getCandidatesNumber();
+    $filtered = $UserRepo->getFilteredCandidatesNumber($filter,$execute);
+    $users = $UserRepo->getAllCandidates($limit,$filter,$execute);
+
+    $usersHTML = [];
+    foreach($users as $candidate){
+        ob_start();
+            include('view/admin/candidate/table_row.php');
+            include("view/admin/modalUpdateUser.php");
+            include("view/admin/modalCandidature.php");
+        $content = ob_get_clean();
+
+        $usersHTML[]= $content;
+    }
+
+    $response = array(
+        "status" => "success",
+        "message" => "Les candidats ont bien été récupérés d'après les critères ci dessous.",
+        "total" => $total,
+        "filtered" => $filtered,
+        "query" => "WHERE $filter",
+        "limit" => $limit,
+        "candidates" => $usersHTML,
+    );
+
+    echo json_encode($response);
+
+}
+function learnerPagination()
+{
+    $jsonData = file_get_contents('php://input',true);
+    $data = json_decode($jsonData);
+
+    $UserRepo = new UserRepository ;
+    $PromoRepo = new PromoRepository;
+
+
+    $limitStart = $data->limitStart;
+    $limitEnd = $data->limitEnd;
+    $limit = "$limitStart,$limitEnd";
+
+    $filter = empty($data->filter) ? null : $data->filter;
+    $execute = empty($data->execute) ? null : $data->execute;
+
+    $total = $UserRepo->getLearnersAndFormatorsNumber();
+    $filtered = $UserRepo->getFilteredLearnersAndFormatorsNumber($filter,$execute);
+    $users = $UserRepo->getLearnersAndFormators($limit,$filter,$execute);
+    $usersHTML = [];
+    foreach($users as $user){
+        ob_start();
+            include("view/admin/apprenant/table_row.php");
+            include("view/admin/modalUpdateUser.php");
+            include("view/admin/modalInfos.php");
+            include("view/admin/modalProjet.php");
+        $content = ob_get_clean();
+
+        $usersHTML[]= $content;
+    }
+
+    $response = array(
+        "status" => "success",
+        "message" => "Les utilisateurs ont bien été récupérés d'après les critères ci dessous.",
+        "total" => $total,
+        "filtered" => $filtered,
+        "query" => "WHERE $filter",
+        "limit" => $limit,
+        "candidates" => $usersHTML,
+    );
+
+    echo json_encode($response);
+
+}
+function companyPagination()
+{
+    $jsonData = file_get_contents('php://input',true);
+    $data = json_decode($jsonData);
+
+    $UserRepo = new UserRepository ;
+    $PromoRepo = new PromoRepository;
+
+    // var_dump($data);
+
+    $limitStart = $data->limitStart;
+    $limitEnd = $data->limitEnd;
+    $limit = "$limitStart,$limitEnd";
+
+    $filter = empty($data->filter) ? null : $data->filter;
+    $execute = empty($data->execute) ? null : $data->execute;
+
+    $total = $UserRepo->getCompaniesNumber();
+    $filtered = $UserRepo->getFilteredCompaniesNumber($filter,$execute);
+    $users = $UserRepo->getAllCompanies($limit,$filter,$execute);
+
+    $usersHTML = [];
+    foreach($users as $user){
+        ob_start();
+            include('view/admin/entreprise/table_row.php');
+            include("view/admin/modalUpdateUser.php");
+            include("view/admin/modalInfos.php");
+            include("view/admin/modalProjet.php");
+        $content = ob_get_clean();
+
+        $usersHTML[]= $content;
+    }
+
+    $response = array(
+        "status" => "success",
+        "message" => "Les utilisateurs ont bien été récupérés d'après les critères ci dessous.",
+        "total" => $total,
+        "filtered" => $filtered,
+        "query" => "WHERE $filter",
+        "limit" => $limit,
+        "candidates" => $usersHTML,
+    );
+
+    echo json_encode($response);
+
+}
 
     function updateUserElements()
     {

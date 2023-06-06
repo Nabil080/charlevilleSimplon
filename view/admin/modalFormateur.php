@@ -1,5 +1,5 @@
 <!-- Extra Large Modal -->
-<div id="modal-formateur<?php "" ?>" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+<div id="modal-formateur-<?= $promo->id ?>" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
     <div class="relative w-full max-w-7xl max-h-full">
         <!-- Modal content -->
         <div class="relative bg-white rounded-lg shadow ">
@@ -9,72 +9,45 @@
                     Formateurs
                 </h3>
                 <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 
-                rounded-lg text-sm p-1.5 ml-auto inline-flex items-center " 
-                data-modal-hide="modal-formateur<?php '' ?>">
-                    <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                rounded-lg text-sm p-1.5 ml-auto inline-flex items-center " data-modal-hide="modal-formateur-<?= $promo->id ?>"  data-modal-target="modal-formateur-<?= $promo->id ?>">
+                    <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                    </svg>
                     <span class="sr-only">Close modal</span>
                 </button>
             </div>
             <!-- Modal body -->
-            
+
             <div class="background bg-main-white overflow-x-hidden p-6 space-y-6 min-h-[100vh]">
                 <section>
                     <!-------------Titre----------->
-                    <h2 class="text-center text-[24px] md:text-4xl font-bold font-title text-main-red uppercase pb-2">$nom de la promo
+                    <h2 class="text-center text-[24px] md:text-4xl font-bold font-title text-main-red uppercase pb-2"><?=$promo->name?>
                     </h2>
-                    <p class="text-center text-[24px] md:text-4xl font-title text-main-red pb-8">Janvier 2023-Septembre 2023 $date
+                    <p class="text-center text-[24px] md:text-4xl font-title text-main-red pb-8"><?="$promo->start - $promo->end"?>
                     </p>
                 </section>
-                
+
                 <div class="grid w-5/6 lg:grid-cols-2 md:w-4/6 gap-8 justify-center mx-auto">
-            <!------Formateurs------->
-            <h3 class="text-center lg:col-start-1 lg:col-end-3 font-main-title text-[22px] font-bold mt-4">Formateurs
-            </h3>
-            <?php if (isset($formateurs)) {
-                foreach ($formateurs as $formateur) { ?>
-            <!-----Card Formateur------->
-            <div
-                class="grid grid-cols-auto rounded-[5px] place-items-center  justify-center items-center border-2 border-main-gray mx-auto">
-                <div class="rounded-full flex place-items-center w-[130px] h-[130px] bg-main-lightred grayscale z-10">
-                    <img src="upload\promotion\devWeb2023\efz.png" class="w-[78px] z-20 grayscale mx-auto my-auto">
+                    <!------Formateurs------->
+                    <h3 class="text-center lg:col-start-1 lg:col-end-3 font-main-title text-[22px] font-bold mt-4">Formateurs
+                    </h3>
+                    <?php foreach ($promoFormators as $formateur) {
+                        include('view/template/_formateur_card.php');
+                    } ?>
                 </div>
-                <p class="text-[18px] font-main-title font-bold pt-4">Steven <span class="uppercase">Blombou</span></p>
-                <div class="border-2 border-main-red w-full mt-1"></div>
-                <p class="text-main-white bg-main-gray px-4 py-1 text-[10px] rounded-[50px] mt-4 mb-4">Développeur Web
-                    et Web mobile</p>
-                <div class="flex gap-3 px-4">
-                    <a href="">
-                        <p class="text-main-white bg-main-gray px-4 py-1 text-[10px] rounded-[50px] mb-4">PHP</p>
-                    </a>
-                    <a href="">
-                        <p class="text-main-white bg-main-gray px-4 py-1 text-[10px] rounded-[50px] mb-4">Symfony</p>
-                    </a>
-                    <a href="">
-                        <p class="text-main-white bg-main-gray px-4 py-1 text-[10px] rounded-[50px] mb-4">HTML</p>
-                    </a>
-                    <a href="">
-                        <p class="text-main-white bg-main-gray px-4 py-1 text-[10px] rounded-[50px] mb-4">CSS</p>
-                    </a>
-                </div>
-                <button class="bg-main-red text-white text-[20px] font-bold font-main-title w-full py-4">Voir le
-                    profil</button>
             </div>
-            <!-------------Fin de la Card Formateur----------->
-            <?php }} ?>
-        </div>
-        </div>
 
 
             <!-- Modal footer -->
             <div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
-                <button data-modal-hide="modal-formateur<?php "" ?>" type="button" class="text-gray-500 bg-white hover:bg-gray-100 
+                <button data-modal-hide="modal-formateur-<?= $promo->id ?>"  data-modal-target="modal-formateur-<?= $promo->id ?>" type="button" class="text-gray-500 bg-white hover:bg-gray-100 
                 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium 
                 px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 
                 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Fermer</button>
             </div>
-            </div>
         </div>
     </div>
-</div>       
+</div>
+</div>
 </div>
 </div>

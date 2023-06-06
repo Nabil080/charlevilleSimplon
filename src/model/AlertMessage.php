@@ -9,6 +9,12 @@
     private $styleSucces = "p-2 border-2 border-green-700 rounded-lg bg-green-200 text-green-500";
     private $styleError = "p-2 border-2 border-red-700 rounded-lg bg-red-200 text-red-500";
 
+    // <p id="{ID_input}_error" class="errorAlert mt-2 text-sm text-red-600 dark:text-red-500"></p>
+    // <div id="{Name}_errorContent"></div>
+
+    //<div id="{Name}_succesContent" class="alertContent"></div>
+    //<div id="succesContent" class="alertContent"></div>
+
 
     public function getError($location, $error, $boolNavbar = null)
     {
@@ -30,7 +36,8 @@
         ];
         return $test;
     }
-    public function getSuccess($success, $navbarBool)
+
+    public function getSuccess($success, $navbarBool = null)
     {
         $file_path = 'view/template/_succesMessage.php';
         $this->type = 'successMessage';

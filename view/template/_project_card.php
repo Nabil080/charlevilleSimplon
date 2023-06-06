@@ -33,8 +33,9 @@
                 </div>
                 <!-- contenu projet -->
                 <div class="text-base flex-grow flex-col">
-                    <p class="pl-[20%] line-clamp-5 mt-2 mb-4"><?=$project->description?></p>
+                    <div class="pl-[20%] line-clamp-4 mt-2 mb-4"><?=$project->description?></div>
                     <div id="end" class="mt-auto">
+                        <?php if(isset($project->promo)) ?>
                         <a href="?action=promotionPage&id=<?= $project->promo->id ?>"
                             class="bg-main-red py-2 px-4 rounded-full text-main-white my-2 hover:bg-main-white hover:text-main-red hover:border border-main-red">
                             <?=$project->promo->name?>
@@ -42,8 +43,8 @@
                         <div
                             class="space-x-4 mt-4 mb-2 text-sm text-main-white [&>a]:bg-main-gray [&>a]:py-1 [&>a]:px-3 [&>a]:rounded-full">
                             <?php foreach($project->team as $user){ ?>
-                                <a href="?action=profilePage&id=<?=$user->id?>" class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white">
-                                    <?=$user->surname?>
+                                <a href="?action=profilePage&id=<?=$user->user_id?>" class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white">
+                                    <?=$user->user_surname?>
                                 </a>
                             <?php } ?>
                         </div>
@@ -68,6 +69,5 @@
             <!-- data filtres-->
             <div class="hidden" formation-filter="formation-<?=$project->promo->formation_id?>"></div>
             <div class="hidden" year-filter="<?=$project->start?>"></div>
-            <div class="hidden" level-filter="<?=$project->getProjectLevel()?>"></div>
 
         </article>

@@ -50,7 +50,12 @@
 
 <body class="w-[100vw] bg-main-white pt-20 min-h-screen flex flex-col">
     <?php require_once 'view/template/_navbar.php'; ?>
-    <?= $content ?>
+
+    <div class="pt-5">
+        <?= $content ?>
+    </div>
+    
+
     <?php include 'view/template/_login.php'; ?>
     <?php require_once 'view/template/_footer.php'; ?>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>

@@ -31,8 +31,14 @@
                     </div>
                     <div class="my-4 grow"><img class="" src="<?=$project->company_image?>" alt="logo de l'entreprise"></div>
                     <div class="flex flex-wrap">
-                        <p class="font-title font-bold mr-2">Adresse :</p>
-                        <p class="text-sm lg:!text-base xl:!text-lg pt-0.5 text-left font-light"><?=$project->company_adress?></p></div>
+                        <p class="font-title font-bold mr-2 block w-full">Adresse :</p>
+                        <?php  
+                         if (isset ($project->company_adress) && !empty($project->company_adress)) { ?>
+                            <p class="text-sm pt-0.5 text-left font-light"><?$project->company_adress?></p>
+                        <?php } else { ?>
+                            <p class="text-sm pt-0.5 text-left font-light">Pas d'adresse spécifiée</p>
+                        <?php } ?>
+                    </div>
                 </div>
             </div>
             <!-- partie info projet -->
@@ -60,8 +66,8 @@
                         </a>
                         <div class="space-x-4 mt-4 mb-2 text-sm md:!text-base lg:!text-lg text-main-white [&>a]:bg-main-gray [&>a]:py-1 [&>a]:px-3 [&>a]:rounded-full">
                             <?php foreach($project->team as $user){ ?>
-                                <a href="?action=profilePage&id=<?=$user->id?>" class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white">
-                                    <?=$user->surname?>
+                                <a href="?action=profilePage&id=<?=$user->user_id?>" class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white">
+                                    <?=$user->user_surname?>
                                 </a>
                             <?php }  ?>
                         </div>
@@ -81,13 +87,18 @@
                 </div>
                 <div class="flex flex-wrap">
                     <p class="font-title font-bold mr-2">Adresse :</p>
-                    <p class="text-sm pt-0.5 text-left font-light"><?=$project->company_adress?></p>
+                    <?php  
+                     if (isset ($project->company_adress) && !empty($project->company_adress)) { ?>
+                        <p class="text-sm pt-0.5 text-left font-light"><?$project->company_adress?></p>
+                    <?php } else { ?>
+                    <p class="text-sm pt-0.5 text-left font-light">Pas d'adresse spécifiée</p>
+                    <?php } ?>
                 </div>
             </div>
         </div>
         <!-- boutons projet -->
         <?php 
-        if (isset($_SESSION['user']) && $_SESSION['user']->role->id == 1 && $project->status->id == 9) { 
+        if (isset($_SESSION['user']) && $_SESSION['user']->role_id == 1 && $project->status->id == 9) { 
              ?> <!--1-->
             <form id="<?= $x ?>" class="validationProjectForm mt-6 flex lg:text-lg [&>div]:grid [&>div]:place-content-center">
                 <!-- refuser -->
@@ -113,7 +124,7 @@
                 </button>
             </form>
         <?php $i ++;
-         } else if (isset($_SESSION['user']) && $_SESSION['user']->role->id == 2 && $project->status->id == 10) { ?> <!--2-->
+         } else if (isset($_SESSION['user']) && $_SESSION['user']->role_id == 2 && $project->status->id == 10) { ?> <!--2-->
             <form id="team<?= $x ?>" class="validationTeamForm mt-6 flex lg:text-lg [&>div]:grid [&>div]:place-content-center">
                 <!-- refuser -->
                 <p class="w-fit px-6 md:!flex gap-2  md:items-center hover:text-main-red cursor-pointer">
@@ -127,7 +138,7 @@
                     
                     <select id="user-dropdown" multiple class="hidden z-20 w-fit" name="team[]" id="">
                        <?php foreach ($apprenants as $apprenant) { ?>
-                            <option value="<?= $apprenant->id ?>"><?= $apprenant->name ?> <?= $apprenant->surname ?></option>
+                            <option value="<?= $apprenant->id ?>"><?= $apprenant->user_name ?> <?= $apprenant->user_surname ?></option>
                         <?php } 
                         $y ++; // Compte le nombre de formulaire
                         ?>
@@ -140,7 +151,7 @@
                     <p  class="hidden md:block"> Accepter</p><i class="fa-solid fa-check"></i>
                 </button>
             </form>
-        <?php }  else if (isset($_SESSION['user']) && $_SESSION['user']->role->id == 3 && $project->status->id == 11) {?>
+        <?php }  else if (isset($_SESSION['user']) && $_SESSION['user']->role_id == 3 && $project->status->id == 11) {?>
             <a type="submit" href="?action=reSubmitProject&id=<?= $project->id ?>" class="w-fit px-6 md:flex md:items-center mx-auto gap-2 hover:text-main-red cursor-pointer">
                 <p class="hidden md:block">Accepter</p><i class="fa-solid fa-check"></i>
             </a>

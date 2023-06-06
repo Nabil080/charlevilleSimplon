@@ -1,4 +1,4 @@
-<div class="rounded-[5px] border border-main-border min-w-[330px] md:w-[400px]">
+<div class="rounded-[5px] border border-main-border min-w-[330px] md:w-[400px] pb-4">
     <img class="max-h-[140px] md:max-h-[200px] w-full" src="assets/img/formations/devweb" alt="Formation">
     <h3 class="text-main-red font-title text-[20px] pl-3 mt-3 md:pb-4 text-center md:text-[36px]"><?= $promo->name; ?></h3>
 
@@ -16,6 +16,6 @@
     <div class="flex justify-center items-center">
         <p class="pb-2 text-[16px] text-center italic"><?= $promo->status->name ?> le <?= $promo->end; ?></p>
         <span class="w-4 h-4 border-[1px] bg-main-green rounded-full ml-2 mb-2 animate-pulse"></span>
-        
+        <div class="hidden" year-filter="<?=$promo->year?>"></div>
     </div>
 </div>

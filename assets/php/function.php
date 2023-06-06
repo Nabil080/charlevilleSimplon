@@ -317,7 +317,8 @@ function securizePdf(array $filesPdf, string $path)
 
 function securizeText(string $text):bool
 {
-    $array = ['<script', '<script>', '</script>', '<iframe', '<iframe>', '</iframe>', '<img', '<link', '<link>', 'src', 'SELECT', 'DELETE', 'DROP', 'INSERT INTO'];
+    $array = ['<script', '<script>', '</script>', '<iframe', '<iframe>', '</iframe>', '<img', '<link', '<link>', 'href',
+     'src', 'SELECT', 'DELETE', 'DROP', 'INSERT INTO', '<a', '<a>'];
     $bools = [];
     foreach ($array as $key) {
         if (str_contains($text, $key)) {
@@ -344,4 +345,13 @@ function formateDate($date):string
     $datefmt = new IntlDateFormatter('fr_FR', 0, 0, NULL, NULL, 'dd MMMM yyyy');
     $formatedDate = $datefmt->format(date_create($date));
     return $formatedDate;
+}
+
+function getPromoName(string $formation, string $date)
+{
+    $dateArray = explode("-", $date);
+    $year = $dateArray[0];
+    $promo = "$formation $year";
+
+    return $promo;
 }

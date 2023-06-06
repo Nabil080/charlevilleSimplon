@@ -21,8 +21,12 @@
       "message": "Les mots de passe ne sont pas identiques."
     },
     {
+      "name": "passwordNotSafe",
+      "message": "Le mot de passe est trop faible."
+    },
+    {
       "name": "existingEmail",
-      "message": "L'email a déjà été utiliser."
+      "message": "L'email a déjà été utilisé."
     },
     {
       "name": "loginIncorrect",
@@ -30,11 +34,11 @@
     },
     {
       "name": "ErrorCompanyRegister",
-      "message": "Erreur ! Une formation à était lu lors d'une inscription d'entreprise."
+      "message": "Erreur ! Une formation a été lue lors d'une inscription d'entreprise."
     },
     {
       "name": "NoTrainingChosen",
-      "message": "Erreur ! Il n'y pas de formation lu."
+      "message": "Erreur ! Il n'y pas de formation lue."
     },
     {
       "name": "duplicateCandidate",
@@ -53,7 +57,7 @@
   "successMessage": [
     {
       "name": "register",
-      "message": "Votre insciption à bien était enregistrer.<br> Un email vous a été envoyer pour activer votre compte et confirmer votre email."
+      "message": "Votre insciption a bien été enregistrée.<br> Un email vous a été envoyé pour activer votre compte et confirmer votre email."
     },
     {
       "name": "login",
@@ -65,11 +69,15 @@
     },
     {
       "name": "mailForgetPassword",
-      "message": "<span class='font-bold'>Envoie réussi !</span><br> Si un compte appartient à cet email, vous recevrez un lien de demande reset de mot de passse."
+      "message": "<span class='font-bold'>Envoi réussi !</span><br> Si un compte appartient à cet email, vous recevrez un lien de demande de modification de mot de passse."
     },
     {
       "name": "resetPassword",
-      "message": "<span class='font-bold'>Changement réussi !</span><br>Le mot de passe à bien était changé. Vous pouvez maintenant vous connecter."
+      "message": "<span class='font-bold'>Changement réussi !</span><br>Le mot de passe a bien été changé. Vous pouvez maintenant vous connecter."
+    },
+    {
+      "name": "sendMail",
+      "message": "Votre message à bien était envoyé."
     }
   ]
 }

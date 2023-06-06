@@ -1,80 +1,60 @@
-<?php $title = "Développeur Web et Web Mobile"; ?>
+<?php $title = $formation_main->name; ?>
 
 <?php ob_start(); ?>
-<main class="pb-10">
-    <h2
-        class="py-5 bg-white text-center text-[24px] md:text-[36px] lg:text-[48px] font-bold font-title text-main-red uppercase">
-        Développeur Web
-        et Web Mobile
-    </h2>
-    <div class="bg-white px-[10%] xl:px-[15%]">
+<main class="pb-10 px-[10%]">
 
-        <div class="flex justify-center md:gap-10 lg:gap-20">
-            <div
-                class="w-full p-5 lg:bg-main-lightgray lg:border-2 lg:border-gray lg:rounded-lg lg:shadow-[2px_0_3px_2px_rgba(0,0,0,0.5)]">
-                <div class="text-[16px] md:text-[20px] text-justify flex flex-col gap-5">
-                    <p>
-                        De l’analyse du besoin à la mise en ligne, en passant par l’interface et la base de données,
-                        le·la
-                        développeur·se web conçoit et programme des applications web.
-                    </p>
-                    <p>
-                        Le⋅a développeur·se web réalise l’ensemble des fonctionnalités d’un site ou d’une application
-                        web.
-                        Le⋅a
-                        développeur·se web analyse les besoins des clients consignés au préalable dans un cahier des
-                        charges
-                        par
-                        le
-                        chef de projet. Il·elle préconise et met en œuvre une solution technique pour concevoir des
-                        sites
-                        sur
-                        mesure
-                        ou
-                        adapter des solutions techniques existantes.
-                    </p>
+    <div class="flex flex-col lg:flex-row justify-center items-center lg:items-start gap-5 md:gap-10 lg:gap-10">
+        <div class="w-full">
+            <h2 class="pb-10 bg-white text-center text-[24px] md:text-[36px] lg:text-[42px] font-bold font-title text-main-red
+    uppercase">
+                <?= $formation_main->name ?>
+            </h2>
+            <div class="text-[16px] md:text-[20px] text-justify flex flex-col gap-5">
+                <?= $formation_main->description ?>
+            </div>
+        </div>
 
-                    <p class="font-bold text-main-red">
-                        Le métier de développeur Web s’articule alors autour de 2 activités principales :
-                    </p>
-
-                    <p>
-                        Développer la partie front-end d’une application web ou web mobile en intégrant les
-                        recommandations
-                        de
-                        sécurité
-                    </p>
-                    <p>
-                        Développer la partie back-end d’une application web ou web mobile en intégrant les
-                        recommandations
-                        de
-                        sécurité
-                    </p>
-                </div>
+        <aside class="md:w-4/5 lg:w-1/2 pb-5 border-2 border-main-gray rounded-lg ">
+            <div class="lg:h-[180px]">
+                <img class="w-full h-auto rounded-t-lg lg:h-full bg-cover" src="assets/img/formations/devweb"
+                    alt="Formation">
             </div>
 
-            <aside
-                class="hidden max-w-[300px] p-5 lg:flex border-2 border-main-gray rounded-lg text-center flex-col gap-10">
-                <h5 class="text-[20px] font-bold">Chiffres clés du secteur</h5>
-                <div>
-                    <p class="text-[48px] text-main-red font-bold pb-3">+ 3.6%</p>
-                    <p class="text-[16px] font-medium">Croissance du secteur du numérique en 2018</p>
+            <div class="mx-5 py-5 flex flex-col items-center gap-5">
+                <h5 class="text-[28px] lg:text-[20px] text-main-red text-center font-bold font-title">Chiffres clés
+                    du
+                    secteur
+                </h5>
+                <div class="flex flex-col sm:flex-row lg:flex-col justify-center gap-5 text-center">
+                    <?php foreach ($formation_stat as $stat) { ?>
+                    <div class="md:w-1/3 lg:w-full">
+                        <p class="text-[24px] text-main-red font-bold">
+                            <?= $stat['stat_number'] ?>
+                        </p>
+                        <p class="text-[16px] font-medium">
+                            <?= $stat['stat_name'] ?>
+                        </p>
+                    </div>
+                    <?php } ?>
                 </div>
-                <div>
-                    <p class="text-[48px] text-main-red font-bold pb-3">232 000</p>
-                    <p class="text-[16px] font-medium">postes seraient à pourvoir entre 2017 et 2027</p>
-                </div>
-                <div>
-                    <p class="text-[48px] text-main-red font-bold pb-3">49 015 €</p>
-                    <p class="text-[16px] font-medium">revenu annuel brut moyen d'un $nom_de_la_formation</p>
-                </div>
-            </aside>
-        </div>
-        <div class="mt-20 pb-10 hidden md:block text-center">
-            <a href="index.php?action=registerPage&formation_id=1"
-                class="px-10 py-3 border border-2  border-main-red text-main-white font-bold text-lg uppercase bg-main-red rounded-lg hover:bg-main-white hover:text-main-red">
-                Postuler à la formation</a>
-        </div>
+                <hr class="w-48 h-1 mx-auto bg-gray-100 border-0 rounded dark:bg-gray-700">
+                <h5 class="text-[28px] lg:text-[20px] text-main-red font-bold font-title">Métiers Visée</h5>
+                <ul class="grid grid-cols-1 gap-x-8 gap-y-2 sm:grid-cols-2 lg:sm:grid-cols-1 ">
+                    <?php foreach ($formation_job as $job) { ?>
+                    <li>
+                        <?= $job['job_name'] ?>
+                    </li>
+                    <?php } ?>
+
+                </ul>
+            </div>
+
+        </aside>
+    </div>
+    <div class="mt-20 pb-10 hidden md:block text-center">
+        <a href="index.php?action=registerPage&formation_id=<?= $formation_main->id ?>"
+            class="px-10 py-3 border-2  border-main-red text-main-white font-bold text-lg uppercase bg-main-red rounded-lg hover:bg-main-white hover:text-main-red">
+            Postuler à la formation</a>
     </div>
 </main>
 
@@ -86,7 +66,7 @@
         <ul class="grid grid-cols-2 lg:grid-cols-4 " id="myTab" data-tabs-toggle="#myTabContent" role="tablist">
             <li class="border border-white">
                 <button onclick="changeTab(0);"
-                    class="tabChange transition-all duration-[0.4s] cursor-pointer bg-main-red w-full p-5 inline-flex justify-center items-center gap-3 text-[16px] md:text-[28px] text-white aria-selected:bg-main-red aria-selected:text-white aria-selected:hover:text-white">
+                    class="tabChange transition-all duration-[0.4s] cursor-pointer !bg-main-red w-full p-5 inline-flex justify-center items-center gap-3 text-[16px] md:text-[28px] text-white aria-selected:bg-main-red aria-selected:text-white aria-selected:hover:text-white">
                     <i class="fa-sharp fa-solid fa-trophy fa-lg"></i>
                     Compétence
                 </button>
@@ -113,102 +93,60 @@
                 </button>
             </li>
         </ul>
-        <div id="myTabContent" class="bg-white pb-10 px-4">
+        <div id="myTabContent" class="bg-white pb-10 px-8">
             <div class="sectionChange text-[16px] lg:text-[20px]">
+                <?php foreach ($formation_activity as $activity) { ?>
                 <div class="py-4">
-                    <h3 class="text-main-red text-[20px] lg:text-[36px] font-bold">Développer le back-end d'une
-                        application web</h3>
-                    <p class="pb-3 text-[16px] text-main-blue font-bold">RNCP31114BC02</p>
-                    <ul class="list-outside list-disc ml-10">
-                        <li>Créer une base de données</li>
-                        <li>Développer les composants d'accès aux données</li>
-                        <li>Elaborer et mettre en oeuvre des composants dans une application de gestion de contenu
-                            ou
-                            e-commerce</li>
-                    </ul>
-                </div>
-                <div class="py-4">
-                    <h3 class="text-main-red text-[20px] lg:text-[36px] font-bold">Développer le front-end d'une
-                        application web</h3>
-                    <p class="pb-3 text-[16px] text-main-blue font-bold">RNCP31114BC01</p>
-                    <ul class="list-outside list-disc ml-10">
-                        <li>Maquetter une application</li>
-                        <li>Réaliser une interface utilisateur web</li>
-                        <li>Développer une interface utilisateur web dynamique</li>
-                        <li>Réaliser une interface utilisateur avec une solution de gestion de contenu ou e-commerce
+                    <h3 class="text-main-red text-[20px] lg:text-[36px] font-bold">
+                        <?= $activity['name'] ?>
+                    </h3>
+                    <p class="pb-3 text-[16px] text-main-blue font-bold">
+                        <?= $activity['ref'] ?>
+                    </p>
+                    <ul class="list-outside list-disc ml-5 md:ml-10 [&>li]:pb-2">
+                        <?php foreach ($activity['skill'] as $skill) { ?>
+                        <li>
+                            <?= $skill ?>
                         </li>
+                        <?php } ?>
+
                     </ul>
                 </div>
+                <?php } ?>
             </div>
-            <div class="sectionChange hidden px-4 bg-white text-[16px] lg:text-[20px]">
+            <div class="sectionChange hidden bg-white text-[16px] lg:text-[20px]">
                 <div class="py-4">
                     <h3 class="pb-3 text-main-red text-[20px] lg:text-[36px] font-bold">Pas de prérequis mais…</h3>
-                    <ul class="list-outside list-disc ml-10">
-                        <li>Très forte motivation, à prouver !</li>
-                        <li>Découvrir le code soi-même (plateformes d'apprentissage en ligne)</li>
-                        <li>Explorer les principaux métiers du numérique, ce qu’ils font, à quoi ils servent</li>
-                        <li>Vouloir travailler en équipe</li>
-                        <li>Ce que nous cherchons ? De la curiosité, de la créativité, une bonne expression à l’oral
-                            et à l’écrit, une représentation claire du métier… et bien sûr, l’envie de s’engager
-                            dans une formation intense !</li>
+                    <ul class="list-outside list-disc ml-5 md:ml-10 [&>li]:pb-2">
+                        <?php foreach ($formation_admission as $require) { ?>
+                        <li>
+                            <?= $require ?>
+                        </li>
+                        <?php } ?>
                     </ul>
                 </div>
             </div>
-            <div class="sectionChange hidden px-4 bg-white text-[16px] lg:text-[20px]">
-
+            <div class="sectionChange hidden bg-white text-[16px] lg:text-[20px]">
+                <?php foreach ($formation_program as $program) { ?>
                 <div class="py-4">
-                    <h3 class="pb-3 text-main-red text-[20px] lg:text-[36px] font-bold">Phase d’immersion</h3>
-                    <ul class="list-outside list-disc ml-10">
-                        <li>Les mains dans la tech : mise en place de son environnement de travail, première
-                            mise en
-                            application de l’algorithmique et de la programmation</li>
-                        <li>Contractualisation du parcours entre le formateur et les apprenants</li>
-                    </ul>
-                </div>
-                <div class="py-4">
-                    <h3 class="pb-3 text-main-red text-[20px] lg:text-[36px] font-bold">Gestion de projet et qualité
+                    <h3 class="pb-3 text-main-red text-[20px] lg:text-[36px] font-bold">
+                        <?= $program['programme_layout_name'] ?>
                     </h3>
-                    <ul class="list-outside list-disc ml-10">
-                        <li>Méthodes agiles et Scrum</li>
-                        <li>Qualité web, accessibilité</li>
-                        <li>Sécurité et RGPD</li>
-                </div>
-                <div class="py-4">
-                    <h3 class="pb-3 text-main-red text-[20px] lg:text-[36px] font-bold">Fondamentaux
-                </div>
-                <ul class="list-outside list-disc ml-10">
-                    <li>Conception et maquettage d’une application web</li>
-                    <li>Développement d’une interface web</li>
-                    <li>Développement de la partie back-end</li>
-                    <li>Développement de la partie back-end</li>
-                </ul>
-                <div class="py-4">
-                    <h3 class="pb-3 text-main-red text-[20px] lg:text-[36px] font-bold">Approfondissement </h3>
-                    <ul class="list-outside list-disc ml-10">
-                        <li>Interfaces dynamiques et responsives</li>
-                        <li>Patrons de conception et architecture</li>
-                        <li>Frameworks avancés</li>
-                        <li>L’esprit DevOps</li>
+                    <ul class="list-outside list-disc ml-5 md:ml-10 [&>li]:pb-2">
+                        <?= $program['programme_name'] ?>
                     </ul>
                 </div>
-                <div class="py-4">
-                    <h3 class="pb-3 text-main-red text-[20px] lg:text-[36px] font-bold">Une formation
-                        professionalisante</h3>
-                    <ul class="list-outside list-disc ml-10">
-                        <li>Parrainage d'une entreprise pour chaque promotion </li>
-                        <li>Stage et alternance </li>
-                        <li>Simulation d’entretien, job dating </li>
-                        <li>Meet-up</li>
-                        <li>Participation aux jurys</li>
-                    </ul>
-                </div>
+                <?php } ?>
             </div>
-            <div class="sectionChange hidden px-4 bg-white text-[16px] lg:text-[20px]">
+            <div class="sectionChange hidden bg-white text-[16px] lg:text-[20px]">
                 <div class="py-4">
                     <h3 class="pb-3 text-main-red text-[20px] lg:text-[36px] font-bold">Frais de scolarité</h3>
-                    <ul class="list-outside list-disc ml-10">
-                        <li>Pris en charge par la région Grand Est</li>
-                        <li>Rémunération pour l'apprenant (ASP)</li>
+                    <ul class="list-outside list-disc ml-5 md:ml-10 [&>li]:pb-2">
+                        <?php foreach ($formation_fee as $fee) { ?>
+                        <li>
+                            <?= $fee ?>
+                        </li>
+                        <?php } ?>
                     </ul>
                 </div>
             </div>
@@ -216,55 +154,38 @@
     </div>
 </section>
 <div class="bg-main-lightgray md:hidden pb-10 text-center">
-    <a href="index.php?action=registerPage&formation_id=1"
-        class="px-10 py-3 border border-2 border-main-red text-main-white font-bold text-lg uppercase bg-main-red rounded-lg hover:bg-main-white hover:text-main-red">
+    <a href="index.php?action=registerPage&formation_id=<?= $formation_main->id ?>"
+        class="px-10 py-3 border-2 border-main-red text-main-white font-bold text-lg uppercase bg-main-red rounded-lg hover:bg-main-white hover:text-main-red">
         Postuler à la formation
     </a>
 </div>
-<section class="bg-main-lightgray pb-5 px-[10%] xl:px-[15%]">
-    <div class="pb-3 flex items-center gap-4 text-main-red items-center">
-        <i class="fa-sharp fa-solid fa-briefcase fa-2xl"></i>
-        <h3 class="text-[30px] lg:text-[40px] font-bold">Métier ciblé</h3>
-    </div>
-    <div class="pb-5">
-        <ul class="ml-10 list-disc">
-            <li>Développeur Web et Mobile</li>
-            <li>Développeur d'application</li>
-            <li>Développeur front</li>
-            <li>Développeur backend</li>
-        </ul>
-    </div>
-</section>
+
 <section class="bg-main-lightgray pb-20 px-[10%] xl:px-[15%]">
     <div class="pb-3 flex items-center gap-4 text-main-red">
         <i class="fa fa-sharp fa-solid fa-graduation-cap fa-2xl"></i>
         <h3 class="text-[30px] lg:text-[40px] font-bold">Certifications</h3>
     </div>
+    <?php foreach ($formation_certification as $certification) { ?>
     <div class="pb-5">
-        <p class="font-bold">Formation certifiante délivrant une certification inscrite
-            au Répertoire Spécifique</p>
-        <div class="pb-5 flex gap-10 text-main-blue font-bold">
-            <p>RS5487</p>
-            <p>Gérer un projet en mobilisant les méthodes agiles</p>
+        <h6 class="font-bold font-title">
+            <?= $certification['certification_name'] ?>
+        </h6>
+        <a href="<?= $certification['certification_link'] ?>" target="_blank">
+            <div class="pb-5 flex md:gap-10 items-center text-main-blue font-bold">
+                <p>
+                    <?= $certification['certification_ref'] ?>
+                </p>
+                <p class="md:hidden h-[30px] mx-2 border-l-2 border-main-blue"></p>
+                <p>
+                    <?= $certification['certification_refName'] ?>
+                </p>
+            </div>
+        </a>
+        <div class="[&>ul]:ml-5 md:ml-10">
+            <?= $certification['certification_description'] ?>
         </div>
-        <ul class="ml-10 list-disc">
-            <li>Domaine : La certification concerne tous les secteurs car les besoins en gestion de projet agile
-                sont présents dans tous les domaines</li>
-            <li>Possibilité de certification partielle : non</li>
-            <li>Durée de validité des composantes acquises : Permanente</li>
-            <li>Matérialisation officielle de la certification : Certificat de compétences</li>
-        </ul>
     </div>
-    <div>
-        <p class="font-bold">Certification inscrite au
-            Répertoire spécifique</p>
-        <div class="pb-5 flex gap-10 text-main-blue font-bold">
-            <p>RS5599</p>
-            <p>Réaliser des applications web à l’aide d’un système de gestion de contenus</p>
-        </div>
-        <p class="ml-10">La certification concerne les professionnels du secteur de la
-            communication, du marketing et de la vente.</p>
-    </div>
+    <?php } ?>
 </section>
 
 <?php $content = ob_get_clean(); ?>

@@ -16,9 +16,8 @@ class Formation
     public $preview;
     public array $jobs;
 
-    public function __construct($id, $name, $description,$duration, $level, $diploma, $image, $preview, $status)
+    public function __construct($id, $name, $description, $duration, $level, $diploma, $image, $preview, $status)
     {
-
         $this->id = $id;
         $this->name = $name;
         $this->description = $description;
@@ -32,7 +31,7 @@ class Formation
         $this->status = $statusRepo->getStatusById($status);
 
         $jobRepo = new JobRepository;
-        $this->jobs = $jobRepo->getJobsByFormationId($id);
+        $this->jobs = $jobRepo->getJobName($id);
     }
 
 }
@@ -43,14 +42,13 @@ class FormationRepository extends ConnectBdd
         parent::__construct();
     }
 
-    public function getFormationById($id):object
+    public function getFormationById($id): object
     {
-        
         $req = $this->bdd->prepare("SELECT * FROM formation WHERE formation_id = ?");
         $req->execute([$id]);
         $data = $req->fetch(PDO::FETCH_ASSOC);
 
-        $Formation = new Formation (
+        $Formation = new Formation(
             $data['formation_id'],
             $data['formation_name'],
             $data['formation_description'],
@@ -65,7 +63,7 @@ class FormationRepository extends ConnectBdd
         return $Formation;
     }
 
-    public function getFormationLevel($id):string
+    public function getFormationLevel($id): string
     {
         $req = $this->bdd->prepare("SELECT formation_level FROM formation WHERE formation_id = ?");
         $req->execute([$id]);
@@ -74,7 +72,7 @@ class FormationRepository extends ConnectBdd
         return $data['formation_level'];
     }
 
-    public function getFormationName($id):string
+    public function getFormationName($id): string
     {
         $req = $this->bdd->prepare("SELECT formation_name FROM formation WHERE formation_id = ?");
         $req->execute([$id]);
@@ -85,7 +83,7 @@ class FormationRepository extends ConnectBdd
         return $data['formation_name'];
     }
 
-    public function getAllFormations():array
+    public function getAllFormations(): array
     {
         $formationRepository = new FormationRepository;
         $req = $this->bdd->prepare('SELECT formation_id FROM formation');
@@ -103,20 +101,19 @@ class FormationRepository extends ConnectBdd
 
     public function getFormationLevels()
     {
-        $levels =  [];
+        $levels = [];
         $req = $this->bdd->prepare("SELECT formation_level FROM formation WHERE formation_level IS NOT NULL");
         $req->execute();
         $data = $req->fetchAll(PDO::FETCH_COLUMN);
 
-        foreach($data as $level){
-            $levels[] = $level ;
+        foreach ($data as $level) {
+            $levels[] = $level;
         }
-            
+
         $uniqueLevels = array_unique($levels);
 
-        
+
         return $uniqueLevels;
 
     }
 }
-

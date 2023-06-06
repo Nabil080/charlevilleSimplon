@@ -37,7 +37,6 @@
             <!-----Card Formateur------->
             <?php foreach ($formateurs as $formateur) { 
                 include('view/template/_formateur_card.php');
-                
              } ?>
         </div>
 

@@ -1,3 +1,14 @@
+<?php
+$promoRepo = new PromoRepository;
+$promos = $promoRepo->getActivePromos();
+$userRepo = new UserRepository;
+$companies = $userRepo->getAllCompanies();
+$companyMails = [];
+foreach($companies as $company){
+    $companyMails[] = $company->user_email;
+}
+?>
+
 <div>
     <!-- Navigation -->
     <button data-drawer-target="sidebar-multi-level-sidebar" data-drawer-toggle="sidebar-multi-level-sidebar"
@@ -8,7 +19,7 @@
     </button>
 
     <nav id="sidebar-multi-level-sidebar"
-        class="fixed transition-all duration-[0.5s] md:top-20 left-0 z-40 w-full md:w-64 h-screen transition-transform -translate-x-full md:translate-x-0"
+        class="fixed transition-all duration-[0.5s] md:top-16 left-0 z-30 w-full md:w-64 h-screen transition-transform -translate-x-full md:translate-x-0"
         aria-label="Sidebar">
         <div class="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-main-white shadow-md shadow-gray-800">
             <ul class="space-y-2 font-medium">
@@ -71,34 +82,18 @@
                             </a>
                         </li>
                         <ul id="dropdown-dev" class="hidden py-2 text-2xl md:text-xl space-y-2">
-                            <!-- <?php foreach ($promotions as $promotion) { ?> -->
+                            <!-- <?php foreach ($promos as $promo) {
+                                $mailList = $promoRepo->getPromoMailList($promo->id)?> -->
                             <li class="flex items-center">
-                                <input type="checkbox" name="$promotion['nom'];">
-                                <a href="#"
-                                    class="flex items-center w-full p-2 transition duration-75 rounded-lg pl-11 group ">$promotion['nom']</a>
+                                <input type="checkbox" name="<?=join(",", $mailList)?>">
+                                <a href="?action=promotionPage&id=<?=$promo->id?>"
+                                    class="flex items-center w-full p-2 transition duration-75 rounded-lg pl-11 group "><?=$promo->name?></a>
                             </li>
                             <!-- <?php } ?> -->
-
-                            <li class="flex items-center">
-                                <input type="checkbox" name="<?php ?>;">
-                                <a href="#"
-                                    class="flex items-center w-full p-2  transition duration-75 rounded-lg pl-11 group ">Référent
-                                    Digital</a>
-                            </li>
-                            <li class="flex items-center">
-                                <input type="checkbox" name="<?php ?>;">
-                                <a href="#"
-                                    class="flex items-center w-full p-2  transition duration-75 rounded-lg pl-11 group ">TSSR</a>
-                            </li>
-                            <li class="flex items-center">
-                                <input type="checkbox" name="<?php ?>;">
-                                <a href="#"
-                                    class="flex items-center w-full p-2  transition duration-75 rounded-lg pl-11 group ">CDA</a>
-                            </li>
                         </ul>
                         <li class="flex items-center">
-                            <input type="checkbox" name="allEntreprise">
-                            <a href="#"
+                            <input type="checkbox" name="<?=join(",",$companyMails)?>">
+                            <a
                                 class="flex items-center w-full p-2 text-2xl md:text-xl transition duration-75 rounded-lg pl-11 group ">Entreprise</a>
                         </li>
                     </ul>

@@ -9,12 +9,12 @@ const tabChange = document.getElementsByClassName('tabChange');
 function changeTab(y) {
     for (i = 0; i < sectionChange.length; i++) {
         sectionChange[i].classList.add("hidden");
-        tabChange[i].classList.remove("!bg-main-red");
+        tabChange[i].classList.remove("!bg-main-red","bg-main-red");
         tabChange[i].classList.add("bg-main-gray");
 
     }
     sectionChange[y].classList.remove("hidden");
-    tabChange[y].classList.add("!bg-main-red");
+    tabChange[y].classList.add("!bg-main-red","bg-main-red");
 }
 function switchDiv(id1, id2) {
     console.log(id1 + " " + id2);
