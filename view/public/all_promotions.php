@@ -1,4 +1,4 @@
-<?php $title = "Tout les promotions"; 
+<?php $title = "Toutes les promotions"; 
     $PromoRepository = new PromoRepository;
     $promos = $PromoRepository->getPromos();?>
 

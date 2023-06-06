@@ -1,4 +1,4 @@
-<?php $title = "Promotion"; ?>
+<?php $title = $promo->name; ?>
 
 <?php ob_start(); ?>
 <main class="w-[100vw] overflow-x-hidden bg-main-white">
