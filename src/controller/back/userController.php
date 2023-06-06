@@ -287,7 +287,7 @@ try {
                             $bool = $UserRepo->checkPassword($id, $password);
                             if ($bool) {
                                 $bools = $userRepository->updateUserDatas($id, $array);
-                                // header('Location:?action=profilePage&id='.$_GET['id']);
+                                header('Location:?action=profilePage&id='.$_GET['id']);
                             } else {
                                 // erreur : Votre mot de passe est incorrect
                             }
@@ -318,7 +318,10 @@ try {
                     $bools = $userRepository->updateUserDescription($id, $array);
                     header('Location:?action=profilePage&id='.$_GET['id']);
                 }
-            } elseif (isset($_FILES) && !empty($_FILES)) {
+            }elseif (isset($_POST) && $type == 'skills'){
+                $bools = $userRepository->updateUserSkills($id, $_POST);
+                header('Location:?action=profilePage&id='.$_GET['id']);
+            }elseif (isset($_FILES) && !empty($_FILES)) {
                 if ($type == 'avatar') {
                     $array = $_FILES['avatar'];
                     $bools = $userRepository->updateUserAvatar($id, $array);

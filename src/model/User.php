@@ -296,17 +296,19 @@ class UserRepository extends ConnectBdd
     public function updateUserSkills(int $id, array $array): bool | array
     {
         $bools = [];
-        $user_skills = $array['skills'];
         $delete_skills = $this->bdd->prepare("DELETE FROM user_tag WHERE user_id = ?");
         $deleted = $delete_skills->execute([$id]);
-        if (is_array($user_skills)) {
-            foreach ($user_skills as $user_skill) {
-                $req = $this->bdd->prepare("INSERT INTO user_tag (user_id, tag_id) VALUES (?, ?)");
-                $bool = $req->execute([$id, $user_skill]);
-                array_push($bools, $bool);
+        if(isset($array['skills'])){
+            $user_skills = $array['skills'];
+            if (is_array($user_skills)) {
+                foreach ($user_skills as $user_skill) {
+                    $req = $this->bdd->prepare("INSERT INTO user_tag (user_id, tag_id) VALUES (?, ?)");
+                    $bool = $req->execute([$id, $user_skill]);
+                    array_push($bools, $bool);
+                }
             }
-            return $bools;
         }
+        return $bools;
     }
 
     public function updateUserDatas(int $id, array $array): bool | array
