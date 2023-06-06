@@ -155,11 +155,13 @@ $title = "Espace personnel";
                             <select name="user_status" class="border-main-red px-4 py-2">
                                 <option selected disabled>Votre statut</option>
                                 <?php foreach ($allStatus as $eachStatus){ ?>
-                                    <option value="<?= $eachStatus['status_id']?>"><?= $eachStatus['status_name'] ?></option>
+                                    <option value="<?= $eachStatus['status_id']?>"<?php if($eachStatus['status_id'] == $userDatas['status_id']){echo "selected";} ?>>
+                                        <?= $eachStatus['status_name'] ?>
+                                    </option>
                                 <?php } ?>
                             </select>
                             <span>Depuis le :</span>
-                            <input type="date" id="user_status_date" name="user_status_date" class="border-main-red px-4 py-2">
+                            <input type="date" id="user_status_date" name="user_status_date" value="<?=$userDatas['user_status_date']?>" class="border-main-red px-4 py-2">
                             <button type="submit"><i class="fa-solid fa-check text-main-red"></i></button>
                             <i onclick="swapDivsById('user-status','user-status-update')" class="fa-solid fa-xmark text-main-red cursor-pointer"></i>
                         </form>
@@ -170,7 +172,7 @@ $title = "Espace personnel";
                                 <?php if ($userDatas['status_id'] == 13){?> bg-main-green<?php }?>
                                 <?php if ($userDatas['status_id'] == 11){?> bg-main-orange<?php }?>">
                             </span>
-                            <span class="text-[16px] flex justify-center italic"><?= $userDatas['status_name'] ?> depuis <?=  substr($userDatas['user_status_date'], 0,-6) ?></span>
+                            <span class="text-[16px] flex justify-center italic"><?= $userDatas['status_name'] ?> depuis <?= "le ".formateDate($userDatas['user_status_date']) ?></span>
                             <div onclick="swapDivsById('user-status','user-status-update')" class="cursor-pointer" <?= $notMyProfile; ?>>
                                 <i class="fa-solid fa-pen text-main-red w-[20px] ml-3"></i>
                                 <span class="sm:inline-block text-[10px] lg:text-base text-main-red"> Modifier</span>

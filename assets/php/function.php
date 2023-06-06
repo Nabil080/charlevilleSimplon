@@ -298,3 +298,11 @@ function securizeText(string $text):bool
         return $isSafe;
     }
 }
+
+function formateDate($date):string
+{
+    setlocale(LC_TIME,'fr_FR','french','French_France.1252','fr_FR.ISO8859-1','fra');
+    $datefmt = new IntlDateFormatter('fr_FR', 0, 0, NULL, NULL, 'dd MMMM yyyy');
+    $formatedDate = $datefmt->format(date_create($date));
+    return $formatedDate;
+}
