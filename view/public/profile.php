@@ -261,6 +261,11 @@ $title = "Espace personnel";
                             </div>
                         </form>
                         <div id="skills" class="flex gap-4 justify-center sm:justify-normal mx-auto sm:px-4 mt-2 lg:mt-7 mb-4 flex-wrap">
+                            <?php if(empty($userTags)){ ?>
+                                <p>Pas de compétences renseignées</p>
+                                <?php } ?>
+
+
                             <?php foreach ($userTags as $tag) { ?>
                                     <p class="bg-[#F2F2F3] px-4 py-1 border-main-gray border-2 text-[14px] lg:text-[16px] rounded-[50px] mb-2"><?= $tag->name ?></p>
                             <?php } ?>

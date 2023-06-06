@@ -270,7 +270,13 @@ class UserRepository extends ConnectBdd
             } else {
                 $errorTable[] = $AlertMessage->getError('linkedin_error', 'ErrorLinkedinLink');
             }
+        }elseif(isset($array['user_linkedin']) && empty($array['user_linkedin'])){
+            $user_linkedin = $array['user_linkedin'];
+            $req = $this->bdd->prepare("UPDATE user SET user_linkedin = ? WHERE user_id = ?");
+            $bool = $req->execute([$user_linkedin, $id]);
+            array_push($bools, $bool);
         }
+
         if(isset($array['user_github']) &&!empty($array['user_github']))
         {
             if(str_contains($array['user_github'], 'github.com'))
@@ -282,6 +288,11 @@ class UserRepository extends ConnectBdd
             } else {
                 $errorTable[] = $AlertMessage->getError('github_error', 'ErrorGithubLink');
             }
+        }elseif(isset($array['user_github']) && empty($array['user_github'])){
+            $user_github = $array['user_github'];
+            $req = $this->bdd->prepare("UPDATE user SET user_github = ? WHERE user_id = ?");
+            $bool = $req->execute([$user_github, $id]);
+            array_push($bools, $bool);
         }
         if (!empty($errorTable)) {
             $errorJson = json_encode($errorTable);
