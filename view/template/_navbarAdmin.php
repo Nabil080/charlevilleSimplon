@@ -1,4 +1,5 @@
 <?php
+
 $promoRepo = new PromoRepository;
 $promos = $promoRepo->getActivePromos();
 $userRepo = new UserRepository;
