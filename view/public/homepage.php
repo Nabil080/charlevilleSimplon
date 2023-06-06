@@ -142,7 +142,7 @@ $title = "Toutes nos formations";
 
     </div>
 
-    <h1 class="text-main-red font-title text-center text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold pt-4 md:py-8">Nos formations</h1>
+    <h1 id="formations" class="text-main-red font-title text-center text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold pt-4 md:py-8">Nos formations</h1>
 
     <div class="large_screen md:mx-2">
 
