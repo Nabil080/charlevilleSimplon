@@ -18,15 +18,19 @@ class ProgramRepository extends ConnectBdd
 
     public function getProgramByFormation($formation_id): array
     {
-        $Program = new Program;
-        $req = $this->bdd->prepare("SELECT `programme_name`,`programme_layout_name` FROM `programme` as pr INNER JOIN `programme_layout` as pl ON pr.programme_layout_id = pl.programme_layout_id WHERE pr.formation_id = ?");
+        $req = $this->bdd->prepare("SELECT `programme_name`,`programme_layout_name`,pr.programme_layout_id FROM `programme` as pr INNER JOIN `programme_layout` as pl ON pr.programme_layout_id = pl.programme_layout_id WHERE pr.formation_id = ?");
         $req->execute([$formation_id]);
         $data = $req->fetchAll(PDO::FETCH_ASSOC);
 
         return $data;
 
     }
+    public function updateDescription($formation_id, $program_layout_id, $program_description): void
+    {
+
+        $req = "UPDATE `programme` SET `programme_name` = ? WHERE `formation_id`= ? AND `programme_layout_id` = ?";
+        $stmt = $this->bdd->prepare($req);
+        $stmt->execute([$program_description, $formation_id, $program_layout_id]);
+    }
 }
-
-
 ?>

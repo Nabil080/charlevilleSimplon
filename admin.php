@@ -21,10 +21,13 @@ switch ($action) {
     case 'crudProjetPage':
         crudProjetPage();
         break;
-    // Afficher le CRUD users choisie
     // Afficher le CRUD des formations
     // Afficher le CRUD des promos(candidature apprennant)
 
+    // Traitement udpdate FORMATION
+    case 'updateFormationElement':
+        updateFormation();
+        break;
 
     // Traitement formulaire de CONTACT
     case 'contactUsers':

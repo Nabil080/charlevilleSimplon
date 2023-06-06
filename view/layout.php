@@ -60,6 +60,7 @@
     <script src="assets/js/ajax_modalLogin.js"></script>
     <script src="assets/js/ajax_function.js"></script>
     <script src="assets/js/function.js"></script>
+    <script src="assets/js/editor_setup.js"></script>
     <?php if (isset($script))
         echo $script; ?>
 </body>
