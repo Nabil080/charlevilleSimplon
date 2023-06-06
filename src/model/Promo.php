@@ -96,9 +96,11 @@ class PromoRepository extends ConnectBdd
         $order = $order === null ? "ORDER BY promo.status_id DESC" : "ORDER BY $order";
         $limit = $limitRequest === null ? "" : "LIMIT $limitRequest";
 
+        $query = "SELECT * FROM `promo` $filters $order $limit";
+
         $promoRepository = new PromoRepository;
-        $req = $this->bdd->prepare("SELECT * FROM `promo` $filters $order $limit");
-        $req->execute();
+        $req = $this->bdd->prepare($query);
+        $req->execute($execute);
         $datas = $req->fetchAll(PDO::FETCH_ASSOC);
         $promos = [];
 
