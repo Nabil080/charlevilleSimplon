@@ -417,14 +417,15 @@ class ProjectRepository extends ConnectBdd
         $adress = isset($post['adress']) ? $post['adress'] : '17 rue de la grande mare lool';
 
         // traitment fichier pdf
-        $pdf = securizePdf($_FILES['pdf']);
+        $path = "assets/upload/project/";
+        $pdf = securizePdf($_FILES['pdf'], $path);
         if($pdf === false){
             // message d'erreurs dans securizePdf
             $error = true;
         }
 
         // traitment image
-        $image = securizeImage($files['image']);
+        $image = securizeImage($files['image'], $path);
         if($image === false){
             // message d'erreurs dans securizePdf
             $error = true;
@@ -549,7 +550,7 @@ class ProjectRepository extends ConnectBdd
             die;
         }
         if (!empty($image)) { 
-           $req = $this->bdd->prepare("UPDATE project SET project_model_image = ? WHERE project_id = ?");
+            $req = $this->bdd->prepare("UPDATE project SET project_model_image = ? WHERE project_id = ?");
             $bool = $req->execute([$image, $id]);
         }
         return $bool;
@@ -573,7 +574,7 @@ class ProjectRepository extends ConnectBdd
             die;
         }
         if (!empty($pdf)) { 
-           $req = $this->bdd->prepare("UPDATE project SET project_file = ? WHERE project_id = ?");
+            $req = $this->bdd->prepare("UPDATE project SET project_file = ? WHERE project_id = ?");
             $bool = $req->execute([$pdf, $id]);
         }
         return $bool;
