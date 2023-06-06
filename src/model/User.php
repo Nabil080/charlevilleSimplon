@@ -30,7 +30,6 @@ class User
     public $user_tags;
     public $user_highlight;
     public $user_cv;
-    public $user_projects;
 
     public function __construct($id)
     {
@@ -85,7 +84,7 @@ class UserRepository extends ConnectBdd
 {
     public function InsertUser($account): void
     {
-        $Mail = new Mail;
+        $Mail = new Mail();
         $Mail->sendMailActivationAccount($account['email']);
         $token = $Mail->getToken();
 
@@ -127,7 +126,6 @@ class UserRepository extends ConnectBdd
         $stmt->execute([$id]);
         $data = $stmt->fetch(PDO::FETCH_ASSOC);
         $stmt->closeCursor();
-
         return $data;
     }
     public function getIdByEmail($email)
@@ -203,6 +201,274 @@ class UserRepository extends ConnectBdd
         $stmt->closeCursor();
     }
 
+    /* Update */
+    public function updateUserAvatar(int $id, array $array): bool | array
+    {
+        // traitement image
+        $path = "assets/upload/avatar/";
+        $image = securizeImage($array, $path);
+        if($image === false){
+            // message d'erreurs dans securizeImage
+            return $image;
+        }
+        if (!empty($image)) { 
+            $req = $this->bdd->prepare("UPDATE user SET user_avatar = ? WHERE user_id = ?");
+            $bool = $req->execute([$image, $id]);
+            return $bool;
+        }
+    }
+
+    public function updateUserCV(int $id, array $array): bool | array
+    {
+        // traitement pdf
+        $bool = [];
+        $path = 'assets/upload/profile/cv/';
+        $pdf = securizePdf($_FILES['cv'], $path);
+        if($pdf === false){
+            $error = true;
+        }
+        if (!empty($pdf)) { 
+            $req = $this->bdd->prepare("UPDATE user SET user_cv = ? WHERE user_id = ?");
+            $bool = $req->execute([$pdf, $id]);
+        }
+        return $bool;
+    }
+
+    public function updateUserStatus(int $id, array $array): bool | array
+    {
+        $user_status = $_POST['user_status'];
+        $user_status_date = $_POST['user_status_date'];
+        $req = $this->bdd->prepare("UPDATE user SET status_id = ?, user_status_date = ? WHERE user_id = ?");
+        $bool = $req->execute([$user_status, $user_status_date, $id]);
+        return $bool;
+    }
+
+    public function updateUserDescription(int $id, array $array): bool | array
+    {
+        $user_description = $array['description'];
+        $checkText = securizeText($user_description);
+        if ($checkText === false){
+            header('HTTP/1.0 400 Bad Request');
+            echo '<br><p>Le texte envoyé est invalide ou contient des balises non acceptées</p>';
+            exit();
+        } else {
+            $req = $this->bdd->prepare("UPDATE user SET user_description =? WHERE user_id =?");
+            $bool = $req->execute([$user_description, $id]);
+            return $bool;
+        }
+    }
+
+    public function updateUserLinks(int $id, array $array): bool | array
+    {
+        $bools = [];
+        $AlertMessage = new AlertMessage;
+        $errorTable = array();
+        if(isset($array['user_linkedin']) && !empty($array['user_linkedin']))
+        {
+            if(str_contains($array['user_linkedin'], 'linkedin.com'))
+            {
+                $user_linkedin = $array['user_linkedin'];
+                $req = $this->bdd->prepare("UPDATE user SET user_linkedin = ? WHERE user_id = ?");
+                $bool = $req->execute([$user_linkedin, $id]);
+                array_push($bools, $bool);
+            } else {
+                $errorTable[] = $AlertMessage->getError('linkedin_error', 'ErrorLinkedinLink');
+            }
+        }elseif(isset($array['user_linkedin']) && empty($array['user_linkedin'])){
+            $user_linkedin = $array['user_linkedin'];
+            $req = $this->bdd->prepare("UPDATE user SET user_linkedin = ? WHERE user_id = ?");
+            $bool = $req->execute([$user_linkedin, $id]);
+            array_push($bools, $bool);
+        }
+
+        if(isset($array['user_github']) &&!empty($array['user_github']))
+        {
+            if(str_contains($array['user_github'], 'github.com'))
+            {
+                $user_github = $array['user_github'];
+                $req = $this->bdd->prepare("UPDATE user SET user_github = ? WHERE user_id = ?");
+                $bool = $req->execute([$user_github, $id]);
+                array_push($bools, $bool);
+            } else {
+                $errorTable[] = $AlertMessage->getError('github_error', 'ErrorGithubLink');
+            }
+        }elseif(isset($array['user_github']) && empty($array['user_github'])){
+            $user_github = $array['user_github'];
+            $req = $this->bdd->prepare("UPDATE user SET user_github = ? WHERE user_id = ?");
+            $bool = $req->execute([$user_github, $id]);
+            array_push($bools, $bool);
+        }
+        if (!empty($errorTable)) {
+            $errorJson = json_encode($errorTable);
+            header('HTTP/1.0 400 Bad Request');
+            echo $errorJson . '<br><p>Veuillez vérifier le(s) lien(s) envoyé(s).</p>';
+            exit();
+        } else {
+            return $bools;
+        }
+    }
+
+    public function updateUserSkills(int $id, array $array): bool | array
+    {
+        $bools = [];
+        $delete_skills = $this->bdd->prepare("DELETE FROM user_tag WHERE user_id = ?");
+        $deleted = $delete_skills->execute([$id]);
+        if(isset($array['skills'])){
+            $user_skills = $array['skills'];
+            if (is_array($user_skills)) {
+                foreach ($user_skills as $user_skill) {
+                    $req = $this->bdd->prepare("INSERT INTO user_tag (user_id, tag_id) VALUES (?, ?)");
+                    $bool = $req->execute([$id, $user_skill]);
+                    array_push($bools, $bool);
+                }
+            }
+        }
+        return $bools;
+    }
+
+    public function updateUserDatas(int $id, array $array): bool | array
+    {
+        $bools = [];
+        $email = securizeMail($array['email']);
+        $phone = securizePhone($array['phone']);
+        $adress = securizeString($array['adress']);
+        $numero_pe = securizeInteger($array['numero_pe']);
+        $nationality = securizeString($array['nationality']);
+        $new_password = $array['new_password'];
+        $confirm_new_password = $array['confirm_new_password'];
+        if (isset($new_password) && !empty($new_password) && isset($confirm_new_password) && !empty($confirm_new_password)) {
+            $checkNewPassword = securizePassword($new_password, $confirm_new_password);
+            if ($checkNewPassword) {
+                $hashedPassword = $checkNewPassword;
+                $req = $this->bdd->prepare("UPDATE user SET user_password = ? WHERE user_id = ?");
+                $bool = $req->execute([$hashedPassword,$id]);
+                array_push($bools, $bool);
+            }
+        }
+        $req = $this->bdd->prepare("UPDATE user SET user_email = ?, user_numero_pe = ?, user_phone = ?, user_place = ?, user_nationality = ? WHERE user_id = ?");
+        $bool = $req->execute([$email, $numero_pe, $phone, $adress, $nationality, $id]);
+        array_push($bools, $bool);
+
+        return $bools;
+    }
+
+    public function updateUserHighlight(int $id, array $array): bool | array
+    {
+
+        $request = "UPDATE user SET user_highlight = ? WHERE user_id = ?";
+        // var_dump($array);
+        $bools = [];
+        // Envoi d'un projet phare URL
+        if ($array['text'] == 'website'){
+            $website = $array['website'];
+            $checkWebsite = securizeUrl($website);
+            if ($checkWebsite){
+                $req = $this->bdd->prepare($request);
+                $bool = $req->execute([$website, $id]);
+                array_push($bools, $bool);
+            } else {
+                // erreur
+            }
+
+        // Envoi d'un projet phare PDF
+        } elseif ($array['text'] == 'pdf'){
+            $pdf = $_FILES['pdf']['name'];
+            $path = 'assets/upload/profile/highlight/';
+            $checkPdf = securizePdf($_FILES['pdf'], $path);
+            if ($checkPdf && !empty($pdf)){
+                $req = $this->bdd->prepare($request);
+                $bool = $req->execute([$checkPdf, $id]);
+                array_push($bools, $bool);
+            } else {
+                // erreur : vous devez envoyer un fichier pdf valide
+            }
+
+        // Envoi d'un projet phare IMAGE
+        } elseif ($array['text'] == 'image'){
+            $image = $_FILES['image']['name'];
+            $path = 'assets/upload/profile/highlight/';
+            $checkImage = securizeImage($_FILES['image'], $path);
+            if ($checkImage &&!empty($image)){
+                $req = $this->bdd->prepare($request);
+                $bool = $req->execute([$checkImage, $id]);
+                array_push($bools, $bool);
+            } else {
+                // erreur : vous devez envoyer un fichier image valide
+            }
+        }
+        return $bools;
+    }
+
+    public function addMyProject(int $id, array $array): bool | array
+    {
+        $bools = [];
+        $title = securizeString($array['title']);
+        $description = securizeString($array['description']);
+        $url = securizeString($array['url']);
+        $skills = isset($array['skills']) ? $array['skills'] : [];
+        $image = $_FILES['image']['name'];
+            $path = 'assets/upload/profile/highlight/';
+            $checkImage = securizeImage($_FILES['image'], $path);
+            if ($checkImage &&!empty($image)){
+                $req = $this->bdd->prepare("INSERT INTO project (project_name, project_description, project_model_image, project_model_link, user_id, status_id, type_id, project_start) VALUES (?, ?, ?, ?, ?, 12, 2, CURRENT_TIMESTAMP())");
+                $bool = $req->execute([$title, $description, $checkImage, $url, $id]);
+                array_push($bools, $bool);
+                $lastID = $this->bdd->lastInsertID();
+                var_dump($lastID);
+                $request = $this->bdd->prepare("INSERT INTO project_team (project_id, user_id) VALUES (?, ?)");
+                $bool2 = $request->execute([(int)$lastID, $id]);
+                array_push($bools, $bool2);
+                foreach ($skills as $skill) {
+                    $req = $this->bdd->prepare("INSERT INTO project_tag (project_id, tag_id) VALUES (?, ?)");
+                    $bool3 = $req->execute([$lastID, $skill]);
+                    array_push($bools, $bool3);
+                    }
+            } else {
+                // erreur : vous devez envoyer un fichier image valide
+            }
+        return $bools;
+    }
+
+    public function modifyMyProject(int $id, array $array, int $projectID): bool | array
+    {
+        $bools = [];
+        $title = securizeString($array['title']);
+        $description = securizeString($array['description']);
+        $url = securizeString($array['url']);
+        if (isset($array['skills'])) {
+            $skills = $array['skills'];
+        } else {
+            $tagRepo = new TagRepository;
+            $tags = $tagRepo->getProjectTags($projectID);
+            $skills = $tags;
+        }
+        if (isset($array['image'])) {
+            $image = $_FILES['image']['name'];
+            $path = 'assets/upload/profile/highlight/';
+            $checkImage = securizeImage($_FILES['image'], $path);
+        } else {
+            $projectRepo = new ProjectRepository;
+            $image = $projectRepo->getProjectImage($projectID);
+            $checkImage = $image['project_model_image'];
+        }
+        if ($checkImage &&!empty($checkImage)) {
+            $req = $this->bdd->prepare("UPDATE project SET project_name = ?, project_description = ?, project_model_image = ?, project_model_link = ?, user_id = ?, status_id = 12, type_id = 2, project_start = CURRENT_TIMESTAMP() WHERE project_id = ?");
+            $bool = $req->execute([$title, $description, $checkImage, $url, $id, $projectID]);
+            array_push($bools, $bool);
+            $removeSkills = $this->bdd->prepare("DELETE FROM project_tag WHERE project_id =?");
+            $clearSkills = $removeSkills->execute([$projectID]);
+            foreach ($skills as $skill) {
+                $req = $this->bdd->prepare("INSERT INTO project_tag (project_id, tag_id) VALUES (?, ?)");
+                $bool2 = $req->execute([$projectID, $skill->id]);
+                array_push($bools, $bool2);
+            }
+        } else {
+             // erreur : vous devez envoyer un fichier image valide
+        }
+
+        return $bools;
+    }
+}
     public function getLearnersAndFormators($limitRequest = null, $filters = null, $execute = null, $order = null):array
     {
         $filters = $filters === null ? "" : "AND $filters";

@@ -93,10 +93,6 @@ class ProjectRepository extends ConnectBdd
             $project->promo = $Promo;
         }
 
-        // $formationRepo = new FormationRepository;
-        // $Formation = $formationRepo->getFormationById($data['formation_id']);
-        // $project->formation = $Formation;
-
         $Type = new Type;
         $typeRepo = new TypeRepository;
         $Type = $typeRepo->getTypeById($data['type_id']);
@@ -204,6 +200,15 @@ class ProjectRepository extends ConnectBdd
 
         $uniqueDates = array_unique($dates);
         return $uniqueDates;
+    }
+
+    public function getProjectImage(int $id): array
+    {
+        $req = $this->bdd->prepare("SELECT project_model_image FROM project WHERE project_id =?");
+        $req->execute(array($id));
+        $image = $req->fetch(PDO::FETCH_ASSOC);
+
+        return $image;
     }
 
     public function getProjectUsers($id): array
@@ -475,7 +480,6 @@ class ProjectRepository extends ConnectBdd
         $bool = $req->execute([$id]);
         return $bool;
     }
-
 
     public function updateProjectTitle(int $id, array $post):bool
 

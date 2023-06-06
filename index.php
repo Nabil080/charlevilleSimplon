@@ -30,8 +30,13 @@ if (isset($_GET['action']) && $_GET['action'] !== '' && !isset($_GET['admin'])) 
                 case 'myProfile':
                     myProfile();
                     break;
+                case 'updateUserElements':
+                    updateUserElements();
+                    break;
+                case 'deleteMyProject':
+                    deleteMyProject();
+                    break;
             }
-
         }
 
 
@@ -66,12 +71,11 @@ if (isset($_GET['action']) && $_GET['action'] !== '' && !isset($_GET['admin'])) 
 
                 }
                 if ($_SESSION['user']->role_id <= 2) {
-
                     switch ($action) {
                         // Envoie du formulaire de modification de projet (version modal)
                         // Envoi de la demande de suppression de projet
                     }
-                    if ($_SESSION['user']->role_id == 1) {
+                    if ($_SESSION['user']['role_id'] == 1) {
                         require 'admin.php';
                     }
                 }

@@ -473,6 +473,109 @@ function companyPagination()
 
 }
 
+    function updateUserElements()
+    {
+        // var_dump($_POST);
+        // var_dump($_FILES);
+        if ((!isset($_GET['id']) || $_GET['id'] == null) && (!isset($_GET['type']) || $_GET['type'] == null)) {
+            // erreur 404 page not found : Vous devez renseigner un id utilisateur et un type de modification
+        } elseif ((isset($_GET['id']) && $_GET['id'] == $_SESSION['user']['user_id']) && (isset($_GET['type']) && $_GET['type'] !== null)) {
+            $type = $_GET['type'];
+            $id = $_GET['id'];
+            $userRepository = new UserRepository();
+            if (isset($_POST) && empty($_FILES)) {
+                $array = $_POST;
+                // var_dump($array);
+
+                if(!empty($array)){
+                    if ($type == 'status') {
+                        $bools = $userRepository->updateUserStatus($id, $array);
+                        header('Location:?action=profilePage&id='.$_GET['id']);
+                    }elseif ($type == 'links') {
+                        $bools = $userRepository->updateUserLinks($id, $array);
+                        header('Location:?action=profilePage&id='.$_GET['id']);
+                    } elseif ($type == 'skills') {
+                        $bools = $userRepository->updateUserSkills($id, $array);
+                        header('Location:?action=profilePage&id='.$_GET['id']);
+                    }elseif ($type == 'datas') {
+                            if (isset($array['password']) && !empty($array['password'])) {
+                                $password = $array['password'];
+                                $UserRepo = new UserRepository();
+                                $bool = $UserRepo->checkPassword($id, $password);
+                                if ($bool) {
+                                    $bools = $userRepository->updateUserDatas($id, $array);
+                                    header('Location:?action=profilePage&id='.$_GET['id']);
+                                } else {
+                                    // erreur : Votre mot de passe est incorrect
+                                }
+                            } else {
+                                // erreur : Vous devez entrer votre mot de passe pour valider les modifications
+                            }
+                    }elseif ($type == 'description') {
+                        $bools = $userRepository->updateUserDescription($id, $array);
+                        header('Location:?action=profilePage&id='.$_GET['id']);
+                    }
+                // TRAITEMENTS AUTORISÉS MALGRÉ POST VIDE aka suppression
+                }elseif ($type == 'links') {
+                    $bools = $userRepository->updateUserLinks($id, $array);
+                    header('Location:?action=profilePage&id='.$_GET['id']);
+                } elseif ($type == 'skills') {
+                    $bools = $userRepository->updateUserSkills($id, $array);
+                    header('Location:?action=profilePage&id='.$_GET['id']);
+                }
+            }elseif(isset($_FILES) && !empty($_FILES) && isset($_POST) && !empty($_POST)){
+                $array = $_POST;
+                if ($type == 'highlight') {
+                    if ($array['modifyInput'] == 'modify' || $array['modifyInput'] == 'add') {
+                        $bools = $userRepository->updateUserHighlight($id, $array);
+                        header('Location:?action=profilePage&id='.$_GET['id']);
+                    } else {
+                        // erreur : Vous devez choisir si vous souhaitez ajouter ou modifier le projet phare
+                    }
+                } elseif ($type == 'addMyProject') {
+                    $bools = $userRepository->addMyProject($id, $array);
+                    header('Location:?action=profilePage&id='.$_GET['id']);
+                } elseif ($type == 'modifyMyProject') {
+                    if (isset($_GET['projectID']) && $_GET['projectID'] !== null){
+                        $projectID = $_GET['projectID'];
+                        $bools = $userRepository->modifyMyProject($id, $array, $projectID);
+                        header('Location:?action=profilePage&id='.$_GET['id']);
+                    } else {
+                        // erreur : l'ID du projet doit être défini
+                    }
+                }
+            }elseif (isset($_FILES) && !empty($_FILES)) {
+                if ($type == 'avatar') {
+                    $array = $_FILES['avatar'];
+                    $bools = $userRepository->updateUserAvatar($id, $array);
+                    header('Location:?action=profilePage&id='.$_GET['id']);
+                } elseif ($type == 'cv') {
+                    $array = $_FILES['cv'];
+                    $bools = $userRepository->updateUserCV($id, $array);
+                    header('Location:?action=profilePage&id='.$_GET['id']);
+                } else {
+                    header('Location:?action=profilePage&id='.$_GET['id']);
+                }
+            } else {
+                // erreur : vous n'êtes pas autorisé à modifier les données de cet utilisateur
+            }
+        }
+    }
+
+    function deleteMyProject() {
+        if (isset($_POST['project_id'])) {
+            $id = $_POST['project_id'];
+            $projectRepo = new ProjectRepository();
+            $bools = $projectRepo->deleteProject($id);
+            $response = array(
+                        "status" => "success",
+                        "message" => "Le projet a bien été supprimé.",
+                        "project_id" => $id,
+                    );
+                    echo json_encode($response);
+        }
+    }
+
 } catch (Exception $error) {
     echo 'Exception reçue : ', $e->getMessage(), "\n";
 
