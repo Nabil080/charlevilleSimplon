@@ -19,7 +19,7 @@ foreach($companies as $company){
     </button>
 
     <nav id="sidebar-multi-level-sidebar"
-        class="fixed transition-all duration-[0.5s] md:top-20 left-0 z-40 w-full md:w-64 h-screen transition-transform -translate-x-full md:translate-x-0"
+        class="fixed transition-all duration-[0.5s] md:top-16 left-0 z-30 w-full md:w-64 h-screen transition-transform -translate-x-full md:translate-x-0"
         aria-label="Sidebar">
         <div class="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-main-white shadow-md shadow-gray-800">
             <ul class="space-y-2 font-medium">

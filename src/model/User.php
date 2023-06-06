@@ -202,13 +202,64 @@ class UserRepository extends ConnectBdd
         $stmt->execute([2, '', $token, $email]);
         $stmt->closeCursor();
     }
-  
-   public function getAllCandidates(): array
+
+    public function getLearnersAndFormators($limitRequest = null, $filters = null, $execute = null, $order = null):array
     {
-        $candidates = [];
-        $query = "SELECT `user_id` FROM `user` WHERE `role_id` = ?";
+        $filters = $filters === null ? "" : "AND $filters";
+        $execute = $execute === null ? [] : explode(",",$execute);
+        $order = $order === null ? "ORDER BY user.role_id ASC" : "ORDER BY $order";
+        $limit = $limitRequest === null ? "" : "LIMIT $limitRequest";
+
+        $query = "SELECT `user_id` FROM `user` WHERE (`role_id` = 4 OR `role_id` = 2) $filters $order $limit";
         $req = $this->bdd->prepare($query);
-        $req->execute([5]);
+        // var_dump($query);
+        // var_dump($execute);
+        $req->execute($execute);
+        $data = $req->fetchAll(PDO::FETCH_ASSOC);
+
+        $users = [];
+        foreach ($data as $key) {
+            $users[] = new User($key['user_id']);
+        }
+
+        return $users;
+    }
+
+    public function getFilteredLearnersAndFormatorsNumber($filters = null, $execute = null,):int
+    {
+        $filters = $filters === null ? "" : "AND $filters";
+        $execute = $execute === null ? [] : explode(",",$execute);
+        $query = "SELECT COUNT(*) FROM `user` WHERE (`role_id` = 4 OR `role_id` = 2) $filters";
+        // var_dump($query);
+        // var_dump($execute);
+        $req = $this->bdd->prepare($query);
+        $req->execute($execute);
+        $data = $req->fetch(PDO::FETCH_COLUMN);
+
+        return $data;
+    }
+
+    public function getLearnersAndFormatorsNumber():int
+    {
+        $req = $this->bdd->prepare("SELECT COUNT(*) FROM user WHERE (role_id = ? OR role_id = ?)");
+        $req->execute([4,2]);
+        $data = $req->fetch(PDO::FETCH_COLUMN);
+
+        return $data;
+    }
+
+    public function getAllCandidates($limitRequest = null, $filters = null, $execute = null, $order = null): array
+    {
+        $filters = $filters === null ? "" : "AND $filters";
+        $execute = $execute === null ? [] : explode(",",$execute);
+        $order = $order === null ? "ORDER BY user.role_id ASC" : "ORDER BY $order";
+        $limit = $limitRequest === null ? "" : "LIMIT $limitRequest";
+
+
+        $candidates = [];
+        $query = "SELECT `user_id` FROM `user` WHERE `role_id` = 5 $filters $order $limit";
+        $req = $this->bdd->prepare($query);
+        $req->execute($execute);
         $data = $req->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ($data as $candidate) {
@@ -216,6 +267,29 @@ class UserRepository extends ConnectBdd
         }
 
         return $candidates;
+    }
+
+    public function getFilteredCandidatesNumber($filters = null, $execute = null,):int
+    {
+        $filters = $filters === null ? "" : "AND $filters";
+        $execute = $execute === null ? [] : explode(",",$execute);
+        $query = "SELECT COUNT(*) FROM `user` WHERE `role_id` = 5 $filters";
+        // var_dump($query);
+        // var_dump($execute);
+        $req = $this->bdd->prepare($query);
+        $req->execute($execute);
+        $data = $req->fetch(PDO::FETCH_COLUMN);
+
+        return $data;
+    }
+
+    public function getCandidatesNumber():int
+    {
+        $req = $this->bdd->prepare("SELECT COUNT(*) FROM user WHERE role_id = ?");
+        $req->execute([5]);
+        $data = $req->fetch(PDO::FETCH_COLUMN);
+
+        return $data;
     }
 
     public function getAllLearners(): array
@@ -234,12 +308,18 @@ class UserRepository extends ConnectBdd
         return $learners;
     }
 
-    public function getAllCompanies(): array
+    public function getAllCompanies($limitRequest = null, $filters = null, $execute = null, $order = null): array
     {
+        $filters = $filters === null ? "" : "AND $filters";
+        $execute = $execute === null ? [] : explode(",",$execute);
+        $order = $order === null ? "ORDER BY user.role_id ASC" : "ORDER BY $order";
+        $limit = $limitRequest === null ? "" : "LIMIT $limitRequest";
+
+
         $companies = [];
-        $query = "SELECT `user_id` FROM `user` WHERE `role_id` = ? ";
+        $query = "SELECT `user_id` FROM `user` WHERE `role_id` = 3 $filters $order $limit";
         $req = $this->bdd->prepare($query);
-        $req->execute([3]);
+        $req->execute($execute);
         $data = $req->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ($data as $company) {
@@ -247,6 +327,29 @@ class UserRepository extends ConnectBdd
         }
 
         return $companies;
+    }
+
+    public function getFilteredCompaniesNumber($filters = null, $execute = null,):int
+    {
+        $filters = $filters === null ? "" : "AND $filters";
+        $execute = $execute === null ? [] : explode(",",$execute);
+        $query = "SELECT COUNT(*) FROM `user` WHERE `role_id` = 3 $filters";
+        // var_dump($query);
+        // var_dump($execute);
+        $req = $this->bdd->prepare($query);
+        $req->execute($execute);
+        $data = $req->fetch(PDO::FETCH_COLUMN);
+
+        return $data;
+    }
+
+    public function getCompaniesNumber():int
+    {
+        $req = $this->bdd->prepare("SELECT COUNT(*) FROM user WHERE role_id = ?");
+        $req->execute([3]);
+        $data = $req->fetch(PDO::FETCH_COLUMN);
+
+        return $data;
     }
 
     public function getAllFormators(): array

@@ -164,7 +164,7 @@
                 <!-- formulaire d'edit 1 -->
                 
                 <div class="w-full bg-gray-200 rounded-full h-2.5 mb-4">
-                    <div class="bg-green-600 h-2.5 rounded-full" style="width: <?= $progress->number ?>%"></div>
+                    <div class="progressBar bg-green-600 h-2.5 rounded-full" data-width="<?= $progress->number ?>" style="width: <?= $progress->number ?>%"></div>
                 </div>
             <?php if ($isMyProject == true) { ?>
 
@@ -360,6 +360,7 @@
 <?php ob_start(); ?>
 
 <script src="assets/js/tabs.js"></script>
+<script src="assets/js/project.js"></script>
 <script src="assets/js/editor_setup.js"></script>
 
 <?php $script = ob_get_clean(); ?>
