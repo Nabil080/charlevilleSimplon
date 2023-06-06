@@ -262,6 +262,8 @@ try {
 
     function updateUserElements()
     {
+        var_dump($_POST);
+        var_dump($_FILES);
         if ((!isset($_GET['id']) || $_GET['id'] == null) && (!isset($_GET['type']) || $_GET['type'] == null)) {
             // erreur 404 page not found : Vous devez renseigner un id utilisateur et un type de modification
         } elseif ((isset($_GET['id']) && $_GET['id'] == $_SESSION['user']['user_id']) && (isset($_GET['type']) && $_GET['type'] !== null)) {
@@ -295,27 +297,7 @@ try {
                             } else {
                                 // erreur : Vous devez entrer votre mot de passe pour valider les modifications
                             }
-                    } elseif ($type == 'highlight') {
-                        if ($array['modifyInput'] == 'modify' || $array['modifyInput'] == 'add') {
-                            $bools = $userRepository->updateUserHighlight($id, $array);
-                            header('Location:?action=profilePage&id='.$_GET['id']);
-                        } else {
-                            // erreur : Vous devez choisir si vous souhaitez ajouter ou modifier le projet phare
-                        }
-                        $bools = $userRepository->updateUserHighlight($id, $array);
-                        header('Location:?action=profilePage&id='.$_GET['id']);
-                    } elseif ($type == 'addMyProject') {
-                        $bools = $userRepository->addMyProject($id, $array);
-                        header('Location:?action=profilePage&id='.$_GET['id']);
-                    } elseif ($type == 'modifyMyProject') {
-                        if (isset($_GET['projectID']) && $_GET['projectID'] !== null){
-                            $projectID = $_GET['projectID'];
-                            $bools = $userRepository->modifyMyProject($id, $array, $projectID);
-                            header('Location:?action=profilePage&id='.$_GET['id']);
-                        } else {
-                            // erreur : l'ID du projet doit être défini
-                        }
-                    } elseif ($type == 'description') {
+                    }elseif ($type == 'description') {
                         $bools = $userRepository->updateUserDescription($id, $array);
                         header('Location:?action=profilePage&id='.$_GET['id']);
                     }
@@ -327,6 +309,29 @@ try {
                     $bools = $userRepository->updateUserSkills($id, $array);
                     header('Location:?action=profilePage&id='.$_GET['id']);
                 }
+            }elseif(isset($_FILES) && !empty($_FILES) && isset($_POST) && !empty($_POST)){
+                $array = $_POST;
+                if ($type == 'highlight') {
+                    if ($array['modifyInput'] == 'modify' || $array['modifyInput'] == 'add') {
+                        $bools = $userRepository->updateUserHighlight($id, $array);
+                        header('Location:?action=profilePage&id='.$_GET['id']);
+                    } else {
+                        // erreur : Vous devez choisir si vous souhaitez ajouter ou modifier le projet phare
+                    }
+                    $bools = $userRepository->updateUserHighlight($id, $array);
+                    header('Location:?action=profilePage&id='.$_GET['id']);
+                } elseif ($type == 'addMyProject') {
+                    $bools = $userRepository->addMyProject($id, $array);
+                    header('Location:?action=profilePage&id='.$_GET['id']);
+                } elseif ($type == 'modifyMyProject') {
+                    if (isset($_GET['projectID']) && $_GET['projectID'] !== null){
+                        $projectID = $_GET['projectID'];
+                        $bools = $userRepository->modifyMyProject($id, $array, $projectID);
+                        header('Location:?action=profilePage&id='.$_GET['id']);
+                    } else {
+                        // erreur : l'ID du projet doit être défini
+                    }
+                }
             }elseif (isset($_FILES) && !empty($_FILES)) {
                 if ($type == 'avatar') {
                     $array = $_FILES['avatar'];
@@ -336,13 +341,12 @@ try {
                     $array = $_FILES['cv'];
                     $bools = $userRepository->updateUserCV($id, $array);
                     header('Location:?action=profilePage&id='.$_GET['id']);
+                } else {
+                    header('Location:?action=profilePage&id='.$_GET['id']);
                 }
-
             } else {
-                header('Location:?action=profilePage&id='.$_GET['id']);
+                // erreur : vous n'êtes pas autorisé à modifier les données de cet utilisateur
             }
-        } else {
-            // erreur : vous n'êtes pas autorisé à modifier les données de cet utilisateur
         }
     }
 
