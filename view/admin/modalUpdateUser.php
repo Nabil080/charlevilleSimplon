@@ -55,7 +55,7 @@ if(isset($candidate)){
                         <input type="text" name="nationality" class=" border text-sm rounded-md block w-full p-2.5 border-main-red text-black" value="<?=$user->user_nationality?>" required>
                     </div>
                     <?php }
-                    // INPUT PAS FORMATEUR/ENTREPRISE
+                    // INPUT PAS FOR MATEUR/ENTREPRISE
                     if($user->role_id > 3){ ?>
                     <div>
                         <label for="number" class="block mb-2 text-sm font-medium  text-main-red">Numéro Pôle Emploi</label>

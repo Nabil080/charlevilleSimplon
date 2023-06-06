@@ -1,5 +1,4 @@
-function updateContact(){
-
+function updateContact() {
   const tableRows = document.querySelectorAll("table tbody tr");
   const contactInput = document.querySelector("#emailContact");
 
@@ -8,26 +7,27 @@ function updateContact(){
       "table tbody tr button[data-modal-target=modal-contact]"
     );
     contactButton.addEventListener("click", (e) => {
-      contactInput.value = e.target.dataset.userMail;
+      mailToInput = e.target.dataset.userMail;
+      contactInput.value = mailToInput;
     });
   });
 
-  const navbarContact = document.querySelector("#dropdown-contact")
-  const navbarContactButton = document.querySelector("#contactValidation")
-  const checkboxes = navbarContact.querySelectorAll("input[type=checkbox]")
+  const navbarContact = document.querySelector("#dropdown-contact");
+  const navbarContactButton = document.querySelector("#contactValidation");
+  const checkboxes = navbarContact.querySelectorAll("input[type=checkbox]");
 
-  navbarContactButton.addEventListener('click', (event) => {
-  let mailList = []
+  navbarContactButton.addEventListener("click", (event) => {
+    let mailList = [];
 
-    checkboxes.forEach(checkbox => {
-      if(checkbox.checked){
+    checkboxes.forEach((checkbox) => {
+      if (checkbox.checked) {
         // (console.log(checkbox))
-        mailList.push(checkbox.name)
+        mailList.push(checkbox.name);
       }
     });
-    contactInput.value = mailList.join(',');
+    contactInput.value = mailList.join(",");
     console.log(mailList);
-  })
+  });
 }
 
-updateContact()
+updateContact();

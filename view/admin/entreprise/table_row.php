@@ -19,7 +19,7 @@
     <td class="px-4 py-3 border">
         <button data-user-mail="<?= $user->user_email ?>" data-user-id="<?= $user->user_id ?>" data-user-name="<?= $user->user_name, ' ', $user->user_surname ?> " data-modal-target="modal-contact" data-modal-toggle="modal-contact" class="block w-full md:w-auto text-white bg-main-gray hover:bg-gray-900 focus:ring-4 focus:outline-none 
                         font-medium rounded-lg text-sm px-5 py-2.5 mt-2 mx-auto text-center" type="button">
-            <i class="fa-solid fa-envelope text-main-white"></i>
+            <i class="select-none pointer-events-none fa-solid fa-envelope text-main-white"></i>
         </button>
     </td>
     <td class="px-4 py-3 mx-auto items-center text-center">
