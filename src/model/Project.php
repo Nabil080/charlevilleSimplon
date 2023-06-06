@@ -140,7 +140,10 @@ class ProjectRepository extends ConnectBdd
         $order = $order === null ? "ORDER BY project.status_id ASC" : "ORDER BY $order";
         $limit = $limitRequest === null ? "" : "LIMIT $limitRequest";
 
-        $query = "SELECT project_id FROM project JOIN formation ON project.formation_id = formation.formation_id $filters $order $limit";
+        $query =
+        "SELECT project.project_id FROM project
+        JOIN promo ON promo.promo_id = project.promo_id
+        JOIN formation ON promo.formation_id = formation.formation_id $filters $order $limit";
         // var_dump($query);
         // var_dump($execute);
         $req = $this->bdd->prepare($query);
@@ -172,7 +175,10 @@ class ProjectRepository extends ConnectBdd
     {
         $filters = $filters === null ? "" : "WHERE $filters";
         $execute = $execute === null ? [] : explode(",",$execute);
-        $query = "SELECT COUNT(*) FROM project JOIN formation ON project.formation_id = formation.formation_id $filters"; 
+        $query =
+        "SELECT COUNT(*) FROM project
+        JOIN promo ON promo.promo_id = project.promo_id
+        JOIN formation ON promo.formation_id = formation.formation_id $filters";
         // var_dump($query);
         // var_dump($execute);
         $req = $this->bdd->prepare($query);
