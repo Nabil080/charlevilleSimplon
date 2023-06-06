@@ -105,6 +105,9 @@ class PromoRepository extends ConnectBdd
 
         foreach ($datas as $data)
         {
+            // Update automatiquement le statut de la promo aux dates requises
+            $promoRepository->updatePromoStatus($data['promo_start'], $data['promo_end'], $data['promo_id']);
+
             $Promo = new Promo(
                 $data['promo_id'],
                 $data['promo_name'],
@@ -489,5 +492,34 @@ class PromoRepository extends ConnectBdd
             }
         }
     }
+
+    
+    public function updatePromoStatus(string $starting_date, string $ending_date, int $promo_id)
+    {
+        $today = date('Y-m-d');
+        $origin = new DateTimeImmutable($today);
+        $start = new DateTimeImmutable($starting_date);
+        $end = new DateTimeImmutable($ending_date);
+        $interval_start = $origin->diff($start);
+        $interval_end = $end->diff($origin);
+        var_dump($starting_date, $ending_date, $today);
+        var_dump($interval_start, $interval_end);
+        die;
+        if ($interval_end->invert == 0 && $interval_end->days > 1)
+        {
+            $req = $this->bdd->prepare("UPDATE promo SET status_id =? WHERE promo_id=?");
+            $req->execute([13, $promo_id]);
+        } elseif($interval_start->invert == 0 && $interval_start->days > 90)
+        {
+            $req = $this->bdd->prepare("UPDATE promo SET status_id =? WHERE promo_id= ?");
+            $req->execute([14, $promo_id]);
+        }
+        elseif ($interval_start->invert == 1)
+        {
+            $req = $this->bdd->prepare("UPDATE promo SET status_id =? WHERE promo_id= ?");
+            $req->execute([12, $promo_id]);
+        }
+    }
+
 
 }
