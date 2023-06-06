@@ -79,8 +79,6 @@ try {
                     }
                 }
             }
-        } else {
-            homepage();
         }
     } else {
         homepage();

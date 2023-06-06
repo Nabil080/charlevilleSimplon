@@ -13,7 +13,7 @@ $title = "Espace personnel";
 
     <?php
     // Gestion page visite de profil ou page MON profil
-    if($_SESSION['user']->role_id == 1){
+    if(isset($_SESSION['user']) && $_SESSION['user']->role_id == 1){
         $notMyProfile = '';
     } elseif (!isset($isMyProfile) || $isMyProfile == false)
     {

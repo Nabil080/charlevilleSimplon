@@ -34,13 +34,6 @@ $formations = $formationRepo->getAllFormations(); ?>
                   </button>
                   <div id="dropdown" class="z-50 border-main-lightgray hidden  bg-opacity-90  bg-gray-400 text-main-white blur-[0.3px] rounded-lg shadow w-fit mr-4 pl-0">
                       <ul class="z-50 relative py-2 md:py-0 px-2 md:px-0 text-sm leading-9 sm:leading-[60px] divide-y border-2 border-main-red divide-main-red rounded-[4px]" aria-labelledby="dropdownDefaultButton">
-                      <li class="md:hover:bg-main-lightred">
-                <a
-                  href="index.php#formations"
-                  class="block px-4 py-2 text-[22px] sm:text-[32px] md:text-[20px]"
-                  >Toutes les formations</a
-                >
-            </li>
                       <?php foreach($formations as $formation){ ?>
               <li class="md:hover:bg-main-lightred">
                 <a
@@ -101,7 +94,7 @@ $formations = $formationRepo->getAllFormations(); ?>
                 } else {
                     ?>
                     <button type="button" id="connexion"
-                        class="text-[24px] sm:text-[36px] md:text-[20px] xl:text-[24px] cursor-pointer"
+                        class="text-[24px] sm:text-[36px] md:text-[20px] xl:text-[24px] text-left md:text-center cursor-pointer"
                         data-modal-target="login-modal" data-modal-toggle="login-modal">Connexion</button>
                     <?php
                 }

@@ -134,12 +134,12 @@ function profilePage()
             homepage();
 
         } else {
-            myprofile();
+            myProfile();
             // header('Location:?action=homepage');
         }
 
     }
-    else if (isset($_GET['id']) && $_GET['id'] == $_SESSION['user']->user_id) {
+    else if (isset($_GET['id']) && isset($_SESSION['user']) && ($_GET['id'] == $_SESSION['user']->user_id)) {
         myProfile();
     } else {
         $id = $_GET['id'];
