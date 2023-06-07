@@ -140,6 +140,8 @@ $formations = $formationRepo->getAllFormations(); ?>
               class="z-50 relative py-2 md:py-0 px-6 md:px-0 text-sm leading-9 sm:leading-[60px] text-gray-700 divide-y border-2 border-main-red divide-main-red rounded-[4px]"
               aria-labelledby="dropdownAccountDefaultButton"
             >
+            <?php if (isset($_SESSION['user']) && $_SESSION['user']->role_id !== 3) {?>
+
               <li class="md:hover:bg-main-lightred">
                 <a
                   href="?action=profilePage"
@@ -147,7 +149,8 @@ $formations = $formationRepo->getAllFormations(); ?>
                   >Profile</a
                 >
               </li>
-              <?php if (isset($_SESSION['user']) && $_SESSION['user']->role_id == 1) ?>
+              <?php } ?>
+              <?php if (isset($_SESSION['user']) && $_SESSION['user']->role_id == 1) {?>
               <li class="md:hover:bg-main-lightred">
                 <a
                   href="?action=crudLearnerPage"
