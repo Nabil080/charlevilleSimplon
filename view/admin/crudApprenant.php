@@ -2,19 +2,19 @@
     <thead class="text-xs text-gray-700 uppercase bg-main-red text-main-white ">
         <tr>
             <th scope="col" class="px-4 py-3 text-center">
-                <?= "" ?> Nom
+                Nom
             </th>
             <th scope="col" class="px-4 py-3 text-center">
-                <?= "" ?> Prénom
+                Prénom
             </th>
             <th scope="col" class="px-4 py-3 text-center">
-                <?= "" ?> Promo
+                Promo
             </th>
             <th scope="col" class="px-4 py-3 text-center">
-                <?= "" ?> Plus d'infos
+                Plus d'infos
             </th>
             <th scope="col" class="px-4 py-3 text-center">
-                <?= "" ?> Contact
+                Contact
             </th>
             <th scope="col" class="px-4 py-3 text-center">
                 Modifier
@@ -36,3 +36,4 @@
     </tbody>
 </table>
 <div id="loading"></div>
+<div id="modals"></div>

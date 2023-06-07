@@ -140,7 +140,6 @@ async function updateData(currentPage = 1){
             candidatesRange.innerHTML = `Résultats <span class="font-semibold text-gray-900">${limitStart + 1}-${projectsCount}</span>`
         }
         candidateNumber.innerHTML = `sur <span class="font-semibold text-gray-900">${projectsCount}</span>`
-        candidateNumber.innerHTML = projectsCount
 
         if(projectsCount === 0){
             candidatesRange.innerHTML = `Aucun utilisateur correspondant.`

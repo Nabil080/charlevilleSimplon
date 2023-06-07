@@ -69,8 +69,4 @@
                     <p class="text-sm pt-0.5 text-left font-light"><?=$project->company_adress?></p>
                 </div>
             </div>
-            <!-- data filtres-->
-            <div class="hidden" formation-filter="formation-<?=$project->promo->formation_id?>"></div>
-            <div class="hidden" year-filter="<?=$project->start?>"></div>
-
         </article>

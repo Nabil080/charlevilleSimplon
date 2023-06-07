@@ -402,15 +402,19 @@ function learnerPagination()
     $filtered = $UserRepo->getFilteredLearnersAndFormatorsNumber($filter,$execute);
     $users = $UserRepo->getLearnersAndFormators($limit,$filter,$execute);
     $usersHTML = [];
+    $modalsHTML = [];
     foreach($users as $user){
         ob_start();
             include("view/admin/apprenant/table_row.php");
-            include("view/admin/modalUpdateUser.php");
             include("view/admin/modalInfos.php");
             include("view/admin/modalProjet.php");
         $content = ob_get_clean();
-
         $usersHTML[]= $content;
+
+        ob_start();
+            include("view/admin/modalUpdateUser.php");
+        $content = ob_get_clean();
+        $modalsHTML[] = $content;
     }
 
     $response = array(
@@ -421,6 +425,7 @@ function learnerPagination()
         "query" => "WHERE $filter",
         "limit" => $limit,
         "candidates" => $usersHTML,
+        "modals" => $modalsHTML,
     );
 
     echo json_encode($response);

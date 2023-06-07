@@ -38,7 +38,7 @@
                         </div>
                     </div>
                     <section id="simplon_projects_<?=$user->user_id?>" class="sectionChange">
-                        <?php 
+                        <?php
                             // var_dump($user->user_id);
                             $projects = $UserRepo->getUserSimplonProjects($user->user_id);
                             foreach($projects as $project){
@@ -47,7 +47,7 @@
                         ?>
                     </section>
                     <section id="perso_projects_<?=$user->user_id?>" class="sectionChange hidden projet-cards w-11/12 mt-2 gap-6 mx-auto flex flex-col justify-center lg:flex-row lg:flex-wrap">
-                    <?php 
+                    <?php
                             $projects = $UserRepo->getUserPersonnalProjects($user->user_id);
                             foreach($projects as $project){
                                 include('view/template/_project_perso_card.php');

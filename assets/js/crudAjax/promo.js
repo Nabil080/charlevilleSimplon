@@ -176,7 +176,7 @@ async function updateData(currentPage = 1){
         updateModifPromo();
         // * Ajoute script modal validation :
         validationForm();
-        // * Ajoute script validation ajax : 
+        // * Ajoute script validation ajax :
         validationAjax();
 }
 
