@@ -149,8 +149,9 @@ function assignTeamToProject(i, x)
 {
     if (validationTeamForm.length > 0){
         assignTeamToProjectTreatment(i);
-        console.log(x);
-        console.log(i);
+        
+        const form = document.getElementById("team" + x);
+        form.classList.add("hidden");
 
         const curr = "status" + x;
         const status = document.getElementById(curr);
