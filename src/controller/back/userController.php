@@ -359,14 +359,18 @@ function candidatePagination()
     $users = $UserRepo->getAllCandidates($limit,$filter,$execute);
 
     $usersHTML = [];
+    $modalsHTML = [];
     foreach($users as $candidate){
         ob_start();
             include('view/admin/candidate/table_row.php');
-            include("view/admin/modal/modalUpdateUser.php");
             include("view/admin/candidate/modalCandidature.php");
         $content = ob_get_clean();
-
         $usersHTML[]= $content;
+
+        ob_start();
+            include("view/admin/modal/modalUpdateUser.php");
+        $content = ob_get_clean();
+        $modalsHTML[] = $content;
     }
 
     $response = array(
@@ -377,6 +381,7 @@ function candidatePagination()
         "query" => "WHERE $filter",
         "limit" => $limit,
         "candidates" => $usersHTML,
+        "modals" => $modalsHTML,
     );
 
     echo json_encode($response);

@@ -16,6 +16,7 @@ function stopLoading(){
     document.querySelector('#loading').innerHTML = ''
 }
 
+const modalDiv = document.querySelector('#modals')
 // PAGINATION
 const candidateTable = document.querySelector('tbody');
 const paginationDiv = document.querySelector('#pagination');
@@ -149,6 +150,7 @@ async function updateData(currentPage = 1){
         candidateTable.innerHTML = data.candidates.join('');
 
         // * CREER LES MODALS :
+        modalDiv.innerHTML = data.modals
         const modalButtons = document.querySelectorAll('tbody [data-modal-target]')
         console.log(modalButtons)
         modalButtons.forEach(button => {

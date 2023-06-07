@@ -176,15 +176,16 @@ class ProjectRepository extends ConnectBdd
     public function getAllProjects($limitRequest = null, $filters = null, $execute = null, $order = null):array
     {
         $projects = [];
-        $filters = $filters === null ? "" : "WHERE $filters";
+        $filters = $filters === null ? "" : "AND $filters";
         $execute = $execute === null ? [] : explode(",",$execute);
-        $order = $order === null ? "ORDER BY project.status_id ASC" : "ORDER BY $order";
+        $order = $order === null ? "ORDER BY project.status_id DESC" : "ORDER BY $order";
         $limit = $limitRequest === null ? "" : "LIMIT $limitRequest";
 
         $query =
         "SELECT project.project_id FROM project
         JOIN promo ON promo.promo_id = project.promo_id
-        JOIN formation ON promo.formation_id = formation.formation_id $filters $order $limit";
+        JOIN formation ON promo.formation_id = formation.formation_id
+        WHERE type_id != 2 $filters $order $limit";
         // var_dump($query);
         // var_dump($execute);
         $req = $this->bdd->prepare($query);
@@ -205,7 +206,7 @@ class ProjectRepository extends ConnectBdd
 
     public function getProjectsNumber():int
     {
-        $req = $this->bdd->prepare("SELECT COUNT(*) FROM project");
+        $req = $this->bdd->prepare("SELECT COUNT(*) FROM project WHERE type_id != 2");
         $req->execute();
         $data = $req->fetch(PDO::FETCH_COLUMN);
 
@@ -214,12 +215,13 @@ class ProjectRepository extends ConnectBdd
 
     public function getFilteredProjectsNumber($filters = null,$execute = null):int
     {
-        $filters = $filters === null ? "" : "WHERE $filters";
+        $filters = $filters === null ? "" : "AND $filters";
         $execute = $execute === null ? [] : explode(",",$execute);
         $query =
         "SELECT COUNT(*) FROM project
         JOIN promo ON promo.promo_id = project.promo_id
-        JOIN formation ON promo.formation_id = formation.formation_id $filters";
+        JOIN formation ON promo.formation_id = formation.formation_id
+        WHERE type_id != 2 $filters";
         // var_dump($query);
         // var_dump($execute);
         $req = $this->bdd->prepare($query);

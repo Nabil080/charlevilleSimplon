@@ -61,7 +61,7 @@ const getProjets = (limitStart = 0,limitEnd = 6) => {
             formationFilters.push(checkbox.dataset.formationId)
         }
     })
-    let formationString = formationFilters.map(id => `project.formation_id = ?`).join(' OR ') ;
+    let formationString = formationFilters.map(id => `promo.formation_id = ?`).join(' OR ') ;
     if(formationString != ""){formationString = `(${formationString})`}
     let formationExecute = formationFilters.map(id => `${id}`)
     console.log(`Filtre de formations : ${formationString}`)
