@@ -3,11 +3,11 @@ session_start();
 require 'src/model/ConnectBdd.php';
 
 // var_dump($_SESSION['user']);
-// $_SESSION['user'] = (object) array(
-//     'user_id' => 2,
-//     'status_id' => 1,
-//     'role_id' => 4,
-// );
+$_SESSION['user'] = (object) array(
+    'user_id' => 2,
+    'status_id' => 1,
+    'role_id' => 1,
+);
 
 
 // var_dump($_SESSION);
@@ -63,22 +63,18 @@ try {
                         break;
                 }
             }
-            if ($_SESSION['user']->role_id <= 2) {
+
+                if ($_SESSION['user']->role_id <= 2) {
                 switch ($action) {
                     // Envoie du formulaire de modification de projet (version modal)
                     // Envoi de la demande de suppression de projet
+                }
+                }
 
+                if ($_SESSION['user']->role_id == 1) {
+                    require 'admin.php';
                 }
-                if ($_SESSION['user']->role_id <= 2) {
-                    switch ($action) {
-                        // Envoie du formulaire de modification de projet (version modal)
-                        // Envoi de la demande de suppression de projet
-                    }
-                    if ($_SESSION['user']->role_id == 1) {
-                        require 'admin.php';
-                    }
-                }
-            }
+                
         }
     } else {
         homepage();
