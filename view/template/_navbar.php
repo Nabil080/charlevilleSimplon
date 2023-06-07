@@ -147,6 +147,7 @@ $formations = $formationRepo->getAllFormations(); ?>
                   >Profile</a
                 >
               </li>
+              <?php if (isset($_SESSION['user']) && $_SESSION['user']->role_id == 1) ?>
               <li class="md:hover:bg-main-lightred">
                 <a
                   href="?action=crudLearnerPage"
@@ -154,6 +155,7 @@ $formations = $formationRepo->getAllFormations(); ?>
                   >Admin</a
                 >
               </li>
+              <?php } ?>
               <li class="md:hover:bg-main-lightred">
                 <a
                   href="?action=projectGestionPage&id=<?= $_SESSION['user']->user_id ?>"
