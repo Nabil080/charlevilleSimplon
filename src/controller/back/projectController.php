@@ -137,12 +137,13 @@ function validationProjectTreatment()
 
 function assignTeamToProject()
 {
+    var_dump($_POST);
     $projectRepository = new ProjectRepository;
     if (isset($_POST) && isset($_POST['team']) && isset($_POST['projectId'])) {
         $projectId = $_POST['projectId'];
         $apprenants = $_POST['team'];
     } else {
-        header('Location:?action=projectGestionPage');
+        // header('Location:?action=projectGestionPage');
     }
     $bools = $projectRepository->assignTeamToProject($projectId, $apprenants);
 
