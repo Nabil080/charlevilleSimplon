@@ -56,50 +56,51 @@ function formationPage()
             } else {
                 $CanModify = false;
             }
-            
+
             include 'view/public/formation.php';
         } else
             throw new Exception('error_404');
     } else
         throw new Exception('error_404');
+}
 
-    // Project 
+// Project 
 
-    function projectPage()
-    {
-        $projectRepository = new ProjectRepository;
-        $promoRepository = new PromoRepository;
-        $progressRepository = new ProgressRepository;
-        $isMyProject = false;
-        if (isset($_SESSION['user'])) {
-            $userProject = $projectRepository->getUserProjects($_SESSION['user']->user_id);
-            foreach ($userProject as $project) {
-                if (isset($_GET['id']) && $_GET['id'] == $project->id) {
-                    $isMyProject = true;
-                }
+function projectPage()
+{
+    $projectRepository = new ProjectRepository;
+    $promoRepository = new PromoRepository;
+    $progressRepository = new ProgressRepository;
+    $isMyProject = false;
+    if (isset($_SESSION['user'])) {
+        $userProject = $projectRepository->getUserProjects($_SESSION['user']->user_id);
+        foreach ($userProject as $project) {
+            if (isset($_GET['id']) && $_GET['id'] == $project->id) {
+                $isMyProject = true;
             }
         }
-        if (!isset($_GET['id'])) {
-            header('Location:?action=homepage');
-        }
-
-        if (isset($_SESSION['user']) && $_SESSION['user']->role_id == 1) {
-            $isMyProject = true;
-        }
-        if (isset($_GET['id']) && $_GET['id'] !== 0) {
-            $id = $_GET['id'];
-        } else {
-            $id = 3;
-        }
-
-
-        $project = $projectRepository->getProjectById($id);
-        $team = $projectRepository->getProjectUsers($id);
-        $promoUsers = $promoRepository->getAllApprenants($project->promo->id);
-        $promoFormateurs = $promoRepository->getAllFormateurs($project->promo->id);
-        $allProgress = $progressRepository->getProgressByProjectId($id);
-        include 'view/public/project.php';
     }
+    if (!isset($_GET['id'])) {
+        header('Location:?action=homepage');
+    }
+
+    if (isset($_SESSION['user']) && $_SESSION['user']->role_id == 1) {
+        $isMyProject = true;
+    }
+    if (isset($_GET['id']) && $_GET['id'] !== 0) {
+        $id = $_GET['id'];
+    } else {
+        $id = 3;
+    }
+
+
+    $project = $projectRepository->getProjectById($id);
+    $team = $projectRepository->getProjectUsers($id);
+    $promoUsers = $promoRepository->getAllApprenants($project->promo->id);
+    $promoFormateurs = $promoRepository->getAllFormateurs($project->promo->id);
+    $allProgress = $progressRepository->getProgressByProjectId($id);
+    include 'view/public/project.php';
+}
 
 function allProjectsPage()
 {
@@ -141,17 +142,16 @@ function profilePage()
             // header('Location:?action=homepage');
         }
 
-    }
-    else if (isset($_GET['id']) && isset($_SESSION['user']) && ($_GET['id'] == $_SESSION['user']->user_id)) {
+    } else if (isset($_GET['id']) && isset($_SESSION['user']) && ($_GET['id'] == $_SESSION['user']->user_id)) {
         myProfile();
     } else {
         $id = $_GET['id'];
         $user = new UserRepository();
         $userDatas = new User($id);
         // var_dump('hi');
-        if($userDatas->role_id == 1 || $userDatas->role_id == 3){
+        if ($userDatas->role_id == 1 || $userDatas->role_id == 3) {
             homepage();
-        } elseif($userDatas->role_id == 2){
+        } elseif ($userDatas->role_id == 2) {
             // gérer rôle formateur : ne pas afficher promo
             $tags = new TagRepository();
             $allTags = $tags->getAllTags();
@@ -189,9 +189,9 @@ function myProfile()
             $isMyProfile = true;
             $user = new UserRepository();
             $userDatas = new User($id);
-            if($userDatas->role_id == 1 || $userDatas->role_id == 3){
+            if ($userDatas->role_id == 1 || $userDatas->role_id == 3) {
                 homepage();
-            } elseif($userDatas->role_id == 2){
+            } elseif ($userDatas->role_id == 2) {
                 // gérer rôle formateur : ne pas afficher promo
                 $tags = new TagRepository();
                 $allTags = $tags->getAllTags();
@@ -216,15 +216,14 @@ function myProfile()
                 include 'view/public/profile.php';
             }
         }
-    }
-    else if (isset($_GET['id']) && $_GET['id'] == $_SESSION['user']->user_id) {
+    } else if (isset($_GET['id']) && $_GET['id'] == $_SESSION['user']->user_id) {
         $id = $_SESSION['user']->user_id;
         $isMyProfile = true;
         $user = new UserRepository();
         $userDatas = new User($id);
-        if($userDatas->role_id == 1 || $userDatas->role_id == 3){
+        if ($userDatas->role_id == 1 || $userDatas->role_id == 3) {
             homepage();
-        } elseif($userDatas->role_id == 2){
+        } elseif ($userDatas->role_id == 2) {
             // gérer rôle formateur : ne pas afficher promo
             $tags = new TagRepository();
             $allTags = $tags->getAllTags();
@@ -281,19 +280,19 @@ function promotionPage()
         $id = 1;
     }
 
-        if (isset($_GET['project']) && $_GET['project'] == 1) {
-            $seeProjects = true;
-        } else {
-            $seeProjects = false;
-        }
-        $PromoRepository = new PromoRepository;
-        $tagsRepository = new TagRepository;
-        $projectRepository = new ProjectRepository;
-        $formationRepository = new FormationRepository;
-        $promo = $PromoRepository->getPromoById($id);
-        $apprenants = $PromoRepository->getAllApprenants($id);
-        $formateurs = $PromoRepository->getAllFormateurs($id);
-        $allProjects = $PromoRepository->getPromoProjects($id);
+    if (isset($_GET['project']) && $_GET['project'] == 1) {
+        $seeProjects = true;
+    } else {
+        $seeProjects = false;
+    }
+    $PromoRepository = new PromoRepository;
+    $tagsRepository = new TagRepository;
+    $projectRepository = new ProjectRepository;
+    $formationRepository = new FormationRepository;
+    $promo = $PromoRepository->getPromoById($id);
+    $apprenants = $PromoRepository->getAllApprenants($id);
+    $formateurs = $PromoRepository->getAllFormateurs($id);
+    $allProjects = $PromoRepository->getPromoProjects($id);
 
     include 'view/public/promotion.php';
 }
