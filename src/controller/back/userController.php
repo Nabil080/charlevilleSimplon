@@ -462,6 +462,7 @@ function companyPagination()
     $users = $UserRepo->getAllCompanies($limit, $filter, $execute);
 
     $usersHTML = [];
+    $modalsHTML = [];
     foreach ($users as $user) {
         ob_start();
         include('view/admin/entreprise/table_row.php');
@@ -469,8 +470,12 @@ function companyPagination()
         include("view/admin/modal/modalInfos.php");
         include("view/admin/modal/modalProjet.php");
         $content = ob_get_clean();
-
         $usersHTML[] = $content;
+
+        ob_start();
+        include("view/admin/modal/modalUpdateUser.php");
+        $content = ob_get_clean();
+        $modalsHTML[] = $content;
     }
 
     $response = array(
@@ -481,6 +486,7 @@ function companyPagination()
         "query" => "WHERE $filter",
         "limit" => $limit,
         "candidates" => $usersHTML,
+        "modals" => $modalsHTML,
     );
 
     echo json_encode($response);

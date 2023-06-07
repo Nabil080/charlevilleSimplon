@@ -156,7 +156,7 @@ async function updateData(currentPage = 1){
         learnerTable.innerHTML = data.projets.join('');
 
         // * CREER LES MODALS :
-        const modalButtons = document.querySelectorAll('tbody [data-modal-target]')
+        const modalButtons = document.querySelectorAll('tbody [data-modal-target], #modals [data-modal-target]')
         // console.log(modalButtons)
         modalButtons.forEach(button => {
             button.addEventListener('click',(event) => {
