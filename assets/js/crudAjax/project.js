@@ -74,9 +74,10 @@ const getProjets = (limitStart = 0,limitEnd = 6) => {
 async function updateData(currentPage = 1){
     showLoading()
     // console.log(currentPage);
-    projectsPerPage = 5
+    console.log(rowNumberSelect.value)
+    let projectsPerPage = 5
     if(rowNumberSelect.value > 0 && rowNumberSelect.value < 100){
-        const projectsPerPage = rowNumberSelect.value
+        projectsPerPage = Number(rowNumberSelect.value)
     }
     let limitStart = (currentPage - 1) * projectsPerPage
     let limitEnd = projectsPerPage
@@ -141,10 +142,11 @@ async function updateData(currentPage = 1){
 
         // * AFFICHE LE NOMBRE DE CANDIDATS CORRESPONDANTS
         if(currentPage != pageCount){
-            candidatesRange.innerHTML = `Résultats <span class="font-semibold text-gray-900">${limitStart + 1}-${limitStart + projectsPerPage}</span>`
+            candidatesRange.innerHTML = `Résultats <span class="font-semibold text-gray-900">${limitStart + 1} - ${limitStart + projectsPerPage}</span>`
         }else{
-            candidatesRange.innerHTML = `Résultats <span class="font-semibold text-gray-900">${limitStart + 1}-${projectsCount}</span>`
+            candidatesRange.innerHTML = `Résultats <span class="font-semibold text-gray-900">${limitStart + 1} - ${projectsCount}</span>`
         }
+
         candidateNumber.innerHTML = `sur <span class="font-semibold text-gray-900">${projectsCount}</span>`
         if(projectsCount === 0){
             candidatesRange.innerHTML = `Aucun utilisateur correspondant.`
