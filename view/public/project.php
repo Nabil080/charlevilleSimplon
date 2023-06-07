@@ -320,7 +320,7 @@
             <?php } ?>
         </h2>
         <div class="mx-4 h-1 bg-main-red"></div>
-        <div class="flex w-9/12">
+        <div class="flex w-full mx-auto">
             <div id="company-notes" class="m-4 lg:w-4/5">
                 <?= $project->description ?>
             </div>
@@ -346,8 +346,10 @@
 
             <?php } ?>
             <!-- ANIMATION ASIDE -->
-            <div class="hidden lg:grid w-1/5 place-items-center">
-                <img class="w-4/5" src="<?= $project->company_image ?>" alt="anim">
+            <div class="hidden lg:grid w-1/5 max-h-[400px] justify-start place-items-center">
+                <!-- <img class="w-4/5" src="<?= $project->company_image ?>" alt="anim"> -->
+                <svg width="200" id="animation" class="h-[280px]" xmlns="http://www.w3.org/2000/svg">
+                </svg>
 
             </div>
         </div>
