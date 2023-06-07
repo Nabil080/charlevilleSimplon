@@ -94,7 +94,7 @@
                     <?php } ?>
                 </div>
                 <ul id="jobContent" class="grid grid-cols-1 gap-x-8 gap-y-2 sm:grid-cols-2 lg:sm:grid-cols-1 ">
-                    <?php var_dump($formation_job);
+                    <?php
                     foreach ($formation_job as $job) { ?>
                     <li>
                         <?= $job ?>

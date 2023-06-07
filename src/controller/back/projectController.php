@@ -142,16 +142,17 @@ function assignTeamToProject()
     if (isset($_POST) && isset($_POST['team']) && isset($_POST['projectId'])) {
         $projectId = $_POST['projectId'];
         $apprenants = $_POST['team'];
+        $bools = $projectRepository->assignTeamToProject($projectId, $apprenants);
+
+        $response = array(
+            "status" => "success",
+            "message" => "Le statut a été modifée comme tel",
+            "projets" => $bools,
+        );
     } else {
         // header('Location:?action=projectGestionPage');
     }
-    $bools = $projectRepository->assignTeamToProject($projectId, $apprenants);
 
-    $response = array(
-        "status" => "success",
-        "message" => "Le statut a été modifée comme tel",
-        "projets" => $bools,
-    );
 }
 
 
