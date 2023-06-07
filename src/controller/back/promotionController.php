@@ -137,9 +137,6 @@ function promotionPagination()
             if ($promo->status->id != 9) {
                 $apprenants = $PromoRepo->getAllApprenants($promo->id);
                 include("view/admin/modalApprenant.php");
-            } else {
-                $candidates = $PromoRepo->getPromoCandidates($promo->id);
-                include("view/admin/promo/modalValidationPromo.php");
             }
 
             $promoFormators = $PromoRepo->getAllFormateurs($promo->id);
@@ -153,8 +150,16 @@ function promotionPagination()
             include("view/admin/modalProjet.php");
             include("view/admin/modalDelete.php");
         $content = ob_get_clean();
-
         $projectsHTML[]= $content;
+
+        ob_start();
+        if($promo->status->id == 9){
+            $candidates = $PromoRepo->getPromoCandidates($promo->id);
+            include("view/admin/promo/modalValidationPromo.php");
+        }
+        $content = ob_get_clean();
+        $modalsHTML[] = $content;
+
     }
 
     $response = array(
@@ -165,6 +170,7 @@ function promotionPagination()
         "query" => "WHERE $filter",
         "limit" => $limit,
         "projets" => $projectsHTML,
+        "modals" => $modalsHTML,
     );
 
     echo json_encode($response);
