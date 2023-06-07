@@ -196,7 +196,7 @@
                 <input name="number" type="number" class="w-1/5 min-w-[80px]" placeholder="<?= $progress->number ?>">
                 <input name="id" type="hidden" value="<?= $progress->id ?>">
                 <button type="submit"><i class="fa-solid fa-check text-main-red"></i></button>
-                <i onclick="swapDivsById('progress1','progress1-update')"
+                <i onclick="swapDivsById('progress<?= $progress->id ?>','progress<?= $progress->id ?>-update')"
                     class="fa-solid fa-xmark text-main-red cursor-pointer"></i>
             </form>
             <?php } ?>
