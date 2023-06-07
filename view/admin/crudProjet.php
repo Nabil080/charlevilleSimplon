@@ -26,6 +26,8 @@
     </thead>
     <tbody class="border-2">
         <?php
+            $PromoRepo = new PromoRepository;
+            $promos = $PromoRepo->getActivePromos();
             // foreach($projects as $project) {
             //     include("view/admin/projet/table_row.php");
             //     include("view/admin/modalDelete.php");

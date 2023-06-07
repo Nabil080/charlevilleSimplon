@@ -57,8 +57,8 @@ function projectPagination()
     $execute = empty($data->execute) ? null : $data->execute;
 
     $total = $projectRepo->getProjectsNumber();
-    $filtered = $projectRepo->getFilteredProjectsNumber($filter,$execute);
-    $projects = $projectRepo->getAllProjects($limit,$filter,$execute);
+    $filtered = $projectRepo->getFilteredCrudProjectsNumber($filter,$execute);
+    $projects = $projectRepo->getAllCrudProjects($limit,$filter,$execute);
 
     $projectsHTML = [];
     foreach($projects as $project){

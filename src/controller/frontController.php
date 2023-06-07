@@ -134,12 +134,12 @@ function profilePage()
             homepage();
 
         } else {
-            myprofile();
+            myProfile();
             // header('Location:?action=homepage');
         }
 
     }
-    else if (isset($_GET['id']) && $_GET['id'] == $_SESSION['user']->user_id) {
+    else if (isset($_GET['id']) && isset($_SESSION['user']) && ($_GET['id'] == $_SESSION['user']->user_id)) {
         myProfile();
     } else {
         $id = $_GET['id'];
@@ -285,6 +285,7 @@ function promotionPage()
         $PromoRepository = new PromoRepository;
         $tagsRepository = new TagRepository;
         $projectRepository = new ProjectRepository;
+        $formationRepository = new FormationRepository;
         $promo = $PromoRepository->getPromoById($id);
         $apprenants = $PromoRepository->getAllApprenants($id);
         $formateurs = $PromoRepository->getAllFormateurs($id);
@@ -339,9 +340,11 @@ function crudCompanyPage()
 
 function crudPromotionPage()
 {
+
     $tagsRepository = new TagRepository;
     $PromoRepo = new PromoRepository;
     $promos = $PromoRepo->getPromos();
+    // var_dump($promos);
     $UserRepo = new UserRepository;
     $FormationRepo = new FormationRepository;
     $formators = $UserRepo->getAllFormators();
@@ -352,10 +355,6 @@ function crudPromotionPage()
 
 function crudProjetPage()
 {
-    $ProjectRepo = new ProjectRepository;
-    $projects = $ProjectRepo->getAllProjects(10);
-    $PromoRepo = new PromoRepository;
-    $promos = $PromoRepo->getActivePromos();
     include 'view/admin/_projects.php';
 }
 

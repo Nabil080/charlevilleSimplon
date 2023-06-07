@@ -208,7 +208,7 @@ searchInput.addEventListener('input', (e) => {
 
     timeoutId = setTimeout(() => {
         updateData();
-    }, 500); // Adjust the delay time (in milliseconds) according to your needs
+    }, 500); 
 });
 
 formationCheckboxes.forEach(checkbox => {

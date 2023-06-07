@@ -96,9 +96,11 @@ class PromoRepository extends ConnectBdd
         $order = $order === null ? "ORDER BY promo.status_id DESC" : "ORDER BY $order";
         $limit = $limitRequest === null ? "" : "LIMIT $limitRequest";
 
+        $query = "SELECT * FROM `promo` $filters $order $limit";
+
         $promoRepository = new PromoRepository;
-        $req = $this->bdd->prepare("SELECT * FROM `promo` $filters $order $limit");
-        $req->execute();
+        $req = $this->bdd->prepare($query);
+        $req->execute($execute);
         $datas = $req->fetchAll(PDO::FETCH_ASSOC);
         $promos = [];
 
@@ -214,8 +216,7 @@ class PromoRepository extends ConnectBdd
         $req = $this->bdd->prepare("SELECT `promo_end` FROM `promo` WHERE `promo_id` = ?");
         $req->execute([$id]);
         $data = $req->fetch(PDO::FETCH_COLUMN);
-        $promoRepository = new PromoRepository;
-        $data = $promoRepository->formateDate($data);
+
         return $data;
     }
 
@@ -242,6 +243,8 @@ class PromoRepository extends ConnectBdd
         $req = $this->bdd->prepare("SELECT * FROM promo WHERE status_id = ?");
         $req->execute([12]);
         $data = $req->fetchAll(PDO::FETCH_ASSOC);
+
+        $promos = [];
 
         foreach ($data as $key) {
             $promos[] = $this->getPromoById($key['promo_id']);
@@ -449,8 +452,8 @@ class PromoRepository extends ConnectBdd
 
         $promoName = getPromoName($formation,$POST['start']);
 
-        $req = $this->bdd->prepare("INSERT INTO promo (promo_name,promo_start,promo_end,formation_id) VALUES (?,?,?,?)");
-        $req->execute([$promoName,$POST['start'],$POST['end'],$POST['formation']]);
+        $req = $this->bdd->prepare("INSERT INTO promo (promo_name,promo_start,promo_end,formation_id,status_id) VALUES (?,?,?,?,?)");
+        $req->execute([$promoName,$POST['start'],$POST['end'],$POST['formation'],9]);
 
         var_dump($POST);
 
@@ -502,8 +505,8 @@ class PromoRepository extends ConnectBdd
         $end = new DateTimeImmutable($ending_date);
         $interval_start = $origin->diff($start);
         $interval_end = $end->diff($origin);
-        var_dump($starting_date, $ending_date, $today);
-        var_dump($interval_start, $interval_end);
+        // var_dump($starting_date, $ending_date, $today);
+        // var_dump($interval_start, $interval_end);
         die;
         if ($interval_end->invert == 0 && $interval_end->days > 1)
         {

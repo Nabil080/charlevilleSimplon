@@ -13,7 +13,7 @@ $title = "Espace personnel";
 
     <?php
     // Gestion page visite de profil ou page MON profil
-    if($_SESSION['user']->role_id == 1){
+    if(isset($_SESSION['user']) && $_SESSION['user']->role_id == 1){
         $notMyProfile = '';
     } elseif (!isset($isMyProfile) || $isMyProfile == false)
     {
@@ -363,7 +363,7 @@ $title = "Espace personnel";
                                 </div>
                             <?php }else{
                                 $info = pathinfo($userDatas->user_highlight);
-                                if ($info["extension"] == "pdf") { ?>
+                                if (isset ($info['extension']) && $info["extension"] == "pdf") { ?>
                                 <div class="md:hidden flex flex-col items-center text-main-black font-title font-bold py-5 px-5">
                                     <p class="mb-5">Vous ne pouvez pas afficher ce fichier pdf sur mobile, mais vous pouvez toutefois le consulter en ouvrant la page suivante :</p>
                                     <a href="<?= $userDatas->user_highlight?>" class="bg-main-red text-main-white text-[16px] rounded-[5px] mx-auto py-3 lg:py-1 px-2 lg:px-4" target="_blank">Voir le projet phare</a>

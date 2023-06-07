@@ -1,6 +1,7 @@
 <!-- Extra Large Modal -->
-<div id="modal-apprenant-<?=$promo->id?>" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
-    <div class="relative w-full max-w-7xl max-h-full">
+
+<div id="modal-apprenant-<?=$promo->id?>" tabindex="-1" class="fixed  bg-black bg-opacity-50 top-0 left-0 right-0 z-50 h-full w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0">
+    <div class="relative w-full max-w-7xl max-h-full ">
         <!-- Modal content -->
         <div class="relative bg-white rounded-lg shadow ">
             <!-- Modal header -->
@@ -56,8 +57,4 @@
                 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Fermer</button>
         </div>
     </div>
-</div>
-</div>
-</div>
-</div>
 </div>
