@@ -51,7 +51,7 @@ function formationPage()
             $fee_all = $Fee->getAll();
             $certification_all = $Certification->getAll();
 
-            if ($_SESSION['user_id'] == 1) {
+            if (isset($_SESSION['user']->user_id) && $_SESSION['user']->user_id == 1) {
                 $CanModify = true;
             } else {
                 $CanModify = false;
