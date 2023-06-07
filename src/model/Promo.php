@@ -429,6 +429,10 @@ class PromoRepository extends ConnectBdd
         $req->execute([$promoId,$userId]);
         $req->closeCursor();
 
+        $req = $this->bdd->prepare("UPDATE user SET role_id = 4 WHERE user_id = ?");
+        $req->execute([$userId]);
+        $req->closeCursor();
+
         $req = $this->bdd->prepare("DELETE FROM promo_candidate WHERE promo_id = ? AND user_id = ?");
         $req->execute([$promoId,$userId]);
         $req->closeCursor();

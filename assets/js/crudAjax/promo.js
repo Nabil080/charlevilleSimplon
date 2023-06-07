@@ -16,7 +16,7 @@ function stopLoading(){
     document.querySelector('#loading').innerHTML = ''
 }
 
-
+const modalDiv = document.querySelector('#modals')
 // PAGINATION
 const learnerTable = document.querySelector('tbody');
 const paginationDiv = document.querySelector('#pagination');
@@ -146,6 +146,7 @@ async function updateData(currentPage = 1){
         learnerTable.innerHTML = data.projets.join('');
 
         // * CREER LES MODALS :
+        modalDiv.innerHTML = data.modals
         const modalButtons = document.querySelectorAll('tbody [data-modal-target]')
         // console.log(modalButtons)
         modalButtons.forEach(button => {
@@ -175,6 +176,8 @@ async function updateData(currentPage = 1){
         updateModifPromo();
         // * Ajoute script modal validation :
         validationForm();
+        // * Ajoute script validation ajax : 
+        validationAjax();
 }
 
 updateData()
