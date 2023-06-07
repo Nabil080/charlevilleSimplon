@@ -35,7 +35,6 @@ class JobRepository extends ConnectBdd
 
     public function getJobName($formation_id): array
     {
-
         $req = $this->bdd->prepare("SELECT job.job_id,`job_name` FROM `job` INNER JOIN `formation_job`AS fj ON job.job_id = fj.job_id WHERE fj.formation_id = ?");
         $req->execute([$formation_id]);
         $data = $req->fetchAll(PDO::FETCH_ASSOC);

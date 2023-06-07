@@ -14,6 +14,8 @@ $title = "Toutes nos formations";
     <div id="homepage-overlay"
         class="absolute w-full h-full py-4 px-4 bg-main-gray bg-opacity-60 flex flex-col [&>div]:mx-auto text-center">
         <!-- HEADER -->
+    <a href="#allFormationsTitle" id="cta-scroll" class="hidden lg:block text-main-white animate-bounce curs text-2xl fixed bottom-5 inset-x-0"><i class="fa-solid fa-chevron-down"></i></a>
+
         <div class="h-1/4 lg:h-[48%] grid place-content-center">
             <h1 class="hidden lg:block uppercase font-title h-full text-main-white text-[60px] font-bold text-center">
                 Simplon <br> charleville-mézières</h1>

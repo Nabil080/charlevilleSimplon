@@ -5,7 +5,6 @@ const change = nav.querySelectorAll("i");
 const div = nav.querySelectorAll("div")[0];
 const dropdown = div.querySelector("#dropdown");
 const dropdownAccount = document.getElementById("dropdownAccount");
-console.log(dropdownAccount);
 
 
 const button = nav.querySelector("button");
