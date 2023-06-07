@@ -453,7 +453,7 @@ class PromoRepository extends ConnectBdd
         $promoName = getPromoName($formation,$POST['start']);
 
         $req = $this->bdd->prepare("INSERT INTO promo (promo_name,promo_start,promo_end,formation_id,status_id) VALUES (?,?,?,?,?)");
-        $req->execute([$promoName,$POST['start'],$POST['end'],$POST['formation'],1]);
+        $req->execute([$promoName,$POST['start'],$POST['end'],$POST['formation'],9]);
 
         var_dump($POST);
 
