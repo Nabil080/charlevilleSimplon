@@ -34,7 +34,7 @@
                         <p class="font-title font-bold mr-2 block w-full">Adresse :</p>
                         <?php  
                          if (isset ($project->company_adress) && !empty($project->company_adress)) { ?>
-                            <p class="text-sm pt-0.5 text-left font-light"><?$project->company_adress?></p>
+                            <p class="text-sm pt-0.5 text-left font-light"><?=$project->company_adress?></p>
                         <?php } else { ?>
                             <p class="text-sm pt-0.5 text-left font-light">Pas d'adresse spécifiée</p>
                         <?php } ?>
@@ -51,7 +51,7 @@
                     <tag>React</tag>
                 </div>
                 <!-- titre projet -->
-                <h2 class="font-title text-main-red italic font-bold text-3xl md:!text-[40px] lg:!text-[46px] my-2 lg:!my-6"><a href="lien du projet">Super projet de fou</a></h2>
+                <h2 class="font-title text-main-red italic font-bold text-3xl md:!text-[40px] lg:!text-[46px] my-2 lg:!my-6"><a href="?action=projectPage&id=<?= $project->id?>"><?= $project->name?></a></h2>
                 <div class="self-end flex w-3/4 justify-between italic border-b border-main-red">
                     <?php if(isset($project->start)){ ?><span>Débuté le <?=date('d-m-Y', strtotime($project->start))?></span><?php }
                     if(isset($project->end)){ ?><span>Fini le <?=date('d-m-Y', strtotime($project->end))?></span><?php } ?>
@@ -61,15 +61,17 @@
                 <div class="text-base md:text-lg lg:text-xl flex-grow flex-col">
                     <p class="pl-[10%] line-clamp-5 lg:line-clamp-6 mt-2 mb-4"><?=$project->description?></p>
                     <div id="end" class="mt-auto lg:mt-8">
+                        <?php if (isset($project->promo) && !empty($project->promo)) {?>
                         <a href="?action=promotionPage&id=<?= $project->promo->id ?>" class="bg-main-red py-2 px-4 rounded-full text-main-white my-2 hover:bg-main-white hover:text-main-red hover:border border-main-red">
                             <?=$project->promo->name?>
                         </a>
+                        <?php } ?>
                         <div class="space-x-4 mt-4 mb-2 text-sm md:!text-base lg:!text-lg text-main-white [&>a]:bg-main-gray [&>a]:py-1 [&>a]:px-3 [&>a]:rounded-full">
-                            <?php foreach($project->team as $user){ ?>
+                            <?php foreach($project->team as $user) { ?>
                                 <a href="?action=profilePage&id=<?=$user->user_id?>" class="hover:border border-main-gray hover:text-main-gray hover:bg-main-white">
                                     <?=$user->user_surname?>
                                 </a>
-                            <?php }  ?>
+                            <?php } ?>
                         </div>
                         <a href="?action=projectPage&id=<?=$project->id?>" class="block float-left text-xs md:!text-base lg:!text-lg ">Voir le projet <i class="fa fa-arrow-right"></i></a>
                     </div>
@@ -89,7 +91,7 @@
                     <p class="font-title font-bold mr-2">Adresse :</p>
                     <?php  
                      if (isset ($project->company_adress) && !empty($project->company_adress)) { ?>
-                        <p class="text-sm pt-0.5 text-left font-light"><?$project->company_adress?></p>
+                        <p class="text-sm pt-0.5 text-left font-light"><?=$project->company_adress?></p>
                     <?php } else { ?>
                     <p class="text-sm pt-0.5 text-left font-light">Pas d'adresse spécifiée</p>
                     <?php } ?>
@@ -135,23 +137,21 @@
                     <?php $promoRepository = new PromoRepository;
                     $apprenants = $promoRepository->getAllApprenants($project->promo->id);?>
                     <div data-dropdown-toggle="user-dropdown" class="text-center w-full cursor-pointer">Sélectionner les apprenants <i class="fa fa-chevron-down"></i></div>
-                    
                     <select id="user-dropdown" multiple class="hidden z-20 w-fit" name="team[]" id="">
                        <?php foreach ($apprenants as $apprenant) { ?>
-                            <option value="<?= $apprenant->id ?>"><?= $apprenant->user_name ?> <?= $apprenant->user_surname ?></option>
-                        <?php } 
-                        $y ++; // Compte le nombre de formulaire
-                        ?>
+                            <option value="<?= $apprenant->user_id ?>"><?= $apprenant->user_name ?> <?= $apprenant->user_surname ?></option>
+                        <?php } ?>
                     </select>
 
                     <input type="hidden" name="projectId" value="<?= $project->id ?>"/>           
                 </div>
                 <!-- accepter -->
-                <button type="submit" onclick="assignTeamToProject(<?= $i ?>, <?= $x ?>)" class="w-fit px-6 md:flex md:items-center gap-2 hover:text-main-red cursor-pointer">
+                <button type="submit" onclick="assignTeamToProject(<?= $y ?>, <?= $x ?>)" class="w-fit px-6 md:flex md:items-center gap-2 hover:text-main-red cursor-pointer">
                     <p  class="hidden md:block"> Accepter</p><i class="fa-solid fa-check"></i>
                 </button>
             </form>
-        <?php }  else if (isset($_SESSION['user']) && $_SESSION['user']->role_id == 3 && $project->status->id == 11) {?>
+        <?php $y ++; // Compte le nombre de formulaire
+            }  else if (isset($_SESSION['user']) && $_SESSION['user']->role_id == 3 && $project->status->id == 11) {?>
             <a type="submit" href="?action=reSubmitProject&id=<?= $project->id ?>" class="w-fit px-6 md:flex md:items-center mx-auto gap-2 hover:text-main-red cursor-pointer">
                 <p class="hidden md:block">Soumettre à nouveau le projet</p><i class="fa-solid fa-check"></i>
             </a>
