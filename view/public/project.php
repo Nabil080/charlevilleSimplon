@@ -19,7 +19,8 @@
     <form id="title-update" method="POST" action="?action=updateProjectElement&id=<?= $project->id ?>&type=title"
         class="hidden space-x-4 font-title text-2xl sm:text-3xl lg:text-[40px] font-semibold text-main-red uppercase ">
         <input name="title" class="border-main-red border-2 p-2" placeholder="<?= $project->name; ?>">
-
+        <input type="hidden" name="id" value="<?= $project->id; ?>">
+        <input type="hidden" value="title" name="type"/>
         <button type="submit"><i class="fa-solid fa-check"></i></button>
         <i onclick="swapDivsById('title','title-update')" class="fa-solid fa-xmark cursor-pointer"></i>
     </form>
@@ -65,6 +66,8 @@
                 <?php }} ?>
 
             </select>
+            <input type="hidden" name="id" value="<?= $project->id; ?>">
+            <input type="hidden" value="apprenants" name="type"/>
             <button type="submit"><i class="fa-solid fa-check text-main-red"></i></button>
             <i onclick="swapDivsById('students','students-update')"
                 class="fa-solid fa-xmark text-main-red cursor-pointer"></i>
@@ -111,6 +114,8 @@
                 <?php }
                 } ?>
             </select>
+            <input type="hidden" name="id" value="<?= $project->id; ?>">
+        <input type="hidden" value="formateurs" name="type"/>
             <button type="submit"><i class="fa-solid fa-check text-main-red"></i>
             </button>
             <i onclick="swapDivsById('formator','formator-update')"
@@ -151,6 +156,8 @@
                     <input type="text" name="lien" placeholder="<?= $project->model_link ?>">
                 </div>
                 <div class="flex">
+                <input type="hidden" name="id" value="<?= $project->id; ?>">
+                <input type="hidden" value="image" name="type"/>
                     <button type="submit"
                         class="py-2 px-4 bg-main-red border-main-white border text-main-white my-4 mr-4">Modifier <i
                             class="fa-solid fa-check"></i></button>
@@ -194,9 +201,11 @@
                 class="hidden my-2 gap-4 w-full flex place-items-center">
                 <input name="name" type="text" class="min-w-[80px] grow" placeholder="<?= $progress->name ?>">
                 <input name="number" type="number" class="w-1/5 min-w-[80px]" placeholder="<?= $progress->number ?>">
-                <input name="id" type="hidden" value="<?= $progress->id ?>">
+                <input name="progress_id" type="hidden" value="<?= $progress->id ?>">
+                <input type="hidden" name="id" value="<?= $project->id; ?>">
+                <input type="hidden" value="progress" name="type"/>
                 <button type="submit"><i class="fa-solid fa-check text-main-red"></i></button>
-                <i onclick="swapDivsById('progress<?= $progress->id ?>','progress<?= $progress->id ?>-update')"
+                <i onclick="swapDivsById('progress1','progress1-update')"
                     class="fa-solid fa-xmark text-main-red cursor-pointer"></i>
             </form>
             <?php } ?>
@@ -227,7 +236,8 @@
             class="hidden w-full flex flex-wrap">
             <input type="text" name="github" placeholder="<?= $project->github ?>"
                 class="text-main-white bg-main-red w-1/2 grow h-[40px] flex items-center justify-center">
-
+                <input type="hidden" name="id" value="<?= $project->id; ?>">
+        <input type="hidden" value="github" name="type"/>
             <button type="submit"><i class="fa-solid fa-check text-main-red"></i></button>
             <i onclick="swapDivsById('github','github-update')"
                 class="fa-solid fa-xmark text-main-red cursor-pointer"></i>
@@ -252,7 +262,8 @@
             class="hidden w-full flex flex-wrap">
             <input type="file" name="pdf" placeholder="<?= $project->file ?>"
                 class="text-main-white bg-main-red w-1/2 grow h-[40px] flex items-center justify-center" />
-
+            <input type="hidden" name="id" value="<?= $project->id; ?>">
+            <input type="hidden" value="pdf" name="type"/>
             <button type="submit"><i class="fa-solid fa-check text-main-red"></i></button>
             <i onclick="swapDivsById('pdf','pdf-update')" class="fa-solid fa-xmark text-main-red cursor-pointer"></i>
         </form>
@@ -274,7 +285,8 @@
             class="hidden w-full flex flex-wrap">
             <input type="text" name="link" placeholder="<?= $project->model_link ?>"
                 class="text-main-white bg-main-red w-1/2 grow h-[40px] flex items-center justify-center">
-
+                <input type="hidden" name="id" value="<?= $project->id; ?>">
+                <input type="hidden" value="link" name="type"/>
             <button type="submit"><i class="fa-solid fa-check text-main-red"></i></button>
             <i onclick="swapDivsById('link','link-update')" class="fa-solid fa-xmark text-main-red cursor-pointer"></i>
         </form>
@@ -331,11 +343,13 @@
             <!-- formulaire d'edit -->
             <form id="company-notes-update"
                 action="?action=updateProjectElement&id=<?= $project->id ?>&type=companyNote" method="POST"
-                class="hidden w-full m-4" method="post" action="">
+                class="hidden w-full m-4" method="post">
                 <textarea name="companyNotes" id="editor" class="w-full" rows="10">
                         <?= $project->description ?>
                         <br>
                     </textarea>
+                    <input type="hidden" name="id" value="<?= $project->id; ?>">
+                <input type="hidden" value="companyNote" name="type"/>
                 <button type="submit"
                     class="py-2 px-4 bg-main-red border-main-white border text-main-white my-4 mr-4">Modifier <i
                         class="fa-solid fa-check"></i></button>
@@ -347,9 +361,9 @@
             <?php } ?>
             <!-- ANIMATION ASIDE -->
             <div class="hidden lg:grid w-1/5 max-h-[400px] justify-start place-items-center">
-                <!-- <img class="w-4/5" src="<?= $project->company_image ?>" alt="anim"> -->
-                <svg width="200" id="animation" class="h-[280px]" xmlns="http://www.w3.org/2000/svg">
-                </svg>
+                <img class="w-4/5" src="<?= $project->company_image ?>" alt="anim">
+                <!-- <svg width="200" id="animation" class="h-[280px]" xmlns="http://www.w3.org/2000/svg">
+                </svg> -->
 
             </div>
         </div>
@@ -371,11 +385,13 @@
             <?php if ($isMyProject == true) { ?>
 
             <!-- formulaire d'edit -->
-            <form id="notes-update" action="?action=updateProjectElement&id=<?= $project->id ?>&type=studentsNote"
+            <form id="notes-update"
                 method="POST" class="hidden w-full m-4" method="post" action="">
                 <textarea name="studentsNote" id="editor" class="w-full" rows="auto">
                     <?= $project->notes ?>
                 </textarea>
+                <input type="hidden" name="id" value="<?= $project->id; ?>">
+                <input type="hidden" value="studentsNote" name="type"/>
                 <button type="submit"
                     class="py-2 px-4 bg-main-red border-main-white border text-main-white my-4 mr-4">Modifier <i
                         class="fa-solid fa-check"></i></button>
@@ -398,6 +414,7 @@
 
 <?php $content = ob_get_clean(); ?>
 <?php ob_start(); ?>
+<script src="assets/js/ajax_project.js"></script>
 
 <script src="assets/js/tabs.js"></script>
 <script src="assets/js/project.js"></script>

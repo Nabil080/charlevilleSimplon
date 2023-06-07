@@ -179,50 +179,61 @@ function reSubmitProject()
 function updateProjectElement()
 {
     $projectRepository = new ProjectRepository;
-
-    if ((!isset($_GET['id']) && $_GET['id'] == null) && (!isset($_GET['type']) && $_GET['type'] == null)){
+    $alertMessage = new AlertMessage;
+    $errorTable = [];
+    if ((!isset($_POST['type']) && $_POST['type'] == null) && (!isset($_POST['id']) && $_POST['id'] == null)){
 
         // header('Location:?action=projectPage&id=3');
-    } else if ((isset($_GET['id']) && $_GET['id'] !== null) && (isset($_GET['type']) && $_GET['type'] !== null)) {
-        $type = $_GET['type'];
-        $id = $_GET['id'];
+    } else if ((isset($_POST['type']) && $_POST['type'] !== null) && (isset($_POST['id']) && $_POST['id'] !== null)) {
+        $type = htmlspecialchars($_POST['type'], ENT_QUOTES) ;
+        $id = htmlspecialchars($_POST['id'], ENT_QUOTES) ;
     }
     if (isset($_POST) && !empty($_POST)) {
         $array = $_POST;
-    } else {
-        // header('Location:?action=projectPage&id='.$_GET['id']);
     }
-    if ($type == "title") {
+    switch ($type) {
+        case "title";
         $bool = $projectRepository->updateProjectTitle($id, $array);
-    }
-    if ($type == "apprenants" || $type == "formateurs") { 
+        break; 
+        case "apprenants": 
         $bool = $projectRepository->updateProjectUsers($id, $type, $array);
-    }
-    if ($type == "progress") {
+        break; 
+        case "formateurs":
+        $bool = $projectRepository->updateProjectUsers($id, $type, $array);
+        break; 
+        case "progress":
         $bool = $projectRepository->updateProjectProgress($id, $array);
-    }
-    if ($type == "image") {
+        break;
+        case "image" :
         $files = $_FILES;
         $post = $_POST;
         $bool = $projectRepository->updateProjectImage($id, $files, $post);
-    }
-    if ($type == "github") {
+        break;
+        case "github":
         $bool = $projectRepository->updateProjectGithub($id, $array);
-    }
-    if ($type == "pdf") {
+        break;
+        case "pdf":
         $files = $_FILES;
         $bool = $projectRepository->updateProjectCharge($id, $files);
-    }
-    if ($type == "link") {
+        break;
+        case "link":
         $bool = $projectRepository->updateProjectLink($id, $array);
-    }
-    if ($type == "companyNote") {
+            break;
+        case "companyNote":
         $bool = $projectRepository->updateCompanyNote($id, $array);
-    }
-    if ($type == "studentsNote") {
+        break;
+        case "studentsNote":
         $bool = $projectRepository->updateStudentsNote($id, $array);
+        break;
     }
-    header("Location:?action=projectPage&id=". $_GET['id']);
+    // header("Location:?action=projectPage&id=". $_GET['id']);
+    $response = array(
+        "status" => "success",
+        "message" => "La modification à été prise en compte",
+        "projets" => $bool,
+    );
+    echo json_encode($response);
+
 }
 
 

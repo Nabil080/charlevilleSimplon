@@ -593,7 +593,7 @@ class ProjectRepository extends ConnectBdd
     {
         $name = htmlspecialchars($post['name'], ENT_QUOTES);
         $number = htmlspecialchars($post['number'], ENT_QUOTES);
-        $progressId = htmlspecialchars($post['id'], ENT_QUOTES);
+        $progressId = htmlspecialchars($post['progress_id'], ENT_QUOTES);
 
             if (!empty($name) && !empty($number)) {
                 $req = $this->bdd->prepare("UPDATE progress SET progress_name = ?, progress_number = ? WHERE project_id = ? AND progress_id = ?");
@@ -606,7 +606,7 @@ class ProjectRepository extends ConnectBdd
                 $bool = $req->execute([$name, $id, $progressId]);
             }
         
-        return $bool;
+        return $number;
     }
 
     public function updateProjectImage(int $id, array $files, array $post): bool
