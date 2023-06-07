@@ -466,7 +466,6 @@ function companyPagination()
     foreach ($users as $user) {
         ob_start();
         include('view/admin/entreprise/table_row.php');
-        include("view/admin/modal/modalUpdateUser.php");
         include("view/admin/modal/modalInfos.php");
         include("view/admin/modal/modalProjet.php");
         $content = ob_get_clean();
