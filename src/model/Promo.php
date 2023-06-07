@@ -527,18 +527,18 @@ class PromoRepository extends ConnectBdd
     public function getPromoStartByFormationID($id) 
 
     {
-        $req = $this->bdd->prepare("SELECT `promo_id` FROM `promo` WHERE `formation_id` = ?");
-        $req->execute([$id]);
-        $data = $req->fetch(PDO::FETCH_COLUMN);
-        $req = $this->bdd->prepare("SELECT `promo_start` FROM `promo` WHERE `promo_id` = ?");
-        $req->execute([$data]);
-        $data = $req->fetch(PDO::FETCH_COLUMN);
-        $promoRepo = new PromoRepository;
-        $data = $promoRepo->formateDate($data);
-        return $data;
+    $req = $this->bdd->prepare("SELECT `promo_id` FROM `promo` WHERE `formation_id` = ?");
+    $req->execute([$id]);
+    $data = $req->fetch(PDO::FETCH_COLUMN);
+    $req = $this->bdd->prepare("SELECT `promo_start` FROM `promo` WHERE `promo_id` = ?");
+    $req->execute([$data]);
+    $data = $req->fetch(PDO::FETCH_COLUMN);
+    $promoRepo = new PromoRepository();
+    $data = $promoRepo->formateDate($data);
+    return $data;
     }
+    
     public function getPromoEndByFormationID($id) 
-
     {
         $req = $this->bdd->prepare("SELECT `promo_id` FROM `promo` WHERE `formation_id` = ?");
         $req->execute([$id]);
@@ -548,6 +548,14 @@ class PromoRepository extends ConnectBdd
         $data = $req->fetch(PDO::FETCH_COLUMN);
         $promoRepo = new PromoRepository;
         $data = $promoRepo->formateDate($data);
+        return $data;
+    }
+
+    public function getPromoImage($id)
+    {
+        $req = $this->bdd->prepare("SELECT `formation_image` FROM `formation` WHERE `formation_id` = ?");
+        $req->execute([$id]);
+        $data = $req->fetch(PDO::FETCH_COLUMN);
         return $data;
     }
 

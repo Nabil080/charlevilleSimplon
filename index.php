@@ -25,7 +25,7 @@ try {
 
 
     if (isset($_SESSION['user'])) {
-        if ($_SESSION['user']->role_id == 2 || $_SESSION['user']->role_id > 3) {
+        if ($_SESSION['user']->role_id == 2 || $_SESSION['user']->role_id == 1 || $_SESSION['user']->role_id > 3) {
             switch ($action) {
                 // Afficher son profil perso
                 case 'myProfile':

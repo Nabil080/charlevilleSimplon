@@ -169,11 +169,14 @@ $title = "Espace personnel";
                         </form>
 
                         <div id="user-status" class="flex items-center pt-1 pb-2">
-                            <span class="w-6 h-6 border-[1px] rounded-full mr-2 animate-pulse
-                                <?php if ($userDatas->user_status_id == 4){?> bg-main-red<?php }?>
-                                <?php if ($userDatas->user_status_id == 13){?> bg-main-green<?php }?>
-                                <?php if ($userDatas->user_status_id == 11){?> bg-main-orange<?php }?>">
-                            </span>
+                                    <i class="fa-solid fa-circle 
+                                <?php if (isset($userDatas->user_status_id) && $userDatas->user_status_id < 6) { 
+                                    echo("text-red-500"); 
+                                } 
+                                else if (isset($userDatas->user_status_id) && $userDatas->user_status_id > 6) {
+                                    echo("text-green-500");
+                                }?>
+                                animate-pulse duration-[2s] mr-1"></i>
                             <span class="text-[16px] flex justify-center italic"><?= $userDatas->user_status ?> depuis <?= "le ".formateDate($userDatas->user_status_date) ?></span>
                             <div onclick="swapDivsById('user-status','user-status-update')" class="cursor-pointer" <?= $notMyProfile; ?>>
                                 <i class="fa-solid fa-pen text-main-red w-[20px] ml-3"></i>
