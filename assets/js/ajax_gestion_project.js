@@ -9,7 +9,6 @@ const multiSelectWithoutCtrl = ( elemSelector ) => {
                 this.selected = !this.selected;
                 return false;
             }, false );
-    console.log(elemSelector);
 
     });
 
@@ -19,7 +18,6 @@ multiSelectWithoutCtrl('#multiSelect option');
 
 const validationProjectForm = document.getElementsByClassName('validationProjectForm');
 const validationTeamForm = document.getElementsByClassName('validationTeamForm');
-console.log(validationTeamForm[3]);
 
 function assignTeamToProjectTreatment(i) 
 {
@@ -28,8 +26,7 @@ function assignTeamToProjectTreatment(i)
             event.preventDefault(); // prevent default form submission behavior
         // handle form submission with fetch
             const formData = new FormData(validationTeamForm[i]);
-            console.log(formData);
-            console.log(validationTeamForm[i]);
+            console.log(validationTeamForm[i].getElementsByTagName('select'));
             fetch('index.php?action=assignTeamToProject', {
                 method: 'POST',
                 body: formData
@@ -152,8 +149,9 @@ function assignTeamToProject(i, x)
 {
     if (validationTeamForm.length > 0){
         assignTeamToProjectTreatment(i);
-        console.log(x);
-        console.log(i);
+        
+        const form = document.getElementById("team" + x);
+        form.classList.add("hidden");
 
         const curr = "status" + x;
         const status = document.getElementById(curr);

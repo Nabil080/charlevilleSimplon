@@ -60,7 +60,7 @@ $formations = $formationRepo->getAllFormations(); ?>
                 <?php if (isset($_SESSION['user']) && $_SESSION['user']->role_id !== 3) { ?>
 
                   <li class="md:hover:bg-main-lightred">
-                    <a href="?action=profilePage" class="block px-4 py-2 text-[22px] sm:text-[32px] md:text-[20px]">Profile</a>
+                    <a href="?action=profilePage" class="block px-4 py-2 text-[22px] sm:text-[32px] md:text-[20px]">Mon profil</a>
                   </li>
                 <?php } ?>
                 <?php if (isset($_SESSION['user']) && $_SESSION['user']->role_id == 1) { ?>
