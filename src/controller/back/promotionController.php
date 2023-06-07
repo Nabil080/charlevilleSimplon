@@ -146,7 +146,7 @@ function promotionPagination()
             }
             $promoFormatorsString = join(",",$promoFormatorsId);
             // var_dump($promoFormatorsId);
-            include("view/admin/modalFormateur.php");
+            include("view/admin/promo/modalFormateur.php");
             include("view/admin/modal/modalProjet.php");
             include("view/admin/modal/modalDelete.php");
         $content = ob_get_clean();
