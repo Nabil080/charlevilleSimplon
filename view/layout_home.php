@@ -4,7 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simplon.co - <?= $title ?></title>
+    <title>Simplon.co -
+        <?= $title ?>
+    </title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,25 +17,25 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://kit.fontawesome.com/eb7aa99f8d.js" crossorigin="anonymous"></script>
     <script>
-    tailwind.config = {
-        theme: {
-            fontFamily: {
-                sans: 'Roboto',
-                title: 'Montserrat',
-            },
-            extend: {
-                colors: {
-                    'main': {
-                        red: '#BD3124',
-                        white: '#EFF1F3',
-                        gray: '#4F4F4F',
-                        lightred: '#F6DADE',
-                        lightgray: '#F2F2F3',
+        tailwind.config = {
+            theme: {
+                fontFamily: {
+                    sans: 'Roboto',
+                    title: 'Montserrat',
+                },
+                extend: {
+                    colors: {
+                        'main': {
+                            red: '#BD3124',
+                            white: '#EFF1F3',
+                            gray: '#4F4F4F',
+                            lightred: '#F6DADE',
+                            lightgray: '#F2F2F3',
+                        }
                     }
                 }
             }
         }
-    }
     </script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.css" rel="stylesheet" />
     <link href="assets/css/style.css" rel="stylesheet" />
@@ -44,24 +46,33 @@
 <body class="w-[100dvw] overflow-x-hidden"></body>
 <?php require_once 'view/template/_navbar_home.php'; ?>
 <?php include 'view/template/_login.php'; ?>
+<div class="pt-[85px]"></div>
+<?php if (isset($_SESSION['alertMessage'])) { ?>
+    <div class="z-50 sticky top-0 w-full">
+        <?= $_SESSION['alertMessage']; ?>
+    </div>
+    <?php unset($_SESSION['alertMessage']);
+} ?>
+</div>
 
-    <?= $content ?>
+<?= $content ?>
 
 
 <?php require_once 'view/template/_footer.php'; ?>
 
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
-    <!-- <script src="assets/js/ajax_form.js"></script> -->
-    <script src="assets/js/nav.js"></script>
-    <script src="assets/js/allFormations.js"></script>
-    <script src="assets/js/ajax_modalLogin.js"></script>
-    <script src="assets/js/ajax_function.js"></script>
-    <script src="assets/js/function.js"></script>
-    <script src="assets/js/comments.js"></script>
-
-    <?php if (isset($script))
-        echo $script; ?>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
+<script src="assets/js/nav.js"></script>
+<script src="assets/js/allFormations.js"></script>
+<script src="assets/js/function.js"></script>
+<script src="assets/js/comments.js"></script>
+<script src="assets/js/ajax_handleFormSubmission.js"></script>
+<script>
+    handleFormSubmission('#login-form', 'index.php?action=loginTreatment');
+    handleFormSubmission('#forget-form', 'index.php?action=sendMailResetPasswordTreatment');
+</script>
+<?php if (isset($script))
+    echo $script; ?>
 </body>
 
 </html>

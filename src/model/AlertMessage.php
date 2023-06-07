@@ -4,51 +4,91 @@
     private $name;
     private $location;
     public $message;
-
     private $alertMessage = 'assets/json/alertMessage.json';
-    private $styleSucces = "p-2 border-2 border-green-700 rounded-lg bg-green-200 text-green-500";
-    private $styleError = "p-2 border-2 border-red-700 rounded-lg bg-red-200 text-red-500";
+    private $styleSucces = "mb-2 p-2 border-2 border-green-700 rounded-lg bg-green-200 text-green-500";
+    private $styleError = "mb-2 p-2 border-2 border-red-700 rounded-lg bg-red-200 text-red-500";
 
-    // <p id="{ID_input}_error" class="errorAlert mt-2 text-sm text-red-600 dark:text-red-500"></p>
-    // <div id="{Name}_errorContent"></div>
+    // <p id="{ID_input}_error" class="errorAlert"></p>
 
-    //<div id="{Name}_succesContent" class="alertContent"></div>
-    //<div id="succesContent" class="alertContent"></div>
+    // $error correspond au "name" dans alertMessage.json
+    // $boolNavbar correspond à un boolean si c'est dans la navbar ou pas
+    // $location correspond à la localisation : 'login', 'forget, 'nom de l'input' 
+    // Si $location = null, alors il sera au dessus du bouton du formulaire
 
 
-    public function getError($location, $error, $boolNavbar = null)
+    public function getError($error, $boolNavbar, $location = null)
     {
+        // Récupérer Message
         $this->type = 'errorMessage';
         $this->name = $error;
+        $where = 'button';
+
+        // Récupérer le lieu du message
+        if ($boolNavbar == false) {
+            switch ($location) {
+                case 'login':
+                    $this->location = ".login_alertMessage";
+                    break;
+                case 'forget':
+                    $this->location = ".forget_alertMessage";
+                    break;
+                case null:
+                    $this->location = '.alertButton';
+                    break;
+                default:
+                    $where = 'input';
+                    $this->location = "#" . $location . "_error";
+            }
+
+        } else if ($boolNavbar == true)
+            // En dessous de la navbar
+            $this->location = '#content_succes';
+
+        // Création du message
         $this->message = $this->getMessage();
+        if ($where != 'input')
+            $this->message = "<p class='alertMessage " . $this->styleError . "'>" . $this->message . "<p>";
 
-        if (!stristr($location, '_errorContent')) {
-            $this->location = $location . '_error';
-        } else {
-            $this->location = $location;
-            $this->message = "<p class='" . $this->styleError . "'>" . $this->message . "<p>";
-        }
-
-        $test = [
+        //Envoyer l'alert
+        $alert = [
             'successMessage' => 0,
             'location' => $this->location,
             'message' => $this->message,
+            'navbar' => $boolNavbar,
+            'where' => $where
         ];
-        return $test;
+        return $alert;
     }
 
-    public function getSuccess($success, $navbarBool = null)
+    public function getSuccess($success, $boolNavbar, $location = null)
     {
         $file_path = 'view/template/_succesMessage.php';
+        // Récupérer Message
         $this->type = 'successMessage';
         $this->name = $success;
         $this->message = $this->getMessage();
 
+        // Récupérer le lieu du message
+        if ($boolNavbar == false) {
+            // Au dessus du bouton
 
-        // $navbarBool correspond à vérifier si on le met sur le content de 
-        // la page (false) ou en général sur le navbar (true)
-        if ($navbarBool) {
-            $this->location = 'navbar_succesContent';
+            switch ($location) {
+                case 'login':
+                    $this->location = ".login_alertMessage";
+                    break;
+                case 'forget':
+                    $this->location = ".forget_alertMessage";
+                    break;
+                default:
+                    $this->location = '.alertButton';
+            }
+        }
+
+
+        // Création du message
+        $this->message = $this->getMessage();
+
+        if ($boolNavbar == true) {
             if (file_exists($file_path)) {
                 // Lit le contenu du fichier
                 $succesMessage = file_get_contents($file_path);
@@ -56,31 +96,29 @@
                 // Insère le message prédéfini dans l'élément avec l'ID "content_success"
                 $succesMessage = str_replace(
                     '<div id="content_success" class="ml-3 text-sm font-medium">',
-                    '<div id="content_success" class="ml-3 text-sm font-medium">' . $this->message,
+                    '<div id="content_success" class="ml-3 text-sm font-medium"><span class="font-bold">Succès</span><br>' . $this->message,
                     $succesMessage
                 );
-
-            } else {
-                var_dump('Le ficher n\'est pas trouvée.');
+                $this->message = $succesMessage;
+                $_SESSION['alertMessage'] = $this->message;
             }
-
         } else {
-            $this->location = ($success == 'mailForgetPassword') ? 'forget_succesContent' : 'succesContent';
-
             $this->message = "<p class='" . $this->styleSucces . "'>" . $this->message . "<p>";
         }
 
-        $test = [
+        //Envoyer
+        $alert = [
             'successMessage' => 1,
             'location' => $this->location,
             'message' => $this->message,
+            'navbar' => $boolNavbar
         ];
-        return $test;
+        return $alert;
+
     }
 
     private function getMessage()
     {
-
         $data = json_decode(file_get_contents($this->alertMessage), true);
 
         foreach ($data[$this->type] as $row) {
@@ -90,5 +128,4 @@
         }
         return 'erreur Inconnue';
     }
-
 }

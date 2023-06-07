@@ -43,7 +43,8 @@
 <?php $content = ob_get_clean(); ?>
 
 <?php ob_start(); ?>
-<script src="assets/js/ajax_passwordForget.js">
+<script>
+handleFormSubmission('#forgetPasswordForm', 'index.php?action=resetPasswordTreatment');
 </script>
 <?php $script = ob_get_clean(); ?>
 

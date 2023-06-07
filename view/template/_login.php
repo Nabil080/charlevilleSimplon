@@ -32,11 +32,8 @@
                             class=" border text-sm rounded-md block w-full p-2.5 border-main-red text-main-red">
                         <p id="password_login_error" class="errorAlert mt-2 text-sm text-red-600 dark:text-red-500"></p>
                     </div>
-                    <div id="loginContent_error"
-                        class="contentAlert hidden mb-5 border border-main-red bg-red-200 rounded-lg p-3 text-center text-sm text-main-red">
-                    </div>
                     <button type="submit"
-                        class="w-full uppercase font-title text-main-white bg-main-red hover:bg-red-800 font-medium rounded-md text-sm px-5 py-2.5 text-center ">Se
+                        class="login_alertMessage w-full uppercase font-title text-main-white bg-main-red hover:bg-red-800 font-medium rounded-md text-sm px-5 py-2.5 text-center">Se
                         connecter</button>
                     <div>
                         <div class="text-sm font-bold text-main-gray">
@@ -65,7 +62,7 @@
                             placeholder="Exemple@mail.com" required>
                     </div>
                     <button type="submit"
-                        class="w-full font-title text-main-white bg-main-red hover:bg-red-800 font-medium rounded-md text-sm px-5 py-2.5 text-center ">Réinitialiser
+                        class="forget_alertMessage w-full font-title text-main-white bg-main-red hover:bg-red-800 font-medium rounded-md text-sm px-5 py-2.5 text-center ">Réinitialiser
                         le mot de passe</button>
                     <div class="text-sm font-bold text-main-gray">
                         Vous avez votre mot de passe ? <a onclick="switchDiv('co','paco')"

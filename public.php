@@ -17,13 +17,13 @@ switch ($action) {
         break;
     // Afficher le formulaire de pré-inscription.
     case 'registerPage':
-        if (!isset($_SESSION['user'])){
+        if (!isset($_SESSION['user'])) {
             registerPage();
             break;
-        }elseif (isset($_SESSION['user']) && $_SESSION['user']->role_id == 5){
+        } elseif (isset($_SESSION['user']) && $_SESSION['user']->role_id == 5) {
             CandidatePromo();
             break;
-        }else{
+        } else {
             homepage();
             break;
         }
@@ -48,7 +48,7 @@ switch ($action) {
     // Afficher la page contact
     case 'contactPage':
         contactPage();
-        break;  
+        break;
     //afficher la page d'activation de compte
     case 'accountActivationPage':
         accountActivationPage();

@@ -9,10 +9,10 @@ function contactTreatment()
 
             if (!empty($value)) {
                 if ($name == "email" && !filter_var($value, FILTER_VALIDATE_EMAIL)) {
-                    $errorTable[] = $AlertMessage->getError($name, 'emailIncorrect');
+                    $errorTable[] = $AlertMessage->getError('emailIncorrect', false, $name);
                 }
             } else {
-                $errorTable[] = $AlertMessage->getError($name, 'emptyField');
+                $errorTable[] = $AlertMessage->getError('emptyField', false, $name);
             }
         }
 
@@ -30,9 +30,9 @@ function contactTreatment()
             $succesJson = json_encode($succes);
             echo $succesJson;
         } else
-            $errorTable = $AlertMessage->getError('contact_errorContent', 'errorForm', false);
+            $errorTable[] = $AlertMessage->getError('errorForm', false);
     } else
-        $errorTable = $AlertMessage->getError('contact_errorContent', 'notForm', false);
+        $errorTable[] = $AlertMessage->getError('notForm', false);
 
     if (!empty($errorTable)) {
         $errorJson = json_encode($errorTable);
