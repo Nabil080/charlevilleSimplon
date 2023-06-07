@@ -69,4 +69,5 @@
                     <p class="text-sm pt-0.5 text-left font-light"><?=$project->company_adress?></p>
                 </div>
             </div>
+
         </article>
