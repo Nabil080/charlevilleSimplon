@@ -123,9 +123,11 @@
                 uppercase
                 rounded
                 shadow-md
-                hover:bg-main-green hover:shadow-lg
-                focus:bg-main-green focus:shadow-lg focus:outline-none focus:ring-0
-                active:bg-main-green active:shadow-lg
+                border
+                border-transparent
+                hover:bg-main-white hover:text-main-red hover:shadow-lg hover:border-main-red
+                focus:bg-main-white focus:text-main-red focus:shadow-lg focus:border-main-red focus:outline-none focus:ring-0
+                active:bg-main-white active:text-main-red active:border-main-red active:shadow-lg
                 transition
                 duration-150
                 ease-in-out">Send</button>

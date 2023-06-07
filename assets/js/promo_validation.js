@@ -1,3 +1,5 @@
+function validationAjax(){
+
 const validationForms = document.querySelectorAll('form.validationForm');
 // console.log(validationForms);
 
@@ -5,7 +7,7 @@ validationForms.forEach((form) => {
     form.addEventListener('submit', (e) => {
         e.preventDefault();
 
-        const checkboxes = document.querySelectorAll('#validationForm input[type=checkbox]');
+        const checkboxes = document.querySelectorAll('.validationForm input[type=checkbox]');
         console.log(checkboxes);
         
         
@@ -46,3 +48,4 @@ validationForms.forEach((form) => {
 
     })
 });
+}

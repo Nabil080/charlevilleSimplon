@@ -47,7 +47,7 @@ if(isset($formators)){
                     <?php if (isset($apprenant->user_status_id) && $apprenant->user_status_id < 6) { 
                         echo("text-red-500"); 
                     } 
-                    else if (isset($apprenant->user_status_id) && $apprenant->user_status_id > 6) {
+                    else if (isset($apprenant->user_status_id) && $apprenant->user_status_id >= 6) {
                         echo("text-green-500");
                     }?>
                      animate-pulse duration-[2s] mr-1"></i>
@@ -80,7 +80,7 @@ if(isset($formators)){
                                 foreach ($projects as $project) {
                                     ?>
                                     <a href="?action=projectPage&id=<?= $project->id ?>">
-                                        <p class="bg-main-gray text-main-white px-4 py-1 text-[14px] rounded-[50px]"><?= substr($project->name, 0, 15) . ".." ;?></p>
+                                        <p class="bg-main-gray text-main-white px-4 py-1 text-[14px] rounded-[50px]"><?php echo strlen($project->name) > 14 ? substr($project->name, 0, 14) . ".." : $project->name;?></p>
                                     </a>
                                 <?php 
                                 $i++;

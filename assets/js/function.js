@@ -3,10 +3,10 @@ function swapDivsById(id1, id2) {
     document.getElementById(id2).classList.toggle('hidden')
 }
 
-const sectionChange = document.getElementsByClassName('sectionChange');
-const tabChange = document.getElementsByClassName('tabChange');
-
 function changeTab(y) {
+    const sectionChange = document.getElementsByClassName('sectionChange');
+    const tabChange = document.getElementsByClassName('tabChange');
+
     for (i = 0; i < sectionChange.length; i++) {
         sectionChange[i].classList.add("hidden");
         tabChange[i].classList.remove("!bg-main-red", "bg-main-red");
@@ -30,25 +30,27 @@ function switchDiv(id1, id2) {
     }
 }
 
-const buttons = document.querySelectorAll("button");
-clickableButtons = [];
-let count = 0;
-buttons.forEach(button => {
-    if (button.dataset.dropdownToggle !== null) {
-        let fleche = button.getElementsByTagName('svg');
-        if (fleche[0] !== undefined) {
-            clickableButtons.push(buttons[count]);
+function rotateDropdownIcons() {
+    const buttons = document.querySelectorAll("button");
+    clickableButtons = [];
+    let count = 0;
+    buttons.forEach(button => {
+        if (button.dataset.dropdownToggle !== null) {
+            let fleche = button.getElementsByTagName('svg');
+            if (fleche[0] !== undefined) {
+                clickableButtons.push(buttons[count]);
+            }
+            count++;
         }
-        count++;
-    }
-})
-clickableButtons.forEach(button => {
-    button.addEventListener('click', () => {
-        fleche = button.getElementsByTagName('svg');
-        fleche[0].classList.toggle('rotate-180');
+    })
+    clickableButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            fleche = button.getElementsByTagName('svg');
+            fleche[0].classList.toggle('rotate-180');
 
+        });
     });
-});
+};
 
 function updateContact() {
 
@@ -80,4 +82,4 @@ function updateContact() {
         contactInput.value = mailList.join(',');
         console.log(mailList);
     })
-}
+};

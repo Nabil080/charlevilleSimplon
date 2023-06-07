@@ -17,25 +17,25 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://kit.fontawesome.com/eb7aa99f8d.js" crossorigin="anonymous"></script>
     <script>
-    tailwind.config = {
-        theme: {
-            fontFamily: {
-                sans: 'Roboto',
-                title: 'Montserrat',
-            },
-            extend: {
-                colors: {
-                    'main': {
-                        red: '#BD3124',
-                        white: '#EFF1F3',
-                        gray: '#4F4F4F',
-                        lightred: '#F6DADE',
-                        lightgray: '#F2F2F3',
+        tailwind.config = {
+            theme: {
+                fontFamily: {
+                    sans: 'Roboto',
+                    title: 'Montserrat',
+                },
+                extend: {
+                    colors: {
+                        'main': {
+                            red: '#BD3124',
+                            white: '#EFF1F3',
+                            gray: '#4F4F4F',
+                            lightred: '#F6DADE',
+                            lightgray: '#F2F2F3',
+                        }
                     }
                 }
             }
         }
-    }
     </script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.css" rel="stylesheet" />
     <link href="assets/css/style.css" rel="stylesheet" />
@@ -48,10 +48,10 @@
 <?php include 'view/template/_login.php'; ?>
 <div class="pt-[85px]"></div>
 <?php if (isset($_SESSION['alertMessage'])) { ?>
-<div class="z-50 sticky top-0 w-full">
-    <?= $_SESSION['alertMessage']; ?>
-</div>
-<?php unset($_SESSION['alertMessage']);
+    <div class="z-50 sticky top-0 w-full">
+        <?= $_SESSION['alertMessage']; ?>
+    </div>
+    <?php unset($_SESSION['alertMessage']);
 } ?>
 </div>
 
@@ -68,8 +68,8 @@
 <script src="assets/js/comments.js"></script>
 <script src="assets/js/ajax_handleFormSubmission.js"></script>
 <script>
-handleFormSubmission('#login-form', 'index.php?action=loginTreatment');
-handleFormSubmission('#forget-form', 'index.php?action=sendMailResetPasswordTreatment');
+    handleFormSubmission('#login-form', 'index.php?action=loginTreatment');
+    handleFormSubmission('#forget-form', 'index.php?action=sendMailResetPasswordTreatment');
 </script>
 <?php if (isset($script))
     echo $script; ?>

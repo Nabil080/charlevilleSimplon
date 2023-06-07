@@ -16,7 +16,7 @@ function stopLoading(){
     document.querySelector('#loading').innerHTML = ''
 }
 
-
+const modalDiv = document.querySelector('#modals')
 // PAGINATION
 const learnerTable = document.querySelector('tbody');
 const paginationDiv = document.querySelector('#pagination');
@@ -30,7 +30,7 @@ const candidateNumber = document.querySelector('#candidates-number')
 const searchInput = document.querySelector('#simple-search');
 
 // Variables nécessaires à la pagination
-const projectsPerPage = 2
+const projectsPerPage = 4
 const paginationRange = 3
 
 let filterString = '';
@@ -149,6 +149,7 @@ async function updateData(currentPage = 1){
         learnerTable.innerHTML = data.candidates.join('');
 
         // * CREER LES MODALS :
+        modalDiv.innerHTML = data.modals
         const modalButtons = document.querySelectorAll('tbody [data-modal-target]')
         // console.log(modalButtons)
         modalButtons.forEach(button => {
@@ -161,6 +162,8 @@ async function updateData(currentPage = 1){
             })
         })
 
+        // * Ajoute script modal contact :
+        updateContact()
 }
 
 updateData()

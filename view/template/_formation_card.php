@@ -19,9 +19,12 @@
     </div>
     <div class="formation_status flex justify-center items-center">
         <h5 class="text-main-gray font-main text-sm md:text-[16px] italic text-center my-3">
-            <?= $formation->status->name; ?> <?php 
-            $start = $promoRepository->getPromoStart($formation->id); 
-            echo $start; ?>
+            <?= $formation->status->name; ?>
+            <?php if ($formation->status->id == 12 || $formation->status->id == 14) { ?>
+                <?php $start = $promoRepository->getPromoStartByFormationID($formation->id); echo $start; ?>
+            <?php } elseif($formation->status->id == 13) { ?>
+                <?php $end = $promoRepository->getPromoEndByFormationID($formation->id); echo $end; ?>
+            <?php } ?>
             </h5>
         <span class="w-4 h-4 border-[1px] bg-main-green rounded-full ml-2 animate-pulse"></span>
     </div>

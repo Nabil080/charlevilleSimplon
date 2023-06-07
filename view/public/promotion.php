@@ -1,4 +1,4 @@
-<?php $title = "Promotion"; ?>
+<?php $title = $promo->name; ?>
 
 <?php ob_start(); ?>
 <p id="seeProjects" data-view="<?= $seeProjects;?>" class="hidden"></p>

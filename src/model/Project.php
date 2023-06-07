@@ -128,7 +128,7 @@ class ProjectRepository extends ConnectBdd
         return $project;
     }
 
-    public function getAllProjects($limitRequest = null, $filters = null, $execute = null, $order = null):array
+    public function getAllCrudProjects($limitRequest = null, $filters = null, $execute = null, $order = null):array
     {
         $projects = [];
         $filters = $filters === null ? "" : "WHERE $filters";
@@ -137,9 +137,55 @@ class ProjectRepository extends ConnectBdd
         $limit = $limitRequest === null ? "" : "LIMIT $limitRequest";
 
         $query =
+        "SELECT project.project_id FROM project $filters $order $limit";
+        // var_dump($query);
+        // var_dump($execute);
+        $req = $this->bdd->prepare($query);
+        $req->execute($execute);
+        $data = $req->fetchAll(PDO::FETCH_ASSOC);
+
+
+        foreach ($data as $key) {
+            $Project = new Project;
+            $projectRepo = new ProjectRepository;
+            $Project = $projectRepo->getProjectById($key['project_id']);
+
+            $projects[] = $Project;
+        }
+
+        return $projects;
+    }
+
+
+    public function getFilteredCrudProjectsNumber($filters = null,$execute = null):int
+    {
+        $filters = $filters === null ? "" : "WHERE $filters";
+        $execute = $execute === null ? [] : explode(",",$execute);
+        $query =
+        "SELECT COUNT(*) FROM project $filters";
+        // var_dump($query);
+        // var_dump($execute);
+        $req = $this->bdd->prepare($query);
+        $req->execute($execute);
+        $data = $req->fetch(PDO::FETCH_COLUMN);
+
+        return $data;
+    }
+
+
+    public function getAllProjects($limitRequest = null, $filters = null, $execute = null, $order = null):array
+    {
+        $projects = [];
+        $filters = $filters === null ? "" : "AND $filters";
+        $execute = $execute === null ? [] : explode(",",$execute);
+        $order = $order === null ? "ORDER BY project.status_id DESC" : "ORDER BY $order";
+        $limit = $limitRequest === null ? "" : "LIMIT $limitRequest";
+
+        $query =
         "SELECT project.project_id FROM project
         JOIN promo ON promo.promo_id = project.promo_id
-        JOIN formation ON promo.formation_id = formation.formation_id $filters $order $limit";
+        JOIN formation ON promo.formation_id = formation.formation_id
+        WHERE type_id != 2 $filters $order $limit";
         // var_dump($query);
         // var_dump($execute);
         $req = $this->bdd->prepare($query);
@@ -160,7 +206,7 @@ class ProjectRepository extends ConnectBdd
 
     public function getProjectsNumber():int
     {
-        $req = $this->bdd->prepare("SELECT COUNT(*) FROM project");
+        $req = $this->bdd->prepare("SELECT COUNT(*) FROM project WHERE type_id != 2");
         $req->execute();
         $data = $req->fetch(PDO::FETCH_COLUMN);
 
@@ -169,12 +215,13 @@ class ProjectRepository extends ConnectBdd
 
     public function getFilteredProjectsNumber($filters = null,$execute = null):int
     {
-        $filters = $filters === null ? "" : "WHERE $filters";
+        $filters = $filters === null ? "" : "AND $filters";
         $execute = $execute === null ? [] : explode(",",$execute);
         $query =
         "SELECT COUNT(*) FROM project
         JOIN promo ON promo.promo_id = project.promo_id
-        JOIN formation ON promo.formation_id = formation.formation_id $filters";
+        JOIN formation ON promo.formation_id = formation.formation_id
+        WHERE type_id != 2 $filters";
         // var_dump($query);
         // var_dump($execute);
         $req = $this->bdd->prepare($query);
@@ -422,6 +469,8 @@ class ProjectRepository extends ConnectBdd
 
     public function addProject($post,$files):void
     {
+        // TODO: $AlertMessage = new AlertMessage;
+        // TODO:$errorTable = [];
         $error = false;
         // traitement company name
         $company = isset($post['company']) ? $post['company'] : 'Simplon';
@@ -432,6 +481,7 @@ class ProjectRepository extends ConnectBdd
         $pdf = securizePdf($_FILES['pdf'], $path);
         if($pdf === false){
             // message d'erreurs dans securizePdf
+             // TODO:$errorTable = $AlertMessage->getError("noPDF",false,"pdf");
             $error = true;
         }
 
@@ -454,16 +504,25 @@ class ProjectRepository extends ConnectBdd
             $error = true;
         }
 
-        $link = securizeString($post['link']);
+        $link = empty($link) ? "" : securizeUrl($post['link']);
         if($link === false){
             // message d'erreurs dans securizeString
             $error = true;
         }
 
+        $status = $_SESSION['user']->role_id == 3 ? 9 : 10;
+        $type = $_SESSION['user']->role_id == 3 ? 3 : 1;
+
         if($error === false){
-            $req = $this->bdd->prepare("INSERT INTO project (project_name,project_description,project_company_name,project_company_link,user_id, project_file, project_company_image, project_company_adress) VALUES (?,?,?,?,?,?,?,?)");
-            $req->execute([$project,$description,$company,$link,$_SESSION['user']->user_id, $pdf, $image, $adress]);
-            // REMPLACE 3 PAR SESSION USER ID
+            $req = $this->bdd->prepare("INSERT INTO project (project_name,project_description,project_company_name,project_company_link,user_id, project_file, project_company_image, project_company_adress,status_id,type_id) VALUES (?,?,?,?,?,?,?,?,?,?)");
+            $req->execute([$project,$description,$company,$link,$_SESSION['user']->user_id, $pdf, $image, $adress,$status,$type]);
+            // REMPLACE 3 PAR SESSION USER
+            $lastId = $this->bdd->lastInsertId();
+            for($i = 0; $i < 3; $i++){
+                $req = $this->bdd->prepare("INSERT INTO progress (project_id) VALUES (?)");
+                $req->execute([$lastId]);
+            }
+
 
             $response = array(
                 "status" => "success",

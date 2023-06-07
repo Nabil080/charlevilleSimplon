@@ -17,13 +17,16 @@ switch ($action) {
         break;
     // Afficher le formulaire de pré-inscription.
     case 'registerPage':
-        if (!isset($_SESSION['user']))
+        if (!isset($_SESSION['user'])) {
             registerPage();
-        else if (isset($_SESSION['user']) && $_SESSION['user']->role_id == 5)
+            break;
+        } elseif (isset($_SESSION['user']) && $_SESSION['user']->role_id == 5) {
             CandidatePromo();
-        else
+            break;
+        } else {
             homepage();
-        break;
+            break;
+        }
 
     // Afficher toutes les promos
     case 'allPromotionsPage':

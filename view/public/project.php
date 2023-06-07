@@ -166,7 +166,7 @@
     <article class="flex-col flex">
         <?php if (isset($allProgress)) { ?>
 
-        <div class="font-title text-xl sm:text-2xl xl:text-3xl font-bold my-4">Avancement
+        <div class="font-title text-xl sm:text-2xl xl:text-3xl font-bold my-4"><span class="underline">Avancement</span>
             <!-- boutons d'edit -->
 
             <?php if ($isMyProject == true) { ?>
@@ -177,7 +177,7 @@
                     " class="fa-solid fa-pen text-main-red cursor-pointer h-fit my-auto"></i></div>
             <?php } ?>
 
-        <div class="grow flex flex-col justify-center">
+        <div class="grow flex  mt-4 gap-2 flex-col justify-center">
             <?php $i = 0;
             foreach ($allProgress as $progress) { ?>
                 <!-- avancement 1 -->
@@ -196,7 +196,7 @@
                 <input name="number" type="number" class="w-1/5 min-w-[80px]" placeholder="<?= $progress->number ?>">
                 <input name="id" type="hidden" value="<?= $progress->id ?>">
                 <button type="submit"><i class="fa-solid fa-check text-main-red"></i></button>
-                <i onclick="swapDivsById('progress1','progress1-update')"
+                <i onclick="swapDivsById('progress<?= $progress->id ?>','progress<?= $progress->id ?>-update')"
                     class="fa-solid fa-xmark text-main-red cursor-pointer"></i>
             </form>
             <?php } ?>
@@ -243,7 +243,7 @@
         <i class="fa-solid fa-file-pdf"></i>
 
 
-        <a id="pdf" href="<?= $project->file ?>" download class="text-main-white px-4 bg-main-red grow h-[40px] flex items-center justify-center">Télécharger le cahier des charges</a>
+        <a id="pdf" href="<?= $project->file ?>" download class="text-main-white px-4 text-center whitespace-nowrap bg-main-red grow h-[40px] flex items-center justify-center">Télécharger le cahier des charges</a>
 
         <?php if ($isMyProject == true) { ?>
         <!-- formulaire d'edit cahier des charges -->
@@ -320,7 +320,7 @@
             <?php } ?>
         </h2>
         <div class="mx-4 h-1 bg-main-red"></div>
-        <div class="flex">
+        <div class="flex w-full mx-auto">
             <div id="company-notes" class="m-4 lg:w-4/5">
                 <?= $project->description ?>
             </div>
@@ -346,8 +346,10 @@
 
             <?php } ?>
             <!-- ANIMATION ASIDE -->
-            <div class="hidden lg:grid w-1/5 place-items-center">
-                <img class="w-4/5" src="<?= $project->company_image ?>" alt="anim">
+            <div class="hidden lg:grid w-1/5 max-h-[400px] justify-start place-items-center">
+                <!-- <img class="w-4/5" src="<?= $project->company_image ?>" alt="anim"> -->
+                <svg width="200" id="animation" class="h-[280px]" xmlns="http://www.w3.org/2000/svg">
+                </svg>
 
             </div>
         </div>

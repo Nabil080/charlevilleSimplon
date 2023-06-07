@@ -160,6 +160,18 @@ async function updateData(currentPage = 1){
                 modal.classList.toggle('hidden')
             })
         })
+        // * CREER LES DROPDOWNS
+        const dropdownButtons = document.querySelectorAll('tbody [data-dropdown-toggle]')
+        // console.log(dropdownButtons)
+        dropdownButtons.forEach(button => {
+            button.addEventListener('click',(event) => {
+                event.preventDefault()
+
+                // alert(button.dataset.dropdownTarget)
+                let dropdown = document.getElementById(button.dataset.dropdownToggle)
+                dropdown.classList.toggle('hidden')
+            })
+        })
 
 
 }

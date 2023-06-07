@@ -1,4 +1,4 @@
-<?php $title = "Tout les promotions"; 
+<?php $title = "Toutes les promotions"; 
     $PromoRepository = new PromoRepository;
     $promos = $PromoRepository->getPromos();?>
 
@@ -25,7 +25,7 @@
         </div>
 
     </div>
-    <div id="promo-cards" class="flex flex-wrap gap-5 justify-center">
+    <div id="promo-cards" class="flex flex-wrap gap-5 md:gap-12 justify-center">
         <?php foreach ($promos as $promo) {
                 include('view/template/_promotion_card.php');
         } ?>

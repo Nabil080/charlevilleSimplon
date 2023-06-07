@@ -4,6 +4,9 @@ const changeNav = nav.querySelector(".changeNav");
 const change = nav.querySelectorAll("i");
 const div = nav.querySelectorAll("div")[0];
 const dropdown = div.querySelector("#dropdown");
+const dropdownAccount = document.getElementById("dropdownAccount");
+
+
 const button = nav.querySelector("button");
 const logo = nav.getElementsByTagName("img")[0];
 const body = document.body;
@@ -129,7 +132,7 @@ window.addEventListener ("scroll", function () {
       changeNav.classList.toggle("h-[100vh]");
       changeNav.classList.toggle("grid-rows-[10vh_10vh_10vh_10vh]");
       nav.classList.toggle("text-main-white"); 
-
+    if (body.getBoundingClientRect().top > -30) {
       if (logo.classList.contains("w-[150px]") == true) 
       {
         logo.src = "assets/img/navbar/logo-simplon.png";
@@ -141,7 +144,8 @@ window.addEventListener ("scroll", function () {
         logo.classList.add("w-[150px]");
         logo.classList.remove("w-[171px]");
       }
-
+    }
+      console.log(change[1]);
       // changement d'icone
       if (change[0].classList.contains("hidden")) {
           change[0].classList.toggle("hidden");
@@ -156,16 +160,20 @@ window.addEventListener ("scroll", function () {
           change[1].classList.add("text-black");
           dropdown.classList.add("bg-main-white", "text-black");
           dropdown.classList.remove("bg-opacity-90", "blur-[0.3px]");
+          if (dropdownAccount !== null) {
           dropdownAccount.classList.add("bg-main-white", "text-black");
           dropdownAccount.classList.remove("bg-opacity-80", "blur-[0.3px]");
+        }
       } else {
           change[1].style.display = "none";
           change[1].classList.add("hidden");
           change[1].classList.add("text-black");
           dropdown.classList.remove("bg-main-white", "text-black");
           dropdown.classList.add("bg-opacity-90", "blur-[0.3px]");
+          if (dropdownAccount !== null) {
           dropdownAccount.classList.remove("bg-main-white", "text-black");
           dropdownAccount.classList.add("bg-opacity-80", "blur-[0.3px]");
+          }
       }
       change[1].classList.toggle("hidden");
       // changement de couleur nav superieur

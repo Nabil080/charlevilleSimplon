@@ -1,3 +1,7 @@
+<?php
+$formationRepo = new FormationRepository;
+$formations = $formationRepo->getAllFormations(); ?>
+
 <nav id="navbar"
     class="w-[100vw] fixed top-0 bg-opacity-30 shadow-[3px_5px_10px] bg-gray-400 text-main-white shadow-[#1111114d] blur-[0.2px] left-0 z-40 transition-all duration-[0.3s]">
     <div
@@ -40,26 +44,12 @@
                         class="z-50 border-main-lightgray hidden  bg-opacity-90  bg-gray-400 text-main-white blur-[0.3px] rounded-lg shadow w-fit mr-4 pl-0">
                         <ul class="z-50 relative py-2 md:py-0 px-2 md:px-0 text-sm leading-9 sm:leading-[60px] divide-y border-2 border-main-red divide-main-red rounded-[4px]"
                             aria-labelledby="dropdownDefaultButton">
-                            <li class="md:hover:bg-gray-700">
-                                <a href="?action=formationPage&id=1"
-                                    class="block px-4 py-2 text-[22px] sm:text-[32px] md:text-[20px]">Devellopeur Web /
-                                    Web mobile</a>
-                            </li>
-                            <li class="md:hover:bg-gray-700">
-                                <a href="?action=formationPage&id=2"
-                                    class="block px-4 py-2 text-[22px] sm:text-[32px] md:text-[20px]">Référent
-                                    Digital</a>
-                            </li>
-                            <li class="md:hover:bg-gray-700">
-                                <a href="?action=formationPage&id=3"
-                                    class="block px-4 py-2 text-[22px] sm:text-[32px] md:text-[20px]">Technicien
-                                    supérieur système et réseaux</a>
-                            </li>
-                            <li class="md:hover:bg-gray-700">
-                                <a href="?action=formationPage&id=4"
-                                    class="block px-4 py-2 text-[22px] sm:text-[32px] md:text-[20px]">Concepteur
-                                    développeur d'applications</a>
-                            </li>
+                            <?php foreach ($formations as $formation) { ?>
+                                <li class="md:hover:bg-gray-400">
+                                    <a href="?action=formationPage&id=<?= $formation->id ?>"
+                                        class="block px-4 py-2 text-[22px] sm:text-[32px] md:text-[20px]"><?= $formation->name ?></a>
+                                </li>
+                            <?php } ?>
                         </ul>
                     </div>
                 </div>
@@ -88,19 +78,33 @@
                             class="z-50 border-main-lightgray min-w-[300px] hidden bg-gray-400 bg-opacity-80  text-main-white blur-[0.3px] rounded-lg shadow text-center w-fit mr-4 pl-0">
                             <ul class="z-50 relative py-2 md:py-0 px-2 md:px-0 text-sm leading-9 sm:leading-[60px] divide-y border-2 border-main-red divide-main-red rounded-[4px]"
                                 aria-labelledby="dropdownAccountDefaultButton">
-                                <li class="md:hover:bg-gray-700  xl:px-16">
-                                    <a href=""
-                                        class="block px-4 py-2 text-[22px] sm:text-[32px] md:text-[20px] ">Profile</a>
-                                </li>
-                                <li class="md:hover:bg-gray-700  xl:px-16">
-                                    <a href="#" class="block px-4 py-2 text-[22px] sm:text-[32px] md:text-[20px]">Admin</a>
-                                </li>
-                                <li class="md:hover:bg-gray-700  xl:px-16">
-                                    <a href="?action=projectGestionPage&id=<?= $_SESSION['user']->user_id ?>"
-                                        class="block px-4 py-2 text-[22px] sm:text-[32px] md:text-[20px]">Mes Projets</a>
-                                </li>
+                                <?php if (isset($_SESSION['user']) && $_SESSION['user']->role_id !== 3) { ?>
 
-                                <li class="md:hover:bg-gray-700  xl:px-16">
+                                    <li class="md:hover:bg-gray-400">
+                                        <a href="?action=profilePage"
+                                            class="block px-4 py-2 text-[22px] sm:text-[32px] md:text-[20px]">Mon profil</a>
+                                    </li>
+                                <?php } ?>
+                                <?php if (isset($_SESSION['user']) && $_SESSION['user']->role_id == 1) { ?>
+                                    <li class="md:hover:bg-gray-400">
+                                        <a href="?action=crudLearnerPage"
+                                            class="block px-4 py-2 text-[22px] sm:text-[32px] md:text-[20px]">Admin</a>
+                                    </li>
+                                <?php } ?>
+                                <?php if (isset($_SESSION['user']) && $_SESSION['user']->role_id < 4) { ?>
+                                    <li class="md:hover:bg-gray-400">
+                                        <a href="?action=projectGestionPage&id=<?= $_SESSION['user']->user_id ?>"
+                                            class="block px-4 py-2 text-[22px] sm:text-[32px] md:text-[20px]">Mes Projets</a>
+                                    </li>
+                                <?php } ?>
+                                <?php if (isset($_SESSION['user']) && $_SESSION['user']->role_id == 4) { ?>
+                                    <li class="md:hover:bg-gray-400">
+                                        <a href="?action=promotionPage"
+                                            class="block px-4 py-2 text-[22px] sm:text-[32px] md:text-[20px]">Ma promo</a>
+                                    </li>
+                                <?php } ?>
+
+                                <li class="md:hover:bg-gray-400">
                                     <a href="index.php?action=logOut"
                                         class="block px-4 py-2 text-[22px] sm:text-[32px] md:text-[20px]">Déconnexion</a>
                                 </li>
@@ -112,7 +116,7 @@
                 } else {
                     ?>
                     <button type="button" id="connexion"
-                        class="text-[24px] sm:text-[36px] md:text-[20px] xl:text-[24px] cursor-pointer"
+                        class="text-[24px] sm:text-[36px] md:text-[20px] xl:text-[24px] text-left md:text-center cursor-pointer"
                         data-modal-target="login-modal" data-modal-toggle="login-modal">Connexion</button>
                     <?php
                 }

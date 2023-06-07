@@ -57,14 +57,14 @@ function projectPagination()
     $execute = empty($data->execute) ? null : $data->execute;
 
     $total = $projectRepo->getProjectsNumber();
-    $filtered = $projectRepo->getFilteredProjectsNumber($filter,$execute);
-    $projects = $projectRepo->getAllProjects($limit,$filter,$execute);
+    $filtered = $projectRepo->getFilteredCrudProjectsNumber($filter,$execute);
+    $projects = $projectRepo->getAllCrudProjects($limit,$filter,$execute);
 
     $projectsHTML = [];
     foreach($projects as $project){
         ob_start();
             include("view/admin/projet/table_row.php");
-            include("view/admin/modalDelete.php");
+            include("view/admin/modal/modalDelete.php");
         $content = ob_get_clean();
 
         $projectsHTML[]= $content;
@@ -137,20 +137,22 @@ function validationProjectTreatment()
 
 function assignTeamToProject()
 {
+    var_dump($_POST);
     $projectRepository = new ProjectRepository;
     if (isset($_POST) && isset($_POST['team']) && isset($_POST['projectId'])) {
         $projectId = $_POST['projectId'];
         $apprenants = $_POST['team'];
-    } else {
-        header('Location:?action=projectGestionPage');
-    }
-    $bools = $projectRepository->assignTeamToProject($projectId, $apprenants);
+        $bools = $projectRepository->assignTeamToProject($projectId, $apprenants);
 
-    $response = array(
-        "status" => "success",
-        "message" => "Le statut a été modifée comme tel",
-        "projets" => $bools,
-    );
+        $response = array(
+            "status" => "success",
+            "message" => "Le statut a été modifée comme tel",
+            "projets" => $bools,
+        );
+    } else {
+        // header('Location:?action=projectGestionPage');
+    }
+
 }
 
 
@@ -220,7 +222,7 @@ function updateProjectElement()
     if ($type == "studentsNote") {
         $bool = $projectRepository->updateStudentsNote($id, $array);
     }
-    // header("Location:?action=projectPage&id=". $_GET['id']);
+    header("Location:?action=projectPage&id=". $_GET['id']);
 }
 
 

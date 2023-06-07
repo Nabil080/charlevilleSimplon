@@ -16,7 +16,7 @@ function stopLoading(){
     document.querySelector('#loading').innerHTML = ''
 }
 
-
+const modalDiv = document.querySelector('#modals')
 // PAGINATION
 const learnerTable = document.querySelector('tbody');
 const paginationDiv = document.querySelector('#pagination');
@@ -146,6 +146,7 @@ async function updateData(currentPage = 1){
         learnerTable.innerHTML = data.projets.join('');
 
         // * CREER LES MODALS :
+        modalDiv.innerHTML = data.modals
         const modalButtons = document.querySelectorAll('tbody [data-modal-target]')
         // console.log(modalButtons)
         modalButtons.forEach(button => {
@@ -157,8 +158,26 @@ async function updateData(currentPage = 1){
                 modal.classList.toggle('hidden')
             })
         })
+        // * CREER LES DROPDOWNS
+        const dropdownButtons = document.querySelectorAll('tbody [data-dropdown-toggle]')
+        // console.log(dropdownButtons)
+        dropdownButtons.forEach(button => {
+            button.addEventListener('click',(event) => {
+                event.preventDefault()
 
-
+                // alert(button.dataset.dropdownTarget)
+                let dropdown = document.getElementById(button.dataset.dropdownToggle)
+                dropdown.classList.toggle('hidden')
+            })
+        })
+        // * Ajoute script modal contact :
+        updateContact()
+        // * Ajoute script modal update :
+        updateModifPromo();
+        // * Ajoute script modal validation :
+        validationForm();
+        // * Ajoute script validation ajax :
+        validationAjax();
 }
 
 updateData()

@@ -16,6 +16,7 @@ function stopLoading(){
     document.querySelector('#loading').innerHTML = ''
 }
 
+const modalDiv = document.querySelector('#modals')
 // PAGINATION
 const candidateTable = document.querySelector('tbody');
 const paginationDiv = document.querySelector('#pagination');
@@ -140,7 +141,6 @@ async function updateData(currentPage = 1){
             candidatesRange.innerHTML = `Résultats <span class="font-semibold text-gray-900">${limitStart + 1}-${projectsCount}</span>`
         }
         candidateNumber.innerHTML = `sur <span class="font-semibold text-gray-900">${projectsCount}</span>`
-        candidateNumber.innerHTML = projectsCount
 
         if(projectsCount === 0){
             candidatesRange.innerHTML = `Aucun utilisateur correspondant.`
@@ -150,6 +150,7 @@ async function updateData(currentPage = 1){
         candidateTable.innerHTML = data.candidates.join('');
 
         // * CREER LES MODALS :
+        modalDiv.innerHTML = data.modals
         const modalButtons = document.querySelectorAll('tbody [data-modal-target]')
         console.log(modalButtons)
         modalButtons.forEach(button => {
@@ -161,6 +162,9 @@ async function updateData(currentPage = 1){
                 modal.classList.toggle('hidden')
             })
         })
+
+        // * Ajoute script modal contact :
+        updateContact()
 
 }
 

@@ -13,13 +13,13 @@
             <div id="description"
                 class="flex flex-col gap-3 max-h-[710px] overflow-hidden text-[16px] md:text-[20px] text-justify [&>ul]:list-disc [&_li]:pb-2">
                 <!-- bouton d'edit -->
-                <?php if ($isMyProject == true) { ?>
+                <?php if ($CanModify == true) { ?>
                 <i onclick="swapDivsById('description','description-update')"
                     class="fa-solid fa-pen text-main-red cursor-pointer order-0 self-end"></i>
                 <?php } ?>
                 <?= $formation_main->description ?>
             </div>
-            <?php if ($isMyProject == true) { ?>
+            <?php if ($CanModify == true) { ?>
             <!-- formulaire d'edit -->
             <form id="description-update"
                 action="?action=updateFormationElement&id=<?= $formation_main->id ?>&type=description" method="POST"
@@ -52,7 +52,7 @@
                     <div id="stat_<?= $key ?>" class="md:w-1/3 lg:w-full">
                         <div class="relative flex justify-center">
                             <!-- bouton d'edit -->
-                            <?php if ($isMyProject == true) { ?>
+                            <?php if ($CanModify == true) { ?>
                             <i onclick="swapDivsById('stat_<?= $key ?>','stat-update-<?= $key ?>')"
                                 class="fa-solid fa-pen text-main-red cursor-pointer order-2 absolute top-0 right-0"></i>
                             <?php } ?>
@@ -66,7 +66,7 @@
                         </p>
                     </div>
                     <!-- formulaire d'edit lien site -->
-                    <?php if ($isMyProject == true) { ?>
+                    <?php if ($CanModify == true) { ?>
                     <form id="stat-update-<?= $key ?>"
                         action="?action=updateFormationElement&id=<?= $formation_main->id ?>&type=stat" method="POST"
                         class="hidden w-full flex flex-col items-center gap-2">
@@ -88,19 +88,20 @@
                 <div class="flex items-center gap-3">
                     <h5 class="text-[28px] lg:text-[20px] text-main-red font-bold font-title">Métiers Visés</h5>
                     <!-- bouton d'edit -->
-                    <?php if ($isMyProject == true) { ?>
+                    <?php if ($CanModify == true) { ?>
                     <i onclick="swapDivsById('jobContent','jobContent-update')"
                         class="text-main-red fa-solid fa-pen fa-sm cursor-pointer"></i>
                     <?php } ?>
                 </div>
                 <ul id="jobContent" class="grid grid-cols-1 gap-x-8 gap-y-2 sm:grid-cols-2 lg:sm:grid-cols-1 ">
-                    <?php foreach ($formation_job as $job) { ?>
+                    <?php
+                    foreach ($formation_job as $job) { ?>
                     <li>
                         <?= $job ?>
                     </li>
                     <?php } ?>
                 </ul>
-                <?php if ($isMyProject == true) { ?>
+                <?php if ($CanModify == true) { ?>
                 <form id="jobContent-update"
                     action="?action=updateFormationElement&id=<?= $formation_main->id ?>&type=job" method="POST"
                     class="hidden w-full p-4 flex flex-col" method="post" action="">
@@ -191,7 +192,7 @@
             <div class="sectionChange text-[16px] lg:text-[20px]">
                 <div id="activityAllContent">
                     <!-- bouton d'edit -->
-                    <?php if ($isMyProject == true) { ?>
+                    <?php if ($CanModify == true) { ?>
                     <i onclick="swapDivsById('activityAllContent','activityAllContent-update')"
                         class="absolute bottom-5 right-5 fa-solid fa-pen text-main-red fa-sm cursor-pointer">
                         modifier</i>
@@ -203,7 +204,7 @@
                                 <?= $activity['name'] ?>
                             </h3>
                             <!-- bouton d'edit -->
-                            <?php if ($isMyProject == true) { ?>
+                            <?php if ($CanModify == true) { ?>
                             <i onclick="swapDivsById('activityContent_<?= $key ?>','activityContent-update_<?= $key ?>')"
                                 class="text-main-red fa-solid fa-pen fa-sm cursor-pointer"></i>
                             <?php } ?>
@@ -216,7 +217,7 @@
                         </div>
                     </div>
                     <!-- formulaire d'edit lien site -->
-                    <?php if ($isMyProject == true) { ?>
+                    <?php if ($CanModify == true) { ?>
                     <form id="activityContent-update_<?= $key ?>"
                         action="?action=updateFormationElement&id=<?= $formation_main->id ?>&type=activity"
                         method="POST" class="hidden w-full p-4" method="post" action="">
@@ -240,7 +241,7 @@
                     <?php } ?>
                 </div>
                 <!-- formulaire d'edit lien site -->
-                <?php if ($isMyProject == true) { ?>
+                <?php if ($CanModify == true) { ?>
                 <form id="activityAllContent-update"
                     action="?action=updateFormationElement&id=<?= $formation_main->id ?>&type=formation_activity"
                     method="POST" class="hidden w-full p-4 flex flex-col" method="post" action="">
@@ -269,9 +270,9 @@
             <div class="sectionChange hidden bg-white text-[16px] lg:text-[20px]">
                 <div class="py-4">
                     <div class="pb-3 flex items-center gap-3">
-                        <h3 class="text-main-red text-[20px] lg:text-[36px] font-bold">Pas de prérequis mais…</h3>
+                        <h3 class="text-main-red text-[20px] lg:text-[36px] font-bold">Conditions d'admission et prérequis :</h3>
                         <!-- bouton d'edit -->
-                        <?php if ($isMyProject == true) { ?>
+                        <?php if ($CanModify == true) { ?>
                         <i onclick="swapDivsById('admissionContent','admissionContent-update')"
                             class="fa-solid fa-pen text-main-red fa-sm cursor-pointer">
                         </i>
@@ -285,7 +286,7 @@
                         <?php } ?>
                     </ul>
                     <!-- formulaire d'edit lien site -->
-                    <?php if ($isMyProject == true) { ?>
+                    <?php if ($CanModify == true) { ?>
                     <form id="admissionContent-update"
                         action="?action=updateFormationElement&id=<?= $formation_main->id ?>&type=formation_requirement"
                         method="POST" class="hidden w-full p-4 flex flex-col" method="post" action="">
@@ -313,14 +314,18 @@
                 </div>
             </div>
             <div class="sectionChange hidden bg-white text-[16px] lg:text-[20px]">
-                <?php foreach ($formation_program as $key => $program) { ?>
+                <?php $allTitle = [];
+                foreach ($formation_program as $key => $program) { ?>
                 <div class="py-4">
                     <div class="pb-3 w-full flex flex-between items-center gap-3">
+                        <?php if (!in_array($program['programme_layout_name'], $allTitle)) { ?>
                         <h3 class="text-main-red text-[20px] lg:text-[36px] font-bold">
                             <?= $program['programme_layout_name'] ?>
+                            <?php $allTitle[] = $program['programme_layout_name']; ?>
                         </h3>
+                        <?php } ?>
                         <!-- bouton d'edit -->
-                        <?php if ($isMyProject == true) { ?>
+                        <?php if ($CanModify == true) { ?>
                         <i onclick="swapDivsById('program_name_<?= $key ?>','program_name-update_<?= $key ?>')"
                             class="fa-solid fa-pen text-main-red fa-sm cursor-pointer"></i>
                         <?php } ?>
@@ -330,7 +335,7 @@
                         <?= $program['programme_name'] ?>
                     </div>
                     <!-- formulaire d'edit lien site -->
-                    <?php if ($isMyProject == true) { ?>
+                    <?php if ($CanModify == true) { ?>
                     <form id="program_name-update_<?= $key ?>"
                         action="?action=updateFormationElement&id=<?= $formation_main->id ?>&type=program" method="POST"
                         class="hidden w-full p-4" method="post" action="">
@@ -354,7 +359,7 @@
                     <div class="pb-3 flex items-center gap-3">
                         <h3 class="text-main-red text-[20px] lg:text-[36px] font-bold">Frais de scolarité</h3>
                         <!-- bouton d'edit -->
-                        <?php if ($isMyProject == true) { ?>
+                        <?php if ($CanModify == true) { ?>
                         <i onclick="swapDivsById('feeContent','feeContent-update')"
                             class="fa-solid fa-pen text-main-red fa-sm cursor-pointer"></i>
                         <?php } ?>
@@ -367,7 +372,7 @@
                         <?php } ?>
                     </ul>
                     <!-- formulaire d'edit lien site -->
-                    <?php if ($isMyProject == true) { ?>
+                    <?php if ($CanModify == true) { ?>
                     <form id="feeContent-update"
                         action="?action=updateFormationElement&id=<?= $formation_main->id ?>&type=fee" method="POST"
                         class="hidden w-full p-4 flex flex-col" method="post" action="">
@@ -412,7 +417,7 @@
             <h3 class="text-[30px] lg:text-[40px] font-bold">Certifications</h3>
         </div>
         <!-- bouton d'edit -->
-        <?php if ($isMyProject == true) { ?>
+        <?php if ($CanModify == true) { ?>
         <i onclick="swapDivsById('certificationAllContent','certificationAllContent-update')"
             class="fa-solid fa-pen text-main-red fa-sm cursor-pointer"></i>
         <?php } ?>
@@ -432,7 +437,7 @@
                     </a>
                 </p>
                 <!-- bouton d'edit -->
-                <?php if ($isMyProject == true) { ?>
+                <?php if ($CanModify == true) { ?>
                 <i onclick="swapDivsById('certificationContent_<?= $key ?>','certificationContent-update_<?= $key ?>')"
                     class="fa-solid fa-pen fa-sm cursor-pointer"></i>
                 <?php } ?>
@@ -443,7 +448,7 @@
             </div>
         </div>
         <!-- formulaire d'edit lien site -->
-        <?php if ($isMyProject == true) { ?>
+        <?php if ($CanModify == true) { ?>
         <form id="certificationContent-update_<?= $key ?>"
             action="?action=updateFormationElement&id=<?= $formation_main->id ?>&type=certification" method="POST"
             class="hidden w-full p-4" method="post" action="">
@@ -469,7 +474,7 @@
         <?php } ?>
     </div>
     <!-- formulaire d'edit lien site -->
-    <?php if ($isMyProject == true) { ?>
+    <?php if ($CanModify == true) { ?>
     <form id="certificationAllContent-update"
         action="?action=updateFormationElement&id=<?= $formation_main->id ?>&type=formation_certification" method="POST"
         class="hidden w-full p-4 flex flex-col" method="post" action="">

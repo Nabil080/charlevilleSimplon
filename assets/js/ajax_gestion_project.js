@@ -9,7 +9,6 @@ const multiSelectWithoutCtrl = ( elemSelector ) => {
                 this.selected = !this.selected;
                 return false;
             }, false );
-    console.log(elemSelector);
 
     });
 
@@ -27,6 +26,7 @@ function assignTeamToProjectTreatment(i)
             event.preventDefault(); // prevent default form submission behavior
         // handle form submission with fetch
             const formData = new FormData(validationTeamForm[i]);
+            console.log(validationTeamForm[i].getElementsByTagName('select'));
             fetch('index.php?action=assignTeamToProject', {
                 method: 'POST',
                 body: formData
@@ -35,25 +35,25 @@ function assignTeamToProjectTreatment(i)
                 .then(data => {
                     console.log(data);
 
-                    // data.forEach(function (element) {
-                    //     // Tout effacer les erreurs déjà afficher.
-                    //     let alertMessages = document.getElementsByClassName('success');
-                    //     for (let i = 0; i < alertMessages.length; i++) {
-                    //         alertMessages[i].remove();
-                    //     }
+                    data.forEach(function (element) {
+                        // Tout effacer les erreurs déjà afficher.
+                        let alertMessages = document.getElementsByClassName('success');
+                        for (let i = 0; i < alertMessages.length; i++) {
+                            alertMessages[i].remove();
+                        }
 
-                    //     alertMessages = document.getElementsByClassName('error');
-                    //     for (let i = 0; i < alertMessages.length; i++) {
-                    //         alertMessages[i].remove();
-                    //     }
+                        alertMessages = document.getElementsByClassName('error');
+                        for (let i = 0; i < alertMessages.length; i++) {
+                            alertMessages[i].remove();
+                        }
 
 
-                    //     let id = (element['successMessage'] ? "content_success" : element['location']);
-                    //     console.log(id);
+                        let id = (element['successMessage'] ? "content_success" : element['location']);
+                        console.log(id);
 
-                    //     const input = document.getElementById(id);
-                    //     input.insertAdjacentHTML("afterend", element['message']);
-                    // })
+                        const input = document.getElementById(id);
+                        input.insertAdjacentHTML("afterend", element['message']);
+                    })
 
                 })
                 .catch(error => console.error(error));
@@ -149,8 +149,9 @@ function assignTeamToProject(i, x)
 {
     if (validationTeamForm.length > 0){
         assignTeamToProjectTreatment(i);
-        console.log(x);
-        console.log(i);
+        
+        const form = document.getElementById("team" + x);
+        form.classList.add("hidden");
 
         const curr = "status" + x;
         const status = document.getElementById(curr);

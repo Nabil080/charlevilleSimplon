@@ -28,7 +28,9 @@ $formations = $formationRepo->getAllFormations();
                 <?php } else if (str_contains($_GET['action'],'crudCompanyPage')) { ?>
                     onclick="window.location.href='?action=registerPage&company=1'"
                 <?php } ?>
-            data-modal-target="modal-add" data-modal-toggle="modal-add" type="button" 
+                <?php if ($_GET['action'] != "crudLearnerPage") { ?>
+            data-modal-target="modal-add" data-modal-toggle="modal-add" type="button"
+            <?php } ?>
             class="
             <?php if (str_contains($_GET['action'],'crudCandidatePage')) { ?>
                 hidden 

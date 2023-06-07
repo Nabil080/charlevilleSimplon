@@ -6,7 +6,7 @@
     </h2>
     <div class="md:flex justify-evenly items-center gap-10">
         <div class="w-1/2 hidden md:block">
-            <img src="assets/img/autres/projet.jpg" alt="image de décoration" class="img-fluid" />
+            <img src="assets/img/autres/project.png" alt="image de décoration" class="img-fluid" />
         </div>
         <div class="md:w-1/2">
             <form id="projectForm" enctype="multipart/form-data" class="flex flex-col items-center gap-6" target="_blank">
@@ -45,7 +45,7 @@
                 <div class="w-full md:w-2/3">
                     <label for="link" class="block mb-2 text-[14px] font-medium">Lien vers votre
                         entreprise</label>
-                    <input type="text" id="link" name="link" placeholder="Votre lien" <?php if(isset($project)){echo "value='$project->company_link'";}?>
+                    <input type="url" id="link" name="link" placeholder="Votre lien" <?php if(isset($project)){echo "value='$project->company_link'";}?>
                         class="bg-main-white border border-main-red text-[18px] rounded-[5px] block w-full p-2.5">
                 </div>
                 <div class="">

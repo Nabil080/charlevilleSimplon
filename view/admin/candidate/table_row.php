@@ -4,15 +4,9 @@
     </th>
     <td class="px-4 py-3 border"><?= $candidate->user_surname ?></td>
     <td class="px-4 py-3 border">
-        <?php if (isset($candidatures)) {
-            foreach ($candidatures as $candidature) { ?>
-                <p class="text-center italic font-bold underline">$candidature</p>
-        <?php
-            }
-        } ?>
         <?php
         foreach ($UserRepo->getUserPromo('candidature', $candidate->user_id) as $promo) {
-            echo "<p class='text-center italic font-bold underline'>$promo->name $promo->start</p>";
+            echo "<p class='text-center italic font-bold underline'>$promo->name</p>";
         }
         ?>
         <button data-modal-target="modal-candidature-<?= $candidate->user_id ?>" data-modal-toggle="modal-candidature-<?= $candidate->user_id ?>" class="block w-full md:w-auto text-white bg-main-red ho:bg-red-800 focus:ring-4 focus:outline-none 

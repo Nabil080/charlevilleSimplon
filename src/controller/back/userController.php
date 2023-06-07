@@ -363,14 +363,18 @@ function candidatePagination()
     $users = $UserRepo->getAllCandidates($limit, $filter, $execute);
 
     $usersHTML = [];
+    $modalsHTML = [];
     foreach ($users as $candidate) {
         ob_start();
         include('view/admin/candidate/table_row.php');
-        include("view/admin/modalUpdateUser.php");
-        include("view/admin/modalCandidature.php");
+        include("view/admin/candidate/modalCandidature.php");
         $content = ob_get_clean();
-
         $usersHTML[] = $content;
+
+        ob_start();
+        include("view/admin/modal/modalUpdateUser.php");
+        $content = ob_get_clean();
+        $modalsHTML[] = $content;
     }
 
     $response = array(
@@ -381,6 +385,7 @@ function candidatePagination()
         "query" => "WHERE $filter",
         "limit" => $limit,
         "candidates" => $usersHTML,
+        "modals" => $modalsHTML,
     );
 
     echo json_encode($response);
@@ -406,15 +411,19 @@ function learnerPagination()
     $filtered = $UserRepo->getFilteredLearnersAndFormatorsNumber($filter, $execute);
     $users = $UserRepo->getLearnersAndFormators($limit, $filter, $execute);
     $usersHTML = [];
+    $modalsHTML = [];
     foreach ($users as $user) {
         ob_start();
         include("view/admin/apprenant/table_row.php");
-        include("view/admin/modalUpdateUser.php");
-        include("view/admin/modalInfos.php");
-        include("view/admin/modalProjet.php");
+        include("view/admin/modal/modalInfos.php");
+        include("view/admin/modal/modalProjet.php");
         $content = ob_get_clean();
-
         $usersHTML[] = $content;
+
+        ob_start();
+        include("view/admin/modal/modalUpdateUser.php");
+        $content = ob_get_clean();
+        $modalsHTML[] = $content;
     }
 
     $response = array(
@@ -425,6 +434,7 @@ function learnerPagination()
         "query" => "WHERE $filter",
         "limit" => $limit,
         "candidates" => $usersHTML,
+        "modals" => $modalsHTML,
     );
 
     echo json_encode($response);
@@ -455,9 +465,9 @@ function companyPagination()
     foreach ($users as $user) {
         ob_start();
         include('view/admin/entreprise/table_row.php');
-        include("view/admin/modalUpdateUser.php");
-        include("view/admin/modalInfos.php");
-        include("view/admin/modalProjet.php");
+        include("view/admin/modal/modalUpdateUser.php");
+        include("view/admin/modal/modalInfos.php");
+        include("view/admin/modal/modalProjet.php");
         $content = ob_get_clean();
 
         $usersHTML[] = $content;
@@ -483,7 +493,7 @@ function updateUserElements()
     // var_dump($_FILES);
     if ((!isset($_GET['id']) || $_GET['id'] == null) && (!isset($_GET['type']) || $_GET['type'] == null)) {
         // erreur 404 page not found : Vous devez renseigner un id utilisateur et un type de modification
-    } elseif ((isset($_GET['id']) && $_GET['id'] == $_SESSION['user']['user_id']) && (isset($_GET['type']) && $_GET['type'] !== null)) {
+    } elseif ((isset($_GET['id']) && $_GET['id'] == $_SESSION['user']->user_id) && (isset($_GET['type']) && $_GET['type'] !== null) || $_SESSION['user']->role_id == 1) {
         $type = $_GET['type'];
         $id = $_GET['id'];
         $userRepository = new UserRepository();

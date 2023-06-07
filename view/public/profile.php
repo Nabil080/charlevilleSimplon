@@ -5,13 +5,15 @@ $title = "Espace personnel";
 <?php ob_start();
 // var_dump($userDatas);
 // var_dump($userPromo);
+// var_dump($allStatus);
+
 ?>
 <!-- Section photo et description -->
 <div class="background bg-main-white overflow-x-hidden min-h-[100vh]">
 
     <?php
     // Gestion page visite de profil ou page MON profil
-    if($_SESSION['user']['role_id'] == 1){
+    if(isset($_SESSION['user']) && $_SESSION['user']->role_id == 1){
         $notMyProfile = '';
     } elseif (!isset($isMyProfile) || $isMyProfile == false)
     {
@@ -21,32 +23,32 @@ $title = "Espace personnel";
     }
 
     // Gestion page profil prospect
-    if ($userDatas['role_id'] == 5) { ?>
+    if ($userDatas->role_id == 5) { ?>
 
         <!-- PROFIL PROSPECT -->
         <section class="prospect_profil">
             <!-- Image de profil -->
             <div class="border-2 picture_desc grid grid-cols-1 lg:grid-cols-2 items-center py-[50px] px-[8%] 2xl:px-[5%]">
                 <div class="picture max-h-screen lg:mr-5">
-                    <img class="w-full rounded-t-lg" src="<?= $userDatas['user_avatar'] ?>" alt="Image de profil">
+                    <img class="w-full rounded-t-lg" src="<?= $userDatas->user_avatar ?>" alt="Image de profil">
                     <button class="bg-main-red w-full text-main-white text-[16px] lg:text-[28px] py-3 rounded-b-lg" <?= $notMyProfile; ?>>Changer ma photo de profil</button>
                 </div>
                 <div class="description lg:ml-5 h-[100%] flex flex-col">
-                    <h1 class="text-main-red font-title text-[28px] lg:text-[48px] font-semibold pt-5 text-center lg:text-left"><span class="uppercase"><?= $userDatas['user_name'] ?></span> <?= $userDatas['user_surname'] ?></h1>
+                    <h1 class="text-main-red font-title text-[28px] lg:text-[48px] font-semibold pt-5 text-center lg:text-left"><span class="uppercase"><?= $userDatas->user_name ?></span> <?= $userDatas->user_surname ?></h1>
                     <div class="text-desc rounded-[5px] border-[1px] border-main-border mt-2 grow lg:flex lg:flex-col lg:justify-between">
                         <p class="text-[20px] text-justify pt-4 px-3 pb-2 lg:pb-0">Candidature pour les formations : <?php foreach($userPromo[0] as $promo){ echo "<a class='text-main-red underline' href='?action=formationPage&id=$promo->id'>$promo->name</a> <br>";} ?></p>
 
                         <div class="h-0 border-[2px] border-main-red w-1/2 mb-5"></div>
                         <ul class="text-justify px-3 pb-3 text-[16px] lg:text-[18px] leading-loose ml-8">
-                            <li class="list-disc">Nom : <?= $userDatas['user_name'] ?></li>
-                            <li class="list-disc">Prénom : <?= $userDatas['user_surname'] ?> </li>
-                            <li class="list-disc">Adresse : <?= $userDatas['user_place'] ?></li>
-                            <li class="list-disc">Email : <?= $userDatas['user_email'] ?></li>
-                            <li class="list-disc">Téléphone : <?= $userDatas['user_phone'] ?></li>
-                            <li class="list-disc">Date de naissance : <?= $userDatas['user_birth_date'] ?></li>
-                            <li class="list-disc">Lieu de naissance : <?= $userDatas['user_birth_place'] ?></li>
-                            <li class="list-disc">Nationalité : <?= $userDatas['user_nationality'] ?></li>
-                            <li class="list-disc">Numéro Pôle Emploi : <?= $userDatas['user_numero_pe'] ?></li>
+                            <li class="list-disc">Nom : <?= $userDatas->user_name ?></li>
+                            <li class="list-disc">Prénom : <?= $userDatas->user_surname ?> </li>
+                            <li class="list-disc">Adresse : <?= $userDatas->user_adress ?></li>
+                            <li class="list-disc">Email : <?= $userDatas->user_email ?></li>
+                            <li class="list-disc">Téléphone : <?= $userDatas->user_phone ?></li>
+                            <li class="list-disc">Date de naissance : <?= $userDatas->user_birth_date ?></li>
+                            <li class="list-disc">Lieu de naissance : <?= $userDatas->user_birth_place ?></li>
+                            <li class="list-disc">Nationalité : <?= $userDatas->user_nationality ?></li>
+                            <li class="list-disc">Numéro Pôle Emploi : <?= $userDatas->user_id_poleEmploi ?></li>
                         </ul>
                         <button data-modal-target="modify-prospect_data-modal" data-modal-toggle="modify-prospect_data-modal" class="bg-main-red w-full lg:w-3/5 text-main-white text-[18px] uppercase py-3 rounded-b-lg lg:rounded-none lg:mb-4 lg:flex lg:justify-center lg:mx-auto" <?= $notMyProfile; ?>>Editer ma candidature</button>
                         <!-- Modal de modification des informations persos -->
@@ -60,26 +62,26 @@ $title = "Espace personnel";
                                     <!-- Partie MODIFICATION -->
                                     <div id="co" class="px-6 py-6 lg:px-8">
                                         <h3 class="mb-4 text-medium uppercase w-fit mx-auto font-bold font-title text-main-red">Modifier mes informations personnelles</h3>
-                                        <form class="space-y-6 [&_input]:text-black" action="?action=updateUserElements&type=datas&id=<?=$userDatas['user_id']?>" method="post">
+                                        <form class="space-y-6 [&_input]:text-black" action="?action=updateUserElements&type=datas&id=<?=$userDatas->user_id?>" method="post">
                                             <div>
                                                 <label for="email" class="block mb-1 text-sm font-medium  text-main-red">E-mail</label>
-                                                <input type="email" name="email" id="email" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" value="<?= $userDatas['user_email'] ?>">
+                                                <input type="email" name="email" id="email" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" value="<?= $userDatas->user_email ?>">
                                             </div>
                                             <div>
                                                 <label for="phone" class="block mb-1 text-sm font-medium  text-main-red">Téléphone</label>
-                                                <input type="phone" name="phone" id="phone" pattern="[0][0-9]{9}" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" value="<?= $userDatas['user_phone'] ?>">
+                                                <input type="phone" name="phone" id="phone" pattern="[0][0-9]{9}" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" value="<?= $userDatas->user_phone ?>">
                                             </div>
                                             <div>
                                                 <label for="adress" class="block mb-1 text-sm font-medium  text-main-red">Adresse</label>
-                                                <input type="text" name="adress" id="adress" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" value="<?= $userDatas['user_place'] ?>">
+                                                <input type="text" name="adress" id="adress" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" value="<?= $userDatas->user_adress ?>">
                                             </div>
                                             <div>
                                                 <label for="numero_pe" class="block mb-1 text-sm font-medium  text-main-red">Numéro Pôle Emploi</label>
-                                                <input type="text" name="numero_pe" id="numero_pe" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" value="<?= $userDatas['user_numero_pe'] ?>">
+                                                <input type="text" name="numero_pe" id="numero_pe" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" value="<?= $userDatas->user_id_poleEmploi ?>">
                                             </div>
                                             <div>
                                                 <label for="nationality" class="block mb-1 text-sm font-medium  text-main-red">Nationalité</label>
-                                                <input type="text" name="nationality" id="nationality" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" value="<?= $userDatas['user_nationality'] ?>">
+                                                <input type="text" name="nationality" id="nationality" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" value="<?= $userDatas->user_nationality ?>">
                                             </div>
                                             <div>
                                                 <label for="new_password" class="block mb-1 text-sm font-medium text-main-red">Choisir un nouveau mot de passe* <span class="text-main-gray italic">Optionnel</span></label>
@@ -107,7 +109,7 @@ $title = "Espace personnel";
 
     <?php
     // Gestion page profil apprenant/formateur/admin
-    if ($userDatas['role_id'] == 4 || $userDatas['role_id'] == 2 || $_SESSION['user']['role_id'] == 1) { ?>
+    if ($userDatas->role_id == 4 || $userDatas->role_id == 2 || $_SESSION['user']->role_id == 1) { ?>
 
         <!-- PROFIL APPRENANT -->
         <section class="apprenant_profil">
@@ -115,13 +117,13 @@ $title = "Espace personnel";
             <div class="picture_description grid grid-cols-1 lg:grid-cols-2 items-center px-[8%] lg:px-[3%]">
                 <!-- Image de profil -->
                 <div class="border-2 picture max-h-screen mx-auto">
-                    <img class="max-w-full max-h-[600px] overflow-scroll rounded-t-lg" src="<?= $userDatas['user_avatar'] ?>" alt="Image de profil">
+                    <img class="max-w-full max-h-[600px] overflow-scroll rounded-t-lg" src="<?= $userDatas->user_avatar ?>" alt="Image de profil">
                     <div id="avatar" <?= $notMyProfile; ?>>
                         <div onclick="swapDivsById('avatar','avatar-update')">
                             <button type="submit" class="bg-main-red w-full text-main-white text-[16px] lg:text-[28px] py-3 rounded-b-lg" <?= $notMyProfile; ?>>Changer ma photo de profil</button>
                         </div>
                     </div>
-                    <form id="avatar-update" method="POST" action="?action=updateUserElements&type=avatar&id=<?=$userDatas['user_id']?>" class="hidden space-x-4 pt-2" enctype="multipart/form-data">
+                    <form id="avatar-update" method="POST" action="?action=updateUserElements&type=avatar&id=<?=$userDatas->user_id?>" class="hidden space-x-4 pt-2" enctype="multipart/form-data">
                         <input type="file" name="avatar">
                         <button type="submit"><i class="fa-solid fa-check text-main-red"></i></button>
                         <i onclick="swapDivsById('avatar','avatar-update')" class="fa-solid fa-xmark text-main-red cursor-pointer"></i>
@@ -132,12 +134,12 @@ $title = "Espace personnel";
                 <!-- Description -->
                 <div class="description lg:ml-5 h-[100%] flex flex-col">
                     <div class="edit_profil flex flex-col lg:justify-normal items-start pt-5">
-                        <h1 id="title" class="text-main-red font-title text-[28px] lg:text-[48px] font-semibold text-center pr-5"><span class="uppercase"><?= $userDatas['user_name'] ?></span> <?= $userDatas['user_surname'] ?></h1>
+                        <h1 id="title" class="text-main-red font-title text-[28px] lg:text-[48px] font-semibold text-center pr-5"><span class="uppercase"><?= $userDatas->user_name ?></span> <?= $userDatas->user_surname ?></h1>
                         <h2 class="font-title text-[14px] lg:text-[24px] font-semibold pr-5">
-                            <?php if($userDatas['role_id'] == 4) { ?>
+                            <?php if($userDatas->role_id == 4) { ?>
                                 <a href="?action=promotionPage&id=<?= $userPromo[2][0]->id ?>" class="font-title text-[10px] lg:text-[18px] my-5 bg-main-red py-2 px-4 rounded-full text-main-white hover:bg-main-white hover:text-main-red hover:border border-main-red"><?= $userPromo[2][0]->name ?></a>
                             <?php } ?>
-                            <?php if ($userDatas['role_id'] == 2) { ?>
+                            <?php if ($userDatas->role_id == 2) { ?>
                                 <p class="font-title text-[10px] lg:text-[18px] pb-4">Ce formateur est actuellement en charge des promotions :</p>
                                 <ul>
                                     <?php foreach ($userPromo[2] as $promo) { ?>
@@ -151,28 +153,31 @@ $title = "Espace personnel";
                     </div>
                     <!-- Statut -->
                     <div class="formation_status flex justify-center lg:justify-normal items-center px-3 mt-2">
-                        <form id="user-status-update" method="POST" action="?action=updateUserElements&type=status&id=<?=$userDatas['user_id']?>" class="hidden space-x-4">
+                        <form id="user-status-update" method="POST" action="?action=updateUserElements&type=status&id=<?=$userDatas->user_id?>" class="hidden space-x-4">
                             <select name="user_status" class="border-main-red px-4 py-2">
                                 <option selected disabled>Votre statut</option>
                                 <?php foreach ($allStatus as $eachStatus){ ?>
-                                    <option value="<?= $eachStatus['status_id']?>"<?php if($eachStatus['status_id'] == $userDatas['status_id']){echo "selected";} ?>>
+                                    <option value="<?= $eachStatus['status_id']?>"<?php if($eachStatus['status_id'] == $userDatas->user_status_id){echo "selected";} ?>>
                                         <?= $eachStatus['status_name'] ?>
                                     </option>
                                 <?php } ?>
                             </select>
                             <span>Depuis le :</span>
-                            <input type="date" id="user_status_date" name="user_status_date" value="<?=$userDatas['user_status_date']?>" class="border-main-red px-4 py-2">
+                            <input type="date" id="user_status_date" name="user_status_date" value="<?=$userDatas->user_status_date?>" class="border-main-red px-4 py-2">
                             <button type="submit"><i class="fa-solid fa-check text-main-red"></i></button>
                             <i onclick="swapDivsById('user-status','user-status-update')" class="fa-solid fa-xmark text-main-red cursor-pointer"></i>
                         </form>
 
                         <div id="user-status" class="flex items-center pt-1 pb-2">
-                            <span class="w-6 h-6 border-[1px] rounded-full mr-2 animate-pulse
-                                <?php if ($userDatas['status_id'] == 4){?> bg-main-red<?php }?>
-                                <?php if ($userDatas['status_id'] == 13){?> bg-main-green<?php }?>
-                                <?php if ($userDatas['status_id'] == 11){?> bg-main-orange<?php }?>">
-                            </span>
-                            <span class="text-[16px] flex justify-center italic"><?= $userDatas['status_name'] ?> depuis <?= "le ".formateDate($userDatas['user_status_date']) ?></span>
+                                    <i class="fa-solid fa-circle 
+                                <?php if (isset($userDatas->user_status_id) && $userDatas->user_status_id < 6) { 
+                                    echo("text-red-500"); 
+                                } 
+                                else if (isset($userDatas->user_status_id) && $userDatas->user_status_id >= 6) {
+                                    echo("text-green-500");
+                                }?>
+                                animate-pulse duration-[2s] mr-1"></i>
+                            <span class="text-[16px] flex justify-center italic"><?= $userDatas->user_status ?> depuis <?= "le ".formateDate($userDatas->user_status_date) ?></span>
                             <div onclick="swapDivsById('user-status','user-status-update')" class="cursor-pointer" <?= $notMyProfile; ?>>
                                 <i class="fa-solid fa-pen text-main-red w-[20px] ml-3"></i>
                                 <span class="sm:inline-block text-[10px] lg:text-base text-main-red"> Modifier</span>
@@ -182,13 +187,13 @@ $title = "Espace personnel";
                     <!-- Texte de description -->
                     <div class="text_description rounded-[5px] border-[1px] border-main-border bg-main-lightgray mt-5 grow lg:flex lg:flex-col lg:justify-between">
                         <div id="description" class="lg:p-4 flex flex-col ">
-                            <p class="text-[18px] text-justify pt-4 px-3 pb-2 lg:pb-0"><?php if(isset($userDatas['user_description']) && !empty($userDatas['user_description'])){ echo $userDatas['user_description'];}else{
+                            <p class="text-[18px] text-justify pt-4 px-3 pb-2 lg:pb-0"><?php if(isset($userDatas->user_description) && !empty($userDatas->user_description)){ echo $userDatas->user_description;}else{
                                 echo "Pas de description renseignée";
                             } ?></p>
                         </div>
-                        <form method="POST" action="?action=updateUserElements&type=description&id=<?=$userDatas['user_id']?>" id="description-update" class="hidden h-full">
+                        <form method="POST" action="?action=updateUserElements&type=description&id=<?=$userDatas->user_id?>" id="description-update" class="hidden h-full">
                             <textarea name="description" id="editor" class="text-editor h-full overflow-scroll">
-                            <?= $userDatas['user_description'] ?>
+                            <?= $userDatas->user_description ?>
                             </textarea>
                             <button type="submit" class="py-2 px-4 bg-main-red border-main-white border text-main-white my-4 mr-4">Modifier <i class="fa-solid fa-check"></i></button>
                             <span onclick="swapDivsById('description','description-update')" class="cursor-pointer">Annuler <i class="fa-solid fa-xmark"></i></span>
@@ -199,18 +204,18 @@ $title = "Espace personnel";
 
                     <div class="flex flex-col lg:flex-row justify-center my-3 lg:my-0 lg:mt-4">
                         <div id="cv" class="flex items-center justify-center lg:flex-row flex-col my-4 lg:my-0 lg:mx-auto">
-                            <a href="<?=$userDatas['user_cv']?>" download class="bg-main-red text-main-white text-[16px] rounded-[5px] mx-auto py-3 lg:py-1 px-2 lg:px-4" target="_blank">Voir le C.V.</a>
+                            <a href="<?=$userDatas->user_cv?>" download class="bg-main-red text-main-white text-[16px] rounded-[5px] mx-auto py-3 lg:py-1 px-2 lg:px-4" target="_blank">Voir le C.V.</a>
                             <div onclick="swapDivsById('cv','cv-update')" class="modify-cv cursor-pointer flex items-center pt-2 pl-3" <?= $notMyProfile; ?>>
                                 <i class="fa-solid fa-download text-main-red w-[20px]"></i>
                                 <span class="text-[10px] text-main-red">Modifier mon C.V.</span>
                             </div>
                         </div>
-                        <form id="cv-update" method="POST" action="?action=updateUserElements&type=cv&id=<?=$userDatas['user_id']?>" class="hidden space-x-4" enctype="multipart/form-data">
+                        <form id="cv-update" method="POST" action="?action=updateUserElements&type=cv&id=<?=$userDatas->user_id?>" class="hidden space-x-4" enctype="multipart/form-data">
                             <input type="file" name="cv">
                             <button type="submit"><i class="fa-solid fa-check text-main-red"></i></button>
                             <i onclick="swapDivsById('cv','cv-update')" class="fa-solid fa-xmark text-main-red cursor-pointer"></i>
                         </form>
-                        <a href="mailto:<?= $userDatas['user_email'] ?>" class="flex items-center my-4 bg-main-red text-main-white text-[16px] rounded-[5px] mx-auto py-3 lg:py-1 px-2 lg:px-4">Contacter</a>
+                        <a href="mailto:<?= $userDatas->user_email ?>" class="flex items-center my-4 bg-main-red text-main-white text-[16px] rounded-[5px] mx-auto py-3 lg:py-1 px-2 lg:px-4">Contacter</a>
                     </div>
                 </div>
             </div>
@@ -225,29 +230,29 @@ $title = "Espace personnel";
                             <h3 class="font-title text-[24px] font-bold uppercase lg:mb-3">Sites web
                             <i onclick="swapDivsById('links','links-update')" class="fa-solid fa-pen cursor-pointer text-main-red w-[20px] pl-3" <?= $notMyProfile; ?>></i></h3>
                         </div>
-                            <form id="links-form" method="POST" action="?action=updateUserElements&type=links&id=<?=$userDatas['user_id']?>">
+                            <form id="links-form" method="POST" action="?action=updateUserElements&type=links&id=<?=$userDatas->user_id?>">
                                 <div id="links">
-                                    <?php if(!isset($userDatas['user_linkedin']) || !isset($userDatas['user_github']) && empty($userDatas['user_linkedin'] && empty($userDatas['user_github']))){ ?>
+                                    <?php if(!isset($userDatas->user_linkedin) || !isset($userDatas->user_github) && empty($userDatas->user_linkedin && empty($userDatas->user_github))){ ?>
                                         <p class="px-4">Pas de site web renseigné.</p>
                                     <?php } ?>
-                                    <?php if(isset($userDatas['user_linkedin']) && !empty($userDatas['user_linkedin'])){ ?>
+                                    <?php if(isset($userDatas->user_linkedin) && !empty($userDatas->user_linkedin)){ ?>
                                         <div class="sites flex items-center px-3 mt-2 mb-4 lg:mb-5">
                                             <span class="w-6 h-6 border-[1px] bg-main-red rounded-full mr-2"></span>
-                                            <a href="<?= $userDatas['user_linkedin'] ?>"><?= $userDatas['user_linkedin'] ?></a>
+                                            <a href="<?= $userDatas->user_linkedin ?>"><?= $userDatas->user_linkedin ?></a>
                                             <p id="linkedin_error" class="errorAlert mt-2 text-sm text-red-600 dark:text-red-500"></p>
                                         </div>
                                     <?php } ?>
-                                    <?php if(isset($userDatas['user_github']) && !empty($userDatas['user_github'])){ ?>
+                                    <?php if(isset($userDatas->user_github) && !empty($userDatas->user_github)){ ?>
                                         <div class="sites flex items-center px-3 mt-2 mb-4 lg:mb-8">
                                             <span class="w-6 h-6 border-[1px] bg-main-red rounded-full mr-2"></span>
-                                            <a href="<?= $userDatas['user_github'] ?>"class="line-clamp-1"><?= $userDatas['user_github'] ?></a>
+                                            <a href="<?= $userDatas->user_github ?>"class="line-clamp-1"><?= $userDatas->user_github ?></a>
                                             <p id="github_error" class="errorAlert mt-2 text-sm text-red-600 dark:text-red-500"></p>
                                         </div>
                                     <?php } ?>
                                 </div>
                                 <div id="links-update" class="hidden space-y-2">
-                                    <input name="user_linkedin" type="url" value="<?= $userDatas['user_linkedin'] ?>" placeholder="lien linkedin" class="space-x-4">
-                                    <input name="user_github" type="url" value="<?= $userDatas['user_github'] ?>" placeholder="lien github" class="space-x-4">
+                                    <input name="user_linkedin" type="url" value="<?= $userDatas->user_linkedin ?>" placeholder="lien linkedin" class="space-x-4">
+                                    <input name="user_github" type="url" value="<?= $userDatas->user_github ?>" placeholder="lien github" class="space-x-4">
                                     <div class="flex justify-center">
                                         <button type="submit" class="py-2 px-4 bg-main-red border-main-white border text-main-white my-4 mr-4">Modifier <i class="fa-solid fa-check"></i></button>
                                         <span onclick="swapDivsById('links','links-update')" class="cursor-pointer border my-4 mr-4 py-2 px-4">Annuler <i class="fa-solid fa-xmark"></i></span>
@@ -259,7 +264,7 @@ $title = "Espace personnel";
                             <h3 class="font-title text-[24px] font-bold uppercase lg:mb-3">Compétences
                             <i onclick="swapDivsById('skills','skills-update')" class="fa-solid fa-pen cursor-pointer text-main-red w-[20px] pl-3" <?= $notMyProfile; ?>></i></h3>
                         </div>
-                        <form id="skills-update" method="POST" action="?action=updateUserElements&type=skills&id=<?=$userDatas['user_id']?>" class="hidden flex flex-col">
+                        <form id="skills-update" method="POST" action="?action=updateUserElements&type=skills&id=<?=$userDatas->user_id?>" class="hidden flex flex-col">
                             <select multiple name="skills[]">
                                 <option selected disabled>Sélectionner des compétences</option>
                                 <?php foreach ($allTags as $eachTag){ ?>
@@ -298,26 +303,26 @@ $title = "Espace personnel";
                                 <!-- Partie MODIFICATION -->
                                 <div id="co" class="px-6 py-6 lg:px-8">
                                     <h3 class="mb-4 text-medium uppercase w-fit mx-auto font-bold font-title text-main-red">Modifier mes informations personnelles</h3>
-                                    <form method="POST" action="?action=updateUserElements&type=datas&id=<?=$userDatas['user_id']?>" class="space-y-6">
+                                    <form method="POST" action="?action=updateUserElements&type=datas&id=<?=$userDatas->user_id?>" class="space-y-6">
                                         <div>
                                             <label for="email" class="block mb-1 text-sm font-medium  text-main-red">E-mail</label>
-                                            <input type="email" name="email" id="email" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" placeholder="exemple@exemple.com" value="<?= $userDatas['user_email'] ?>">
+                                            <input type="email" name="email" id="email" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" placeholder="exemple@exemple.com" value="<?= $userDatas->user_email ?>">
                                         </div>
                                         <div>
                                             <label for="phone" class="block mb-1 text-sm font-medium  text-main-red">Téléphone</label>
-                                            <input type="tel" name="phone" id="phone" pattern="[0][0-9]{9}" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" placeholder="06 xx xx xx xx" value="<?= $userDatas['user_phone'] ?>">
+                                            <input type="tel" name="phone" id="phone" pattern="[0][0-9]{9}" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" placeholder="06 xx xx xx xx" value="<?= $userDatas->user_phone ?>">
                                         </div>
                                         <div>
                                             <label for="adress" class="block mb-1 text-sm font-medium  text-main-red">Adresse</label>
-                                            <input type="text" name="adress" id="adress" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" placeholder="Votre adresse" value="<?= $userDatas['user_place'] ?>">
+                                            <input type="text" name="adress" id="adress" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" placeholder="Votre adresse" value="<?= $userDatas->user_adress ?>">
                                         </div>
                                         <div>
                                             <label for="numero_pe" class="block mb-1 text-sm font-medium  text-main-red">Numéro Pôle Emploi</label>
-                                            <input type="text" name="numero_pe" id="numero_pe" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" placeholder="Votre numéro pole emploi" value="<?= $userDatas['user_numero_pe'] ?>">
+                                            <input type="text" name="numero_pe" id="numero_pe" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" placeholder="Votre numéro pole emploi" value="<?= $userDatas->user_id_poleEmploi ?>">
                                         </div>
                                         <div>
                                             <label for="nationality" class="block mb-1 text-sm font-medium  text-main-red">Nationalité</label>
-                                            <input type="text" name="nationality" id="nationality" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" placeholder="Votre nationalité" value="<?= $userDatas['user_nationality'] ?>">
+                                            <input type="text" name="nationality" id="nationality" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" placeholder="Votre nationalité" value="<?= $userDatas->user_nationality ?>">
                                         </div>
                                         <div>
                                             <label for="new_password" class="block mb-1 text-sm font-medium text-main-red">Choisir un nouveau mot de passe* <span class="text-main-gray italic">Optionnel</span></label>
@@ -355,24 +360,24 @@ $title = "Espace personnel";
                     <!-- SECTION PROJET PHARE -->
                     <section class="sectionChange border h-[480px] lg:h-[580px]">
                         <div class="projet-phare">
-                            <?php if (empty($userDatas['user_highlight'])){?>
+                            <?php if (empty($userDatas->user_highlight)){?>
                                 <div class="w-full h-full text-main-black font-title font-bold pt-6 pl-6">
                                     <p>Cet utilisateur n'a pas encore de projet phare</p>
                                 </div>
                             <?php }else{
-                                $info = pathinfo($userDatas['user_highlight']);
-                                if ($info["extension"] == "pdf") { ?>
+                                $info = pathinfo($userDatas->user_highlight);
+                                if (isset ($info['extension']) && $info["extension"] == "pdf") { ?>
                                 <div class="md:hidden flex flex-col items-center text-main-black font-title font-bold py-5 px-5">
                                     <p class="mb-5">Vous ne pouvez pas afficher ce fichier pdf sur mobile, mais vous pouvez toutefois le consulter en ouvrant la page suivante :</p>
-                                    <a href="<?= $userDatas['user_highlight']?>" class="bg-main-red text-main-white text-[16px] rounded-[5px] mx-auto py-3 lg:py-1 px-2 lg:px-4" target="_blank">Voir le projet phare</a>
+                                    <a href="<?= $userDatas->user_highlight?>" class="bg-main-red text-main-white text-[16px] rounded-[5px] mx-auto py-3 lg:py-1 px-2 lg:px-4" target="_blank">Voir le projet phare</a>
                                 </div>
-                                <iframe class="hidden md:block w-full min-h-[400px] lg:min-h-[500px]" src="<?= $userDatas['user_highlight'] ?>" title="iframe du projet phare"></iframe>
+                                <iframe class="hidden md:block w-full min-h-[400px] lg:min-h-[500px]" src="<?= $userDatas->user_highlight ?>" title="iframe du projet phare"></iframe>
                             <?php } else {?>
-                                <iframe class="w-full min-h-[400px] lg:min-h-[500px]" src="<?= $userDatas['user_highlight'] ?>" title="iframe du projet phare"></iframe>
+                                <iframe class="w-full min-h-[400px] lg:min-h-[500px]" src="<?= $userDatas->user_highlight ?>" title="iframe du projet phare"></iframe>
                             <?php }}?>
                                 <!-- Boutons modifier/supprimer le projet phare -->
                                 <div class="boutons lg:flex lg:flex-row lg:justify-between" <?= $notMyProfile; ?>>
-                                    <?php if (!empty($userDatas['user_highlight'])){?>
+                                    <?php if (!empty($userDatas->user_highlight)){?>
                                     <div id="main-project" class="flex justify-between mt-5 mx-5 mb-2">
                                         <div id="modif-modal-button" data-modal-target="main-project-update" data-modal-toggle="main-project-update" class="flex items-center pt-2 lg:mr-10 cursor-pointer">
                                             <i class="fa-solid fa-pen fa-xl text-main-red "></i>
@@ -388,7 +393,7 @@ $title = "Espace personnel";
                                     <?php }?>
                                     <!-- Bouton ajouter un projet phare -->
                                     <?php
-                                    if (empty($userDatas['user_highlight'])){?>
+                                    if (empty($userDatas->user_highlight)){?>
                                     <div data-modal-target="main-project-update" data-modal-toggle="main-project-update" class="flex items-center mt-5 ml-6 mb-2 cursor-pointer" <?= $notMyProfile; ?>>
                                         <span class="w-[40px] h-[40px] border bg-main-red rounded-full mr-2 flex items-center justify-center"><i class="fa-solid fa-plus text-main-white text-[25px] font-bold"></i></span>
                                         <p class="text-main-red italic text-[18px] font-semibold mr-4">Ajouter mon projet phare</p>
@@ -409,7 +414,7 @@ $title = "Espace personnel";
                                 <!-- Partie MODIFICATION -->
                                 <div id="co" class="px-6 py-6 lg:px-8">
                                     <h3 class="mb-4 text-medium uppercase w-fit mx-auto font-bold font-title text-main-red">Modifier mon projet phare</h3>
-                                    <form id="highlight_form" class="space-y-6" action="?action=updateUserElements&type=highlight&id=<?=$userDatas['user_id']?>" method="post" enctype="multipart/form-data">
+                                    <form id="highlight_form" class="space-y-6" action="?action=updateUserElements&type=highlight&id=<?=$userDatas->user_id?>" method="post" enctype="multipart/form-data">
                                         <div>
                                             <input id="modifyInput" type="hidden" name="modifyInput" value="add" />
                                             <label for="type" class="block mb-1 text-sm font-medium  text-main-red">Type de fichier</label>
@@ -493,7 +498,7 @@ $title = "Espace personnel";
                                             </button>
                                             <div id="co" class="px-6 py-6 lg:px-8">
                                                 <h3 class="mb-4 text-medium uppercase w-fit mx-auto font-bold font-title text-main-red">Modifier mon projet perso</h3>
-                                                <form method="POST" action="?action=updateUserElements&type=modifyMyProject&id=<?=$userDatas['user_id']?>&projectID=<?= $project->id ?>" class="space-y-6" enctype="multipart/form-data">
+                                                <form method="POST" action="?action=updateUserElements&type=modifyMyProject&id=<?=$userDatas->user_id?>&projectID=<?= $project->id ?>" class="space-y-6" enctype="multipart/form-data">
                                                     <div>
                                                         <label for="modif_title" class="block mb-1 text-sm font-medium text-main-red">Titre de votre projet</label>
                                                         <input type="text" name="title" id="modif_title" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" placeholder="Titre de mon projet" value="<?= $project->name ?>">
@@ -568,7 +573,7 @@ $title = "Espace personnel";
                                 <!-- Formulaire d'ajout -->
                                 <div id="co" class="px-6 py-6 lg:px-8">
                                     <h3 class="mb-4 text-medium uppercase w-fit mx-auto font-bold font-title text-main-red">Ajouter un projet perso</h3>
-                                    <form method="POST" action="?action=updateUserElements&type=addMyProject&id=<?=$userDatas['user_id']?>" class="space-y-6" enctype="multipart/form-data">
+                                    <form method="POST" action="?action=updateUserElements&type=addMyProject&id=<?=$userDatas->user_id?>" class="space-y-6" enctype="multipart/form-data">
                                         <div>
                                             <label for="add_title" class="block mb-1 text-sm font-medium text-main-red">Titre de votre projet</label>
                                             <input type="text" name="title" id="add_title" class=" border text-sm rounded-lg block w-full p-1.5 border-main-red text-main-red" placeholder="Titre de mon projet" required>

@@ -53,7 +53,7 @@
 
     <main class="md:ml-64">
         <?php include("view/template/_searchCrud.php"); ?>
-        <div class="overflow-x-auto">
+        <div class="overflow-x-auto xl:overflow-x-visible">
             <?= $content ?>
             <?php include("view/template/_paginationCrud.php"); ?>
         </div>
@@ -65,7 +65,7 @@
     <script src="assets/js/function.js"></script>
     <script src="assets/js/crud.js"></script>
     <script src="assets/js/crudNabil.js"></script>
-    <script src="assets/js/ajax_form.js"></script>
+    <!-- <script src="assets/js/ajax_form.js"></script> -->
     <?php if (isset($script))
         echo $script; ?>
 </body>

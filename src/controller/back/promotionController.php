@@ -124,7 +124,6 @@ function promotionPagination()
 
     $PromoRepo = new PromoRepository;
 
-    // var_dump($data);
     $limitStart = $data->limitStart;
     $limitEnd = $data->limitEnd;
     $limit = "$limitStart,$limitEnd";
@@ -143,20 +142,30 @@ function promotionPagination()
         include("view/admin/promo/table_row.php");
         if ($promo->status->id != 9) {
             $apprenants = $PromoRepo->getAllApprenants($promo->id);
-            include("view/admin/modalApprenant.php");
-        } else {
-            $candidates = $PromoRepo->getPromoCandidates($promo->id);
-            include("view/admin/promo/modalValidationPromo.php");
+            include("view/admin/promo/modalApprenant.php");
         }
 
         $promoFormators = $PromoRepo->getAllFormateurs($promo->id);
-        // include("view/admin/modalFormateur.php");
-        // include("view/admin/modalProjet.php");
-        // include("view/admin/promo/modalUpdatePromotion.php");
-        // include("view/admin/modalDelete.php");
+        $promoFormatorsId = [];
+        foreach ($promoFormators as $formator) {
+            $promoFormatorsId[] = $formator->user_id;
+        }
+        $promoFormatorsString = join(",", $promoFormatorsId);
+        // var_dump($promoFormatorsId);
+        include("view/admin/promo/modalFormateur.php");
+        include("view/admin/modal/modalProjet.php");
+        include("view/admin/modal/modalDelete.php");
         $content = ob_get_clean();
-
         $projectsHTML[] = $content;
+
+        ob_start();
+        if ($promo->status->id == 9) {
+            $candidates = $PromoRepo->getPromoCandidates($promo->id);
+            include("view/admin/promo/modalValidationPromo.php");
+        }
+        $content = ob_get_clean();
+        $modalsHTML[] = $content;
+
     }
 
     $response = array(
@@ -167,6 +176,7 @@ function promotionPagination()
         "query" => "WHERE $filter",
         "limit" => $limit,
         "projets" => $projectsHTML,
+        "modals" => $modalsHTML,
     );
 
     echo json_encode($response);

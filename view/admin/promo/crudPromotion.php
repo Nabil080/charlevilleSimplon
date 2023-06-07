@@ -28,26 +28,27 @@
         </tr>
     </thead>
     <tbody class="border-2">
-        <?php 
-        foreach ($promos as $promo) {
-            $mailList = $PromoRepo->getPromoMailList($promo->id);
-            include("view/admin/promo/table_row.php");
-            if ($promo->status->id != 9) {
-                $apprenants = $PromoRepo->getAllApprenants($promo->id);
-                include("view/admin/modalApprenant.php");
-            } else {
-                $candidates = $PromoRepo->getPromoCandidates($promo->id);
-                include("view/admin/promo/modalValidationPromo.php");
-            }
+        <?php
+        // foreach ($promos as $promo) {
+        //     $mailList = $PromoRepo->getPromoMailList($promo->id);
+        //     include("view/admin/promo/table_row.php");
+        //     if ($promo->status->id != 9) {
+        //         $apprenants = $PromoRepo->getAllApprenants($promo->id);
+        //         include("view/admin/modalApprenant.php");
+        //     } else {
+        //         $candidates = $PromoRepo->getPromoCandidates($promo->id);
+        //         include("view/admin/promo/modalValidationPromo.php");
+        //     }
 
-            $promoFormators = $PromoRepo->getAllFormateurs($promo->id);
-            include("view/admin/modalFormateur.php");
-            include("view/admin/modalProjet.php");
-            include("view/admin/promo/modalUpdatePromotion.php");
-            include("view/admin/modalDelete.php");
-        }
+        //     $promoFormators = $PromoRepo->getAllFormateurs($promo->id);
+        //     include("view/admin/modalFormateur.php");
+        //     include("view/admin/modal/modalProjet.php");
+        //     include("view/admin/promo/modalUpdatePromotion.php");
+        //     include("view/admin/modal/modalDelete.php");
+        // }
         ?>
 
     </tbody>
 </table>
 <div id="loading"></div>
+<div id="modals"></div>

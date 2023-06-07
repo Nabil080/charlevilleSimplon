@@ -18,7 +18,7 @@ class RequirementRepository extends ConnectBdd
     public function getRequirementByFormation($formation_id): array
     {
         $Requirement = new Requirement;
-        $req = $this->bdd->prepare("SELECT `requirement_name` FROM `requirement` AS r INNER JOIN `formation_requirement` AS fr ON r.requirement_id = fr.requirement_id WHERE `formation_id` = ?");
+        $req = $this->bdd->prepare("SELECT `requirement_name` FROM `requirement` AS r INNER JOIN `formation_requirement` AS fr ON r.requirement_id = fr.requirement_id WHERE fr.formation_id = ?");
         $req->execute([$formation_id]);
         $data = $req->fetchAll(PDO::FETCH_ASSOC);
 

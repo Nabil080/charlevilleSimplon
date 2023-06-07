@@ -15,11 +15,15 @@
                 <input type="hidden" name="project" value="<?=$project->id?>">
                 <select name="promo" class="w-full">
                     <?php
+                    $promoRepo = new PromoRepository;
+                    $promos = $promoRepo->getActivePromos();
+                    if(!empty($promos)){
                         foreach ($promos as $promo) { ?>
                             <option value="<?= $promo->id ?>">
                                 <?=$promo->name?>
                             </option>
                         <?php }
+                    }
                     ?>
                 </select>
                 <button type="submit" name="submit"
@@ -46,7 +50,7 @@
             <i class="fa-solid fa-link"></i>
         </a>
     </td>
-    <td class="px-4 py-3 mx-auto items-center text-center">
+    <td class="px-4 py-3 mx-auto items-center text-center relative">
         <button id="dropdown-button-<?=$project->id?>" data-dropdown-toggle="dropdown-content-<?=$project->id?>"
             class="inline-flex items-center p-0.5 text-sm font-medium text-center text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none "
             type="button">
@@ -57,7 +61,7 @@
             </svg>
         </button>
         <div id="dropdown-content-<?=$project->id?>"
-            class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow  ">
+            class="hidden absolute top-12 right-0 z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow  ">
             <ul class="py-1 text-sm text-gray-700 " aria-labelledby="dropdown-button-<?=$project->id?>">
                 <li>
                     <a href="?action=addProject&id=<?=$project->id?>" class="block py-2 px-4">Modifier</a>

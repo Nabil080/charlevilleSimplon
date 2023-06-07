@@ -2,33 +2,35 @@
     <thead class="text-xs text-gray-700 uppercase bg-main-red text-main-white ">
         <tr>
             <th scope="col" class="px-4 py-3 text-center">
-                <?= "" ?> Nom du projet
+                <?= "" ?> Nom
+            </th>
+            <th scope="col" class="px-4 py-3 text-center">
+                <?= "" ?> Prénom
             </th>
             <th scope="col" class="px-4 py-3 text-center">
                 <?= "" ?> Nom de l'entreprise
             </th>
             <th scope="col" class="px-4 py-3 text-center">
-                <?= "" ?> Type de projet
+                <?= "" ?> Plus d'infos
             </th>
             <th scope="col" class="px-4 py-3 text-center">
-                <?= "" ?> Promotion
+                <?= "" ?> Contact
             </th>
             <th scope="col" class="px-4 py-3 text-center">
-                <?= "" ?> Cahier des charges
+                <?= "" ?> Modifier
             </th>
             <th scope="col" class="px-4 py-3 text-center">
-                <?= "" ?> Fiche de projet
-            </th>
-            <th scope="col" class="px-4 py-3 text-center">
-                <span class="sr-only">Edit</span>
+                <?= "" ?> Supprimer
             </th>
         </tr>
     </thead>
     <tbody class="border-2">
         <?php
-            // foreach($projects as $project) {
-            //     include("view/admin/projet/table_row.php");
-            //     include("view/admin/modalDelete.php");
+            // foreach ($companies as $user) {
+            //     include('view/admin/entreprise/table_row.php');
+            //     include("view/admin/modal/modalUpdateUser.php");
+            //     include("view/admin/modal/modalInfos.php");
+            //     include("view/admin/modal/modalProjet.php");
             // }
         ?>
 
