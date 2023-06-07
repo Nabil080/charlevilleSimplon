@@ -51,8 +51,12 @@ function formationPage()
             $fee_all = $Fee->getAll();
             $certification_all = $Certification->getAll();
 
-            //var_dump($formation_job);
-            $isMyProject = true;
+            if ($_SESSION['user_id'] == 1) {
+                $CanModify = true;
+            } else {
+                $CanModify = false;
+            }
+            
             include 'view/public/formation.php';
         } else
             throw new Exception('error_404');
