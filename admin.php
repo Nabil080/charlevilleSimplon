@@ -1,6 +1,5 @@
 <?php
 
-
 switch ($action) {
     // Afficher le tableau de bord prospects
     case 'crudCandidatePage':

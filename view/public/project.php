@@ -320,7 +320,7 @@
             <?php } ?>
         </h2>
         <div class="mx-4 h-1 bg-main-red"></div>
-        <div class="flex">
+        <div class="flex w-9/12">
             <div id="company-notes" class="m-4 lg:w-4/5">
                 <?= $project->description ?>
             </div>
