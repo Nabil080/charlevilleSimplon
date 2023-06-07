@@ -146,7 +146,7 @@ $formations = $formationRepo->getAllFormations(); ?>
                 <a
                   href="?action=profilePage"
                   class="block px-4 py-2 text-[22px] sm:text-[32px] md:text-[20px]"
-                  >Profile</a
+                  >Mon profil</a
                 >
               </li>
               <?php } ?>

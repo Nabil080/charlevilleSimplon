@@ -73,7 +73,7 @@ $formations = $formationRepo->getAllFormations(); ?>
                                 aria-labelledby="dropdownAccountDefaultButton">
                                 <li class="md:hover:bg-gray-700  xl:px-16">
                                     <a href="?action=profilePage"
-                                        class="block px-4 py-2 text-[22px] sm:text-[32px] md:text-[20px] ">Profile</a>
+                                        class="block px-4 py-2 text-[22px] sm:text-[32px] md:text-[20px] ">Mon profil</a>
                                 </li>
                                 <li class="md:hover:bg-gray-700  xl:px-16">
                                     <a href="?action=crudCandidatePage" class="block px-4 py-2 text-[22px] sm:text-[32px] md:text-[20px]">Admin</a>
