@@ -2,8 +2,8 @@
 
 <?php ob_start();
 
-include("view/admin/crudCandidat.php");
-include("view/admin/modalContact.php");
+include("view/admin/candidate/crudCandidat.php");
+include("view/admin/modal/modalContact.php");
 
 $content = ob_get_clean(); ?>
 

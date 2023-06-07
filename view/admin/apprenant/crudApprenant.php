@@ -2,38 +2,38 @@
     <thead class="text-xs text-gray-700 uppercase bg-main-red text-main-white ">
         <tr>
             <th scope="col" class="px-4 py-3 text-center">
-                <?= "" ?> Nom du projet
+                Nom
             </th>
             <th scope="col" class="px-4 py-3 text-center">
-                <?= "" ?> Nom de l'entreprise
+                Prénom
             </th>
             <th scope="col" class="px-4 py-3 text-center">
-                <?= "" ?> Type de projet
+                Promo
             </th>
             <th scope="col" class="px-4 py-3 text-center">
-                <?= "" ?> Promotion
+                Plus d'infos
             </th>
             <th scope="col" class="px-4 py-3 text-center">
-                <?= "" ?> Cahier des charges
+                Contact
             </th>
             <th scope="col" class="px-4 py-3 text-center">
-                <?= "" ?> Fiche de projet
+                Modifier
             </th>
             <th scope="col" class="px-4 py-3 text-center">
-                <span class="sr-only">Edit</span>
+                Supprimer
             </th>
         </tr>
     </thead>
     <tbody class="border-2">
         <?php
-            $PromoRepo = new PromoRepository;
-            $promos = $PromoRepo->getActivePromos();
-            // foreach($projects as $project) {
-            //     include("view/admin/projet/table_row.php");
-            //     include("view/admin/modalDelete.php");
-            // }
+        // foreach ($users as $user){
+        //     include("view/admin/apprenant/table_row.php");
+        //     include("view/admin/modal/modalUpdateUser.php");
+        //     include("view/admin/modal/modalInfos.php");
+        //     include("view/admin/modal/modalProjet.php");
+        // }
         ?>
-
     </tbody>
 </table>
 <div id="loading"></div>
+<div id="modals"></div>

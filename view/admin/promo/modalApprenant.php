@@ -34,7 +34,7 @@
                     </h3>
 
 
-                                <?php foreach ($apprenants as $apprenant) { 
+                                <?php foreach ($apprenants as $apprenant) {
             include('view/template/_apprenant_card.php');
              }; ?>
 

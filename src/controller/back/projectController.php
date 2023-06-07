@@ -64,7 +64,7 @@ function projectPagination()
     foreach($projects as $project){
         ob_start();
             include("view/admin/projet/table_row.php");
-            include("view/admin/modalDelete.php");
+            include("view/admin/modal/modalDelete.php");
         $content = ob_get_clean();
 
         $projectsHTML[]= $content;

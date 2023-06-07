@@ -24,22 +24,25 @@
     <?php if (empty($projects)) { ?>
         <h3 class="text-main-gray underline decoration-main-red text-2xl italic font-bold">Pas de Projets pour le moment</h3>';
         <?php  } else if (!empty($projects)) {
-        $i = 0;
-        $x = 0;
-        $y = 0;
-        if ($_SESSION['user']->role_id == 2) {
-            foreach ($projects as $projets) { 
-                foreach ($projets as $project) {
-                    if ($project->status->id == 10) {
-                        include('view/template/_gestion_project_card.php');
-                        $x ++;
+            $i = 0;
+            $x = 0;
+            $y = 0;
+            if ($_SESSION['user']->role_id == 2) {
+                foreach ($projects as $projets) { 
+                    foreach ($projets as $project) {
+                        if ($project->status->id == 10) {
+                            include('view/template/_gestion_project_card.php');
+                            $x ++;
+                        }
                     }
+                }
+            } else {
+            foreach ($projects as $project) {
+                include('view/template/_gestion_project_card.php');
+                $x ++;
+                }
             }
-        }} else {
-        foreach ($projects as $project) { 
-            include('view/template/_gestion_project_card.php');
-            $x ++;
-        }}} ?>
+        } ?>
 
 
 </section>
