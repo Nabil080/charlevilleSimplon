@@ -1,4 +1,4 @@
-<div class="rounded-[5px] border border-main-border min-w-[330px] md:w-[400px] pb-4">
+<div class="rounded-[5px] border border-main-border min-w-[330px] md:w-[500px] pb-4">
     <img class="max-h-[140px] md:max-h-[200px] w-full" src="assets/img/formations/devweb" alt="Formation">
     <h3 class="text-main-red font-title text-[20px] pl-3 mt-3 md:pb-4 text-center md:text-[36px]"><?= $promo->name; ?></h3>
 
@@ -8,11 +8,17 @@
             class="border border-4 border-main-red rounded-[5px] text-main-red font-medium flex items-center justify-center text-[14px] font-main w-[90%] py-2 px-2">Voir tous les élèves de la promo</a>
             <?php } elseif ($promo->status->id == 14) {?>
                 <a href="?action=promotionPage&id=<?= $promo->id;?>"
-                    class="border border-4 border-main-red rounded-[5px] text-main-red font-medium flex items-center justify-center text-[14px] font-main w-[90%] py-2 px-2">Postuler à la formation</a>
+                    class="border border-4 border-main-red bg-main-red rounded-[5px] text-main-white font-medium flex items-center justify-center text-[14px] font-main w-[90%] py-2 px-2">Postuler à la formation</a>
             <?php } ?>
+            <?php if ($promo->status->id == 12 || $promo->status->id == 13) {?>
         <a href="?action=promotionPage&id=<?= $promo->id; ?>&project=1"
             class="bg-main-red rounded-[5px] text-main-white font-medium flex items-center justify-center text-[14px] font-main w-2/5 py-2 px-2">Projets
             réalisés</a>
+            <?php } elseif ($promo->status->id == 14) {?>
+                <a href="?action=promotionPage&id=<?= $promo->id; ?>&project=1"
+            class="bg-main-gray rounded-[5px] text-main-white font-medium flex items-center justify-center text-[14px] font-main w-2/5 py-2 px-2 pointer-events-none">Projets
+            réalisés</a>
+            <?php } ?>
         <a href="?action=formationPage&id=<?= $promo->formation_id; ?>"
             class="bg-main-red rounded-[5px] text-main-white font-medium flex items-center justify-center text-[14px] font-main w-2/5 py-2 px-3">En
             savoir plus</a>
