@@ -5,6 +5,7 @@
 include("view/admin/promo/crudPromotion.php");
 include("view/admin/modalContact.php");
 include("view/admin/promo/modalAddPromotion.php");
+include("view/admin/promo/modalUpdatePromotion.php");
 
 $content = ob_get_clean(); ?>
 
