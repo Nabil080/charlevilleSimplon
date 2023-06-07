@@ -153,7 +153,7 @@
             </form>
         <?php }  else if (isset($_SESSION['user']) && $_SESSION['user']->role_id == 3 && $project->status->id == 11) {?>
             <a type="submit" href="?action=reSubmitProject&id=<?= $project->id ?>" class="w-fit px-6 md:flex md:items-center mx-auto gap-2 hover:text-main-red cursor-pointer">
-                <p class="hidden md:block">Accepter</p><i class="fa-solid fa-check"></i>
+                <p class="hidden md:block">Soumettre à nouveau le projet</p><i class="fa-solid fa-check"></i>
             </a>
         <?php }  ?>
         <div class="w-4/5 h-1 border-b-2 my-12 mx-auto"></div>

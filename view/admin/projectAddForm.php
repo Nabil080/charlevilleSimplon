@@ -6,7 +6,7 @@
     </h2>
     <div class="md:flex justify-evenly items-center gap-10">
         <div class="w-1/2 hidden md:block">
-            <img src="assets/img/autres/projet.jpg" alt="image de décoration" class="img-fluid" />
+            <img src="assets/img/autres/project.png" alt="image de décoration" class="img-fluid" />
         </div>
         <div class="md:w-1/2">
             <form id="projectForm" enctype="multipart/form-data" class="flex flex-col items-center gap-6" target="_blank">
