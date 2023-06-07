@@ -9,12 +9,12 @@ const tabChange = document.getElementsByClassName('tabChange');
 function changeTab(y) {
     for (i = 0; i < sectionChange.length; i++) {
         sectionChange[i].classList.add("hidden");
-        tabChange[i].classList.remove("!bg-main-red","bg-main-red");
+        tabChange[i].classList.remove("!bg-main-red", "bg-main-red");
         tabChange[i].classList.add("bg-main-gray");
 
     }
     sectionChange[y].classList.remove("hidden");
-    tabChange[y].classList.add("!bg-main-red","bg-main-red");
+    tabChange[y].classList.add("!bg-main-red", "bg-main-red");
 }
 
 function switchDiv(id1, id2) {
@@ -39,14 +39,45 @@ buttons.forEach(button => {
         if (fleche[0] !== undefined) {
             clickableButtons.push(buttons[count]);
         }
-        count ++;
+        count++;
     }
 })
 clickableButtons.forEach(button => {
     button.addEventListener('click', () => {
-       fleche = button.getElementsByTagName('svg');
+        fleche = button.getElementsByTagName('svg');
         fleche[0].classList.toggle('rotate-180');
 
     });
 });
 
+function updateContact() {
+
+    const tableRows = document.querySelectorAll("table tbody tr");
+    const contactInput = document.querySelector("#emailContact");
+
+    tableRows.forEach((row) => {
+        const contactButton = row.querySelector(
+            "table tbody tr button[data-modal-target=modal-contact]"
+        );
+        contactButton.addEventListener("click", (e) => {
+            contactInput.value = e.target.dataset.userMail;
+        });
+    });
+
+    const navbarContact = document.querySelector("#dropdown-contact")
+    const navbarContactButton = document.querySelector("#contactValidation")
+    const checkboxes = navbarContact.querySelectorAll("input[type=checkbox]")
+
+    navbarContactButton.addEventListener('click', (event) => {
+        let mailList = []
+
+        checkboxes.forEach(checkbox => {
+            if (checkbox.checked) {
+                // (console.log(checkbox))
+                mailList.push(checkbox.name)
+            }
+        });
+        contactInput.value = mailList.join(',');
+        console.log(mailList);
+    })
+}

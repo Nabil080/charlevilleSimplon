@@ -86,7 +86,7 @@
                   transition
                   ease-in-out
                   m-0
-                  focus:text-gray-700  focus:border-main-green focus:outline-none" id="exampleInput8" name="email"
+                  focus:text-gray-700  focus:border-main-green focus:outline-none" id="email" name="email"
                             placeholder="Adresse mail">
                         <p id="email_error" class="errorAlert mt-2 text-sm text-red-600 dark:text-red-500"></p>
                     </div>
@@ -109,9 +109,9 @@
                 " id="message" name="message" rows="3" placeholder="Message"></textarea>
                         <p id="message_error" class="errorAlert mt-2 text-sm text-red-600 dark:text-red-500"></p>
                     </div>
-                    <div id="errorContent"></div>
-                    <div id="succesContent"></div>
+
                     <button type="submit" class="
+                alertButton
                 w-1/2
                 px-6
                 py-2.5
@@ -144,7 +144,9 @@
 <?php $link = ob_get_clean(); ?>
 
 <?php ob_start(); ?>
-<script src="assets/js/ajax_contact.js"></script>
+<script>
+handleFormSubmission('#contact-form', 'index.php?action=contactTreatment');
+</script>
 <?php $script = ob_get_clean(); ?>
 
 <?php require 'view/layout.php'; ?>

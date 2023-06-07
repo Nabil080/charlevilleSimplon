@@ -13,10 +13,13 @@ class Mail
     public function __construct($message, $to, $email = null, $name = null, $surname = null)
     {
         $this->$to = $to;
+
+        //contact 
         if ($email !== null) {
             $this->sender = $email;
             $this->to = $this->emailSupport;
         }
+        // Message d'activation & reset
         if ($name !== null && $surname !== null) {
             $this->signature = "\r\n\r\nCordialement,\r\n" . $name . " " . $surname;
         }

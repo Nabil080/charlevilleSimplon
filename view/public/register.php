@@ -42,7 +42,7 @@ $title = "Inscription";
 <!-- Entreprise  -->
 
 <?php ob_start(); ?>
-<div class="w-full md:w-2/3 mb-6 md:mb-3">
+<div class="w-full md:w-2/3">
     <label for="name_company" class="block mb-2 text-[14px] font-medium">Nom de l'entreprise</label>
     <input type="text" id="name_company" name="name_company" placeholder="Simplon"
         class="bg-main-white border border-main-red text-[18px] rounded-[5px] block w-full p-2.5">
@@ -66,7 +66,7 @@ $title = "Inscription";
             <?php echo ($boolCompany) ? "l'inscription" : 'la candidature'; ?> !
         </p>
     </div>
-    <form id="register-form" class="bg-main-lightgray p-5 border border-main-red rounded-[5px]">
+    <form id="register-form" class="space-y-6 bg-main-lightgray p-5 border border-main-red rounded-[5px]">
         <?php if (!$boolCompany) { ?>
         <p class="pb-10 text-[14px] md:text-[20px] font-medium text-center">
             Pour postuler à la formation $nom_de_la_promo qui commence le $date_de_la_promo, veuillez remplir le
@@ -96,7 +96,6 @@ $title = "Inscription";
             <div class="w-full md:w-2/3 mb-6 md:mb-3">
                 <label for="phone" class="block mb-2 text-[14px] font-medium">Téléphone</label>
                 <input type="tel" id="phone" name="phone" pattern="[0][0-9]{9}" placeholder="07256533**"
-
                     class="bg-main-white border border-main-red text-[18px] rounded-[5px] block w-full p-2.5">
                 <p id="phone_error" class="errorAlert mt-2 text-sm text-red-600 dark:text-red-500"></p>
             </div>
@@ -120,7 +119,7 @@ $title = "Inscription";
             </div>
             <?php echo ($boolCompany) ? $company : $prospect; ?>
         </div>
-        <p class="py-5 md:text-center text-[14px] text-main-red font-bold">
+        <p class="pb-5 md:text-center text-[14px] text-main-red font-bold">
             Conservez votre mot de passe : il
             vous
             servira
@@ -135,7 +134,7 @@ $title = "Inscription";
                     class="bg-main-white border border-main-red text-[18px] rounded-[5px] block w-full p-2.5">
                 <p id="password_error" class="errorAlert mt-2 text-sm text-red-600 dark:text-red-500"></p>
             </div>
-            <div class="w-full md:w-2/3 mb-6">
+            <div class="w-full md:w-2/3">
                 <label for="confirm_password" class="block mb-2 text-[14px] font-medium">Confirmez mot de
                     passe</label>
                 <input type="password" id="confirm_password" name="confirm_password"
@@ -148,12 +147,9 @@ $title = "Inscription";
         <input type="hidden" name="boolCompany" value="<?= $boolCompany ?>" />
         <input type="hidden" name="formation_id" value="<?= $formation_id ?>" />
 
-        <div id="registerContent_error"
-            class="hidden contentAlert border border-main-red bg-red-200 rounded-lg mb-5 p-3 text-center text-sm text-main-red">
-        </div>
         <div class="text-center">
-            <button type=" submit" id="postuler"
-                class="px-10 py-3 text-main-white font-bold text-lg uppercase bg-main-red rounded-lg">
+            <button type="submit" id="postuler"
+                class="alertButton px-10 py-3 text-main-white font-bold text-lg uppercase bg-main-red rounded-lg">
                 <?php echo ($boolCompany) ? "Inscription" : 'Postuler'; ?>
             </button>
         </div>
@@ -162,7 +158,10 @@ $title = "Inscription";
 <?php $content = ob_get_clean(); ?>
 
 <?php ob_start(); ?>
-<script src="assets/js/ajax_register.js"></script>
+<script src="assets/js/ajax_handleFormSubmission.js"></script>
+<script>
+handleFormSubmission('#register-form', 'index.php?action=registerTreatment');
+</script>
 <?php $script = ob_get_clean(); ?>
 
 <?php include 'view/layout.php'; ?>
