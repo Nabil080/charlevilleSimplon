@@ -173,6 +173,8 @@ async function updateData(currentPage = 1){
         updateContact()
         // * Ajoute script modal update :
         updateModifPromo();
+        // * Ajoute script modal validation :
+        validationForm();
 }
 
 updateData()
