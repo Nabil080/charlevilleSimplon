@@ -1,3 +1,11 @@
+<?php
+$userRepo = new UserRepository;
+$formators = $userRepo->getAllFormators();
+$formationRepo = new FormationRepository;
+$formations = $formationRepo->getAllFormations();
+?>
+
+
 <!-- Modal de modification promo -->
 <section id="modal-update-<?= $promo->id ?>" data-modal-placement="center" tabindex="-1" aria-hidden="true" class="hidden grid place-content-center w-full h-full bg-black bg-opacity-50 backdrop:brightness-50 fixed top-0 left-0 right-0 z-50 p-4 overflow-x-hidden overflow-y-auto md:inset-0  md:h-full">
     <div class="relative w-full h-fit max-w-md md:h-auto">
@@ -19,10 +27,7 @@
                     <div>
                         <label for="formation" class="block mb-2 text-sm font-medium  text-main-red">Formation</label>
                         <select name="formation" id="formation" class=" border text-sm rounded-md block w-full p-2.5 border-main-red text-main-red" required>
-                            <?php
-                            $formationRepo = new FormationRepository;
-                            $formations = $formationRepo->getAllFormations();
-                                foreach ($formations as $formation) { ?>
+                            <?php foreach ($formations as $formation) { ?>
                                 <option <?php if($promo->formation_id == $formation->id){echo 'selected';} ?> value="<?= $formation->id ?>"><?= $formation->name ?></option>
                             <?php } ?>
                         </select>
@@ -31,10 +36,7 @@
                         <label for="formators" class="block mb-2 text-sm font-medium  text-main-red">Formateurs</label>
                         <select multiple name="formators[]" id="formators" class=" border text-sm rounded-md block w-full p-2.5 border-main-red text-main-red">
                             <option disabled selected value> Formateurs(non obligatoire) </option>
-                                <?php
-                                $userRepo = new UserRepository; 
-                                $formators = $userRepo->getAllFormators();
-                            foreach ($formators as $formator) { ?>
+                                <?php foreach ($formators as $formator) { ?>
                                         <option <?php foreach ($promoFormators as $promoFormator){ if($promoFormator->user_id == $formator->user_id){echo 'selected';}}?> value="<?= $formator->user_id ?>"><?= "$formator->user_name $formator->user_surname"?></option>
                                 <?php
                             } ?>
