@@ -418,10 +418,14 @@ class ProjectRepository extends ConnectBdd
             $error = true;
         }
 
-        $link = securizeString($post['link']);
-        if($link === false){
-            // message d'erreurs dans securizeString
-            $error = true;
+        if(isset($post['link']) && !empty($post['link'])){
+            $link = securizeString($post['link']);
+            if($link === false){
+                    // message d'erreurs dans securizeString
+                    $error = true;
+                }
+        }else{
+            $link = null;
         }
 
 
