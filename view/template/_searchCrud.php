@@ -19,6 +19,10 @@ $formations = $formationRepo->getAllFormations();
                     <input type="text" id="simple-search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
                             focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2 ml-5" placeholder="Rechercher" required="">
                 </div>
+                <div class="ml-10 flex">
+                    <p class="hidden md:block">Nombre de lignes à afficher</p>
+                    <input id="row-number" class="w-20 h-fit" type="number" max="100" min="1" value="5">
+                </div>
             </div>
         </div>
         <div class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 md:pr-8 flex-shrink-0">
