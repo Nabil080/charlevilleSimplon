@@ -14,7 +14,7 @@
             // ? récupéré en JS
             // foreach ($candidates as $candidate) {
             //     include('view/admin/candidate/table_row.php');
-            //     include("view/admin/modalUpdateUser.php");
+            //     include("view/admin/modal/modalUpdateUser.php");
             //     include("view/admin/modalCandidature.php");
             // }
         ?>

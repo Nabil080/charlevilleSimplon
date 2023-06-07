@@ -362,8 +362,8 @@ function candidatePagination()
     foreach($users as $candidate){
         ob_start();
             include('view/admin/candidate/table_row.php');
-            include("view/admin/modalUpdateUser.php");
-            include("view/admin/modalCandidature.php");
+            include("view/admin/modal/modalUpdateUser.php");
+            include("view/admin/candidate/modalCandidature.php");
         $content = ob_get_clean();
 
         $usersHTML[]= $content;
@@ -406,13 +406,13 @@ function learnerPagination()
     foreach($users as $user){
         ob_start();
             include("view/admin/apprenant/table_row.php");
-            include("view/admin/modalInfos.php");
-            include("view/admin/modalProjet.php");
+            include("view/admin/modal/modalInfos.php");
+            include("view/admin/modal/modalProjet.php");
         $content = ob_get_clean();
         $usersHTML[]= $content;
 
         ob_start();
-            include("view/admin/modalUpdateUser.php");
+            include("view/admin/modal/modalUpdateUser.php");
         $content = ob_get_clean();
         $modalsHTML[] = $content;
     }
@@ -456,9 +456,9 @@ function companyPagination()
     foreach($users as $user){
         ob_start();
             include('view/admin/entreprise/table_row.php');
-            include("view/admin/modalUpdateUser.php");
-            include("view/admin/modalInfos.php");
-            include("view/admin/modalProjet.php");
+            include("view/admin/modal/modalUpdateUser.php");
+            include("view/admin/modal/modalInfos.php");
+            include("view/admin/modal/modalProjet.php");
         $content = ob_get_clean();
 
         $usersHTML[]= $content;

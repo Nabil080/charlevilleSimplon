@@ -94,7 +94,8 @@
                     <?php } ?>
                 </div>
                 <ul id="jobContent" class="grid grid-cols-1 gap-x-8 gap-y-2 sm:grid-cols-2 lg:sm:grid-cols-1 ">
-                    <?php foreach ($formation_job as $job) { ?>
+                    <?php var_dump($formation_job);
+                    foreach ($formation_job as $job) { ?>
                     <li>
                         <?= $job ?>
                     </li>
@@ -269,7 +270,7 @@
             <div class="sectionChange hidden bg-white text-[16px] lg:text-[20px]">
                 <div class="py-4">
                     <div class="pb-3 flex items-center gap-3">
-                        <h3 class="text-main-red text-[20px] lg:text-[36px] font-bold">Pas de prérequis mais…</h3>
+                        <h3 class="text-main-red text-[20px] lg:text-[36px] font-bold">Conditions d'admission et prérequis :</h3>
                         <!-- bouton d'edit -->
                         <?php if ($isMyProject == true) { ?>
                         <i onclick="swapDivsById('admissionContent','admissionContent-update')"
@@ -313,12 +314,16 @@
                 </div>
             </div>
             <div class="sectionChange hidden bg-white text-[16px] lg:text-[20px]">
-                <?php foreach ($formation_program as $key => $program) { ?>
+                <?php $allTitle = [];
+                foreach ($formation_program as $key => $program) { ?>
                 <div class="py-4">
                     <div class="pb-3 w-full flex flex-between items-center gap-3">
+                        <?php if (!in_array($program['programme_layout_name'], $allTitle)) { ?>
                         <h3 class="text-main-red text-[20px] lg:text-[36px] font-bold">
                             <?= $program['programme_layout_name'] ?>
+                            <?php $allTitle[] = $program['programme_layout_name']; ?>
                         </h3>
+                        <?php } ?>
                         <!-- bouton d'edit -->
                         <?php if ($isMyProject == true) { ?>
                         <i onclick="swapDivsById('program_name_<?= $key ?>','program_name-update_<?= $key ?>')"

@@ -2,35 +2,35 @@
     <thead class="text-xs text-gray-700 uppercase bg-main-red text-main-white ">
         <tr>
             <th scope="col" class="px-4 py-3 text-center">
-                <?= "" ?> Nom
-            </th>
-            <th scope="col" class="px-4 py-3 text-center">
-                <?= "" ?> Prénom
+                <?= "" ?> Nom du projet
             </th>
             <th scope="col" class="px-4 py-3 text-center">
                 <?= "" ?> Nom de l'entreprise
             </th>
             <th scope="col" class="px-4 py-3 text-center">
-                <?= "" ?> Plus d'infos
+                <?= "" ?> Type de projet
             </th>
             <th scope="col" class="px-4 py-3 text-center">
-                <?= "" ?> Contact
+                <?= "" ?> Promotion
             </th>
             <th scope="col" class="px-4 py-3 text-center">
-                <?= "" ?> Modifier
+                <?= "" ?> Cahier des charges
             </th>
             <th scope="col" class="px-4 py-3 text-center">
-                <?= "" ?> Supprimer
+                <?= "" ?> Fiche de projet
+            </th>
+            <th scope="col" class="px-4 py-3 text-center">
+                <span class="sr-only">Edit</span>
             </th>
         </tr>
     </thead>
     <tbody class="border-2">
         <?php
-            // foreach ($companies as $user) {
-            //     include('view/admin/entreprise/table_row.php');
-            //     include("view/admin/modalUpdateUser.php");
-            //     include("view/admin/modalInfos.php");
-            //     include("view/admin/modalProjet.php");
+            $PromoRepo = new PromoRepository;
+            $promos = $PromoRepo->getActivePromos();
+            // foreach($projects as $project) {
+            //     include("view/admin/projet/table_row.php");
+            //     include("view/admin/modal/modalDelete.php");
             // }
         ?>
 

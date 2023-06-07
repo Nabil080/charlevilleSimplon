@@ -136,7 +136,7 @@ function promotionPagination()
             include("view/admin/promo/table_row.php");
             if ($promo->status->id != 9) {
                 $apprenants = $PromoRepo->getAllApprenants($promo->id);
-                include("view/admin/modalApprenant.php");
+                include("view/admin/promo/modalApprenant.php");
             }
 
             $promoFormators = $PromoRepo->getAllFormateurs($promo->id);
@@ -147,8 +147,8 @@ function promotionPagination()
             $promoFormatorsString = join(",",$promoFormatorsId);
             // var_dump($promoFormatorsId);
             include("view/admin/modalFormateur.php");
-            include("view/admin/modalProjet.php");
-            include("view/admin/modalDelete.php");
+            include("view/admin/modal/modalProjet.php");
+            include("view/admin/modal/modalDelete.php");
         $content = ob_get_clean();
         $projectsHTML[]= $content;
 

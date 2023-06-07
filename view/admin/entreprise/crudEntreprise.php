@@ -2,38 +2,38 @@
     <thead class="text-xs text-gray-700 uppercase bg-main-red text-main-white ">
         <tr>
             <th scope="col" class="px-4 py-3 text-center">
-                Nom
+                <?= "" ?> Nom
             </th>
             <th scope="col" class="px-4 py-3 text-center">
-                Prénom
+                <?= "" ?> Prénom
             </th>
             <th scope="col" class="px-4 py-3 text-center">
-                Promo
+                <?= "" ?> Nom de l'entreprise
             </th>
             <th scope="col" class="px-4 py-3 text-center">
-                Plus d'infos
+                <?= "" ?> Plus d'infos
             </th>
             <th scope="col" class="px-4 py-3 text-center">
-                Contact
+                <?= "" ?> Contact
             </th>
             <th scope="col" class="px-4 py-3 text-center">
-                Modifier
+                <?= "" ?> Modifier
             </th>
             <th scope="col" class="px-4 py-3 text-center">
-                Supprimer
+                <?= "" ?> Supprimer
             </th>
         </tr>
     </thead>
     <tbody class="border-2">
         <?php
-        // foreach ($users as $user){
-        //     include("view/admin/apprenant/table_row.php");
-        //     include("view/admin/modalUpdateUser.php");
-        //     include("view/admin/modalInfos.php");
-        //     include("view/admin/modalProjet.php");
-        // }
+            // foreach ($companies as $user) {
+            //     include('view/admin/entreprise/table_row.php');
+            //     include("view/admin/modal/modalUpdateUser.php");
+            //     include("view/admin/modal/modalInfos.php");
+            //     include("view/admin/modal/modalProjet.php");
+            // }
         ?>
+
     </tbody>
 </table>
 <div id="loading"></div>
-<div id="modals"></div>
