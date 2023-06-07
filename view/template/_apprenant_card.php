@@ -47,7 +47,7 @@ if(isset($formators)){
                     <?php if (isset($apprenant->user_status_id) && $apprenant->user_status_id < 6) { 
                         echo("text-red-500"); 
                     } 
-                    else if (isset($apprenant->user_status_id) && $apprenant->user_status_id > 6) {
+                    else if (isset($apprenant->user_status_id) && $apprenant->user_status_id >= 6) {
                         echo("text-green-500");
                     }?>
                      animate-pulse duration-[2s] mr-1"></i>

@@ -173,7 +173,7 @@ $title = "Espace personnel";
                                 <?php if (isset($userDatas->user_status_id) && $userDatas->user_status_id < 6) { 
                                     echo("text-red-500"); 
                                 } 
-                                else if (isset($userDatas->user_status_id) && $userDatas->user_status_id > 6) {
+                                else if (isset($userDatas->user_status_id) && $userDatas->user_status_id >= 6) {
                                     echo("text-green-500");
                                 }?>
                                 animate-pulse duration-[2s] mr-1"></i>
