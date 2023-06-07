@@ -44,7 +44,7 @@
         <div id="dropdown-content-<?= $promo->id ?>" class="hidden absolute top-12 right-0 z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow  ">
             <ul class="py-1 text-sm text-gray-700 " aria-labelledby="dropdown-button-<?= $promo->id ?>">
                 <li>
-                    <a data-modal-target="modal-update-<?= $promo->id ?>" data-modal-toggle="modal-update-<?= $promo->id ?>" class="cursor-pointer block py-2 px-4">Modifier</a>
+                    <a data-promo-id="<?=$promo->id?>" data-formation-id="<?=$promo->formation_id?>"  data-start-date="<?=$PromoRepo->getPromoStart($promo->id)?>" data-end-date="<?=$PromoRepo->getPromoEnd($promo->id)?>" data-modal-target="modal-update" data-modal-toggle="modal-update" class="open-update cursor-pointer block py-2 px-4">Modifier</a>
                 </li>
             </ul>
             <div class="py-1">

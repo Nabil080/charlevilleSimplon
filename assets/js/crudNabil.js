@@ -30,4 +30,23 @@ function updateContact() {
   });
 }
 
-updateContact();
+function updateModifPromo(){
+  const tableRows = document.querySelectorAll("table tbody tr")
+  const updateModal = document.querySelector("#modal-update")
+  const promotionInput = document.querySelector("#promotion-input")
+  const formationInput = document.querySelector("#formation-input")
+  const startInput = document.querySelector("#start-input")
+  const endInput = document.querySelector("#end-input")
+
+  tableRows.forEach(row => {
+    const updateButton = row.querySelector("[data-modal-target=modal-update]")
+    updateButton.addEventListener("click", (e) => {
+      // console.log(updateButton.dataset)
+      promotionInput.value = updateButton.dataset.promoId
+      formationInput.value = updateButton.dataset.formationId
+      startInput.value = updateButton.dataset.startDate
+      endInput.value = updateButton.dataset.endDate
+    })
+  })
+}
+

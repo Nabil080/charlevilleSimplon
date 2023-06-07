@@ -143,9 +143,14 @@ function promotionPagination()
             }
 
             $promoFormators = $PromoRepo->getAllFormateurs($promo->id);
+            $promoFormatorsId = [];
+            foreach($promoFormators as $formator){
+                $promoFormatorsId[] = $formator->user_id;
+            }
+            $promoFormatorsString = join(",",$promoFormatorsId);
+            // var_dump($promoFormatorsId);
             include("view/admin/modalFormateur.php");
             include("view/admin/modalProjet.php");
-            include("view/admin/promo/modalUpdatePromotion.php");
             include("view/admin/modalDelete.php");
         $content = ob_get_clean();
 
