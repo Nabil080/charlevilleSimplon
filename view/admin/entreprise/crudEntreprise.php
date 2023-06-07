@@ -37,3 +37,4 @@
     </tbody>
 </table>
 <div id="loading"></div>
+<div id="modals"></div>
