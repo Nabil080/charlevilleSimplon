@@ -469,6 +469,8 @@ class ProjectRepository extends ConnectBdd
 
     public function addProject($post,$files):void
     {
+        // TODO: $AlertMessage = new AlertMessage;
+        // TODO:$errorTable = [];
         $error = false;
         // traitement company name
         $company = isset($post['company']) ? $post['company'] : 'Simplon';
@@ -479,6 +481,7 @@ class ProjectRepository extends ConnectBdd
         $pdf = securizePdf($_FILES['pdf'], $path);
         if($pdf === false){
             // message d'erreurs dans securizePdf
+             // TODO:$errorTable = $AlertMessage->getError("noPDF",false,"pdf");
             $error = true;
         }
 
@@ -513,7 +516,13 @@ class ProjectRepository extends ConnectBdd
         if($error === false){
             $req = $this->bdd->prepare("INSERT INTO project (project_name,project_description,project_company_name,project_company_link,user_id, project_file, project_company_image, project_company_adress,status_id,type_id) VALUES (?,?,?,?,?,?,?,?,?,?)");
             $req->execute([$project,$description,$company,$link,$_SESSION['user']->user_id, $pdf, $image, $adress,$status,$type]);
-            // REMPLACE 3 PAR SESSION USER ID
+            // REMPLACE 3 PAR SESSION USER
+            $lastId = $this->bdd->lastInsertId();
+            for($i = 0; $i < 3; $i++){
+                $req = $this->bdd->prepare("INSERT INTO progress (project_id) VALUES (?)");
+                $req->execute([$lastId]);
+            }
+
 
             $response = array(
                 "status" => "success",

@@ -1,6 +1,10 @@
 {
   "errorMessage": [
     {
+      "name": "noPDF",
+      "message": "Le fichier n'est pas un PDF"
+    },
+    {
       "name": "notForm",
       "message": "Nous n'avons pas reçu de formulaire. Si le problème persiste, envoyer un message au support."
     },
