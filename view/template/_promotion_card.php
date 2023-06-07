@@ -1,6 +1,8 @@
-<div class="rounded-[5px] border border-main-border min-w-[330px] md:w-[500px] pb-4">
-    <img class="max-h-[140px] md:max-h-[200px] w-full" src="assets/img/formations/devweb" alt="Formation">
-    <h3 class="text-main-red font-title text-[20px] pl-3 mt-3 md:pb-4 text-center md:text-[36px]"><?= $promo->name; ?></h3>
+<div class="rounded-[5px] border border-main-border min-w-[330px] md:w-[470px] pb-4">
+    <?php $image = $PromoRepository->getPromoImage($promo->formation_id); ?>
+    <img class="max-h-[140px] md:max-h-[200px] w-full" src="<?= $image; ?>" alt="Formation">
+
+    <h3 class="text-main-red font-title text-[20px] pl-3 mt-3 md:pb-4 text-center flex items-center justify-center md:text-[36px] md:min-h-[120px]"><?= $promo->name; ?></h3>
 
     <div class="flex flex-wrap justify-around gap-3 pb-6 pt-2">
         <?php if ($promo->status->id == 12 || $promo->status->id == 13) {?>
