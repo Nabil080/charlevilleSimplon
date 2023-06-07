@@ -106,7 +106,7 @@ class PromoRepository extends ConnectBdd
         foreach ($datas as $data)
         {
             // Update automatiquement le statut de la promo aux dates requises
-            $promoRepository->updatePromoStatus($data['promo_start'], $data['promo_end'], $data['promo_id']);
+            // $promoRepository->updatePromoStatus($data['promo_start'], $data['promo_end'], $data['promo_id']);
 
             $Promo = new Promo(
                 $data['promo_id'],
