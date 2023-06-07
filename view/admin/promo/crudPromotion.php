@@ -51,4 +51,4 @@
     </tbody>
 </table>
 <div id="loading"></div>
-<div id="modals"></div>
+<div id="modals" class=""></div>

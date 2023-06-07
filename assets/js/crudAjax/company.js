@@ -16,7 +16,10 @@ function stopLoading(){
     document.querySelector('#loading').innerHTML = ''
 }
 
-
+// NOMBRE DE LIGNES
+const rowNumberSelect = document.querySelector('#row-number')
+// DIV MODAL
+const modalDiv = document.querySelector('#modals')
 // PAGINATION
 const learnerTable = document.querySelector('tbody');
 const paginationDiv = document.querySelector('#pagination');
@@ -30,7 +33,6 @@ const candidateNumber = document.querySelector('#candidates-number')
 const searchInput = document.querySelector('#simple-search');
 
 // Variables nécessaires à la pagination
-const projectsPerPage = 2
 const paginationRange = 3
 
 let filterString = '';
@@ -73,6 +75,10 @@ const getProjets = (limitStart = 0,limitEnd = 6) => {
 async function updateData(currentPage = 1){
     showLoading()
     // console.log(currentPage);
+    let projectsPerPage = 5
+    if(rowNumberSelect.value > 0 && rowNumberSelect.value < 100){
+        projectsPerPage = Number(rowNumberSelect.value)
+    }
     let limitStart = (currentPage - 1) * projectsPerPage
     let limitEnd = projectsPerPage
     // console.log(limitStart,limitEnd)
@@ -194,4 +200,8 @@ nextPage.addEventListener('click', (e) => {
 lastPage.addEventListener('click', (e) => {
     pageCount = document.querySelector("[data-page-count]").dataset.pageCount
     updateData(pageCount)
+})
+
+rowNumberSelect.addEventListener('change', (e) => {
+    updateData()
 })
