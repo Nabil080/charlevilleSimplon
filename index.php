@@ -6,7 +6,7 @@ require 'src/model/ConnectBdd.php';
 // $_SESSION['user'] = (object) array(
 //     'user_id' => 2,
 //     'status_id' => 1,
-//     'role_id' => 1,
+//     'role_id' => 2,
 // );
 
 

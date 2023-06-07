@@ -136,8 +136,8 @@
                 <div class="grow">
                     <?php $promoRepository = new PromoRepository;
                     $apprenants = $promoRepository->getAllApprenants($project->promo->id);?>
-                    <div data-dropdown-toggle="user-dropdown" class="text-center w-full cursor-pointer">Sélectionner les apprenants <i class="fa fa-chevron-down"></i></div>
-                    <select id="user-dropdown" multiple class="hidden z-20 w-fit" name="team[]" id="">
+                    <div data-dropdown-toggle="user-dropdown<?= $y ?>" class="text-center w-full cursor-pointer">Sélectionner les apprenants <i class="fa fa-chevron-down"></i></div>
+                    <select id="user-dropdown<?= $y ?>" multiple class="hidden z-20 w-fit" name="team[]" id="">
                        <?php foreach ($apprenants as $apprenant) { ?>
                             <option value="<?= $apprenant->user_id ?>"><?= $apprenant->user_name ?> <?= $apprenant->user_surname ?></option>
                         <?php } ?>
