@@ -48,7 +48,7 @@
 </head>
 
 
-<body class="w-[100vw] bg-main-white min-h-screen flex flex-col justify-between">
+<body class="w-[100vw] bg-main-white min-h-screen pt-12 flex flex-col justify-between">
     <?php require_once 'view/template/_navbar.php'; ?>
     <?php include 'view/template/_login.php'; ?>
     <div class="pt-[73px]">

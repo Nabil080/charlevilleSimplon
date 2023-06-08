@@ -106,5 +106,10 @@ actualPromotion.addEventListener('click', () => {
         checkbox.checked = false;
     })
     getFiltersProjects();
-    toggleDropdown('year-dropdown');
+    let dropdownButton = document.querySelector("#year-dropdown");
+    let dropdown = document.querySelector('.filter-dropdown');
+    dropdown.classList.add("hidden");
+    dropdownButton.classList.add("rounded-b-lg");
+
+    // toggleDropdown('year-dropdown');
 });

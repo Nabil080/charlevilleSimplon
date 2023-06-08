@@ -26,6 +26,7 @@ inputs[i].addEventListener('change', function()  // Event listener sur chaque ch
 
 window.addEventListener("scroll", function () { // Ecoute le scroll sur la page
 
+    const nav = document.querySelector("nav");
     if (nav.classList.contains("-translate-y-[20vh]") && this.window.screen.width > 762) { // si la navbar est caché fait remonté l'aside jusqu'en haut
         aside.classList.add("-translate-y-20");
     } else {    // Si la navbar apparait fait redescendre l'aside

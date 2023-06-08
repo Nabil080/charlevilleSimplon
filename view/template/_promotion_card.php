@@ -1,7 +1,8 @@
 <div class="rounded-[5px] border border-main-border min-w-[330px] md:w-[470px] pb-4">
     <?php $image = $PromoRepository->getPromoImage($promo->formation_id); ?>
-    <img class="max-h-[140px] md:max-h-[200px] w-full" src="<?= $image; ?>" alt="Formation">
-
+    <div role="image" class="bg-cover bg-center  h-[140px] md:h-[200px] w-full" style= "background-image: url(<?= $image ?>)" aria-label="image">
+        <!-- <img class="" src="<?= $formation->image ?>" alt="Formation"> -->
+    </div>
     <h3 class="text-main-red font-title text-[20px] pl-3 mt-3 md:pb-4 text-center flex items-center justify-center md:text-[36px] md:min-h-[120px]"><?= $promo->name; ?></h3>
 
     <div class="flex flex-wrap justify-around gap-3 pb-6 pt-2">
