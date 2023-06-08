@@ -36,8 +36,8 @@
                                 class="text-main-red font-title text-[28px] md:text-[48px] font-semibold pt-5 text-center md:text-left">
                                 <span class="uppercase"><?=$candidate->user_name?></span> <?=$candidate->user_surname?></h1>
                             <div
-                                class="text-desc rounded-[5px] border-[1px] border-main-border mt-5 grow md:flex md:flex-col md:justify-between">
-                                <p class="text-[20px] text-justify py-5 px-3">Mes informations</p>
+                                class="text-desc rounded-[5px] border-[1px] border-main-border mt-8 grow md:flex md:flex-col md:justify-center gap-2 content-start">
+                                <p class="text-[20px] text-justify pt-5 pb-2 px-3">Mes informations</p>
                                 <div class="h-0 border-[2px] border-main-red w-1/2"></div>
                                 <ul class="text-justify px-3 pb-3 text-[16px] md:text-[18px] leading-loose ml-8">
                                     <?php if (isset($candidate->user_name)) { ?>

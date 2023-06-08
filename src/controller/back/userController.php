@@ -297,7 +297,6 @@ function contactUsers()
 function deleteCandidate()
 {
     // Check si admin
-    var_dump($_POST);
     $userRepo = new UserRepository;
     $req = $userRepo->bdd->prepare("DELETE FROM `promo_candidate` WHERE `user_id` = ? AND `promo_id` = ?");
     $req->execute([$_POST['user_id'], $_POST['promo_id']]);
@@ -494,8 +493,6 @@ function companyPagination()
 
 function updateUserElements()
 {
-    // var_dump($_POST);
-    // var_dump($_FILES);
     if ((!isset($_GET['id']) || $_GET['id'] == null) && (!isset($_GET['type']) || $_GET['type'] == null)) {
         // erreur 404 page not found : Vous devez renseigner un id utilisateur et un type de modification
     } elseif ((isset($_GET['id']) && $_GET['id'] == $_SESSION['user']->user_id) && (isset($_GET['type']) && $_GET['type'] !== null) || $_SESSION['user']->role_id == 1) {

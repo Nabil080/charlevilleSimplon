@@ -45,7 +45,7 @@ $formations = $formationRepo->getAllFormations(); ?>
                         <ul class="z-50 relative py-2 md:py-0 px-2 md:px-0 text-sm leading-9 sm:leading-[60px] divide-y border-2 border-main-red divide-main-red rounded-[4px]"
                             aria-labelledby="dropdownDefaultButton">
                             <?php foreach ($formations as $formation) { ?>
-                                <li class="md:hover:bg-gray-400">
+                                <li class="md:hover:bg-gray-800">
                                     <a href="?action=formationPage&id=<?= $formation->id ?>"
                                         class="block px-4 py-2 text-[22px] sm:text-[32px] md:text-[20px]"><?= $formation->name ?></a>
                                 </li>
@@ -80,31 +80,31 @@ $formations = $formationRepo->getAllFormations(); ?>
                                 aria-labelledby="dropdownAccountDefaultButton">
                                 <?php if (isset($_SESSION['user']) && $_SESSION['user']->role_id !== 3) { ?>
 
-                                    <li class="md:hover:bg-gray-400">
+                                    <li class="md:hover:bg-gray-800">
                                         <a href="?action=profilePage"
                                             class="block px-4 py-2 text-[22px] sm:text-[32px] md:text-[20px]">Mon profil</a>
                                     </li>
                                 <?php } ?>
                                 <?php if (isset($_SESSION['user']) && $_SESSION['user']->role_id == 1) { ?>
-                                    <li class="md:hover:bg-gray-400">
+                                    <li class="md:hover:bg-gray-800">
                                         <a href="?action=crudLearnerPage"
                                             class="block px-4 py-2 text-[22px] sm:text-[32px] md:text-[20px]">Admin</a>
                                     </li>
                                 <?php } ?>
                                 <?php if (isset($_SESSION['user']) && $_SESSION['user']->role_id < 4) { ?>
-                                    <li class="md:hover:bg-gray-400">
+                                    <li class="md:hover:bg-gray-800">
                                         <a href="?action=projectGestionPage&id=<?= $_SESSION['user']->user_id ?>"
                                             class="block px-4 py-2 text-[22px] sm:text-[32px] md:text-[20px]">Mes Projets</a>
                                     </li>
                                 <?php } ?>
                                 <?php if (isset($_SESSION['user']) && $_SESSION['user']->role_id == 4) { ?>
-                                    <li class="md:hover:bg-gray-400">
+                                    <li class="md:hover:bg-gray-800">
                                         <a href="?action=promotionPage"
                                             class="block px-4 py-2 text-[22px] sm:text-[32px] md:text-[20px]">Ma promo</a>
                                     </li>
                                 <?php } ?>
 
-                                <li class="md:hover:bg-gray-400">
+                                <li class="md:hover:bg-gray-800">
                                     <a href="index.php?action=logOut"
                                         class="block px-4 py-2 text-[22px] sm:text-[32px] md:text-[20px]">Déconnexion</a>
                                 </li>

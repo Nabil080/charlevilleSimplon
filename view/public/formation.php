@@ -435,9 +435,6 @@
             class="fa-solid fa-pen text-main-red fa-sm cursor-pointer"></i>
         <?php } ?>
     </div>
-    <h6 class="pb-3 font-bold font-title">
-        Formation certifiante délivrant une certification inscrite au Répertoire Spécifique
-    </h6>
     <div id="certificationAllContent">
         <?php foreach ($formation_certification as $key => $certification) { ?>
         <div id="certificationContent_<?= $key ?>" class="pb-5">

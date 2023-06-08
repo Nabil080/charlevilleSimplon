@@ -564,5 +564,24 @@ class PromoRepository extends ConnectBdd
         return $data;
     }
 
+    public function getPromoByFormationId(int $id): object
+    {
+        $promoRepository = new PromoRepository;
+        $req = $this->bdd->prepare("SELECT * FROM `promo` WHERE `formation_id` = ?");
+        $req->execute([$id]);
+        $data = $req->fetch(PDO::FETCH_ASSOC);
+
+        $Promo = new Promo(
+        $data['promo_id'], 
+        $data['promo_name'], 
+        $promoRepository->formateDate($data['promo_start']),
+        $promoRepository->formateDate($data['promo_end']),
+        $data['promo_year'],
+        $data['formation_id'],
+        $data['status_id']
+        );
+
+        return $Promo;
+    }
 
 }

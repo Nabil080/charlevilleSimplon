@@ -109,7 +109,22 @@ window.addEventListener ("scroll", function () {
         logo.src = "assets/img/navbar/logo-simplon.png";
         logo.classList.remove("w-[150px]");
         logo.classList.add("w-[171px]");
-
+        dropdown.classList.add("bg-main-white", "text-black");
+        let listes = dropdown.getElementsByTagName('li');
+        for (let i = 0; i < listes.length; i++) {
+          listes[i].classList.remove("md:hover:bg-gray-800");
+          listes[i].classList.add("hover:bg-main-lightred");
+        }
+        dropdown.classList.remove("bg-opacity-90", "blur-[0.3px]");
+        if (dropdownAccount !== null) {
+          dropdownAccount.classList.add("bg-main-white", "text-black");
+          dropdownAccount.classList.remove("bg-opacity-80", "blur-[0.3px]");
+          let listesAccount = dropdownAccount.getElementsByTagName('li');
+          for (let i = 0; i < listesAccount.length; i++) {
+          listesAccount[i].classList.remove("md:hover:bg-gray-800");
+            listesAccount[i].classList.add("hover:bg-main-lightred");
+          }
+        }
       } else if (body.getBoundingClientRect().top > -30 || y == 1) {
 
         changeNav.classList.remove("text-black");
@@ -118,7 +133,24 @@ window.addEventListener ("scroll", function () {
         logo.src = "assets/img/simplonblanc.png";
         logo.classList.add("w-[150px]");
         logo.classList.remove("w-[171px]");
-        
+        dropdown.classList.remove("bg-main-white", "text-black");
+        let listes = dropdown.getElementsByTagName('li');
+        for (let i = 0; i < listes.length; i++) {
+          listes[i].classList.add("md:hover:bg-gray-800");
+
+          listes[i].classList.remove("hover:bg-main-lightred");
+        }
+        dropdown.classList.add("bg-opacity-90", "blur-[0.3px]");
+        if (dropdownAccount !== null) {
+          dropdownAccount.classList.remove("bg-main-white", "text-black");
+          dropdownAccount.classList.add("bg-opacity-80", "blur-[0.3px]");
+          let listesAccount = dropdownAccount.getElementsByTagName('li');
+          for (let i = 0; i < listesAccount.length; i++) {
+          listesAccount[i].classList.add("md:hover:bg-gray-800");
+
+            listesAccount[i].classList.remove("hover:bg-main-lightred");
+          }
+        }
       }
     }
   }
@@ -155,25 +187,25 @@ window.addEventListener ("scroll", function () {
           change[0].classList.toggle("hidden");
       }
       if (!change[1].classList.contains("hidden")) {
-          change[1].classList.remove("hidden");
-          change[1].style.display = "block";
-          change[1].classList.add("text-black");
-          dropdown.classList.add("bg-main-white", "text-black");
-          dropdown.classList.remove("bg-opacity-90", "blur-[0.3px]");
-          if (dropdownAccount !== null) {
+        change[1].classList.remove("hidden");
+        change[1].style.display = "block";
+        change[1].classList.add("text-black");
+        dropdown.classList.add("bg-main-white", "text-black");
+        dropdown.classList.remove("bg-opacity-90", "blur-[0.3px]");
+        if (dropdownAccount !== null) {
           dropdownAccount.classList.add("bg-main-white", "text-black");
           dropdownAccount.classList.remove("bg-opacity-80", "blur-[0.3px]");
         }
       } else {
-          change[1].style.display = "none";
-          change[1].classList.add("hidden");
-          change[1].classList.add("text-black");
-          dropdown.classList.remove("bg-main-white", "text-black");
-          dropdown.classList.add("bg-opacity-90", "blur-[0.3px]");
-          if (dropdownAccount !== null) {
+        change[1].style.display = "none";
+        change[1].classList.add("hidden");
+        change[1].classList.add("text-black");
+        dropdown.classList.remove("bg-main-white", "text-black");
+        dropdown.classList.add("bg-opacity-90", "blur-[0.3px]");
+        if (dropdownAccount !== null) {
           dropdownAccount.classList.remove("bg-main-white", "text-black");
           dropdownAccount.classList.add("bg-opacity-80", "blur-[0.3px]");
-          }
+        }
       }
       change[1].classList.toggle("hidden");
       // changement de couleur nav superieur

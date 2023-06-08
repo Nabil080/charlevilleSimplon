@@ -2,8 +2,8 @@
 
 <?php ob_start(); ?>
 
-<main class="px-[5%] justify-self-start">
-    <div class="flex flex-col md:flex-row justify-content items-center">
+<main class="px-[5%] min-h-[74vh] justify-self-start ">
+    <div class="flex flex-col md:flex-row justify-content absolute inset-x-0 inset-y-0 items-center">
         <div class="md:w-1/2">
             <img src="assets/img/autres/errorBig.png" alt="image d'erreur" class="hidden md:block img-fluid" />
             <img src="assets/img/autres/errorLittle.png" alt="image d'erreur" class="md:hidden img-fluid" />

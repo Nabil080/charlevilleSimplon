@@ -71,6 +71,7 @@ function projectPage()
     $projectRepository = new ProjectRepository;
     $promoRepository = new PromoRepository;
     $progressRepository = new ProgressRepository;
+    $tags = new TagRepository();
     $isMyProject = false;
     if (isset($_SESSION['user'])) {
         $userProject = $projectRepository->getUserProjects($_SESSION['user']->user_id);
@@ -83,7 +84,6 @@ function projectPage()
     if (!isset($_GET['id'])) {
         header('Location:?action=homepage');
     }
-
     if (isset($_SESSION['user']) && $_SESSION['user']->role_id == 1) {
         $isMyProject = true;
     }
@@ -93,8 +93,11 @@ function projectPage()
         $id = 3;
     }
 
-
+    $allTags = $tags->getAllTags();
     $project = $projectRepository->getProjectById($id);
+    // if ($project->status->id !== 10) {
+    //     header('Location:?action=homepage');
+    // }
     $team = $projectRepository->getProjectUsers($id);
     $promoUsers = $promoRepository->getAllApprenants($project->promo->id);
     $promoFormateurs = $promoRepository->getAllFormateurs($project->promo->id);
