@@ -1,12 +1,12 @@
 <!-- Modal de connexion -->
-<section id="login-modal" data-modal-placement="center" tabindex="-1" aria-hidden="true"
+<section id="company-login-modal" data-modal-placement="center" tabindex="-1" aria-hidden="true"
     class="backdrop:brightness-50 fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] md:h-full">
     <div class="relative w-full h-fit max-w-md md:h-auto">
         <div class="relative bg-main-white border-main-red border-2 rounded-md text-main-red">
             <button type="button"
                 class="absolute top-3 right-2.5 text-main-red bg-transparent rounded-md text-sm p-1.5 ml-auto inline-flex items-center border border-transparent hover:border-main-red"
-                data-modal-hide="login-modal">
-                <svg data-modal-hide="login-modal" aria-hidden="true" class="w-5 h-5 text-main-light"
+                data-modal-hide="company-login-modal">
+                <svg data-modal-hide="company-login-modal" aria-hidden="true" class="w-5 h-5 text-main-light"
                     fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd"
                         d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
@@ -41,8 +41,8 @@
                                 class="hover:underline text-main-red cursor-pointer">Réinitialiser</a>
                         </div>
                         <div class="text-sm font-bold text-main-gray">
-                            Pas de compte ? <a href="index.php#allFormationsTitle" data-modal-target="login-modal" data-modal-hide="login-modal"
-                                class="hover:underline text-main-red cursor-pointer">Candidatez à une formation</a>
+                            Pas de compte ? <a href="?action=registerPage&company="
+                                class="hover:underline text-main-red cursor-pointer">S'inscrire en tant qu'entreprise</a>
                         </div>
                     </div>
                 </form>
