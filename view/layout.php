@@ -17,28 +17,28 @@
     <script src="build/ckeditor.js"></script>
     <script src="https://kit.fontawesome.com/eb7aa99f8d.js" crossorigin="anonymous"></script>
     <script>
-    tailwind.config = {
-        theme: {
-            fontFamily: {
-                sans: 'Roboto',
-                title: 'Montserrat',
-            },
-            extend: {
-                colors: {
-                    'main': {
-                        red: '#BD3124',
-                        white: '#FFFF',
-                        gray: '#4F4F4F',
-                        lightred: '#F6DADE',
-                        lightgray: '#F2F2F3',
-                        blue: '#4A9AE6',
-                        green: '#A2EF4D',
-                        orange: '#ff7f00',
+        tailwind.config = {
+            theme: {
+                fontFamily: {
+                    sans: 'Roboto',
+                    title: 'Montserrat',
+                },
+                extend: {
+                    colors: {
+                        'main': {
+                            red: '#BD3124',
+                            white: '#FFFF',
+                            gray: '#4F4F4F',
+                            lightred: '#F6DADE',
+                            lightgray: '#F2F2F3',
+                            blue: '#4A9AE6',
+                            green: '#A2EF4D',
+                            orange: '#ff7f00',
+                        }
                     }
                 }
             }
         }
-    }
     </script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.css" rel="stylesheet" />
     <link href="assets/css/nav.css" rel="stylesheet" />
@@ -51,14 +51,17 @@
 <body class="w-[100vw] bg-main-white min-h-screen flex flex-col justify-between">
     <?php require_once 'view/template/_navbar.php'; ?>
     <?php include 'view/template/_login.php'; ?>
-    <div class="pt-[75px]"></div>
-    <?php if (isset($_SESSION['alertMessage'])) { ?>
-    <div class="z-50 sticky top-0 w-full">
-        <?= $_SESSION['alertMessage']; ?>
+    <div class="pt-[73px]">
+        <?php if (isset($_SESSION['alertMessage'])) { ?>
+            <div class="z-50 sticky top-0 w-full">
+                <?= $_SESSION['alertMessage']; ?>
+            </div>
+            <?php unset($_SESSION['alertMessage']);
+        } ?>
     </div>
-    <?php unset($_SESSION['alertMessage']);
-    } ?>
-    </div>
+
+
+
     <?= $content ?>
 
 
@@ -70,8 +73,8 @@
     <script src="assets/js/editor_setup.js"></script>
     <script src="assets/js/ajax_handleFormSubmission.js"></script>
     <script>
-    handleFormSubmission('#login-form', 'index.php?action=loginTreatment');
-    handleFormSubmission('#forget-form', 'index.php?action=sendMailResetPasswordTreatment');
+        handleFormSubmission('#login-form', 'index.php?action=loginTreatment');
+        handleFormSubmission('#forget-form', 'index.php?action=sendMailResetPasswordTreatment');
     </script>
     <?php if (isset($script))
         echo $script; ?>

@@ -7,6 +7,9 @@
     private $alertMessage = 'assets/json/alertMessage.json';
     private $styleSucces = "mb-2 p-2 border-2 border-green-700 rounded-lg bg-green-200 text-green-500";
     private $styleError = "mb-2 p-2 border-2 border-red-700 rounded-lg bg-red-200 text-red-500";
+    private $file_errorMessage = 'view/template/_errorMessage.php';
+    private $file_succesMessage = 'view/template/_succesMessage.php';
+
 
     // <p id="{ID_input}_error" class="errorAlert"></p>
 
@@ -40,15 +43,28 @@
                     $this->location = "#" . $location . "_error";
             }
 
-        } else if ($boolNavbar == true)
-            // En dessous de la navbar
-            $this->location = '#content_succes';
+        }
+
 
         // Création du message
         $this->message = $this->getMessage();
-        if ($where != 'input')
-            $this->message = "<p class='alertMessage " . $this->styleError . "'>" . $this->message . "<p>";
+        if ($boolNavbar == true) {
+            if (file_exists($this->file_errorMessage)) {
+                // Lit le contenu du fichier
+                $succesMessage = file_get_contents($this->file_errorMessage);
 
+                // Insère le message prédéfini dans l'élément avec l'ID "content_success"
+                $succesMessage = str_replace(
+                    '<div id="content_success" class="ml-3 text-sm font-medium">',
+                    '<div id="content_success" class="ml-3 text-sm font-medium"><span class="font-bold">Erreur</span><br>' . $this->message,
+                    $succesMessage
+                );
+                $this->message = $succesMessage;
+                $_SESSION['alertMessage'] = $this->message;
+            }
+        } else {
+            $this->message = "<p class='alertMessage " . $this->styleError . "'>" . $this->message . "<p>";
+        }
         //Envoyer l'alert
         $alert = [
             'successMessage' => 0,
@@ -62,7 +78,6 @@
 
     public function getSuccess($success, $boolNavbar, $location = null)
     {
-        $file_path = 'view/template/_succesMessage.php';
         // Récupérer Message
         $this->type = 'successMessage';
         $this->name = $success;
@@ -89,17 +104,17 @@
         $this->message = $this->getMessage();
 
         if ($boolNavbar == true) {
-            if (file_exists($file_path)) {
+            if (file_exists($this->file_succesMessage)) {
                 // Lit le contenu du fichier
-                $succesMessage = file_get_contents($file_path);
+                $errorMessage = file_get_contents($this->file_succesMessage);
 
                 // Insère le message prédéfini dans l'élément avec l'ID "content_success"
-                $succesMessage = str_replace(
+                $errorMessage = str_replace(
                     '<div id="content_success" class="ml-3 text-sm font-medium">',
                     '<div id="content_success" class="ml-3 text-sm font-medium"><span class="font-bold">Succès</span><br>' . $this->message,
-                    $succesMessage
+                    $errorMessage
                 );
-                $this->message = $succesMessage;
+                $this->message = $errorMessage;
                 $_SESSION['alertMessage'] = $this->message;
             }
         } else {
