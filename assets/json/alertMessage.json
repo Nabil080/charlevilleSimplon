@@ -5,6 +5,10 @@
       "message": "Le fichier n'est pas un PDF"
     },
     {
+      "name": "notActive",
+      "message": "Le compte n'est pas activé ! Merci de vérifier vos e-mails"
+    },
+    {
       "name": "notForm",
       "message": "Nous n'avons pas reçu de formulaire. Si le problème persiste, envoyer un message au support."
     },

@@ -83,7 +83,7 @@ function registerTreatment()
             }
 
             $UserRepo = new UserRepository;
-            //$UserRepo->InsertUser($user);
+            $UserRepo->InsertUser($user);
             $succes = [$AlertMessage->getSuccess('register', true)];
             $succesJson = json_encode($succes);
             echo $succesJson;
@@ -140,32 +140,35 @@ function loginTreatment()
             if (is_string($user_id)) {
                 $bool = $UserRepo->checkPassword($user_id, $password);
                 if ($bool) {
-                    $userSession = $UserRepo->getUserSession($user_id);
-                    $_SESSION['user'] = (object) array(
-                        'user_id' => $userSession['user_id'],
-                        'status_id' => $userSession['status_id'],
-                        'role_id' => $userSession['role_id'],
-                    );
-                    $AlertMessage->getSuccess('login', true);
-                    $role_id = $userSession['role_id'];
-                    switch ($role_id) {
-                        case '1':
-                            header('Location: index.php?action=crudCandidatePage');
-                            break;
-                        case '2':
-                            header('Location: index.php');
-                            break;
-                        case '3':
-                            header('Location: index.php');
-                            break;
-                        case '4':
-                            header('Location: index.php');
-                            break;
-                        case '5':
-                            header('Location: index.php');
-                            break;
-                    }
-
+                    $isUserActive = $UserRepo->checkActive($user_id);
+                    if($isUserActive){
+                        $userSession = $UserRepo->getUserSession($user_id);
+                        $_SESSION['user'] = (object) array(
+                            'user_id' => $userSession['user_id'],
+                            'status_id' => $userSession['status_id'],
+                            'role_id' => $userSession['role_id'],
+                        );
+                        $AlertMessage->getSuccess('login', true);
+                        $role_id = $userSession['role_id'];
+                        switch ($role_id) {
+                            case '1':
+                                header('Location: index.php?action=crudCandidatePage');
+                                break;
+                            case '2':
+                                header('Location: index.php');
+                                break;
+                            case '3':
+                                header('Location: index.php');
+                                break;
+                            case '4':
+                                header('Location: index.php');
+                                break;
+                            case '5':
+                                header('Location: index.php');
+                                break;
+                        }
+                    }else
+                    $errorTable[] = $AlertMessage->getError('notActive',true);
                 } else
                     $errorTable[] = $AlertMessage->getError('loginIncorrect', false, 'login');
             } else

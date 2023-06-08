@@ -55,8 +55,8 @@
 
                 // Insère le message prédéfini dans l'élément avec l'ID "content_success"
                 $succesMessage = str_replace(
-                    '<div id="content_success" class="ml-3 text-sm font-medium">',
-                    '<div id="content_success" class="ml-3 text-sm font-medium"><span class="font-bold">Erreur</span><br>' . $this->message,
+                    '<div id="content_error" class="ml-3 text-sm font-medium">',
+                    '<div id="content_error" class="ml-3 text-sm font-medium"><span class="font-bold">Erreur</span><br>' . $this->message,
                     $succesMessage
                 );
                 $this->message = $succesMessage;

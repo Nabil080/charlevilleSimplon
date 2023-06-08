@@ -1,5 +1,5 @@
 <div id="alert-border-3"
-    class="flex p-4 mb-4 text-red-800 border-t-4 border-red-300 bg-red-50 dark:text-red-400 dark:bg-gray-800 dark:border-red-800"
+    class="flex p-4 mb-4 text-red-800 border-t-4 border-red-300 bg-red-50"
     role="alert">
     <svg class="flex-shrink-0 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
         <path fill-rule="evenodd"

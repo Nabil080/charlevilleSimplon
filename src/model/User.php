@@ -171,6 +171,17 @@ class UserRepository extends ConnectBdd
 
         return ($account) ? true : false;
     }
+    public function checkActive($id): bool
+    {
+        $req = $this->bdd->prepare("SELECT status_id FROM `user` WHERE user_id = ?");
+        $req->execute([$id]);
+        $status_id = $req->fetch(PDO::FETCH_COLUMN);
+        $req->closeCursor();
+
+        $isUserActive = $status_id != 1 ? true : false ;
+        return $isUserActive;
+        
+    }
     public function checkPassword($id, $mdp): bool
     {
         $req = "SELECT user_password FROM `user` WHERE  user_id= ?";
