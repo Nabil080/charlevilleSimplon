@@ -262,7 +262,9 @@ function registerPage()
     if (($boolCompany == 0 && $formation_id == 0) || ($boolCompany == 1 && $formation_id != 0)) {
         throw new Exception('error_404');
     }
-    else {
+    elseif($boolCompany === 1){
+        include 'view/public/register.php';
+    }else{
         $PromoRepository = new PromoRepository;
         $promo = $PromoRepository->getPromoById($formation_id);
         include 'view/public/register.php';

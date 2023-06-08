@@ -81,11 +81,50 @@ class User
 
 class UserRepository extends ConnectBdd
 {
+    public function sendMailActivationAccount($email){
+        $token = bin2hex(random_bytes(32));
+        
+        if ($email) {
+            $send = $email;
+            $objet = 'Veuillez activer votre compte Simplon Charleville !';
+            $message = "Bonjour,\r\n\r\n
+            Bienvenue à Simplon ! Dernière étape pour votre candidature !   \r\n\r\n
+            Veuillez cliquer sur ce lien pour valider votre compte : \r\n\r\n
+            Cordialement,\r\n
+            Jordan Kunys";
+    
+            $name = "Simplon Charleville";
+            $email = "simplon.charleville@gmail.com";
+    
+            if (!empty($name) && !empty($email) && !empty($objet) && !empty($message)) {
+                $to = $send;
+                $email_subject = $objet;
+                $bodyParagraphs = ["Name: {$name}", "Email: {$email}", "Message:", $message];
+                $email_body = join(PHP_EOL, $bodyParagraphs);
+                $headers = ['From' => $email, 'Reply-To' => $email, 'Content-type' => 'text/html; charset=utf-8'];
+                if (mail($to, $email_subject, $email_body, $headers)) {
+                    echo 'envoi réussi';
+
+                    return $token;
+                } else {
+                    echo 'envoi échoué';
+
+                    return false;
+                }
+            } else {
+                echo 'éléments manquants';
+
+                return false;
+            }
+        }
+    }
     public function InsertUser($account): void
     {
         $Mail = new MailRepository();
-        $Mail->sendMailActivationAccount($account['email']);
-        $token = $Mail->getToken();
+        // $Mail->sendMailActivationAccount($account['email']);
+        // $token = $Mail->getToken();
+        $token = $this->sendMailActivationAccount($account['email']);
+        var_dump($token);
 
         $pass = password_hash($account['password'], PASSWORD_BCRYPT);
 
