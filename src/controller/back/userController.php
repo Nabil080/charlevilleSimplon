@@ -164,6 +164,9 @@ function loginTreatment()
                             case '5':
                                 header('Location: index.php');
                                 break;
+                            default :
+                                header('Location: index.php');
+                                break;
                         }
                     }else
                     $UserRepo->sendMailActivationAccount($email);

@@ -119,6 +119,49 @@ class UserRepository extends ConnectBdd
             }
         }
     }
+
+    public function sendMailValidationCandidature($user_id,$promo_id){
+        
+        $user = new User($user_id);
+        $promoRepo = New PromoRepository;
+        $promo = $promoRepo->getPromoById($promo_id);
+        if (isset($user) && !empty($user)) {
+            $send = $user->user_email;
+            $objet = 'Votre candidature pour $prom!";
+            $message = "Bonjour,\r\n\r\n
+            Bienvenue à Simplon ! Dernière étape pour votre candidature !   \r\n\r\n
+            Veuillez cliquer sur ce lien pour valider votre compte : http://localhost/projet_dev_v2/index.php?action=registerPage&token=$token \r\n\r\n
+            Cordialement,\r\n
+            Jordan Kunys";
+            
+    
+            $name = "Simplon Charleville";
+            $email = "simplon.charleville@gmail.com";
+    
+            if (!empty($name) && !empty($email) && !empty($objet) && !empty($message)) {
+                $to = $send;
+                $email_subject = $objet;
+                $bodyParagraphs = ["Name: {$name}", "Email: {$email}", "Message:", $message];
+                $email_body = join(PHP_EOL, $bodyParagraphs);
+                $headers = ['From' => $email, 'Reply-To' => $email, 'Content-type' => 'text/html; charset=utf-8'];
+                if (mail($to, $email_subject, $email_body, $headers)) {
+                    echo 'envoi réussi';
+
+                    return $token;
+                } else {
+                    echo 'envoi échoué';
+
+                    return false;
+                }
+            } else {
+                echo 'éléments manquants';
+
+                return false;
+            }
+        }
+    }
+
+
     public function InsertUser($account): void
     {
         $Mail = new MailRepository();
@@ -141,6 +184,8 @@ class UserRepository extends ConnectBdd
             $req = "INSERT INTO `promo_candidate`(`user_id`,`promo_id`) VALUE(?,?)";
             $stmt = $this->bdd->prepare($req);
             $stmt->execute([$user_id[0], $account['formation_id']]);
+
+            $this->sendMailValidationCandidature($user_id,$account['formation_id']);
         }
         $stmt->closeCursor();
     }
