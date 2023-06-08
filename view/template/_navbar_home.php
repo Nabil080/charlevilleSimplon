@@ -78,7 +78,7 @@ $formations = $formationRepo->getAllFormations(); ?>
                             class="z-50 border-main-lightgray min-w-[300px] hidden bg-gray-400 bg-opacity-80  text-main-white blur-[0.3px] rounded-lg shadow text-center w-fit mr-4 pl-0">
                             <ul class="z-50 relative py-2 md:py-0 px-2 md:px-0 text-sm leading-9 sm:leading-[60px] divide-y border-2 border-main-red divide-main-red rounded-[4px]"
                                 aria-labelledby="dropdownAccountDefaultButton">
-                                <?php if (isset($_SESSION['user']) && $_SESSION['user']->role_id !== 3) { ?>
+                                <?php if (isset($_SESSION['user']) && $_SESSION['user']->role_id != 3 && $_SESSION['user']->role_id != 1) { ?>
 
                                     <li class="md:hover:bg-gray-800">
                                         <a href="?action=profilePage"
