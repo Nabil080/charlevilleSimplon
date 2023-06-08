@@ -18,7 +18,6 @@ function changeTab(y) {
 }
 
 function switchDiv(id1, id2) {
-    console.log(id1 + " " + id2);
     const div1 = document.getElementById(id1);
     const div2 = document.getElementById(id2);
     if (div1.style.display === "none") {
@@ -75,11 +74,9 @@ function updateContact() {
 
         checkboxes.forEach(checkbox => {
             if (checkbox.checked) {
-                // (console.log(checkbox))
                 mailList.push(checkbox.name)
             }
         });
         contactInput.value = mailList.join(',');
-        console.log(mailList);
     })
 };

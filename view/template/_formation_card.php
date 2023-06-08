@@ -40,7 +40,7 @@
         <?php } else if ($formation->status->id == 13) { ?>
             <a href="#"
                 class="bg-green-700 rounded-[5px] min-h-[58px] cursor-default text-main-white border  text-center font-medium flex items-center justify-center text-sm font-main w-1/3 py-2 px-2">
-                Prochaine session bientot
+                Prochaine session bientôt
             </a>
         <?php } else if ($formation->status->id == 12) { ?>
             <a href="#"

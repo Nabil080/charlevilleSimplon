@@ -1,9 +1,6 @@
 function companyHomepage() {
-    // alert("salut");
     const homepage = document.getElementById("homepage");
-    // console.log(homepage);
     const companyHomepage = document.getElementById("company-homepage");
-    // console.log(companyHomepage);
     homepage.classList.add("opacity-0");
     setTimeout(() => {
         homepage.classList.add("hidden", "lg:hidden");
@@ -15,11 +12,8 @@ function companyHomepage() {
 }
 
 function visitorHomepage() {
-    // alert("salut");
     const homepage = document.getElementById("homepage");
-    // console.log(homepage);
     const visitorHomepage = document.getElementById("visitor-homepage");
-    // console.log(visitorHomepage);
     homepage.classList.add("opacity-0");
     setTimeout(() => {
         homepage.classList.add("hidden", "lg:hidden");
@@ -32,9 +26,7 @@ function visitorHomepage() {
 
 function returnHomepage(id) {
     const homepage = document.getElementById("homepage");
-    // console.log(homepage);
     const previousPage = document.getElementById(id);
-    // console.log(previousPage);
     previousPage.classList.remove("opacity-100");
     setTimeout(() => {
         homepage.classList.remove("hidden", "lg:hidden");
@@ -47,7 +39,6 @@ function returnHomepage(id) {
 
 function loginModal() {
     const loginModal = document.getElementById("login-modal");
-    // console.log(loginModal);
     loginModal.showModal();
 }
 

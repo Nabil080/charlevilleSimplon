@@ -33,4 +33,3 @@ class ProgramRepository extends ConnectBdd
         $stmt->execute([$program_description, $formation_id, $program_layout_id]);
     }
 }
-?>

@@ -2,21 +2,6 @@
 session_start();
 require 'src/model/ConnectBdd.php';
 
-// var_dump($_SESSION['user']);
-$_SESSION['user'] = (object) array(
-    'user_id' => 2,
-    'status_id' => 1,
-    'role_id' => 1,
-);
-
-
-// var_dump($_SESSION);
-// TEMP POUR TEST SANS CONNEXION
-// $_SESSION['user'] = (object) array(
-//     'user_id' => 1,
-//     'role_id' => 5,
-//     'status_id' => 2
-// );
 try {
     if (isset($_GET['action']) && $_GET['action'] !== '') {
         $action = $_GET['action'];
@@ -82,7 +67,3 @@ try {
     // throw new Exception();
 
 }
-
-// $Repo = new FormationRepository;
-// $data = $Repo->getAllFormations();
-// var_dump($data);

@@ -110,7 +110,7 @@
                             <input id="search-radio" type="radio" value="job-search" name="radio-job" checked
                                 value="job-search" checked
                                 class="radio-job w-4 h-4 text-main-red bg-gray-100 border-gray-300 focus:ring-main-red">
-                            <label for="search-radio" class="ml-2 text-sm font-medium text-gray-900">Recherche</label>
+                            <label for="search-radio" class="ml-2 text-sm font-medium text-gray-900">Rechercher</label>
                         </div>
                         <div class="flex items-center mr-4">
                             <input id="add-radio" type="radio" value="job-add" name="radio-job" value="job-add"
@@ -195,7 +195,7 @@
                     <?php if ($CanModify == true) { ?>
                     <i onclick="swapDivsById('activityAllContent','activityAllContent-update')"
                         class="absolute bottom-5 right-5 fa-solid fa-pen text-main-red fa-sm cursor-pointer">
-                        modifier</i>
+                        Modifier</i>
                     <?php } ?>
                     <?php foreach ($formation_activity as $key => $activity) { ?>
                     <div id="activityContent_<?= $key ?>" class="py-4">
@@ -422,9 +422,6 @@
             class="fa-solid fa-pen text-main-red fa-sm cursor-pointer"></i>
         <?php } ?>
     </div>
-    <h6 class="pb-3 font-bold font-title">
-        Formation certifiante délivrant une certification inscrite au Répertoire Spécifique
-    </h6>
     <div id="certificationAllContent">
         <?php foreach ($formation_certification as $key => $certification) { ?>
         <div id="certificationContent_<?= $key ?>" class="pb-5">

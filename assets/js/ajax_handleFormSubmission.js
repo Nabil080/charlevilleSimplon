@@ -1,5 +1,4 @@
 function handleFormSubmission(formId, actionUrl) {
-    console.log('ok');
     const form = document.querySelector(formId);
     form.addEventListener('submit', function (event) {
         event.preventDefault(); // prevent default form submission behavior
@@ -12,7 +11,6 @@ function handleFormSubmission(formId, actionUrl) {
         })
             .then(response => response.json())
             .then(data => {
-                console.log(data);
                 if (typeof data != Array) data = Array.from(data);
                 deleteAlert();
                 showAlert(data);
@@ -33,10 +31,8 @@ function deleteAlert() {
 }
 function showAlert(data) {
     data.forEach(function (element) {
-        console.log(element['location']);
         if (element['navbar'] == false) {
             const input = document.querySelector(element['location']);
-            console.log(input);
             if (element['location'] == '.alertButton' || element['where'] == 'button') {
                 input.insertAdjacentHTML('beforebegin', element['message']);
             } else {

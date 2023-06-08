@@ -56,7 +56,6 @@ function updateFormation()
                 }
                 break;
             case 'activity':
-                var_dump($_POST);
                 $activity_id = (int) htmlspecialchars(strip_tags($_POST['activity_id']));
                 $activity_ref = htmlspecialchars(strip_tags($_POST['ref']));
                 $activity_name = htmlspecialchars(strip_tags($_POST['name']));

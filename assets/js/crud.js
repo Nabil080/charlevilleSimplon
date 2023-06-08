@@ -14,7 +14,7 @@ inputs[i].addEventListener('change', function()  // Event listener sur chaque ch
     const bool = bools.every(isFalse); // Applique la function isFalse sur chaque element du tableau bools, renvoie un true si tout les éléments sont faux (donc pas checked)
 
     if (contactButton.classList.contains("hidden")) { // Si le button est déja caché l'affiche
-         contactButton.classList.remove("hidden");
+        contactButton.classList.remove("hidden");
     } else if (bool == true) {  // Si le boolean est true, aucun des inputs est checked, si il est faux au moins des inputs est checked
         contactButton.classList.add("hidden");
     }
@@ -38,7 +38,6 @@ function validationForm(){
 // Gestion de validation de promotion
 
     const validationForm = document.querySelectorAll("form.validationForm");
-    console.log(validationForm)
     validationForm.forEach(form => {
         // console.log(form);
         const validationDiv = form.querySelector(".validationDiv")
@@ -73,7 +72,6 @@ function validationForm(){
                         numberChecked ++; // Ajoute +1 pour chaque input checked
                     }
                 });
-                console.log(boolInput);
                 allText = allText.sort(); // Trie tout les elements par ordre alphabétique
                 finalText = allText.join(""); // Transforme l'array en string
                 containerValidation.insertAdjacentHTML("afterbegin", finalText); // Ajoute tout les éléments selectionnés dans le container

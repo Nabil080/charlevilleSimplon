@@ -77,8 +77,6 @@ class FormationRepository extends ConnectBdd
         $req = $this->bdd->prepare("SELECT formation_name FROM formation WHERE formation_id = ?");
         $req->execute([$id]);
         $data = $req->fetch(PDO::FETCH_ASSOC);
-        var_dump($data);
-        var_dump($id);
 
         return $data['formation_name'];
     }
@@ -124,7 +122,6 @@ class FormationRepository extends ConnectBdd
         $data = $stmt->fetch(PDO::PARAM_BOOL);
 
         $bool = ($data != false) ? true : false;
-        //var_dump($bool);
         return $bool;
     }
     public function updateDescription($description, $id): void

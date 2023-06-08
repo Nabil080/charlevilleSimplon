@@ -2,12 +2,7 @@
 $title = "Espace personnel";
 ?>
 
-<?php ob_start();
-// var_dump($userDatas);
-// var_dump($userPromo);
-// var_dump($allStatus);
-
-?>
+<?php ob_start(); ?>
 <!-- Section photo et description -->
 <div class="background bg-main-white overflow-x-hidden min-h-[100vh]">
 

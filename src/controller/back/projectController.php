@@ -20,7 +20,6 @@ function allProjectsPagination()
     $projects = $projectRepo->getAllProjects($limit,$filter,$execute);
 
     $projectsHTML = [];
-    // var_dump($projects);
     foreach($projects as $project){
         ob_start();
             include('view/template/_project_card.php');
@@ -31,7 +30,7 @@ function allProjectsPagination()
 
     $response = array(
         "status" => "success",
-        "message" => "Les projets ont bien été récupérés d'après les critères ci dessous.",
+        "message" => "Les projets ont bien été récupérés d'après les critères ci-dessous.",
         "total" => $total,
         "filtered" => $filtered,
         "query" => "WHERE $filter",
@@ -72,7 +71,7 @@ function projectPagination()
 
     $response = array(
         "status" => "success",
-        "message" => "Les projets ont bien été récupérés d'après les critères ci dessous.",
+        "message" => "Les projets ont bien été récupérés d'après les critères ci-dessous.",
         "total" => $total,
         "filtered" => $filtered,
         "query" => "WHERE $filter",
@@ -128,7 +127,7 @@ function validationProjectTreatment()
     
     $response = array(
         "status" => "success",
-        "message" => "Le statut a été modifée comme tel",
+        "message" => "Le statut a bien été modifié",
         "projets" => $bool,
     );
     echo json_encode($response);
@@ -137,7 +136,6 @@ function validationProjectTreatment()
 
 function assignTeamToProject()
 {
-    var_dump($_POST);
     $projectRepository = new ProjectRepository;
     if (isset($_POST) && isset($_POST['team']) && isset($_POST['projectId'])) {
         $projectId = $_POST['projectId'];
@@ -146,7 +144,7 @@ function assignTeamToProject()
 
         $response = array(
             "status" => "success",
-            "message" => "Le statut a été modifée comme tel",
+            "message" => "Le statut a bien été modifié.",
             "projets" => $bools,
         );
     } else {
@@ -229,7 +227,7 @@ function updateProjectElement()
     // header("Location:?action=projectPage&id=". $_GET['id']);
     $response = array(
         "status" => "success",
-        "message" => "La modification à été prise en compte",
+        "message" => "La modification a été prise en compte",
         "projets" => $bool,
     );
     echo json_encode($response);

@@ -7,7 +7,7 @@ function deletePromotion()
 
     $response = array(
         "status" => "success",
-        "message" => "La promotion a bien été supprimé.",
+        "message" => "La promotion a bien été supprimée.",
     );
 
     echo json_encode($response);
@@ -21,14 +21,14 @@ function addPromotion()
 
         $response = array(
             "status" => "success",
-            "message" => "La promotion a bien été ajouté.",
+            "message" => "La promotion a bien été ajoutée.",
         );
 
         echo json_encode($response);
     } else {
         $response = array(
             "status" => "failure",
-            "message" => "La promotion n'a pas été ajouté.",
+            "message" => "La promotion n'a pas été ajoutée.",
         );
 
         echo json_encode($response);
@@ -110,7 +110,7 @@ function promosFilter()
 
     $response = array(
         "status" => "success",
-        "message" => "La requête a été modifée comme tel",
+        "message" => "La requête a bien été modifiée",
         "projets" => $projectsHTML,
     );
     echo json_encode($response);
@@ -152,7 +152,6 @@ function promotionPagination()
             $promoFormatorsId[] = $formator->user_id;
         }
         $promoFormatorsString = join(",", $promoFormatorsId);
-        // var_dump($promoFormatorsId);
         include("view/admin/promo/modalFormateur.php");
         include("view/admin/modal/modalProjet.php");
         include("view/admin/modal/modalDelete.php");

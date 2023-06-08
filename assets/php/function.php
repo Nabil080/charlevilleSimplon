@@ -130,7 +130,7 @@ function securizePassword(string $password, string $confirm_password)
 
             $response = array(
                 "status" => "failure",
-                "message" => "Les mots de passes ne correspondent pas"
+                "message" => "Les mots de passe ne correspondent pas"
             );
             echo json_encode($response);
 
@@ -141,7 +141,7 @@ function securizePassword(string $password, string $confirm_password)
 
             $response = array(
                 "status" => "failure",
-                "message" => "Mot de passe invalide ! (Une majuscule, un chiffre et un charactère spécial minimum)"
+                "message" => "Mot de passe invalide ! Vous devez au minimum employer une majuscule, un chiffre et un caractère spécial."
             );
             echo json_encode($response);
 
@@ -263,14 +263,14 @@ function securizePdf(array $filesPdf, string $path)
                     if(move_uploaded_file($tmpFile, $path.$pdf = uniqid() . '.' . end($extension))) {
                         // $response = array(
                         //     "status" => "",
-                        //     "message" => "Le cahier des charges a bien été upload'"
+                        //     "message" => "Le cahier des charges a bien été envoyé'"
                         // );
                         // echo json_encode($response);
                         return $path.$pdf;
                     } else {
                         $response = array(
                             "status" => "failure",
-                            "message" => "Echec de l'upload du cahier des charges"
+                            "message" => "Echec de l'envoi du cahier des charges"
                         );
                         echo json_encode($response);
 
@@ -318,7 +318,7 @@ function securizePdf(array $filesPdf, string $path)
 function securizeText(string $text):bool
 {
     $array = ['<script', '<script>', '</script>', '<iframe', '<iframe>', '</iframe>', '<img', '<link', '<link>', 'href',
-     'src', 'SELECT', 'DELETE', 'DROP', 'INSERT INTO', '<a', '<a>'];
+    'src', 'SELECT', 'DELETE', 'DROP', 'INSERT INTO', '<a', '<a>'];
     $bools = [];
     foreach ($array as $key) {
         if (str_contains($text, $key)) {

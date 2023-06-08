@@ -16,15 +16,12 @@ function changeDateTab(y) {
         tabDateChange[y].classList.remove("animate-pulse");
 
     }
-    console.log(window.innerWidth);
 
     if (window.innerWidth < 640) { // Pour le mobile définit un translate
-        console.log(translate_x);
 
         if (typeof translate_x !== 'undefined') {
             translate.classList.remove(translate_x);
         }
-        console.log(translate_x);
 
         let number = y * 17; // Définit le translate en fonction du numéro de la tab
         translate_x = "-translate-x-[" + number +"%]"; // Ajoute la variable prédente pour définir le translate en pourcentage
@@ -37,15 +34,3 @@ function changeDateTab(y) {
 
     tabDateChange[y].classList.add("!bg-main-red");
 }
-
-// Open Side menu
-
-// document.addEventListener("dragend", openSide());
-
-// function openSide() { // onclick sur le déclencheur
-//     const list = document.getElementById("translateList"); // Récupere l'élément à ouvrir ou fermer
-
-//     list.classList.toggle("-translate-x-2/3"); // Toggle les classes pour obtenir l'effet de translate
-//     list.classList.toggle("opacity-40");
-//     list.classList.toggle("animate-pulse");
-// }

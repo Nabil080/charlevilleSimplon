@@ -43,9 +43,7 @@ class TagRepository extends ConnectBdd
         return $tags;
     }
 
-
     public function getUserTags($id):array
-
     {
         $tags = [];
         $req = $this->bdd->prepare("SELECT tag_id FROM user_tag WHERE user_id = ?");

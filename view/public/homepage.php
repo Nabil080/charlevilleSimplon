@@ -177,7 +177,7 @@ $title = "Toutes nos formations";
             </p>
             <i class="fa-solid fa-briefcase text-center w-full text-[32px] my-2 text-main-red lg:text-[55px]"></i>
             <p class="mx-7 py-5  font-main text-[16px] tracking-wide">Pour garantir une
-                <strong>insertion professionnelle réussie</strong>, l’apprenante est accompagnée par des formateurs
+                <strong>insertion professionnelle réussie</strong>, l’apprenant est accompagné par des formateurs
                 experts du métier visé et
                 des équipes en lien avec les entreprises du territoire. Il est immergé dans le monde de l’entreprise
                 tout au long de sa
@@ -302,7 +302,7 @@ $title = "Toutes nos formations";
                     salariés dont les métiers et les
                     compétences sont fortement impactées par la transformation numérique, déploie ses projets dans les
                     grands comptes. DigitESS nait à ce
-                    moment là pour accompagner la transition numérique des acteurs à impact positif.</p>
+                    moment-là pour accompagner la transition numérique des acteurs à impact positif.</p>
             </div>
             <div class="hidden sectionDateChange transition-all duration-[1.5s]">
                 <h3 class="text-[20px] md:text-[32px] font-bold font-title">2018 - 2019</h3>
@@ -331,11 +331,7 @@ $title = "Toutes nos formations";
                     formés dans le monde, et fête ses 7 ans et demi entouré de ses partenaires et amis en décembre. </p>
             </div>
         </div>
-
-
     </div>
-
-
 </div>
 
 <?php ob_start(); ?>

@@ -24,6 +24,3 @@ class RoleRepository extends ConnectBdd{
         return $Role;
     }
 }
-
-
-?>

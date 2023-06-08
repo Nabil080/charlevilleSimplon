@@ -59,6 +59,3 @@ class RequirementRepository extends ConnectBdd
         $stmt->closeCursor();
     }
 }
-
-
-?>

@@ -58,7 +58,7 @@ function loadProjects(projets,number){
             $bool = "false";
         }
         if ($bool == "false"){
-             actualPromotion.classList.add("bg-main-gray");
+            actualPromotion.classList.add("bg-main-gray");
         } else if ($bool == "true"){
             actualPromotion.classList.remove("bg-main-gray");
         }
@@ -67,7 +67,6 @@ function loadProjects(projets,number){
     if(yearFilters.length === 0){
         yearFilters.push('')
     }
-    // console.log(yearFilters)
 
     // ! CREATION DE L'ARRAY PROJETS FILTRES A PARTIR DE L'ARRAY TOUS LES PROJETS
         // * CREATION DU NOUVEL ARRAY VIA .MAP

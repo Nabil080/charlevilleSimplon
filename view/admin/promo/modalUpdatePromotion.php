@@ -19,9 +19,6 @@ $formations = $formationRepo->getAllFormations();
             <!-- Partie CONNEXION -->
             <div id="co" class="px-6 py-6 lg:px-8">
                 <h3 class="mb-4 text-xl uppercase w-fit mx-auto font-bold font-title text-main-red">Modif de promo</h3>
-                <?php
-                // var_dump($promo)
-                ?>
                 <form class="space-y-6" action="?action=updatePromotion" method="post" target="_blank">
                     <input id="promotion-input" type="hidden" value="" name="promo">
                     <div>
