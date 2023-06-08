@@ -55,7 +55,7 @@
     <span id="filter-reset" class="text-main-red text-xs py-0.5 cursor-pointer underline hover:text-red-700 2xl:mx-[10%]">Réinitialiser les filtres</span>
 
 
-    <section id="project-cards" class="mt-2 grid gap-6 xl:grid-cols-2 w-fit mx-auto">
+    <section id="project-cards" class="mt-2 grid min-h-[65vh] gap-6 xl:grid-cols-2 w-fit mx-auto">
                 <!-- INCLUDE DES CARDS DEPUIS LE JS -->
     </section>
 

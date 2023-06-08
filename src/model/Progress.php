@@ -32,8 +32,4 @@ class ProgressRepository extends ConnectBdd{
     
         return $allProgress;
     }
-
 }
-
-
-?>

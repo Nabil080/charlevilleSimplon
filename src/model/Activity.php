@@ -86,6 +86,3 @@ class ActivityRepository extends ConnectBdd
         return $activityTable;
     }
 }
-
-
-?>

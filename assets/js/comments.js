@@ -2,14 +2,14 @@
 const tableau = [
   {
     nom: "GAUDIN Florian",
-    description: "Allez à Simplon m'as permis d'apprendre à être un vrai développeur. J'ai appris l'HTML et le JS.",
+    description: "Aller à Simplon m'a permis d'apprendre à être un vrai développeur. J'ai appris l'HTML et le JS.",
     sourceImage: "assets/img/avatar/florian.jpg",
     promo_id: "1",
     promo: "Developpeur Web 2023"
   },
   {
     nom: "BELILA Nabil",
-    description: `Dans une école de développeur, j'ai plongé dans un océan de connaissances,
+    description: `Dans une école de développeur, j'ai plongé dans un océan de connaissances.
     Chaque jour, j'ai exploré de nouveaux horizons.`,
     sourceImage: "assets/img/avatar/nabil.jpg",
     promo_id: "1",
@@ -24,7 +24,7 @@ const tableau = [
   },
   {
       nom: "GUERET Louis",
-      description: "J'ai acquis tant de compétences qui m'ont permit de devenir un développeur confiant et polyvalent.",
+      description: "J'ai acquis tant de compétences qui m'ont permis de devenir un développeur confiant et polyvalent.",
       sourceImage: "assets/img/avatar/louis.jpg",
       promo_id: "1",
       promo: "Developpeur Web 2023"

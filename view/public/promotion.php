@@ -38,15 +38,15 @@
             <!-----Card Formateur------->
             <?php foreach ($formateurs as $formateur) { 
                 include('view/template/_formateur_card.php');
-             } ?>
+            } ?>
         </div>
 
         <div class="grid w-11/12 justify-center mx-auto xl:w-[100%] grid-cols-1 xl:grid-cols-2 gap-8 xl:gap-12"> <!------Apprenants------->
             <h3 class="text-center xl:col-start-1 xl:col-end-3 font-main-title text-[22px] font-bold mt-4">Apprenants</h3>
-             <!-----Cards Apprenants------->
+            <!-----Cards Apprenants------->
             <?php foreach ($apprenants as $apprenant) { 
             include('view/template/_apprenant_card.php');
-             }; ?>
+            }; ?>
             
         </div>
     </section>
@@ -57,7 +57,7 @@
         <?php 
         foreach($allProjects as $project) {
         include('view/template/_project_card.php');
-         } ?>
+        } ?>
 
     </section>
 </main>

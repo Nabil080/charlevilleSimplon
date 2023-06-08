@@ -33,6 +33,3 @@ class StatusRepository extends ConnectBdd{
         return $allStatus;
     }
 }
-
-
-?>

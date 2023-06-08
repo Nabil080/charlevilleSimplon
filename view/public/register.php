@@ -26,14 +26,14 @@ $title = "Inscription";
 
 </div>
 <div class="w-full md:w-2/3 mb-6 md:mb-3">
-    <label for="id_poleEmploi" class="block mb-2 text-[14px] font-medium">Identifiant Pole Emploi</label>
+    <label for="id_poleEmploi" class="block mb-2 text-[14px] font-medium">Identifiant Pôle Emploi</label>
     <input type="text" id="id_poleEmploi" name="id_poleEmploi" placeholder="ID pole emploi"
         class="bg-main-white border border-main-red text-[18px] rounded-[5px] block w-full p-2.5">
     <div class="flex items-center mt-2">
         <input id="default-checkbox" type="checkbox" name="id_poleEmploi_checkbox"
             class="w-4 h-4 text-main-red bg-main-white border-main-border rounded focus:ring-0">
-        <label for="default-checkbox" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">J'ai pas encore
-            le numéro Pôle Emploi</label>
+        <label for="default-checkbox" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Je n'ai pas encore
+            de numéro Pôle Emploi</label>
     </div>
     <p id="id_poleEmploi_error" class="errorAlert mt-2 text-sm text-red-600 dark:text-red-500"></p>
 </div>
@@ -69,7 +69,7 @@ $title = "Inscription";
     <form id="register-form" class="space-y-6 bg-main-lightgray p-5 border border-main-red rounded-[5px]">
         <?php if (!$boolCompany) { ?>
         <p class="pb-10 text-[14px] md:text-[20px] font-medium text-center">
-            Pour postuler à la formation $nom_de_la_promo qui commence le $date_de_la_promo, veuillez remplir le
+            Pour postuler à la formation <?= $promo->name ?> qui commence le <?= $promo->start ?>, veuillez remplir le
             formulaire ci-dessous :
         </p>
         <?php } ?>
@@ -135,7 +135,7 @@ $title = "Inscription";
                 <p id="password_error" class="errorAlert mt-2 text-sm text-red-600 dark:text-red-500"></p>
             </div>
             <div class="w-full md:w-2/3">
-                <label for="confirm_password" class="block mb-2 text-[14px] font-medium">Confirmez mot de
+                <label for="confirm_password" class="block mb-2 text-[14px] font-medium">Confirmez votre mot de
                     passe</label>
                 <input type="password" id="confirm_password" name="confirm_password"
                     placeholder="Confirmer votre mot de passe"

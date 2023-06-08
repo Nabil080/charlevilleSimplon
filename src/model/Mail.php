@@ -108,12 +108,11 @@ class MailRepository extends ConnectBdd
 
             Pour changer votre mot de passe, veuillez cliquer sur le lien ci-dessous : \r\n\r\n
             http://localhost/projet_dev_v2/index.php?action=resetPasswordForm&token=$this->token\r\n\r\n
-            Si vous n'avez pas fait de demande, il suffit d'ignorer se message. \r\n\r\n
+            Si vous n'êtes pas à l'origine de cette demande, il vous suffit d'ignorer ce message. \r\n\r\n
             " . $signature;
         $headers = "From: $sender\r\n";
         $headers .= "Reply-To: $sender\r\n";
         $headers .= "Content-Type: text/plain; charset=utf-8\r\n";
         mail($to, $subject, $message, $headers);
     }
-
 }

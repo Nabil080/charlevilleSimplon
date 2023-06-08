@@ -44,4 +44,3 @@ class SkillRepository extends ConnectBdd
         return $skillTable;
     }
 }
-?>

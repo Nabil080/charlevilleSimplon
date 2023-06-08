@@ -19,18 +19,11 @@ class Project
     public $formator;
     public $status;
     public $promo;
-    // public $formation;
     public $type;
     public $tags;
     public $start;
     public $end;
     public $team;
-
-    // public function createToInsert(array $projectForm):bool{
-
-
-    //     return true
-    // }
 
     public function getProjectLevel()
     {
@@ -138,8 +131,6 @@ class ProjectRepository extends ConnectBdd
 
         $query =
         "SELECT project.project_id FROM project $filters $order $limit";
-        // var_dump($query);
-        // var_dump($execute);
         $req = $this->bdd->prepare($query);
         $req->execute($execute);
         $data = $req->fetchAll(PDO::FETCH_ASSOC);
@@ -163,8 +154,6 @@ class ProjectRepository extends ConnectBdd
         $execute = $execute === null ? [] : explode(",",$execute);
         $query =
         "SELECT COUNT(*) FROM project $filters";
-        // var_dump($query);
-        // var_dump($execute);
         $req = $this->bdd->prepare($query);
         $req->execute($execute);
         $data = $req->fetch(PDO::FETCH_COLUMN);
@@ -186,8 +175,6 @@ class ProjectRepository extends ConnectBdd
         JOIN promo ON promo.promo_id = project.promo_id
         JOIN formation ON promo.formation_id = formation.formation_id
         WHERE type_id != 2 $filters $order $limit";
-        // var_dump($query);
-        // var_dump($execute);
         $req = $this->bdd->prepare($query);
         $req->execute($execute);
         $data = $req->fetchAll(PDO::FETCH_ASSOC);
@@ -222,8 +209,6 @@ class ProjectRepository extends ConnectBdd
         JOIN promo ON promo.promo_id = project.promo_id
         JOIN formation ON promo.formation_id = formation.formation_id
         WHERE type_id != 2 $filters";
-        // var_dump($query);
-        // var_dump($execute);
         $req = $this->bdd->prepare($query);
         $req->execute($execute);
         $data = $req->fetch(PDO::FETCH_COLUMN);
@@ -478,7 +463,7 @@ class ProjectRepository extends ConnectBdd
         $error = false;
         // traitement company name
         $company = isset($post['company']) ? $post['company'] : 'Simplon';
-        $adress = isset($post['adress']) ? $post['adress'] : '17 rue de la grande mare lool';
+        $adress = isset($post['adress']) ? $post['adress'] : 'Pôle Formation UIMM 8 rue Claude Chrétien 08000 Charleville-Mézières';
 
         // traitment fichier pdf
         $path = "assets/upload/project/";
@@ -616,6 +601,28 @@ class ProjectRepository extends ConnectBdd
         return $number;
     }
 
+    public function updateProjectTags (int $id, array $post)
+    {
+        $skills = $post['skills'];
+        $bools = [];
+
+        $req = $this->bdd->prepare('DELETE FROM project_tag WHERE project_id = ?');
+        $bool = $req->execute([$id]);
+        $bools[] = $bool;
+        foreach ($skills as $skill) {
+
+            $req = $this->bdd->prepare('INSERT INTO project_tag (project_id, tag_id) VALUES (?,?)');
+            $bool = $req->execute([$id, (int)$skill]);
+            $bools[] = $bool;
+        }
+        if (in_array(false, $bools)) {
+            return false;
+        } else {
+            return true;
+        }
+
+    }
+
     public function updateProjectImage(int $id, array $files, array $post): bool
     {
         $path = 'assets/upload/project/maquette/';
@@ -686,7 +693,6 @@ class ProjectRepository extends ConnectBdd
         if ($isSafe == true) {
             $req = $this->bdd->prepare('UPDATE project SET project_notes = ? WHERE project_id = ?');
             $bool = $req->execute([$post['studentsNote'], $id]);
-            var_dump($bool);
             return $bool;
         } else {
 
@@ -694,5 +700,3 @@ class ProjectRepository extends ConnectBdd
         }
     }
 }
-
-?>

@@ -12,7 +12,6 @@ function registerTreatment()
         $id_poleEmploi = '';
         $boolCompany = $_POST['boolCompany'];
         $formation_id = $_POST['formation_id'];
-        //var_dump($_POST);
 
         foreach ($_POST as $name => $value) {
             if (!empty($value) || $value != '') {
@@ -47,7 +46,6 @@ function registerTreatment()
                 $errorTable[] = $AlertMessage->getError('passwordNotSafe', false, 'password');
             }
         }
-
 
         if (empty($errorTable)) {
             $role_id = ($boolCompany) ? 3 : 5;
@@ -234,7 +232,6 @@ function resetPasswordTreatment()
 {
     $AlertMessage = new AlertMessage;
     $errorTable = array();
-    //var_dump($_POST);
 
     if (isset($_POST)) {
         $pass = htmlspecialchars(strip_tags($_POST['password']));
@@ -270,8 +267,6 @@ function resetPasswordTreatment()
 
 function contactUsers()
 {
-    // var_dump($_POST);
-
     if (isset($_POST['message'])) {
         $send = trim(htmlspecialchars(strip_tags($_POST['send']), ENT_QUOTES));
         $objet = trim(htmlspecialchars(strip_tags($_POST['object']), ENT_QUOTES));
@@ -279,7 +274,6 @@ function contactUsers()
 
         $name = "Simplon Charleville";
         $email = "simplon.charleville@gmail.com";
-
 
         if (!empty($name) && !empty($email) && !empty($objet) && !empty($message)) {
             $to = $send;
@@ -295,14 +289,12 @@ function contactUsers()
         } else {
             echo 'éléments manquants';
         }
-
     }
 }
 
 function deleteCandidate()
 {
     // Check si admin
-    var_dump($_POST);
     $userRepo = new UserRepository;
     $req = $userRepo->bdd->prepare("DELETE FROM `promo_candidate` WHERE `user_id` = ? AND `promo_id` = ?");
     $req->execute([$_POST['user_id'], $_POST['promo_id']]);
@@ -311,7 +303,6 @@ function deleteCandidate()
 function deleteLearner()
 {
     // Check si admin
-    var_dump($_POST);
     $userRepo = new UserRepository;
     $req = $userRepo->bdd->prepare("DELETE FROM `promo_user` WHERE `user_id` = ? AND `promo_id` = ?");
     $req->execute([$_POST['user_id'], $_POST['promo_id']]);
@@ -321,7 +312,6 @@ function deleteLearner()
 function deleteUser()
 {
     // Check si admin
-    var_dump($_POST);
     $userRepo = new UserRepository;
     $userRepo->deleteUser($_POST['user_id']);
 }
@@ -329,7 +319,6 @@ function deleteUser()
 function assignFormator()
 {
     // Check si admin
-    var_dump($_POST);
     $userRepo = new UserRepository;
     $req = $userRepo->bdd->prepare("UPDATE user SET `role_id` = ? WHERE `user_id` = ?");
     $req->execute([2, $_POST['user_id']]);
@@ -338,7 +327,6 @@ function assignFormator()
 function updateUserPersonnalInfos()
 {
     // Check si admin
-    // var_dump($_POST);
     $userRepo = new UserRepository;
     $userRepo->updateUserPersonnalInfos($_POST);
 }
@@ -392,7 +380,6 @@ function candidatePagination()
         "candidates" => $usersHTML,
         "modals" => $modalsHTML,
     );
-
     echo json_encode($response);
 
 }
@@ -403,7 +390,6 @@ function learnerPagination()
 
     $UserRepo = new UserRepository;
     $PromoRepo = new PromoRepository;
-
 
     $limitStart = $data->limitStart;
     $limitEnd = $data->limitEnd;
@@ -441,7 +427,6 @@ function learnerPagination()
         "candidates" => $usersHTML,
         "modals" => $modalsHTML,
     );
-
     echo json_encode($response);
 
 }
@@ -452,8 +437,6 @@ function companyPagination()
 
     $UserRepo = new UserRepository;
     $PromoRepo = new PromoRepository;
-
-    // var_dump($data);
 
     $limitStart = $data->limitStart;
     $limitEnd = $data->limitEnd;
@@ -492,15 +475,12 @@ function companyPagination()
         "candidates" => $usersHTML,
         "modals" => $modalsHTML,
     );
-
     echo json_encode($response);
 
 }
 
 function updateUserElements()
 {
-    // var_dump($_POST);
-    // var_dump($_FILES);
     if ((!isset($_GET['id']) || $_GET['id'] == null) && (!isset($_GET['type']) || $_GET['type'] == null)) {
         // erreur 404 page not found : Vous devez renseigner un id utilisateur et un type de modification
     } elseif ((isset($_GET['id']) && $_GET['id'] == $_SESSION['user']->user_id) && (isset($_GET['type']) && $_GET['type'] !== null) || $_SESSION['user']->role_id == 1) {
@@ -509,7 +489,6 @@ function updateUserElements()
         $userRepository = new UserRepository();
         if (isset($_POST) && empty($_FILES)) {
             $array = $_POST;
-            // var_dump($array);
 
             if (!empty($array)) {
                 if ($type == 'status') {

@@ -77,7 +77,6 @@ class User
         $this->user_status_date = $account['user_status_date'];
         $this->role_id = $account['role_id'];
     }
-
 }
 
 class UserRepository extends ConnectBdd
@@ -108,7 +107,6 @@ class UserRepository extends ConnectBdd
     }
 
     /* Set */
-
     public function setPassword($email, $password): void
     {
         $pass = password_hash($password, PASSWORD_BCRYPT);
@@ -190,7 +188,6 @@ class UserRepository extends ConnectBdd
         $mdpuser = $stmt->fetch(PDO::FETCH_OBJ);
         $stmt->closeCursor();
         $mdpuser = $mdpuser->user_password;
-
 
         $bool = (password_verify($mdp, $mdpuser) || $mdp === $mdpuser) ? true : false;
         return $bool;
@@ -363,7 +360,6 @@ class UserRepository extends ConnectBdd
     {
 
         $request = "UPDATE user SET user_highlight = ? WHERE user_id = ?";
-        // var_dump($array);
         $bools = [];
         // Envoi d'un projet phare URL
         if ($array['text'] == 'website') {
@@ -421,7 +417,6 @@ class UserRepository extends ConnectBdd
             $bool = $req->execute([$title, $description, $checkImage, $url, $id]);
             array_push($bools, $bool);
             $lastID = $this->bdd->lastInsertID();
-            var_dump($lastID);
             $request = $this->bdd->prepare("INSERT INTO project_team (project_id, user_id) VALUES (?, ?)");
             $bool2 = $request->execute([(int) $lastID, $id]);
             array_push($bools, $bool2);
@@ -484,8 +479,6 @@ class UserRepository extends ConnectBdd
 
         $query = "SELECT `user_id` FROM `user` WHERE (`role_id` = 4 OR `role_id` = 2) $filters $order $limit";
         $req = $this->bdd->prepare($query);
-        // var_dump($query);
-        // var_dump($execute);
         $req->execute($execute);
         $data = $req->fetchAll(PDO::FETCH_ASSOC);
 
@@ -502,8 +495,6 @@ class UserRepository extends ConnectBdd
         $filters = $filters === null ? "" : "AND $filters";
         $execute = $execute === null ? [] : explode(",", $execute);
         $query = "SELECT COUNT(*) FROM `user` WHERE (`role_id` = 4 OR `role_id` = 2) $filters";
-        // var_dump($query);
-        // var_dump($execute);
         $req = $this->bdd->prepare($query);
         $req->execute($execute);
         $data = $req->fetch(PDO::FETCH_COLUMN);
@@ -527,7 +518,6 @@ class UserRepository extends ConnectBdd
         $order = $order === null ? "ORDER BY user.role_id ASC" : "ORDER BY $order";
         $limit = $limitRequest === null ? "" : "LIMIT $limitRequest";
 
-
         $candidates = [];
         $query = "SELECT `user_id` FROM `user` WHERE `role_id` = 5 $filters $order $limit";
         $req = $this->bdd->prepare($query);
@@ -546,8 +536,6 @@ class UserRepository extends ConnectBdd
         $filters = $filters === null ? "" : "AND $filters";
         $execute = $execute === null ? [] : explode(",", $execute);
         $query = "SELECT COUNT(*) FROM `user` WHERE `role_id` = 5 $filters";
-        // var_dump($query);
-        // var_dump($execute);
         $req = $this->bdd->prepare($query);
         $req->execute($execute);
         $data = $req->fetch(PDO::FETCH_COLUMN);
@@ -587,7 +575,6 @@ class UserRepository extends ConnectBdd
         $order = $order === null ? "ORDER BY user.role_id ASC" : "ORDER BY $order";
         $limit = $limitRequest === null ? "" : "LIMIT $limitRequest";
 
-
         $companies = [];
         $query = "SELECT `user_id` FROM `user` WHERE `role_id` = 3 $filters $order $limit";
         $req = $this->bdd->prepare($query);
@@ -606,8 +593,6 @@ class UserRepository extends ConnectBdd
         $filters = $filters === null ? "" : "AND $filters";
         $execute = $execute === null ? [] : explode(",", $execute);
         $query = "SELECT COUNT(*) FROM `user` WHERE `role_id` = 3 $filters";
-        // var_dump($query);
-        // var_dump($execute);
         $req = $this->bdd->prepare($query);
         $req->execute($execute);
         $data = $req->fetch(PDO::FETCH_COLUMN);
@@ -638,7 +623,6 @@ class UserRepository extends ConnectBdd
 
         return $formators;
     }
-
 
     public function getUserPromo($option, $userId): array
     {
@@ -694,7 +678,6 @@ class UserRepository extends ConnectBdd
             }
         }
 
-
         return $projects;
     }
 
@@ -713,7 +696,6 @@ class UserRepository extends ConnectBdd
                 $projects[] = $Project;
             }
         }
-
 
         return $projects;
     }
@@ -769,12 +751,9 @@ class UserRepository extends ConnectBdd
 
     public function updateUserPersonnalInfos(array $post): void
     {
-        var_dump($post);
         $query = "";
         $execute = [];
         $error = false;
-
-
 
         // Sécurisation variables générales
         $surname = securizeString($post['surname']);
@@ -793,7 +772,6 @@ class UserRepository extends ConnectBdd
             $error = true;
         }
 
-
         // UPDATE GENERALE
         if ($surname === false || $name === false || $adress === false || $email === false || $phone === false) {
             $error = true;
@@ -801,8 +779,6 @@ class UserRepository extends ConnectBdd
             $query = "UPDATE `user` SET `user_surname` = ?, `user_name` = ?, `user_place` = ?, `user_email` = ?, `user_phone` = ?";
             $execute = [$surname, $name, $adress, $email, $phone];
         }
-
-
 
         // UPDATE PAS ENTREPRISE
         if ($post['role'] != 3) {
@@ -820,8 +796,6 @@ class UserRepository extends ConnectBdd
             }
         } else {
 
-
-
             // UPDATE ENTREPRISE
             // Sécurisation variables entreprise
             $company = securizeString($post['company']);
@@ -834,8 +808,6 @@ class UserRepository extends ConnectBdd
                 $execute = array_merge($execute, $push);
             }
         }
-
-
 
         // UPDATE CANDIDAT/APPRENANT
         if ($post['role'] == 5 || $post['role'] == 4) {
@@ -850,16 +822,12 @@ class UserRepository extends ConnectBdd
             }
         }
 
-
-
         // FAIT LA REQUETE SI 0 ERREURS
         if ($error === false) {
             $query .= " WHERE `user_id` = ?";
             $push = [$user];
             $execute = array_merge($execute, $push);
 
-            // var_dump($query);
-            // var_dump($execute);
             $req = $this->bdd->prepare($query);
             $req->execute($execute);
         }

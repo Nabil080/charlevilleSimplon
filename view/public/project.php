@@ -93,7 +93,7 @@
                 class="fa-solid fa-pen text-main-red cursor-pointer h-fit my-auto"></i>
             <?php } ?>
             <?php } else if (!isset($team)) {?>
-            <p class="text-red-500 text-xl"> Pas de formateurs assignés pour le moment</p>
+            <p class="text-red-500 text-xl"> Pas de formateur assigné pour le moment</p>
             <?php } ?>
         </div>
         <?php if ($isMyProject == true) { ?>
@@ -145,7 +145,7 @@
         </div>
         <?php } ?>
 
-        <div class="w-full max-h-[200px] sm:max-h-[250px] overflow-scroll">
+        <div class="w-full max-h-[300px] sm:max-h-[350px] overflow-scroll">
             <img id="maquette" class="w-full" src="<?= $project->model_image ?>" alt="maquette du projet">
             <?php if ($isMyProject == true) { ?>
             <form id="maquette-update" enctype="multipart/form-data"
@@ -184,11 +184,11 @@
                     " class="fa-solid fa-pen text-main-red cursor-pointer h-fit my-auto"></i></div>
             <?php } ?>
 
-        <div class="grow flex  mt-4 gap-2 flex-col justify-center">
+        <div class="grow flex !content-start h-fit flex-wrap mt-2  flex-col justify-center" style="justify-content: start;">
             <?php $i = 0;
             foreach ($allProgress as $progress) { ?>
                 <!-- avancement 1 -->
-                <div id="progress<?= $progress->id ?>" class="mb-1 text-md sm:text-xl xl:text-2xl  text-start italic"><?= $progress->name ?></div>
+            <div id="progress<?= $progress->id ?>" class="mb-1  text-md sm:text-xl xl:text-2xl  text-start italic"><?= $progress->name ?></div>
                 <!-- formulaire d'edit 1 -->
                 
                 <div class="w-full bg-gray-200 rounded-full h-2.5 mb-4">
@@ -211,18 +211,54 @@
             <?php } ?>
 
             <?php $i++; } ?>
+            <?php } else if (!isset($project->github)) {?>
+                <p class="text-red-500 text-xl"> Pas de barre de progression pour le moment</p>
+            <?php } ?>
+            <div class="modify-skills flex items-center pt-2  lg:mt-5">
+                <h3 class="font-title text-[24px] font-bold uppercase lg:mb-3">Compétences
+                <i onclick="swapDivsById('skills','skills-update')" class="fa-solid fa-pen cursor-pointer text-main-red w-[20px] pl-3"></i></h3>
+            </div>
+            <div id="skills" class="flex gap-4 justify-center sm:justify-normal mx-auto sm:px-4 mt-2 lg:mt-7 mb-4 flex-wrap">
+                <?php if(empty($project->tags)){ ?>
+                    <p>Pas de compétences renseignées</p>
+                    <?php } ?>
 
-        </div>
-        <?php } else if (!isset($project->github)) {?>
-        <p class="text-red-500 text-xl"> Pas de barre de progression pour le moment</p>
-        <?php } ?>
-        <div class="uppercase space-x-4 my-4 [&>tag]:bg-main-gray [&>tag]:bg-opacity-10 [&>tag]:py-2 [&>tag]:px-4 [&>tag]:rounded-full">
-            <p>Tags du projet :</p>
+
+                <?php $tagsId = [];
+                foreach ($project->tags as $tag) { ?>
+                        <p class="bg-[#F2F2F3] px-4 py-1 border-main-gray border-2 text-[14px] lg:text-[16px] rounded-[50px] mb-2"><?= $tag->name ?></p>
+                <?php 
+                $tagsId[] = $tag->id;
+                } ?>
+            </div>
+
+            <form id="skills-update" method="POST" action="?action=updateUserElements&type=skills&id=" class="hidden flex flex-col">
+                <select multiple name="skills[]">
+                    <option selected disabled>Sélectionner des compétences</option>
+                    <?php 
+                    foreach ($allTags as $eachTag){ ?>
+                        <option value="<?= $eachTag['tag_id']?>" 
+                        <?php if(in_array($eachTag['tag_id'],$tagsId)){echo "selected";}?>   >
+                        <?= $eachTag['tag_name'] ?></option>
+                    <?php } ?>
+                </select>
+                <input type="hidden" name="id" value="<?= $project->id; ?>">
+                <input type="hidden" value="tags" name="type"/>
+                <div class="flex justify-center">
+                    <button type="submit" class="py-2 px-4 bg-main-red border-main-white border text-main-white my-4 mr-4">Modifier <i class="fa-solid fa-check"></i></button>
+                    <span onclick="swapDivsById('skills','skills-update')" class="cursor-pointer border my-4 mr-4 py-2 px-4">Annuler <i class="fa-solid fa-xmark"></i></span>
+                </div>
+            </form>
+                        
+            <div class="uppercase space-x-4 mt-4 [&>tag]:bg-main-gray [&>tag]:bg-opacity-10 [&>tag]:py-2 [&>tag]:px-4 [&>tag]:rounded-full">
+            <!-- <h4 class="text-xl italic mb-4">Compétences du projet :</h4>
             <?php foreach($project->tags as $tag){ ?>
                 <tag><?=$tag->name?></tag>
-            <?php } ?>
-            <tag>React</tag>
+            <?php } ?> -->
         </div>
+        </div>
+        
+
     </article>
 </section>
 
@@ -413,11 +449,6 @@
         </div>
     </div>
 </section>
-
-<?php
-//var_dump($_POST)
-//echo $_POST['company-notes'];
-?>
 
 <?php $content = ob_get_clean(); ?>
 <?php ob_start(); ?>

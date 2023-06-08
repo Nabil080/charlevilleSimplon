@@ -64,8 +64,6 @@ const getProjets = (limitStart = 0,limitEnd = 6) => {
     let formationString = formationFilters.map(id => `promo.formation_id = ?`).join(' OR ') ;
     if(formationString != ""){formationString = `(${formationString})`}
     let formationExecute = formationFilters.map(id => `${id}`)
-    console.log(`Filtre de formations : ${formationString}`)
-    console.log(`Execute de formations : ${formationExecute}`)
 
     // * DEFINIT LES FILTRES ANNÉES
     const yearFilters = []
@@ -78,8 +76,6 @@ const getProjets = (limitStart = 0,limitEnd = 6) => {
     let yearString = yearFilters.map(year => `YEAR(project. project_start) = ?`).join(' OR ') ;
     if(yearString != ""){yearString = `(${yearString})`}
     let yearExecute = yearFilters.map(year => `${year}`)
-    console.log(`Filtre d'années : ${yearString}`)
-    console.log(`Execute d'années : ${yearExecute}`)
 
     // * DEFINIT LES FILTRES NIVEAUX
     const levelFilters = []
@@ -92,8 +88,6 @@ const getProjets = (limitStart = 0,limitEnd = 6) => {
     let levelString = levelFilters.map(level => `formation.formation_level = ?`).join(' OR ') ;
     if(levelString != ""){levelString = `(${levelString})`}
     let levelExecute = levelFilters.map(level => `${level}`)
-    console.log(`Filtre de niveau : ${levelString}`)
-    console.log(`Execute de niveau : ${levelExecute}`)
 
     // * DEFINIT LES FILTRES RECHERCHE
     let searchString = searchInput.value ? `(project.project_name LIKE ?
@@ -109,8 +103,6 @@ const getProjets = (limitStart = 0,limitEnd = 6) => {
     // les transformes en string pour la requete
     const filterString = filtersArray.join(" AND ");
     const filterExecute = ExecuteArray.join(",");
-    console.log(`requête envoyée :  WHERE ${filterString}`)
-    console.log(`execute envoyée : [${filterExecute}]`)
     return fetch('?action=allProjectsPagination',{
         method: 'POST',
         headers: {
@@ -128,21 +120,16 @@ const getProjets = (limitStart = 0,limitEnd = 6) => {
 
 async function updateData(currentPage = 1){
         showLoading()
-    // console.log(currentPage);
     let limitStart = (currentPage - 1) * projectsPerPage
     let limitEnd = projectsPerPage
-    // console.log(limitStart,limitEnd)
 
     data = await getProjets(limitStart,limitEnd)
         stopLoading()
-        console.log(data);
 
         // TODO: CREATION DE LA PAGINATION
 
         let prevRange = ( currentPage - 1 ) * projectsPerPage
         let nextRange = (currentPage * projectsPerPage )
-        // console.log(prevRange,nextRange)
-        // console.log(currentPage)
         const allProjectsCount = data.total
         let projectsCount = data.filtered
         let pageCount = Math.ceil(projectsCount / projectsPerPage);

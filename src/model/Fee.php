@@ -46,6 +46,3 @@ class FeeRepository extends ConnectBdd
         $stmt->closeCursor();
     }
 }
-
-
-?>

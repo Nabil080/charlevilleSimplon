@@ -96,5 +96,3 @@ class CertificationRepository extends ConnectBdd
         $stmt->closeCursor();
     }
 }
-
-?>
