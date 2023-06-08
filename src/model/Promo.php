@@ -108,7 +108,8 @@ class PromoRepository extends ConnectBdd
         foreach ($datas as $data)
         {
             // Update automatiquement le statut de la promo aux dates requises
-            // $promoRepository->updatePromoStatus($data['promo_start'], $data['promo_end'], $data['promo_id']);
+            $promoRepository->updatePromoStatus($data['promo_start'], $data['promo_end'], $data['promo_id']);
+            // $promoRepository->updatePromoStatus("2023-07-02", "2024-02-02", 5);
 
             $Promo = new Promo(
                 $data['promo_id'],
@@ -512,17 +513,27 @@ class PromoRepository extends ConnectBdd
         $interval_end = $end->diff($origin);
         // var_dump($starting_date, $ending_date, $today);
         // var_dump($interval_start, $interval_end);
-        die;
+        // die;
+
+        // $interval_end->invert == 1 lorsque la promo n'est pas encore terminée
+        // $interval_end->invert == 0 correspond à une date dépassée
+        // => "promo terminée"
         if ($interval_end->invert == 0 && $interval_end->days > 1)
         {
             $req = $this->bdd->prepare("UPDATE promo SET status_id =? WHERE promo_id=?");
             $req->execute([13, $promo_id]);
-        } elseif($interval_start->invert == 0 && $interval_start->days > 90)
+        }
+        // $interval_end->invert == 1 la promo n'est pas terminée
+        // mais elle n'est pas commencée $interval_start->invert == 0
+        //  && elle commence dans moins de 90 jours
+        // => "promo débute le"
+        elseif($interval_end->invert == 1 && $interval_start->invert == 0 && $interval_start->days <= 90)
         {
             $req = $this->bdd->prepare("UPDATE promo SET status_id =? WHERE promo_id= ?");
             $req->execute([14, $promo_id]);
         }
-        elseif ($interval_start->invert == 1)
+        // $interval_end->invert == 1 la promo n'est pas terminée mais elle est commencée $interval_start->invert == 1 => "promo en cours"
+        elseif ($interval_end->invert == 1 && $interval_start->invert == 1)
         {
             $req = $this->bdd->prepare("UPDATE promo SET status_id =? WHERE promo_id= ?");
             $req->execute([12, $promo_id]);

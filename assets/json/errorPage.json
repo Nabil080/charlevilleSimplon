@@ -2,5 +2,13 @@
   "exception": {
     "name": "error_404",
     "message": ""
+  },
+  "ID or Type is missing":{
+    "name": "error_404",
+    "message": "ID or Type is missing : Vous devez renseigner un id utilisateur et un type de modification."
+  },
+  "Access Denied": {
+    "name": "error_404",
+    "message": "Access Denied : Vous n'êtes pas autorisé à modifier les données de cet utilisateur"
   }
 }

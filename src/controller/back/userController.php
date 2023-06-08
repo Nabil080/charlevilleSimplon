@@ -485,17 +485,18 @@ function companyPagination()
 
     function updateUserElements()
     {
-        // var_dump($_POST);
-        // var_dump($_FILES);
+        $alertMessage = new AlertMessage();
+        $errorTable = [];
+
         if ((!isset($_GET['id']) || $_GET['id'] == null) && (!isset($_GET['type']) || $_GET['type'] == null)) {
             // erreur 404 page not found : Vous devez renseigner un id utilisateur et un type de modification
+            throw new Exception("ID or Type is missing");
         } elseif ((isset($_GET['id']) && $_GET['id'] == $_SESSION['user']->user_id) && (isset($_GET['type']) && $_GET['type'] !== null) || $_SESSION['user']->role_id == 1) {
             $type = $_GET['type'];
             $id = $_GET['id'];
             $userRepository = new UserRepository();
             if (isset($_POST) && empty($_FILES)) {
                 $array = $_POST;
-                // var_dump($array);
 
                 if(!empty($array)){
                     if ($type == 'status') {
@@ -516,10 +517,10 @@ function companyPagination()
                                     $bools = $userRepository->updateUserDatas($id, $array);
                                     header('Location:?action=profilePage&id='.$_GET['id']);
                                 } else {
-                                    // erreur : Votre mot de passe est incorrect
+                                    $errorTable[] = $alertMessage->getError("passwordIncorrect", false, 'password');
                                 }
                             } else {
-                                // erreur : Vous devez entrer votre mot de passe pour valider les modifications
+                                $errorTable[] = $alertMessage->getError("passwordEmpty", false, 'password');
                             }
                     }elseif ($type == 'description') {
                         $bools = $userRepository->updateUserDescription($id, $array);
@@ -567,9 +568,13 @@ function companyPagination()
                     header('Location:?action=profilePage&id='.$_GET['id']);
                 }
             } else {
-                // erreur : vous n'êtes pas autorisé à modifier les données de cet utilisateur
+
             }
+        } else {
+            // erreur : vous n'êtes pas autorisé à modifier les données de cet utilisateur
+            throw new Exception("Access Denied");
         }
+
     }
 
     function deleteMyProject() {

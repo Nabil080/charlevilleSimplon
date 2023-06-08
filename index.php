@@ -84,7 +84,3 @@ try {
     // throw new Exception();
 
 }
-
-// $Repo = new FormationRepository;
-// $data = $Repo->getAllFormations();
-// var_dump($data);

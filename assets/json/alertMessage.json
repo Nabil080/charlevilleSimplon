@@ -29,6 +29,10 @@
       "message": "Le mot de passe est trop faible."
     },
     {
+      "name": "passwordIncorrect",
+      "message": "Le mot de passe est incorrect."
+    },
+    {
       "name": "existingEmail",
       "message": "L'email a déjà été utilisé."
     },
