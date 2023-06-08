@@ -216,6 +216,13 @@
         <?php } else if (!isset($project->github)) {?>
         <p class="text-red-500 text-xl"> Pas de barre de progression pour le moment</p>
         <?php } ?>
+        <div class="uppercase space-x-4 my-4 [&>tag]:bg-main-gray [&>tag]:bg-opacity-10 [&>tag]:py-2 [&>tag]:px-4 [&>tag]:rounded-full">
+            <p>Tags du projet :</p>
+            <?php foreach($project->tags as $tag){ ?>
+                <tag><?=$tag->name?></tag>
+            <?php } ?>
+            <tag>React</tag>
+        </div>
     </article>
 </section>
 
@@ -332,7 +339,7 @@
             <?php } ?>
         </h2>
         <div class="mx-4 h-1 bg-main-red"></div>
-        <div class="flex w-full mx-auto">
+        <div class="flex w-[98vw] max-w-[1200px] mx-auto">
             <div id="company-notes" class="m-4 lg:w-4/5">
                 <?= $project->description ?>
             </div>
@@ -343,7 +350,7 @@
             <!-- formulaire d'edit -->
             <form id="company-notes-update"
                 action="?action=updateProjectElement&id=<?= $project->id ?>&type=companyNote" method="POST"
-                class="hidden w-full m-4" method="post">
+                class="hidden w-4/5 m-4" method="post">
                 <textarea name="companyNotes" id="editor" class="w-full" rows="10">
                         <?= $project->description ?>
                         <br>

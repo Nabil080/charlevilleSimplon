@@ -37,9 +37,8 @@
         </div>
 
         <aside class="md:w-4/5 lg:w-1/2 pb-5 border-2 border-main-gray rounded-lg ">
-            <div class="lg:h-[180px]">
-                <img class="w-full h-auto rounded-t-lg lg:h-full bg-cover" src="assets/img/formations/devweb"
-                    alt="Formation">
+            <div class="lg:h-[180px] bg-center bg-cover" style= "background-image: url(<?= $formation_main->image ?>)">
+
             </div>
 
             <div class="mx-5 py-5 flex flex-col items-center gap-5">
@@ -146,11 +145,26 @@
 
         </aside>
     </div>
+    <?php
+    if ($formation_main->status->id == 13) { ?>
+        <div class="mt-20 pb-10 hidden md:block text-center">
+            <a href="#"
+                class="px-10 py-3 border-2  text-main-white font-bold cursor-default text-lg uppercase bg-green-700 rounded-lg">
+                Prochaine session bientot</a>
+        </div>
+    <?php } else if ($formation_main->status->id == 12) { ?>
+        <div class="mt-20 pb-10 hidden md:block text-center">
+            <a href="#"
+                class="px-10 py-3 border-2  text-main-white font-bold cursor-default text-lg uppercase bg-gray-700 rounded-lg">
+                Session en cours</a>
+        </div>
+    <?php } else if ($formation_main->status->id == 14) { ?>
     <div class="mt-20 pb-10 hidden md:block text-center">
         <a href="index.php?action=registerPage&formation_id=<?= $formation_main->id ?>"
             class="px-10 py-3 border-2  border-main-red text-main-white font-bold text-lg uppercase bg-main-red rounded-lg hover:bg-main-white hover:text-main-red">
             Postuler à la formation</a>
     </div>
+    <?php } ?>
 </main>
 
 <section>
@@ -316,8 +330,8 @@
             <div class="sectionChange hidden bg-white text-[16px] lg:text-[20px]">
                 <?php $allTitle = [];
                 foreach ($formation_program as $key => $program) { ?>
-                <div class="py-4">
-                    <div class="pb-3 w-full flex flex-between items-center gap-3">
+                <div class="py">
+                    <div class="pt-3 w-full flex flex-between items-center gap-3">
                         <?php if (!in_array($program['programme_layout_name'], $allTitle)) { ?>
                         <h3 class="text-main-red text-[20px] lg:text-[36px] font-bold">
                             <?= $program['programme_layout_name'] ?>
@@ -330,10 +344,10 @@
                             class="fa-solid fa-pen text-main-red fa-sm cursor-pointer"></i>
                         <?php } ?>
                     </div>
-                    <div id="program_name_<?= $key ?>"
+                    <li id="program_name_<?= $key ?>"
                         class="[&>ul]:list-outside [&>ul]:list-disc [&>ul]:ml-5 [&>ul]:md:ml-10 [&_li]:pb-2">
                         <?= $program['programme_name'] ?>
-                    </div>
+                    </li>
                     <!-- formulaire d'edit lien site -->
                     <?php if ($CanModify == true) { ?>
                     <form id="program_name-update_<?= $key ?>"
@@ -365,10 +379,9 @@
                         <?php } ?>
                     </div>
                     <ul id="feeContent" class="list-outside list-disc ml-5 md:ml-10 [&>li]:pb-2">
-                        <?php foreach ($formation_fee as $fee) { ?>
-                        <li>
-                            <?= $fee['fee_name'] ?>
-                        </li>
+                        <?php
+                        foreach ($formation_fee as $fee) { ?>
+                            <?= $fee['fee_name'] ?> <!--Liste déja incluse -->
                         <?php } ?>
                     </ul>
                     <!-- formulaire d'edit lien site -->
