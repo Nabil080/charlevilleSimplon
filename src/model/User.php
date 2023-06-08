@@ -89,9 +89,10 @@ class UserRepository extends ConnectBdd
             $objet = 'Veuillez activer votre compte Simplon Charleville !';
             $message = "Bonjour,\r\n\r\n
             Bienvenue à Simplon ! Dernière étape pour votre candidature !   \r\n\r\n
-            Veuillez cliquer sur ce lien pour valider votre compte : \r\n\r\n
+            Veuillez cliquer sur ce lien pour valider votre compte : http://localhost/projet_dev_v2/index.php?action=registerPage&token=$token \r\n\r\n
             Cordialement,\r\n
             Jordan Kunys";
+            
     
             $name = "Simplon Charleville";
             $email = "simplon.charleville@gmail.com";
