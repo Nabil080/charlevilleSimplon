@@ -168,6 +168,8 @@ function loginTreatment()
                                 break;
                         }
                     }else
+                    // Renvoyer un mail de validation
+                    // $UserRepo->sendValidationMail($user_id);
                     $errorTable[] = $AlertMessage->getError('notActive',true);
                 } else
                     $errorTable[] = $AlertMessage->getError('loginIncorrect', false, 'login');
@@ -268,7 +270,7 @@ function resetPasswordTreatment()
 
 function contactUsers()
 {
-    var_dump($_POST);
+    // var_dump($_POST);
 
     if (isset($_POST['message'])) {
         $send = trim(htmlspecialchars(strip_tags($_POST['send']), ENT_QUOTES));
