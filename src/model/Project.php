@@ -534,6 +534,13 @@ class ProjectRepository extends ConnectBdd
             );
 
             echo json_encode($response);
+        }else{
+            $response = array(
+                "status" => "failure",
+                "message" => "Le projet n'a pas été ajouté.",
+            );
+
+            echo json_encode($response);   
         }
     }
 

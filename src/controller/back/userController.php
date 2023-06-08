@@ -137,7 +137,7 @@ function loginTreatment()
         if (empty($errorTable)) {
 
             $user_id = $UserRepo->getIdByEmail($email);
-            if (is_string($user_id)) {
+            if (($user_id)) {
                 $bool = $UserRepo->checkPassword($user_id, $password);
                 if ($bool) {
                     $isUserActive = $UserRepo->checkActive($user_id);
