@@ -35,7 +35,7 @@
             class="bg-main-red rounded-[5px] min-h-[58px] text-main-white border border-main-white hover:bg-main-white hover:text-main-red hover:border-main-red  text-center font-medium flex items-center justify-center text-sm font-main w-1/3 py-2 px-3">En
             savoir plus</a>
         <?php if ($formation->status->id == 14 ) {?>
-            <a href="index.php?action=registerPage"
+            <a href="index.php?action=registerPage&id=<?=$formation->id?>"
                 class="bg-main-red rounded-[5px] min-h-[58px] text-main-white border border-main-white hover:bg-main-white hover:text-main-red hover:border-main-red  text-center font-medium flex items-center justify-center text-sm font-main w-1/3 py-2 px-2">Postuler
                 à la formation
             </a>
