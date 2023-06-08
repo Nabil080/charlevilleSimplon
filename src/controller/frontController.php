@@ -22,7 +22,7 @@ function allFormationsPage()
 
 function formationPage()
 {
-    if (isset($_GET['id']) && is_int($_GET['id'])) {
+    if (isset($_GET['id']) && !empty($_GET['id'])) {
         $formation_id = (int) $_GET['id'];
         $Formation = new FormationRepository;
         if ($Formation->checkExistFormation($formation_id)) {

@@ -11,7 +11,7 @@ const button = nav.querySelector("button");
 const logo = nav.getElementsByTagName("img")[0];
 const body = document.body;
 
-
+console.log(body);
 removeHeight = - 150; // Définit la hauteur à laquelle la navbar disparait (150px du top)
 if (document.getElementById("homepage-overlay") !== null) { // Si c'est sur l'accueil passe à 70% de la hauteur de l'écran
   removeHeight = - (this.window.screen.height * 0.7);
