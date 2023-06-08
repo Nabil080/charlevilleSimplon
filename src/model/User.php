@@ -127,12 +127,58 @@ class UserRepository extends ConnectBdd
         $promo = $promoRepo->getPromoById($promo_id);
         if (isset($user) && !empty($user)) {
             $send = $user->user_email;
-            $objet = 'Votre candidature pour $prom!";
-            $message = "Bonjour,\r\n\r\n
-            Bienvenue à Simplon ! Dernière étape pour votre candidature !   \r\n\r\n
-            Veuillez cliquer sur ce lien pour valider votre compte : http://localhost/projet_dev_v2/index.php?action=registerPage&token=$token \r\n\r\n
+            $objet = "Votre candidature pour $promo->name!";
+            $message = "Bonjour $user->user_surname,\r\n\r\n
+            Votre candidature pour la promotion $promo->name a bien été prise en compte ! Pour rappel, elle début le $promo->start.   \r\n\r\n
+            Voici les informations de votre candidature, n'hésitez pas à les modifier sur votre profil s'ils sont incorrects : \r\n
+            Nom : $user->user_name \r\n
+            Prénom : $user->user_surname \r\n
+            Email : $user->user_email \r\n
+            Numéro de téléphone : $user->user_phone \r\n
+            Adresse : $user->user_adress \r\n
+            Numéro pôle Emploi : $user->user_id_poleEmploi \r\n\r\n
             Cordialement,\r\n
             Jordan Kunys";
+            
+    
+            $name = "Simplon Charleville";
+            $email = "simplon.charleville@gmail.com";
+    
+            if (!empty($name) && !empty($email) && !empty($objet) && !empty($message)) {
+                $to = $send;
+                $email_subject = $objet;
+                $bodyParagraphs = ["Name: {$name}", "Email: {$email}", "Message:", $message];
+                $email_body = join(PHP_EOL, $bodyParagraphs);
+                $headers = ['From' => $email, 'Reply-To' => $email, 'Content-type' => 'text/html; charset=utf-8'];
+                if (mail($to, $email_subject, $email_body, $headers)) {
+                    echo 'envoi réussi';
+
+                    return true;
+                } else {
+                    echo 'envoi échoué';
+
+                    return false;
+                }
+            } else {
+                echo 'éléments manquants';
+
+                return false;
+            }
+        }
+    }
+
+    public function sendMailResetPassword($email){
+        $token = bin2hex(random_bytes(32));
+        
+        if ($email) {
+            $send = $email;
+            $objet = "Demande de changement de mot de passe";
+            $message = "Bonjour,\r\n\r\n
+    
+                Pour changer votre mot de passe, veuillez cliquer sur le lien ci-dessous : \r\n\r\n
+                http://localhost/projet_dev_v2/index.php?action=resetPasswordForm&token=$token \r\n\r\n
+                Si vous n'êtes pas à l'origine de cette demande, il vous suffit d'ignorer ce message. \r\n\r\n
+                " ;
             
     
             $name = "Simplon Charleville";
@@ -160,7 +206,6 @@ class UserRepository extends ConnectBdd
             }
         }
     }
-
 
     public function InsertUser($account): void
     {

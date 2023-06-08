@@ -195,11 +195,13 @@ function sendMailResetPasswordTreatment()
 
         if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $user_id = $UserRepo->getIdByEmail($email);
-            if (is_string($user_id)) {
-                $Mail = new MailRepository;
-                $Mail->sendMailResetPassword($email);
+            if (($user_id)) {
+                // $Mail = new MailRepository;
+                // $Mail->sendMailResetPassword($email);
+                // $token = $Mail->getToken();
 
-                $token = $Mail->getToken();
+                $token = $UserRepo->sendMailResetPassword($email);
+
                 $UserRepo->addToken($user_id, $token);
             }
             $success = [$AlertMessage->getSuccess('mailForgetPassword', false)];
