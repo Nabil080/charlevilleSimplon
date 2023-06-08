@@ -136,6 +136,7 @@ function promotionPagination()
     $promotions = $PromoRepo->getPromos($limit, $filter, $execute);
 
     $projectsHTML = [];
+    $modalsHTML = [];
     foreach ($promotions as $promo) {
         ob_start();
         $mailList = $PromoRepo->getPromoMailList($promo->id);
@@ -163,6 +164,7 @@ function promotionPagination()
             $candidates = $PromoRepo->getPromoCandidates($promo->id);
             include("view/admin/promo/modalValidationPromo.php");
         }
+        include("view/admin/promo/modalUpdatePromotion.php");
         $content = ob_get_clean();
         $modalsHTML[] = $content;
 

@@ -529,7 +529,7 @@ class PromoRepository extends ConnectBdd
         }
     }
 
-    public function getPromoStartByFormationID($id) 
+    public function getPromoStartByFormationID($id)
 
     {
     $req = $this->bdd->prepare("SELECT `promo_id` FROM `promo` WHERE `formation_id` = ?");
@@ -542,8 +542,8 @@ class PromoRepository extends ConnectBdd
     $data = $promoRepo->formateDate($data);
     return $data;
     }
-    
-    public function getPromoEndByFormationID($id) 
+
+    public function getPromoEndByFormationID($id)
     {
         $req = $this->bdd->prepare("SELECT `promo_id` FROM `promo` WHERE `formation_id` = ?");
         $req->execute([$id]);
