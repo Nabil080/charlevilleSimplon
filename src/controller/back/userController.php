@@ -166,8 +166,7 @@ function loginTreatment()
                                 break;
                         }
                     }else
-                    // Renvoyer un mail de validation
-                    // $UserRepo->sendValidationMail($user_id);
+                    $UserRepo->sendMailActivationAccount($email);
                     $errorTable[] = $AlertMessage->getError('notActive',true);
                 } else
                     $errorTable[] = $AlertMessage->getError('loginIncorrect', false, 'login');

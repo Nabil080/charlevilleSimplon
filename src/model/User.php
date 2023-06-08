@@ -125,7 +125,6 @@ class UserRepository extends ConnectBdd
         // $Mail->sendMailActivationAccount($account['email']);
         // $token = $Mail->getToken();
         $token = $this->sendMailActivationAccount($account['email']);
-        var_dump($token);
 
         $pass = password_hash($account['password'], PASSWORD_BCRYPT);
 
