@@ -28,7 +28,7 @@ $formations = $formationRepo->getAllFormations();
                         <label for="formation" class="block mb-2 text-sm font-medium  text-main-red">Formation</label>
                         <select id="formation-input" name="formation" class=" border text-sm rounded-md block w-full p-2.5 border-main-red text-main-red" required>
                             <?php foreach ($formations as $formation) { ?>
-                                <option value="<?= $formation->id ?>"><?= $formation->name ?></option>
+                                <option value="<?= $formation->id ?>"<?php if($formation->id === $promo->formation_id){echo"selected";} ?>><?= $formation->name ?></option>
                             <?php } ?>
                         </select>
                     </div>
