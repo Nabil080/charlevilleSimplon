@@ -267,8 +267,6 @@ function resetPasswordTreatment()
 
 function contactUsers()
 {
-    // var_dump($_POST);
-
     if (isset($_POST['message'])) {
         $send = trim(htmlspecialchars(strip_tags($_POST['send']), ENT_QUOTES));
         $objet = trim(htmlspecialchars(strip_tags($_POST['object']), ENT_QUOTES));
