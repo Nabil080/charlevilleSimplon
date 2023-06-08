@@ -46,9 +46,9 @@
 <?php require_once 'view/template/_navbar_home.php'; ?>
 <?php include 'view/template/_login.php'; ?>
 <?php if (isset($_SESSION['alertMessage'])) { ?>
-<div class="pt-[85px] z-50 sticky top-0 w-full">
+<!-- <div class="pt-[85px] z-50 sticky top-0 w-full"> -->
     <?= $_SESSION['alertMessage']; ?>
-</div>
+<!-- </div> -->
 <?php unset($_SESSION['alertMessage']);
 } ?>
 </div>
