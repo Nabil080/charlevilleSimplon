@@ -594,6 +594,28 @@ class ProjectRepository extends ConnectBdd
         return $number;
     }
 
+    public function updateProjectTags (int $id, array $post)
+    {
+        $skills = $post['skills'];
+        $bools = [];
+
+        $req = $this->bdd->prepare('DELETE FROM project_tag WHERE project_id = ?');
+        $bool = $req->execute([$id]);
+        $bools[] = $bool;
+        foreach ($skills as $skill) {
+
+            $req = $this->bdd->prepare('INSERT INTO project_tag (project_id, tag_id) VALUES (?,?)');
+            $bool = $req->execute([$id, (int)$skill]);
+            $bools[] = $bool;
+        }
+        if (in_array(false, $bools)) {
+            return false;
+        } else {
+            return true;
+        }
+
+    }
+
     public function updateProjectImage(int $id, array $files, array $post): bool
     {
         $path = 'assets/upload/project/maquette/';

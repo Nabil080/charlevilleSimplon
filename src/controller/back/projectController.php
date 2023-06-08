@@ -202,6 +202,9 @@ function updateProjectElement()
         case "progress":
         $bool = $projectRepository->updateProjectProgress($id, $array);
         break;
+        case "tags":
+        $bool = $projectRepository->updateProjectTags($id, $array);
+        break;
         case "image" :
         $files = $_FILES;
         $post = $_POST;

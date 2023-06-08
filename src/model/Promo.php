@@ -555,4 +555,5 @@ class PromoRepository extends ConnectBdd
         $data = $req->fetch(PDO::FETCH_COLUMN);
         return $data;
     }
+
 }
