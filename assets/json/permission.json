@@ -1,0 +1,14 @@
+{
+  "homePage": {
+    "read": "pubic",
+    "write": null
+  },
+  "formationPage": {
+    "read": "public",
+    "write": "admin"
+  },
+  "myProfile": {
+    "read": "pubic",
+    "write": "author"
+  }
+}
