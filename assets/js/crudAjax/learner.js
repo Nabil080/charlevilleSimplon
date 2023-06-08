@@ -53,8 +53,6 @@ const getProjets = (limitStart = 0,limitEnd = 6) => {
         // les transformes en string pour la requete
         const filterString = filtersArray.join(" AND ");
         const filterExecute = ExecuteArray.join(",");
-        console.log(`requête envoyée :  WHERE ${filterString}`)
-        console.log(`execute envoyée : [${filterExecute}]`)
 
     return fetch('?action=learnerPagination',{
         method: 'POST',
@@ -73,25 +71,20 @@ const getProjets = (limitStart = 0,limitEnd = 6) => {
 
 async function updateData(currentPage = 1){
     showLoading()
-    // console.log(currentPage);
     let projectsPerPage = 5
     if(rowNumberSelect.value > 0 && rowNumberSelect.value < 100){
         projectsPerPage = Number(rowNumberSelect.value)
     }
     let limitStart = (currentPage - 1) * projectsPerPage
     let limitEnd = projectsPerPage
-    // console.log(limitStart,limitEnd)
 
     data = await getProjets(limitStart,limitEnd)
         stopLoading()
-        console.log(data);
 
         // TODO: CREATION DE LA PAGINATION
 
         let prevRange = ( currentPage - 1 ) * projectsPerPage
         let nextRange = (currentPage * projectsPerPage )
-        // console.log(prevRange,nextRange)
-        // console.log(currentPage)
         const allProjectsCount = data.total
         let projectsCount = data.filtered
         let pageCount = Math.ceil(projectsCount / projectsPerPage);
@@ -156,12 +149,10 @@ async function updateData(currentPage = 1){
         // * CREER LES MODALS :
         modalDiv.innerHTML = data.modals
         const modalButtons = document.querySelectorAll('tbody [data-modal-target], #modals [data-modal-target]')
-        // console.log(modalButtons)
         modalButtons.forEach(button => {
             button.addEventListener('click',(event) => {
                 event.preventDefault()
 
-                // alert(button.dataset.modalTarget)
                 let modal = document.getElementById(button.dataset.modalTarget)
                 modal.classList.toggle('hidden')
             })

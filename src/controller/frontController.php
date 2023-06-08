@@ -65,7 +65,6 @@ function formationPage()
 }
 
 // Project 
-
 function projectPage()
 {
     $projectRepository = new ProjectRepository;
@@ -93,7 +92,9 @@ function projectPage()
         $id = 3;
     }
 
+
     $allTags = $tags->getAllTags();
+
     $project = $projectRepository->getProjectById($id);
     // if ($project->status->id !== 10) {
     //     header('Location:?action=homepage');
@@ -107,7 +108,6 @@ function projectPage()
 
 function allProjectsPage()
 {
-
     include 'view/public/all_projects.php';
 }
 
@@ -139,7 +139,6 @@ function profilePage()
     if (!isset($_GET['id'])) {
         if (!isset($_SESSION['user']->user_id)) {
             homepage();
-
         } else {
             myProfile();
             // header('Location:?action=homepage');
@@ -151,7 +150,6 @@ function profilePage()
         $id = $_GET['id'];
         $user = new UserRepository();
         $userDatas = new User($id);
-        // var_dump('hi');
         if ($userDatas->role_id == 1 || $userDatas->role_id == 3) {
             homepage();
         } elseif ($userDatas->role_id == 2) {
@@ -261,10 +259,14 @@ function registerPage()
 {
     $boolCompany = (isset($_GET['company'])) ? 1 : 0;
     $formation_id = (isset($_GET['id'])) ? $_GET['id'] : 0;
-    if (($boolCompany == 0 && $formation_id == 0) || ($boolCompany == 1 && $formation_id != 0))
+    if (($boolCompany == 0 && $formation_id == 0) || ($boolCompany == 1 && $formation_id != 0)) {
         throw new Exception('error_404');
-    else
+    }
+    else {
+        $PromoRepository = new PromoRepository;
+        $promo = $PromoRepository->getPromoById($formation_id);
         include 'view/public/register.php';
+    }
 }
 
 // Promotion
@@ -273,8 +275,8 @@ function allPromotionsPage()
     $PromoRepository = new PromoRepository;
     $promos = $PromoRepository->getPromos();
     include 'view/public/all_promotions.php';
-
 }
+
 function promotionPage()
 {
     if (isset($_GET['id_promo'])) {
@@ -324,7 +326,6 @@ function resetPasswordForm()
 function crudCandidatePage()
 {
     $UserRepo = new UserRepository;
-
     include 'view/admin/_candidate.php';
 }
 
@@ -346,11 +347,9 @@ function crudCompanyPage()
 
 function crudPromotionPage()
 {
-
     $tagsRepository = new TagRepository;
     $PromoRepo = new PromoRepository;
     $promos = $PromoRepo->getPromos();
-    // var_dump($promos);
     $UserRepo = new UserRepository;
     $FormationRepo = new FormationRepository;
     $formators = $UserRepo->getAllFormators();
@@ -371,7 +370,7 @@ function projectFormPage()
         $projectRepo = new ProjectRepository;
         $project = $projectRepo->getProjectById($_GET['id']);
     }
-
+    
     include 'view/admin/projectAddForm.php';
 }
 

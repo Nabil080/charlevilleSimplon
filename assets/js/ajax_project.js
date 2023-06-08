@@ -11,7 +11,7 @@ forms.forEach(form  => {
         }).then(response => response.json())
         .then(data => {
             if (data.projets == true) {
-                console.log("succes");
+                // Afficher un succès
             }
         })
     });

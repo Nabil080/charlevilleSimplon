@@ -8,8 +8,6 @@ validationForms.forEach((form) => {
         e.preventDefault();
 
         const checkboxes = document.querySelectorAll('.validationForm input[type=checkbox]');
-        console.log(checkboxes);
-        
         
         const promo = e.target.dataset.promo;
         const accepted = [];
@@ -28,8 +26,6 @@ validationForms.forEach((form) => {
             accepted: accepted,
             rejected: rejected
         };
-
-        console.log(data);
 
         fetch('?action=validatePromotion',{
             method: 'POST',

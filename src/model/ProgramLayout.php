@@ -24,6 +24,3 @@ class ProgramLayoutRepository extends ConnectBdd
         return $data;
     }
 }
-
-
-?>

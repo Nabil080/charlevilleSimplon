@@ -48,7 +48,6 @@
                     <?php foreach($project->tags as $tag){ ?>
                         <tag><?=$tag->name?></tag>
                     <?php } ?>
-                    <tag>React</tag>
                 </div>
                 <!-- titre projet -->
                 <h2 class="font-title text-main-red italic font-bold text-3xl md:!text-[40px] lg:!text-[46px] my-2 lg:!my-6"><a href="?action=projectPage&id=<?= $project->id?>"><?= $project->name?></a></h2>
@@ -90,7 +89,7 @@
                 <div class="flex flex-wrap">
                     <p class="font-title font-bold mr-2">Adresse :</p>
                     <?php  
-                     if (isset ($project->company_adress) && !empty($project->company_adress)) { ?>
+                    if (isset ($project->company_adress) && !empty($project->company_adress)) { ?>
                         <p class="text-sm pt-0.5 text-left font-light"><?=$project->company_adress?></p>
                     <?php } else { ?>
                     <p class="text-sm pt-0.5 text-left font-light">Pas d'adresse spécifiée</p>
@@ -101,7 +100,7 @@
         <!-- boutons projet -->
         <?php 
         if (isset($_SESSION['user']) && $_SESSION['user']->role_id == 1 && $project->status->id == 9) { 
-             ?> <!--1-->
+            ?> <!--1-->
             <form id="<?= $x ?>" class="validationProjectForm mt-6 flex lg:text-lg [&>div]:grid [&>div]:place-content-center">
                 <!-- refuser -->
                 <button type="submit" onclick="refuseProject(<?= $i ?>, <?= $x ?>)" class="w-fit px-6 md:!flex gap-2 md:items-center hover:text-main-red cursor-pointer">
@@ -115,7 +114,7 @@
                             <?php foreach ($promos as $promo) { ?>
                                 <option value="<?= $promo->id ?>"><?= $promo->name ?></option>
                             <?php } 
-                             ?>
+                            ?>
                         </select>
                             
                     <input type="hidden" name="projectId" value="<?= $project->id ?>"/>           
@@ -126,7 +125,7 @@
                 </button>
             </form>
         <?php $i ++;
-         } else if (isset($_SESSION['user']) && $_SESSION['user']->role_id == 2 && $project->status->id == 10) { ?> <!--2-->
+        } else if (isset($_SESSION['user']) && $_SESSION['user']->role_id == 2 && $project->status->id == 10) { ?> <!--2-->
             <form id="team<?= $x ?>" class="validationTeamForm mt-6 flex lg:text-lg [&>div]:grid [&>div]:place-content-center">
                 <!-- refuser -->
                 <p class="w-fit px-6 md:!flex gap-2  md:items-center hover:text-main-red cursor-pointer">
@@ -138,7 +137,7 @@
                     $apprenants = $promoRepository->getAllApprenants($project->promo->id);?>
                     <div data-dropdown-toggle="user-dropdown<?= $y ?>" class="text-center w-full cursor-pointer">Sélectionner les apprenants <i class="fa fa-chevron-down"></i></div>
                     <select id="user-dropdown<?= $y ?>" multiple class="hidden z-20 w-fit" name="team[]" id="">
-                       <?php foreach ($apprenants as $apprenant) { ?>
+                        <?php foreach ($apprenants as $apprenant) { ?>
                             <option value="<?= $apprenant->user_id ?>"><?= $apprenant->user_name ?> <?= $apprenant->user_surname ?></option>
                         <?php } ?>
                     </select>

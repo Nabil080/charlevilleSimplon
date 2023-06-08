@@ -24,6 +24,3 @@ class TypeRepository extends ConnectBdd{
         return $Type;
     }
 }
-
-
-?>

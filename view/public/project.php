@@ -93,7 +93,7 @@
                 class="fa-solid fa-pen text-main-red cursor-pointer h-fit my-auto"></i>
             <?php } ?>
             <?php } else if (!isset($team)) {?>
-            <p class="text-red-500 text-xl"> Pas de formateurs assignés pour le moment</p>
+            <p class="text-red-500 text-xl"> Pas de formateur assigné pour le moment</p>
             <?php } ?>
         </div>
         <?php if ($isMyProject == true) { ?>
@@ -449,11 +449,6 @@
         </div>
     </div>
 </section>
-
-<?php
-//var_dump($_POST)
-//echo $_POST['company-notes'];
-?>
 
 <?php $content = ob_get_clean(); ?>
 <?php ob_start(); ?>

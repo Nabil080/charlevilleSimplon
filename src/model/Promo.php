@@ -80,8 +80,6 @@ class PromoRepository extends ConnectBdd
         $filters = $filters === null ? "" : "WHERE $filters";
         $execute = $execute === null ? [] : explode(",",$execute);
         $query = "SELECT COUNT(*) FROM promo $filters"; 
-        // var_dump($query);
-        // var_dump($execute);
         $req = $this->bdd->prepare($query);
         $req->execute($execute);
         $data = $req->fetch(PDO::FETCH_COLUMN);
@@ -227,7 +225,7 @@ class PromoRepository extends ConnectBdd
         $data = $req->fetch(PDO::FETCH_COLUMN);
         return $data;
     }
-  
+
     public function CheckDuplicateCandidate($user_id, $promo_id)
     {
         $req = $this->bdd->prepare("SELECT * FROM `promo_candidate` WHERE `user_id` = ? AND `promo_id` = ?");
@@ -403,7 +401,7 @@ class PromoRepository extends ConnectBdd
         $subject = "Vous avez été accepté pour votre formation $Promo->name";
         $message = "Bonjour,\r\n\r\n
             Vous avez été accepté pour la formation de : $Promo->name  \r\n\r\n
-            Bienvenue à Simplon ! La formation débute le $Promo->start et se termine le $Promo->end. \r\n\r\n
+            Bienvenue à Simplon ! La formation débutera le $Promo->start et se terminera le $Promo->end. \r\n\r\n
             Cordialement,\r\n
             Jordan Kunys";
         mail($to, $subject, $message, $headers);
@@ -417,7 +415,7 @@ class PromoRepository extends ConnectBdd
         $subject = "Vous avez malheureusement été refusé pour votre formation $Promo->name";
         $message = "Bonjour,\r\n\r\n
             Vous avez été refusé pour la formation de : $Promo->name  \r\n\r\n
-            Mais n'abandonnez pas ! Formez vous via notre plateforme en ligne ! \r\n\r\n
+            Mais n'abandonnez pas ! Formez-vous via notre plateforme en ligne ! \r\n\r\n
             Cordialement,\r\n
             Jordan Kunys";
         mail($to, $subject, $message, $headers);
@@ -460,8 +458,6 @@ class PromoRepository extends ConnectBdd
         $req = $this->bdd->prepare("INSERT INTO promo (promo_name,promo_start,promo_end,formation_id,status_id,promo_year) VALUES (?,?,?,?,?,?)");
         $req->execute([$promoName,$POST['start'],$POST['end'],$POST['formation'],9,$promoyear]);
 
-        var_dump($POST);
-
         $lastId = $this->bdd->lastInsertId();
         if(isset($POST['formators'])){
             foreach($POST['formators'] as $formator){
@@ -473,7 +469,6 @@ class PromoRepository extends ConnectBdd
 
     public function updatePromo(array $POST):void
     {
-        var_dump($POST);
         $FormationRepo = new FormationRepository;
         $formation = $FormationRepo->getFormationById($POST['formation'])->name;
 
@@ -486,7 +481,6 @@ class PromoRepository extends ConnectBdd
         if(isset($POST['formators'])){
 
             $formators = $this->getAllFormateurs($POST['promo']);
-            var_dump($formators);
             if(is_array($formators)){
                 foreach($formators as $formator){
                     $req = $this->bdd->prepare("DELETE FROM promo_user WHERE user_id = ? AND promo_id = ?");
@@ -501,7 +495,6 @@ class PromoRepository extends ConnectBdd
         }
     }
 
-    
     public function updatePromoStatus(string $starting_date, string $ending_date, int $promo_id)
     {
         $today = date('Y-m-d');
@@ -530,7 +523,6 @@ class PromoRepository extends ConnectBdd
     }
 
     public function getPromoStartByFormationID($id)
-
     {
     $req = $this->bdd->prepare("SELECT `promo_id` FROM `promo` WHERE `formation_id` = ?");
     $req->execute([$id]);
@@ -562,26 +554,6 @@ class PromoRepository extends ConnectBdd
         $req->execute([$id]);
         $data = $req->fetch(PDO::FETCH_COLUMN);
         return $data;
-    }
-
-    public function getPromoByFormationId(int $id): object
-    {
-        $promoRepository = new PromoRepository;
-        $req = $this->bdd->prepare("SELECT * FROM `promo` WHERE `formation_id` = ?");
-        $req->execute([$id]);
-        $data = $req->fetch(PDO::FETCH_ASSOC);
-
-        $Promo = new Promo(
-        $data['promo_id'], 
-        $data['promo_name'], 
-        $promoRepository->formateDate($data['promo_start']),
-        $promoRepository->formateDate($data['promo_end']),
-        $data['promo_year'],
-        $data['formation_id'],
-        $data['status_id']
-        );
-
-        return $Promo;
     }
 
 }

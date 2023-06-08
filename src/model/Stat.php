@@ -56,6 +56,3 @@ class StatRepository extends ConnectBdd
         $stmt->execute([$stat_name, $stat_id]);
     }
 }
-
-
-?>

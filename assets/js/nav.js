@@ -177,7 +177,6 @@ window.addEventListener ("scroll", function () {
         logo.classList.remove("w-[171px]");
       }
     }
-      console.log(change[1]);
       // changement d'icone
       if (change[0].classList.contains("hidden")) {
           change[0].classList.toggle("hidden");

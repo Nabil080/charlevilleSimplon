@@ -38,7 +38,7 @@
         <section
             class="mb-32 mt-8 bg-main-lightgray py-4 w-11/12 mx-auto rounded-[5px] border-2 border-main-red text-center">
             <div class="max-w-[700px] mx-auto px-3 lg:px-6">
-                <h2 class="text-3xl font-bold mb-12">Nous contactez</h2>
+                <h2 class="text-3xl font-bold mb-12">Nous contacter</h2>
                 <form id="contact-form">
                     <div class="form-group mb-6">
                         <input type="text" class="form-control block
