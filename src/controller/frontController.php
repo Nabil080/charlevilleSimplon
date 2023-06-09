@@ -100,7 +100,7 @@ function projectPage()
     //     header('Location:?action=homepage');
     // }
     $team = $projectRepository->getProjectUsers($id);
-    if(isset($project->promo->id)){
+    if (isset($project->promo->id)) {
         $promoUsers = $promoRepository->getAllApprenants($project->promo->id);
         $promoFormateurs = $promoRepository->getAllFormateurs($project->promo->id);
     }
@@ -263,10 +263,9 @@ function registerPage()
     $formation_id = (isset($_GET['id'])) ? $_GET['id'] : 0;
     if (($boolCompany == 0 && $formation_id == 0) || ($boolCompany == 1 && $formation_id != 0)) {
         throw new Exception('error_404');
-    }
-    elseif($boolCompany === 1){
+    } elseif ($boolCompany === 1) {
         include 'view/public/register.php';
-    }else{
+    } else {
         $PromoRepository = new PromoRepository;
         $promo = $PromoRepository->getPromoById($formation_id);
         include 'view/public/register.php';
@@ -283,10 +282,10 @@ function allPromotionsPage()
 
 function promotionPage()
 {
-    if (isset($_GET['id_promo'])) {
-        $id = $_GET['id_promo'];
+    if (isset($_GET['id'])) {
+        $id = $_GET['id'];
     } else {
-        $id = 1;
+        throw new Exception('error_404');
     }
 
     if (isset($_GET['project']) && $_GET['project'] == 1) {
@@ -374,7 +373,7 @@ function projectFormPage()
         $projectRepo = new ProjectRepository;
         $project = $projectRepo->getProjectById($_GET['id']);
     }
-    
+
     include 'view/admin/projectAddForm.php';
 }
 
