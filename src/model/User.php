@@ -226,11 +226,14 @@ class UserRepository extends ConnectBdd
             $stmt->execute();
             $user_id = $stmt->fetch();
 
+            $promo_id = $account['formation_id'];
+            $promo_id = 2;
+
             $req = "INSERT INTO `promo_candidate`(`user_id`,`promo_id`) VALUE(?,?)";
             $stmt = $this->bdd->prepare($req);
-            $stmt->execute([$user_id[0], $account['formation_id']]);
+            $stmt->execute([$user_id[0], $promo_id]);
 
-            $this->sendMailValidationCandidature($user_id,$account['formation_id']);
+            $this->sendMailValidationCandidature($user_id,$promo_id);
         }
         $stmt->closeCursor();
     }

@@ -1,4 +1,4 @@
-<div id="alert-border-3 "
+<div id="alert-border-3"
     class="flex p-4 mb-4 fixed top-[0px] w-full z-50 text-green-800 border-t-4 border-green-300 bg-green-50"
     role="alert">
     <svg class="flex-shrink-0 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
