@@ -104,16 +104,16 @@ class UserRepository extends ConnectBdd
                 $email_body = join(PHP_EOL, $bodyParagraphs);
                 $headers = ['From' => $email, 'Reply-To' => $email, 'Content-type' => 'text/html; charset=utf-8'];
                 if (mail($to, $email_subject, $email_body, $headers)) {
-                    echo 'envoi réussi';
+                    // echo 'envoi réussi';
 
                     return $token;
                 } else {
-                    echo 'envoi échoué';
+                    // echo 'envoi échoué';
 
                     return false;
                 }
             } else {
-                echo 'éléments manquants';
+                // echo 'éléments manquants';
 
                 return false;
             }
@@ -151,16 +151,16 @@ class UserRepository extends ConnectBdd
                 $email_body = join(PHP_EOL, $bodyParagraphs);
                 $headers = ['From' => $email, 'Reply-To' => $email, 'Content-type' => 'text/html; charset=utf-8'];
                 if (mail($to, $email_subject, $email_body, $headers)) {
-                    echo 'envoi réussi';
+                    // echo 'envoi réussi';
 
                     return true;
                 } else {
-                    echo 'envoi échoué';
+                    // echo 'envoi échoué';
 
                     return false;
                 }
             } else {
-                echo 'éléments manquants';
+                // echo 'éléments manquants';
 
                 return false;
             }
@@ -191,16 +191,16 @@ class UserRepository extends ConnectBdd
                 $email_body = join(PHP_EOL, $bodyParagraphs);
                 $headers = ['From' => $email, 'Reply-To' => $email, 'Content-type' => 'text/html; charset=utf-8'];
                 if (mail($to, $email_subject, $email_body, $headers)) {
-                    echo 'envoi réussi';
+                    // echo 'envoi réussi';
 
                     return $token;
                 } else {
-                    echo 'envoi échoué';
+                    // echo 'envoi échoué';
 
                     return false;
                 }
             } else {
-                echo 'éléments manquants';
+                // echo 'éléments manquants';
 
                 return false;
             }
