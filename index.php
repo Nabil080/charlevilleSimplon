@@ -2,6 +2,12 @@
 session_start();
 require 'src/model/ConnectBdd.php';
 
+// $_SESSION['user'] = (object) array(
+//     'user_id' => 2,
+//     'status_id' => 1,
+//     'role_id' => 3,
+// );
+
 try {
     if (isset($_GET['action']) && $_GET['action'] !== '') {
         $action = $_GET['action'];
@@ -21,30 +27,31 @@ try {
                         deleteMyProject();
                         break;
                 }
-                if ($_SESSION['user']->role_id <= 3) {
-                    switch ($action) {
-                        // Afficher le CRUD de projet (Gestion de projet)
-                        case 'projectGestionPage':
-                            projectGestionPage();
-                            break;
+            }
+            if ($_SESSION['user']->role_id <= 3) {
+                switch ($action) {
+                    // Afficher le CRUD de projet (Gestion de projet)
+                    case 'projectGestionPage':
+                        projectGestionPage();
+                        break;
 
 
-                        // Afficher le formulaire d'ajout de projet
-                        case 'addProject':
-                            projectFormPage();
-                            break;
-                        // Afficher le formulaire de modification du projet
+                    // Afficher le formulaire d'ajout de projet
+                    case 'addProject':
+                        projectFormPage();
+                        break;
+                    // Afficher le formulaire de modification du projet
 
-                        // Envoi du formulaire d'ajout de projet
-                        case 'addProjectTraitement':
-                            addProjectTraitement();
-                            break;
-                        // Envoi du formulaire de moficiation de projet
-                        case 'updateProjectTraitement':
-                            updateProjectTraitement();
-                            break;
-                    }
+                    // Envoi du formulaire d'ajout de projet
+                    case 'addProjectTraitement':
+                        addProjectTraitement();
+                        break;
+                    // Envoi du formulaire de moficiation de projet
+                    case 'updateProjectTraitement':
+                        updateProjectTraitement();
+                        break;
                 }
+            }
 
                 if ($_SESSION['user']->role_id <= 2) {
                     switch ($action) {
@@ -56,7 +63,7 @@ try {
                 if ($_SESSION['user']->role_id == 1) {
                     require 'admin.php';
                 }
-            }
+            
         }
     } else {
         homepage();
