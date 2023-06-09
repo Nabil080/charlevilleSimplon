@@ -168,9 +168,10 @@ function loginTreatment()
                                 header('Location: index.php');
                                 break;
                         }
-                    }else
-                    $UserRepo->sendMailActivationAccount($email);
-                    $errorTable[] = $AlertMessage->getError('notActive',true);
+                    }else{
+                        $UserRepo->sendMailActivationAccount($email);
+                        $errorTable[] = $AlertMessage->getError('notActive',true);
+                    }
                 } else
                     $errorTable[] = $AlertMessage->getError('loginIncorrect', false, 'login');
             } else
