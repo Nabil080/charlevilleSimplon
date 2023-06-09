@@ -80,6 +80,8 @@ class PromoRepository extends ConnectBdd
         $filters = $filters === null ? "" : "WHERE $filters";
         $execute = $execute === null ? [] : explode(",",$execute);
         $query = "SELECT COUNT(*) FROM promo $filters"; 
+        // var_dump($query);
+        // var_dump($execute);
         $req = $this->bdd->prepare($query);
         $req->execute($execute);
         $data = $req->fetch(PDO::FETCH_COLUMN);
@@ -106,7 +108,7 @@ class PromoRepository extends ConnectBdd
         foreach ($datas as $data)
         {
             // Update automatiquement le statut de la promo aux dates requises
-            // $promoRepository->updatePromoStatus($data['promo_start'], $data['promo_end'], $data['promo_id']);
+            $promoRepository->updatePromoStatus($data['promo_start'], $data['promo_end'], $data['promo_id']);
 
             $Promo = new Promo(
                 $data['promo_id'],
@@ -225,7 +227,7 @@ class PromoRepository extends ConnectBdd
         $data = $req->fetch(PDO::FETCH_COLUMN);
         return $data;
     }
-
+  
     public function CheckDuplicateCandidate($user_id, $promo_id)
     {
         $req = $this->bdd->prepare("SELECT * FROM `promo_candidate` WHERE `user_id` = ? AND `promo_id` = ?");
@@ -401,7 +403,7 @@ class PromoRepository extends ConnectBdd
         $subject = "Vous avez été accepté pour votre formation $Promo->name";
         $message = "Bonjour,\r\n\r\n
             Vous avez été accepté pour la formation de : $Promo->name  \r\n\r\n
-            Bienvenue à Simplon ! La formation débutera le $Promo->start et se terminera le $Promo->end. \r\n\r\n
+            Bienvenue à Simplon ! La formation débute le $Promo->start et se termine le $Promo->end. \r\n\r\n
             Cordialement,\r\n
             Jordan Kunys";
         mail($to, $subject, $message, $headers);
@@ -415,7 +417,7 @@ class PromoRepository extends ConnectBdd
         $subject = "Vous avez malheureusement été refusé pour votre formation $Promo->name";
         $message = "Bonjour,\r\n\r\n
             Vous avez été refusé pour la formation de : $Promo->name  \r\n\r\n
-            Mais n'abandonnez pas ! Formez-vous via notre plateforme en ligne ! \r\n\r\n
+            Mais n'abandonnez pas ! Formez vous via notre plateforme en ligne ! \r\n\r\n
             Cordialement,\r\n
             Jordan Kunys";
         mail($to, $subject, $message, $headers);
@@ -458,6 +460,8 @@ class PromoRepository extends ConnectBdd
         $req = $this->bdd->prepare("INSERT INTO promo (promo_name,promo_start,promo_end,formation_id,status_id,promo_year) VALUES (?,?,?,?,?,?)");
         $req->execute([$promoName,$POST['start'],$POST['end'],$POST['formation'],9,$promoyear]);
 
+        var_dump($POST);
+
         $lastId = $this->bdd->lastInsertId();
         if(isset($POST['formators'])){
             foreach($POST['formators'] as $formator){
@@ -469,6 +473,7 @@ class PromoRepository extends ConnectBdd
 
     public function updatePromo(array $POST):void
     {
+        var_dump($POST);
         $FormationRepo = new FormationRepository;
         $formation = $FormationRepo->getFormationById($POST['formation'])->name;
 
@@ -481,6 +486,7 @@ class PromoRepository extends ConnectBdd
         if(isset($POST['formators'])){
 
             $formators = $this->getAllFormateurs($POST['promo']);
+            var_dump($formators);
             if(is_array($formators)){
                 foreach($formators as $formator){
                     $req = $this->bdd->prepare("DELETE FROM promo_user WHERE user_id = ? AND promo_id = ?");
@@ -495,6 +501,7 @@ class PromoRepository extends ConnectBdd
         }
     }
 
+    
     public function updatePromoStatus(string $starting_date, string $ending_date, int $promo_id)
     {
         $today = date('Y-m-d');
@@ -503,26 +510,34 @@ class PromoRepository extends ConnectBdd
         $end = new DateTimeImmutable($ending_date);
         $interval_start = $origin->diff($start);
         $interval_end = $end->diff($origin);
-        // var_dump($starting_date, $ending_date, $today);
-        // var_dump($interval_start, $interval_end);
-        die;
+
+        // $interval_end->invert == 1 lorsque la promo n'est pas encore terminée
+        // $interval_end->invert == 0 correspond à une date dépassée
+        // => "promo terminée"
         if ($interval_end->invert == 0 && $interval_end->days > 1)
         {
             $req = $this->bdd->prepare("UPDATE promo SET status_id =? WHERE promo_id=?");
             $req->execute([13, $promo_id]);
-        } elseif($interval_start->invert == 0 && $interval_start->days > 90)
+        }
+        // $interval_end->invert == 1 la promo n'est pas terminée
+        // mais elle n'est pas commencée $interval_start->invert == 0
+        //  && elle commence dans moins de 90 jours
+        // => "promo débute le"
+        elseif($interval_end->invert == 1 && $interval_start->invert == 0 && $interval_start->days <= 90)
         {
             $req = $this->bdd->prepare("UPDATE promo SET status_id =? WHERE promo_id= ?");
             $req->execute([14, $promo_id]);
         }
-        elseif ($interval_start->invert == 1)
+        // $interval_end->invert == 1 la promo n'est pas terminée mais elle est commencée $interval_start->invert == 1 => "promo en cours"
+        elseif ($interval_end->invert == 1 && $interval_start->invert == 1)
         {
             $req = $this->bdd->prepare("UPDATE promo SET status_id =? WHERE promo_id= ?");
             $req->execute([12, $promo_id]);
         }
     }
 
-    public function getPromoStartByFormationID($id)
+    public function getPromoStartByFormationID($id) 
+
     {
     $req = $this->bdd->prepare("SELECT `promo_id` FROM `promo` WHERE `formation_id` = ?");
     $req->execute([$id]);
@@ -534,8 +549,8 @@ class PromoRepository extends ConnectBdd
     $data = $promoRepo->formateDate($data);
     return $data;
     }
-
-    public function getPromoEndByFormationID($id)
+    
+    public function getPromoEndByFormationID($id) 
     {
         $req = $this->bdd->prepare("SELECT `promo_id` FROM `promo` WHERE `formation_id` = ?");
         $req->execute([$id]);
@@ -555,5 +570,6 @@ class PromoRepository extends ConnectBdd
         $data = $req->fetch(PDO::FETCH_COLUMN);
         return $data;
     }
+
 
 }
