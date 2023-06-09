@@ -114,6 +114,7 @@ function loginTreatment()
 {
     $AlertMessage = new AlertMessage;
     $errorTable = array();
+    $succes = array();
 
     if (isset($_POST) && !empty($_POST)) {
         $UserRepo = new UserRepository;
@@ -139,38 +140,22 @@ function loginTreatment()
                 $bool = $UserRepo->checkPassword($user_id, $password);
                 if ($bool) {
                     $isUserActive = $UserRepo->checkActive($user_id);
-                    if($isUserActive){
+                    if ($isUserActive) {
                         $userSession = $UserRepo->getUserSession($user_id);
                         $_SESSION['user'] = (object) array(
                             'user_id' => $userSession['user_id'],
                             'status_id' => $userSession['status_id'],
                             'role_id' => $userSession['role_id'],
                         );
-                        $AlertMessage->getSuccess('login', true);
-                        $role_id = $userSession['role_id'];
-                        switch ($role_id) {
-                            case '1':
-                                header('Location: index.php?action=crudCandidatePage');
-                                break;
-                            case '2':
-                                header('Location: index.php');
-                                break;
-                            case '3':
-                                header('Location: index.php');
-                                break;
-                            case '4':
-                                header('Location: index.php');
-                                break;
-                            case '5':
-                                header('Location: index.php');
-                                break;
-                            default :
-                                header('Location: index.php');
-                                break;
-                        }
-                    }else{
+                      
+                        $succes[] = $AlertMessage->getSuccess('login', true, 'login');
+                        //$role_id = $userSession['role_id'];
+                        $json = json_encode($succes);
+                        echo $json;
+
+                    } else {
                         $UserRepo->sendMailActivationAccount($email);
-                        $errorTable[] = $AlertMessage->getError('notActive',true);
+                        $errorTable[] = $AlertMessage->getError('notActive', true);
                     }
                 } else
                     $errorTable[] = $AlertMessage->getError('loginIncorrect', false, 'login');

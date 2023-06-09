@@ -11,7 +11,7 @@ function handleFormSubmission(formId, actionUrl) {
         })
             .then(response => response.json())
             .then(data => {
-                if (typeof data != Array) data = Array.from(data);
+                console.log(data);
                 deleteAlert();
                 showAlert(data);
             })
@@ -31,6 +31,7 @@ function deleteAlert() {
 }
 function showAlert(data) {
     data.forEach(function (element) {
+        console.log(element['navbar']);
         if (element['navbar'] == false) {
             const input = document.querySelector(element['location']);
             if (element['location'] == '.alertButton' || element['where'] == 'button') {
@@ -39,6 +40,7 @@ function showAlert(data) {
                 input.innerHTML = element['message'];
             }
         } else {
+            console.log('je commence');
             window.location.href = 'index.php';
         }
     })

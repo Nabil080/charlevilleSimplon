@@ -21,6 +21,8 @@
 
     public function getError($error, $boolNavbar, $location = null)
     {
+        $redirection = null;
+
         // Récupérer Message
         $this->type = 'errorMessage';
         $this->name = $error;
@@ -71,13 +73,15 @@
             'location' => $this->location,
             'message' => $this->message,
             'navbar' => $boolNavbar,
-            'where' => $where
+            'where' => $where,
+            'redirection' => $redirection
         ];
         return $alert;
     }
 
     public function getSuccess($success, $boolNavbar, $location = null)
     {
+        $redirection = null;
         // Récupérer Message
         $this->type = 'successMessage';
         $this->name = $success;
@@ -97,8 +101,9 @@
                 default:
                     $this->location = '.alertButton';
             }
+        } else if ($location == 'login') {
+            $redirection = 'login';
         }
-
 
         // Création du message
         $this->message = $this->getMessage();
@@ -126,7 +131,8 @@
             'successMessage' => 1,
             'location' => $this->location,
             'message' => $this->message,
-            'navbar' => $boolNavbar
+            'navbar' => $boolNavbar,
+            'redirection' => $redirection
         ];
         return $alert;
 
