@@ -100,8 +100,10 @@ function projectPage()
     //     header('Location:?action=homepage');
     // }
     $team = $projectRepository->getProjectUsers($id);
-    $promoUsers = $promoRepository->getAllApprenants($project->promo->id);
-    $promoFormateurs = $promoRepository->getAllFormateurs($project->promo->id);
+    if(isset($project->promo->id)){
+        $promoUsers = $promoRepository->getAllApprenants($project->promo->id);
+        $promoFormateurs = $promoRepository->getAllFormateurs($project->promo->id);
+    }
     $allProgress = $progressRepository->getProgressByProjectId($id);
     include 'view/public/project.php';
 }

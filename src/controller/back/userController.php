@@ -147,6 +147,7 @@ function loginTreatment()
                             'status_id' => $userSession['status_id'],
                             'role_id' => $userSession['role_id'],
                         );
+                      
                         $succes[] = $AlertMessage->getSuccess('login', true, 'login');
                         //$role_id = $userSession['role_id'];
                         $json = json_encode($succes);
@@ -271,12 +272,12 @@ function contactUsers()
             $email_body = join(PHP_EOL, $bodyParagraphs);
             $headers = ['From' => $email, 'Reply-To' => $email, 'Content-type' => 'text/html; charset=utf-8'];
             if (mail($to, $email_subject, $email_body, $headers)) {
-                echo 'envoi réussi';
+                // echo 'envoi réussi';
             } else {
-                echo 'envoi échoué';
+                // echo 'envoi échoué';
             }
         } else {
-            echo 'éléments manquants';
+            // echo 'éléments manquants';
         }
     }
 }
