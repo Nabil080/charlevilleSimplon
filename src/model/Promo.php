@@ -108,7 +108,7 @@ class PromoRepository extends ConnectBdd
         foreach ($datas as $data)
         {
             // Update automatiquement le statut de la promo aux dates requises
-            $promoRepository->updatePromoStatus($data['promo_start'], $data['promo_end'], $data['promo_id']);
+            // $promoRepository->updatePromoStatus($data['promo_start'], $data['promo_end'], $data['promo_id']);
             // $promoRepository->updatePromoStatus("2023-07-02", "2024-02-02", 5);
 
             $Promo = new Promo(
@@ -511,9 +511,9 @@ class PromoRepository extends ConnectBdd
         $end = new DateTimeImmutable($ending_date);
         $interval_start = $origin->diff($start);
         $interval_end = $end->diff($origin);
-        // var_dump($starting_date, $ending_date, $today);
-        // var_dump($interval_start, $interval_end);
-        // die;
+        var_dump($starting_date, $ending_date, $today);
+        var_dump($interval_start, $interval_end);
+        die;
 
         // $interval_end->invert == 1 lorsque la promo n'est pas encore terminée
         // $interval_end->invert == 0 correspond à une date dépassée
