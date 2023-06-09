@@ -21,6 +21,10 @@
       "message": "L'email est incorrect."
     },
     {
+      "name": "existingEmail",
+      "message": "L'email a déjà été utilisé."
+    },
+    {
       "name": "passwordNotIdentical",
       "message": "Les mots de passe ne sont pas identiques."
     },
@@ -29,8 +33,12 @@
       "message": "Le mot de passe est trop faible."
     },
     {
-      "name": "existingEmail",
-      "message": "L'email a déjà été utilisé."
+      "name": "incorrectPassword",
+      "message": "Votre mot de passe est incorrect"
+    },
+    {
+      "name": "notPassword",
+      "message": "Vous devez entrer votre mot de passe pour valider les modifications"
     },
     {
       "name": "loginIncorrect",
@@ -55,8 +63,11 @@
     {
       "name": "ErrorGithubLink",
       "message": "Veuillez entrer un lien Github valide."
+    },
+    {
+      "name": "choiceProject",
+      "message": "Vous devez choisir si vous souhaitez ajouter ou modifier le projet phare"
     }
-    
   ],
   "successMessage": [
     {
@@ -82,6 +93,10 @@
     {
       "name": "sendMail",
       "message": "Votre message à bien était envoyé."
+    },
+    {
+      "name": "updateSucces",
+      "message": "La modification effectuée est réussie."
     }
   ]
 }

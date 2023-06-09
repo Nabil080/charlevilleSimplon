@@ -131,125 +131,34 @@ function projectGestionPage()
 }
 
 // Profile
-function profilePage()
+function profilePage($id)
 {
-    if (!isset($_GET['id'])) {
-        if (!isset($_SESSION['user']->user_id)) {
-            homepage();
+    $user_id = (int) $id;
+    if (is_int($user_id)) {
+        $userDatas = new User($user_id);
+        if ($userDatas->role_id == 1 || $userDatas->role_id == 3)
+            throw new Exception('error_404');
+        $tags = new TagRepository();
+        $allTags = $tags->getAllTags();
+        $userTags = $tags->getUserTags($id);
+        $status = new StatusRepository();
+        $allStatus = $status->getAllStatus();
+        $ProjectRepo = new ProjectRepository();
+        $userProjects = $ProjectRepo->getUserProjects($id);
+        $Promo = new PromoRepository();
+        $userPromo = $Promo->getPromoByUserID($id);
 
-        } else {
-            myProfile();
-            // header('Location:?action=homepage');
-        }
-
-    } else if (isset($_GET['id']) && isset($_SESSION['user']) && ($_GET['id'] == $_SESSION['user']->user_id)) {
-        myProfile();
-    } else {
-        $id = $_GET['id'];
-        $user = new UserRepository();
-        $userDatas = new User($id);
-        // var_dump('hi');
-        if ($userDatas->role_id == 1 || $userDatas->role_id == 3) {
-            homepage();
-        } elseif ($userDatas->role_id == 2) {
-            // gérer rôle formateur : ne pas afficher promo
-            $tags = new TagRepository();
-            $allTags = $tags->getAllTags();
-            $userTags = $tags->getUserTags($id);
-            $status = new StatusRepository();
-            $allStatus = $status->getAllStatus();
-            $ProjectRepo = new ProjectRepository();
-            $userProjects = $ProjectRepo->getUserProjects($id);
-            $Promo = new PromoRepository();
-            $userPromo = $Promo->getPromoByUserID($id);
-            include 'view/public/profile.php';
-        } else {
-            $tags = new TagRepository();
-            $allTags = $tags->getAllTags();
-            $userTags = $tags->getUserTags($id);
-            $status = new StatusRepository();
-            $allStatus = $status->getAllStatus();
-            $ProjectRepo = new ProjectRepository();
-            $userProjects = $ProjectRepo->getUserProjects($id);
-            $Promo = new PromoRepository();
-            $userPromo = $Promo->getPromoByUserID($id);
-            include 'view/public/profile.php';
-        }
-    }
-}
-
-function myProfile()
-{
-    $isMyProfile = false;
-    if (!isset($_GET['id'])) {
-        if (!isset($_SESSION['user']->user_id)) {
-            homepage();
-        } else {
-            $id = $_SESSION['user']->user_id;
-            $isMyProfile = true;
-            $user = new UserRepository();
-            $userDatas = new User($id);
-            if ($userDatas->role_id == 1 || $userDatas->role_id == 3) {
-                homepage();
-            } elseif ($userDatas->role_id == 2) {
-                // gérer rôle formateur : ne pas afficher promo
-                $tags = new TagRepository();
-                $allTags = $tags->getAllTags();
-                $userTags = $tags->getUserTags($id);
-                $status = new StatusRepository();
-                $allStatus = $status->getAllStatus();
-                $ProjectRepo = new ProjectRepository();
-                $userProjects = $ProjectRepo->getUserProjects($id);
-                $Promo = new PromoRepository();
-                $userPromo = $Promo->getPromoByUserID($id);
-                include 'view/public/profile.php';
-            } else {
-                $tags = new TagRepository();
-                $allTags = $tags->getAllTags();
-                $userTags = $tags->getUserTags($id);
-                $status = new StatusRepository();
-                $allStatus = $status->getAllStatus();
-                $ProjectRepo = new ProjectRepository();
-                $userProjects = $ProjectRepo->getUserProjects($id);
-                $Promo = new PromoRepository();
-                $userPromo = $Promo->getPromoByUserID($id);
-                include 'view/public/profile.php';
-            }
-        }
-    } else if (isset($_GET['id']) && $_GET['id'] == $_SESSION['user']->user_id) {
-        $id = $_SESSION['user']->user_id;
+        $ability = new Ability;
+        $edit_profil = $ability->authorizationRequest('profilePage', 'write', $user_id);
         $isMyProfile = true;
-        $user = new UserRepository();
-        $userDatas = new User($id);
-        if ($userDatas->role_id == 1 || $userDatas->role_id == 3) {
-            homepage();
-        } elseif ($userDatas->role_id == 2) {
-            // gérer rôle formateur : ne pas afficher promo
-            $tags = new TagRepository();
-            $allTags = $tags->getAllTags();
-            $userTags = $tags->getUserTags($id);
-            $status = new StatusRepository();
-            $allStatus = $status->getAllStatus();
-            $ProjectRepo = new ProjectRepository();
-            $userProjects = $ProjectRepo->getUserProjects($id);
-            $Promo = new PromoRepository();
-            $userPromo = $Promo->getPromoByUserID($id);
-            include 'view/public/profile.php';
+        if ($userDatas->role_id == 5) {
+            include 'view/public/profile_prospect.php';
+
         } else {
-            $tags = new TagRepository();
-            $allTags = $tags->getAllTags();
-            $userTags = $tags->getUserTags($id);
-            $status = new StatusRepository();
-            $allStatus = $status->getAllStatus();
-            $ProjectRepo = new ProjectRepository();
-            $userProjects = $ProjectRepo->getUserProjects($id);
-            $Promo = new PromoRepository();
-            $userPromo = $Promo->getPromoByUserID($id);
             include 'view/public/profile.php';
         }
     } else {
-        $id = $_GET['id'];
-        profilePage();
+        throw new Exception('error_404');
     }
 }
 

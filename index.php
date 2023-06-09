@@ -2,11 +2,11 @@
 session_start();
 require 'src/model/ConnectBdd.php';
 
-// var_dump($_SESSION['user']);
+//var_dump($_SESSION['user']);
 $_SESSION['user'] = (object) array(
-    'user_id' => 2,
+    'user_id' => 4,
     'status_id' => 1,
-    'role_id' => 1,
+    'role_id' => 4,
 );
 
 
@@ -25,10 +25,6 @@ try {
         if (isset($_SESSION['user'])) {
             if ($_SESSION['user']->role_id == 2 || $_SESSION['user']->role_id == 1 || $_SESSION['user']->role_id > 3) {
                 switch ($action) {
-                    // Afficher son profil perso
-                    case 'myProfile':
-                        myProfile();
-                        break;
                     case 'updateUserElements':
                         updateUserElements();
                         break;

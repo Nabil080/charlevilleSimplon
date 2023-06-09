@@ -20,6 +20,7 @@ class ConnectBdd
         $this->bdd = new PDO("mysql:host=$host;dbname=$db;charset=utf8", $user, $pass, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
     }
 }
+require_once('src/helper/Ability.php');
 require_once('src/model/Activity.php');
 require_once('src/model/AlertMessage.php');
 require_once('src/model/Certification.php');

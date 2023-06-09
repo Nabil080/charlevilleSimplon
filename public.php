@@ -35,7 +35,17 @@ switch ($action) {
     // Afficher la promo choisi
     // Afficher profil de l'apprennant
     case 'profilePage':
-        profilePage();
+        if (isset($_GET['id'])) {
+            profilePage($_GET['id']);
+        } else if (
+            isset($_SESSION['user']) &&
+            $_SESSION['user']->role_id != 1 &&
+            $_SESSION['user']->role_id != 3
+        ) {
+            profilePage($_SESSION['user']->user_id);
+        } else {
+            throw new Exception('error_404');
+        }
         break;
     // Afficher tous les projets
     case 'allProjectsPage':

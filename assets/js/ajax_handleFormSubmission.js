@@ -1,6 +1,6 @@
 function handleFormSubmission(formId, actionUrl) {
-    console.log('ok');
     const form = document.querySelector(formId);
+    console.log(formId + ' ok');
     form.addEventListener('submit', function (event) {
         event.preventDefault(); // prevent default form submission behavior
 

@@ -11,7 +11,9 @@
     private $file_succesMessage = 'view/template/_succesMessage.php';
 
 
-    // <p id="{ID_input}_error" class="errorAlert"></p>
+    // Sous chaque input : <p id="{ID_input}_error" class="errorAlert"></p>
+    // Sur la class du boutton submit : "alertButton"
+
 
     // $error correspond au "name" dans alertMessage.json
     // $boolNavbar correspond à un boolean si c'est dans la navbar ou pas

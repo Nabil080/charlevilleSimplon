@@ -11,6 +11,7 @@ class Ability
     public function authorizationRequest($page, $action, $id_author = null, $group = null)
     {
         $id_role = (isset($_SESSION['user'])) ? (int) $_SESSION['user']->role_id : null;
+        $user_id = (isset($_SESSION['user'])) ? (int) $_SESSION['user']->user_id : null;
 
         if (file_exists($this->file_Permission)) {
             $data_permission = json_decode(file_get_contents($this->file_Permission), true);
@@ -21,7 +22,7 @@ class Ability
                 case 'public':
                     return true;
                 case 'author':
-                    return ($id_role = $id_author) ? true : false;
+                    return ($user_id == $id_author) ? true : false;
                 case 'admin':
                     return ($id_role == $this->admin) ? true : false;
                 default:
