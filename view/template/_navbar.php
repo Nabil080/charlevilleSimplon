@@ -5,8 +5,9 @@ $formations = $formationRepo->getAllFormations(); ?>
 <nav id="navbar"
   class="w-[100vw] fixed top-0 shadow-[3px_5px_10px] shadow-[#1111114d] blur-[0.2px] left-0 z-40 transition-all duration-[0.3s]">
   <div
-    class="grid grid-cols-2 transition-all duration-[0.2s] items-center bg-main-white border-t-[4px] md:grid-cols-[20%_80%] border-main-red">
-    <a href="index.php"><img src="assets/img/navbar/logo-simplon.png" alt="Logo Simplon" class="w-[171px]" /></a>
+    class="grid grid-cols-2 transition-all duration-[0.2s] items-center bg-main-white border-t-[4px] md:grid-cols-[15%_85%] border-main-red">
+    <!-- <a href="index.php"><img src="assets/img/navbar/logo-simplon.png" alt="Logo Simplon" class="w-[171px]" /></a> -->
+    <a href="index.php"><img src="assets/img/navbar/UIMM-Region-ChampagneArdenne-Rvb-768x713.png" alt="Logo Simplon" class="w-auto ml-4 py-2 h-[68px]" /></a>
     <i onclick="changeNavFunction()"
       class="fa-solid fa-bars text-[39px] justify-self-end mr-6 sm:mr-8 mb-1 md:hidden hiddenIcon"></i>
     <i onclick="changeNavFunction()"
