@@ -1,0 +1,24 @@
+services:
+    db:
+        image: mariadb:10.6
+        container_name: simplon-charleville-db
+        restart: always
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: simplon-charleville
+            MYSQL_USER: user
+            MYSQL_PASSWORD: pass
+        volumes:
+            - ./sql:/docker-entrypoint-initdb.d
+        ports:
+            - "3306:3306"
+
+    php:
+        build: .
+        container_name: simplon-charleville-php
+        ports:
+            - "8000:80"
+        volumes:
+            - ./public:/var/www/html
+        depends_on:
+            - db
